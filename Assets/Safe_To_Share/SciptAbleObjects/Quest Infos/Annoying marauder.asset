@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ceaca0b19b2644ab3890b77291e9e8, type: 3}
+  m_Name: Annoying marauder
+  m_EditorClassIdentifier: 
+  guid: dae4e4ff504825e4fb6b508825bcc461
+  title: Annoying Marauder
+  desc: 'Deal with the growing local gang.
+
+    To be contiuned...'
+  sprite: {fileID: 21300000, guid: 313c940257ccc404a82da79cddf49b6f, type: 3}
+  world: Village
+  progressGoal: 0
+  questChain: 0
+  hasInstantReward: 0
+  questReward:
+    expGain: 0
+    goldGain: 0
+  returnGuid: 
+  nextGuid: 
+  returnTo: {fileID: 0}
+  altNextQuest: {fileID: 0}

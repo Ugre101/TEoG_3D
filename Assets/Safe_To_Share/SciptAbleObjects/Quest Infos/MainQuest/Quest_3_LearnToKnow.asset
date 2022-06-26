@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ceaca0b19b2644ab3890b77291e9e8, type: 3}
+  m_Name: Quest_3_LearnToKnow
+  m_EditorClassIdentifier: 
+  guid: 3132f22d8d7ac7746873d8a931f08f18
+  title: Get acquainted with the locals
+  desc: There is always somebody needing to get something done, build trust with
+    the locals and while making friends and foes.
+  sprite: {fileID: 21300000, guid: e6c56efe3cb30d94789b850e50b3c24c, type: 3}
+  world: 
+  progressGoal: 0
+  questChain: 1
+  hasInstantReward: 0
+  questReward:
+    expGain: 100
+    goldGain: 100
+  returnGuid: 
+  nextGuid: bb5869610b712d5419c61e375e433d71
+  returnTo: {fileID: 0}
+  altNextQuest: {fileID: 11400000, guid: bb5869610b712d5419c61e375e433d71, type: 2}

@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a41e503f608c61c46916e5442705378d, type: 3}
+  m_Name: Quick Bake
+  m_EditorClassIdentifier: 
+  guid: c55ab443821501f4e9a32f57adefc844
+  title: Quick Bake
+  desc: Tired of waiting for your bun to cook in the oven? Use this to boost the
+    growth speed of your coming child for two week.
+  sprite: {fileID: 21300000, guid: 66983e75cff23a34bbdac7a542f21d28, type: 3}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 25
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 0
+      hpGain: 0
+      wpGain: 0
+    pregnancyItemEffect:
+      active: 1
+      fertilityMods:
+        mod: []
+      virilityMods:
+        mod: []
+      growthSpeedMods:
+        mod:
+        - modValue: 4
+          from: 
+          modType: 0
+          hoursLeft: 336
+        - modValue: 33
+          from: 
+          modType: 1
+          hoursLeft: 336
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+    charStatItemEffects:
+      active: 0
+      assignCharStatTempMods: []
+    healthStatItemEffects:
+      active: 0
+      assignCharStatTempMods: []
+  tempEffectDesc: 

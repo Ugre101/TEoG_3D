@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41153aa8c454d2d957b3be556f43d7c, type: 3}
+  m_Name: NinjaSmoke
+  m_EditorClassIdentifier: 
+  guid: 3911e10ad362acd4a93cd7e78af4f9bd
+  title: Ninja Smoke
+  desc: "Quickly escape to your boat.\r\nCan be used both in combat(not implemented)
+    and outside of combat. \r"
+  sprite: {fileID: 21300000, guid: 129f8bc7a5d4b5446b2e915529f5840b, type: 3}
+  size: {x: 1, y: 1}
+  value: 5
+  canSell: 1
+  effectsTree:
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods: []
+      virilityMods: []
+      growthSpeedMods: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+  tempEffectDesc: 
+  exit: {fileID: 11400000, guid: deb0c6b34f6fb7c4eae9e3ee15fe46f3, type: 2}

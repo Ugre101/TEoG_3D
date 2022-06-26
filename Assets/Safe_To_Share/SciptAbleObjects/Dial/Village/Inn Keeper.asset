@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5907435390308999788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99aaaaa317e64c0a93229f5e1cf94ccb, type: 3}
+  m_Name: a327fe46-a1dd-433f-a995-e7fc5189001f
+  m_EditorClassIdentifier: 
+  childNodeIds: []
+  rect:
+    serializedVersion: 2
+    x: 407
+    y: 297
+    width: 200
+    height: 150
+  playerText: Bye
+  title: 
+  text: []
+--- !u!114 &-2777863534190956710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b89bdac9304ea6abce1ea60f773c12, type: 3}
+  m_Name: 4cc88424-2791-41d1-91f0-d281dd227f25
+  m_EditorClassIdentifier: 
+  childNodeIds:
+  - a327fe46-a1dd-433f-a995-e7fc5189001f
+  - 1f62f8d2-00ac-411f-8d49-b37261684ebf
+  rect:
+    serializedVersion: 2
+    x: 13
+    y: 150
+    width: 200
+    height: 150
+  playerText: 
+  title: Welcome
+  text: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c780b751cbb47188a39f5378e087136, type: 3}
+  m_Name: Inn Keeper
+  m_EditorClassIdentifier: 
+  guid: 3ff43520a8bfadf43a71056f89c64b41
+  nodes:
+  - {fileID: -2777863534190956710}
+  - {fileID: -5907435390308999788}
+  - {fileID: 8196100468529736796}
+--- !u!114 &8196100468529736796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155145ec2c6d45038b81bd00bd476c50, type: 3}
+  m_Name: 1f62f8d2-00ac-411f-8d49-b37261684ebf
+  m_EditorClassIdentifier: 
+  childNodeIds: []
+  rect:
+    serializedVersion: 2
+    x: 441
+    y: 57
+    width: 200
+    height: 150
+  playerText: I want to order a meal
+  title: 
+  text: []
+  offerServices: {fileID: 11400000, guid: f2d27a4dee48bce4fa925b8bc5bfa5c6, type: 2}
+  shopTitle: Inn

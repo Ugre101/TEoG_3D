@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ea9ce45c7ff1ba4ea11e267633acd8b, type: 3}
+  m_Name: Gender morph perk
+  m_EditorClassIdentifier: 
+  guid: cf01d105a662d374bbf8b2f6be12be9d
+  title: Gender morph
+  desc: Exploiting the energizing of your essence when you orgasm to manipulate your
+    partner's own essence to transform them towards your preference. If needed partner
+    will gain minor amount of stable essence.
+  sprite: {fileID: 0}
+  cost: 2
+  perkType: 0
+  needPerkGuids:
+  - 5d7cceaa55130734c891e35a5904a414
+  - 037bb7af119fbcc438114f8a18dfc058
+  exclusiveWithPerkGuids: []
+  requireCharStats: []
+  statMods: []
+  bodyMods: []
+  recoveryMods: []
+  needPerk:
+  - {fileID: 11400000, guid: 5d7cceaa55130734c891e35a5904a414, type: 2}
+  - {fileID: 11400000, guid: 037bb7af119fbcc438114f8a18dfc058, type: 2}
+  exclusiveWithPerk: []
+  loseFlatBonus: 0
+  lostPercentBonus: 0
+  stableEssenceMods: []
+  drainEssenceMods: []
+  giveEssenceMods: []
+  bonus: 15
+  stableGain: 5

@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a655863191b44069e60712a20250f11, type: 3}
+  m_Name: Breast Milker Kit
+  m_EditorClassIdentifier: 
+  guid: 7c66f324afbf3f44687b543d659183ba
+  title: Breast milking kit
+  desc: Where does the flasks come from?
+  sprite: {fileID: 21300000, guid: 7cad9c863b842084fb32605a61365529, type: 3}
+  size: {x: 1, y: 1}
+  unlimitedUse: 1
+  value: 250
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 0
+      hpGain: 0
+      wpGain: 0
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods:
+        mod: []
+      virilityMods:
+        mod: []
+      growthSpeedMods:
+        mod: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+    charStatItemEffects:
+      active: 0
+      assignCharStatTempMods: []
+    healthStatItemEffects:
+      active: 0
+      assignCharStatTempMods: []
+    sexualFluidItemEffects:
+      active: 0
+      fluidCapStretch: []
+      fluidRecMods: []
+    miscItemEffects:
+      active: 0
+      fatBurnMods: []
+  tempEffectDesc: 
+  updateInventoryAfterUse: 1
+  smallFlask:
+    m_AssetGUID: 07ddc4071fdbc0646998f2158d7bb1b9
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  flask:
+    m_AssetGUID: c1b97960582a48f4da668745a5de3302
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  largeFlask:
+    m_AssetGUID: c556cf63c49138742bf74aac696580b6
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

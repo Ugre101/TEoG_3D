@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2910a755bf1a740846d9ee67cb22bd, type: 3}
+  m_Name: Tease
+  m_EditorClassIdentifier: 
+  guid: 0145627e7da64be4089d58a663105786
+  title: Tease
+  desc: 
+  sprite: {fileID: 21300000, guid: d686fa84208561b44815732d42976d69, type: 3}
+  canTargetEnemies: 1
+  canTargetAllies: 0
+  useCosts: []
+  effectsTree:
+    dealDamage:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    dealWillDamage:
+      active: 1
+      value: 20
+      rngValue:
+        minValue: 0.8
+        maxValue: 1.2
+      affectedByStats:
+      - statType: 3
+        divValue: 20
+      modType: 0
+    healDamage:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    healWillPower:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    shrinkBody:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+      bodyType: 0
+    growBody:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+      bodyType: 0
+  battleAct:
+    onCasterEffect:
+      prefab: {fileID: 0}
+      triggerBattleAnimations: 3
+      floatBattleAnimations: 0
+      stayTime: 0.56
+    instancePrefabOnCasterFirst: 0
+    onTargetEffect:
+      prefab: {fileID: 0}
+      triggerBattleAnimations: 0
+      floatBattleAnimations: 0
+      stayTime: 0
+    instancePrefabOnTargetFirst: 0
+    instanceCastDelay: 0.2

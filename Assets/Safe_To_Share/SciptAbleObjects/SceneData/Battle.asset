@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44e6be2a4d842beac134ff19b6535e3, type: 3}
+  m_Name: Battle
+  m_EditorClassIdentifier: 
+  guid: 79f7dffff08a3f34bb8aa8d44d4757e8
+  description: 
+  sceneType: 2
+  sceneReference:
+    m_AssetGUID: aa55e7cf452b4d042b18af3daae4ad1a
+    m_SubObjectName: 
+    m_SubObjectType: 

@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa23f8d2bd089c0488152a79e7e5101a, type: 3}
+  m_Name: Hit
+  m_EditorClassIdentifier: 
+  guid: 4038a32d34d790c43ac88eea5421a75a
+  title: Hit
+  desc: 
+  sprite: {fileID: 21300000, guid: 9677110050a65ba4ea47a365403dabff, type: 3}
+  canTargetEnemies: 1
+  canTargetAllies: 0
+  useCosts: []
+  effectsTree:
+    dealDamage:
+      active: 1
+      value: 20
+      rngValue:
+        minValue: 0.8
+        maxValue: 1.2
+      affectedByStats:
+      - statType: 0
+        divValue: 20
+      modType: 0
+    dealWillDamage:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    healDamage:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    healWillPower:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    shrinkBody:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+      bodyType: 0
+    growBody:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+      bodyType: 0
+  battleAct:
+    onCasterEffect:
+      prefab: {fileID: 0}
+      triggerBattleAnimations: 2
+      floatBattleAnimations: 0
+      stayTime: 0.43
+    instancePrefabOnCasterFirst: 0
+    onTargetEffect:
+      prefab: {fileID: 0}
+      triggerBattleAnimations: 0
+      floatBattleAnimations: 0
+      stayTime: 0
+    instancePrefabOnTargetFirst: 0
+    instanceCastDelay: 0.2

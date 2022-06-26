@@ -1,0 +1,511 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1912623750545861898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5012429634684710478}
+  - component: {fileID: 2525530955445585966}
+  - component: {fileID: 5290461748724833624}
+  - component: {fileID: 5172481964968123178}
+  - component: {fileID: 1271632348}
+  - component: {fileID: 1271632349}
+  - component: {fileID: 3009485336775115344}
+  m_Layer: 23
+  m_Name: Dorm Mate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5012429634684710478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912623750545861898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2432568574534396240}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &2525530955445585966
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912623750545861898}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 1
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!136 &5290461748724833624
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912623750545861898}
+  m_Material: {fileID: 13400000, guid: 7ea3cfdfc72c2e046bcc3d60af503cad, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.22
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!54 &5172481964968123178
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912623750545861898}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &1271632348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912623750545861898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35bcf143941b46d9888055ca61ac9552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationRate: 540
+  _rotationMode: 1
+  _maxWalkSpeed: 4
+  _minAnalogWalkSpeed: 0
+  _maxAcceleration: 20
+  _brakingDecelerationWalking: 20
+  _groundFriction: 8
+  _sprintSpeedMultiplier: 2
+  _sprintAccelerationMultiplier: 1
+  _maxWalkSpeedCrouched: 3
+  _crouchedHeight: 1
+  _crouchedJump: 0
+  _maxFallSpeed: 40
+  _brakingDecelerationFalling: 0
+  _fallingLateralFriction: 0.3
+  _airControl: 0.8
+  _jumpMaxCount: 1
+  _jumpImpulse: 6
+  _jumpMaxHoldTime: 0.35
+  _jumpPreGroundedTime: 0.15
+  _jumpPostGroundedTime: 0.15
+  _gravity: {x: 0, y: -30, z: 0}
+  _canSwim: 1
+  _maxSwimSpeed: 3
+  _brakingDecelerationSwimming: 0
+  _swimmingFriction: 0.5
+  _buoyancy: 1
+  _maxFlySpeed: 6
+  _brakingDecelerationFlying: 0
+  _flyingFriction: 0.3
+  _mass: 1
+  _impartExternalVelocity: 1
+  _impartPlatformVelocity: 1
+  _impartPlatformMovement: 1
+  _impartPlatformRotation: 1
+  _applyPushForce: 1
+  _pushForceAffectCharacters: 1
+  _applyStandingDownwardForce: 1
+  _pushForceScale: 1
+  _standingDownwardForceScale: 1
+  _useRootMotion: 0
+  _camera: {fileID: 0}
+  _characterMovement: {fileID: 1271632349}
+  _rootMotionController: {fileID: 7261518492823782124}
+  _cameraTransform: {fileID: 0}
+  _agent: {fileID: 2525530955445585966}
+  _autoBraking: 1
+  _brakingDistance: 2
+  _stoppingDistance: 1
+--- !u!114 &1271632349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912623750545861898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec98a008bee16d4297327d4ce890e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _constrainToPlane: 0
+  _capsuleRadius: 0.22
+  _capsuleHeight: 1.8
+  _slopeLimit: 60
+  _stepOffset: 0.45
+  _perchOffset: 0
+  _unperchOffset: 0
+  _perchAdditionalHeight: 0.4
+  _collideWithTriggers: 0
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 1
+  _groundProbingDistance: 0.5
+  _transform: {fileID: 5012429634684710478}
+  _rigidbody: {fileID: 5172481964968123178}
+  _capsuleCollider: {fileID: 5290461748724833624}
+--- !u!114 &3009485336775115344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912623750545861898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e26ca437d04eac840104cf473b8447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avatarDict: {fileID: 11400000, guid: 5870e7a7f1445be4f98a75dd78d0169e, type: 2}
+  avatarChanger: {fileID: 6067295739379692011}
+  avatarScaler: {fileID: 5537660859417063438}
+  playerAvatar: 0
+  move: {fileID: 2525530955445585966}
+  aIMover: {fileID: 1271632348}
+  mate:
+    identity:
+      id: 0
+      firstName: 
+      lastName: 
+      birthDay:
+        year: 0
+        day: 0
+    familyTree:
+      father:
+        id: 0
+        firstName: 
+        lastName: 
+        birthDay:
+          year: 0
+          day: 0
+      mother:
+        id: 0
+        firstName: 
+        lastName: 
+        birthDay:
+          year: 0
+          day: 0
+      childrenIds: 
+    stats:
+      strength:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      intelligence:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      constitution:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      charisma:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      agility:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      health:
+        mods:
+          tempBaseStatMods: []
+        currentValue: 150
+      willPower:
+        mods:
+          tempBaseStatMods: []
+        currentValue: 150
+    body:
+      muscle:
+        baseValue: 20
+        mods:
+          tempBaseStatMods: []
+      fat:
+        baseValue: 20
+        mods:
+          tempBaseStatMods: []
+      height:
+        baseValue: 160
+        mods:
+          tempBaseStatMods: []
+      thickset:
+        baseValue: 0
+        mods:
+          tempBaseStatMods: []
+      fatBurnRate:
+        mods:
+          tempBaseStatMods: []
+      bodyMorphs:
+        avatarBodyMorphs: []
+      skinTone: 0
+    vore:
+      level:
+        exp: 0
+        level: 1
+        points: 0
+      stomach:
+        preysIds: 
+        specialPreysIds: 
+        voreExp: 0
+      stomachDigestionMode:
+        currentMode: 0
+      ballsDigest:
+        currentMode: 0
+      cockDigest:
+        currentMode: 0
+      boobsDigest:
+        currentMode: 0
+      analDigest:
+        currentMode: 0
+      vaginaDigest:
+        currentMode: 0
+      drainEssenceType: 3
+      digestionStrength:
+        mods:
+          tempBaseStatMods: []
+      pleasureDigestion:
+        mods:
+          tempBaseStatMods: []
+      orgasmDrain:
+        mods:
+          tempBaseStatMods: []
+      capacityBoost:
+        tempBaseStatMods: []
+    sexualOrgans:
+      anals:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0
+            mods:
+              tempBaseStatMods: []
+          fluidName: Scat
+        list: []
+      dicks:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0
+            mods:
+              tempBaseStatMods: []
+          fluidName: Cum
+        list: []
+      balls:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0
+            mods:
+              tempBaseStatMods: []
+          fluidName: Cum
+        list: []
+      boobs:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0
+            mods:
+              tempBaseStatMods: []
+          fluidName: Milk
+        list: []
+      vaginas:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0
+            mods:
+              tempBaseStatMods: []
+          fluidName: Cum
+        list: []
+    level:
+      exp: 0
+      level: 1
+      points: 0
+    essenceSystem:
+      femi:
+        amount: 0
+      masculinity:
+        amount: 0
+      stableEssence:
+        baseValue: 0
+        mods:
+          tempBaseStatMods: []
+      essenceOptions:
+        selfDrain: 0
+        giveHeight: 0
+        transmuteTo: 0
+        morphPartnerToGender: 0
+    sexStats:
+      totalOrgasms: 0
+      currentArousal: 0
+      fluidsOnBody:
+        fluids: []
+      fluidsInStomach:
+        fluids: []
+      baseMaxArousal:
+        mods:
+          tempBaseStatMods: []
+      maxCasterOrgasms:
+        mods:
+          tempBaseStatMods: []
+      gainArousalFactor:
+        mods:
+          tempBaseStatMods: []
+      giveArousalFactor:
+        mods:
+          tempBaseStatMods: []
+    pregnancySystem:
+      fertility:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      virility:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      pregnancySpeed:
+        mods:
+          tempBaseStatMods: []
+      timesPregnant: 0
+      timesImpregnated: 0
+    relationsShips:
+      relationShips: []
+    hair:
+      bald: 0
+      color: {r: 1, g: 1, b: 1, a: 1}
+    sleepIn: 0
+    workTitle: 
+--- !u!1 &7297204200486777659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2432568574534396240}
+  - component: {fileID: 2126684856959139973}
+  - component: {fileID: 6067295739379692011}
+  - component: {fileID: 7261518492823782124}
+  - component: {fileID: 5537660859417063438}
+  m_Layer: 0
+  m_Name: AvatarHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2432568574534396240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297204200486777659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5012429634684710478}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2126684856959139973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297204200486777659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b7b5e119f395f4e8d5add705235f67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 1271632348}
+  avatarChangerBase: {fileID: 6067295739379692011}
+--- !u!114 &6067295739379692011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297204200486777659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8724109875216e4448f887a56b24f63c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7261518492823782124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297204200486777659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838519e5d02343249e0d4ddd7578cba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avatarChangerBase: {fileID: 6067295739379692011}
+--- !u!114 &5537660859417063438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297204200486777659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb22ed00a681804b995cbb2a65b214b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterMovement: {fileID: 1271632349}
+  minSize: 0.1
+  maxSize: 3

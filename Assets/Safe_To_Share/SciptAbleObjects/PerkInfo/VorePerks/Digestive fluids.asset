@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94708c2e1581451091a920708749863d, type: 3}
+  m_Name: Digestive fluids
+  m_EditorClassIdentifier: 
+  guid: 357c5773b05307b468e855d4e5679dca
+  title: 'Digestive fluids '
+  desc: 'Strengthen your digestive fluids for faster digestion.
+
+'
+  sprite: {fileID: 21300000, guid: bbb3845c6d713d54e971990a0c03ebb2, type: 3}
+  cost: 1
+  perkType: 0
+  needPerkGuids: []
+  exclusiveWithPerkGuids: []
+  statMods: []
+  bodyMods: []
+  needPerk: []
+  exclusiveWithPerk: []
+  capacityMods: []
+  digestionMods:
+  - modValue: 1
+    from: 
+    modType: 0
+  - modValue: 5
+    from: 
+    modType: 1

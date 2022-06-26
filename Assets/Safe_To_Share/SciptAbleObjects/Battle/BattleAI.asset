@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f579593ec50f44cf9e961e1838879a23, type: 3}
+  m_Name: BattleAI
+  m_EditorClassIdentifier: 
+  hitStandardGuid:
+    guid: 4038a32d34d790c43ac88eea5421a75a
+  teaseStandardGuid:
+    guid: 0145627e7da64be4089d58a663105786
+  rareUseGuid:
+    guid: 
+  lowHpGuid:
+    guid: 
+  lowWpGuid:
+    guid: 
+  rareCastChance: 0.1

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105da473e74a4b5697f1df099a8334d9, type: 3}
+  m_Name: Small & Cute
+  m_EditorClassIdentifier: 
+  guid: 11cd234b1839a3540924f496f4c2bc7b
+  title: Small & Cute
+  desc: Shrink smaller, gain agility and charm.
+  sprite: {fileID: 0}
+  cost: 1
+  perkType: 0
+  needPerkGuids: []
+  exclusiveWithPerkGuids:
+  - 73a4e61cfb05b534e916a21b66be1f4f
+  requireCharStats: []
+  statMods:
+  - mod:
+      modValue: 2
+      from: 
+      modType: 0
+    stat: 4
+  - mod:
+      modValue: 10
+      from: 
+      modType: 1
+    stat: 4
+  - mod:
+      modValue: 1
+      from: 
+      modType: 0
+    stat: 3
+  - mod:
+      modValue: 10
+      from: 
+      modType: 1
+    stat: 3
+  bodyMods:
+  - mod:
+      modValue: -15
+      from: 
+      modType: 1
+    type: 2
+  - mod:
+      modValue: -5
+      from: 
+      modType: 0
+    type: 2
+  recoveryMods: []
+  needPerk: []
+  exclusiveWithPerk:
+  - {fileID: 11400000, guid: 73a4e61cfb05b534e916a21b66be1f4f, type: 2}

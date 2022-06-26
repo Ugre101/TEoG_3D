@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d57aecbe6dc05e74a946553f676d26e0, type: 3}
+  m_Name: Male
+  m_EditorClassIdentifier: 
+  prefab:
+    m_AssetGUID: a6925467e97c177488b1815e9938d1d2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  playerPrefab:
+    m_AssetGUID: 47bf5e7badfa9b441b287ed9e261c15d
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  supportedGenders: 010000000300000006000000
+  supportedRaces:
+  - {fileID: 11400000, guid: 4d8d0eb9b96993249aa87052e588b749, type: 2}
+  - {fileID: 11400000, guid: 9937335d74a4c954ca19a2af573e1a6a, type: 2}
+  - {fileID: 11400000, guid: 4ab7bba494160634cba5937da38f8351, type: 2}

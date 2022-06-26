@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9190826032194436923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d440149dbf98400abe06431005bb2a19, type: 3}
+  m_Name: 1eac7c0e-9633-4fc0-b27e-1331c8f1bad3
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 597
+    y: 22
+    width: 200
+    height: 150
+  childNodeIds:
+  - c8d3936f-71fe-46fc-b03f-4f9914183e0b
+  playerText: Accept
+  title: Accept
+  text:
+  - Good luck
+  questQuest: {fileID: 11400000, guid: dae4e4ff504825e4fb6b508825bcc461, type: 2}
+--- !u!114 &-6289736441458631044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99aaaaa317e64c0a93229f5e1cf94ccb, type: 3}
+  m_Name: c8d3936f-71fe-46fc-b03f-4f9914183e0b
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 888
+    y: 12
+    width: 200
+    height: 150
+  childNodeIds: []
+  playerText: Bye
+  title: 
+  text: []
+--- !u!114 &-221421698718275582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b89bdac9304ea6abce1ea60f773c12, type: 3}
+  m_Name: f6819431-88af-4645-82c8-92d29632f6e0
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 7
+    y: 227
+    width: 200
+    height: 150
+  childNodeIds:
+  - e67b1dc6-f504-4d04-947c-3e4918838cde
+  - 393bdd48-d7fe-4e11-8345-deee25ba1ea9
+  playerText: 
+  title: 
+  text:
+  - Hey there stranger, you seem to be new to this island and you look to me like
+    a capable-ish fighter, say would you be kind enough to lend aid to me?
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c780b751cbb47188a39f5378e087136, type: 3}
+  m_Name: Noble
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: -221421698718275582}
+  - {fileID: 4011652254932973947}
+  - {fileID: 3118929175189084471}
+  - {fileID: -9190826032194436923}
+  - {fileID: -6289736441458631044}
+  - {fileID: 6087263411371980548}
+--- !u!114 &3118929175189084471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b89bdac9304ea6abce1ea60f773c12, type: 3}
+  m_Name: e67b1dc6-f504-4d04-947c-3e4918838cde
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 274
+    y: 96
+    width: 200
+    height: 150
+  childNodeIds:
+  - 1eac7c0e-9633-4fc0-b27e-1331c8f1bad3
+  - bff759f1-98bf-4c6f-80b3-a25d2a49222c
+  playerText: I willing to hear you out
+  title: 
+  text:
+  - "You see, the local gangs of thugs have grown in both size and annoyance over
+    the last couple of years. The bastard even stole one of my priced bottles of
+    dwarven whiskey, do you know how hard they are to get smuggled out through the
+    blockade! Normally I would simply pay mercenaries to tear them a new asshole,
+    but because of the war between kingdom 1 and kingdom 2 all capable ones have
+    traveled for greater profit and I can\u2019t blame them for it."
+  - Would you be willing to show them their place in this world? If you were to defeat
+    enough of them to lure out their leader and show them how weak he really is I
+    bet they would lose morale and give up their raids and if luck would have it
+    some of my old workers would return.
+--- !u!114 &4011652254932973947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99aaaaa317e64c0a93229f5e1cf94ccb, type: 3}
+  m_Name: 393bdd48-d7fe-4e11-8345-deee25ba1ea9
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 255
+    y: 383
+    width: 200
+    height: 150
+  childNodeIds: []
+  playerText: Maybe later
+  title: 
+  text: []
+--- !u!114 &6087263411371980548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99aaaaa317e64c0a93229f5e1cf94ccb, type: 3}
+  m_Name: bff759f1-98bf-4c6f-80b3-a25d2a49222c
+  m_EditorClassIdentifier: 
+  rect:
+    serializedVersion: 2
+    x: 591
+    y: 258
+    width: 200
+    height: 150
+  childNodeIds: []
+  playerText: Maybe later
+  title: 
+  text: []

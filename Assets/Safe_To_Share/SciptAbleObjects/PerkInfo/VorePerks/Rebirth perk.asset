@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3e54f2ffde42c7a067858ff9a77f40, type: 3}
+  m_Name: Rebirth perk
+  m_EditorClassIdentifier: 
+  guid: 0821321d10ca7f442bc47d7fcdf770c5
+  title: Rebirth
+  desc: Turn your prey into your children.
+  sprite: {fileID: 21300000, guid: 43e8f1b43c351cb4abe7e0f8c5bbb020, type: 3}
+  cost: 1
+  perkType: 0
+  needPerkGuids: []
+  exclusiveWithPerkGuids: []
+  statMods: []
+  bodyMods: []
+  needPerk: []
+  exclusiveWithPerk: []
+  capacityMods: []
+  digestionMods: []
+  pleasureDigestionMods: []
+  drainMods: []

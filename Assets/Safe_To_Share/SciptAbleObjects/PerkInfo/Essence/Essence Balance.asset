@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f2ee100882443d9572e27406574521, type: 3}
+  m_Name: Essence Balance
+  m_EditorClassIdentifier: 
+  guid: 7ac5f0fa4138a50498db544d136f0e10
+  title: Essence Balance
+  desc: "Stabilize your essence further allowing you to drain more essence without
+    being transformed.\r"
+  sprite: {fileID: 21300000, guid: 89ecf4007a152fd4096664711713f74d, type: 3}
+  cost: 1
+  perkType: 1
+  needPerkGuids:
+  - dec46ffbf5cbe104aa9f2ba59fa5bb2a
+  exclusiveWithPerkGuids: []
+  requireCharStats: []
+  statMods: []
+  bodyMods: []
+  recoveryMods: []
+  needPerk:
+  - {fileID: 11400000, guid: dec46ffbf5cbe104aa9f2ba59fa5bb2a, type: 2}
+  exclusiveWithPerk: []
+  loseFlatBonus: 0
+  lostPercentBonus: 0
+  stableEssenceMods:
+  - modValue: 100
+    from: 
+    modType: 0
+  - modValue: 10
+    from: 
+    modType: 1
+  drainEssenceMods: []
+  giveEssenceMods: []

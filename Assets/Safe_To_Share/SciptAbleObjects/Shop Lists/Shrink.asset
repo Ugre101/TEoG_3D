@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8fd210f6110435e9edc2dd1551be191, type: 3}
+  m_Name: Shrink
+  m_EditorClassIdentifier: 
+  sellingItems:
+  - {fileID: 11400000, guid: ef769bd99d03d6a46b35d15333bac987, type: 2}
+  - {fileID: 11400000, guid: 001ef7134c1231745b1f0a7df19fc73f, type: 2}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89d21cf4c24847848738bff6d5886219, type: 3}
+  m_Name: Player Avatar Dictionary 1
+  m_EditorClassIdentifier: 
+  defaultAvatar: {fileID: 1849981198304112025, guid: 7c6b83c401dbd0c41ad36a259cfbeeb7, type: 3}
+  avatars:
+  - {fileID: 1849981198304112025, guid: 7c6b83c401dbd0c41ad36a259cfbeeb7, type: 3}
+  - {fileID: 3300125151782726369, guid: 47bf5e7badfa9b441b287ed9e261c15d, type: 3}
+  - {fileID: 3327985521952277658, guid: 58c0649755f9ff94792927b5d190a967, type: 3}
+  - {fileID: 8520115837730351774, guid: 9706a56823783fd4088db91bf2f072bc, type: 3}
+  - {fileID: 4445055129012332304, guid: 8c19022a2b520944e95a1d4b9b42c61a, type: 3}
+  - {fileID: 5327438532335951967, guid: 0bad4e602ba78e248b97ec6b45819578, type: 3}
+  - {fileID: 2271191965103071415, guid: 3b563dbb834650b4da05ecc4111e62eb, type: 3}
+  sfwAvatar: {fileID: 8052112696863437772, guid: 01ac49c38d7bfa440bd747c97cebc516, type: 3}
+  sfwMode: 0

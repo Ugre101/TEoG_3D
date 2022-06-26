@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a41e503f608c61c46916e5442705378d, type: 3}
+  m_Name: Sissy Sweat
+  m_EditorClassIdentifier: 
+  guid: 66c59c5b1d4d0da4d9baf53ea65d9967
+  title: Sissy Sweat
+  desc: Organic and free range collected, helps you lose muscle to achieve a softer
+    look.
+  sprite: {fileID: 21300000, guid: 575013fd58af67a4cbf9a09435b9bf4e, type: 3}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 10
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 0
+      hpGain: 0
+      wpGain: 0
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods: []
+      virilityMods: []
+      growthSpeedMods: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 1
+      bodyTempMods: []
+      bodyChanges:
+      - bodyStatType: 0
+        permChange: -2
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+  tempEffectDesc: 

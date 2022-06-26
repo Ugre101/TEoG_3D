@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be4b900f25a463681e9773b52f52961, type: 3}
+  m_Name: Village
+  m_EditorClassIdentifier: 
+  guid: 379cbe0b4a98d634fb9d793702430260
+  description: 
+  sceneType: 0
+  sceneReference:
+    m_AssetGUID: 3fe0367b67bd2134cb0b27dcbb22b997
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  subLocations:
+  - {fileID: 11400000, guid: baa519b1bbc84bf4b869ceda7d49a57d, type: 2}
+  - {fileID: 11400000, guid: 76fc6f39a6a2d5b46b489d57d9cbc3ab, type: 2}
+  - {fileID: 11400000, guid: f49ae443932afa042b81fd219276b7c6, type: 2}
+  - {fileID: 11400000, guid: c08654a5036730047ac0bac3ab9fb930, type: 2}
+  worldMap: {fileID: 21300000, guid: 4189a22612f2c6645a3bcd8748f0d8ff, type: 3}
+  sceneName: Village

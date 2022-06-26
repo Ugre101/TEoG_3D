@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934feff1ae37482491df60716ed99121, type: 3}
+  m_Name: Sea Food
+  m_EditorClassIdentifier: 
+  guid: 1697757719588c747b7d9cb907591b75
+  title: 
+  desc: 
+  sprite: {fileID: 0}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 0
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 1
+      hpGain: 40
+      wpGain: 40
+    pregnancyItemEffect:
+      active: 1
+      fertilityMods:
+        mod: []
+      virilityMods:
+        mod: []
+      growthSpeedMods:
+        mod: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+    charStatItemEffects:
+      active: 1
+      assignCharStatTempMods:
+      - statType: 1
+        tempMods:
+          mod:
+          - modValue: 2
+            from: 
+            modType: 0
+            hoursLeft: 24
+      - statType: 3
+        tempMods:
+          mod:
+          - modValue: 2
+            from: 
+            modType: 0
+            hoursLeft: 24
+    healthStatItemEffects:
+      active: 0
+      assignCharStatTempMods: []
+  tempEffectDesc: 
+  kcal: 1200

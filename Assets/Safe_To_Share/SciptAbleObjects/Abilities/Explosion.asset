@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f2910a755bf1a740846d9ee67cb22bd, type: 3}
+  m_Name: Explosion
+  m_EditorClassIdentifier: 
+  guid: 82b631246acbd724dad0841a5d66072f
+  title: 
+  desc: Boom, rng heavy attack deals between zero and a lot of damage.
+  sprite: {fileID: 21300000, guid: 7eef317a2e1b4264b9cbd125c48f0496, type: 3}
+  canTargetEnemies: 1
+  canTargetAllies: 0
+  useCosts: []
+  effectsTree:
+    dealDamage:
+      active: 1
+      value: 100
+      rngValue:
+        minValue: 0
+        maxValue: 1.5
+      affectedByStats:
+      - statType: 1
+        divValue: 25
+      modType: 0
+    dealWillDamage:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    healDamage:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    healWillPower:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    shrinkBody:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+      bodyType: 0
+    growBody:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+      bodyType: 0
+  battleAct:
+    onCasterEffect:
+      prefab: {fileID: 0}
+      triggerBattleAnimations: 0
+      floatBattleAnimations: 0
+      stayTime: 0
+    instancePrefabOnCasterFirst: 0
+    onTargetEffect:
+      prefab: {fileID: 7156317333231045241, guid: fb8d8f6d8dd5fe247a08487a0dbf3943, type: 3}
+      triggerBattleAnimations: 0
+      floatBattleAnimations: 0
+      stayTime: 1
+    instancePrefabOnTargetFirst: 0
+    instanceCastDelay: 0.2

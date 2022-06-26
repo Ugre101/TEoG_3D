@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934feff1ae37482491df60716ed99121, type: 3}
+  m_Name: Orc Brew
+  m_EditorClassIdentifier: 
+  guid: 6fc3204e6b86d164e839d1f2527e0883
+  title: Orc Brew
+  desc: "A spiced ale brewed according to orc tribe traditions\r.\n"
+  sprite: {fileID: 21300000, guid: 62d01ea42da49614f9ec2a19efb2fbac, type: 3}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 25
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 0
+      hpGain: 0
+      wpGain: 0
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods:
+        mod: []
+      virilityMods:
+        mod: []
+      growthSpeedMods:
+        mod: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 1
+      race: {fileID: 11400000, guid: 96817023700d0764793f5b1dcfe15bd9, type: 2}
+      toGain: 15
+    charStatItemEffects:
+      active: 1
+      assignCharStatTempMods:
+      - statType: 0
+        tempMods:
+          mod:
+          - modValue: 1
+            from: 
+            modType: 0
+            hoursLeft: 8
+          - modValue: 5
+            from: 
+            modType: 1
+            hoursLeft: 8
+    healthStatItemEffects:
+      active: 0
+      assignCharStatTempMods: []
+    sexualFluidItemEffects:
+      active: 0
+      fluidCapStretch: []
+      fluidRecMods: []
+    miscItemEffects:
+      active: 0
+      fatBurnMods: []
+  tempEffectDesc: 
+  updateInventoryAfterUse: 0
+  kcal: 200

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360b2341112e41828a311800700351ac, type: 3}
+  m_Name: Drain Masc
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 17515c69a1bc9ab42958b755e6a441dc, type: 3}
+  title: Drain Masc
+  data:
+    giver: 0
+    receiver: 0
+    text: Drain masc
+    afterText: []
+  errorData:
+    giver: 0
+    receiver: 0
+    text: 
+    afterText: []
+  desc: 
+  drainerOrgasmNeeded: 0
+  victimOrgasmNeeded: 1
+  orgasmsNeeded: 1
+  returnData:
+    giver: 0
+    receiver: 0
+    text: You drain their masculinity
+    afterText: []
+  effectPrefab: {fileID: 0}

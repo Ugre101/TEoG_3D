@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d57aecbe6dc05e74a946553f676d26e0, type: 3}
+  m_Name: Orc Male
+  m_EditorClassIdentifier: 
+  prefab:
+    m_AssetGUID: 35e1e4282e2e14647b69784fae801150
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  playerPrefab:
+    m_AssetGUID: 0bad4e602ba78e248b97ec6b45819578
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  supportedGenders: 010000000300000006000000
+  supportedRaces:
+  - {fileID: 11400000, guid: 96817023700d0764793f5b1dcfe15bd9, type: 2}

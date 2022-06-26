@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ceaca0b19b2644ab3890b77291e9e8, type: 3}
+  m_Name: Quest_2_Enemy
+  m_EditorClassIdentifier: 
+  guid: e61247e2e73723b4397e698c8aa2ff7f
+  title: Find some enemies
+  desc: "Looking at the minimap in the corner or by bringing up the big map by pressing
+    the it\u2019s button or \u201CM\u201D, you can see hot spots for enemies marked
+    green for easy and red for hard."
+  sprite: {fileID: 21300000, guid: e6c56efe3cb30d94789b850e50b3c24c, type: 3}
+  world: 
+  progressGoal: 0
+  questChain: 1
+  hasInstantReward: 1
+  questReward:
+    expGain: 50
+    goldGain: 50
+  returnGuid: 
+  nextGuid: 3132f22d8d7ac7746873d8a931f08f18
+  returnTo: {fileID: 0}
+  altNextQuest: {fileID: 11400000, guid: 3132f22d8d7ac7746873d8a931f08f18, type: 2}

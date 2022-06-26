@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6313824137460171397
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 696589580446626876, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 65b8d5bf0237ced4595956326979d0f0, type: 2}
+    - target: {fileID: 696589580446626876, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d8baa8352ccaf4fb6ba1a362b2123e, type: 2}
+    - target: {fileID: 2193790161450771162, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: changeHairColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193790161450771162, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: prefab.m_AssetGUID
+      value: 0bad4e602ba78e248b97ec6b45819578
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193790161450771162, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: hairMats.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 65b8d5bf0237ced4595956326979d0f0, type: 2}
+    - target: {fileID: 2193790161450771162, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: hairMats.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d8baa8352ccaf4fb6ba1a362b2123e, type: 2}
+    - target: {fileID: 3125602382389740205, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 65b8d5bf0237ced4595956326979d0f0, type: 2}
+    - target: {fileID: 3125602382389740205, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d8baa8352ccaf4fb6ba1a362b2123e, type: 2}
+    - target: {fileID: 4801338532652694777, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 65b8d5bf0237ced4595956326979d0f0, type: 2}
+    - target: {fileID: 4801338532652694777, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 41d8baa8352ccaf4fb6ba1a362b2123e, type: 2}
+    - target: {fileID: 6938937832306137217, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_Name
+      value: Player OrcMaleFuta2 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712378753901396539, guid: 35e1e4282e2e14647b69784fae801150, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 35e1e4282e2e14647b69784fae801150, type: 3}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8fd210f6110435e9edc2dd1551be191, type: 3}
+  m_Name: Pregnancy Store
+  m_EditorClassIdentifier: 
+  sellingItems:
+  - {fileID: 11400000, guid: 37d50a59c926f1147abae502534d4710, type: 2}
+  - {fileID: 11400000, guid: 935651fcc43f8004ab942b5872c41d0c, type: 2}
+  - {fileID: 11400000, guid: c55ab443821501f4e9a32f57adefc844, type: 2}
+  - {fileID: 11400000, guid: cfa7031ae3441fc4388f7e7679b6ff22, type: 2}
+  - {fileID: 11400000, guid: 102d4e4f17b176e4b98c6625e6fc6b02, type: 2}
+  - {fileID: 11400000, guid: 6fcc2def4006ae44cac694e12cb18b0a, type: 2}
+  - {fileID: 11400000, guid: 7c66f324afbf3f44687b543d659183ba, type: 2}
+  - {fileID: 11400000, guid: abcffbb5d3b1d2a48ad943157297ac46, type: 2}
+  - {fileID: 11400000, guid: f57f17ac7789b154ebb96da19d902134, type: 2}

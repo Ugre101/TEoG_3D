@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934feff1ae37482491df60716ed99121, type: 3}
+  m_Name: Whole Pig
+  m_EditorClassIdentifier: 
+  guid: f18005530fba9514486a79704f661bc7
+  title: Whole roasted pig
+  desc: Can you really eat all that alone?
+  sprite: {fileID: 21300000, guid: 5e8ff2e4ee17d23408f26b4fd44e6063, type: 3}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 200
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 1
+      hpGain: 200
+      wpGain: 200
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods:
+        mod: []
+      virilityMods:
+        mod: []
+      growthSpeedMods:
+        mod: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+    charStatItemEffects:
+      active: 1
+      assignCharStatTempMods:
+      - statType: 0
+        tempMods:
+          mod:
+          - modValue: 2
+            from: 
+            modType: 0
+            hoursLeft: 72
+      - statType: 2
+        tempMods:
+          mod:
+          - modValue: 4
+            from: 
+            modType: 0
+            hoursLeft: 72
+    healthStatItemEffects:
+      active: 1
+      assignCharStatTempMods:
+      - healthTypes: 0
+        tempMods:
+          mod:
+          - modValue: 50
+            from: 
+            modType: 0
+            hoursLeft: 72
+      - healthTypes: 1
+        tempMods:
+          mod:
+          - modValue: 50
+            from: 
+            modType: 0
+            hoursLeft: 72
+    sexualFluidItemEffects:
+      active: 0
+      fluidCapStretch: []
+      fluidRecMods: []
+    miscItemEffects:
+      active: 0
+      fatBurnMods: []
+  tempEffectDesc: 
+  updateInventoryAfterUse: 0
+  kcal: 22000

@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a41e503f608c61c46916e5442705378d, type: 3}
+  m_Name: Quick Shoot
+  m_EditorClassIdentifier: 
+  guid: 9bbe004f16f5d004aa064a39631a21bb
+  title: Quick Shoot
+  desc: Allows you to orgasm more and faster
+  sprite: {fileID: 0}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 69
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 0
+      hpGain: 0
+      wpGain: 0
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods: []
+      virilityMods: []
+      growthSpeedMods: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 1
+      orgMods:
+      - mod:
+        - modValue: 2
+          from: 
+          modType: 0
+          hoursLeft: 24
+      arousalMods:
+      - mod:
+        - modValue: -20
+          from: 
+          modType: 0
+          hoursLeft: 24
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+  tempEffectDesc: 

@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda9f4e05e2346cdb94a8b7acce6b7f6, type: 3}
+  m_Name: Surrender
+  m_EditorClassIdentifier: 
+  guid: d507d249619199346adf56c4916e1d84
+  title: Surrender
+  desc: Give up.
+  sprite: {fileID: 21300000, guid: 8634ebc0011ec1e438bf19f3ad81132c, type: 3}
+  canTargetEnemies: 0
+  canTargetAllies: 0
+  useCosts: []
+  effectsTree:
+    dealDamage:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    dealWillDamage:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    healDamage:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    healWillPower:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+    shrinkBody:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+      bodyType: 0
+    growBody:
+      active: 0
+      value: 0
+      rngValue:
+        minValue: 1
+        maxValue: 1
+      affectedByStats: []
+      modType: 0
+      bodyType: 0
+  battleAct:
+    onCasterEffect:
+      prefab: {fileID: 0}
+      triggerBattleAnimations: 0
+      floatBattleAnimations: 0
+      stayTime: 0
+    instancePrefabOnCasterFirst: 0
+    onTargetEffect:
+      prefab: {fileID: 0}
+      triggerBattleAnimations: 0
+      floatBattleAnimations: 0
+      stayTime: 0
+    instancePrefabOnTargetFirst: 0
+    instanceCastDelay: 0.2

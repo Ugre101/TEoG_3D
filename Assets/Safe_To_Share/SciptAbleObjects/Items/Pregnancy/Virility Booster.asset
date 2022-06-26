@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a41e503f608c61c46916e5442705378d, type: 3}
+  m_Name: Virility Booster
+  m_EditorClassIdentifier: 
+  guid: 37d50a59c926f1147abae502534d4710
+  title: Virility Booster
+  desc: Gives a strong week-long boost to your virility and a small permanent boost.
+  sprite: {fileID: 21300000, guid: 5bfe9124289f46d49b6e033d1234e665, type: 3}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 20
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 0
+      hpGain: 0
+      wpGain: 0
+    pregnancyItemEffect:
+      active: 1
+      fertilityMods:
+        mod: []
+      virilityMods:
+        mod:
+        - modValue: 5
+          from: 
+          modType: 0
+          hoursLeft: 168
+        - modValue: 20
+          from: 
+          modType: 1
+          hoursLeft: 168
+      growthSpeedMods:
+        mod: []
+      permFertility: 0
+      permVirility: 1
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+  tempEffectDesc: 

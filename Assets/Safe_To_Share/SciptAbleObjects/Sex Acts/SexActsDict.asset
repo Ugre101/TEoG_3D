@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cafbd0ad96c7478a87ef61fae76b19d4, type: 3}
+  m_Name: SexActsDict
+  m_EditorClassIdentifier: 
+  sexActs:
+  - {fileID: 11400000, guid: d8773dd7d9139e249b33752503e3a683, type: 2}
+  - {fileID: 11400000, guid: 6b0a711d8a0f2ca44943f9a1ba363fdb, type: 2}
+  - {fileID: 11400000, guid: 6839457057d4605409442f27f4d86e94, type: 2}
+  - {fileID: 11400000, guid: 65bc5669a6ac5c04180d320b00e84221, type: 2}
+  - {fileID: 11400000, guid: c812640eb0258134aa54f6ec6cd6aec1, type: 2}
+  - {fileID: 11400000, guid: f7e2a62cc9f9a6440a25ad261130b721, type: 2}
+  - {fileID: 11400000, guid: a66164533a4bee7478d5e9b1ce5782fb, type: 2}
+  drainActions:
+  - {fileID: 11400000, guid: 33361da7fdaee404cac92555935dc88a, type: 2}
+  - {fileID: 11400000, guid: 4f77dcb263eda7c488a75753ce08cdbb, type: 2}
+  - {fileID: 11400000, guid: f5ed8f39133efd6419d11fcc79bc24e6, type: 2}
+  - {fileID: 11400000, guid: 185b60f80fdc0334eb1221284c666f77, type: 2}
+  voreActions:
+  - {fileID: 11400000, guid: a4c2079eb614a9b4ea5812f1e1b7e2b0, type: 2}
+  - {fileID: 11400000, guid: a875ca0140751a34d81ba83fb6f29a21, type: 2}
+  - {fileID: 11400000, guid: 3178285ab9031114fa98820c5ad69f71, type: 2}
+  - {fileID: 11400000, guid: d53c19d89b34bc2429e286c5e156b6d6, type: 2}
+  - {fileID: 11400000, guid: cda3cc6b7c4bf5f4f9fee4ee0cd743bd, type: 2}
+  - {fileID: 11400000, guid: f5b1480da2002954fabbe4a1a929e289, type: 2}
+  - {fileID: 11400000, guid: ab9fe2418978ae041a6d30290caa5778, type: 2}

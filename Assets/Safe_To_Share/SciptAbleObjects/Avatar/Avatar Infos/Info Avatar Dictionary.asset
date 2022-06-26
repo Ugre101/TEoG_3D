@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 757deffde8c649b7914b7aefad1c0ed7, type: 3}
+  m_Name: Info Avatar Dictionary
+  m_EditorClassIdentifier: 
+  defaultAvatar: {fileID: 11400000, guid: ba62fb4ddf2f5b8418715c48540dec2b, type: 2}
+  avatars:
+  - {fileID: 11400000, guid: 21c48cf42fa315d4c8eef3cbad43f5c7, type: 2}
+  - {fileID: 11400000, guid: ba62fb4ddf2f5b8418715c48540dec2b, type: 2}
+  - {fileID: 11400000, guid: d45af1c8fe08a2b4ba685ed9fc51b737, type: 2}
+  - {fileID: 11400000, guid: 1f3c805bddb7f3345ad3e57c5d5d4c6b, type: 2}
+  - {fileID: 11400000, guid: 1314e4ea8628d5641bbae6634d981ecc, type: 2}
+  - {fileID: 11400000, guid: a634f6ebc6eefb34f8c45d2593307f14, type: 2}
+  - {fileID: 11400000, guid: 4cf6509439121f540b57d51a04d3be2b, type: 2}
+  sfwAvatar: {fileID: 0}
+  sfwMode: 0

@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105da473e74a4b5697f1df099a8334d9, type: 3}
+  m_Name: Mass Conversion
+  m_EditorClassIdentifier: 
+  guid: d8df2e44976056e419de35f144ea7610
+  title: Mass Conversion
+  desc: "Convert fat into fluids just remember to maintain your fat reserves so you
+    don\u2019t have to starve to death for the sake of releasing a larger load.\r\n"
+  sprite: {fileID: 21300000, guid: 46ea335785cbb1641b15a99f040528ee, type: 3}
+  cost: 1
+  perkType: 0
+  needPerkGuids: []
+  exclusiveWithPerkGuids: []
+  requireCharStats: []
+  statMods: []
+  bodyMods: []
+  recoveryMods: []
+  assignModsToOrganContainer: []
+  assignPregnancyMods:
+    fertilityMods: []
+    virilityMods: []
+    pregnancySpeedMods: []
+  assignFluidMods:
+    fluidCapStretchAll: []
+    fluidCapStretch: []
+    fluidRecModsAll:
+    - modValue: 25
+      from: 
+      modType: 1
+    fluidRecMods: []
+  miscPerkStuff:
+    fatBurnMods:
+    - modValue: 1
+      from: 
+      modType: 0
+    - modValue: 15
+      from: 
+      modType: 1
+  needPerk: []
+  exclusiveWithPerk: []

@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 450435d1b76440a180adec51666a29c1, type: 3}
+  m_Name: ExperimentalTonic
+  m_EditorClassIdentifier: 
+  guid: 5b1868a20d9de234f9d48d76dfeeec89
+  title: Experimental Tonic
+  desc: May cause different permanent and non permanent effects.
+  sprite: {fileID: 21300000, guid: 0fcbd48a290243545bb9c8142b82ccea, type: 3}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 5
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 0
+      hpGain: 0
+      wpGain: 0
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods: []
+      virilityMods: []
+      growthSpeedMods: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+  tempEffectDesc: 

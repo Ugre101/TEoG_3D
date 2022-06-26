@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db00d7a52424fa9ba707fa050268f86, type: 3}
+  m_Name: Swimmer
+  m_EditorClassIdentifier: 
+  guid: bbad59885a0edd245b92b51ea43e2848
+  title: Swimmer
+  desc: Swim faster and nothing else...
+  sprite: {fileID: 0}
+  cost: 1
+  perkType: 4
+  needPerkGuids: []
+  exclusiveWithPerkGuids: []
+  requireCharStats: []
+  statMods: []
+  bodyMods: []
+  recoveryMods: []
+  needPerk: []
+  exclusiveWithPerk: []
+  extraJumps: 0
+  extraJumpStrength: 0
+  tempJumpStrength: []
+  sprintBoost: 0
+  tempSprintBoost: []
+  swimSpeedMods:
+  - modValue: 4
+    from: 
+    modType: 0
+  - modValue: 20
+    from: 
+    modType: 1

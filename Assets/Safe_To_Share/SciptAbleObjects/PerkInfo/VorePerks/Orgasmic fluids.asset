@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94708c2e1581451091a920708749863d, type: 3}
+  m_Name: Orgasmic fluids
+  m_EditorClassIdentifier: 
+  guid: 2522bf9a23576ae45b84ff41671d0ad4
+  title: 'Orgasmic fluids '
+  desc: Enhances the fluids in your organs with stimulating properties causing your
+    prey to orgasm allowing you to drain their essence.
+  sprite: {fileID: 21300000, guid: 8a4f3c43e9c073e4cb92495dd8dd6161, type: 3}
+  cost: 3
+  perkType: 0
+  needPerkGuids: []
+  exclusiveWithPerkGuids: []
+  statMods: []
+  bodyMods: []
+  needPerk: []
+  exclusiveWithPerk: []
+  capacityMods: []
+  digestionMods: []
+  pleasureDigestionMods:
+  - modValue: 4
+    from: 
+    modType: 0
+  drainMods:
+  - modValue: 2
+    from: 
+    modType: 0

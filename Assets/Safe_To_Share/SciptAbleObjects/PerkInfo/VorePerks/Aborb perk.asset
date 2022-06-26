@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db71473c7b2ab504689ef5966dade279, type: 3}
+  m_Name: Aborb perk
+  m_EditorClassIdentifier: 
+  guid: 6c6eaf4b9ebc13d44863e42c5b8b2149
+  title: Aborption
+  desc: Allows you to absorb your prey when you oral vore them, making you grow in
+    height instead of gaining fat.
+  sprite: {fileID: 21300000, guid: 92706a2557aa7224ab79d9ffe81dcf82, type: 3}
+  cost: 3
+  perkType: 1
+  needPerkGuids: []
+  exclusiveWithPerkGuids: []
+  requireCharStats: []
+  statMods: []
+  bodyMods: []
+  recoveryMods: []
+  needPerk: []
+  exclusiveWithPerk: []
+  capacityMods: []
+  digestionMods: []
+  pleasureDigestionMods: []
+  drainMods: []
+  percentAbsorbed: 13
+  absorbTypes: 02000000

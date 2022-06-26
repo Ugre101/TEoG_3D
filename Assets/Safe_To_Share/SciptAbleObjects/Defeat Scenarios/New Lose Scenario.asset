@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7421324772519499601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fa93486e3184cf692d93075de9a8a21, type: 3}
+  m_Name: efa6760e-f412-4d30-99d2-993d27aec560
+  m_EditorClassIdentifier: 
+  childNodeIds:
+  - ba914286-b1f6-4528-9e65-1afeae5bc782
+  rect:
+    serializedVersion: 2
+    x: 407
+    y: 53
+    width: 200
+    height: 150
+  introText: They tries to drain your essence
+  resistText: You resisted
+  giveInText: You gave in and allowed them to drain you
+  resistCost: 40
+  drainEssenceType: 3
+--- !u!114 &-3838635065576950655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea61ce40f3674494b2e3c29155bb7452, type: 3}
+  m_Name: a14f62ad-3d13-4f81-a23d-90d6d23c322c
+  m_EditorClassIdentifier: 
+  childNodeIds:
+  - f328eb90-a1d1-4792-a1ef-5e409b062ea6
+  rect:
+    serializedVersion: 2
+    x: 390
+    y: 330
+    width: 200
+    height: 150
+  introText: They are trying to shrink you
+  resistText: You resisted
+  giveInText: You allowed them you temporarily shrink you
+  resistCost: 42
+  transferToSelf: 0
+  bodyType: 2
+  permChange: 0
+  tempChange:
+  - modValue: -33
+    from: 
+    modType: 1
+    hoursLeft: 2
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76d834afd547462eb2706b184445c315, type: 3}
+  m_Name: New Lose Scenario
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 3965245431475919867}
+  - {fileID: -7421324772519499601}
+  - {fileID: -3838635065576950655}
+  - {fileID: 3315522677120081563}
+  - {fileID: 3931132109509844292}
+  title: Test
+--- !u!114 &3315522677120081563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde0dc6bf56f4fb9bed4f624d6478e02, type: 3}
+  m_Name: f328eb90-a1d1-4792-a1ef-5e409b062ea6
+  m_EditorClassIdentifier: 
+  childNodeIds: []
+  rect:
+    serializedVersion: 2
+    x: 739
+    y: 330
+    width: 200
+    height: 150
+  introText: They are looking at you with hungry eyes
+  resistText: Struggle
+  giveInText: Willing prey
+  resistCost: 33
+  voreTypes: 00000000010000000200000004000000
+--- !u!114 &3931132109509844292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea61ce40f3674494b2e3c29155bb7452, type: 3}
+  m_Name: ba914286-b1f6-4528-9e65-1afeae5bc782
+  m_EditorClassIdentifier: 
+  childNodeIds: []
+  rect:
+    serializedVersion: 2
+    x: 666
+    y: 20
+    width: 200
+    height: 150
+  introText: They want to shrink your muscle
+  resistText: 
+  giveInText: 
+  resistCost: 31
+  transferToSelf: 1
+  bodyType: 0
+  permChange: -2
+  tempChange: []
+--- !u!114 &3965245431475919867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dad8fd9fa694a81bb9beb5da0b97df3, type: 3}
+  m_Name: d3dfed8c-4a4d-430e-bd4d-f4528a6abbe6
+  m_EditorClassIdentifier: 
+  childNodeIds:
+  - a14f62ad-3d13-4f81-a23d-90d6d23c322c
+  - efa6760e-f412-4d30-99d2-993d27aec560
+  rect:
+    serializedVersion: 2
+    x: 38
+    y: 137
+    width: 200
+    height: 150
+  introText: 
+  resistText: 
+  giveInText: 
+  resistCost: 0

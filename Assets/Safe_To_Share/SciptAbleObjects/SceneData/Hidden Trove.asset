@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be4b900f25a463681e9773b52f52961, type: 3}
+  m_Name: Hidden Trove
+  m_EditorClassIdentifier: 
+  guid: 2436a9a6f6076354b945d0dbdf84bd06
+  description: Strange place
+  sceneType: 0
+  sceneReference:
+    m_AssetGUID: 5f617d0b0123bab4297fcdebf214d51e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  subLocations: []
+  worldMap: {fileID: 21300000, guid: 9bc35dde03942c641b16e91469830ab9, type: 3}
+  sceneName: Hidden Trove

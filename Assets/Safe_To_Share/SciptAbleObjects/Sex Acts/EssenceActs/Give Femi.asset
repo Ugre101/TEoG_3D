@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3b077198c6649feb9252fea8911a4ab, type: 3}
+  m_Name: Give Femi
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: b0a6699ac0d956c4da885db411ba9a4a, type: 3}
+  title: Give femi
+  data:
+    giver: 0
+    receiver: 0
+    text: Give femi
+    afterText: []
+  errorData:
+    giver: 0
+    receiver: 0
+    text: 
+    afterText: []
+  desc: 
+  drainerOrgasmNeeded: 1
+  victimOrgasmNeeded: 0
+  orgasmsNeeded: 1
+  returnData:
+    giver: 0
+    receiver: 0
+    text: 
+    afterText: []

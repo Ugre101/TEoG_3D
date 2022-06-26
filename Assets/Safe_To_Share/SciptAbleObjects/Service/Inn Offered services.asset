@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf64bc320014c4b8993b6d2e18dea98, type: 3}
+  m_Name: Inn Offered services
+  m_EditorClassIdentifier: 
+  offeredServices:
+  - {fileID: 11400000, guid: 0a64285b95e30c24da58b2d419347544, type: 2}
+  - {fileID: 11400000, guid: c7c4c5be432190d4882402aec65794a9, type: 2}
+  - {fileID: 11400000, guid: 9b01d92e8c33fac428c778542e739a93, type: 2}
+  - {fileID: 11400000, guid: 069a6e282f10d75418623f525d5901bd, type: 2}

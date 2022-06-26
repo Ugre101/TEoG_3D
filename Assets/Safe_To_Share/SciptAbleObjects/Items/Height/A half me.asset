@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a41e503f608c61c46916e5442705378d, type: 3}
+  m_Name: A half me
+  m_EditorClassIdentifier: 
+  guid: ef769bd99d03d6a46b35d15333bac987
+  title: A half me (8h)
+  desc: Cut your height by half for a quater of a day
+  sprite: {fileID: 21300000, guid: 53e7d06fb76564344b52175352fcd419, type: 3}
+  size: {x: 1, y: 1}
+  value: 40
+  canSell: 1
+  effectsTree:
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods: []
+      virilityMods: []
+      growthSpeedMods: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 1
+      bodyTempMods:
+      - bodyStatType: 2
+        assignTempMod:
+          mod:
+          - modValue: -50
+            from: 
+            modType: 1
+            hoursLeft: 8
+      bodyChanges: []
+  tempEffectDesc: 

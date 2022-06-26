@@ -1,0 +1,64 @@
+{
+    "name": "TEoG Save",
+    "maps": [
+        {
+            "name": "Save",
+            "id": "cd4fa9ac-b85c-42f0-b86f-0a74d642b8f7",
+            "actions": [
+                {
+                    "name": "QuickSave",
+                    "type": "Button",
+                    "id": "2d2dc341-18e6-4087-9399-c5ec20a28601",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "QuickLoad",
+                    "type": "Button",
+                    "id": "00ac16f9-a882-4063-bca9-892da4726369",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fe658cdb-7d96-40d7-9f72-86af74c65f6a",
+                    "path": "<Keyboard>/f5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyBoard",
+                    "action": "QuickSave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "107a5642-9fdf-463b-8688-a5285bb8c3e5",
+                    "path": "<Keyboard>/f9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyBoard",
+                    "action": "QuickLoad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "KeyBoard",
+            "bindingGroup": "KeyBoard",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

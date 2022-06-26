@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea44b391e0b48a2829892336d623487, type: 3}
+  m_Name: Player CharacterPreset
+  m_EditorClassIdentifier: 
+  startGender:
+    allowedGenders:
+    - weight: 0
+      gender: 0
+    startEssence: 0
+  startIdentity:
+    customIdentity: 1
+    identity:
+      id: 0
+      firstName: 
+      lastName: 
+      birthDay:
+        year: 0
+        day: 0
+    nameList: {fileID: 0}
+    minAge: 18
+    maxAge: 18
+  startStats:
+    strength: 15
+    charm: 15
+    constitution: 10
+    intelligence: 10
+    agility: 10
+  startAbilitiesGuids:
+  - guid: 4038a32d34d790c43ac88eea5421a75a
+  - guid: 0145627e7da64be4089d58a663105786
+  - guid: d507d249619199346adf56c4916e1d84
+  startItems:
+  - {fileID: 11400000, guid: e35b4beceb55d664ca41901c925af336, type: 2}
+  startPerks: []
+  startEssencePerks: []
+  startVorePerks: []
+  startRaceRef:
+    m_AssetGUID: 4d8d0eb9b96993249aa87052e588b749
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  startBody:
+    height: 165
+    muscle: 22
+    fat: 18
+    rng:
+      minValue: 1
+      maxValue: 1
+  startHair:
+    bald: 0
+    hairColors:
+    - {r: 1, g: 1, b: 1, a: 1}

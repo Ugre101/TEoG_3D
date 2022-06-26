@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1809dc5cd44f4d6ba6f8f1edbc7a1d1c, type: 3}
+  m_Name: AutoTransMuteEssencePerk
+  m_EditorClassIdentifier: 
+  guid: 5d7cceaa55130734c891e35a5904a414
+  title: Transmute Essence
+  desc: Allows you to transmute your partners essence when they orgasm shaping them
+    to your liking. So if you want them to be more feminine they will drain themself
+    of masculine essence and gain the drained amount of feminine essence with a minor
+    bonus.
+  sprite: {fileID: 21300000, guid: c85fec337ccde6c45acc6c24613b2ed5, type: 3}
+  cost: 2
+  perkType: 0
+  needPerkGuids: []
+  exclusiveWithPerkGuids: []
+  requireCharStats: []
+  statMods: []
+  bodyMods: []
+  recoveryMods: []
+  needPerk: []
+  exclusiveWithPerk: []
+  loseFlatBonus: 0
+  lostPercentBonus: 0
+  stableEssenceMods: []
+  drainEssenceMods: []
+  giveEssenceMods: []
+  essenceToChange: 25
+  bonus: 5

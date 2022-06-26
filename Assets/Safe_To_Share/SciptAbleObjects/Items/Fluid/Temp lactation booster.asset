@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a41e503f608c61c46916e5442705378d, type: 3}
+  m_Name: Temp lactation booster
+  m_EditorClassIdentifier: 
+  guid: abcffbb5d3b1d2a48ad943157297ac46
+  title: Temp lactation booster (72h)
+  desc: Temporary boosts your breasts lactation rate allowing you to produce milk
+    even if you aren't pregnant.
+  sprite: {fileID: 21300000, guid: b1a4a0805166aba479d17346920501a7, type: 3}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 33
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 0
+      hpGain: 0
+      wpGain: 0
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods:
+        mod: []
+      virilityMods:
+        mod: []
+      growthSpeedMods:
+        mod: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+    charStatItemEffects:
+      active: 0
+      assignCharStatTempMods: []
+    healthStatItemEffects:
+      active: 0
+      assignCharStatTempMods: []
+    sexualFluidItemEffects:
+      active: 1
+      fluidCapStretch:
+      - organType: 2
+        mods:
+          mod:
+          - modValue: 5
+            from: 
+            modType: 1
+            hoursLeft: 72
+      fluidRecMods:
+      - organType: 2
+        mods:
+          mod:
+          - modValue: 1
+            from: 
+            modType: 0
+            hoursLeft: 72
+          - modValue: 25
+            from: 
+            modType: 1
+            hoursLeft: 72
+    miscItemEffects:
+      active: 0
+      fatBurnMods: []
+  tempEffectDesc: 
+  updateInventoryAfterUse: 0

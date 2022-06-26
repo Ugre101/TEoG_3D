@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934feff1ae37482491df60716ed99121, type: 3}
+  m_Name: Potato Soup
+  m_EditorClassIdentifier: 
+  guid: f0827e7e87901e8489ab70866d8d3638
+  title: Potato Soup
+  desc: 
+  sprite: {fileID: 0}
+  size: {x: 1, y: 1}
+  unlimitedUse: 0
+  value: 0
+  canSell: 1
+  effectsTree:
+    healingItemEffects:
+      active: 1
+      hpGain: 50
+      wpGain: 50
+    pregnancyItemEffect:
+      active: 0
+      fertilityMods:
+        mod: []
+      virilityMods:
+        mod: []
+      growthSpeedMods:
+        mod: []
+      permFertility: 0
+      permVirility: 0
+    bodyStatItemEffect:
+      active: 0
+      bodyTempMods: []
+      bodyChanges: []
+    voreItemEffect:
+      active: 0
+      digestionMods:
+        mod: []
+      capacityMods:
+        mod: []
+      pleasureMods:
+        mod: []
+      pleasureDrainModes:
+        mod: []
+    sexStatsItemEffects:
+      active: 0
+      orgMods: []
+      arousalMods: []
+    learnAbilityItemEffect:
+      active: 0
+      ability: {fileID: 0}
+    raceEssenceItemEffects:
+      active: 0
+      race: {fileID: 0}
+      toGain: 0
+    charStatItemEffects:
+      active: 1
+      assignCharStatTempMods:
+      - statType: 2
+        tempMods:
+          mod:
+          - modValue: 2
+            from: 
+            modType: 0
+            hoursLeft: 24
+          - modValue: 10
+            from: 
+            modType: 1
+            hoursLeft: 24
+    healthStatItemEffects:
+      active: 1
+      assignCharStatTempMods:
+      - healthTypes: 2
+        tempMods:
+          mod:
+          - modValue: 1
+            from: 
+            modType: 0
+            hoursLeft: 24
+      - healthTypes: 3
+        tempMods:
+          mod:
+          - modValue: 1
+            from: 
+            modType: 0
+            hoursLeft: 24
+  tempEffectDesc: 
+  kcal: 700

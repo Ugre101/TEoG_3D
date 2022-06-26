@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0620dd1ed6b7cc840a43ea61815b28d6, type: 3}
+  m_Name: Halfling
+  m_EditorClassIdentifier: 
+  guid: 4ab7bba494160634cba5937da38f8351
+  title: Halfling
+  desc: 
+  sprite: {fileID: 0}
+  primaryRaceMods:
+    StatMods: []
+    BodyMods:
+    - mod:
+        modValue: -35
+        from: 
+        modType: 1
+      type: 2
+  secondaryRaceMods:
+    StatMods: []
+    BodyMods: []

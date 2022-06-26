@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faaa11c972c143e29da238ebbd4a340d, type: 3}
+  m_Name: EnemyPreset
+  m_EditorClassIdentifier: 
+  startGender:
+    allowedGenders:
+    - weight: 2
+      gender: 1
+    startEssence: 60
+  startIdentity:
+    customIdentity: 0
+    identity:
+      id: 0
+      firstName: 
+      lastName: 
+      birthDay:
+        year: 0
+        day: 0
+    nameList: {fileID: 11400000, guid: a047e43d2031dd54c862cb59bf14aa29, type: 2}
+    minAge: 18
+    maxAge: 44
+  startStats:
+    strength: 10
+    charm: 10
+    constitution: 10
+    intelligence: 10
+    agility: 10
+  startAbilitiesGuids: []
+  startItems: []
+  startPerks: []
+  startEssencePerks:
+  - {fileID: 11400000, guid: 805c419f5cc46ba419a77f37f6f53172, type: 2}
+  - {fileID: 11400000, guid: 92f6b0a8e998af243a9a0826dca3491a, type: 2}
+  - {fileID: 11400000, guid: 5ad4d4d4ae1f34045a2976f89ef0d925, type: 2}
+  startVorePerks: []
+  startRaceRef:
+    m_AssetGUID: 96817023700d0764793f5b1dcfe15bd9
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  startBody:
+    height: 184
+    muscle: 21
+    fat: 14
+    rng:
+      minValue: 1
+      maxValue: 1
+  startHair:
+    bald: 0
+    hairColors:
+    - {r: 1, g: 1, b: 1, a: 1}
+  startSkinColor:
+    clampRandomColor: 0
+    whitest: 0
+    darkest: 0
+    manualSkinColor: 0
+    skinDarkness: 0
+  battleReward:
+    goldReward: 50
+    expReward: 50
+    rngValue:
+      minValue: 1
+      maxValue: 1
+  canTakeEnemyHome:
+    canTake: 1
+    orgasmsNeeded: 2
+  loseScenarios: {fileID: 11400000, guid: d547ccf44044b6b41809a119bae15cc3, type: 2}
+  desc: 
+  giveRandomBodyMorphs: 0
+  customLoseScenarios:
+  - Title: Test All
+    introNode:
+      id: 973e9c26-2494-497d-863f-4f703904922b
+      introText: Intro
+      resistText: 
+      giveInText: 
+      resistCost: 0
+      canvasPos: {x: 100, y: -200}
+      childNodesIds:
+      - 06b10e4f-2d6b-4960-abe8-face9c736725
+    drainNodes:
+    - id: 06b10e4f-2d6b-4960-abe8-face9c736725
+      introText: Drian
+      resistText: 
+      giveInText: 
+      resistCost: 0
+      canvasPos: {x: 388.66397, y: -186.3352}
+      childNodesIds:
+      - 81baac00-459c-45c1-8e75-4dfa1be11778
+      drainEssenceType: 1
+      giveEssenceType: 2
+      DrainBonus: 97
+      GiveBonus: 45
+    bodyNodes:
+    - id: 81baac00-459c-45c1-8e75-4dfa1be11778
+      introText: Shrink
+      resistText: 
+      giveInText: 
+      resistCost: 0
+      canvasPos: {x: 687.12836, y: -298.44135}
+      childNodesIds:
+      - 49a96016-9394-4c67-aff2-66d747f1a421
+      bodyType: 2
+      tempMods:
+      - Duration: 1
+        Value: -51
+        ModType: 1
+      permChange: -7
+      transfer: 0
+    voreNodes:
+    - id: 49a96016-9394-4c67-aff2-66d747f1a421
+      introText: Vore
+      resistText: 
+      giveInText: 
+      resistCost: 0
+      canvasPos: {x: 1023.4469, y: -292.6176}
+      childNodesIds: []
+      voreTypes: 00000000010000000200000004000000
+    enemies:
+    - EnemyPreset

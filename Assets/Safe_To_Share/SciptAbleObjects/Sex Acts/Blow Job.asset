@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cdbce6d6724ed0a90b4653828c2e5e, type: 3}
+  m_Name: Blow Job
+  m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  title: Blow job
+  data:
+    giver: 0
+    receiver: 0
+    text: 
+    afterText: []
+  errorData:
+    giver: 0
+    receiver: 0
+    text: 
+    afterText: []
+  arousalGain:
+    casterBaseAmount: 20
+    targetBaseAmount: 15
+    rng:
+      minValue: 1
+      maxValue: 1
+  casterNeedsSexualOrgan:
+  - organType: 0
+    minSize:
+      need: 1
+      size: 2
+    maxSize:
+      need: 0
+      size: 0
+    amount:
+      need: 0
+      size: 0
+  partnerNeedsSexualOrgan: []
+  casterNeedsBody: []
+  partnerNeedsBody: []
+  heightCompression:
+    active: 0
+    playerIsXTimesTaller: 0
+  canImpregnate: 0
+  canGetImpregnated: 0
+  organToBeImpregnated: 0
+  cumFluidsFromInto:
+  - fromPartner: 0
+    form: 1
+    into: 1

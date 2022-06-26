@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16f2ee100882443d9572e27406574521, type: 3}
+  m_Name: Essence Hoader
+  m_EditorClassIdentifier: 
+  guid: 478e259dca9dd264b9ca969271247111
+  title: Essence Hoader
+  desc: "Stabilize your essence even further allowing you to drain significantly
+    more essence without being transformed.\r"
+  sprite: {fileID: 21300000, guid: 2e1d474a709280743b16c2042ed7ca36, type: 3}
+  cost: 2
+  perkType: 0
+  needPerkGuids:
+  - 046be9c8abda50746b51dc6088d24206
+  exclusiveWithPerkGuids: []
+  requireCharStats: []
+  statMods: []
+  bodyMods: []
+  recoveryMods: []
+  needPerk:
+  - {fileID: 11400000, guid: 046be9c8abda50746b51dc6088d24206, type: 2}
+  exclusiveWithPerk: []
+  loseFlatBonus: 0
+  lostPercentBonus: 0
+  stableEssenceMods:
+  - modValue: 300
+    from: 
+    modType: 0
+  - modValue: 50
+    from: 
+    modType: 1
+  drainEssenceMods: []
+  giveEssenceMods: []

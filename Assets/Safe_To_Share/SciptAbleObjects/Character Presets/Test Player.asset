@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aea44b391e0b48a2829892336d623487, type: 3}
+  m_Name: Test Player
+  m_EditorClassIdentifier: 
+  startGender:
+    allowedGenders:
+    - weight: 3
+      gender: 0
+    startEssence: 0
+  startIdentity:
+    customIdentity: 1
+    identity:
+      id: 0
+      firstName: Test
+      lastName: Testsson
+      birthDay:
+        year: 0
+        day: 0
+    nameList: {fileID: 0}
+    minAge: 18
+    maxAge: 44
+  startStats:
+    strength: 20
+    charm: 20
+    constitution: 10
+    intelligence: 10
+    agility: 10
+  startAbilitiesGuids:
+  - guid: 4038a32d34d790c43ac88eea5421a75a
+  - guid: 0145627e7da64be4089d58a663105786
+  - guid: d507d249619199346adf56c4916e1d84
+  - guid: 9a470fc5a623e6a45838ef7a05b21094
+  - guid: 82b631246acbd724dad0841a5d66072f
+  - guid: 7a0b1ca80586e0a4c926392b079badb3
+  startItems:
+  - {fileID: 11400000, guid: e35b4beceb55d664ca41901c925af336, type: 2}
+  - {fileID: 11400000, guid: 37d50a59c926f1147abae502534d4710, type: 2}
+  - {fileID: 11400000, guid: 7c66f324afbf3f44687b543d659183ba, type: 2}
+  - {fileID: 11400000, guid: abcffbb5d3b1d2a48ad943157297ac46, type: 2}
+  startPerks: []
+  startEssencePerks:
+  - {fileID: 11400000, guid: cf01d105a662d374bbf8b2f6be12be9d, type: 2}
+  startVorePerks: []
+  startRaceRef:
+    m_AssetGUID: 96817023700d0764793f5b1dcfe15bd9
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  startBody:
+    height: 160
+    muscle: 39
+    fat: 16
+    rng:
+      minValue: 1
+      maxValue: 1
+  startHair:
+    bald: 0
+    hairColors:
+    - {r: 1, g: 1, b: 1, a: 1}
+  startSkinColor:
+    clampRandomColor: 1
+    whitest: 0.1
+    darkest: 0.7
+    manualSkinColor: 0
+    skinDarkness: 0

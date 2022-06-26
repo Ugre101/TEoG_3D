@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c111fd92c6a43218f6e4735417ac38d, type: 3}
+  m_Name: Height Theft
+  m_EditorClassIdentifier: 
+  guid: 5ad4d4d4ae1f34045a2976f89ef0d925
+  title: Height Theft
+  desc: When draining essence take a minuscule amount of the target's height
+  sprite: {fileID: 0}
+  cost: 2
+  perkType: 0
+  needPerkGuids: []
+  exclusiveWithPerkGuids: []
+  statMods: []
+  bodyMods: []
+  needPerk: []
+  exclusiveWithPerk: []
+  loseFlatBonus: 0
+  lostPercentBonus: 0
+  stableEssenceMods: []
+  drainEssenceMods: []
+  giveEssenceMods: []
+  heightDrain:
+  - modValue: 1
+    from: Height Theft
+    modType: 1
+  heightGive: []

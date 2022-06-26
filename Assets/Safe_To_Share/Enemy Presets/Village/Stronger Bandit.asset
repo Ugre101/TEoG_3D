@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faaa11c972c143e29da238ebbd4a340d, type: 3}
+  m_Name: Stronger Bandit
+  m_EditorClassIdentifier: 
+  startGender:
+    allowedGenders:
+    - weight: 3
+      gender: 1
+    startEssence: 220
+  startIdentity:
+    customIdentity: 0
+    identity:
+      id: 0
+      firstName: 
+      lastName: 
+      birthDay:
+        year: 0
+        day: 0
+    nameList: {fileID: 11400000, guid: a047e43d2031dd54c862cb59bf14aa29, type: 2}
+    minAge: 18
+    maxAge: 44
+  startStats:
+    strength: 10
+    charm: 8
+    constitution: 10
+    intelligence: 8
+    agility: 10
+  startAbilities: []
+  startItems: []
+  startPerks: []
+  startEssencePerks: []
+  startVorePerks: []
+  startRaceRef:
+    m_AssetGUID: 4d8d0eb9b96993249aa87052e588b749
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  battleAI:
+    standardAbility: {fileID: 11400000, guid: 4038a32d34d790c43ac88eea5421a75a, type: 2}
+    standardGuid: 4038a32d34d790c43ac88eea5421a75a
+    rareUseAbility: {fileID: 0}
+    rareUseGuid: 
+    castOnSelfWhenLowHealth: {fileID: 0}
+    lowHpGuid: 
+    castOnSelfWhenLowWillHealth: {fileID: 0}
+    lowWpGuid: 
+    rareCastChance: 0.1
+  startBody:
+    height: 180
+    muscle: 30
+    fat: 26
+    rng:
+      minValue: 1
+      maxValue: 1
+  battleReward:
+    goldReward: 125
+    expReward: 100
+    rngValue:
+      minValue: 1
+      maxValue: 1
+  canTakeEnemyHome:
+    canTake: 1
+    orgasmsNeeded: 3
+  loseScenarios: {fileID: 11400000, guid: d547ccf44044b6b41809a119bae15cc3, type: 2}
+  desc: Hangs around close to the Inn
+  customLoseScenarios: []
