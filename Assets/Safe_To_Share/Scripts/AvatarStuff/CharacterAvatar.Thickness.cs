@@ -16,15 +16,16 @@ namespace AvatarStuff
             {
                 if (!hasShape)
                     return;
+                float clampedValue = Mathf.Clamp(Mathf.Abs(thickset.Value) * 30f, 0, 300f);
                 if (thickset.Value > 0)
                 {
-                    shape.SetBlendShapeWeight(thick, thickset.Value * 100f);
+                    shape.SetBlendShapeWeight(thick, clampedValue);
                     shape.SetBlendShapeWeight(thin, 0f);
                 }
                 else
                 {
                     shape.SetBlendShapeWeight(thick, 0);
-                    shape.SetBlendShapeWeight(thin,  Mathf.Abs(thickset.Value * 100f));
+                    shape.SetBlendShapeWeight(thin,  clampedValue);
                 }
             }
 

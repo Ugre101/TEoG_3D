@@ -248,7 +248,7 @@ namespace Character
 
         public virtual void OnStomachDigestion(Prey prey, string digestionMode) =>
             //TODO Need balancing
-            Body.Thickset.BaseValue += prey.StartWeight / 100f;
+            Body.Thickset.BaseValue += prey.StartWeight / 1000f;
 
         public virtual void OnOrganDigestionProgress(SexualOrganType organType, Prey prey, string mode, float progress)
         {
