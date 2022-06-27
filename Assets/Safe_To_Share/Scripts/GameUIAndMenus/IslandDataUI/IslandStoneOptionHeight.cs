@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.IslandDataUI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 {
     public class IslandStoneOptionHeight : IslandStoneOption
     {
@@ -15,11 +15,6 @@ namespace GameUIAndMenus.IslandDataUI
         [SerializeField] Image btnImage;
         [SerializeField] Slider slider;
 
-        void Start()
-        {
-            increaseButton.onClick.AddListener(AddHeight);
-            slider.onValueChanged.AddListener(SetCurrentValue);
-        }
 
         void OnEnable()
         {
@@ -29,7 +24,7 @@ namespace GameUIAndMenus.IslandDataUI
             UpdateValue(data.bodyData.GetValueOfType(bodyType));
         }
 
-        void SetCurrentValue(float arg0)
+        public void SetCurrentValue(float arg0)
         {
             if (!IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))
                 return;
@@ -41,10 +36,10 @@ namespace GameUIAndMenus.IslandDataUI
         }
 
         bool CanAfford(out BodyStat playerBody) =>
-            playerHolder.Player.Body.BodyStats.TryGetValue(bodyType, out playerBody) &&
+            player.Body.BodyStats.TryGetValue(bodyType, out playerBody) &&
             !(playerBody.BaseValue <= DonateAmount + 1);
 
-        void AddHeight()
+        public override void Click()
         {
             if (!CanAfford(out var playerBody) ||
                 !IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))

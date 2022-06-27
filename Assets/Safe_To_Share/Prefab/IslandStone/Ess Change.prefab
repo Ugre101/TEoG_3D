@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2767940311545561131}
   m_RootOrder: 1
@@ -104,6 +105,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2293449799502300654}
   - {fileID: 2293449799571814646}
@@ -168,11 +170,254 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffa10db979e47aba27fc2b5b40022b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHolder: {fileID: 0}
+  player:
+    identity:
+      id: 107
+      firstName: 
+      lastName: 
+      birthDay:
+        year: -21
+        day: 0
+    familyTree:
+      father:
+        id: 108
+        firstName: 
+        lastName: 
+        birthDay:
+          year: -21
+          day: 0
+      mother:
+        id: 109
+        firstName: 
+        lastName: 
+        birthDay:
+          year: -21
+          day: 0
+      childrenIds: 
+    stats:
+      strength:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      intelligence:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      constitution:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      charisma:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      agility:
+        baseValue: 10
+        mods:
+          tempBaseStatMods: []
+      health:
+        mods:
+          tempBaseStatMods: []
+        currentValue: 0
+      willPower:
+        mods:
+          tempBaseStatMods: []
+        currentValue: 0
+    body:
+      muscle:
+        baseValue: 20
+        mods:
+          tempBaseStatMods: []
+      fat:
+        baseValue: 20
+        mods:
+          tempBaseStatMods: []
+      height:
+        baseValue: 160
+        mods:
+          tempBaseStatMods: []
+      thickset:
+        baseValue: 0
+        mods:
+          tempBaseStatMods: []
+      fatBurnRate:
+        mods:
+          tempBaseStatMods: []
+      bodyMorphs:
+        avatarBodyMorphs: []
+      skinTone: 0
+    vore:
+      level:
+        exp: 0
+        level: 1
+        points: 0
+      stomach:
+        preysIds: 
+        specialPreysIds: 
+        voreExp: 0
+      stomachDigestionMode:
+        currentMode: 0
+      ballsDigest:
+        currentMode: 0
+      cockDigest:
+        currentMode: 0
+      boobsDigest:
+        currentMode: 0
+      analDigest:
+        currentMode: 0
+      vaginaDigest:
+        currentMode: 0
+      drainEssenceType: 3
+      digestionStrength:
+        mods:
+          tempBaseStatMods: []
+      pleasureDigestion:
+        mods:
+          tempBaseStatMods: []
+      orgasmDrain:
+        mods:
+          tempBaseStatMods: []
+      capacityBoost:
+        tempBaseStatMods: []
+    sexualOrgans:
+      anals:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0
+            mods:
+              tempBaseStatMods: []
+          fluidName: Scat
+        list: []
+      dicks:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0
+            mods:
+              tempBaseStatMods: []
+          fluidName: Cum
+        list: []
+      balls:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0.5
+            mods:
+              tempBaseStatMods: []
+          fluidName: Cum
+        list: []
+      boobs:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0
+            mods:
+              tempBaseStatMods: []
+          fluidName: Milk
+        list: []
+      vaginas:
+        fluid:
+          mods:
+            tempBaseStatMods: []
+          currentValue: 0
+          recovery:
+            baseValue: 0
+            mods:
+              tempBaseStatMods: []
+          fluidName: Femcum
+        list: []
+    level:
+      exp: 0
+      level: 1
+      points: 0
+    essenceSystem:
+      femi:
+        amount: 0
+      masculinity:
+        amount: 0
+      stableEssence:
+        baseValue: 0
+        mods:
+          tempBaseStatMods: []
+      essenceOptions:
+        selfDrain: 0
+        giveHeight: 1
+        transmuteTo: 2
+        morphPartnerToGender: 0
+    sexStats:
+      totalOrgasms: 0
+      currentArousal: 0
+      fluidsOnBody:
+        fluids: []
+      fluidsInStomach:
+        fluids: []
+      baseMaxArousal:
+        mods:
+          tempBaseStatMods: []
+      maxCasterOrgasms:
+        mods:
+          tempBaseStatMods: []
+      gainArousalFactor:
+        mods:
+          tempBaseStatMods: []
+      giveArousalFactor:
+        mods:
+          tempBaseStatMods: []
+    pregnancySystem:
+      fertility:
+        baseValue: 35
+        mods:
+          tempBaseStatMods: []
+      virility:
+        baseValue: 35
+        mods:
+          tempBaseStatMods: []
+      pregnancySpeed:
+        mods:
+          tempBaseStatMods: []
+      timesPregnant: 0
+      timesImpregnated: 0
+    relationsShips:
+      relationShips: []
+    hair:
+      bald: 0
+      color: {r: 1, g: 1, b: 1, a: 1}
+    abilityBook:
+      boundAbilities:
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+    lastTimeSlept:
+      min: 0
+      year: 0
+      day: 0
+      hour: 0
   island: 0
   currentAmount: {fileID: 2293449799571814647}
-  increaseButton: {fileID: 2293449800301450561}
-  decreaseQuestButton: {fileID: 2293449801105556616}
   essenceType: 0
   costText: {fileID: 2293449800597858634}
   btnImage: {fileID: 2293449800301450566}
@@ -206,6 +451,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2293449799477092323}
   m_RootOrder: 0
@@ -340,6 +586,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2293449799477092323}
   m_RootOrder: 1
@@ -475,6 +722,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2293449800597858629}
   m_Father: {fileID: 2293449799477092323}
@@ -566,7 +814,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2293449800301450566}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5543065851828835708}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI.IslandStoneOptionEssence,
+          MyGameUIScripts
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2293449800448241667
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +856,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2293449801105556619}
   m_RootOrder: 0
@@ -729,6 +991,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2293449800301450560}
   m_RootOrder: 0
@@ -864,6 +1127,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2293449800448241664}
   m_Father: {fileID: 2293449799477092323}
@@ -982,6 +1246,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7310908799858970058}
   m_Father: {fileID: 2767940311545561131}
@@ -1020,6 +1285,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7953083118811616891}
   m_RootOrder: 0
@@ -1093,6 +1359,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1944804991090036268}
   m_Father: {fileID: 2767940311545561131}
@@ -1131,6 +1398,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5560916096361992198}
   m_RootOrder: 0
@@ -1205,6 +1473,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7953083118811616891}
   - {fileID: 208872058454250192}
@@ -1267,4 +1536,17 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5543065851828835708}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI.IslandStoneOptionEssence,
+          MyGameUIScripts
+        m_MethodName: SetCurrentValue
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
