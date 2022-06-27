@@ -5,6 +5,7 @@ using System.Text;
 using Dialogue;
 using Dialogue.UI;
 using Safe_to_Share.Scripts.CustomClasses;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

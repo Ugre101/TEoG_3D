@@ -1,5 +1,5 @@
 using System.IO;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;

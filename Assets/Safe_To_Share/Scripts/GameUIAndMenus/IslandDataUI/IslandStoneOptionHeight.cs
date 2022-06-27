@@ -1,6 +1,6 @@
 ﻿using Character.BodyStuff;
 using Character.IslandData;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

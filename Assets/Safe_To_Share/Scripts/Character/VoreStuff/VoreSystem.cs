@@ -14,7 +14,7 @@ using Character.VoreStuff.VoreDigestionModes.Vagina;
 using Character.VoreStuff.VorePerks;
 using CustomClasses;
 using Safe_to_Share.Scripts.CustomClasses;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Character.VoreStuff

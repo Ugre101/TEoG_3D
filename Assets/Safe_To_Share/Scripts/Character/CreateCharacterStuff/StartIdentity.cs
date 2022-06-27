@@ -1,7 +1,7 @@
 ﻿using System;
 using Character.GenderStuff;
 using Character.IdentityStuff;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

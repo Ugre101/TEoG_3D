@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Static;
 using Character.Npc;
 using Character.PlayerStuff;
 using Character.Service;
@@ -11,6 +10,7 @@ using Dialogue.UI;
 using GameUIAndMenus.DialogueAndEventMenu;
 using Items;
 using Map;
+using Safe_To_Share.Scripts.Static;
 using SaveStuff;
 using SceneStuff;
 using Shop;

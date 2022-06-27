@@ -1,9 +1,9 @@
 ﻿using Character.PlayerStuff;
 using Character.StatsStuff;
 using Character.StatsStuff.Mods;
-using Static;
 using System;
 using System.Text;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Character

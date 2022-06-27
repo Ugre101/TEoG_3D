@@ -1,5 +1,5 @@
 ﻿using Character.PlayerStuff;
-using Static;
+using Safe_To_Share.Scripts.Static;
 
 namespace Character.Ailments
 {

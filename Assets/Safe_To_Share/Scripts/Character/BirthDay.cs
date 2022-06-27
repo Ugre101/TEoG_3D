@@ -1,5 +1,5 @@
 ﻿using System;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Character

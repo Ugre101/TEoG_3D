@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Character;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI

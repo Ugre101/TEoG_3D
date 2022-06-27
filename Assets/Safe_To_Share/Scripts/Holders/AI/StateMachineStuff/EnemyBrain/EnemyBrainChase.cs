@@ -1,5 +1,5 @@
-﻿using Assets.Scripts.Static;
-using Character.EnemyStuff;
+﻿using Character.EnemyStuff;
+using Safe_To_Share.Scripts.Static;
 
 namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
 {

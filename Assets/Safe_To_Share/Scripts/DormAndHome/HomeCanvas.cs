@@ -1,8 +1,8 @@
-using Assets.Scripts.Static;
 using AvatarStuff.Holders;
 using Character;
 using Character.PlayerStuff;
 using CustomClasses;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

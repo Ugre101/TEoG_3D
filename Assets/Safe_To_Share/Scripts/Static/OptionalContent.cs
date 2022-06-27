@@ -1,6 +1,6 @@
 ﻿using CustomClasses;
 
-namespace Static
+namespace Safe_To_Share.Scripts.Static
 {
     public static class OptionalContent
     {

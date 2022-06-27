@@ -4,7 +4,7 @@ using System.Text;
 using Character.StatsStuff.Mods;
 using GameUIAndMenus.EffectUI;
 using Items;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 

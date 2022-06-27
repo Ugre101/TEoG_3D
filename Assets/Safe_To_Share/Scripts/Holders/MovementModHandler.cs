@@ -1,8 +1,8 @@
 using Character.StatsStuff.Mods;
 using Movement.ECM2.Source.Characters;
 using Safe_to_Share.Scripts.CustomClasses;
+using Safe_To_Share.Scripts.Static;
 using Special_Items;
-using Static;
 using UnityEngine;
 
 namespace AvatarStuff.Holders

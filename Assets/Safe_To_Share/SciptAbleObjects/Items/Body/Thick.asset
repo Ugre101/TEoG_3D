@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Thick
   m_EditorClassIdentifier: 
   guid: 2f20a4b9327c05641bbbe580316ea7a2
-  title: 
-  desc: 
+  title: Thick sauce
+  desc: So rich it imetadly fattens your bone structure temporarily so much even
+    after it stops some thickening remains.
   sprite: {fileID: 0}
   size: {x: 1, y: 1}
   unlimitedUse: 0
-  value: 0
+  value: 30
   canSell: 1
   effectsTree:
     healingItemEffects:
@@ -39,7 +40,7 @@ MonoBehaviour:
       active: 1
       bodyTempMods: []
       bodyChanges: []
-      thickSetChange: 0.25
+      thickSetChange: 0.125
       tempThickMods:
       - modValue: 1
         from: 
@@ -61,7 +62,8 @@ MonoBehaviour:
       arousalMods: []
     learnAbilityItemEffect:
       active: 0
-      ability: {fileID: 0}
+      dropSerializableObject:
+        guid: 
     raceEssenceItemEffects:
       active: 0
       race: {fileID: 0}

@@ -5,7 +5,7 @@ using Character.PlayerStuff;
 using Character.RelationShipStuff;
 using Dialogue;
 using GameUIAndMenus;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts

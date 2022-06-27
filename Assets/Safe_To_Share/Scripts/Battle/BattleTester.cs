@@ -4,7 +4,7 @@ using Character;
 using Character.CreateCharacterStuff;
 using Character.EnemyStuff;
 using Character.PlayerStuff;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Battle

@@ -4,7 +4,7 @@ using Character.BodyStuff;
 using Character.PregnancyStuff;
 using Character.StatsStuff;
 using Safe_to_Share.Scripts.CustomClasses;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

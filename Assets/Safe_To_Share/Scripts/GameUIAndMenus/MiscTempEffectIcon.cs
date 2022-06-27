@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Character.StatsStuff.Mods;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

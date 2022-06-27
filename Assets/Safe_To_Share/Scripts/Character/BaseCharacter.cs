@@ -17,7 +17,7 @@ using Character.RelationShipStuff;
 using Character.SexStatsStuff;
 using Character.StatsStuff;
 using Character.VoreStuff;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Character

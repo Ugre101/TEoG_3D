@@ -6,6 +6,7 @@ using Character.EssenceStuff;
 using Character.PlayerStuff;
 using DormAndHome.Dorm;
 using Safe_To_Share.Scripts.AfterBattle.UI;
+using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine.AddressableAssets;
 

@@ -2,7 +2,7 @@
 using Character.BodyStuff;
 using Character.PlayerStuff;
 using DormAndHome.Dorm;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace AvatarStuff.Holders

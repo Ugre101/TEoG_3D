@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Character;
 using Character.CreateCharacterStuff;
 using Character.EnemyStuff;
 using Character.EssenceStuff;
 using Character.PlayerStuff;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated
@@ -18,17 +17,15 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated
         [SerializeField] List<EssencePerk> essencePerks = new();
         [SerializeField] List<EssencePerk> enemyEssencePerks = new();
 
-        IEnumerator Start()
+        async void Start()
         {
-            if (GameTester.GetFirstCall())
-                yield break;
-
-            yield return playerSheet.LoadAssets();
+            if (!GameTester.GetFirstCall()) return;
+            await playerSheet.LoadAssets();
             Player player = new(playerSheet.NewCharacter());
             foreach (EssencePerk perk in essencePerks)
                 perk.GainPerk(player);
             BaseCharacter[] playerTeam = { player, };
-            yield return enemySheet.LoadAssets();
+            await enemySheet.LoadAssets();
             Enemy enemy = new(enemySheet.NewEnemy());
             foreach (EssencePerk enemyEssencePerk in enemyEssencePerks)
                 enemyEssencePerk.GainPerk(enemy);

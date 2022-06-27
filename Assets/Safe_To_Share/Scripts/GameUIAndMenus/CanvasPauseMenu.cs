@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Static;
 using CustomClasses;
 using Options;
+using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
 using UnityEngine.InputSystem;

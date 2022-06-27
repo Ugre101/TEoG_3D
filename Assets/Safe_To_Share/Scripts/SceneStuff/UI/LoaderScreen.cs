@@ -11,7 +11,7 @@ namespace SceneStuff
         [SerializeField] CanvasGroup group;
         [SerializeField, Range(0.2f, 0.8f)] float aplhaCutOff = 0.2f;
         public void LoadProgress(float value) => progressText.text = $"Loading... {value}";
-
+        public void LoadingAvatar() => progressText.text = "Loading avatar";
         public void UnLoadProgress(float value) => progressText.text = $"Unloading... {value}";
 
         Coroutine running;

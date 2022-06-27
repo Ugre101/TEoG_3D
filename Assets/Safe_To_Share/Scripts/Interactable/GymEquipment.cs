@@ -3,7 +3,7 @@ using System.Text;
 using Character.BodyStuff;
 using Character.PlayerStuff;
 using Items;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Interactable

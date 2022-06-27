@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
-using Assets.Scripts.Static;
 using AvatarStuff.Holders;
 using Character;
 using Character.PlayerStuff;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;

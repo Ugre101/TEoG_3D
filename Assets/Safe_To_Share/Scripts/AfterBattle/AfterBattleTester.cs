@@ -7,7 +7,7 @@ using Character.LevelStuff;
 using Character.PlayerStuff;
 using Character.VoreStuff;
 using Safe_To_Share.Scripts.AfterBattle.Defeated;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle

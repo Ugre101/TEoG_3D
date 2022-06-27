@@ -49,7 +49,8 @@ namespace Safe_To_Share.Scripts.Interactable
                 return;
             if (transform.localScale.x < heightReq)
                 return;
-            
+
+            bool removedTree = false;
             Vector3 vecFlier = PlayerHolder.Instance.transform.position; 
             List<int> toRemove = new();
 
@@ -76,11 +77,13 @@ namespace Safe_To_Share.Scripts.Interactable
                     if (hasDebrisPool)
                         TreeDebrisObjectPool.Instance.IfHasDebrisAddFor(treeName, treePos);
                     trees.RemoveAt(i);
+                    removedTree = true;
                 }
             }
             paryTrees = trees.ToArray();
             Terrain.activeTerrain.terrainData.treeInstances = paryTrees;
-            RefreshTerrainColliders();
+            if (removedTree)
+                RefreshTerrainColliders();
         }
 
         void RefreshTerrainColliders()

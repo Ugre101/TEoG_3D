@@ -1,5 +1,5 @@
 ﻿using Character.VoreStuff;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 

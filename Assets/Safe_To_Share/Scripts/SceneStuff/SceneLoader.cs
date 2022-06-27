@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Assets.Scripts.Static;
 using AvatarStuff.Holders;
 using Character;
 using Character.EnemyStuff;
 using Character.PlayerStuff;
 using CustomClasses;
 using DormAndHome.Dorm;
+using Safe_To_Share.Scripts.Static;
 using SaveStuff;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -148,7 +148,7 @@ namespace SceneStuff
         IEnumerator LoadSceneOp(LocationSceneSo newScene, Player player, SceneTeleportExit teleportExit)
         {
             yield return BaseLoadLocationOp(newScene);
-            GetPlayerHolderAndReplacePlayer(player, teleportExit.ExitPos);
+            yield return GetPlayerHolderAndReplacePlayer(player, teleportExit.ExitPos);
             yield return AllDone(false);
         }
 
@@ -171,19 +171,25 @@ namespace SceneStuff
                  SetNewSceneStuff(loaded.Result, asyncLoad);
         }
         
-        static void GetPlayerHolderAndReplacePlayer(Player player, Vector3 exitPos)
+        static IEnumerator  GetPlayerHolderAndReplacePlayer(Player player, Vector3 exitPos)
         {
             PlayerHolder holder = PlayerHolder.Instance;
             if (holder == null)
-                return;
-            holder.ReplacePlayer(player);
+                yield break;
+            Task wait = holder.ReplacePlayer(player);
+            while (!wait.IsCompleted)
+            {
+                yield return null;
+            }
+            if (wait.IsFaulted)
+                throw wait.Exception;
             holder.transform.position = exitPos;
         }
 
         IEnumerator LoadSceneOp(LocationSceneSo newScene, Player player, Vector3 playerPosition)
         {
             yield return BaseLoadLocationOp(newScene);
-            GetPlayerHolderAndReplacePlayer(player, playerPosition);
+            yield return GetPlayerHolderAndReplacePlayer(player, playerPosition);
             yield return AllDone(false);
         }
 
@@ -277,9 +283,9 @@ namespace SceneStuff
 
             yield return waitAFrame;
             if (CurrentLocation != null)
-                GetPlayerHolderAndReplacePlayer(player, lastPos);
+                yield return GetPlayerHolderAndReplacePlayer(player, lastPos);
             else
-                PlayerHolder.Instance.ReplacePlayer(player);
+               yield return PlayerHolder.Instance.ReplacePlayer(player);
             yield return gameUI.LoadGameUI();
             yield return AllDone(false);
         }

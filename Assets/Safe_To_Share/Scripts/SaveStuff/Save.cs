@@ -11,8 +11,8 @@ using DormAndHome.Dorm;
 using DormAndHome.Dorm.Buildings;
 using Map;
 using QuestStuff;
+using Safe_To_Share.Scripts.Static;
 using SceneStuff;
-using Static;
 using UnityEngine;
 
 namespace SaveStuff

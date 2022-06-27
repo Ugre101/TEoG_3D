@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-//using Character;
 using UnityEngine;
+//using Character;
 
-namespace Static
+namespace Safe_To_Share.Scripts.Static
 {
     public static class DateSystem
     {

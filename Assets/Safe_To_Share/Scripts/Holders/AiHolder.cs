@@ -1,5 +1,5 @@
 ﻿using Movement.ECM2.Source.Characters;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.AI;
 

@@ -11,6 +11,7 @@ using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
 using Character.SkillsAndSpells;
 using Currency;
+using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
 

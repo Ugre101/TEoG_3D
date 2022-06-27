@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using Character;
 using Character.VoreStuff;
 using DormAndHome.Dorm.Buildings;
+using Safe_To_Share.Scripts.Static;
 using SaveStuff;
-using Static;
 using UnityEngine;
 
 namespace DormAndHome.Dorm

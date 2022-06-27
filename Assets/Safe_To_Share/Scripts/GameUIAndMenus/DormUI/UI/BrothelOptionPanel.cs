@@ -1,4 +1,5 @@
 ﻿using DormAndHome.Dorm.Buildings;
+using Safe_To_Share.Scripts.Static;
 
 namespace DormAndHome.Dorm.UI
 {

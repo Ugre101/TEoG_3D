@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Character.EssenceStuff;
 using Character.Organs.OrgansContainers;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

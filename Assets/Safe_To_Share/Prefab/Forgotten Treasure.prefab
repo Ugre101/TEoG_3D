@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5487127323802534541}
   - component: {fileID: 5487127323802534540}
   - component: {fileID: 2846752160706591526}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Forgotten Treasure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0.9336527, z: -0, w: 0.35817975}
   m_LocalPosition: {x: 227.18, y: 6.222, z: 204.596}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5487127324559543959}
   - {fileID: 5487127323978464197}
@@ -170,14 +171,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 404788, guid: 1114cf24024994ef9aa334a699763ce5, type: 3}
   m_PrefabInstance: {fileID: 5487127323978585841}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &5487127323986038019 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 9591794, guid: 1114cf24024994ef9aa334a699763ce5, type: 3}
-  m_PrefabInstance: {fileID: 5487127323978585841}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &5487127323980752591 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2306110, guid: 1114cf24024994ef9aa334a699763ce5, type: 3}
+  m_PrefabInstance: {fileID: 5487127323978585841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &5487127323986038019 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9591794, guid: 1114cf24024994ef9aa334a699763ce5, type: 3}
   m_PrefabInstance: {fileID: 5487127323978585841}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5487127324559250783
@@ -259,6 +260,11 @@ PrefabInstance:
     - {fileID: 11479762, guid: 9b2e44136e0194bc682963f5ee4447e0, type: 3}
     - {fileID: 9532852, guid: 9b2e44136e0194bc682963f5ee4447e0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b2e44136e0194bc682963f5ee4447e0, type: 3}
+--- !u!137 &5487127324553948071 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13713144, guid: 9b2e44136e0194bc682963f5ee4447e0, type: 3}
+  m_PrefabInstance: {fileID: 5487127324559250783}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5487127324559157389 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 114130, guid: 9b2e44136e0194bc682963f5ee4447e0, type: 3}
@@ -267,10 +273,5 @@ GameObject:
 --- !u!4 &5487127324559543959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 498632, guid: 9b2e44136e0194bc682963f5ee4447e0, type: 3}
-  m_PrefabInstance: {fileID: 5487127324559250783}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &5487127324553948071 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 13713144, guid: 9b2e44136e0194bc682963f5ee4447e0, type: 3}
   m_PrefabInstance: {fileID: 5487127324559250783}
   m_PrefabAsset: {fileID: 0}

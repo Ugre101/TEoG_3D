@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 using System.Collections;
+using Safe_To_Share.Scripts.Static;
 using SceneStuff;
-using Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts

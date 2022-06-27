@@ -3,6 +3,7 @@ using Character.PlayerStuff.Currency;
 using Character.Service;
 using Currency;
 using Currency.UI;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 

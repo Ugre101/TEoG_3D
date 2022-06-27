@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Assets.Scripts.Static;
 using AvatarStuff;
 using AvatarStuff.Holders;
 using Character;
@@ -11,8 +10,8 @@ using Character.VoreStuff;
 using DormAndHome.Dorm;
 using Map;
 using QuestStuff;
+using Safe_To_Share.Scripts.Static;
 using SceneStuff;
-using Static;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;

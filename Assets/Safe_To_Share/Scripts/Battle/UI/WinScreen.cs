@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Runtime.InteropServices.ComTypes;
 using Options;
-using Static;
 using UnityEngine;
 using UnityEngine.UI;
 

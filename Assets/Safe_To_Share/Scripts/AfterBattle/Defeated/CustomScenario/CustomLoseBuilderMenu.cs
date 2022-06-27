@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using Character.DefeatScenarios.Custom;
 using Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

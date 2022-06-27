@@ -2,6 +2,7 @@
 using Character;
 using Character.PlayerStuff;
 using Safe_To_Share.Scripts.AfterBattle.Defeated.UI;
+using Safe_To_Share.Scripts.Static;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated
 {

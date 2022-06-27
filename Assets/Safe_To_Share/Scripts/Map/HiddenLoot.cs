@@ -1,6 +1,5 @@
 using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
-using Currency;
 using UnityEngine;
 using Random = System.Random;
 

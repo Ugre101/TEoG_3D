@@ -1,5 +1,5 @@
 ﻿using Character.Organs;
-using Static;
+using Safe_To_Share.Scripts.Static;
 
 namespace Character.VoreStuff.VoreDigestionModes.Balls
 {

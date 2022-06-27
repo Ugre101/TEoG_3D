@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DormAndHome.Dorm.Buildings;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 
 namespace DormAndHome.Dorm.UI

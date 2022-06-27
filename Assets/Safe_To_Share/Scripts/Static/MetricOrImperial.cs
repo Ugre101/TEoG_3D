@@ -1,8 +1,7 @@
-﻿using System;
-using CustomClasses;
+﻿using CustomClasses;
 using UnityEngine;
 
-namespace Static
+namespace Safe_To_Share.Scripts.Static
 {
     public static class MetricOrImperial
     {

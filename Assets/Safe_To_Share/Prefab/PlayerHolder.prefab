@@ -917,7 +917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d306884953f458ab360a141efee046b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  removeDist: 3
+  removeDist: 4
   heightReq: 3
   runInEditor: 0
 --- !u!1 &5109424214000010065

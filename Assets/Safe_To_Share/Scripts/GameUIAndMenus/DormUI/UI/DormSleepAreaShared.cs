@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.Static;
-using CustomClasses;
+﻿using CustomClasses;
 using GameUIAndMenus;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace DormAndHome.Dorm.UI

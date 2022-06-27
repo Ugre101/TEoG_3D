@@ -1,4 +1,5 @@
-﻿using Character;
+﻿using System.Threading.Tasks;
+using Character;
 using UnityEngine;
 
 namespace AvatarStuff.Holders
@@ -13,7 +14,7 @@ namespace AvatarStuff.Holders
 
         public AvatarScaler Scaler => avatarScaler;
 
-        protected virtual async void UpdateAvatar(BaseCharacter whom)
+        protected virtual async Task UpdateAvatar(BaseCharacter whom)
         {
             var res = await avatarDict.GetAvatarLoaded(whom, playerAvatar);
             avatarChanger.UpdateAvatar(res);

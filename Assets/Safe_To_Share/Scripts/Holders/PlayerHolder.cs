@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Character;
@@ -14,6 +15,7 @@ using DormAndHome.Dorm;
 using Movement.ECM2.Source.Characters;
 using Movement.ECM2.Source.Components;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace AvatarStuff.Holders
 {
@@ -58,7 +60,7 @@ namespace AvatarStuff.Holders
         protected override void Sub()
         {
             base.Sub();
-            UpdateAvatar(Player);
+            // UpdateAvatar(Player);
             Player.RaceSystem.RaceChangedEvent += RaceChange;
             Player.Body.Height.StatDirtyEvent += UpdateHeightsChange;
             player.Body.Muscle.StatDirtyEvent += ModifyCurrentAvatar;
@@ -124,7 +126,13 @@ namespace AvatarStuff.Holders
 
             Player.Inventory.Load(toLoad.InventorySave);
             Player.AndSpellBook.Load(toLoad.ControlledCharacterSave.AbilitySave);
-
+            var wait = UpdateAvatar(Player);
+            while (!wait.IsCompleted)
+            {
+                yield return null;
+            }
+            if (wait.IsFaulted)
+                throw wait.Exception;
             NewPlayer();
         }
 
@@ -162,13 +170,18 @@ namespace AvatarStuff.Holders
                     movementPerk.GainMovementMods(this);
         }
 
-        public void ReplacePlayer(Player newPlayer)
+        public async Task ReplacePlayer(Player newPlayer)
         {
             UnSub();
             Player = newPlayer;
             AddMovementMods();
             Player.Vore.Level.LoadMyPerkAssets();
             Player.Essence.LoadMyPerkAssets();
+            Stopwatch sw = new();
+            sw.Start();
+            await UpdateAvatar(newPlayer);
+            sw.Stop();
+            print("load time " + sw.Elapsed);
             NewPlayer();
         }
 
@@ -206,7 +219,7 @@ namespace AvatarStuff.Holders
         async Task LoadPresetThenReplace()
         {
             await playerChar.LoadAssets();
-            ReplacePlayer(new Player(playerChar.NewCharacter()));
+            await ReplacePlayer(new Player(playerChar.NewCharacter()));
             player.LevelSystem.GainExp(999);
             Player.Vore.Level.GainExp(999);
             PlayerGold.GoldBag.GainGold(9999);

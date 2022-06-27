@@ -1,4 +1,6 @@
-﻿namespace DormAndHome.Dorm.UI
+﻿using Safe_To_Share.Scripts.Static;
+
+namespace DormAndHome.Dorm.UI
 {
     public class DormDungeonUpgradePanel : BuildingUpgradePanel
     {

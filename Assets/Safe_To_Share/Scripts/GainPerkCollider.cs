@@ -1,5 +1,5 @@
 using AvatarStuff.Holders;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;

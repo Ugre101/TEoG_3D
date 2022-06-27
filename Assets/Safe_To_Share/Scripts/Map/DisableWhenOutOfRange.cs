@@ -1,5 +1,6 @@
 ﻿
 using System;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Map

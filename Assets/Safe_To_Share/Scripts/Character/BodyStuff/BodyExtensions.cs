@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using Character.GenderStuff;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Character.BodyStuff

@@ -1,6 +1,6 @@
 using System.Collections;
 using Gaia;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 public class SyncDateSystemWithLighting : MonoBehaviour

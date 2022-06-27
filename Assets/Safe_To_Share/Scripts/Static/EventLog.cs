@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Static
+namespace Safe_To_Share.Scripts.Static
 {
     public static class EventLog
     {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Safe_To_Share.Scripts.Static;
+using UnityEngine;
 
 namespace GameUIAndMenus.IslandDataUI
 {

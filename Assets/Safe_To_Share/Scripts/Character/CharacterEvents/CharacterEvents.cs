@@ -4,7 +4,7 @@ using Character.CharacterEvents.Vore;
 using Character.Organs;
 using Character.VoreStuff.VoreDigestionModes;
 using Character.VoreStuff.VoreDigestionModes.Vagina;
-using Static;
+using Safe_To_Share.Scripts.Static;
 
 namespace Character.CharacterEvents
 {

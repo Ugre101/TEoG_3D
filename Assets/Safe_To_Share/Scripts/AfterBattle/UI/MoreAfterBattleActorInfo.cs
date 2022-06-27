@@ -3,7 +3,7 @@ using System.Text;
 using Character;
 using Character.Organs;
 using Character.Organs.OrgansContainers;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

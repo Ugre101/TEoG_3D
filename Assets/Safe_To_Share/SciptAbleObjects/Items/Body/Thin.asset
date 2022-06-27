@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Thin
   m_EditorClassIdentifier: 
   guid: 976d55b4c19c50343b554cb181cbfab6
-  title: 
-  desc: 
+  title: Thin pill
+  desc: Weight Loss drug banned in many countries as it failed to remove fat and
+    istead thinned bone structure giving a less thick look.
   sprite: {fileID: 0}
   size: {x: 1, y: 1}
   unlimitedUse: 0
-  value: 0
+  value: 50
   canSell: 1
   effectsTree:
     healingItemEffects:
@@ -61,7 +62,8 @@ MonoBehaviour:
       arousalMods: []
     learnAbilityItemEffect:
       active: 0
-      ability: {fileID: 0}
+      dropSerializableObject:
+        guid: 
     raceEssenceItemEffects:
       active: 0
       race: {fileID: 0}

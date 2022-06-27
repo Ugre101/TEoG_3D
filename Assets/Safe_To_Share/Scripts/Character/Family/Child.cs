@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Character.CreateCharacterStuff;
 using Character.IdentityStuff;
-using Static;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Character.Family

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Character.CreateCharacterStuff;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
