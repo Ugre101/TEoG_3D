@@ -35,6 +35,9 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             foreach (VoreActionButton voreBtn in voreActButtons)
                 voreBtn.Clear();
             Refresh(buttonsOwner, partner);
+            if (!OptionalContent.Vore.Enabled)
+                foreach (VoreActionButton voreActionButton in voreActButtons)
+                    voreActionButton.Clear();
         }
 
         public void Refresh(BaseCharacter buttonOwner, BaseCharacter partner)
@@ -65,7 +68,6 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
 
             if (OptionalContent.Vore.Enabled)
                 SetupVoreButtons(buttonOwner, partner);
-
             takeToDorm.ShowOrgasmsLeft(partner);
         }
 

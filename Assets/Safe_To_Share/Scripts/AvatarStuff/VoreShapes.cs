@@ -121,7 +121,7 @@ namespace AvatarStuff
         static float AvatarStretch(float containerSize, IEnumerable<int> preyIds)
         {
             float stomachWeight = VoredCharacters.CurrentPreyTotalWeight(preyIds);
-            float avatarStretch = Mathf.Clamp(stomachWeight / containerSize * 100f, 0f, 200f);
+            float avatarStretch = Mathf.Clamp(stomachWeight / containerSize, 0f, 200f);
             return avatarStretch;
         }
 
@@ -151,7 +151,7 @@ namespace AvatarStuff
 
             public VoreStruggle(CharacterAvatar.BlendShape voreShape) => this.voreShape = voreShape;
 
-            float Value => Mathf.Clamp(stretch + Random.Range(-3f, 3f), 0f, 130f);
+            float Value => Mathf.Clamp(stretch + Random.Range(-3f, 3f), 0f, 200f);
             void SetStretch(float value) => stretch = value * 100f;
 
             public void Tick(SkinnedMeshRenderer shape)

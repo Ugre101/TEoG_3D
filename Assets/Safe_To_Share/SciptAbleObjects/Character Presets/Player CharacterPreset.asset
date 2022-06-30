@@ -60,3 +60,9 @@ MonoBehaviour:
     bald: 0
     hairColors:
     - {r: 1, g: 1, b: 1, a: 1}
+  startSkinColor:
+    clampRandomColor: 1
+    whitest: 0.1
+    darkest: 0.5
+    manualSkinColor: 0
+    skinDarkness: 0

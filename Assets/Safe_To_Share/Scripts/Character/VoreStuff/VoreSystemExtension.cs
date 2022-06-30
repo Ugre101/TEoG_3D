@@ -62,12 +62,15 @@ namespace Character.VoreStuff
             }
             return false;
         }        
-        public static bool SpecialOrganVore(this BaseCharacter pred, BaseCharacter prey, SexualOrganType organType, SpecialVoreOptions specialVoreOptions)
+        public static bool SpecialOrganVore(this BaseCharacter pred, BaseCharacter prey, SexualOrganType organType,
+            SpecialVoreOptions specialVoreOptions, bool onePreyOnly)
         {
             if (!pred.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container) || !container.HaveAny()) 
                 return false;
-            foreach (BaseOrgan baseOrgan in container.List.Where(baseOrgan => CanOrganVore(pred, baseOrgan, prey)))
+            foreach (BaseOrgan baseOrgan in container.List)
             {
+                if (onePreyOnly && baseOrgan.Vore.SpecialPreysIds.Count > 0)
+                    continue;
                 Prey myPrey = new(prey);
                 // if (HandleInsta(pred,myPrey, organType, specialVoreOptions, baseOrgan))
                 //     return true;

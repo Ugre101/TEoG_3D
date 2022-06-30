@@ -103,12 +103,12 @@ namespace Character
         {
             return hpPer switch
             {
-                -30 => "Terrible Sleep",
-                -10 => "Bad Sleep",
-                5 => "Sleep",
-                15 => "Good Sleep",
-                30 => "Great Sleep",
-                _ => "Sleep"
+                -30 => "Slept terrible",
+                -10 => "Slept bad",
+                5 => "Slept",
+                15 => "Slept good",
+                30 => "Slept great",
+                _ => "Slept"
             };
         }
     }

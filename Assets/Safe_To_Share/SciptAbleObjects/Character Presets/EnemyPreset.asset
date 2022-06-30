@@ -44,12 +44,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5ad4d4d4ae1f34045a2976f89ef0d925, type: 2}
   startVorePerks: []
   startRaceRef:
-    m_AssetGUID: 96817023700d0764793f5b1dcfe15bd9
+    m_AssetGUID: 4d8d0eb9b96993249aa87052e588b749
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   startBody:
-    height: 184
+    height: 128
     muscle: 21
     fat: 14
     rng:

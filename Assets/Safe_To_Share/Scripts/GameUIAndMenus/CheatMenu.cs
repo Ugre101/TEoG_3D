@@ -1,37 +1,46 @@
+using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
-using Currency;
-using GameUIAndMenus;
+using CustomClasses;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CheatMenu : GameMenu
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    [SerializeField] Button expBtn, goldBtn, mascBtn, femiBtn;
-
-    void Start()
+    public class CheatMenu : MonoBehaviour,ICancelMeBeforeOpenPauseMenu
     {
-        expBtn.onClick.AddListener(ExpCheat);
-        goldBtn.onClick.AddListener(GoldCheat);
-        mascBtn.onClick.AddListener(MascCheat);
-        femiBtn.onClick.AddListener(FemiCheat);
-    }
-
-    void FemiCheat() => Player.Essence.Femininity.Amount += 200;
-
-    void MascCheat() => Player.Essence.Masculinity.Amount += 200;
-
-    void GoldCheat() => PlayerGold.GoldBag.GainGold(200);
-
-    void ExpCheat() => Player.LevelSystem.GainExp(200);
-
-    public override bool BlockIfActive()
-    {
-        if (gameObject.activeInHierarchy)
+        [SerializeField] Button expBtn, goldBtn, mascBtn, femiBtn;
+        Player player;
+        void Start()
         {
-            gameObject.SetActive(false);
-            return true;
+            expBtn.onClick.AddListener(ExpCheat);
+            goldBtn.onClick.AddListener(GoldCheat);
+            mascBtn.onClick.AddListener(MascCheat);
+            femiBtn.onClick.AddListener(FemiCheat);
         }
 
-        return false;
+        public void Enter(Player parPlayer)
+        {
+            gameObject.SetActive(true);
+            this.player = parPlayer;
+        }
+
+        void FemiCheat() => player.Essence.Femininity.Amount += 200;
+
+        void MascCheat() => player.Essence.Masculinity.Amount += 200;
+
+        void GoldCheat() => PlayerGold.GoldBag.GainGold(200);
+
+        void ExpCheat() => player.LevelSystem.GainExp(200);
+
+        public bool BlockIfActive()
+        {
+            if (gameObject.activeInHierarchy)
+            {
+                gameObject.SetActive(false);
+                return true;
+            }
+
+            return false;
+        }
     }
 }

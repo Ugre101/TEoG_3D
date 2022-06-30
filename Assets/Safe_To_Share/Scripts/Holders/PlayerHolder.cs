@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Character;
 using Character.CreateCharacterStuff;
-using Character.EnemyStuff;
 using Character.LevelStuff;
 using Character.Organs.Fluids;
 using Character.PlayerStuff;
@@ -54,7 +52,14 @@ namespace AvatarStuff.Holders
         }
 
         void OnDisable() => UnSub();
-        void OnDestroy() => UnSub();
+        void OnDestroy()
+        {
+            UnSub();
+#if UNITY_EDITOR
+            playerChar.UnLoad();
+#endif
+        }
+
         public event Action RePlaced;
 
         protected override void Sub()
@@ -177,11 +182,8 @@ namespace AvatarStuff.Holders
             AddMovementMods();
             Player.Vore.Level.LoadMyPerkAssets();
             Player.Essence.LoadMyPerkAssets();
-            Stopwatch sw = new();
-            sw.Start();
             await UpdateAvatar(newPlayer);
-            sw.Stop();
-            print("load time " + sw.Elapsed);
+            NewAvatar(avatarChanger.CurrentAvatar);
             NewPlayer();
         }
 

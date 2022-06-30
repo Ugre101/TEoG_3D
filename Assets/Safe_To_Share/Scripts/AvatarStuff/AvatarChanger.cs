@@ -11,14 +11,14 @@ namespace AvatarStuff
     {
         public event Action<CharacterAvatar> NewAvatar;
         public bool AvatarLoaded { get; private set; }
-        CharacterAvatar currentAvatar;
+        public CharacterAvatar CurrentAvatar { get; private set; }
         bool hasAvatar;
         public void UpdateAvatar(AssetReference avatar)
         {
 
-            if (hasAvatar && currentAvatar.Prefab.AssetGUID == avatar.AssetGUID)
+            if (hasAvatar && CurrentAvatar.Prefab.AssetGUID == avatar.AssetGUID)
             {
-                NewAvatar?.Invoke(currentAvatar);
+                NewAvatar?.Invoke(CurrentAvatar);
                 return;
             }
             AvatarLoaded = false;
@@ -29,7 +29,7 @@ namespace AvatarStuff
         void Done(AsyncOperationHandle<GameObject> obj)
         {
             if (hasAvatar)
-                Destroy(currentAvatar.gameObject);
+                Destroy(CurrentAvatar.gameObject);
             if (obj.Result == null)
                 return;
             AvatarLoaded = true;
@@ -38,7 +38,7 @@ namespace AvatarStuff
             if (obj.Result.TryGetComponent(out CharacterAvatar avatar))
             {
                 NewAvatar?.Invoke(avatar);
-                currentAvatar = avatar;
+                CurrentAvatar = avatar;
                 hasAvatar = true;
             }
         }
@@ -46,20 +46,20 @@ namespace AvatarStuff
         public void UpdateAvatar(GameObject value)
         {
             if(!value.TryGetComponent(out CharacterAvatar avatar)) return;
-            if (hasAvatar && currentAvatar.Prefab.AssetGUID == avatar.Prefab.AssetGUID)
+            if (hasAvatar && CurrentAvatar.Prefab.AssetGUID == avatar.Prefab.AssetGUID)
             {
-                NewAvatar?.Invoke(currentAvatar);
+                NewAvatar?.Invoke(CurrentAvatar);
                 return;
             }
             AvatarLoaded = false;
             if (hasAvatar)
-                Destroy(currentAvatar.gameObject);
+                Destroy(CurrentAvatar.gameObject);
             var instance = Instantiate(avatar, transform);
             AvatarLoaded = true;
             if (instance.TryGetComponent(out Animator ani))
                 InvokeNewAnimator(ani);
             NewAvatar?.Invoke(instance);
-            currentAvatar = instance;
+            CurrentAvatar = instance;
             hasAvatar = true;
             //    avatar.LoadAssetAsync<GameObject>().Completed += Done;
         }

@@ -15,8 +15,8 @@ MonoBehaviour:
   startGender:
     allowedGenders:
     - weight: 3
-      gender: 0
-    startEssence: 0
+      gender: 5
+    startEssence: 3796
   startIdentity:
     customIdentity: 1
     identity:
@@ -52,12 +52,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf01d105a662d374bbf8b2f6be12be9d, type: 2}
   startVorePerks: []
   startRaceRef:
-    m_AssetGUID: 96817023700d0764793f5b1dcfe15bd9
+    m_AssetGUID: 4d8d0eb9b96993249aa87052e588b749
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   startBody:
-    height: 160
+    height: 197
     muscle: 39
     fat: 16
     rng:

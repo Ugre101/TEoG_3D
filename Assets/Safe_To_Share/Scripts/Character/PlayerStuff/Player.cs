@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Character.Ailments;
 using Character.CreateCharacterStuff;
 using Character.Family;
@@ -6,7 +7,6 @@ using Character.Organs;
 using Character.PlayerStuff.Currency;
 using Character.PregnancyStuff;
 using Character.VoreStuff;
-using Currency;
 using Items;
 using QuestStuff;
 using Safe_To_Share.Scripts.Static;
@@ -84,6 +84,12 @@ namespace Character.PlayerStuff
         public override void TickHour(int ticks = 1)
         {
             base.TickHour(ticks);
+            CheckAilments();
+        }
+
+        public override IEnumerator Load(CharacterSave toLoad)
+        { 
+            yield return base.Load(toLoad);
             CheckAilments();
         }
 

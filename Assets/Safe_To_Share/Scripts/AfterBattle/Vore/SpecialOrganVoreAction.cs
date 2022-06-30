@@ -38,7 +38,6 @@ namespace Safe_To_Share.Scripts.AfterBattle.Vore
                 : container.List.Any(baseOrgan => VoreSystemExtension.CanOrganVore(giver, baseOrgan, receiver));
         }
 
-        public override SexActData Use(AfterBattleActor caster, AfterBattleActor target) =>
-            caster.Actor.SpecialOrganVore(target.Actor, organType, specialDigestion) ? data : errorData;
+        public override SexActData Use(AfterBattleActor caster, AfterBattleActor target) => caster.Actor.SpecialOrganVore(target.Actor, organType, specialDigestion,onePreyOnly) ? data : errorData;
     }
 }

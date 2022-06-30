@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Character;
 using Character.Ailments;
 using Character.StatsStuff.Mods;
 using GameUIAndMenus.EffectUI;
 using Items;
+using SaveStuff;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Pool;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
@@ -15,7 +18,6 @@ namespace GameUIAndMenus
 {
     public class ShowTempEffects : GameMenu
     {
-        [SerializeField] List<TempEffectIcon> prePooledPrefabs;
         [SerializeField] TempEffectIcon prefab;
         [SerializeField] SleepTempEffectIcon sleepPrefab;
         [SerializeField] TiredEffectIcon tiredEffectIcon;
@@ -24,27 +26,40 @@ namespace GameUIAndMenus
         [SerializeField] Transform content;
         [SerializeField] EffectHoverText hoverText;
 
-        Queue<TempEffectIcon> iconsPool;
+        ObjectPool<TempEffectIcon> iconsPool;
+        public ObjectPool<TempEffectIcon> IconsPool
+        {
+            get
+            {
+                if (iconsPool == null)
+                    iconsPool = new ObjectPool<TempEffectIcon>(CreateFunc, ActionOnGet, ActionOnRelease,ActionOnDestroy);
+                return iconsPool;
+            }
+        }
+
+        static void ActionOnDestroy(TempEffectIcon obj) => Destroy(obj.gameObject);
+
+
+        static void ActionOnRelease(TempEffectIcon obj)
+        {
+            obj.Clear();
+            obj.gameObject.SetActive(false);
+        }
+
+        static void ActionOnGet(TempEffectIcon obj) => obj.gameObject.SetActive(true);
+
+        TempEffectIcon CreateFunc()
+        {
+            var obj = Instantiate(prefab, content);
+            obj.pool = IconsPool;
+            return obj;
+        }
+
         Coroutine loadItemEffects;
 
         float sleepTier;
 
-        TempEffectIcon GetIcon
-        {
-            get
-            {
-                if (iconsPool.Count > 0)
-                {
-                    var gotten = iconsPool.Dequeue();
-                    gotten.gameObject.SetActive(true);
-                    return gotten;
-                }
-
-                var newPrefab = Instantiate(prefab, content);
-                prePooledPrefabs.Add(newPrefab);
-                return newPrefab;
-            }
-        }
+        
 
         void Start()
         {
@@ -54,12 +69,18 @@ namespace GameUIAndMenus
             sleepPrefab.StopHoverInfo += hoverText.StopHoverText;
             tiredEffectIcon.StopHoverInfo += hoverText.StopHoverText;
         }
-
         void OnEnable()
         {
-            FillIconsPool();
-            Dictionary<string, List<TempIntMod>> tempItems = new();
             hoverText.gameObject.SetActive(false);
+            ShowTempModsEffects();
+            ShowAilments();
+            Player.UpdateAilments += ShowAilments;
+            LoadManager.LoadedSave += ShowTempModsEffects;
+        }
+
+        void ShowTempModsEffects()
+        {
+            Dictionary<string, List<TempIntMod>> tempItems = new();
             AddTempModsFrom(tempItems,
                 Player.Stats.GetCharStats.Values.SelectMany(charStat => charStat.Mods.TempBaseStatMods));
             HackGetSleepTier();
@@ -74,42 +95,25 @@ namespace GameUIAndMenus
             AddTempModsFrom(tempItems, Player.SexStats.MaxCasterOrgasms.Mods.TempBaseStatMods);
             AddTempModsFrom(tempItems, Player.SexStats.BaseMaxArousal.Mods.TempBaseStatMods);
             GetTempVoreMods(tempItems);
-            ShowItemEffects(tempItems);
-
-            Player.UpdateAilments += ShowAilments;
-            ShowAilments();
+            loadItemEffects = StartCoroutine(ShowItemEffects(tempItems));
         }
 
         void OnDisable()
         {
             Player.UpdateAilments -= ShowAilments;
+            LoadManager.LoadedSave -= ShowTempModsEffects;
             if (loadItemEffects != null)
                 StopCoroutine(loadItemEffects);
         }
 
         void OnDestroy()
         {
+            IconsPool.Dispose();
             sleepPrefab.HoverInfo -= hoverText.ShowHoverText;
             tiredEffectIcon.HoverInfo -= hoverText.ShowHoverText;
 
             sleepPrefab.StopHoverInfo -= hoverText.StopHoverText;
             tiredEffectIcon.StopHoverInfo -= hoverText.StopHoverText;
-        }
-
-#if UNITY_EDITOR
-        void OnValidate()
-        {
-            if (Application.isPlaying)
-                return;
-            prePooledPrefabs = new List<TempEffectIcon>(GetComponentsInChildren<TempEffectIcon>(true));
-        }
-#endif
-
-        void FillIconsPool()
-        {
-            iconsPool = new Queue<TempEffectIcon>(prePooledPrefabs);
-            foreach (TempEffectIcon prePooled in prePooledPrefabs)
-                prePooled.gameObject.SetActive(false);
         }
 
         void ShowAilments()
@@ -156,11 +160,11 @@ namespace GameUIAndMenus
                 tempItems.Add(tempIntMod.From, new List<TempIntMod> { tempIntMod, });
         }
 
-        void ShowItemEffects(Dictionary<string, List<TempIntMod>> dict)
+        IEnumerator ShowItemEffects(Dictionary<string, List<TempIntMod>> dict)
         {
             HandleSleepEffects(dict);
-            foreach (var pair in dict)
-                loadItemEffects = StartCoroutine(LoadKeysAndThenItems(pair));
+            foreach (KeyValuePair<string, List<TempIntMod>> pair in dict) 
+                yield return LoadKeysAndThenItems(pair);
         }
 
         void HandleSleepEffects(IDictionary<string, List<TempIntMod>> dict)
@@ -178,18 +182,16 @@ namespace GameUIAndMenus
 
         IEnumerator LoadKeysAndThenItems(KeyValuePair<string, List<TempIntMod>> hashSet)
         {
-            var keys = Addressables.LoadResourceLocationsAsync(hashSet.Key);
+            var keys = Addressables.LoadResourceLocationsAsync(hashSet.Key,typeof(Item));
             yield return keys;
             if (keys.Status != AsyncOperationStatus.Succeeded) yield break;
-            foreach (IResourceLocation resourceLocation in keys.Result)
-                Addressables.LoadAssetAsync<Item>(resourceLocation).Completed +=
-                    item => ItemLoaded(item, hashSet.Value);
-        }
-
-        void ItemLoaded(AsyncOperationHandle<Item> obj, List<TempIntMod> mod)
-        {
-            var icon = GetIcon;
-            icon.Setup(obj.Result, mod);
+            if (keys.Result.Count <= 0) yield break;
+            var item = Addressables.LoadAssetAsync<Item>(keys.Result[0]);
+            yield return item;
+            if (item.Status != AsyncOperationStatus.Succeeded) 
+                yield break;
+            var icon = IconsPool.Get();
+            icon.Setup(item.Result, hashSet.Value);
             icon.HoverInfo += hoverText.ShowHoverText;
             icon.StopHoverInfo += hoverText.StopHoverText;
         }
