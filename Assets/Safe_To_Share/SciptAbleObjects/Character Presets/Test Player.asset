@@ -15,7 +15,7 @@ MonoBehaviour:
   startGender:
     allowedGenders:
     - weight: 3
-      gender: 5
+      gender: 1
     startEssence: 3796
   startIdentity:
     customIdentity: 1
@@ -57,7 +57,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   startBody:
-    height: 197
+    height: 448
     muscle: 39
     fat: 16
     rng:

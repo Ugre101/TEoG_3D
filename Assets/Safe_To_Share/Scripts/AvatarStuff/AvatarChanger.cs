@@ -37,9 +37,9 @@ namespace AvatarStuff
                 InvokeNewAnimator(ani);
             if (obj.Result.TryGetComponent(out CharacterAvatar avatar))
             {
-                NewAvatar?.Invoke(avatar);
                 CurrentAvatar = avatar;
                 hasAvatar = true;
+                NewAvatar?.Invoke(avatar);
             }
         }
 
@@ -58,9 +58,9 @@ namespace AvatarStuff
             AvatarLoaded = true;
             if (instance.TryGetComponent(out Animator ani))
                 InvokeNewAnimator(ani);
-            NewAvatar?.Invoke(instance);
             CurrentAvatar = instance;
             hasAvatar = true;
+            NewAvatar?.Invoke(instance);
             //    avatar.LoadAssetAsync<GameObject>().Completed += Done;
         }
 

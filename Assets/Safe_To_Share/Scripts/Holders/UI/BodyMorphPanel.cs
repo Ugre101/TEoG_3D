@@ -12,7 +12,7 @@ namespace AvatarStuff.UI
         [Header("Sorting"), SerializeField,] Button all;
         [SerializeField] Button body, face;
         PlayerHolder playerHolder;
-
+        CharacterAvatar Current => playerHolder.Changer.CurrentAvatar;
         void Start()
         {
             all.onClick.AddListener(Setup);
@@ -29,18 +29,18 @@ namespace AvatarStuff.UI
 
         BodyMorphs.AvatarBodyMorphs GetMatch()
         {
-            var assetGuid = playerHolder.CurrentAvatar.Prefab.AssetGUID;
+            var assetGuid = Current.Prefab.AssetGUID;
             if (!playerHolder.Player.Body.Morphs.Dict.TryGetValue(assetGuid, out var match))
-                match = playerHolder.Player.Body.Morphs.AddNew(playerHolder.CurrentAvatar.Prefab.AssetGUID,playerHolder.CurrentAvatar.AvatarBodyShapes.AddToCharacter());
+                match = playerHolder.Player.Body.Morphs.AddNew(Current.Prefab.AssetGUID,Current.AvatarBodyShapes.AddToCharacter());
             return match;
         }
 
-        public void Setup() => sliders.Setup(GetMatch(), playerHolder.CurrentAvatar);
+        public void Setup() => sliders.Setup(GetMatch(), Current);
 
-        void SortBody() => sliders.SetupOfType(GetMatch(), playerHolder.CurrentAvatar,
+        void SortBody() => sliders.SetupOfType(GetMatch(), Current,
             CharacterAvatar.BodyShapes.BodyShapeTypes.Body);
 
-        void SortFace() => sliders.SetupOfType(GetMatch(), playerHolder.CurrentAvatar,
+        void SortFace() => sliders.SetupOfType(GetMatch(), Current,
             CharacterAvatar.BodyShapes.BodyShapeTypes.Face);
     }
 }

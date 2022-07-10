@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Movement.ECM2.Source.Characters;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -52,6 +53,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
         }
         public void OnRaiseElevation(InputAction.CallbackContext ctx)
         {
+            if (GameManager.Paused) return;
             if (ctx.performed)
                 elevationRoutine = StartCoroutine(TargetElevation(elevationRate));
             else if (ctx.canceled)
@@ -59,6 +61,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
         }
         public void OnLowerCameraHeight(InputAction.CallbackContext ctx)
         {
+            if (GameManager.Paused) return;
             if (ctx.performed)
                 elevationRoutine = StartCoroutine(TargetElevation(-elevationRate));
             else if (ctx.canceled)
@@ -67,6 +70,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
 
         public void OnCursorLock(InputAction.CallbackContext context)
         {
+            if (GameManager.Paused) return;
             if (!IsPointerOverUIObject() && context.performed)
                 LockCursor();
             else if (context.canceled)
@@ -86,6 +90,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
         }
         public void OnLook(InputAction.CallbackContext ctx)
         {
+            if (GameManager.Paused) return;
             if (!ctx.performed)
                 return;
             if (ThirdPersonCameraSettings.AlwaysLook && mover.GetVelocity().magnitude > 0)
@@ -101,6 +106,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
 
         public void OnMouseScroll(InputAction.CallbackContext ctx)
         {
+            if (GameManager.Paused) return;
             if (ctx.performed)
                 SetDistance(ctx.ReadValue<float>() * zoomRate);
         }

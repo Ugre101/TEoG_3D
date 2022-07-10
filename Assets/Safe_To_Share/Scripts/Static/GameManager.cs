@@ -7,12 +7,12 @@ namespace Safe_To_Share.Scripts.Static
     {
         private static bool cursorOrgState;
         private static CursorLockMode lockState;
-        static bool paused;
+        public static bool Paused { get;private set; }
         public static void Pause()
         {
-            if (paused)
+            if (Paused)
                 return;
-            paused = true;
+            Paused = true;
             Time.timeScale = 0f;
             cursorOrgState = Cursor.visible;
             Cursor.visible = true;
@@ -22,7 +22,7 @@ namespace Safe_To_Share.Scripts.Static
 
         public static void Resume(bool forceFreeCursor)
         {
-            paused = false;
+            Paused = false;
             Time.timeScale = 1f;
             if (forceFreeCursor)
             {

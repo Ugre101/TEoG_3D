@@ -81,7 +81,7 @@ namespace AvatarStuff.Holders
             ForeignFluidExtensions.CleanBody(player);
         }
 
-        public void UpdateAvatar() => UpdateAvatar(Player);
+        public async void UpdateAvatar() => await UpdateAvatar(Player);
 
         protected override void UnSub()
         {
@@ -103,21 +103,19 @@ namespace AvatarStuff.Holders
 
         protected override void NewAvatar(CharacterAvatar obj)
         {
-            if (CurrentAvatar != null)
-                Player.UpdateAvatar -= ModifyCurrentAvatar;
-            CurrentAvatar = obj;
-            CurrentAvatar.Setup(Player);
+            Player.UpdateAvatar -= ModifyCurrentAvatar;
+            Changer.CurrentAvatar.Setup(Player);
             Player.UpdateAvatar += ModifyCurrentAvatar;
         }
 
         public void ModifyCurrentAvatar()
         {
-            if (CurrentAvatar == null) return;
-            CurrentAvatar.Setup(Player);
+            if (Changer.CurrentAvatar == null) return;
+            Changer.CurrentAvatar.Setup(Player);
             HeightsChange(player.Body.Height.Value);
         }
 
-        void RaceChange(BasicRace oldrace, BasicRace newrace) => UpdateAvatar(Player);
+       async void RaceChange(BasicRace oldrace, BasicRace newrace) => await UpdateAvatar(Player);
 
         public IEnumerator Load(PlayerSave toLoad)
         {
@@ -136,8 +134,8 @@ namespace AvatarStuff.Holders
             {
                 yield return null;
             }
-            if (wait.IsFaulted)
-                throw wait.Exception;
+            NewAvatar(Changer.CurrentAvatar);
+            if (wait is { IsFaulted: true, Exception: { } }) throw wait.Exception;
             NewPlayer();
         }
 
@@ -183,7 +181,7 @@ namespace AvatarStuff.Holders
             Player.Vore.Level.LoadMyPerkAssets();
             Player.Essence.LoadMyPerkAssets();
             await UpdateAvatar(newPlayer);
-            NewAvatar(avatarChanger.CurrentAvatar);
+            NewAvatar(Changer.CurrentAvatar);
             NewPlayer();
         }
 
@@ -227,12 +225,22 @@ namespace AvatarStuff.Holders
             PlayerGold.GoldBag.GainGold(9999);
         }
 #endif
-        public void TriggerCombat(BaseCharacter[] enemy)
+        void OnCollisionEnter(Collision collision)
         {
+            if (!collision.gameObject.TryGetComponent(out EnemyAiHolder enemy)) return;
+            TriggerCombat(enemy.Enemy);
+        }
+
+        bool combat;
+        public void TriggerCombat(params BaseCharacter[] enemy)
+        {
+            if (combat) return;
+            combat = true;
             LoadCombat?.Invoke(Player, enemy);
         }
 
-        public static Action<Player, BaseCharacter[]> LoadCombat;
+        public delegate void CombatParameters(Player player, params BaseCharacter[] enemies);
+        public static CombatParameters LoadCombat;
         public static Action<PlayerHolder, DormMate> LoadDormSex;
 
         public void TriggerSex(DormMate mate)

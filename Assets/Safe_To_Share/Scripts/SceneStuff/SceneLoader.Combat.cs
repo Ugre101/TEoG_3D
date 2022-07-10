@@ -52,7 +52,7 @@ namespace SceneStuff
         }
 
         bool startedCombat;
-        void LoadCombat(Player player, BaseCharacter[] enemy)
+        void LoadCombat(Player player,params BaseCharacter[] enemy)
         {
             if (startedCombat) return;
             StartCoroutine(FinishLoadCombatScene(player, enemy));

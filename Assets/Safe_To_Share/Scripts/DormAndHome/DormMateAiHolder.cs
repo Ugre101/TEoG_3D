@@ -54,13 +54,11 @@ namespace AvatarStuff.Holders
 
         protected override void NewAvatar(CharacterAvatar obj)
         {
-            if (CurrentAvatar != null)
-                Mate.UpdateAvatar -= ModifyAvatar;
-            CurrentAvatar = obj;
-            CurrentAvatar.Setup(Mate);
+            Mate.UpdateAvatar -= ModifyAvatar;
+            Changer.CurrentAvatar.Setup(Mate);
             Mate.UpdateAvatar += ModifyAvatar;
         }
 
-        void ModifyAvatar() => CurrentAvatar.Setup(Mate);
+        void ModifyAvatar() => Changer.CurrentAvatar.Setup(Mate);
     }
 }

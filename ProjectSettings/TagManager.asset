@@ -17,6 +17,7 @@ TagManager:
   - Terrain Tile
   - Animal
   - Water
+  - Enemy
   layers:
   - Default
   - TransparentFX

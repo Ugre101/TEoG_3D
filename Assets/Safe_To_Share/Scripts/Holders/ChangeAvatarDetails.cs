@@ -94,9 +94,9 @@ namespace AvatarStuff
         [ContextMenu("Get mats")]
         public void GetAvatarMats()
         {
-            canChangeColorOff = holder.CurrentAvatar.HairMats;
+            currentAvatar = holder.Changer.CurrentAvatar;
+            canChangeColorOff = currentAvatar.HairMats;
             changeColorOff = new List<Material>(canChangeColorOff);
-            currentAvatar = holder.CurrentAvatar;
         }
     }
 }

@@ -25,8 +25,8 @@ namespace AvatarStuff.Holders
         {
             base.Start();
             SpawnLocation = transform.position;
-            avatarChanger.NewAvatar += ModifyAvatar;
-            avatarChanger.NewAvatar += NewAvatar;
+            Changer.NewAvatar += ModifyAvatar;
+            Changer.NewAvatar += NewAvatar;
             // Player.RaceSystem.RaceChangedEvent += RaceChange;
         }
 
@@ -36,7 +36,9 @@ namespace AvatarStuff.Holders
             if (OutOfRange || Time.frameCount % 3 != 0)
                 return;
             if (DistanceToPlayer < initCombatRange)
+            {
                 StartCombat();
+            }
             if (currentState == null)
                 ChangeState(new EnemyBrainIdle(this));
             else
@@ -46,8 +48,8 @@ namespace AvatarStuff.Holders
         void OnDestroy()
         {
             Enemy.Unsub();
-            avatarChanger.NewAvatar -= ModifyAvatar;
-            avatarChanger.NewAvatar -= NewAvatar;
+            Changer.NewAvatar -= ModifyAvatar;
+            Changer.NewAvatar -= NewAvatar;
         }
 
         void ModifyAvatar(CharacterAvatar obj)
@@ -61,8 +63,8 @@ namespace AvatarStuff.Holders
         void StartCombat()
         {
             InterActedWith = true;
-            Stopped = true;
-            Player.TriggerCombat(new BaseCharacter[]{enemy, });
+            //Stopped = true;
+            //Player.TriggerCombat(enemy);
         }
 
         public void ChangeState(State<EnemyAiHolder> newState)
@@ -93,7 +95,7 @@ namespace AvatarStuff.Holders
         bool waitingToReturn;
         protected override void OutOfRangeFunction()
         {
-            if (avatarChanger.AvatarLoaded)
+            if (Changer.AvatarLoaded)
                 ReturnMe?.Invoke(this);
             else
                 waitingToReturn = true;

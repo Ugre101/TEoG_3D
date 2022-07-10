@@ -10,21 +10,23 @@ namespace AvatarStuff.Holders
         [SerializeField] protected AvatarChanger avatarChanger;
         [SerializeField] protected AvatarScaler avatarScaler;
         [SerializeField] protected bool playerAvatar;
-        public CharacterAvatar CurrentAvatar { get; protected set; }
 
         public AvatarScaler Scaler => avatarScaler;
+
+        public AvatarChanger Changer => avatarChanger;
 
         protected virtual async Task UpdateAvatar(BaseCharacter whom)
         {
             var res = await avatarDict.GetAvatarLoaded(whom, playerAvatar);
-            avatarChanger.UpdateAvatar(res);
+            Changer.UpdateAvatar(res);
+            await Task.Yield();
         }
 
         public virtual void HeightsChange(float newHeight) => Scaler.ChangeScale(newHeight);
 
-        protected virtual void Sub() => avatarChanger.NewAvatar += NewAvatar;
+        protected virtual void Sub() => Changer.NewAvatar += NewAvatar;
 
-        protected virtual void UnSub() => avatarChanger.NewAvatar -= NewAvatar;
+        protected virtual void UnSub() => Changer.NewAvatar -= NewAvatar;
 
         protected abstract void NewAvatar(CharacterAvatar obj);
         

@@ -7,7 +7,6 @@ namespace SaveStuff
     public class SubLocationSceneSo : GameSceneSo
     {
         [NonSerialized] bool sceneActive;
-
         public override GameSceneType SceneType => GameSceneType.SubLocation;
 
         [field: NonSerialized]
