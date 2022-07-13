@@ -13,6 +13,7 @@ using UnityEngine.AddressableAssets;
 
 namespace AvatarStuff
 {
+    [RequireComponent(typeof(FootSteps))]
     public partial class CharacterAvatar : MonoBehaviour
     {
         const float OrganMulti = 0.7f;

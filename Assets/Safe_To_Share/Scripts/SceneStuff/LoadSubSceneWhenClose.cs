@@ -1,5 +1,5 @@
-﻿using AvatarStuff.Holders;
-using Character.PlayerStuff;
+﻿using System;
+using AvatarStuff.Holders;
 using SaveStuff;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -16,7 +16,7 @@ namespace SceneStuff
         private bool hasBlockingObejct;
         float lastTick;
         Transform player;
-
+        public static  event Action  SubSceneChange ;
         protected virtual void Start()
         {
             hasBlockingObejct = blockingCollider != null;
@@ -74,7 +74,11 @@ namespace SceneStuff
             subScene.SceneReference.UnLoadScene().Completed += DoneUnloading;
         }
 
-        void DoneUnloading(AsyncOperationHandle<SceneInstance> obj) => subScene.SceneLoaded = false;
+        void DoneUnloading(AsyncOperationHandle<SceneInstance> obj)
+        {
+            subScene.SceneLoaded = false;
+            SubSceneChange?.Invoke();
+        }
 
         void LoadScene()
         {
@@ -86,6 +90,7 @@ namespace SceneStuff
         {
             subScene.SceneLoaded = true;
             ToggleActiveBlockingObject(false);
+            SubSceneChange?.Invoke();
         }
 
         private void ToggleActiveBlockingObject(bool value)

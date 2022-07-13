@@ -38,8 +38,12 @@ public class SyncDateSystemWithLighting : MonoBehaviour
         GaiaGlobal.Instance.UpdateGaiaTimeOfDay(false);
     }
 
+    static int lastMin;
     static void UpdateMinutes(int obj)
     {
+        int abs = Mathf.Abs(obj - lastMin);
+        if (abs <= 2) return;
+        lastMin = obj;
         TimeOfDay.m_todMinutes = obj;
         GaiaGlobal.Instance.UpdateGaiaTimeOfDay(false);
     }

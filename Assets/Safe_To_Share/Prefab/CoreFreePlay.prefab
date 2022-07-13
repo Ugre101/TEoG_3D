@@ -602,7 +602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
   m_XRTrackingOrigin: {fileID: 0}
@@ -1204,7 +1203,7 @@ MonoBehaviour:
   brain: {fileID: 7004627993087508327}
   crounchFactor: 2.78
   orgZoom: 60
-  orgCameraHeight: {x: 0, y: 1.7000008, z: 0}
+  orgCameraHeight: {x: 0, y: 1.7000008, z: 0.3}
   zoomTo: 25
   zoomRate: 15
 --- !u!114 &8254489817098735847

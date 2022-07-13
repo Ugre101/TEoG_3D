@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CustomClasses;
@@ -20,14 +21,22 @@ namespace GameUIAndMenus
         [SerializeField] LoadMasterAudio masterAudio;
         readonly WaitForEndOfFrame waitForEndOfFrame = new();
         IEnumerable<ICancelMeBeforeOpenPauseMenu> cancelThese;
-        bool sceneDirty = true;
+        static bool sceneDirty = true;
 
         void Start()
         {
             bindings.performed += ctx => TogglePause();
             SceneLoader.NewScene += SetDirty;
+            LoadSubSceneWhenClose.SubSceneChange += SetDirty;
             // Load Audio settings
             LoadSettings();
+        }
+
+        void OnDestroy()
+        {
+            bindings.Dispose();
+            SceneLoader.NewScene -= SetDirty;
+            LoadSubSceneWhenClose.SubSceneChange -= SetDirty;
         }
 
         void OnEnable() => bindings.Enable();
@@ -68,7 +77,7 @@ namespace GameUIAndMenus
             }
         }
 
-        void SetDirty() => sceneDirty = true;
+        public static void SetDirty() => sceneDirty = true;
 
         public void Pause()
         {

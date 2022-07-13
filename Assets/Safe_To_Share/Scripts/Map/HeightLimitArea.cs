@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Map
 {
+    [RequireComponent(typeof(Collider))]
     public class HeightLimitArea : MonoBehaviour
     {
         [SerializeField] float heightLimit = 1f;

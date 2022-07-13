@@ -3,12 +3,14 @@ using System.Threading.Tasks;
 using Movement.ECM2.Source;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Events;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace AvatarStuff
 {
     public class AvatarChanger : AvatarChangerBase
     {
+        public UnityEvent<Animator> NewAnimatorUnityEvent;
         public event Action<CharacterAvatar> NewAvatar;
         public bool AvatarLoaded { get; private set; }
         public CharacterAvatar CurrentAvatar { get; private set; }
@@ -57,7 +59,10 @@ namespace AvatarStuff
             var instance = Instantiate(avatar, transform);
             AvatarLoaded = true;
             if (instance.TryGetComponent(out Animator ani))
+            {
                 InvokeNewAnimator(ani);
+                NewAnimatorUnityEvent?.Invoke(ani);
+            }
             CurrentAvatar = instance;
             hasAvatar = true;
             NewAvatar?.Invoke(instance);

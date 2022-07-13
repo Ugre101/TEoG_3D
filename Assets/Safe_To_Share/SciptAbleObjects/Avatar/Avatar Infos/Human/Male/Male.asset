@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Male
   m_EditorClassIdentifier: 
   prefab:
-    m_AssetGUID: a6925467e97c177488b1815e9938d1d2
+    m_AssetGUID: e8c68a606c97cd84cbe26583c56b7f19
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   playerPrefab:
-    m_AssetGUID: 47bf5e7badfa9b441b287ed9e261c15d
+    m_AssetGUID: b600c7c134c60e047bd5b0e5d07168a7
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

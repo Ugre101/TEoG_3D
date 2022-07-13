@@ -2,6 +2,7 @@
 using Character;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace AvatarStuff.UI
 {
@@ -10,13 +11,15 @@ namespace AvatarStuff.UI
         [SerializeField] BodyMorphSlider prefab;
         [SerializeField] Transform content;
 
-        Queue<BodyMorphSlider> sliderPool;
+        ObjectPool<BodyMorphSlider> sliderPool;
 
+        bool firstSetup = true;
         public void Setup(BodyMorphs.AvatarBodyMorphs morphs, CharacterAvatar avatar)
         {
-            SetupSliderPool();
+            if (firstSetup)
+                SetupSliderPool();
             foreach (var subStruct in morphs.bodyAvatarMorphs)
-                GetSlider().Setup(subStruct, avatar);
+                sliderPool.Get().Setup(subStruct, avatar,sliderPool);
         }
 
 
@@ -28,21 +31,27 @@ namespace AvatarStuff.UI
             {
                 var found = morphs.bodyAvatarMorphs.Find(b => b.title == bodyShape.Title);
                 if (found != null)
-                    GetSlider().Setup(found, avatar);
+                    sliderPool.Get().Setup(found, avatar,sliderPool);
             }
         }
 
         void SetupSliderPool()
         {
-            sliderPool = new Queue<BodyMorphSlider>(content.GetComponentsInChildren<BodyMorphSlider>(true));
-            content.SleepChildren();
+            firstSetup = false;
+            sliderPool = new ObjectPool<BodyMorphSlider>(CreateFunc,ActionOnGet,ActionOnRelease);
+            foreach (var slider in GetComponentsInChildren<BodyMorphSlider>())
+                sliderPool.Release(slider);
         }
 
-        BodyMorphSlider GetSlider()
+        static void ActionOnRelease(BodyMorphSlider obj)
         {
-            var gotten = sliderPool.Count > 0 ? sliderPool.Dequeue() : Instantiate(prefab, content);
-            gotten.gameObject.SetActive(true);
-            return gotten;
+            obj.Clear();
+            obj.gameObject.SetActive(false);
         }
+
+        static void ActionOnGet(BodyMorphSlider obj) => obj.gameObject.SetActive(true);
+
+        BodyMorphSlider CreateFunc() => Instantiate(prefab, content);
+
     }
 }

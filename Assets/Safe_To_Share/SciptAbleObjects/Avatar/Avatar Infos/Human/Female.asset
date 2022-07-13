@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Female
   m_EditorClassIdentifier: 
   prefab:
-    m_AssetGUID: 1f28d366fd28c36429fb34c4db62b1c9
+    m_AssetGUID: 9fd49dbe7da0a374b85cb42ad59f90e6
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   playerPrefab:
-    m_AssetGUID: 58c0649755f9ff94792927b5d190a967
+    m_AssetGUID: c5ec9102a8d86954c822bae7aad5157a
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
