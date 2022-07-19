@@ -491,6 +491,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8724109875216e4448f887a56b24f63c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newAnimatorEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2126684856959139973}
+        m_TargetAssemblyTypeName: Movement.ECM2.Source.Characters.UnityCharacterAnimator,
+          ECM2
+        m_MethodName: SetAnimator
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7261518492823782124}
+        m_TargetAssemblyTypeName: ECM2.Source.Helpers.RootMotionController, ECM2
+        m_MethodName: SetAnimator
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7261518492823782124
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,14 +7,10 @@ namespace Options
 {
     public class GraphicsTierDropDown : MonoBehaviour
     {
-        TMP_Dropdown dropdown;
+        [SerializeField]  TMP_Dropdown dropdown;
         // Start is called before the first frame update
         void Start()
         {
-            if (!TryGetComponent(out TMP_Dropdown drop)) 
-                return;
-        
-            dropdown = drop;
             Setup();
             dropdown.onValueChanged.AddListener(ChangeTier);
         }

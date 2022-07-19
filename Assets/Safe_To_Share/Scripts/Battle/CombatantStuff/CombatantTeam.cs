@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Character;
 using UnityEngine;
 
@@ -18,10 +19,10 @@ namespace Battle.CombatantStuff
                 slot.EmptySlot();
         }
 
-        public Combatant SetupTeam(BaseCharacter obj)
+        public async Task<Combatant> SetupTeam(BaseCharacter obj)
         {
             CombatantSlot emptySlot = slots.FirstOrDefault(cs => cs.Empty);
-            return emptySlot != null ? emptySlot.AddCombatant(obj) : null;
+            return emptySlot != null ? await emptySlot.AddCombatant(obj) : null;
         }
     }
 }

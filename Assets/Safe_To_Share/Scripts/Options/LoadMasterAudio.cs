@@ -8,7 +8,7 @@ namespace Options
     public class LoadMasterAudio : MonoBehaviour
     {
         [SerializeField] AssetReference audioMixer;
-        [SerializeField] AudioControlSlider master, weather, music;
+        [SerializeField] AudioControlSlider master, weather, music,footSteps;
 
         public void Setup() => audioMixer.LoadAssetAsync<AudioMixer>().Completed += Loaded;
 
@@ -17,6 +17,7 @@ namespace Options
             master.SetupMixer(obj.Result);
             weather.SetupMixer(obj.Result);
             music.SetupMixer(obj.Result);
+            footSteps.SetupMixer(obj.Result);
         }
     }
 }

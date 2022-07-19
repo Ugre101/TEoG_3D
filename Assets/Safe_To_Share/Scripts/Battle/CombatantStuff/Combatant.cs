@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Threading.Tasks;
 using AvatarStuff;
 using Battle.UI;
 using Character;
@@ -25,14 +26,12 @@ namespace Battle.CombatantStuff
 
         private void Sub()
         {
-            avatarChanger.NewAnimator += NewAvatar;
-            avatarChanger.NewAvatar += ModifyAvatar;
         }
 
-        void NewAvatar(Animator obj)
+        public void NewAvatar(Animator obj)
         {
             activeAnimator = obj;
-            obj.SetBool(BattleIdle, true);
+            activeAnimator.SetBool(BattleIdle, true);
             if (Character != null)
                 BindAvatarReactions();
         }
@@ -46,8 +45,6 @@ namespace Battle.CombatantStuff
 
         private void UnSub()
         {
-            avatarChanger.NewAnimator -= NewAvatar;
-            avatarChanger.NewAvatar -= ModifyAvatar;
             if (Character == null)
                 return;
             Hp.CurrentValueChange -= Dead;
@@ -56,14 +53,15 @@ namespace Battle.CombatantStuff
             Wp.ValueDecrease -= ReactTakeWillDamage;
         }
 
-        public void Setup(BaseCharacter character)
+        public async Task Setup(BaseCharacter character)
         {
             UnSub();
             Sub();
-            avatarChanger.UpdateAvatar(avatarDict.GetAvatar(character,playerAvatar));
-            transform.eulerAngles = Vector3.zero;
-            characterFrame.gameObject.SetActive(true);
             Character = character;
+            var loaded = await avatarDict.GetAvatarLoaded(character, playerAvatar);
+            avatarChanger.UpdateAvatar(loaded);
+            //transform.eulerAngles = Vector3.zero;
+            characterFrame.gameObject.SetActive(true);
             characterFrame.Setup(character);
         }
 

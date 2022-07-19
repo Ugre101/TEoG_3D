@@ -77,6 +77,8 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: d176720b225b1e6489785a4e8fd6b8aa
+    name: Foot Steps Volume
   - guid: ab11e17f4d9740c428eebc4a5631ab58
     name: Master Volume
   - guid: 2de641b17b1492548acc81fdde4c880d
@@ -138,7 +140,9 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 47856ca13ab53ab40ba4e079360165a9
   m_FloatValues:
-    d176720b225b1e6489785a4e8fd6b8aa: -16.035946
+    2de641b17b1492548acc81fdde4c880d: -4.9356413
+    6f447b077bb81234492e0419f66a8c83: -20.098167
+    d176720b225b1e6489785a4e8fd6b8aa: -20
     ab11e17f4d9740c428eebc4a5631ab58: -0.0024418721
   m_TransitionOverrides: {}
 --- !u!243 &4315405250654611154

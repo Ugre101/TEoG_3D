@@ -1,4 +1,5 @@
-﻿using Character;
+﻿using System.Threading.Tasks;
+using Character;
 using UnityEngine;
 
 namespace Battle.CombatantStuff
@@ -8,11 +9,11 @@ namespace Battle.CombatantStuff
         [SerializeField] Combatant myCombatant;
         public bool Empty { get; private set; } = true;
 
-        public Combatant AddCombatant(BaseCharacter character)
+        public async Task<Combatant> AddCombatant(BaseCharacter character)
         {
             Empty = false;
-            myCombatant.Setup(character);
             myCombatant.gameObject.SetActive(true);
+            await myCombatant.Setup(character);
             return myCombatant;
         }
 
@@ -21,6 +22,5 @@ namespace Battle.CombatantStuff
             myCombatant.gameObject.SetActive(false);
             Empty = true;
         }
-
     }
 }

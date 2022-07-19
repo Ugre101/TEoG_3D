@@ -79,7 +79,7 @@ namespace Safe_To_Share.Scripts.Static
             dropdown.ClearOptions();
             dropdown.AddOptions(EnumToDataList(altExcludeOptions));
             dropdown.onValueChanged.RemoveAllListeners();
-            dropdown.value = IndexOfEnum(currentValue);
+            dropdown.SetValueWithoutNotify(IndexOfEnum(currentValue));
             dropdown.onValueChanged.AddListener(onChange);
         }
 

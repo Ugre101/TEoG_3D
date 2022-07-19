@@ -1,16 +1,13 @@
 using System;
-using System.Threading.Tasks;
 using Movement.ECM2.Source;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Events;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace AvatarStuff
 {
     public class AvatarChanger : AvatarChangerBase
     {
-        public UnityEvent<Animator> NewAnimatorUnityEvent;
         public event Action<CharacterAvatar> NewAvatar;
         public bool AvatarLoaded { get; private set; }
         public CharacterAvatar CurrentAvatar { get; private set; }
@@ -56,15 +53,13 @@ namespace AvatarStuff
             AvatarLoaded = false;
             if (hasAvatar)
                 Destroy(CurrentAvatar.gameObject);
-            var instance = Instantiate(avatar, transform);
+            var instance = Instantiate(avatar,transform);
+            instance.transform.localPosition = Vector3.zero;
             AvatarLoaded = true;
-            if (instance.TryGetComponent(out Animator ani))
-            {
-                InvokeNewAnimator(ani);
-                NewAnimatorUnityEvent?.Invoke(ani);
-            }
             CurrentAvatar = instance;
             hasAvatar = true;
+            if (instance.TryGetComponent(out Animator ani)) 
+                InvokeNewAnimator(ani);
             NewAvatar?.Invoke(instance);
             //    avatar.LoadAssetAsync<GameObject>().Completed += Done;
         }

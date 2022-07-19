@@ -36,16 +36,21 @@ namespace AvatarStuff
             }
         }
 
-        public void Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls)
+        /// <returns>If skin color need to be updated</returns>
+        public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls)
         {
             if (hidden)
             {
-                if (hasDick || hasBalls) 
+                if (hasDick || hasBalls)
+                {
                     Show(skinnedMeshRenderers);
+                    return true;
+                }
             }
             else if (!hasDick && !hasBalls)
                 Hide(skinnedMeshRenderers);
 
+            return false;
         }
     }
 }

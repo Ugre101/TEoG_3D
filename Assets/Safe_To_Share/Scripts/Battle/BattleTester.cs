@@ -16,14 +16,14 @@ namespace Battle
 
         [SerializeField, Range(1, 3),] int enemies = 1;
 
-        IEnumerator Start()
+        async void Start()
         {
             if (!GameTester.GetFirstCall())
-                yield break;            
+                return;
             
-            yield return playerPreset.LoadAssets();
+            await playerPreset.LoadAssets();
             BaseCharacter[] playerTeam = { new Player(playerPreset.NewCharacter()), };
-            yield return enemyPreset.LoadAssets();
+            await enemyPreset.LoadAssets();
             List<BaseCharacter> enemyTeam = new();
             for (int i = 0; i < enemies; i++)
                 enemyTeam.Add(new Enemy(enemyPreset.NewEnemy()));

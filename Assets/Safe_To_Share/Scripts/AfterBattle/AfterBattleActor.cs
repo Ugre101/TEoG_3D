@@ -24,7 +24,6 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         void UnSub()
         {
-            avatarChanger.NewAnimator -= NewAnimator;
             avatarChanger.NewAvatar -= NewAvatar;
             if (Actor == null)
                 return;
@@ -39,7 +38,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
                 avatar.SetArousal(obj);
         }
 
-        void NewAvatar(CharacterAvatar obj)
+        public void NewAvatar(CharacterAvatar obj)
         {
             avatar = obj;
             hasAvatar = true;
@@ -72,7 +71,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         public void UpdateHeight() => avatarScaler.ChangeScale(Actor.Body.Height.Value);
 
-        void NewAnimator(Animator obj)
+        public void NewAnimator(Animator obj)
         {
             animator = obj;
             animator.SetBool(Idle, true);
@@ -84,7 +83,6 @@ namespace Safe_To_Share.Scripts.AfterBattle
             UnSub();
             Actor.UpdateAvatar += ModifyAvatar;
             Actor.Body.Height.StatDirtyEvent += UpdateHeight;
-            avatarChanger.NewAnimator += NewAnimator;
             avatarChanger.NewAvatar += NewAvatar;
             Actor.SexStats.ArousalChange += UpdateArousal;
             ModifyAvatar();

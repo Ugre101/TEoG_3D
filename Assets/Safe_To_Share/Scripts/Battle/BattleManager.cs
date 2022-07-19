@@ -69,7 +69,7 @@ namespace Battle
         }
 
 
-        public void Setup(Player parPlayer, BaseCharacter[] enemies, BaseCharacter[] allies,bool boss)
+        public async void Setup(Player parPlayer, BaseCharacter[] enemies, BaseCharacter[] allies,bool boss)
         {
             player = parPlayer;
             playerTeamChars = new ControlledCharacter[] { player, };
@@ -81,21 +81,23 @@ namespace Battle
             enemyTeamChars = enemies;
             whoseTurn = new List<CombatCharacter>();
 
-
-            SetupTeam(playerTeam, playerTeamChars, true);
+            transform.AwakeChildren();
+            await SetupTeam(playerTeam, playerTeamChars, true);
             BuildSpeed(); // Favour player team
-            SetupTeam(enemyTeam, enemyTeamChars, false);
+            await SetupTeam(enemyTeam, enemyTeamChars, false);
 
-            void SetupTeam(CombatantTeam team, IEnumerable<BaseCharacter> charArray, bool ally)
+            async Task SetupTeam(CombatantTeam team, IEnumerable<BaseCharacter> charArray, bool ally)
             {
                 team.FirstSetup();
                 foreach (BaseCharacter character in charArray)
-                    whoseTurn.Add(new CombatCharacter(team.SetupTeam(character), character, ally));
+                {
+                    var setupTeam = await team.SetupTeam(character);
+                    whoseTurn.Add(new CombatCharacter(setupTeam, character, ally));
+                }
             }
 
             BattleUIManager.Instance.Setup(whoseTurn);
             NextTurn();
-            transform.AwakeChildren();
             StartCoroutine(BattleSceneManager.PreLoadAfterBattle());
         }
 

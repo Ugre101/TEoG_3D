@@ -1867,6 +1867,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[9]
       value: 
       objectReference: {fileID: 2100000, guid: de08c6af00366254ca8cce120f526e85, type: 2}
+    - target: {fileID: -5041536863153386493, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4623124009478314746, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 7.27
@@ -10162,7 +10166,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 200
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -10197,7 +10201,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

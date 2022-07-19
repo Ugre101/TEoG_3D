@@ -57,7 +57,7 @@ namespace AvatarStuff
         [SerializeField] bool hasHideDaz;
 
         float ballSize;
-
+        bool forceSkinUpdate;
         bool firstUse = true;
         float lastTick;
         SkinnedMeshRenderer[] shapes;
@@ -94,7 +94,6 @@ namespace AvatarStuff
 
        
 #if UNITY_EDITOR
-
         void OnValidate()
         {
             hasDickController = dickController != null;
@@ -121,9 +120,8 @@ namespace AvatarStuff
             if (firstUse)
                 FirstSetup();
             LoadDetails();
-            SexualOrgans sexualOrgans = character.SexualOrgans;
-            bool hasVagina = sexualOrgans.Vaginas.HaveAny();
-            HandleDickAndBalls(sexualOrgans);
+            bool hasVagina = character.SexualOrgans.Vaginas.HaveAny();
+            HandleDickAndBalls(character.SexualOrgans);
             vore.Update(character);
             foreach (SkinnedMeshRenderer shape in AllShapes)
                 SetShapes(character, hasVagina, shape);
@@ -133,6 +131,7 @@ namespace AvatarStuff
             SetArousal(character.SexStats.Arousal);
             UpdateBodyTypeMorphs(character.Body.Morphs);
             SetSkinTone(character.Body.SkinTone);
+            forceSkinUpdate = false;
         }
 
         void HandleDickAndBalls(SexualOrgans sexualOrgans)
@@ -140,7 +139,7 @@ namespace AvatarStuff
             bool hasDick = sexualOrgans.Dicks.HaveAny();
             bool hasBalls = sexualOrgans.Balls.HaveAny();
             if (hasHideDaz)
-                hideDazDickAndBalls.Handle(bodyMeshRenderers, hasDick, hasBalls);
+                forceSkinUpdate = hideDazDickAndBalls.Handle(bodyMeshRenderers, hasDick, hasBalls);
             HandleDick(sexualOrgans.Dicks, hasDick);
             HandleBalls(sexualOrgans.Balls, hasBalls);
         }
@@ -213,7 +212,11 @@ namespace AvatarStuff
         static float SetOrganSize(float currentSize) => 0.2f + Mathf.Log(currentSize) * OrganMulti;
 
 
-        public void SetSkinTone(float tone) => skinTone.SetSkinTone(tone, bodyMeshRenderers);
+        public void SetSkinTone(float tone)
+        {
+            skinTone.SetSkinTone(tone, bodyMeshRenderers, forceSkinUpdate);
+            forceSkinUpdate = false;
+        }
 
         public void Save()
         {

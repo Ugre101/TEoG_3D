@@ -19,21 +19,14 @@ namespace Options
         {
             loaded = mixer;
             slider.onValueChanged.AddListener(ChangeMaster);
-            slider.value = PlayerPrefs.GetFloat(volumeParameter, 1f);
-            Load();
+            slider.value = PlayerPrefs.GetFloat(volumeParameter, slider.value);
+            //Load();
         }
 
-        void OnDisable() => PlayerPrefs.SetFloat(volumeParameter,slider.value);
+        void OnDestroy() => PlayerPrefs.SetFloat(volumeParameter,slider.value);
 
         void ChangeMaster(float arg0)
         {
-            float newValue = arg0 == 0 ?  -80f :Mathf.Log10(arg0) * stepMultiplier;
-            loaded.SetFloat(volumeParameter, newValue);
-        }
-
-        void Load()
-        {
-            float arg0 = PlayerPrefs.GetFloat(volumeParameter, 1f);
             float newValue = arg0 == 0 ?  -80f :Mathf.Log10(arg0) * stepMultiplier;
             loaded.SetFloat(volumeParameter, newValue);
         }
