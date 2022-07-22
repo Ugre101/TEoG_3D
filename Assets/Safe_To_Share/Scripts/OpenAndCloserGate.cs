@@ -29,7 +29,6 @@ namespace Safe_To_Share.Scripts
         IEnumerator ShortDelay()
         {
             yield return waitForSeconds;
-            print("Close portal");
             occlusionPortal.open = false;
         }
     }

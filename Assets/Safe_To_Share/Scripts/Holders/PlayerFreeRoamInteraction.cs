@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Character.PlayerStuff;
 using TMPro;
+using Unity.Collections;
+using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -24,22 +25,38 @@ namespace AvatarStuff.Holders
         IInteractable lastHit;
         bool hasHit;
         float stopHoverDist;
+        JobHandle handle;
+        NativeArray<RaycastHit> results;
+        NativeArray<RaycastCommand> commands;
+
         void Start()
         {
+            results = new NativeArray<RaycastHit>(rays.Count + 1 , Allocator.Persistent);
+            commands = new NativeArray<RaycastCommand>(rays.Count + 1, Allocator.Persistent);
+
             optionButton.onClick.AddListener(DoInteraction);
             stopHoverDist = rayDist * 3f;
         }
 
         private void DoInteraction() => lastHit?.DoInteraction(playerHolder.Player);
 
+        bool timeToCheck;
+        [SerializeField] float cameraRayDist = 12f;
+
         void Update()
         {
             if (Time.frameCount % FrameLimit != 0)
                 return;
-            if (CastRayHits())
+            if (timeToCheck)
             {
-                ShowOptionsShowFor(lastHit);
-                return;
+                if (CheckRayCastResult()) 
+                    ShowOptionsShowFor(lastHit);
+                timeToCheck = false;
+            }
+            else
+            {
+                ScheduleRaycast();
+                timeToCheck = true;
             }
             if (hasHit && Vector3.Distance(lastHitPos, transform.position) > stopHoverDist)
                 StopShowText();
@@ -61,37 +78,39 @@ namespace AvatarStuff.Holders
 
         string HotkeyHumanReadableString() => InputControlPath.ToHumanReadableString(hotKey.action.bindings[0].path, InputControlPath.HumanReadableStringOptions.OmitDevice);
 
-        bool CastRayHits() => rays.Any(CastBodyRay) || CastCameraRay();
-
-        private bool CastCameraRay()
+        private void ScheduleRaycast()
         {
+            Vector3 transformDirection = transform.TransformDirection(Vector3.forward);
             Ray camRay = cam.ScreenPointToRay(Pointer.current.position.ReadValue());
-            if (!CameraLooksAtInteractable(camRay, out RaycastHit camHit, out IInteractable camInteractable))
-                return false;
-            lastHitPos = camHit.point;
-            lastHit = camInteractable;
-            return true;
+            int i;
+            for (i = 0; i < rays.Count; i++)
+                commands[i] = new RaycastCommand(transform.position + rays[i], transformDirection,rayDist,searchLayers);
+            commands[i] = new RaycastCommand(camRay.origin, camRay.direction, cameraRayDist, searchLayers);
+            handle = RaycastCommand.ScheduleBatch(commands, results, 1);
         }
 
-        private bool CameraLooksAtInteractable(Ray camRay, out RaycastHit camHit, out IInteractable camInteractable)
+        bool CheckRayCastResult()
         {
-            camInteractable = null;
-            return Physics.Raycast(camRay, out camHit, 100f, searchLayers) &&
-                   camHit.transform.TryGetComponent(out camInteractable) &&
-                   Vector3.Distance(camHit.point, transform.position) <= rayDist * 3f;
+            handle.Complete();
+            // Copy the result. If batchedHit.collider is null there was no hit
+            foreach (RaycastHit hit in results)
+            {
+                if (hit.collider == null) continue;
+                if (hit.transform.TryGetComponent(out IInteractable interactable))
+                {
+                    lastHitPos = hit.transform.position;
+                    lastHit = interactable;
+                    return true;
+                }
+            }
+            return false;
         }
 
-        bool CastBodyRay(Vector3 offset)
+        void OnDestroy()
         {
-            Ray ray = new Ray(transform.position + offset, transform.TransformDirection(Vector3.forward));
-            if (!Physics.Raycast(ray, out RaycastHit hit, rayDist, searchLayers) || !hit.transform.TryGetComponent(out IInteractable interactable))
-                return false;
-            lastHitPos = hit.transform.position;
-            lastHit = interactable;
-            return true;
+            results.Dispose();
+            commands.Dispose();        
         }
-
-        
 
         public void OnInterAction(InputAction.CallbackContext ctx)
         {

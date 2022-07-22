@@ -19,7 +19,7 @@ namespace Spawner.Editor
             Event e = Event.current;
 
 
-            if (e.control && e.type == EventType.MouseDown)
+            if (e.shift && e.type == EventType.MouseDown)
             {
                 int controlID = GUIUtility.GetControlID(FocusType.Passive);
                 GUIUtility.hotControl = controlID;
