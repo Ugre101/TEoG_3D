@@ -11,20 +11,18 @@ namespace Safe_To_Share.Scripts
         [SerializeField] UnityEvent exitEvent;
 
         [SerializeField] bool stopMoverOnEnter;
+
         void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
                 enterEvent.Invoke();
-            if (stopMoverOnEnter && other.TryGetComponent(out ThirdPersonEcm2Character mover))
-            {
-                mover.Stop();
-            }
+            if (stopMoverOnEnter && other.TryGetComponent(out ThirdPersonEcm2Character mover)) mover.Stop();
         }
 
         void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
-                exitEvent.Invoke();    
+                exitEvent.Invoke();
         }
     }
 }

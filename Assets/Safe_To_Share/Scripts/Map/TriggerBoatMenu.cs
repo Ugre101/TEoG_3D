@@ -6,7 +6,6 @@ namespace Map
 {
     public class TriggerBoatMenu : MonoBehaviour
     {
-        public static event Action OpenBoatMenu;
         [SerializeField] protected SceneTeleportExit exit;
         [SerializeField] Transform exitLocation;
         public Vector3 ExitLocation => exitLocation.position;
@@ -21,6 +20,8 @@ namespace Map
                 return;
             OnPlayerEnter();
         }
+
+        public static event Action OpenBoatMenu;
 
         protected virtual void OnPlayerEnter() => OpenBoatMenu?.Invoke();
     }

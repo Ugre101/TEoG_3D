@@ -7,10 +7,7 @@ namespace Character.Service
     public class SleepService : BaseService
     {
         [SerializeField] int sleepQuality;
-        
-        public override void OnUse(Player player)
-        {
-            player.Sleep(sleepQuality);
-        }
+
+        public override void OnUse(Player player) => player.Sleep(sleepQuality);
     }
 }

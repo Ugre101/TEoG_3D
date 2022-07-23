@@ -42,9 +42,9 @@ namespace Character.PregnancyStuff
         public static bool IsPregnant(this BaseCharacter character)
         {
             foreach (var con in character.SexualOrgans.Containers.Values)
-                foreach (var org in con.List)
-                    if (org.Womb.HasFetus)
-                        return true;
+            foreach (var org in con.List)
+                if (org.Womb.HasFetus)
+                    return true;
             return false;
         }
     }

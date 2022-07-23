@@ -2,10 +2,10 @@
 using Character.DefeatScenarios.Nodes;
 using CustomClasses;
 using Safe_to_Share.Scripts.CustomClasses;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEngine;
 
 namespace Defeated
 {
@@ -21,7 +21,7 @@ namespace Defeated
                 nodes.Add(MakeNode<LoseScenarioNode>());
             if (AssetDatabase.GetAssetPath(this) != string.Empty)
                 foreach (var node in nodes.Where(n =>
-                    AssetDatabase.GetAssetPath(n) == string.Empty))
+                             AssetDatabase.GetAssetPath(n) == string.Empty))
                     AssetDatabase.AddObjectToAsset(node, this);
 
 #endif

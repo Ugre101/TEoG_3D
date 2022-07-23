@@ -12,8 +12,8 @@ namespace SaveStuff
         public static int ShowAmount = 10;
         [SerializeField] Slider amountToShow;
         [SerializeField] TextMeshProUGUI showAmountText;
-        bool firstSlide = true;
         readonly WaitForSecondsRealtime afterSmallDelay = new(0.1f);
+        bool firstSlide = true;
 
         public void SetupSlider(int saves)
         {
@@ -22,7 +22,9 @@ namespace SaveStuff
             showAmountText.text = $"Show {ShowAmount} saves";
             amountToShow.onValueChanged.AddListener(ChangeAmount);
         }
+
         public void NewMaxAmount(int amount) => amountToShow.maxValue = amount;
+
         void ChangeAmount(float arg0)
         {
             ShowAmount = Mathf.RoundToInt(arg0);

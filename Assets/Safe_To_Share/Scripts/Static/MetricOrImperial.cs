@@ -8,6 +8,7 @@ namespace Safe_To_Share.Scripts.Static
         public static readonly SavedBoolSetting Metric = new("UsingImperialUnits");
 
         static string AddS(float value) => Mathf.FloorToInt(value) > 1f ? "s" : string.Empty;
+
         #region VolumeUnits
 
         public static string ConvertCl(this int value, bool wordAfter = true) =>
@@ -58,8 +59,8 @@ namespace Safe_To_Share.Scripts.Static
                     : $"{Mathf.FloorToInt(pint)}pint{AddS(pint)}";
             float gallon = value * 0.002642f;
             return gallon % 1 > 0.13f
-                ?  $"{Mathf.FloorToInt(gallon)}gallon{AddS(gallon)} and {Mathf.FloorToInt(gallon % 1 * 8f)}pints"
-                :  $"{Mathf.FloorToInt(gallon)}gallon{AddS(gallon)}";
+                ? $"{Mathf.FloorToInt(gallon)}gallon{AddS(gallon)} and {Mathf.FloorToInt(gallon % 1 * 8f)}pints"
+                : $"{Mathf.FloorToInt(gallon)}gallon{AddS(gallon)}";
         }
 
         static string ClToMetric(float value, bool wordAfter)
@@ -72,7 +73,7 @@ namespace Safe_To_Share.Scripts.Static
                 return $"{value:0.##}cl";
             float l = value / 100f;
             return l < 10 ? $"{l:0.##}l" : $"{l:0.#}l";
-        }  
+        }
 
         #endregion
 
@@ -94,7 +95,7 @@ namespace Safe_To_Share.Scripts.Static
             return wordAfter ? $"{value}kg" : value.ToString();
         }
 
-        public static string ConvertKg(this float value, bool wordAfter =  true) =>
+        public static string ConvertKg(this float value, bool wordAfter = true) =>
             Metric.Enabled ? KgToMetric(value, wordAfter) : KgToImperial(value, wordAfter);
 
         static string KgToImperial(float value, bool wordAfter)
@@ -140,7 +141,7 @@ namespace Safe_To_Share.Scripts.Static
         }
 
         public static string ConvertCm(this float value, bool wordAfter = true) =>
-            Metric.Enabled ?  CmToMetric(value, wordAfter) : CmToImperial(value, wordAfter);
+            Metric.Enabled ? CmToMetric(value, wordAfter) : CmToImperial(value, wordAfter);
 
         static string CmToMetric(float value, bool wordAfter = true)
         {

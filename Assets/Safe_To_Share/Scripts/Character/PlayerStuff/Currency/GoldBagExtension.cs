@@ -28,13 +28,11 @@ namespace Currency
             int finalCost = Mathf.RoundToInt(cost * DiscountMulti(player));
             return PlayerGold.GoldBag.CanAfford(finalCost);
         }
-        public static bool TryBuyItem(this Player player,Item item,int amount = 1)
+
+        public static bool TryBuyItem(this Player player, Item item, int amount = 1)
         {
-            int discountedCost = Mathf.CeilToInt(item.Value* DiscountMulti(player)  * amount);
-            if (PlayerGold.GoldBag.TryToBuy(discountedCost))
-            {
-                player.Inventory.AddItem(item,amount);
-            }
+            int discountedCost = Mathf.CeilToInt(item.Value * DiscountMulti(player) * amount);
+            if (PlayerGold.GoldBag.TryToBuy(discountedCost)) player.Inventory.AddItem(item, amount);
             return false;
         }
     }

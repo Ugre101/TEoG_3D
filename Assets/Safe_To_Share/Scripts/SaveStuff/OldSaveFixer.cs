@@ -2,7 +2,6 @@
 using System.Linq;
 using Character;
 using Character.PlayerStuff;
-using Character.SkillsAndSpells;
 using Character.VoreStuff;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -37,9 +36,8 @@ namespace SaveStuff
                     Debug.LogWarning("Didn't have " + standardAbility.SubObjectName);
                 }
         }
-        
-        
-        
+
+
         static void CheckVore(BaseCharacter player)
         {
             int faults = player.Vore.Stomach.PreysIds.RemoveAll(id => !VoredCharacters.PreyDict.ContainsKey(id)) +

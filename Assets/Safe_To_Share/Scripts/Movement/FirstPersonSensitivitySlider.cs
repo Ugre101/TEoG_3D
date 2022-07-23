@@ -9,6 +9,7 @@ namespace Safe_To_Share.Scripts.Movement
     {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI amount;
+
         void Start()
         {
             UpdateText(FirstPersonCameraSettings.Sensitivity);
@@ -19,6 +20,7 @@ namespace Safe_To_Share.Scripts.Movement
         void OnDestroy() => slider.onValueChanged.RemoveAllListeners();
 
         void UpdateText(float dist) => amount.text = $"{dist:0.##}";
+
         void ChangeSensitivity(float arg0)
         {
             FirstPersonCameraSettings.Sensitivity = arg0;

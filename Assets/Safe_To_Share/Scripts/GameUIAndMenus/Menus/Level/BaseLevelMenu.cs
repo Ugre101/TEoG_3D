@@ -10,8 +10,14 @@ namespace GameUIAndMenus.Menus.Level
         [SerializeField] protected Transform content;
         [SerializeField, Range(0.01f, 0.5f),] float zoomRate;
         [SerializeField, Range(0.1f, 1f),] float minZoom;
-        [SerializeField]  private BaseLevelButton[] btns;
+        [SerializeField] BaseLevelButton[] btns;
         bool firstStart = true;
+
+        void Start()
+        {
+            firstStart = false;
+            SetupButtons();
+        }
 
         protected virtual void OnEnable()
         {
@@ -21,23 +27,18 @@ namespace GameUIAndMenus.Menus.Level
                 SetupButtons();
         }
 
+#if UNITY_EDITOR
+        void OnValidate() => btns = GetComponentsInChildren<BaseLevelButton>();
+#endif
+
         public void OnZoom(InputValue ctx)
         {
             float newZoom = Mathf.Clamp(content.localScale.x + ctx.Get<float>() * Time.unscaledDeltaTime * zoomRate,
                 minZoom, 2f);
             content.localScale = new Vector3(newZoom, newZoom, newZoom);
         }
-        void Start()
-        {
-            firstStart = false;
-            SetupButtons();
-        }
 
-#if UNITY_EDITOR
-        void OnValidate() => btns = GetComponentsInChildren<BaseLevelButton>();
-#endif
-        
-        private void SetupButtons()
+        void SetupButtons()
         {
             foreach (var btn in btns)
                 btn.Setup(holder);

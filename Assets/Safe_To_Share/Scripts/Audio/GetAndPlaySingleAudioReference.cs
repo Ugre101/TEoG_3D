@@ -9,10 +9,7 @@ namespace Safe_To_Share.Scripts.Audio
         [SerializeField] AudioSource audioSource;
         [SerializeField] AssetReference audioClip;
 
-        void Start()
-        {
-            audioClip.LoadAssetAsync<AudioClip>().Completed += StartPlaying;
-        }
+        void Start() => audioClip.LoadAssetAsync<AudioClip>().Completed += StartPlaying;
 
         void StartPlaying(AsyncOperationHandle<AudioClip> obj)
         {

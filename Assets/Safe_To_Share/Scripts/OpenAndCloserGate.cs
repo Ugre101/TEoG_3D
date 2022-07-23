@@ -15,7 +15,6 @@ namespace Safe_To_Share.Scripts
             openGate.Rewind();
             openGate.Play("Open");
             occlusionPortal.open = true;
-
         }
 
         void OnTriggerExit(Collider other)

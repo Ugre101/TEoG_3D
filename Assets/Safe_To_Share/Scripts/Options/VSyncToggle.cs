@@ -5,10 +5,12 @@ namespace Options
 {
     public class VSyncToggle : MonoBehaviour
     {
-        private const string VsyncIsOnSaveName = "Vsynced";
-        private static bool? vsync;
+        const string VsyncIsOnSaveName = "Vsynced";
+        static bool? vsync;
 
-        private static bool Vsync
+        [SerializeField] Toggle toggle;
+
+        static bool Vsync
         {
             get
             {
@@ -24,9 +26,7 @@ namespace Options
             }
         }
 
-        [SerializeField] private Toggle toggle;
-
-        private void Start()
+        void Start()
         {
             toggle.isOn = Vsync;
             toggle.onValueChanged.AddListener(ChangeVsync);
@@ -34,6 +34,6 @@ namespace Options
 
         public static void LoadSetting() => QualitySettings.vSyncCount = Vsync ? 1 : 0;
 
-        private static void ChangeVsync(bool on) => QualitySettings.vSyncCount = on ? 1 : 0;
+        static void ChangeVsync(bool on) => QualitySettings.vSyncCount = on ? 1 : 0;
     }
 }

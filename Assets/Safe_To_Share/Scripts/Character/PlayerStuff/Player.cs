@@ -77,7 +77,7 @@ namespace Character.PlayerStuff
         public override void TickMin(int ticks = 1)
         {
             base.TickMin(ticks);
-            if (OptionalContent.Vore.Enabled && Vore.VoreTick(this,true, ticks))
+            if (OptionalContent.Vore.Enabled && Vore.VoreTick(this, true, ticks))
                 InvokeUpdateAvatar();
         }
 
@@ -88,7 +88,7 @@ namespace Character.PlayerStuff
         }
 
         public override IEnumerator Load(CharacterSave toLoad)
-        { 
+        {
             yield return base.Load(toLoad);
             CheckAilments();
         }
@@ -143,11 +143,8 @@ namespace Character.PlayerStuff
 #endif
         }
 
-        public static event Action<Player,BaseCharacter[]> StartCombat;
+        public static event Action<Player, BaseCharacter[]> StartCombat;
 
-        public void InvokeCombat(BaseCharacter[] enemy)
-        {
-            StartCombat?.Invoke(this,enemy);
-        }
+        public void InvokeCombat(BaseCharacter[] enemy) => StartCombat?.Invoke(this, enemy);
     }
 }

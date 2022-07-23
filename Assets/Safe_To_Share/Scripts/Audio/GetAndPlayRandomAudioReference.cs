@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Random = System.Random;
 
 namespace Safe_To_Share.Scripts.Audio
 {
@@ -8,10 +9,11 @@ namespace Safe_To_Share.Scripts.Audio
     {
         [SerializeField] AudioSource audioSource;
         [SerializeField] AssetReference[] audioClipRefs;
-        readonly System.Random rng = new();
+        readonly Random rng = new();
         void Start() => PlayRandomTrack();
 
-        void PlayRandomTrack() => audioClipRefs[rng.Next(audioClipRefs.Length)].LoadAssetAsync<AudioClip>().Completed += PlayTrack;
+        void PlayRandomTrack() => audioClipRefs[rng.Next(audioClipRefs.Length)].LoadAssetAsync<AudioClip>().Completed +=
+            PlayTrack;
 
         void PlayTrack(AsyncOperationHandle<AudioClip> obj)
         {

@@ -13,6 +13,7 @@ namespace Character.CreateCharacterStuff
         [SerializeField] int muscle;
         [SerializeField] int fat;
         [SerializeField] RngValue rng;
+
         public void Default()
         {
             height = 160;
@@ -25,8 +26,8 @@ namespace Character.CreateCharacterStuff
         public Body NewBody() => new(GetValue(muscle), GetValue(fat), GetValue(height));
 
         public Body NewBody(Islands islands) => IslandStonesDatas.IslandDataDict.TryGetValue(islands, out var data)
-                ? new Body(GetValue(muscle) + data.bodyData.muscle.Current, GetValue(fat) + data.bodyData.fat.Current, GetValue(height) + data.bodyData.height.Current)
-                : NewBody();
-        
+            ? new Body(GetValue(muscle) + data.bodyData.muscle.Current, GetValue(fat) + data.bodyData.fat.Current,
+                GetValue(height) + data.bodyData.height.Current)
+            : NewBody();
     }
 }

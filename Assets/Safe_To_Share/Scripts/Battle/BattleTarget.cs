@@ -8,10 +8,10 @@ namespace Battle
 {
     public class BattleTarget : MonoBehaviour
     {
-        
+        [SerializeField] LayerMask enemyIsOnLayer;
+
         int enemyTargetIndex;
         CombatCharacter[] possibleEnemyTargets;
-        [SerializeField] LayerMask enemyIsOnLayer;
 
         public CombatCharacter EnemyTargeted
         {
@@ -22,6 +22,7 @@ namespace Battle
                 return possibleEnemyTargets[enemyTargetIndex];
             }
         }
+
         public void SetPossibleTargets(CombatCharacter[] combatCharacters) => possibleEnemyTargets = combatCharacters;
 
         public void SwitchTargetLeft(InputAction.CallbackContext ctx)
@@ -41,7 +42,8 @@ namespace Battle
             Vector2 mousePos = Pointer.current.position.ReadValue();
             if (Camera.main is not { } cam) return;
             Ray ray = cam.ScreenPointToRay(mousePos);
-            if (Physics.Raycast(ray, out RaycastHit hit, enemyIsOnLayer) && hit.transform.gameObject.TryGetComponent(out Combatant combatant))
+            if (Physics.Raycast(ray, out RaycastHit hit, enemyIsOnLayer) &&
+                hit.transform.gameObject.TryGetComponent(out Combatant combatant))
                 MatchTarget(combatant);
         }
 
@@ -60,6 +62,5 @@ namespace Battle
             enemyTargetIndex = newIndex;
             EnemyTargeted.Combatant.Target();
         }
-
     }
 }

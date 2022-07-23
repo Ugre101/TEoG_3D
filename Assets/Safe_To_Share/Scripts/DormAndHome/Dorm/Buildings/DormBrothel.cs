@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Character.EssenceStuff;
 using Character.PlayerStuff.Currency;
-using Currency;
 using UnityEngine;
 using Random = System.Random;
 

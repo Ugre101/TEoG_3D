@@ -7,10 +7,10 @@ namespace Map
 {
     public class TreeDebrisObjectPool : MonoBehaviour
     {
-        public static TreeDebrisObjectPool Instance { get; private set; }
         [SerializeField] List<DebrisMatch> debrisMatches = new();
 
         Dictionary<string, DebrisMatch> dict;
+        public static TreeDebrisObjectPool Instance { get; private set; }
 
         Dictionary<string, DebrisMatch> Dict => dict ??= debrisMatches.ToDictionary(dm => dm.TreeName);
 
@@ -18,7 +18,7 @@ namespace Map
         {
             if (Instance == null)
                 Instance = this;
-            else   
+            else
                 Destroy(gameObject);
         }
 
@@ -30,20 +30,45 @@ namespace Map
             prefab.transform.position = treePos;
         }
 
+        [Serializable]
+        class DebrisMatch
+        {
+            [SerializeField] string treeName;
+            [SerializeField] List<Debris> prefabs;
+
+            int id;
+
+            public DebrisMatch(string treeName, List<Debris> prefab)
+            {
+                this.treeName = treeName;
+                prefabs = prefab;
+            }
+
+            public string TreeName => treeName;
+
+            public Debris GetPrefab()
+            {
+                if (id >= 0)
+                    id = 0;
+                return prefabs[id++];
+            }
+        }
+
 #if UNITY_EDITOR
 
         [SerializeField] List<EditorDebrisMatch> editorDebrisMatches = new();
+
         [ContextMenu("Setup matches")]
         void SetupMatches()
         {
-            for (int i = transform.childCount; i --> 0;) 
+            for (int i = transform.childCount; i-- > 0;)
                 DestroyImmediate(transform.GetChild(i).gameObject);
             debrisMatches = new List<DebrisMatch>();
             foreach (EditorDebrisMatch match in editorDebrisMatches)
                 if (match.debrisPrefab != null && match.treePrefab != null)
                 {
                     List<Debris> prefabs = new();
-                    for (int i = 0; i < 10; i++) 
+                    for (int i = 0; i < 10; i++)
                         prefabs.Add(AddDebris(match));
                     debrisMatches.Add(new DebrisMatch(match.treePrefab.name, prefabs));
                 }
@@ -65,29 +90,5 @@ namespace Map
             public GameObject debrisPrefab;
         }
 #endif
-        
-        [Serializable]
-        class DebrisMatch
-        {
-            public DebrisMatch(string treeName, List<Debris> prefab)
-            {
-                this.treeName = treeName;
-                prefabs = prefab;
-            }
-
-            int id;
-            [SerializeField] string treeName;
-            [SerializeField] List<Debris> prefabs;
-
-            public Debris GetPrefab()
-            {
-                if (id >= 0)
-                    id = 0;
-                return prefabs[id++];
-            }
-
-            public string TreeName => treeName;
-        }
-        
     }
 }

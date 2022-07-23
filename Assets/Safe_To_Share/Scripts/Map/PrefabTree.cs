@@ -1,5 +1,4 @@
-﻿using System;
-using AvatarStuff.Holders;
+﻿using AvatarStuff.Holders;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Map
@@ -8,10 +7,7 @@ namespace Safe_To_Share.Scripts.Map
     {
         void OnCollisionEnter(Collision collision)
         {
-            if (collision.collider.TryGetComponent(out PlayerHolder player))
-            {
-                Debug.Log("Trigger enter");
-            }
+            if (collision.collider.TryGetComponent(out PlayerHolder player)) Debug.Log("Trigger enter");
         }
     }
 }

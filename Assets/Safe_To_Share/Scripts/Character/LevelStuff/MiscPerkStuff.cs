@@ -9,9 +9,10 @@ namespace Character.LevelStuff
     public class MiscPerkStuff
     {
         [SerializeField] List<IntMod> fatBurnMods = new();
+
         public void AssignMods(BaseCharacter character)
         {
-            foreach (IntMod burnMod in fatBurnMods) 
+            foreach (IntMod burnMod in fatBurnMods)
                 character.Body.FatBurnRate.Mods.AddStatMod(burnMod);
         }
     }

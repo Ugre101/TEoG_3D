@@ -9,7 +9,7 @@ namespace Character.DefeatScenarios.Nodes
     {
         [SerializeField] bool transferToSelf;
         [SerializeField] BodyStatType bodyType;
-        [SerializeField,Range(-25,25),] int permChange;
+        [SerializeField, Range(-25, 25),] int permChange;
         [SerializeField] List<TempIntMod> tempChange = new();
 
         public override void HandleEffects(BaseCharacter caster, BaseCharacter target)

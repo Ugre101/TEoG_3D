@@ -8,6 +8,7 @@ namespace Map
     {
         [SerializeField] float showDist = 100f;
         bool showing;
+
         void Update()
         {
             if (Time.frameCount % 30 != 0) return;
@@ -26,7 +27,6 @@ namespace Map
                 transform.SleepChildren();
                 showing = false;
             }
-            
         }
     }
 }

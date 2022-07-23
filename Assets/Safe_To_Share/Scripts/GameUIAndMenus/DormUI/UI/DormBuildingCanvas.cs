@@ -1,6 +1,5 @@
 ﻿using Safe_To_Share.Scripts.Static;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace DormAndHome.Dorm.UI
 {

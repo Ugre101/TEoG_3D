@@ -59,6 +59,7 @@ namespace Character.StatsStuff.Mods
         public float GetValueOfType(ModType type) =>
             StatMods.Where(mod => mod.ModType == type).Sum(mod => mod.ModValue) +
             TempBaseStatMods.Where(mod => mod.ModType == type).Sum(mod => mod.ModValue);
+
         public void AddTempStatMod(int duration, int value, string from, ModType type)
             => AddTempStatMod(new TempIntMod(duration, value, from, type));
 

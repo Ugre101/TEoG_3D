@@ -8,15 +8,19 @@ namespace AvatarStuff
         [SerializeField, Min(0f),] float minSize, maxSize = 4f;
 
         [SerializeField] Vector3 hideOffset;
-        [SerializeField, Range(float.Epsilon, 0.5f)] float hideSize;
-        [SerializeField,Range(0.1f,2f)] float sizeMulti = 1f;
+
+        [SerializeField, Range(float.Epsilon, 0.5f),]
+        float hideSize;
+
+        [SerializeField, Range(0.1f, 2f),] float sizeMulti = 1f;
         public float currentSize;
         float fluidFactor = 0.8f;
         float fluidMax = 100;
         bool hidden;
+
         void HideBalls()
         {
-            if (hidden) 
+            if (hidden)
                 return;
             transform.localScale = new Vector3(hideSize, hideSize, hideSize);
             transform.localPosition += hideOffset;
@@ -27,20 +31,22 @@ namespace AvatarStuff
         {
             if (show)
                 ShowBalls();
-            else 
+            else
                 HideBalls();
         }
+
         void ShowBalls()
         {
-            if (!hidden) 
+            if (!hidden)
                 return;
             hidden = false;
             transform.localPosition -= hideOffset;
             ReSize(currentSize);
         }
+
         public void ReSize(float newSize)
         {
-            float size = Mathf.Clamp(newSize,minSize,maxSize);
+            float size = Mathf.Clamp(newSize, minSize, maxSize);
             currentSize = size;
             SetBallSize();
         }

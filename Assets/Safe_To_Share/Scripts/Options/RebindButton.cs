@@ -95,13 +95,15 @@ namespace Options
             switch (i)
             {
                 case 0:
-                    bind1Text.text = action.bindings.Count > 0 
-                        ? InputControlPath.ToHumanReadableString(action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice)
+                    bind1Text.text = action.bindings.Count > 0
+                        ? InputControlPath.ToHumanReadableString(action.bindings[0].effectivePath,
+                            InputControlPath.HumanReadableStringOptions.OmitDevice)
                         : string.Empty;
                     break;
                 case 1:
                     bind2Text.text = action.bindings.Count > i
-                        ? InputControlPath.ToHumanReadableString(action.bindings[i].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice)
+                        ? InputControlPath.ToHumanReadableString(action.bindings[i].effectivePath,
+                            InputControlPath.HumanReadableStringOptions.OmitDevice)
                         : string.Empty;
                     break;
             }

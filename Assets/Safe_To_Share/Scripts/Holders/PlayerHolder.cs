@@ -13,19 +13,24 @@ using DormAndHome.Dorm;
 using Movement.ECM2.Source.Characters;
 using Movement.ECM2.Source.Components;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace AvatarStuff.Holders
 {
     [SelectionBase]
     public class PlayerHolder : Holder
     {
+        public delegate void CombatParameters(Player player, params BaseCharacter[] enemies);
+
+        public static CombatParameters LoadCombat;
+        public static Action<PlayerHolder, DormMate> LoadDormSex;
         [SerializeField] MovementModHandler movementMoveModHandler;
         [SerializeField] ThirdPersonEcm2Character thirdPersonEcm2Character;
 
         [SerializeField] Player player;
 
         [SerializeField] LayerMask validLayers;
+
+        bool combat;
 
         public static PlayerHolder Instance { get; private set; }
         public static int PlayerID { get; private set; }
@@ -36,6 +41,7 @@ namespace AvatarStuff.Holders
             get => player;
             private set => player = value;
         }
+
         public MovementModHandler MoveModHandler => movementMoveModHandler;
 
         public ThirdPersonEcm2Character PersonEcm2Character => thirdPersonEcm2Character;
@@ -52,12 +58,19 @@ namespace AvatarStuff.Holders
         }
 
         void OnDisable() => UnSub();
+
         void OnDestroy()
         {
             UnSub();
 #if UNITY_EDITOR
             playerChar.UnLoad();
 #endif
+        }
+
+        void OnCollisionEnter(Collision collision)
+        {
+            if (!collision.gameObject.TryGetComponent(out EnemyAiHolder enemy)) return;
+            TriggerCombat(enemy.Enemy);
         }
 
         public event Action RePlaced;
@@ -115,7 +128,7 @@ namespace AvatarStuff.Holders
             HeightsChange(player.Body.Height.Value);
         }
 
-       async void RaceChange(BasicRace oldrace, BasicRace newrace) => await UpdateAvatar(Player);
+        async void RaceChange(BasicRace oldrace, BasicRace newrace) => await UpdateAvatar(Player);
 
         public IEnumerator Load(PlayerSave toLoad)
         {
@@ -130,12 +143,9 @@ namespace AvatarStuff.Holders
             Player.Inventory.Load(toLoad.InventorySave);
             Player.AndSpellBook.Load(toLoad.ControlledCharacterSave.AbilitySave);
             var wait = UpdateAvatar(Player);
-            while (!wait.IsCompleted)
-            {
-                yield return null;
-            }
+            while (!wait.IsCompleted) yield return null;
             NewAvatar(Changer.CurrentAvatar);
-            if (wait is { IsFaulted: true, Exception: { } }) throw wait.Exception;
+            if (wait is { IsFaulted: true, Exception: { }, }) throw wait.Exception;
             NewPlayer();
         }
 
@@ -193,6 +203,15 @@ namespace AvatarStuff.Holders
             RePlaced?.Invoke();
         }
 
+        public void TriggerCombat(params BaseCharacter[] enemy)
+        {
+            if (combat) return;
+            combat = true;
+            LoadCombat?.Invoke(Player, enemy);
+        }
+
+        public void TriggerSex(DormMate mate) => LoadDormSex?.Invoke(this, mate);
+
         /*
          bool loadingBattle;
 
@@ -225,27 +244,5 @@ namespace AvatarStuff.Holders
             PlayerGold.GoldBag.GainGold(9999);
         }
 #endif
-        void OnCollisionEnter(Collision collision)
-        {
-            if (!collision.gameObject.TryGetComponent(out EnemyAiHolder enemy)) return;
-            TriggerCombat(enemy.Enemy);
-        }
-
-        bool combat;
-        public void TriggerCombat(params BaseCharacter[] enemy)
-        {
-            if (combat) return;
-            combat = true;
-            LoadCombat?.Invoke(Player, enemy);
-        }
-
-        public delegate void CombatParameters(Player player, params BaseCharacter[] enemies);
-        public static CombatParameters LoadCombat;
-        public static Action<PlayerHolder, DormMate> LoadDormSex;
-
-        public void TriggerSex(DormMate mate)
-        {
-            LoadDormSex?.Invoke(this,mate);
-        }
     }
 }

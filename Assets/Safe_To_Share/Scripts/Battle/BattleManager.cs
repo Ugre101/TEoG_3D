@@ -9,8 +9,6 @@ using Character;
 using Character.EnemyStuff;
 using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
-using Character.SkillsAndSpells;
-using Currency;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
@@ -23,11 +21,11 @@ namespace Battle
         [SerializeField] CombatantTeam playerTeam, enemyTeam;
 
         [SerializeField] BattleTarget battleTarget;
+
+        [SerializeField] BattleAI battleAI;
         BaseCharacter[] enemyTeamChars;
         Player player;
         ControlledCharacter[] playerTeamChars;
-
-        [SerializeField] BattleAI battleAI;
         bool waitingForPlayerInput;
         List<CombatCharacter> whoseTurn;
         public static BattleManager Instance { get; private set; }
@@ -69,7 +67,7 @@ namespace Battle
         }
 
 
-        public async void Setup(Player parPlayer, BaseCharacter[] enemies, BaseCharacter[] allies,bool boss)
+        public async void Setup(Player parPlayer, BaseCharacter[] enemies, BaseCharacter[] allies, bool boss)
         {
             player = parPlayer;
             playerTeamChars = new ControlledCharacter[] { player, };

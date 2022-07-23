@@ -8,10 +8,11 @@ namespace Character.SexStatsStuff
     public class SexPerk : BasicPerk
     {
         [SerializeField] IntMod[] maxOrgasmsMod;
+
         public override void PerkGainedEffect(BaseCharacter character)
         {
             base.PerkGainedEffect(character);
-            foreach (IntMod intMod in maxOrgasmsMod) 
+            foreach (IntMod intMod in maxOrgasmsMod)
                 character.SexStats.MaxCasterOrgasms.Mods.AddStatMod(intMod);
         }
     }

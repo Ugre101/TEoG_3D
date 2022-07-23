@@ -17,10 +17,10 @@ namespace CustomClasses
         }
 #endif
     }
+
     public interface ISavableSerializableScriptableObject
     {
         public SerializableScriptableObjectSaves Save();
         public IEnumerator Load(SerializableScriptableObjectSaves toLoad);
-
     }
 }

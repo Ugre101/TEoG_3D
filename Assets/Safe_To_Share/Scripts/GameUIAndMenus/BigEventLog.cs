@@ -1,5 +1,4 @@
-﻿
-using System.Text;
+﻿using System.Text;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
@@ -26,12 +25,14 @@ namespace GameUIAndMenus
                 eventLog.text = string.Empty;
                 return;
             }
+
             StringBuilder sb = new();
             for (int i = EventLog.Events.Count; i-- > 1;)
             {
                 sb.AppendLine(EventLog.Events[i]);
                 sb.AppendLine();
             }
+
             sb.AppendLine(EventLog.Events[0]);
 
             eventLog.text = sb.ToString();

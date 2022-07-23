@@ -8,18 +8,19 @@ namespace AvatarStuff
 {
     public class AvatarChanger : AvatarChangerBase
     {
-        public event Action<CharacterAvatar> NewAvatar;
+        bool hasAvatar;
         public bool AvatarLoaded { get; private set; }
         public CharacterAvatar CurrentAvatar { get; private set; }
-        bool hasAvatar;
+        public event Action<CharacterAvatar> NewAvatar;
+
         public void UpdateAvatar(AssetReference avatar)
         {
-
             if (hasAvatar && CurrentAvatar.Prefab.AssetGUID == avatar.AssetGUID)
             {
                 NewAvatar?.Invoke(CurrentAvatar);
                 return;
             }
+
             AvatarLoaded = false;
             avatar.InstantiateAsync(transform).Completed += Done;
             //    avatar.LoadAssetAsync<GameObject>().Completed += Done;
@@ -44,25 +45,25 @@ namespace AvatarStuff
 
         public void UpdateAvatar(GameObject value)
         {
-            if(!value.TryGetComponent(out CharacterAvatar avatar)) return;
+            if (!value.TryGetComponent(out CharacterAvatar avatar)) return;
             if (hasAvatar && CurrentAvatar.Prefab.AssetGUID == avatar.Prefab.AssetGUID)
             {
                 NewAvatar?.Invoke(CurrentAvatar);
                 return;
             }
+
             AvatarLoaded = false;
             if (hasAvatar)
                 Destroy(CurrentAvatar.gameObject);
-            var instance = Instantiate(avatar,transform);
+            var instance = Instantiate(avatar, transform);
             instance.transform.localPosition = Vector3.zero;
             AvatarLoaded = true;
             CurrentAvatar = instance;
             hasAvatar = true;
-            if (instance.TryGetComponent(out Animator ani)) 
+            if (instance.TryGetComponent(out Animator ani))
                 InvokeNewAnimator(ani);
             NewAvatar?.Invoke(instance);
             //    avatar.LoadAssetAsync<GameObject>().Completed += Done;
         }
-
     }
 }

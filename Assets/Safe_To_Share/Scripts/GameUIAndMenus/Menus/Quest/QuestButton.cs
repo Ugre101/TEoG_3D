@@ -7,12 +7,12 @@ namespace QuestStuff.UI
 {
     public class QuestButton : MonoBehaviour
     {
-        public static event Action<QuestInfo, QuestProgress> ShowMeOnLargePage;
         [SerializeField] Button btn;
-        [SerializeField] TextMeshProUGUI title, desc, world,progress;
+        [SerializeField] TextMeshProUGUI title, desc, world, progress;
+        public static event Action<QuestInfo, QuestProgress> ShowMeOnLargePage;
+
         public void Setup(QuestInfo info, QuestProgress questProgress)
         {
-
             btn.onClick.AddListener(ShowOnLarge);
             title.text = info.Title;
             desc.text = info.Desc;
@@ -22,6 +22,5 @@ namespace QuestStuff.UI
 
             void ShowOnLarge() => ShowMeOnLargePage?.Invoke(info, questProgress);
         }
-
     }
 }

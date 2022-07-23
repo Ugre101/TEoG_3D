@@ -13,25 +13,30 @@ namespace Safe_To_Share.Scripts.CameraStuff
         [SerializeField] FreePlayCameraController thirdPerson;
         [SerializeField] CinemachineVirtualCamera brain;
         [SerializeField] float crounchFactor;
-        [SerializeField, HideInInspector] float orgZoom;
-        [SerializeField, HideInInspector] Vector3 orgCameraHeight;
-# if UNITY_EDITOR
-        private void OnValidate()
+        [SerializeField, HideInInspector,] float orgZoom;
+        [SerializeField, HideInInspector,] Vector3 orgCameraHeight;
+
+        [SerializeField, Range(5f, 45f),] float zoomTo;
+        [SerializeField, Range(10f, 25f),] float zoomRate;
+        bool zoomIn;
+        bool zoomOut;
+
+        void Update()
         {
-            if (brain == null && TryGetComponent(out CinemachineVirtualCamera cam))
-                brain = cam;
-            orgZoom = brain.m_Lens.FieldOfView;
-            orgCameraHeight = brain.Follow.localPosition;
+            if (zoomIn)
+                ZoomIn();
+            else if (zoomOut)
+                ZoomOut();
         }
-#endif
-        private void OnEnable()
+
+        void OnEnable()
         {
-          //  print(transform.localEulerAngles);
-          //  print(thirdPerson.transform.localEulerAngles);
-            brain.ForceCameraPosition(transform.position,thirdPerson.transform.rotation);
+            //  print(transform.localEulerAngles);
+            //  print(thirdPerson.transform.localEulerAngles);
+            brain.ForceCameraPosition(transform.position, thirdPerson.transform.rotation);
             Cursor.lockState = CursorLockMode.Locked;
 #if Calls_Code_I_Dont_Own
-            
+
             mover.SetRotationMode(RotationMode.OrientToCameraViewDirection);
             mover.SetFirstPersonMode(true);
             mover.Crouched += Crouched;
@@ -41,14 +46,6 @@ namespace Safe_To_Share.Scripts.CameraStuff
             UnCrouched();
         }
 
-        void IfSwimming(MovementMode prevmovementmode, int prevcustommode)
-        {
-#if Calls_Code_I_Dont_Own
-            if (mover.IsSwimming())
-                ExitFirstPerson();
-#endif
-        }
-
         protected override void OnDisable()
         {
             base.OnDisable();
@@ -56,6 +53,23 @@ namespace Safe_To_Share.Scripts.CameraStuff
             mover.Crouched -= Crouched;
             mover.Uncrouched -= UnCrouched;
             mover.MovementModeChanged -= IfSwimming;
+#endif
+        }
+# if UNITY_EDITOR
+        void OnValidate()
+        {
+            if (brain == null && TryGetComponent(out CinemachineVirtualCamera cam))
+                brain = cam;
+            orgZoom = brain.m_Lens.FieldOfView;
+            orgCameraHeight = brain.Follow.localPosition;
+        }
+#endif
+
+        void IfSwimming(MovementMode prevmovementmode, int prevcustommode)
+        {
+#if Calls_Code_I_Dont_Own
+            if (mover.IsSwimming())
+                ExitFirstPerson();
 #endif
         }
 
@@ -72,9 +86,9 @@ namespace Safe_To_Share.Scripts.CameraStuff
             };
         }
 
-        private void UnCrouched() => brain.Follow.localPosition = orgCameraHeight;
+        void UnCrouched() => brain.Follow.localPosition = orgCameraHeight;
 
-        private void Crouched() => brain.Follow.localPosition /= crounchFactor;
+        void Crouched() => brain.Follow.localPosition /= crounchFactor;
 
         public void OnScrollOut(InputAction.CallbackContext ctx)
         {
@@ -90,40 +104,30 @@ namespace Safe_To_Share.Scripts.CameraStuff
             Cursor.lockState = CursorLockMode.None;
         }
 
-        private void Update()
-        {
-            if (zoomIn)
-                ZoomIn();
-            else if (zoomOut)
-                ZoomOut();
-        }
 
-
-        private void ZoomIn()
+        void ZoomIn()
         {
             if (brain.m_Lens.FieldOfView > zoomTo)
             {
                 brain.m_Lens.FieldOfView -= zoomRate * Time.deltaTime;
                 return;
             }
+
             brain.m_Lens.FieldOfView = zoomTo;
             zoomIn = false;
         }
-        private void ZoomOut()
+
+        void ZoomOut()
         {
             if (brain.m_Lens.FieldOfView < orgZoom)
             {
                 brain.m_Lens.FieldOfView += zoomRate * 3f * Time.deltaTime;
                 return;
             }
+
             brain.m_Lens.FieldOfView = orgZoom;
             zoomOut = false;
         }
-
-        [SerializeField, Range(5f, 45f)] float zoomTo;
-        [SerializeField, Range(10f, 25f)] float zoomRate;
-        bool zoomIn;
-        bool zoomOut;
 
         public void Binoculars(InputAction.CallbackContext ctx)
         {
@@ -138,6 +142,5 @@ namespace Safe_To_Share.Scripts.CameraStuff
                 zoomOut = true;
             }
         }
-
     }
 }

@@ -33,7 +33,7 @@ namespace GameUIAndMenus.Menus.Level
             needPerk.text = string.Empty;
             exclusivePerk.text = string.Empty;
             gameObject.SetActive(true);
-            
+
             string GetDesc() => charStatType switch
             {
                 CharStatType.Strength => "Increases hit damage",

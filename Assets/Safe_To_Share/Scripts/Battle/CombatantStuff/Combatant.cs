@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Threading.Tasks;
 using AvatarStuff;
 using Battle.UI;
@@ -11,20 +10,27 @@ namespace Battle.CombatantStuff
 {
     public class Combatant : MonoBehaviour
     {
+        static readonly int BattleIdle = Animator.StringToHash("Battle");
+        static readonly int DeadAnimation = Animator.StringToHash("dead");
         [SerializeField] AvatarInfoDict avatarDict;
         [SerializeField] CharacterFrame characterFrame;
         [SerializeField] GameObject targetFrame;
         [SerializeField] AvatarChanger avatarChanger;
         [SerializeField] bool playerAvatar;
-        Animator activeAnimator;
-        static readonly int BattleIdle = Animator.StringToHash("Battle");
-        static readonly int DeadAnimation = Animator.StringToHash("dead");
         readonly WaitForSeconds waitForSeconds = new(0.5f);
+        Animator activeAnimator;
         public BaseCharacter Character { get; private set; }
         Health Hp => Character?.Stats.Health;
         Health Wp => Character?.Stats.WillPower;
 
-        private void Sub()
+        void OnDestroy()
+        {
+            if (activeAnimator != null)
+                activeAnimator.SetBool(BattleIdle, false);
+            UnSub();
+        }
+
+        void Sub()
         {
         }
 
@@ -36,14 +42,7 @@ namespace Battle.CombatantStuff
                 BindAvatarReactions();
         }
 
-        void OnDestroy()
-        {
-            if (activeAnimator != null)
-                activeAnimator.SetBool(BattleIdle, false);
-            UnSub();
-        }
-
-        private void UnSub()
+        void UnSub()
         {
             if (Character == null)
                 return;
@@ -65,7 +64,7 @@ namespace Battle.CombatantStuff
             characterFrame.Setup(character);
         }
 
-        private void ModifyAvatar(CharacterAvatar obj) => obj.Setup(Character);
+        void ModifyAvatar(CharacterAvatar obj) => obj.Setup(Character);
 
         void BindAvatarReactions()
         {
@@ -75,11 +74,11 @@ namespace Battle.CombatantStuff
             Wp.ValueDecrease += ReactTakeWillDamage;
         }
 
-        void ReactTakeWillDamage(int obj) => 
-            FloatAnimations(FloatBattleAnimations.TakeWillDamage,(float)obj/Wp.Value);
+        void ReactTakeWillDamage(int obj) =>
+            FloatAnimations(FloatBattleAnimations.TakeWillDamage, (float)obj / Wp.Value);
 
         void ReactTakeHealthDamage(int obj) =>
-            FloatAnimations(FloatBattleAnimations.TakeHealthDamage, (float) obj / Hp.Value);
+            FloatAnimations(FloatBattleAnimations.TakeHealthDamage, (float)obj / Hp.Value);
 
 
         void Dead(int obj)
@@ -88,17 +87,17 @@ namespace Battle.CombatantStuff
                 Die();
         }
 
-        void Die() 
+        void Die()
         {
             if (activeAnimator != null)
-                activeAnimator.SetBool(DeadAnimation,true);
+                activeAnimator.SetBool(DeadAnimation, true);
             if (characterFrame != null)
                 characterFrame.gameObject.SetActive(false);
         }
 
         public void Revive()
         {
-            activeAnimator.SetBool(DeadAnimation,false);
+            activeAnimator.SetBool(DeadAnimation, false);
             characterFrame.gameObject.SetActive(true);
         }
 
@@ -116,9 +115,9 @@ namespace Battle.CombatantStuff
         {
             if (activeAnimator == null)
             {
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 Debug.LogWarning("Combatant has no animator");
-                #endif
+#endif
                 return;
             }
 

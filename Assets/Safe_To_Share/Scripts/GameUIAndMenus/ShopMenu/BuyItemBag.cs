@@ -13,7 +13,7 @@ namespace Shop.UI
         public void Setup(List<Item> shopItems)
         {
             content.KillChildren();
-            foreach (Item sellingItem in shopItems) 
+            foreach (Item sellingItem in shopItems)
                 Instantiate(prefab, content).Setup(sellingItem);
         }
     }

@@ -8,6 +8,7 @@ namespace AvatarStuff
         [SerializeField, Range(0, 10f),] float size;
         [SerializeField] BallsContainer fluidsCon = new();
         [SerializeField] bool hidden;
+
         void OnValidate()
         {
             if (!TryGetComponent(out DictatorBalls ballsController))

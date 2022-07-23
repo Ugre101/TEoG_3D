@@ -5,15 +5,31 @@ namespace AvatarStuff
     public class DictatorDick : MonoBehaviour
     {
         [SerializeField] Transform[] genitals;
-        [SerializeField,Min(0.01f),] float dickMin, dickMax = 2.5f;
+        [SerializeField, Min(0.01f),] float dickMin, dickMax = 2.5f;
         [SerializeField] Vector3 hideOffset;
-        [SerializeField,Range(float.Epsilon,0.2f)] float hideSize = 1f;
-        [SerializeField,HideInInspector] bool hasGenitals;
-        [Header("Hide dick")]
-        bool hidden;
+
+        [SerializeField, Range(float.Epsilon, 0.2f),]
+        float hideSize = 1f;
+
+        [SerializeField, HideInInspector,] bool hasGenitals;
+
+        [Header("Hide dick")] bool hidden;
+
+        float DickSize { get; set; }
+
+
+        float Boner { get; set; } = 1f;
+#if UNITY_EDITOR
+
+        void OnValidate()
+        {
+            genitals = GetComponentsInChildren<Transform>();
+            hasGenitals = genitals != null && genitals.Length > 0;
+        }
+#endif
         void HideDick()
         {
-            if (hidden) 
+            if (hidden)
                 return;
             transform.localPosition += hideOffset;
             genitals[0].localScale = new Vector3(hideSize, hideSize, hideSize);
@@ -24,9 +40,10 @@ namespace AvatarStuff
         {
             if (show)
                 ShowDick();
-            else 
+            else
                 HideDick();
         }
+
         void ShowDick()
         {
             if (!hidden)
@@ -34,8 +51,6 @@ namespace AvatarStuff
             transform.localPosition -= hideOffset;
             hidden = false;
         }
-
-        float DickSize { get; set; }
 
         public void SetDickSize(float value)
         {
@@ -51,8 +66,6 @@ namespace AvatarStuff
             genitals[0].localScale = new Vector3(dickSize, dickSize, dickSize);
         }
 
-
-        float Boner { get; set; } = 1f;
         public void SetBoner(float value)
         {
             Boner = Mathf.Clamp(value / 70f, 0f, 1f);
@@ -60,14 +73,5 @@ namespace AvatarStuff
                 return;
             ScaleDick();
         }
-#if UNITY_EDITOR
-
-        void OnValidate()
-        {
-            genitals = GetComponentsInChildren<Transform>();
-            hasGenitals = genitals != null && genitals.Length > 0;
-        }
-#endif
-       
     }
 }

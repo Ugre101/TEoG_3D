@@ -10,8 +10,8 @@ namespace Character.VoreStuff.VoreDigestionModes
             pred.Vore.AltDigestionPerk(pred, VoreOrganDigestionMode.Absorption, baseOrgan.Vore, VoreType.Oral);
             return false;
             //      AltDigestionPerk(pred, VoreDigestionMode.Absorption, Stomach, VoreType.Oral);
-        }    
-        
+        }
+
         public override bool Tick(BaseCharacter pred, VoreOrgan voreOrgan, bool predIsPlayer)
         {
             voreOrgan.NoDigestTick();

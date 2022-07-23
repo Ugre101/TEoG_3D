@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Currency
 {
-    [System.Serializable]
+    [Serializable]
     public class GoldBag
     {
-        public event Action<int> GoldAmountChanged; 
         [SerializeField] int gold;
 
         public GoldBag(int startGold) => gold = startGold;
@@ -21,11 +19,13 @@ namespace Currency
                 GoldAmountChanged?.Invoke(gold);
             }
         }
+
+        public event Action<int> GoldAmountChanged;
         public bool CanAfford(int cost) => Gold >= cost;
 
         public bool TryToBuy(int cost)
         {
-            if (!CanAfford(cost)) 
+            if (!CanAfford(cost))
                 return false;
             Gold -= cost;
             return true;

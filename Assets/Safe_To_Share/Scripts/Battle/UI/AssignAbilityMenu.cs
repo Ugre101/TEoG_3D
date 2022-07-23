@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Battle.SkillsAndSpells;
 using Character;
-using Character.SkillsAndSpells;
 using CustomClasses;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
@@ -18,20 +17,22 @@ namespace Battle.UI
 
         [SerializeField] AssignAbilityIcon[] preInstancedAbilityIcons;
 
-#if UNITY_EDITOR
-        void OnValidate() => preInstancedAbilityIcons = content.GetComponentsInChildren<AssignAbilityIcon>(true);
-#endif
+        List<AssignAbilityIcon> abilityIcons = new();
 
         Queue<AssignAbilityIcon> iconQue;
-        AssignAbilityIcon GetAbilityIcon() => iconQue.Count > 0 ? iconQue.Dequeue() : Instantiate(abilityIcon, content);
 
-        ControlledCharacter lastChar = null;
+        ControlledCharacter lastChar;
+
         public void OnDestroy()
         {
             StopAllCoroutines();
             AttackBtn.BindActionToMe -= BindButton;
             AssignAbilityIcon.AbilityBound -= Done;
         }
+
+#if UNITY_EDITOR
+        void OnValidate() => preInstancedAbilityIcons = content.GetComponentsInChildren<AssignAbilityIcon>(true);
+#endif
 
         public bool BlockIfActive()
         {
@@ -44,6 +45,8 @@ namespace Battle.UI
             return false;
         }
 
+        AssignAbilityIcon GetAbilityIcon() => iconQue.Count > 0 ? iconQue.Dequeue() : Instantiate(abilityIcon, content);
+
         public void FirstSetup()
         {
             AttackBtn.BindActionToMe += BindButton;
@@ -52,7 +55,7 @@ namespace Battle.UI
             content.SleepChildren();
         }
 
-        private void EnqueueIcons()
+        void EnqueueIcons()
         {
             foreach (Transform child in content)
                 if (child.TryGetComponent(out AssignAbilityIcon icon) && icon.gameObject.activeSelf)
@@ -73,23 +76,23 @@ namespace Battle.UI
             }
 
             gameObject.SetActive(true);
-            if (BattleManager.CurrentPlayerControlled.Character is not ControlledCharacter baseCharacter) 
+            if (BattleManager.CurrentPlayerControlled.Character is not ControlledCharacter baseCharacter)
                 return;
             if (lastChar != null && lastChar.Identity.ID == baseCharacter.Identity.ID)
             {
                 ChangeAbilityIconsButtonBind(obj);
                 return;
             }
+
             EnqueueIcons();
-            Test(baseCharacter.AndSpellBook.Abilities,obj);
+            Test(baseCharacter.AndSpellBook.Abilities, obj);
             lastChar = baseCharacter;
         }
 
-        List<AssignAbilityIcon> abilityIcons = new();
         void Test(HashSet<string> guids, AttackBtn attackBtn)
         {
             abilityIcons = new List<AssignAbilityIcon>();
-            foreach (string guid in guids) 
+            foreach (string guid in guids)
                 Load(guid);
 
             async void Load(string guid)
@@ -108,13 +111,9 @@ namespace Battle.UI
             }
         }
 
-        private void ChangeAbilityIconsButtonBind(AttackBtn obj)
+        void ChangeAbilityIconsButtonBind(AttackBtn obj)
         {
-            foreach(var icon in abilityIcons)
-            {
-                icon.ChangeButton(obj);
-            }
+            foreach (var icon in abilityIcons) icon.ChangeButton(obj);
         }
-
     }
 }

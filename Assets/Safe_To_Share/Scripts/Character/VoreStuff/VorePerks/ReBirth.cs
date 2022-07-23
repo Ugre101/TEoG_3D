@@ -2,8 +2,6 @@
 using System.Linq;
 using Character.BodyStuff;
 using Character.Organs;
-using Character.PregnancyStuff;
-using Character.VoreStuff.VoreDigestionModes;
 using Character.VoreStuff.VoreDigestionModes.Vagina;
 using UnityEngine;
 
@@ -14,15 +12,15 @@ namespace Character.VoreStuff.VorePerks
     {
         public override string DigestionMode => VaginaDigestionModes.Rebirth;
 
-        public override IEnumerable<VoreType> OrganType => new[] { VoreType.UnBirth };
+        public override IEnumerable<VoreType> OrganType => new[] { VoreType.UnBirth, };
 
-        public override void OnDigestionTick(BaseCharacter pred, VoreOrgan voreOrgan,VoreType type)
+        public override void OnDigestionTick(BaseCharacter pred, VoreOrgan voreOrgan, VoreType type)
         {
             for (int index = voreOrgan.PreysIds.Count; index-- > 0;)
                 ReBirthPrey(pred, voreOrgan, index);
         }
 
-        static void ReBirthPrey(BaseCharacter pred, VoreOrgan voreOrgan,int index)
+        static void ReBirthPrey(BaseCharacter pred, VoreOrgan voreOrgan, int index)
         {
             int preysId = voreOrgan.PreysIds[index];
             if (!VoredCharacters.PreyDict.TryGetValue(preysId, out Prey prey))
@@ -37,12 +35,10 @@ namespace Character.VoreStuff.VorePerks
         static void TurnToFetus(BaseCharacter pred, VoreOrgan voreOrgan, int preysId, Prey prey)
         {
             var baseOrgan = pred.SexualOrgans.Vaginas.List.FirstOrDefault(v => v.Vore.PreysIds.Contains(preysId));
-            baseOrgan?.Womb.AddFetus(pred,prey);
+            baseOrgan?.Womb.AddFetus(pred, prey);
             pred.OnOrganDigestion(SexualOrganType.Vagina, prey, VaginaDigestionModes.Rebirth);
             voreOrgan.RemovePrey(preysId);
             VoredCharacters.RemovePrey(prey);
         }
     }
-
-
 }

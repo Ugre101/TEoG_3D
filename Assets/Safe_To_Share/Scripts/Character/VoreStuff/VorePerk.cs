@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Character.LevelStuff;
 using Character.StatsStuff.Mods;
 using UnityEngine;
@@ -18,7 +17,7 @@ namespace Character.VoreStuff
         public override void PerkGainedEffect(BaseCharacter character)
         {
             base.PerkGainedEffect(character);
-            foreach (IntMod capacityMod in capacityMods) 
+            foreach (IntMod capacityMod in capacityMods)
                 character.Vore.capacityBoost.AddStatMod(capacityMod);
             foreach (IntMod digestionMod in digestionMods)
                 character.Vore.digestionStrength.Mods.AddStatMod(digestionMod);
@@ -36,9 +35,10 @@ namespace Character.VoreStuff
         {
         }
     }
+
     public static class VorePerksExtensions
     {
-        public static void GainPerk(this VorePerk perk,BaseCharacter baseCharacter)
+        public static void GainPerk(this VorePerk perk, BaseCharacter baseCharacter)
         {
             if (baseCharacter.Vore.Level.OwnedPerks.Contains(perk))
                 return;

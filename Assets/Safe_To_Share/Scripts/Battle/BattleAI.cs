@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using Battle.SkillsAndSpells;
 using Character.StatsStuff;
 using Character.StatsStuff.HealthStuff;
@@ -7,7 +6,6 @@ using CustomClasses;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using Random = UnityEngine.Random;
 
 namespace Battle
 {
@@ -22,12 +20,9 @@ namespace Battle
         [SerializeField] float rareCastChance = 0.1f;
         Ability castOnSelfWhenLowHealth;
         Ability castOnSelfWhenLowWillHealth;
+
         Ability hitStandardAbility;
-        Ability rareUseAbility;
 
-        bool standardIsNotNull, teaseIsNotNull, rareIsNotNull, hpLowIsNotNull, wpLowIsNotNull;
-
-        Ability teaseStandardAbility;
 /*
         public IEnumerable<AsyncOperationHandle<Ability>> LoadBattleUI()
         {
@@ -35,15 +30,20 @@ namespace Battle
         }
 */
         bool loaded;
+        Ability rareUseAbility;
+
+        bool standardIsNotNull, teaseIsNotNull, rareIsNotNull, hpLowIsNotNull, wpLowIsNotNull;
+
+        Ability teaseStandardAbility;
 
 
-       public void SetLoadedFalse() => loaded = false;
-        
+        public void SetLoadedFalse() => loaded = false;
+
         public IEnumerator HandleTurn(CombatCharacter caster, CombatCharacter target)
         {
             if (!loaded)
                 yield return Load();
-            
+
             Stats casterStats = caster.Character.Stats;
             if (CastHealthAbility(hpLowIsNotNull, casterStats.Health))
                 yield return castOnSelfWhenLowHealth.UseEffect(caster, caster);

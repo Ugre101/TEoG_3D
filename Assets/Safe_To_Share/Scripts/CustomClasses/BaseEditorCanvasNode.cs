@@ -11,8 +11,7 @@ namespace Safe_to_Share.Scripts.CustomClasses
         [SerializeField] List<string> childNodeIds = new();
         public virtual List<string> ChildNodeIds => childNodeIds;
 #if UNITY_EDITOR
-        [HideInInspector]
-        public Rect rect = new(Vector2.zero, new Vector2(200, 150));
+        [HideInInspector] public Rect rect = new(Vector2.zero, new Vector2(200, 150));
 
         public void AddChild(BaseEditorCanvasNode childNode)
         {

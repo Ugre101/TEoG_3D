@@ -11,6 +11,7 @@ namespace Safe_To_Share.Scripts
         [SerializeField] UnityEvent exitEvent;
 
         [SerializeField] bool stopMoverOnEnter;
+
         void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player") && other.TryGetComponent(out PlayerHolder holder))
@@ -24,12 +25,12 @@ namespace Safe_To_Share.Scripts
         void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
-                exitEvent.Invoke();    
+                exitEvent.Invoke();
         }
+
         [Serializable]
         class PlayerHolderEvent : UnityEvent<PlayerHolder>
         {
-        
         }
     }
 }

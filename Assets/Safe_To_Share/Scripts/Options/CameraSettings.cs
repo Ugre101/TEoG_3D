@@ -1,5 +1,3 @@
-
-
 using Cinemachine;
 using UnityEngine;
 
@@ -7,11 +5,11 @@ namespace Options
 {
     public class CameraSettings : MonoBehaviour
     {
-        [SerializeField] CinemachineVirtualCamera virtualCamera;
         const string SaveName = "CameraRenderDistance";
         static float? renderDistance;
-    
+
         static CinemachineVirtualCamera cam;
+        [SerializeField] CinemachineVirtualCamera virtualCamera;
 
         public static float RenderDistance
         {
@@ -23,7 +21,7 @@ namespace Options
             set
             {
                 renderDistance = value;
-                PlayerPrefs.SetFloat(SaveName,value);
+                PlayerPrefs.SetFloat(SaveName, value);
                 if (cam != null)
                     cam.m_Lens.FarClipPlane = value;
             }
@@ -38,6 +36,7 @@ namespace Options
                     return;
                 virtualCamera = gotCam;
             }
+
             cam = virtualCamera;
             virtualCamera.m_Lens.FarClipPlane = RenderDistance;
         }

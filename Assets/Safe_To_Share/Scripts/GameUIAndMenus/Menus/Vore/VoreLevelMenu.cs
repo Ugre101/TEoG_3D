@@ -5,7 +5,9 @@ namespace GameUIAndMenus.Menus.Vore
     public class VoreLevelMenu : BaseLevelMenu
     {
         int VorePoints => Player.Vore.Level.Points;
-        protected override void OnEnable() {
+
+        protected override void OnEnable()
+        {
             base.OnEnable();
             Player.Vore.Level.PerkPointsChanged += UpdatePerkPoints;
             UpdatePerkPoints(Player.Vore.Level.Points);

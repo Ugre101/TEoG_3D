@@ -11,6 +11,7 @@ namespace Character.BodyStuff.BodyBuild
 
         protected override float MinValue => -10f;
         protected override float MaxValue => 10f;
+
         protected override string Desc() =>
             Value switch
             {

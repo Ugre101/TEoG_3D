@@ -12,27 +12,20 @@ namespace Safe_To_Share.Scripts
 {
     public class TestStuff : MonoBehaviour
     {
-        Player testPlayer = new Player();
-        enum textNum
-        {
-            test1 = 0,
-            test2 = 4,
-            test3 = 8,
-        }
-        [SerializeField] RelationsShips relationsShips = new RelationsShips();
+        [SerializeField] RelationsShips relationsShips = new();
         [SerializeField] BaseDialogue testDial;
         [SerializeField] GameCanvas gameCanvas;
 
+        [SerializeField, Range(-100, 500),] int sleepQuality;
+        DeadTired deadTired = new();
+        Player testPlayer = new();
 
-        Tired tired = new Tired();
-        DeadTired deadTired = new DeadTired();
+
+        Tired tired = new();
+
         [ContextMenu("Test")]
-        void Test()
-        {
-            StartCoroutine(AddEvents());
-        }
+        void Test() => StartCoroutine(AddEvents());
 
-        [SerializeField, Range(-100, 500),] int sleepQuality = 0;
         [ContextMenu("Sleep")]
         void Sleep()
         {
@@ -50,6 +43,14 @@ namespace Safe_To_Share.Scripts
 
         [ContextMenu("Test Dialogue")]
         void TestDialogue() => gameCanvas.OpenDialogueMenu(testDial);
+
+        enum textNum
+        {
+            test1 = 0,
+            test2 = 4,
+            test3 = 8,
+        }
+
         [Serializable]
         struct SaveNewLine
         {

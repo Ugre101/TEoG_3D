@@ -5,9 +5,7 @@ namespace Dialogue
 {
     public class StartBattleDialogue : DialogueBaseNode
     {
-        public void StartBattle(Player player, BaseCharacter[] enemies, BaseCharacter[] allies = null)
-        {
+        public void StartBattle(Player player, BaseCharacter[] enemies, BaseCharacter[] allies = null) =>
             player.InvokeCombat(enemies);
-        }
     }
 }

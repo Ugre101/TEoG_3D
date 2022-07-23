@@ -15,22 +15,6 @@ namespace Character.IdentityStuff
         [Space(1f), SerializeField,] string[] lastNames;
 
         readonly Random rnd = new();
-
-
-#if UNITY_EDITOR
-        [Header("Editor Only")]
-        [SerializeField] TextAsset nuetralNamesFile;
-        [SerializeField] TextAsset femaleNamesFile;
-        [SerializeField] TextAsset maleNamesFile;
-        [SerializeField] TextAsset lastNamesFile;
-        private void OnValidate()
-        {
-            neutralNames = nuetralNamesFile ? nuetralNamesFile.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
-            femaleNames = femaleNamesFile ? femaleNamesFile.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
-            malesNames = maleNamesFile ? maleNamesFile.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
-            lastNames = lastNamesFile ? lastNamesFile.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries) : null;
-        }
-#endif
         public string GetRandomFemaleName => GetRandomStringName(femaleNames);
         public string GetRandomMaleName => GetRandomStringName(malesNames);
         public string GetRandomNeutralName => GetRandomStringName(neutralNames);
@@ -38,5 +22,31 @@ namespace Character.IdentityStuff
 
         string GetRandomStringName(IReadOnlyList<string> list) =>
             list.Count > 0 ? list[rnd.Next(0, list.Count)] : string.Empty;
+
+
+#if UNITY_EDITOR
+        [Header("Editor Only"), SerializeField,]
+        
+        TextAsset nuetralNamesFile;
+
+        [SerializeField] TextAsset femaleNamesFile;
+        [SerializeField] TextAsset maleNamesFile;
+        [SerializeField] TextAsset lastNamesFile;
+        void OnValidate()
+        {
+            neutralNames = nuetralNamesFile
+                ? nuetralNamesFile.text.Split(new[] { Environment.NewLine, }, StringSplitOptions.RemoveEmptyEntries)
+                : null;
+            femaleNames = femaleNamesFile
+                ? femaleNamesFile.text.Split(new[] { Environment.NewLine, }, StringSplitOptions.RemoveEmptyEntries)
+                : null;
+            malesNames = maleNamesFile
+                ? maleNamesFile.text.Split(new[] { Environment.NewLine, }, StringSplitOptions.RemoveEmptyEntries)
+                : null;
+            lastNames = lastNamesFile
+                ? lastNamesFile.text.Split(new[] { Environment.NewLine, }, StringSplitOptions.RemoveEmptyEntries)
+                : null;
+        }
+#endif
     }
 }

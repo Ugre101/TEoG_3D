@@ -8,6 +8,7 @@ namespace SaveStuff
     {
         [SerializeField] SaveSummary summary;
         [SerializeField] Save save;
+
         public FullSave(SaveSummary summary, Save save)
         {
             this.summary = summary;

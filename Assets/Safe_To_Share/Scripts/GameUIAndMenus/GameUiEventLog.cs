@@ -56,6 +56,7 @@ namespace GameUIAndMenus
                 sb.AppendLine(log.Text);
                 sb.AppendLine();
             }
+
             eventLog.text = sb.ToString();
         }
 

@@ -10,14 +10,8 @@ namespace Dialogue.DialogueActions
     {
         [SerializeField] bool needSpace;
 
-        public override bool MeetsCondition()
-        {
-            return !needSpace || DormManager.Instance.DormHasSpace;
-        }
-        
-        public override void Invoke(BaseCharacter toAdd)
-        {
-            DormManager.Instance.AddToDorm(toAdd);
-        }
+        public override bool MeetsCondition() => !needSpace || DormManager.Instance.DormHasSpace;
+
+        public override void Invoke(BaseCharacter toAdd) => DormManager.Instance.AddToDorm(toAdd);
     }
 }

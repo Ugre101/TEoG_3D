@@ -11,7 +11,7 @@ namespace Character.SexStatsStuff.UI
 
         public void Setup(SexStats sexStats)
         {
-            ChangeArousalSlider((float) sexStats.Arousal / sexStats.MaxArousal);
+            ChangeArousalSlider((float)sexStats.Arousal / sexStats.MaxArousal);
             ChangeArousalText(sexStats.Arousal);
             sexStats.ArousalChange += ChangeArousalText;
             sexStats.ArousalSliderChange += ChangeArousalSlider;

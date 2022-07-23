@@ -9,7 +9,6 @@ namespace SaveStuff
     [CreateAssetMenu(fileName = "New Scene ref", menuName = "Scene Data/Scene ref")]
     public class GameSceneSo : DescriptionBaseSo
     {
-        
         // public AudioCueSO musicTrack;
 
         /// <summary>
@@ -23,7 +22,7 @@ namespace SaveStuff
             Battle,
             AfterBattle,
             SubLocation,
-            UI
+            UI,
         }
 
         [SerializeField] GameSceneType sceneType;

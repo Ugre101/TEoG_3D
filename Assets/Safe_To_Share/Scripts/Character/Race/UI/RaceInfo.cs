@@ -8,6 +8,7 @@ namespace Character.Race.UI
     {
         [SerializeField] TextMeshProUGUI raceText;
         [SerializeField] TextMeshProUGUI moreInfo;
+
         public void PrintRaceInfo(BaseCharacter character)
         {
             StringBuilder sb = new("Race\n");

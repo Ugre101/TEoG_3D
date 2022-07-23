@@ -5,9 +5,19 @@ namespace Safe_To_Share.Scripts.Static
 {
     public static class GameManager
     {
-        private static bool cursorOrgState;
-        private static CursorLockMode lockState;
-        public static bool Paused { get;private set; }
+        public enum EnemyClose
+        {
+            OutOfRange,
+            InView,
+            Chasing,
+        }
+
+        static bool cursorOrgState;
+        static CursorLockMode lockState;
+
+        public static Action<EnemyClose> EnemyGrowsCloser;
+        public static bool Paused { get; private set; }
+
         public static void Pause()
         {
             if (Paused)
@@ -31,7 +41,6 @@ namespace Safe_To_Share.Scripts.Static
             }
             else
             {
-                
                 Cursor.visible = cursorOrgState;
                 Cursor.lockState = lockState;
             }
@@ -39,16 +48,6 @@ namespace Safe_To_Share.Scripts.Static
 
         public static void EnemyInRange(EnemyClose howClose)
         {
-            
         }
-
-        public static Action<EnemyClose> EnemyGrowsCloser;
-        public enum EnemyClose
-        {
-            OutOfRange,
-            InView,
-            Chasing,
-        }
-
     }
 }

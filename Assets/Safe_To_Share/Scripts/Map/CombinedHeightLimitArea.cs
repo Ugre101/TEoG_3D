@@ -11,6 +11,8 @@ namespace Safe_To_Share.Scripts.Map
         [SerializeField] int sharedId;
         [SerializeField] float heightLimit = 1f;
 
+        void OnDestroy() => InsideArea.Remove(this);
+
         void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out Holder holder))
@@ -28,7 +30,5 @@ namespace Safe_To_Share.Scripts.Map
                 return;
             holder.Scaler.ExitHeightLimitArea();
         }
-
-        void OnDestroy() => InsideArea.Remove(this);
     }
 }

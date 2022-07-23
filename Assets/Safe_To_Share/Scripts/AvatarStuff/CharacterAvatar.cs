@@ -30,8 +30,7 @@ namespace AvatarStuff
         [SerializeField] protected List<SkinnedMeshRenderer> bodyMeshRenderers;
         [SerializeField] protected List<SkinnedMeshRenderer> hairMeshRenderers;
 
-        [Header("Body Morphs"), SerializeField,] 
-        
+        [Header("Body Morphs"), SerializeField,]
         BlendShape bodyFat;
 
         [SerializeField] BlendShape noBoobs;
@@ -41,24 +40,21 @@ namespace AvatarStuff
         [SerializeField] Thickness thickness;
         [SerializeField, Range(50f, 500f),] float fatMultiplier = 200f;
 
-        [Header("Vore"), SerializeField,]
-        
-        VoreShapes vore = new();
+        [Header("Vore"), SerializeField,] VoreShapes vore = new();
 
-        [Header("Hair"), SerializeField,]  bool changeHairColor = true;
+        [Header("Hair"), SerializeField,] bool changeHairColor = true;
         [SerializeField] HairColor hairColor = new();
         [SerializeField] DictatorBoner dictatorBoner;
 
         [Header("Dont touch"), SerializeField,]
-        
         bool hasBallsController;
 
         [SerializeField] bool hasDickController;
         [SerializeField] bool hasHideDaz;
 
         float ballSize;
-        bool forceSkinUpdate;
         bool firstUse = true;
+        bool forceSkinUpdate;
         float lastTick;
         SkinnedMeshRenderer[] shapes;
 
@@ -89,10 +85,9 @@ namespace AvatarStuff
                 return;
             lastTick = Time.time;
             vore.TickVoreStruggle(ballsController);
-           
         }
 
-       
+
 #if UNITY_EDITOR
         void OnValidate()
         {
@@ -103,8 +98,8 @@ namespace AvatarStuff
             if (bodyMeshRenderers is not { Count: > 0, }) return;
             foreach (SkinnedMeshRenderer skinnedMeshRenderer in bodyMeshRenderers)
             {
-                bodyMuscle.ChangeShape(skinnedMeshRenderer,0f);
-                bodyFat.ChangeShape(skinnedMeshRenderer,0f);
+                bodyMuscle.ChangeShape(skinnedMeshRenderer, 0f);
+                bodyFat.ChangeShape(skinnedMeshRenderer, 0f);
             }
         }
 #endif
@@ -197,7 +192,7 @@ namespace AvatarStuff
                 DazDick(sexualOrgans, hasDick);
             else
             {
-                dictatorBoner.HideOrShow(hasDick,bodyMeshRenderers);
+                dictatorBoner.HideOrShow(hasDick, bodyMeshRenderers);
                 dictatorBoner.SetDickSize(SetOrganSize(sexualOrgans.Biggest));
             }
         }
@@ -292,9 +287,7 @@ namespace AvatarStuff
             {
                 string shapeName = meshRenderer.sharedMesh.GetBlendShapeName(i).ToLower();
                 if (shapeName.Contains("hd details"))
-                {
                     print($"Skipped {shapeName} ({i})");
-                }
                 else if (vore.EditorQuickSetup(shapeName, i))
                 {
                 }
@@ -322,8 +315,8 @@ namespace AvatarStuff
                     print($"Unassigned {shapeName} ({i})");
             }
         }
-        
-        
+
+
 #endif
     }
 }

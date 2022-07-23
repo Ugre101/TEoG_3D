@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using Character.PlayerStuff;
-using Character.VoreStuff;
 using Dialogue;
 using Dialogue.DialogueActions;
-using Dialogue.Events;
-using Dialogue.UI;
 using QuestStuff;
-using Safe_to_Share.Scripts.CustomClasses;
 using SceneStuff;
-using UnityEngine;
 
 namespace GameUIAndMenus.DialogueAndEventMenu
 {
@@ -23,10 +15,11 @@ namespace GameUIAndMenus.DialogueAndEventMenu
             AddOptionButtons(currentNode);
             ShowNodeText(currentNode);
         }
+
         protected override void HandleOption(DialogueBaseNode obj)
         {
             currentNode = obj;
-            foreach (DialogueBaseAction dialogueBaseAction in currentNode.Actions) 
+            foreach (DialogueBaseAction dialogueBaseAction in currentNode.Actions)
                 dialogueBaseAction.Invoke(Player);
             AddOptionButtons(currentNode);
             ShowNodeText(currentNode);

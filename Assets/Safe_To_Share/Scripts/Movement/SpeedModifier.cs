@@ -14,14 +14,14 @@ namespace Safe_To_Share.Scripts.Movement
         public float decelerationMultiplier = 2.0f;
 
         public float frictionMultiplier = 2.0f;
+        [SerializeField] TempIntMod sprintMod = new(88, 50, "Road", ModType.Percent);
         float _savedDecelerationWalking;
         float _savedGroundFriction;
         float _savedMaxAcceleration;
+        ECM2Character playerChar;
 
         bool stopBoosting;
-        ECM2Character playerChar;
-        WaitForSeconds waitForSeconds = new(1.6f);
-        [SerializeField] TempIntMod sprintMod = new(88, 50, "Road", ModType.Percent);
+        readonly WaitForSeconds waitForSeconds = new(1.6f);
 
         void OnCollisionEnter(Collision other)
         {
@@ -33,6 +33,7 @@ namespace Safe_To_Share.Scripts.Movement
                 stopBoosting = false;
                 return;
             }
+
             playerChar = holder.PersonEcm2Character;
             holder.MoveModHandler.AddWalkTempEffect(sprintMod);
             _savedMaxAcceleration = playerChar.maxAcceleration;
@@ -43,14 +44,14 @@ namespace Safe_To_Share.Scripts.Movement
             playerChar.brakingDecelerationWalking *= decelerationMultiplier;
             playerChar.groundFriction *= frictionMultiplier;
         }
-        
+
         void OnCollisionExit(Collision other)
         {
-            if (!other.gameObject.CompareTag("Player") || 
+            if (!other.gameObject.CompareTag("Player") ||
                 !other.gameObject.TryGetComponent(out PlayerHolder holder))
                 return;
             stopBoosting = true;
-            StartCoroutine(SmallDelay(playerChar,holder));
+            StartCoroutine(SmallDelay(playerChar, holder));
         }
 
         IEnumerator SmallDelay(ECM2Character character, PlayerHolder holder)

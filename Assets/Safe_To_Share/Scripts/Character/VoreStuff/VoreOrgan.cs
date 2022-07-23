@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Character.VoreStuff
 {
     [Serializable]
     public class VoreOrgan
     {
+        static int timesPleadedThisSession;
         [SerializeField] List<int> preysIds = new();
         [SerializeField] List<int> specialPreysIds = new();
         [SerializeField] int voreExp;
@@ -31,7 +33,7 @@ namespace Character.VoreStuff
 
         public Prey Vore(BaseCharacter prey)
         {
-            Prey item = new Prey(prey);
+            Prey item = new(prey);
             VoredCharacters.AddPrey(item);
             PreysIds.Add(item.Identity.ID);
             return item;
@@ -41,7 +43,7 @@ namespace Character.VoreStuff
         {
             float v = 0;
             for (int index = PreysIds.Count; index-- > 0;)
-                v = DigestPreyAndReturnAmount(toDigest, digested, v, index,predIsPlayer);
+                v = DigestPreyAndReturnAmount(toDigest, digested, v, index, predIsPlayer);
             if (stretch > 0.5f)
                 VoreExp += Mathf.RoundToInt(3f * stretch);
             return v;
@@ -52,7 +54,7 @@ namespace Character.VoreStuff
             int preysId = PreysIds[index];
             if (!VoredCharacters.PreyDict.TryGetValue(preysId, out Prey prey))
                 return v;
-            float preyDigest = prey.Digest(toDigest,predIsPlayer);
+            float preyDigest = prey.Digest(toDigest, predIsPlayer);
             v += preyDigest;
             if (preyDigest < toDigest)
             {
@@ -62,7 +64,7 @@ namespace Character.VoreStuff
             else if (predIsPlayer && !prey.havePleaded && prey.DigestionProgress is > 20f and < 40f)
             {
                 // 50% to trigger once then lower to not spam player
-                bool shouldTrigger = (UnityEngine.Random.value / timesPleadedThisSession) > 0.8f;
+                bool shouldTrigger = Random.value / timesPleadedThisSession > 0.8f;
                 if (!shouldTrigger) return v;
                 timesPleadedThisSession++;
                 prey.havePleaded = true;
@@ -71,15 +73,17 @@ namespace Character.VoreStuff
 
             return v;
         }
-        static int timesPleadedThisSession = 0;
-        public static event Action<Prey,VoreOrgan> PleadEvent;
-        public static event Action<Prey> ReleasedPrey; 
+
+        public static event Action<Prey, VoreOrgan> PleadEvent;
+        public static event Action<Prey> ReleasedPrey;
+
         public void ReleasePrey(int id)
         {
             if (!VoredCharacters.PreyDict.TryGetValue(id, out var prey)) return;
             if (!preysIds.Remove(id) || specialPreysIds.Remove(id)) return;
             ReleasedPrey?.Invoke(prey);
         }
+
         public void RemovePrey(int id)
         {
             preysIds.Remove(id);

@@ -30,7 +30,7 @@ namespace Character.CreateCharacterStuff
         [SerializeField] GenderBias[] allowedGenders =
         {
             new(3, Gender.Male), new(3, Gender.Female),
-            new(2, Gender.Futanari), new(1, Gender.DickGirl), 
+            new(2, Gender.Futanari), new(1, Gender.DickGirl),
             new(1, Gender.CuntBoy), new(0, Gender.Doll),
         };
 

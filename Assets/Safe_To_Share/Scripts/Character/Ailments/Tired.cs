@@ -8,11 +8,12 @@ namespace Character.Ailments
     {
         const string Cause = "Tired";
 
-        public static bool Has(BaseCharacter character) => character.Stats.GetCharStats.Values.Any(stat => stat.Mods.HaveModFrom(Cause));
-
         public Tired() : base(-1, Cause, ModType.Flat)
         {
         }
+
+        public static bool Has(BaseCharacter character) =>
+            character.Stats.GetCharStats.Values.Any(stat => stat.Mods.HaveModFrom(Cause));
 
         public override bool Gain(BaseCharacter character)
         {
@@ -29,7 +30,8 @@ namespace Character.Ailments
         public override bool Cure(BaseCharacter character)
         {
             bool change = false;
-            foreach (CharStat unused in character.Stats.GetCharStats.Values.Where(stat => stat.Mods.RemoveStatModsFromSource(Cause)))
+            foreach (CharStat unused in character.Stats.GetCharStats.Values.Where(stat =>
+                         stat.Mods.RemoveStatModsFromSource(Cause)))
                 change = true;
             return change;
         }

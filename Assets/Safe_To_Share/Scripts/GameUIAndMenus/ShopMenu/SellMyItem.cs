@@ -15,13 +15,10 @@ namespace Shop.UI
         public void Setup(InventoryItem sellMe)
         {
             item = sellMe;
-           // icon.sprite = sellMe.ItemGuid.Icon;
+            // icon.sprite = sellMe.ItemGuid.Icon;
             btn.onClick.AddListener(Sell);
         }
 
-        void Sell()
-        {
-            SellMe?.Invoke(item);
-        }
+        void Sell() => SellMe?.Invoke(item);
     }
 }

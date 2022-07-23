@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Dialogue.DialogueActions;
 using Dialogue.DialogueActions.Vore;
@@ -16,8 +15,6 @@ namespace Dialogue
         [SerializeField] string title;
         [SerializeField, TextArea,] string[] text;
         [SerializeField] bool canEscapeOut;
-        [SerializeReference] List<DialogueBaseAction> actions = new();
-        [SerializeReference] List<DialogueVoreAction> voreActions = new();
 
         public string Title => title;
         public string[] Text => text;
@@ -26,9 +23,9 @@ namespace Dialogue
 
         public bool CanEscapeOut => canEscapeOut;
 
-        public List<DialogueVoreAction> VoreActions => voreActions;
+        [field: SerializeReference] public List<DialogueVoreAction> VoreActions { get; } = new();
 
-        public List<DialogueBaseAction> Actions => actions;
+        [field: SerializeReference] public List<DialogueBaseAction> Actions { get; } = new();
 
         public bool MeetsActionsConditions() => Actions.All(dialogueBaseAction => dialogueBaseAction.MeetsCondition());
 #if UNITY_EDITOR

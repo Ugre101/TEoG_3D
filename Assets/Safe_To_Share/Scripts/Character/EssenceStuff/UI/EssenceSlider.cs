@@ -31,7 +31,7 @@ namespace Character.EssenceStuff.UI
             if (obj <= 0)
                 slider.value = 0f;
             else if (obj < lastVal)
-                slider.value = (float) obj / lastVal;
+                slider.value = (float)obj / lastVal;
             else
             {
                 // Needs testing if look good

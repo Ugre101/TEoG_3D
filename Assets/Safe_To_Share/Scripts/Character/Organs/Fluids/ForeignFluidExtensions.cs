@@ -7,10 +7,7 @@ namespace Character.Organs.Fluids
 {
     public static class ForeignFluidExtensions
     {
-        public static string FluidOnBodyDesc(this BaseCharacter character)
-        {
-            return "";
-        }
+        public static string FluidOnBodyDesc(this BaseCharacter character) => "";
 
         public static string FluidInWomb(this BaseOrgan organ, SexualOrganType type)
         {
@@ -23,7 +20,7 @@ namespace Character.Organs.Fluids
             if (biggest.Length == 0)
                 return string.Empty;
             float biggestPer = organ.Womb.ForeignFluids.GetFluids.Max(f => f.Amount) / tot;
-            if (biggest.Length == 1 || biggestPer > 0.9f )
+            if (biggest.Length == 1 || biggestPer > 0.9f)
                 desc.Append(biggest[0].FluidType);
             else if (biggest.Length > 1 && biggestPer > 0.5f)
                 desc.Append($"{biggest[0].FluidType} with traces of  {biggest[1].FluidType}");
@@ -40,7 +37,8 @@ namespace Character.Organs.Fluids
 
                 if (biggest.Length > 2)
                     desc.Append($" and {biggest[2].FluidType}");
-            } 
+            }
+
             switch (type)
             {
                 case SexualOrganType.Dick:
@@ -67,16 +65,13 @@ namespace Character.Organs.Fluids
             foreach (BaseOrgan organ in container.List)
                 organ.Womb.ForeignFluids.ClearFluids();
         }
-        
-        public static void CleanBody(BaseCharacter character)
-        {
-            character.SexStats.FluidsOnBody.ClearFluids();
-        }
+
+        public static void CleanBody(BaseCharacter character) => character.SexStats.FluidsOnBody.ClearFluids();
 
         public static void CleanOrifices(BaseCharacter character, SexualOrganType toClean)
         {
             if (!character.SexualOrgans.Containers.TryGetValue(toClean, out var container)) return;
-            foreach (BaseOrgan organ in container.List) 
+            foreach (BaseOrgan organ in container.List)
                 organ.Womb.ForeignFluids.ClearFluids();
         }
     }

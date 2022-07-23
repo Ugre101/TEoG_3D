@@ -1,6 +1,4 @@
 using AvatarStuff.Holders;
-using Character.PlayerStuff;
-using SaveStuff;
 using UnityEngine;
 
 namespace SceneStuff

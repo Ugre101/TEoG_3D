@@ -19,7 +19,10 @@ namespace AvatarStuff
                 return player ? defaultAvatar.PlayerPrefab : defaultAvatar.Prefab;
             return BestMatch(character, player);
         }
-        public async Task<GameObject> GetAvatarLoaded(BaseCharacter character, bool player) => avatars.Count == 0 ? await defaultAvatar.GetLoadedPrefab(player) : await BestMatchGame(character, player);
+
+        public async Task<GameObject> GetAvatarLoaded(BaseCharacter character, bool player) => avatars.Count == 0
+            ? await defaultAvatar.GetLoadedPrefab(player)
+            : await BestMatchGame(character, player);
 
         AssetReference BestMatch(BaseCharacter character, bool player)
         {
@@ -29,7 +32,8 @@ namespace AvatarStuff
             }
 #endif
             return player ? GetInfo(character).PlayerPrefab : GetInfo(character).Prefab;
-        }    
+        }
+
         public AvatarInfo GetInfo(BaseCharacter character)
         {
 #if UNITY_EDITOR
@@ -48,7 +52,8 @@ namespace AvatarStuff
             }
 
             return bestMatch ? bestMatch : defaultAvatar;
-        }  
+        }
+
         async Task<GameObject> BestMatchGame(BaseCharacter character, bool player)
         {
 #if UNITY_EDITOR

@@ -71,7 +71,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             takeToDorm.ShowOrgasmsLeft(partner);
         }
 
-        static List<AfterBattleBaseAction> FirstStep(List<AfterBattleBaseAction> list, BaseCharacter buttonOwner, BaseCharacter partner)
+        static List<AfterBattleBaseAction> FirstStep(List<AfterBattleBaseAction> list, BaseCharacter buttonOwner,
+            BaseCharacter partner)
         {
             List<AfterBattleBaseAction> actsWeCantDoAnymore = list.FindAll(a => !a.CanUse(buttonOwner, partner));
             foreach (AfterBattleBaseAction afterBattleBaseAction in actsWeCantDoAnymore)

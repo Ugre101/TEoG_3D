@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AvatarStuff.Holders;
@@ -27,7 +26,7 @@ namespace Map.Spawner
         [SerializeField] float range = 10f;
         [SerializeField] Islands island;
         [SerializeField, HideInInspector,] int id;
-        [SerializeField] List<Vector3> spawnPoints = new List<Vector3>();
+        [SerializeField] List<Vector3> spawnPoints = new();
         bool assetsLoaded;
 
 
@@ -36,7 +35,7 @@ namespace Map.Spawner
         Transform player;
         Queue<Enemy> returnEnemies;
 
-         async void Start()
+        async void Start()
         {
             var playerObject = PlayerHolder.Instance;
             if (playerObject == null)
@@ -56,14 +55,16 @@ namespace Map.Spawner
                 enabled = false;
                 return;
             }
+
             await PreLoadChars();
         }
+
         void Update()
         {
             if (!assetsLoaded) return;
             if (!inRange) return;
             if (!FrameLimit()) return;
-            if (returnEnemies is { Count: not 0, }) 
+            if (returnEnemies is { Count: not 0, })
                 SpawnAEnemyPrefab(returnEnemies.Dequeue());
         }
 
@@ -83,16 +84,13 @@ namespace Map.Spawner
         {
             alreadyPreloading = false;
             foreach (EnemyPreset preset in enemyPresets)
-                 preset.UnLoad();
+                preset.UnLoad();
         }
 
         void OnDrawGizmosSelected()
         {
             Gizmos.DrawSphere(transform.position, range);
-            foreach (Vector3 spawnPoint in spawnPoints)
-            {
-                Gizmos.DrawSphere(spawnPoint,1f);
-            }
+            foreach (Vector3 spawnPoint in spawnPoints) Gizmos.DrawSphere(spawnPoint, 1f);
         }
 
         public void ReSetupQue() => SetupEnemies();
@@ -115,7 +113,7 @@ namespace Map.Spawner
         async Task PreLoadChars()
         {
             Task[] tasks = new Task[enemyPresets.Length];
-            for (int i = 0; i < enemyPresets.Length; i++) 
+            for (int i = 0; i < enemyPresets.Length; i++)
                 tasks[i] = enemyPresets[i].LoadAssets();
 
             await Task.WhenAll(tasks);
@@ -144,6 +142,7 @@ namespace Map.Spawner
                     hit = true;
                     break;
                 }
+
                 tempList.Remove(spawnPoint);
             }
 
@@ -154,18 +153,19 @@ namespace Map.Spawner
             return true;
         }
 
-       public bool ValidPosition(Ray ray, out NavMeshHit navHit)
+        public bool ValidPosition(Ray ray, out NavMeshHit navHit)
         {
             navHit = new NavMeshHit();
             return Physics.Raycast(ray, out RaycastHit hit) &&
                    NavMesh.SamplePosition(hit.point, out navHit, 2f, spawnOn);
             //&& NotToClose(navHit) && NotToFarAway(navHit);
-        }    
-       public bool AddSpawnPosition(Ray ray)
+        }
+
+        public bool AddSpawnPosition(Ray ray)
         {
             NavMeshHit navHit = new();
             bool valid = Physics.Raycast(ray, out RaycastHit hit) &&
-                   NavMesh.SamplePosition(hit.point, out navHit, 2f, spawnOn);
+                         NavMesh.SamplePosition(hit.point, out navHit, 2f, spawnOn);
             if (valid && Vector3.Distance(transform.position, navHit.position) < range)
                 spawnPoints.Add(navHit.position);
             return valid;
@@ -173,7 +173,7 @@ namespace Map.Spawner
         }
 
         bool NotToFarAway(Vector3 navHit) => Vector3.Distance(navHit, player.position) <
-                                                SpawnSettings.SpawnWhenPlayerAreWithinDistance;
+                                             SpawnSettings.SpawnWhenPlayerAreWithinDistance;
 
         bool NotToClose(Vector3 navHit) =>
             Vector3.Distance(player.position, navHit) > DontSpawnWithinRangeOfPlayer;

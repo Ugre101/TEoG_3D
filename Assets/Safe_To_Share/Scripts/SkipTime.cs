@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts
 {
-    public class SkipTime : MonoBehaviour,ICancelMeBeforeOpenPauseMenu
+    public class SkipTime : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         static int waitTime = 1;
         [SerializeField] Slider slider;
@@ -26,19 +26,33 @@ namespace Safe_To_Share.Scripts
             binds.actions[1].performed += DecreaseTime;
             binds.actions[2].performed += CallWait;
         }
-        void IncreaseTime(InputAction.CallbackContext obj) => slider.value++;
-        void DecreaseTime(InputAction.CallbackContext obj) => slider.value--;
-        void CallWait(InputAction.CallbackContext obj) => Wait();
-        public void ToggleSetActive(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed)
-                gameObject.SetActive(!gameObject.activeSelf);
-        }
+
         void OnEnable() => binds.Enable();
 
         void OnDisable() => binds.Disable();
 
         void OnDestroy() => binds.Dispose();
+
+        public bool BlockIfActive()
+        {
+            if (gameObject.activeInHierarchy)
+            {
+                gameObject.SetActive(false);
+                return true;
+            }
+
+            return false;
+        }
+
+        void IncreaseTime(InputAction.CallbackContext obj) => slider.value++;
+        void DecreaseTime(InputAction.CallbackContext obj) => slider.value--;
+        void CallWait(InputAction.CallbackContext obj) => Wait();
+
+        public void ToggleSetActive(InputAction.CallbackContext ctx)
+        {
+            if (ctx.performed)
+                gameObject.SetActive(!gameObject.activeSelf);
+        }
 
         void UpdateWaitText() => waitText.text = $"{waitTime}h";
 
@@ -54,17 +68,6 @@ namespace Safe_To_Share.Scripts
         {
             waitTime = Mathf.RoundToInt(arg0);
             UpdateWaitText();
-        }
-
-        public bool BlockIfActive()
-        {
-            if (gameObject.activeInHierarchy)
-            {
-                gameObject.SetActive(false);
-                return true;
-            }
-
-            return false;
         }
     }
 }

@@ -7,7 +7,6 @@ namespace Character.EssenceStuff
     public class Essence
     {
         [SerializeField] int amount;
-        public event Action<int> EssenceChange;
 
         public int Amount
         {
@@ -18,6 +17,8 @@ namespace Character.EssenceStuff
                 EssenceChange?.Invoke(amount);
             }
         }
+
+        public event Action<int> EssenceChange;
 
         public int LoseEssence(int toLose)
         {

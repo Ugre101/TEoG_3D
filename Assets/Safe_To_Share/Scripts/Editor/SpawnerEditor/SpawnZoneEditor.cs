@@ -10,7 +10,7 @@ namespace Spawner.Editor
         SpawnZone myTarget;
 
 
-        void OnEnable() => myTarget = (SpawnZone) target;
+        void OnEnable() => myTarget = (SpawnZone)target;
 
         void OnSceneGUI()
         {
@@ -27,14 +27,13 @@ namespace Spawner.Editor
                 if (myTarget.AddSpawnPosition(ray))
                 {
                 }
+
                 e.Use();
             }
         }
 
-        public override void OnInspectorGUI()
-        {
+        public override void OnInspectorGUI() =>
             //  EditorGUILayout.LabelField("hold control and left click mouse to spawn spawnzone");
             base.OnInspectorGUI();
-        }
     }
 }

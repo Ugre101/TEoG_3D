@@ -1,7 +1,6 @@
 ﻿using System;
 using AvatarStuff.Holders.AI.StateMachineStuff;
 using AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain;
-using Character;
 using Character.EnemyStuff;
 using UnityEngine;
 
@@ -14,6 +13,8 @@ namespace AvatarStuff.Holders
         [Range(0f, 5f), SerializeField,] float initCombatRange = 1.5f;
 
         State<EnemyAiHolder> currentState;
+
+        bool waitingToReturn;
         public float AggroRange => aggroRange;
         public Vector3 SpawnLocation { get; private set; }
 
@@ -35,10 +36,7 @@ namespace AvatarStuff.Holders
             if (Stopped) return;
             if (OutOfRange || Time.frameCount % 3 != 0)
                 return;
-            if (DistanceToPlayer < initCombatRange)
-            {
-                StartCombat();
-            }
+            if (DistanceToPlayer < initCombatRange) StartCombat();
             if (currentState == null)
                 ChangeState(new EnemyBrainIdle(this));
             else
@@ -60,13 +58,10 @@ namespace AvatarStuff.Holders
                 obj.Setup(Enemy);
         }
 
-        void StartCombat()
-        {
-            InterActedWith = true;
-            //Stopped = true;
-            //Player.TriggerCombat(enemy);
-        }
+        void StartCombat() => InterActedWith = true;
 
+        //Stopped = true;
+        //Player.TriggerCombat(enemy);
         public void ChangeState(State<EnemyAiHolder> newState)
         {
             currentState?.OnExit();
@@ -92,7 +87,6 @@ namespace AvatarStuff.Holders
             }
         }
 
-        bool waitingToReturn;
         protected override void OutOfRangeFunction()
         {
             if (Changer.AvatarLoaded)

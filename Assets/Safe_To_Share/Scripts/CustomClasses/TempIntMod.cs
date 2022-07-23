@@ -13,6 +13,7 @@ namespace Character.StatsStuff.Mods
 
         public int HoursLeft => hoursLeft;
         public void AddHours(int hours) => hoursLeft += hours;
+
         public bool TickDown(int tick = 1)
         {
             hoursLeft -= tick;

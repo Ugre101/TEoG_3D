@@ -21,11 +21,11 @@ namespace Character
                 avatarBodyMorphs.Find(ab => ab.avatarGuid == avatarGuid).bodyAvatarMorphs.Add(morph);
             else // TODO Test if working
             {
-                avatarBodyMorphs.Add(new AvatarBodyMorphs(avatarGuid, new List<AvatarBodyMorphs.BodyMorph> { morph }));
-                dict = null;    
+                avatarBodyMorphs.Add(new AvatarBodyMorphs(avatarGuid, new List<AvatarBodyMorphs.BodyMorph> { morph, }));
+                dict = null;
             }
         }
-        
+
         public AvatarBodyMorphs AddNew(string avatarGuid, IEnumerable<AvatarBodyMorphs.BodyMorph> avatar)
         {
             var list = avatar.ToList();
@@ -55,7 +55,8 @@ namespace Character
                 public float value;
 
                 public BodyMorph(string title) => this.title = title;
-                public BodyMorph(string title,float value)
+
+                public BodyMorph(string title, float value)
                 {
                     this.title = title;
                     this.value = value;

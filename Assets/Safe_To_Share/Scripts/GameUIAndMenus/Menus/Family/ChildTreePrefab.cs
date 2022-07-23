@@ -6,10 +6,7 @@ namespace GameUIAndMenus.Menus.Family
     public class ChildTreePrefab : MonoBehaviour
     {
         Child child;
-        
-        public void Setup(Child thisChild)
-        {
-            child = thisChild;
-        }
+
+        public void Setup(Child thisChild) => child = thisChild;
     }
 }

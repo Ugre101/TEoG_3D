@@ -6,36 +6,37 @@ using UnityEngine.UI;
 
 public class MatsOptionBtn : MonoBehaviour
 {
-    public event Action<Material> AddMe;
-    public event Action<Material> RemoveMe;
     [SerializeField] Button btn;
     [SerializeField] Image btnBackground;
     [SerializeField] TextMeshProUGUI btnTitle;
     bool chosen = true;
     Material material;
+
+    void Start()
+    {
+        btn.onClick.AddListener(Click);
+        ChangeAvatarDetails.ToggleAll += ToggledAll;
+    }
+
+    void OnDestroy() => ChangeAvatarDetails.ToggleAll -= ToggledAll;
+
+    public event Action<Material> AddMe;
+    public event Action<Material> RemoveMe;
+
     public void Setup(Material mat)
     {
         material = mat;
         btnTitle.text = mat.name;
         UpdateChosenColor();
     }
-    void Start()
-    {
-        btn.onClick.AddListener(Click);
-        ChangeAvatarDetails.ToggleAll += ToggledAll;
-    }
-    void OnDestroy()
-    {
-        ChangeAvatarDetails.ToggleAll -= ToggledAll;
-    }
 
-    private void ToggledAll(bool obj)
+    void ToggledAll(bool obj)
     {
         chosen = obj;
         UpdateChosenColor();
     }
 
-    private void Click()
+    void Click()
     {
         chosen = !chosen;
         if (chosen)
@@ -45,5 +46,5 @@ public class MatsOptionBtn : MonoBehaviour
         UpdateChosenColor();
     }
 
-    private void UpdateChosenColor() => btnBackground.color = chosen ? Color.green : Color.gray;
+    void UpdateChosenColor() => btnBackground.color = chosen ? Color.green : Color.gray;
 }

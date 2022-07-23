@@ -13,10 +13,10 @@ namespace SceneStuff
         [SerializeField] protected SubLocationSceneSo subScene;
         [SerializeField] float loadDist = 150;
         [SerializeField] Collider blockingCollider;
-        private bool hasBlockingObejct;
+        bool hasBlockingObejct;
         float lastTick;
         Transform player;
-        public static  event Action  SubSceneChange ;
+
         protected virtual void Start()
         {
             hasBlockingObejct = blockingCollider != null;
@@ -29,21 +29,14 @@ namespace SceneStuff
 
         protected virtual void Update()
         {
-            if (Time.time < lastTick + 0.5f )
+            if (Time.time < lastTick + 0.5f)
                 return;
             lastTick = Time.time;
             float dist = Vector3.Distance(player.position, transform.position);
             if (dist <= loadDist)
                 IfNotActiveLoadScene();
-            else if (loadDist + 5f < dist) 
+            else if (loadDist + 5f < dist)
                 IfActiveUnloadScene();
-        }
-
-        private void IfNotActiveLoadScene()
-        {
-            if (subScene.SceneActive || subScene.SceneLoaded)
-                return;
-            LoadScene();
         }
 
         protected virtual void OnDestroy()
@@ -54,13 +47,22 @@ namespace SceneStuff
             subScene.Activated -= LoadedMe;
         }
 
-        private void IfActiveUnloadScene()
+        public static event Action SubSceneChange;
+
+        void IfNotActiveLoadScene()
+        {
+            if (subScene.SceneActive || subScene.SceneLoaded)
+                return;
+            LoadScene();
+        }
+
+        void IfActiveUnloadScene()
         {
             if (!subScene.SceneActive || !subScene.SceneLoaded)
                 return;
             UnLoadScene();
         }
-        
+
         protected virtual void LoadedMe()
         {
             if (subScene.SceneActive)
@@ -93,7 +95,7 @@ namespace SceneStuff
             SubSceneChange?.Invoke();
         }
 
-        private void ToggleActiveBlockingObject(bool value)
+        void ToggleActiveBlockingObject(bool value)
         {
             if (hasBlockingObejct)
                 blockingCollider.gameObject.SetActive(value);

@@ -15,26 +15,44 @@ namespace Safe_To_Share.Scripts.CameraStuff
         [SerializeField] ThirdPersonEcm2Character mover;
         [SerializeField] FirstPersonCamera firstPerson;
         [SerializeField] CinemachineVirtualCamera virtualCamera;
-        Cinemachine3rdPersonFollow followCam;
 
-        [Header("Settings")]
-        [SerializeField,Range(float.Epsilon,3f)] float minDistance = 3;
+        [Header("Settings"), SerializeField, Range(float.Epsilon, 3f),]
+        
+        float minDistance = 3;
+
         [SerializeField] float maxDistance = 20;
-        [SerializeField] private Transform target;
-        [SerializeField, Range(float.Epsilon, 0.05f)] float tiltRate = 0.02f;
-        [SerializeField, Range(float.Epsilon, 0.1f)] float rorateRate = 0.04f;
-        [SerializeField, Range(float.Epsilon, 0.05f)] float zoomRate = 0.05f;
-        [SerializeField, Range(float.Epsilon, 0.05f)] float elevationRate = 0.01f;
+        [SerializeField] Transform target;
+
+        [SerializeField, Range(float.Epsilon, 0.05f),]
+        float tiltRate = 0.02f;
+
+        [SerializeField, Range(float.Epsilon, 0.1f),]
+        float rorateRate = 0.04f;
+
+        [SerializeField, Range(float.Epsilon, 0.05f),]
+        float zoomRate = 0.05f;
+
+        [SerializeField, Range(float.Epsilon, 0.05f),]
+        float elevationRate = 0.01f;
+
+        readonly WaitForSecondsRealtime waitForSecondsRealtime = new(0.01f);
+
+        Coroutine elevationRoutine;
+        Cinemachine3rdPersonFollow followCam;
+        bool isCursorLocked;
 
         Vector2 mouseLookInput;
-        bool isCursorLocked;
         static float Sensitivity => ThirdPersonCameraSettings.Sensitivity;
         static bool InvertVerticalAxis => ThirdPersonCameraSettings.InvertVerticalAxis;
 
-        private void Start() => followCam = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        void Start() => followCam = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
 
-        Coroutine elevationRoutine;
-        readonly WaitForSecondsRealtime waitForSecondsRealtime = new(0.01f);
+        void OnEnable()
+        {
+            mover.SetRotationMode(RotationMode.OrientToMovement);
+            mover.SetFirstPersonMode(false);
+        }
+
         IEnumerator TargetElevation(float change)
         {
             bool loop = true;
@@ -46,11 +64,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
                 yield return waitForSecondsRealtime;
             }
         }
-        private void OnEnable()
-        {
-            mover.SetRotationMode(RotationMode.OrientToMovement);
-            mover.SetFirstPersonMode(false);
-        }
+
         public void OnRaiseElevation(InputAction.CallbackContext ctx)
         {
             if (GameManager.Paused) return;
@@ -59,6 +73,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             else if (ctx.canceled)
                 StopCoroutine(elevationRoutine);
         }
+
         public void OnLowerCameraHeight(InputAction.CallbackContext ctx)
         {
             if (GameManager.Paused) return;
@@ -76,7 +91,8 @@ namespace Safe_To_Share.Scripts.CameraStuff
             else if (context.canceled)
                 UnlockCursor();
         }
-        private static bool IsPointerOverUIObject()
+
+        static bool IsPointerOverUIObject()
         {
             if (EventSystem.current == null)
                 return false;
@@ -88,6 +104,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
             return results.Count > 0;
         }
+
         public void OnLook(InputAction.CallbackContext ctx)
         {
             if (GameManager.Paused) return;
@@ -101,7 +118,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             if (mouseLookInput.y != 0)
                 TiltTarget(mouseLookInput.y);
             if (mouseLookInput.x != 0)
-                RotateTarget(InvertVerticalAxis ? -mouseLookInput.x :  mouseLookInput.x);
+                RotateTarget(InvertVerticalAxis ? -mouseLookInput.x : mouseLookInput.x);
         }
 
         public void OnMouseScroll(InputAction.CallbackContext ctx)
@@ -111,7 +128,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
                 SetDistance(ctx.ReadValue<float>() * zoomRate);
         }
 
-        private void SetDistance(float newDistance)
+        void SetDistance(float newDistance)
         {
             followCam.CameraDistance = Mathf.Clamp(followCam.CameraDistance - newDistance, minDistance, maxDistance);
             if (Math.Abs(followCam.CameraDistance - minDistance) < float.Epsilon)
@@ -148,7 +165,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
 
         bool IsCursorLocked() => isCursorLocked;
 
-        private void RotateTarget(float value)
+        void RotateTarget(float value)
         {
             target.rotation *= Quaternion.AngleAxis(value * rorateRate * Sensitivity, Vector3.up);
             var targetTrans = target.transform;
@@ -157,7 +174,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             targetTrans.localEulerAngles = angles;
         }
 
-        private void TiltTarget(float value)
+        void TiltTarget(float value)
         {
             target.rotation *= Quaternion.AngleAxis(value * tiltRate * Sensitivity, Vector3.right);
             var angles = target.transform.localEulerAngles;

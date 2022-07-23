@@ -7,7 +7,8 @@ namespace Character.VoreStuff.VoreDigestionModes.Vagina
         public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer)
         {
             pred.SexualOrgans.Vaginas.Fluid.IncreaseCurrentValue(
-                baseOrgan.Vore.DigestTick(pred.Vore.digestionStrength.Value / 3f, baseOrgan.Vore.Stretch, HandleVaginaDigestion,predIsPlayer) /
+                baseOrgan.Vore.DigestTick(pred.Vore.digestionStrength.Value / 3f, baseOrgan.Vore.Stretch,
+                    HandleVaginaDigestion, predIsPlayer) /
                 2f);
             return true;
 

@@ -24,7 +24,7 @@ namespace Shop.UI
 
         void Start()
         {
-           // toggleSell.onClick.AddListener(ToggleSelling);
+            // toggleSell.onClick.AddListener(ToggleSelling);
         }
 
         void OnEnable()
@@ -34,12 +34,6 @@ namespace Shop.UI
             ItemShowCase.BuyItemInAmount += BuyItem;
         }
 
-        void BuyItem(Item arg1, int arg2)
-        {
-            if (Player.TryBuyItem(arg1,arg2)) 
-                buyItemShowCase.Setup(arg1, PlayerGold.GoldBag);
-        }
-
         void OnDisable()
         {
             ItemForSale.WantToBuyItem -= GetItem;
@@ -47,6 +41,13 @@ namespace Shop.UI
             ItemShowCase.BuyItemInAmount -= BuyItem;
             PlayerGold.GoldBag.GoldAmountChanged -= GoldChanged;
         }
+
+        void BuyItem(Item arg1, int arg2)
+        {
+            if (Player.TryBuyItem(arg1, arg2))
+                buyItemShowCase.Setup(arg1, PlayerGold.GoldBag);
+        }
+
         public static event Action<int> CanAfford;
 
         void HandleSoldItem(InventoryItem obj)
@@ -56,7 +57,7 @@ namespace Shop.UI
         void GetItem(Item obj)
         {
             buyItemShowCase.gameObject.SetActive(true);
-            buyItemShowCase.Setup(obj,PlayerGold.GoldBag,GoldBagExtension.DiscountMulti(Player));
+            buyItemShowCase.Setup(obj, PlayerGold.GoldBag, GoldBagExtension.DiscountMulti(Player));
         }
 
         void ToggleSelling()
@@ -75,15 +76,12 @@ namespace Shop.UI
             CanAfford?.Invoke(PlayerGold.GoldBag.Gold);
         }
 
-        void SellItems()
-        {
-            toggleSellText.text = "Buy";
-            // foreach (InventoryItem item in Player.Inventory.Items)
-            //     if (item.ItemGuid.CanSell)
-            //     {
-            //     }
-        }
+        void SellItems() => toggleSellText.text = "Buy";
 
+        // foreach (InventoryItem item in Player.Inventory.Items)
+        //     if (item.ItemGuid.CanSell)
+        //     {
+        //     }
         public void Setup(string shopTitle, List<Item> items)
         {
             buyItemShowCase.Reset();

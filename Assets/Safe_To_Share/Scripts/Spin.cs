@@ -7,10 +7,11 @@ namespace Safe_To_Share.Scripts
         [SerializeField, Range(5f, 15f),] float spinRate = 1f;
         [SerializeField] new Transform transform;
         [SerializeField] Renderer rend;
+
         void Update()
         {
             if (rend.isVisible)
-                transform.RotateAround(transform.position, Vector3.up, spinRate * Time.deltaTime );
+                transform.RotateAround(transform.position, Vector3.up, spinRate * Time.deltaTime);
         }
     }
 }

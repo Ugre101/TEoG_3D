@@ -1,7 +1,6 @@
 ﻿using System;
 using AvatarStuff.Holders;
 using Character.LevelStuff;
-using Character.PlayerStuff;
 using Character.VoreStuff;
 using GameUIAndMenus.Menus.Level;
 using UnityEngine;
@@ -13,16 +12,17 @@ namespace GameUIAndMenus.Menus.Vore
 {
     public class VorePerkButton : BasePerkButton, IPointerEnterHandler
     {
-      //  new VorePerk loaded;
+        public void OnPointerEnter(PointerEventData eventData) => ShowPerkInfo?.Invoke(transform.position, loaded);
+
+        //  new VorePerk loaded;
         public override void Setup(PlayerHolder player)
         {
             this.player = player;
             Addressables.LoadAssetAsync<VorePerk>(guid).Completed += Loaded;
         }
 
-        public void OnPointerEnter(PointerEventData eventData) => ShowPerkInfo?.Invoke(transform.position, loaded);
-
         public static event Action<Vector3, BasicPerk> ShowPerkInfo;
+
         void HasPerk(VorePerk obj)
         {
             bool havePerk = player.Player.Vore.Level.OwnedPerks.Contains(loaded as VorePerk);

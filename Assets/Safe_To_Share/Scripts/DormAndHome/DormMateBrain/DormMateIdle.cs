@@ -20,7 +20,6 @@ namespace AvatarStuff.Holders.AI.StateMachineStuff.DormMateBrain
         {
             if (Time.time >= waitUntil)
             {
-                
             }
         }
     }

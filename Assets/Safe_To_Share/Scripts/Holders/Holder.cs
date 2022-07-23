@@ -29,6 +29,5 @@ namespace AvatarStuff.Holders
         protected virtual void UnSub() => Changer.NewAvatar -= NewAvatar;
 
         protected abstract void NewAvatar(CharacterAvatar obj);
-        
     }
 }

@@ -19,7 +19,7 @@ namespace EffectStuff.Editor
             EditorGUI.indentLevel++;
             EditorGUILayout.BeginHorizontal();
 
-            string[] effects = {"dealDamage", "dealWillDamage", "healDamage",};
+            string[] effects = { "dealDamage", "dealWillDamage", "healDamage", };
             foreach (string effect in effects)
             {
                 var tempShowEffect = property.FindPropertyRelative(effect);

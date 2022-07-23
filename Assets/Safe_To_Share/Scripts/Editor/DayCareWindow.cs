@@ -1,5 +1,4 @@
 ﻿using AvatarStuff.Holders;
-using Character.EnemyStuff;
 using Character.Family;
 using Character.IdentityStuff;
 using Character.PlayerStuff;
@@ -11,17 +10,9 @@ namespace EditorFolder
 {
     public class DayCareWindow : EditorWindow
     {
-        [MenuItem("MENUITEM/Day care")]
-        private static void ShowWindow()
+        void OnGUI()
         {
-            var window = GetWindow<DayCareWindow>();
-            window.titleContent = new GUIContent("Day care");
-            window.Show();
-        }
-
-        private void OnGUI()
-        {
-            GUILayout.Label("Day care children",EditorStyles.boldLabel);
+            GUILayout.Label("Day care children", EditorStyles.boldLabel);
             if (GUILayout.Button("Gain Child"))
             {
                 var holder = FindObjectOfType<PlayerHolder>();
@@ -31,6 +22,7 @@ namespace EditorFolder
                 DayCare.AddChild(child);
                 DayCare.AddChild(fetus.GetBorn("Do I Count"));
             }
+
             foreach (Child child in DayCare.ChildDict.Values)
             {
                 EditorGUILayout.TextField("Name", child.Identity.FullName);
@@ -38,6 +30,14 @@ namespace EditorFolder
                 EditorGUILayout.TextField("Mother", child.FamilyTree.Mother.FullName);
                 EditorGUILayout.TextField("Father", child.FamilyTree.Father.FullName);
             }
+        }
+
+        [MenuItem("MENUITEM/Day care")]
+        static void ShowWindow()
+        {
+            var window = GetWindow<DayCareWindow>();
+            window.titleContent = new GUIContent("Day care");
+            window.Show();
         }
     }
 }

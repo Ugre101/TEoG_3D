@@ -11,6 +11,13 @@ namespace DormAndHome.Dorm.Dungeon
 
         readonly WaitForSeconds waitForSeconds = new(2f);
 
+        IEnumerator Start()
+        {
+            yield return waitForSeconds;
+            DormManager.Loaded += Loaded;
+            SpawnDungeonMates();
+        }
+
 
         void OnDestroy() => DormManager.Loaded -= Loaded;
 #if UNITY_EDITOR
@@ -22,13 +29,6 @@ namespace DormAndHome.Dorm.Dungeon
             spawnSpots = new List<DungeonSpawnSpot>(GetComponentsInChildren<DungeonSpawnSpot>());
         }
 #endif
-
-        IEnumerator Start()
-        {
-            yield return waitForSeconds;
-            DormManager.Loaded += Loaded;
-            SpawnDungeonMates();
-        }
 
         void SpawnDungeonMates()
         {

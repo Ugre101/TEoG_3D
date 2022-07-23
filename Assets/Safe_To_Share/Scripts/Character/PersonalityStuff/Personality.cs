@@ -6,6 +6,5 @@ namespace Character.PersonalityStuff
     {
         // Negative = sub   positive = dom
         [SerializeField] int subDom;
-        
     }
 }

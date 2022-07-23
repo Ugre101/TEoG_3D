@@ -17,6 +17,5 @@ namespace Safe_To_Share.Scripts.Movement.Settings.UI
         void OnDestroy() => toggle.onValueChanged.RemoveAllListeners();
 
         static void ChangeLook(bool arg0) => ThirdPersonCameraSettings.AlwaysLook = arg0;
-        
     }
 }

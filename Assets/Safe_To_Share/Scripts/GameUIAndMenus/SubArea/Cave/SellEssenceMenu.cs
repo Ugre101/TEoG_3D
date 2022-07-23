@@ -1,6 +1,5 @@
 ﻿using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
-using Currency;
 using CustomClasses;
 using GameUIAndMenus;
 using UnityEngine;

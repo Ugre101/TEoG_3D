@@ -21,7 +21,7 @@ namespace GameUIAndMenus.Menus.Vore
 
             drainChooseContainer.gameObject.SetActive(true);
 
-            drainChoose.SetupTmpDropDown(Player.Vore.DrainEssenceType,ChangeDrainOption);
+            drainChoose.SetupTmpDropDown(Player.Vore.DrainEssenceType, ChangeDrainOption);
         }
 
         void ChangeDrainOption(int arg0) =>

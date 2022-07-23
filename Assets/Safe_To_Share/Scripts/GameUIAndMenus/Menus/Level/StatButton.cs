@@ -1,6 +1,5 @@
 ﻿using System;
 using AvatarStuff.Holders;
-using Character.PlayerStuff;
 using Character.StatsStuff;
 using TMPro;
 using UnityEngine;
@@ -17,12 +16,6 @@ namespace GameUIAndMenus.Menus.Level
         [SerializeField] int cost = 1;
         [SerializeField] TextMeshProUGUI currentAmount;
 
-        public override void Setup(PlayerHolder player)
-        {
-            this.player = player;
-            UpdateValue();
-        }
-
 # if UNITY_EDITOR
         void OnValidate()
         {
@@ -32,6 +25,12 @@ namespace GameUIAndMenus.Menus.Level
 #endif
         public void OnPointerEnter(PointerEventData eventData) =>
             ShowStatInfo?.Invoke(statType, cost, transform.position);
+
+        public override void Setup(PlayerHolder player)
+        {
+            this.player = player;
+            UpdateValue();
+        }
 
 
         public static event Action<CharStatType, int, Vector3> ShowStatInfo;

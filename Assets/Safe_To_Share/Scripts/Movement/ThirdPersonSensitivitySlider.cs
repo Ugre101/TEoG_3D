@@ -9,13 +9,16 @@ namespace Safe_To_Share.Scripts.Movement
     {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI amount;
+
         void Start()
         {
             UpdateText(ThirdPersonCameraSettings.Sensitivity);
             slider.value = ThirdPersonCameraSettings.Sensitivity;
             slider.onValueChanged.AddListener(ChangeSensitivity);
         }
+
         void UpdateText(float dist) => amount.text = $"{dist:0.##}";
+
         void ChangeSensitivity(float arg0)
         {
             ThirdPersonCameraSettings.Sensitivity = arg0;

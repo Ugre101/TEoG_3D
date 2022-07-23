@@ -1,5 +1,4 @@
 ﻿using Map;
-using SaveStuff;
 using SceneStuff;
 using UnityEngine;
 
@@ -28,7 +27,7 @@ namespace GameUIAndMenus.SceneUI
             if (SceneLoader.CurrentScene != null && SceneLoader.CurrentScene.Guid == obj.Guid)
             {
                 gameCanvas.CloseMenus();
-                SceneLoader.Instance.TeleportToExit(holder,exit);
+                SceneLoader.Instance.TeleportToExit(holder, exit);
             }
             else
                 SceneLoader.Instance.LoadNewLocation(obj, Player, exit);

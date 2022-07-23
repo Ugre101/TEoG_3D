@@ -7,7 +7,7 @@ namespace Options
     {
         void OnEnable()
         {
-            if(!OptionalContent.Vore.Enabled)
+            if (!OptionalContent.Vore.Enabled)
                 gameObject.SetActive(false);
         }
     }

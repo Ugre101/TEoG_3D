@@ -1,5 +1,4 @@
 ﻿using AvatarStuff.Holders;
-using Character.PlayerStuff;
 
 namespace DormAndHome.Dorm
 {

@@ -9,7 +9,7 @@ namespace Battle.CombatantStuff
     {
         [SerializeField] CombatantSlot[] slots;
 
-#if  UNITY_EDITOR
+#if UNITY_EDITOR
         void OnValidate() => slots = GetComponentsInChildren<CombatantSlot>();
 #endif
 

@@ -11,7 +11,11 @@ namespace Character.BodyStuff.BodyBuild
         {
         }
 
-        public override float BaseValue { get => base.BaseValue; set => base.BaseValue = Mathf.Clamp(value, MinValue,MaxValue); }
+        public override float BaseValue
+        {
+            get => base.BaseValue;
+            set => base.BaseValue = Mathf.Clamp(value, MinValue, MaxValue);
+        }
 
         protected abstract float MinValue { get; }
         protected abstract float MaxValue { get; }

@@ -20,7 +20,7 @@ namespace Character.DefeatScenarios.Nodes
 
         public virtual bool CanDo(BaseCharacter caster, BaseCharacter target) => true;
 
-        public virtual void HandleEffects(BaseCharacter caster,BaseCharacter target)
+        public virtual void HandleEffects(BaseCharacter caster, BaseCharacter target)
         {
         }
     }

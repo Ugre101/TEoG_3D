@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Reflection;
 using Character.Organs.Fluids.SexualFluids;
 
@@ -9,10 +8,8 @@ namespace Character.Organs.Fluids
 {
     public static class FluidTypes
     {
-        
-        
         static Dictionary<string, FluidType> fluidTypes;
-        
+
         public static Dictionary<string, FluidType> FluidsDict
         {
             get

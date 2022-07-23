@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using Character.CreateCharacterStuff;
 
 namespace Character.CreateCharacterStuff.EditorPresets
 {
@@ -120,7 +119,8 @@ namespace Character.CreateCharacterStuff.EditorPresets
                 serializedObject.Update();
                 SerializedProperty height = startBody.FindPropertyRelative("height");
                 height.intValue = EditorGUILayout.IntSlider("Height", height.intValue, 1, 999);
-                EditorGUILayout.HelpBox("Remember that race will modify height, 160 is average for race",MessageType.Info);
+                EditorGUILayout.HelpBox("Remember that race will modify height, 160 is average for race",
+                    MessageType.Info);
                 SerializedProperty muscle = startBody.FindPropertyRelative("muscle");
                 muscle.intValue = EditorGUILayout.IntSlider("Muscle", muscle.intValue, 1, 99);
                 SerializedProperty fat = startBody.FindPropertyRelative("fat");
@@ -156,7 +156,7 @@ namespace Character.CreateCharacterStuff.EditorPresets
             if (baseEditorFold)
                 base.OnInspectorGUI();
             if (GUILayout.Button("Set all values to Default"))
-                ((CharacterPreset) target).DefaultValues();
+                ((CharacterPreset)target).DefaultValues();
         }
     }
 }

@@ -4,10 +4,11 @@ namespace CustomClasses
 {
     public class SavedFloatSetting
     {
+        readonly float defaultValue;
         readonly string saveName;
 
         float? value;
-        readonly float defaultValue;
+
         public SavedFloatSetting(string saveName, float defaultValue)
         {
             this.saveName = saveName;

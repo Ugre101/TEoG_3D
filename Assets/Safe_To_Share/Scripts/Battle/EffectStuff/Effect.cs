@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Battle.SkillsAndSpells;
 using Character;
-using Character.SkillsAndSpells;
 using Character.StatsStuff.Mods;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
@@ -29,7 +28,8 @@ namespace Battle.EffectStuff
         public float FinalValue(BaseCharacter user, float baseValue) =>
             modType == ModType.Flat ? Value(user) : Percent(user, baseValue);
 
-        public int FinalIntValue(BaseCharacter user, int baseValue) => modType == ModType.Flat ? IntValue(user) : IntPercent(user, baseValue);
+        public int FinalIntValue(BaseCharacter user, int baseValue) =>
+            modType == ModType.Flat ? IntValue(user) : IntPercent(user, baseValue);
 
 
         protected float Value(BaseCharacter user) => value * StatModValue(user) * rngValue.GetRandomValue;
@@ -39,7 +39,8 @@ namespace Battle.EffectStuff
         protected float Percent(BaseCharacter user, float baseValue) => baseValue * (Value(user) / 100f);
         protected int IntPercent(BaseCharacter user, int baseValue) => Mathf.RoundToInt(Percent(user, baseValue));
 
-        protected float StatModValue(BaseCharacter user) => 1f + (affectedByStats.Count == 0 ? 0 : 
-            affectedByStats.Sum(v => (float) user.Stats.GetCharStats[v.StatType].Value / v.DivValue));
+        protected float StatModValue(BaseCharacter user) => 1f + (affectedByStats.Count == 0
+            ? 0
+            : affectedByStats.Sum(v => (float)user.Stats.GetCharStats[v.StatType].Value / v.DivValue));
     }
 }

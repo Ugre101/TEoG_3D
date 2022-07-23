@@ -1,4 +1,10 @@
 {
-	"name": "MyDialogueScripts",
-	"references":[ "GUID:1dd4efe6b41648509aececc3ef871ff6", "GUID:3569e5de841d45758fe8159e4d0a38e3", "GUID:9d8681c8201c491cb2cbd531f2753f52", "GUID:00c69af6635eb95459965de537f97531", "GUID:3627295ec002ed84fad2824b1681bedf" ]
+  "name": "MyDialogueScripts",
+  "references": [
+    "GUID:1dd4efe6b41648509aececc3ef871ff6",
+    "GUID:3569e5de841d45758fe8159e4d0a38e3",
+    "GUID:9d8681c8201c491cb2cbd531f2753f52",
+    "GUID:00c69af6635eb95459965de537f97531",
+    "GUID:3627295ec002ed84fad2824b1681bedf"
+  ]
 }

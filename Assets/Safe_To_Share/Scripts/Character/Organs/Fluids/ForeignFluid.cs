@@ -26,6 +26,7 @@ namespace Character.Organs.Fluids
             foreach (ForeignFluid foreignFluid in fluids)
                 foreignFluid.Amount *= (100f - percent) / 100f;
         }
+
         [Serializable]
         public class ForeignFluid
         {

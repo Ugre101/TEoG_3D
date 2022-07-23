@@ -8,7 +8,6 @@ namespace Character.Organs
 {
     public static class SexualOrgansExtensions
     {
-
         public static int FluidMaxValueCylinder(this IEnumerable<BaseOrgan> organs, SexualFluid sexualFluid)
         {
             float sexualFluidValue = sexualFluid.Value / 100f;
@@ -26,9 +25,12 @@ namespace Character.Organs
             float sexualFluidValue = sexualFluid.Value / 100000f;
             return Mathf.CeilToInt(SphereCalc(organs) * sexualFluidValue);
         }
-       public static float FluidAmountScaledWithHeight(float fluidAmount, float height)
+
+        public static float FluidAmountScaledWithHeight(float fluidAmount, float height)
             => fluidAmount * HeightScaleValue(height);
-        public static string FluidAmountInText(float amount, float height) => FluidAmountScaledWithHeight(amount, height).ConvertCl(true);
+
+        public static string FluidAmountInText(float amount, float height) =>
+            FluidAmountScaledWithHeight(amount, height).ConvertCl();
 
         static float CylinderCalc(IEnumerable<BaseOrgan> organs)
         {
@@ -40,10 +42,10 @@ namespace Character.Organs
         static float SphereCalc(IEnumerable<BaseOrgan> organs) =>
             4f / 3f * Mathf.PI * Mathf.Pow(organs.Sum(o => o.Value), 3f);
 
-        public static float ScaledWithHeight(this BaseOrgan organ, float height) 
+        public static float ScaledWithHeight(this BaseOrgan organ, float height)
             => organ.Value * HeightScaleValue(height);
 
-        private static float HeightScaleValue(float height) => (0.1f + height / 177f);
+        static float HeightScaleValue(float height) => 0.1f + height / 177f;
 
 
         public static string OrganDesc(SexualOrganType type, BaseOrgan organ, bool capitalLeter = true) => type switch

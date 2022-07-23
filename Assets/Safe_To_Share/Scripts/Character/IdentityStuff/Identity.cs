@@ -16,6 +16,7 @@ namespace Character.IdentityStuff
             id = IDGiver.NewID();
             birthDay = BirthDay.BirthedToday(21);
         }
+
         public Identity(string firstName, string lastName, BirthDay birthDay) // 18
         {
             this.firstName = firstName;

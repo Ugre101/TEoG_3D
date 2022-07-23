@@ -1,6 +1,5 @@
 using AvatarStuff;
 using AvatarStuff.Holders;
-using Character.PlayerStuff;
 using UnityEngine;
 
 public class TriggerMirrorMenu : MonoBehaviour

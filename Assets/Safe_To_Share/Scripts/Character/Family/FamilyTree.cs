@@ -18,6 +18,7 @@ namespace Character.Family
             mother = new Identity();
             childrenIds = new List<int>();
         }
+
         public FamilyTree(Identity father, Identity mother)
         {
             this.father = father;

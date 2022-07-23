@@ -7,14 +7,19 @@ namespace Safe_To_Share.Scripts.Interactable
 {
     public class DestroyCloseTrees : MonoBehaviour
     {
-        private TreeInstance[] paryTrees;
-        private Vector3 pvecTerrainPosition;
-        private Vector3 pvecTerrainSize;
-        [SerializeField,Range(float.Epsilon, 5f),] float removeDist = 2f;
-        [SerializeField, Range(2f, 5f)] float heightReq = 3f;
+        const int FrameLimit = 8;
+
+        [SerializeField, Range(float.Epsilon, 5f),]
+        float removeDist = 2f;
+
+        [SerializeField, Range(2f, 5f),] float heightReq = 3f;
         bool foundCollider;
         bool hasDebrisPool;
+        TreeInstance[] paryTrees;
+        Vector3 pvecTerrainPosition;
+        Vector3 pvecTerrainSize;
         TerrainCollider terrainCollider;
+
         void Start()
         {
             if (Terrain.activeTerrain == null)
@@ -22,6 +27,7 @@ namespace Safe_To_Share.Scripts.Interactable
                 enabled = false;
                 return;
             }
+
             var activeTerrain = Terrain.activeTerrain;
             pvecTerrainPosition = activeTerrain.transform.position;
             var terrainData = activeTerrain.terrainData;
@@ -36,14 +42,12 @@ namespace Safe_To_Share.Scripts.Interactable
 #endif
         }
 
-        const int FrameLimit = 8;
-
         void Update()
         {
 #if UNITY_EDITOR
             if (!runInEditor)
                 return;
-            
+
 #endif
             if (Time.frameCount % FrameLimit != 0)
                 return;
@@ -51,7 +55,7 @@ namespace Safe_To_Share.Scripts.Interactable
                 return;
 
             bool removedTree = false;
-            Vector3 vecFlier = PlayerHolder.Instance.transform.position; 
+            Vector3 vecFlier = PlayerHolder.Instance.transform.position;
             List<int> toRemove = new();
 
             for (int l = 0; l < paryTrees.Length; l++)
@@ -61,7 +65,7 @@ namespace Safe_To_Share.Scripts.Interactable
                 // Get the world coordinates of the tree position
                 Vector3 vec3 = Vector3.Scale(pvecTerrainSize, vecTree) + pvecTerrainPosition;
                 float fltProximity = Vector3.Distance(vecFlier, vec3);
-                if (fltProximity < removeDist) 
+                if (fltProximity < removeDist)
                     toRemove.Add(l);
             }
 
@@ -80,6 +84,7 @@ namespace Safe_To_Share.Scripts.Interactable
                     removedTree = true;
                 }
             }
+
             paryTrees = trees.ToArray();
             Terrain.activeTerrain.terrainData.treeInstances = paryTrees;
             if (removedTree)
@@ -94,7 +99,7 @@ namespace Safe_To_Share.Scripts.Interactable
         }
 
 #if UNITY_EDITOR
-        [SerializeField] bool runInEditor = false;
+        [SerializeField] bool runInEditor;
         TreeInstance[] orgTrees;
 
         [ContextMenu("Restore trees")]
@@ -105,6 +110,4 @@ namespace Safe_To_Share.Scripts.Interactable
         }
 #endif
     }
-    
 }
- 

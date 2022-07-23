@@ -10,7 +10,7 @@ namespace Spawner.Editor
         CreateDebugTeleportPoint myTarget;
 
 
-        void OnEnable() => myTarget = (CreateDebugTeleportPoint) target;
+        void OnEnable() => myTarget = (CreateDebugTeleportPoint)target;
 
         void OnSceneGUI()
         {
@@ -25,7 +25,8 @@ namespace Spawner.Editor
                 GUIUtility.hotControl = controlID;
                 Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
 
-                if (Physics.Raycast(ray, out RaycastHit hit,float.MaxValue,myTarget.validRaycastTargets)) myTarget.AddNewPoint(hit.point);
+                if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, myTarget.validRaycastTargets))
+                    myTarget.AddNewPoint(hit.point);
 
                 e.Use();
             }

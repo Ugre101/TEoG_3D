@@ -7,7 +7,7 @@ namespace AvatarStuff
         [SerializeField, Range(0f, 100f),] float boner;
         [SerializeField, Range(0.1f, 20f),] float size = 1f;
         [SerializeField] bool hidden;
-        
+
         void OnValidate()
         {
             if (Application.isPlaying) return;

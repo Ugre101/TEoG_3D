@@ -13,10 +13,12 @@ namespace GameUIAndMenus.Menus.Vore
 {
     public class VoreOrganSettings : MonoBehaviour
     {
-        Player player;
         [SerializeField] GameObject noSelected, selected;
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TMP_Dropdown dropdown;
+        [SerializeField] Transform preyContent;
+        [SerializeField] PreyShowCase preyPrefab;
+        Player player;
 
         void Start()
         {
@@ -42,10 +44,8 @@ namespace GameUIAndMenus.Menus.Vore
             StomachVoreOrganContainerInfo.ShowStomachSettings -= ShowOralSettings;
         }
 
-        public void Setup(Player player)
-        {
-            this.player = player;
-        }
+        public void Setup(Player player) => this.player = player;
+
         void ShowOralSettings()
         {
             noSelected.gameObject.SetActive(false);
@@ -59,12 +59,14 @@ namespace GameUIAndMenus.Menus.Vore
             dropdown.onValueChanged.RemoveAllListeners();
             dropdown.value = player.Vore.StomachDigestionMode.CurrentModeID;
             dropdown.onValueChanged.AddListener(NewMode);
-            ShowPreys(VoredCharacters.GetPreys(player.Vore.Stomach.PreysIds), VoreType.Oral, player.Vore.StomachDigestionMode.CurrentModeTitle);
-            
+            ShowPreys(VoredCharacters.GetPreys(player.Vore.Stomach.PreysIds), VoreType.Oral,
+                player.Vore.StomachDigestionMode.CurrentModeTitle);
+
             void NewMode(int arg0)
             {
                 StomachDigestionMode mode = player.Vore.StomachDigestionMode;
-                int newMode = Array.IndexOf( mode.AllDigestionTypes, mode.GetPossibleDigestionTypes(player).ElementAt(arg0));
+                int newMode = Array.IndexOf(mode.AllDigestionTypes,
+                    mode.GetPossibleDigestionTypes(player).ElementAt(arg0));
                 player.Vore.StomachDigestionMode.SetDigestionMode(newMode);
             }
         }
@@ -92,30 +94,28 @@ namespace GameUIAndMenus.Menus.Vore
                 allPreys.AddRange(VoredCharacters.GetPreys(baseOrgan.Vore.PreysIds));
                 allPreys.AddRange(VoredCharacters.GetPreys(baseOrgan.Vore.SpecialPreysIds));
             }
+
             ShowPreys(allPreys, type.OrganToVoreType(), voreOrgan.CurrentModeTitle);
 
             void NewMode(int arg0)
             {
-                int newMode = Array.IndexOf(voreOrgan.AllDigestionTypes, voreOrgan.GetPossibleDigestionTypes(player).ElementAt(arg0));
+                int newMode = Array.IndexOf(voreOrgan.AllDigestionTypes,
+                    voreOrgan.GetPossibleDigestionTypes(player).ElementAt(arg0));
                 voreOrgan.SetDigestionMode(newMode);
             }
         }
-        [SerializeField] Transform preyContent;
-        [SerializeField] PreyShowCase preyPrefab;
-        void ShowPreys(IEnumerable<Prey> preys,VoreType voreType, string altMode)
+
+        void ShowPreys(IEnumerable<Prey> preys, VoreType voreType, string altMode)
         {
             preyContent.KillChildren();
             foreach (Prey prey in preys)
             {
-              var preyPre =  Instantiate(preyPrefab,preyContent);
-                  preyPre.Setup(prey, voreType, altMode);
-                  preyPre.RegurgitateMe += Reg;
+                var preyPre = Instantiate(preyPrefab, preyContent);
+                preyPre.Setup(prey, voreType, altMode);
+                preyPre.RegurgitateMe += Reg;
             }
         }
 
-        void Reg(int arg1, VoreType arg2)
-        {
-            VoreSystemExtension.RegurgitatePrey(player,arg2,arg1);
-        }
+        void Reg(int arg1, VoreType arg2) => VoreSystemExtension.RegurgitatePrey(player, arg2, arg1);
     }
 }

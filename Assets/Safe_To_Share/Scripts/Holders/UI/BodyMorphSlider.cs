@@ -1,5 +1,4 @@
-﻿using System;
-using Character;
+﻿using Character;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -12,12 +11,20 @@ namespace AvatarStuff.UI
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI value;
+        CharacterAvatar currentAvatar;
+        bool hasPool;
 
         BodyMorphs.AvatarBodyMorphs.BodyMorph myMorph;
-        CharacterAvatar currentAvatar;
         IObjectPool<BodyMorphSlider> pool;
-        bool hasPool;
-        public void Setup(BodyMorphs.AvatarBodyMorphs.BodyMorph morph, CharacterAvatar avatar,IObjectPool<BodyMorphSlider> spawnPool)
+
+        void OnDisable()
+        {
+            if (hasPool)
+                pool.Release(this);
+        }
+
+        public void Setup(BodyMorphs.AvatarBodyMorphs.BodyMorph morph, CharacterAvatar avatar,
+            IObjectPool<BodyMorphSlider> spawnPool)
         {
             myMorph = morph;
             currentAvatar = avatar;
@@ -28,12 +35,6 @@ namespace AvatarStuff.UI
             slider.onValueChanged.RemoveAllListeners();
             slider.SetValueWithoutNotify(morph.value);
             slider.onValueChanged.AddListener(ChangeValue);
-        }
-
-        void OnDisable()
-        {
-            if (hasPool)
-                pool.Release(this);
         }
 
         void ChangeValue(float arg0)

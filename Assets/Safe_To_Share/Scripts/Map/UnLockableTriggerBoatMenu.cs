@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using SaveStuff;
 using SceneStuff;
 using UnityEngine;
 
@@ -47,7 +46,7 @@ namespace Map
             base.OnPlayerEnter();
         }
 
-        private void UnLock()
+        void UnLock()
         {
             lockAble.UnLock();
             UnLocked = true;

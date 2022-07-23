@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using CustomClasses;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Character.SkillsAndSpells
 {
@@ -21,12 +17,12 @@ namespace Character.SkillsAndSpells
         }
 
         public HashSet<string> Abilities { get; private set; } = new();
+
         public void Load(IEnumerable<string> guids)
         {
             Abilities = new HashSet<string>();
             foreach (string loadSavedGuid in guids.Where(loadSavedGuid => !string.IsNullOrEmpty(loadSavedGuid)))
                 Abilities.Add(loadSavedGuid);
-            
         }
 
         public bool KnowAbility(string ability) => Abilities.Contains(ability);

@@ -6,14 +6,12 @@ using Character.Service;
 using Character.VoreStuff;
 using CustomClasses;
 using Dialogue;
-using Dialogue.UI;
 using GameUIAndMenus.DialogueAndEventMenu;
 using Items;
 using Map;
 using Safe_To_Share.Scripts.Static;
 using SaveStuff;
 using SceneStuff;
-using Shop;
 using Shop.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -57,7 +55,6 @@ namespace GameUIAndMenus
             BaseDialogue.StartVoreEvent += OpenVoreEvent;
         }
 
-       
 
         void OnDestroy()
         {
@@ -133,12 +130,13 @@ namespace GameUIAndMenus
             SwitchPanels(dialogueMenu.gameObject);
             dialogueMenu.Setup(dialogue);
         }
+
         void OpenVoreEvent(BaseDialogue arg1, Player arg2, Prey arg3, VoreOrgan arg4)
         {
             if (voreEventMenu.isActiveAndEnabled) return; // TODO event que system
             GameManager.Pause();
             SwitchPanels(voreEventMenu.gameObject);
-            voreEventMenu.Setup(arg1,arg2,arg3,arg4);
+            voreEventMenu.Setup(arg1, arg2, arg3, arg4);
         }
     }
 

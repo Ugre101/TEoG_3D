@@ -18,44 +18,52 @@ namespace Character.CharacterEvents
 
             public static class VoreEvents
             {
-                static Dictionary<SexualOrganType, Dictionary<string,DuoEvent>> organDigestionDict;
-
-                public static Dictionary<SexualOrganType, Dictionary<string,DuoEvent>> VoreOrganEvents =>
-                    organDigestionDict ??= new Dictionary<SexualOrganType,Dictionary<string, DuoEvent>>
-                    {
-                        {SexualOrganType.Balls, new Dictionary<string, DuoEvent>
-                        {
-                            {VoreOrganDigestionMode.Digestion, new PlayerBallsDigestion()},
-                        }},
-                        {SexualOrganType.Boobs, new Dictionary<string, DuoEvent>
-                        {
-                            {VoreOrganDigestionMode.Digestion, new PlayerBoobsDigestion()},
-                            {VoreOrganDigestionMode.Absorption, new PlayerBoobsTransformed()},
-                        }},
-                        { SexualOrganType.Dick, new Dictionary<string, DuoEvent>
-                        {
-                            {VoreOrganDigestionMode.Absorption, new PlayerCockTransformedPrey()},
-                        }},
-                        {SexualOrganType.Vagina, new Dictionary<string, DuoEvent>
-                        {
-                            {VoreOrganDigestionMode.Digestion, new PlayerUnbirthDigestion()},
-                            {VaginaDigestionModes.Rebirth, new PlayerRebirthedPrey()},
-                        }},
-                    };
+                static Dictionary<SexualOrganType, Dictionary<string, DuoEvent>> organDigestionDict;
                 static Dictionary<string, DuoEvent> voreStomachEvents;
-                public static Dictionary<string, DuoEvent> VoreStomachEvents => voreStomachEvents ??=  new Dictionary<string, DuoEvent>
-                {   
-                    {VoreOrganDigestionMode.Digestion, new PlayerDigestedPreyStomach()},
-                    {VoreOrganDigestionMode.Absorption, AbsorbedPreyStomach},
-                };
-                static PlayerAbsorbedPreyStomach AbsorbedPreyStomach { get; } = new PlayerAbsorbedPreyStomach();
-                static Dictionary<SexualOrganType, Dictionary<string,DuoEvent>> organDigestionProgressDict;
+                static Dictionary<SexualOrganType, Dictionary<string, DuoEvent>> organDigestionProgressDict;
+
+                public static Dictionary<SexualOrganType, Dictionary<string, DuoEvent>> VoreOrganEvents =>
+                    organDigestionDict ??= new Dictionary<SexualOrganType, Dictionary<string, DuoEvent>>
+                    {
+                        {
+                            SexualOrganType.Balls, new Dictionary<string, DuoEvent>
+                            {
+                                { VoreOrganDigestionMode.Digestion, new PlayerBallsDigestion() },
+                            }
+                        },
+                        {
+                            SexualOrganType.Boobs, new Dictionary<string, DuoEvent>
+                            {
+                                { VoreOrganDigestionMode.Digestion, new PlayerBoobsDigestion() },
+                                { VoreOrganDigestionMode.Absorption, new PlayerBoobsTransformed() },
+                            }
+                        },
+                        {
+                            SexualOrganType.Dick, new Dictionary<string, DuoEvent>
+                            {
+                                { VoreOrganDigestionMode.Absorption, new PlayerCockTransformedPrey() },
+                            }
+                        },
+                        {
+                            SexualOrganType.Vagina, new Dictionary<string, DuoEvent>
+                            {
+                                { VoreOrganDigestionMode.Digestion, new PlayerUnbirthDigestion() },
+                                { VaginaDigestionModes.Rebirth, new PlayerRebirthedPrey() },
+                            }
+                        },
+                    };
+
+                public static Dictionary<string, DuoEvent> VoreStomachEvents => voreStomachEvents ??=
+                    new Dictionary<string, DuoEvent>
+                    {
+                        { VoreOrganDigestionMode.Digestion, new PlayerDigestedPreyStomach() },
+                        { VoreOrganDigestionMode.Absorption, AbsorbedPreyStomach },
+                    };
+
+                static PlayerAbsorbedPreyStomach AbsorbedPreyStomach { get; } = new();
 
                 public static Dictionary<SexualOrganType, Dictionary<string, DuoEvent>> VoreOrganProgressEvents =>
-                    organDigestionProgressDict ??= new Dictionary<SexualOrganType, Dictionary<string, DuoEvent>>()
-                    {
-
-                    };
+                    organDigestionProgressDict ??= new Dictionary<SexualOrganType, Dictionary<string, DuoEvent>>();
             }
         }
 

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Character.DefeatScenarios.Nodes;
 using CustomClasses.Editor;
 using Safe_To_Share.Scripts.Static;
@@ -14,17 +12,17 @@ namespace Defeated.Editor
 {
     public class LoseScenarioBuilderWindow : BaseNodeBuilderWindows
     {
-        LoseScenario selected;
-
-        NodeTypes createOfType = NodeTypes.Body;
-        [NonSerialized]
-        readonly string[] options =
+        [NonSerialized] readonly string[] options =
         {
             NodeTypes.Basic.ToString(),
             NodeTypes.Drain.ToString(),
             NodeTypes.Body.ToString(),
             NodeTypes.Vore.ToString(),
         };
+
+        NodeTypes createOfType = NodeTypes.Body;
+        LoseScenario selected;
+
         void OnGUI()
         {
             if (selected == null)
@@ -39,7 +37,7 @@ namespace Defeated.Editor
                 foreach (LoseScenarioNode node in selected.GetAllNodes().Cast<LoseScenarioNode>())
                 {
                     DrawNode(node);
-                    DrawNodeConnection(selected,node);
+                    DrawNodeConnection(selected, node);
                 }
 
                 EditorGUILayout.EndScrollView();
@@ -68,12 +66,13 @@ namespace Defeated.Editor
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
+
                     creatingNode = null;
                 }
             }
         }
 
-      
+
         [MenuItem("Defeat/Lose Scenario Builder")]
         static void ShowWindow()
         {
@@ -96,10 +95,11 @@ namespace Defeated.Editor
         {
             GUILayout.BeginArea(node.rect, NodeStyle);
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.LabelField(node.GetType().Name.Remove(0,12), EditorStyles.whiteLabel);
+            EditorGUILayout.LabelField(node.GetType().Name.Remove(0, 12), EditorStyles.whiteLabel);
             //EditorGUILayout.LabelField(node.Title);
             //EditorGUILayout.LabelField("Add child of type");
-            createOfType = UgreTools.IntToEnum(EditorGUILayout.Popup(createOfType.IndexOfEnum(),options),NodeTypes.Drain);
+            createOfType = UgreTools.IntToEnum(EditorGUILayout.Popup(createOfType.IndexOfEnum(), options),
+                NodeTypes.Drain);
             PrintButtons(node);
 
             GUILayout.EndArea();

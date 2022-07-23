@@ -21,7 +21,7 @@ namespace GameUIAndMenus.Menus.Family
                 PrintChild(id);
         }
 
-        private void PrintChild(int id)
+        void PrintChild(int id)
         {
             if (!DayCare.ChildDict.TryGetValue(id, out Child myChild))
                 return;

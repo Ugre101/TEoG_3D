@@ -15,10 +15,7 @@ namespace GameUIAndMenus.Menus.Level
             Setup();
         }
 
-        void OnDisable()
-        {
-            Player.LevelSystem.PerkPointsChanged -= UpdatePerkPoints;
-        }
+        void OnDisable() => Player.LevelSystem.PerkPointsChanged -= UpdatePerkPoints;
 
         void Setup()
         {

@@ -12,15 +12,9 @@ namespace Options
         // Start is called before the first frame update
         void Start()
         {
-            if (TryGetComponent(out Toggle toggle))
-            {
-                toggle.onValueChanged.AddListener(Change);
-            }
+            if (TryGetComponent(out Toggle toggle)) toggle.onValueChanged.AddListener(Change);
         }
 
-        void Change(bool arg0)
-        {
-            QualitySettings.renderPipeline = arg0 ? withShadow : noShadow;
-        }
+        void Change(bool arg0) => QualitySettings.renderPipeline = arg0 ? withShadow : noShadow;
     }
 }

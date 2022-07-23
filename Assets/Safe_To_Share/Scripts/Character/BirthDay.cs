@@ -13,10 +13,12 @@ namespace Character
         {
             this.year = year;
             this.day = day;
-        } public BirthDay(DateSave date)
+        }
+
+        public BirthDay(DateSave date)
         {
-            this.year = date.Year;
-            this.day = date.Day;
+            year = date.Year;
+            day = date.Day;
         }
 
         public int Year => year;

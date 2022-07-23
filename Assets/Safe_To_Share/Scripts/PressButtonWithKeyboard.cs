@@ -7,7 +7,9 @@ namespace Safe_To_Share.Scripts
     public class PressButtonWithKeyboard : MonoBehaviour
     {
         [SerializeField] Button btn;
-        [SerializeField] InputAction action = new InputAction();
+
+        [SerializeField] InputAction action = new();
+
         // Start is called before the first frame update
         void Start() => action.performed += Click;
 

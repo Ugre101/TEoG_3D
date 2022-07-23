@@ -13,18 +13,22 @@ namespace SceneStuff
 {
     public partial class SceneLoader
     {
-        bool loadingBattle, loadingBattleUI;
         AsyncOperationHandle<SceneInstance> battleSceneOperationHandle;
 
         AsyncOperationHandle<SceneInstance> battleUIOperationHandle;
+        bool loadingBattle, loadingBattleUI;
+
+        bool startedCombat;
+
         public void LoadCombatUIIfNotAlready()
         {
-            if (currentScene ==  battleScene)
+            if (currentScene == battleScene)
                 return;
             if (!loadingBattleUI)
                 battleUIOperationHandle = battleUIScene.SceneReference.LoadSceneAsync(LoadSceneMode.Additive);
             loadingBattleUI = true;
         }
+
         public void LoadCombatIfNotAlready()
         {
             if (currentScene == battleScene)
@@ -51,8 +55,7 @@ namespace SceneStuff
             }
         }
 
-        bool startedCombat;
-        void LoadCombat(Player player,params BaseCharacter[] enemy)
+        void LoadCombat(Player player, params BaseCharacter[] enemy)
         {
             if (startedCombat) return;
             StartCoroutine(FinishLoadCombatScene(player, enemy));
@@ -80,6 +83,7 @@ namespace SceneStuff
                 LoaderScreen.UnLoadProgress(unLoadScene.PercentComplete);
                 yield return null;
             }
+
             LoadCombatIfNotAlready();
             yield return UpdateProgressWhileSceneNotDone(battleSceneOperationHandle);
             if (battleSceneOperationHandle.Status == AsyncOperationStatus.Succeeded)

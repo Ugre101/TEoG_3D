@@ -1,5 +1,4 @@
 ﻿using AvatarStuff.Holders;
-using Character.PlayerStuff;
 using UnityEngine;
 
 namespace AvatarStuff.UI
@@ -7,6 +6,7 @@ namespace AvatarStuff.UI
     public class EnterBodyMorphPanel : MonoBehaviour
     {
         [SerializeField] BodyMorphPanel panel;
+
         void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player") && other.TryGetComponent(out PlayerHolder mover))
@@ -18,7 +18,7 @@ namespace AvatarStuff.UI
 
         void OnTriggerExit(Collider other)
         {
-            if (!other.CompareTag("Player")) 
+            if (!other.CompareTag("Player"))
                 return;
             panel.gameObject.SetActive(false);
         }

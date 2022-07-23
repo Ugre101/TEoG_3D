@@ -31,7 +31,7 @@ namespace DormAndHome.Dorm.Buildings
         }
 
         public event Action Upgraded;
-        
+
         public abstract void TickBuildingEffect(List<DormMate> dormMates);
     }
 }

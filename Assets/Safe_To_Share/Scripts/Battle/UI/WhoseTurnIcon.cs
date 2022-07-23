@@ -8,7 +8,8 @@ namespace Battle.UI
     {
         [SerializeField] Image background;
         [SerializeField] TextMeshProUGUI title;
-        public void Setup(bool ally,string firstName)
+
+        public void Setup(bool ally, string firstName)
         {
             background.color = ally ? Color.blue : Color.red;
             title.text = firstName;

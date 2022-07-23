@@ -6,7 +6,7 @@ namespace Currency
     [CreateAssetMenu(fileName = "Create CurrencyPerk", menuName = "Character/CurrencyPerk", order = 0)]
     public class CurrencyPerk : BasicPerk
     {
-        [SerializeField,Range(0,100),] int discount;
+        [SerializeField, Range(0, 100),] int discount;
 
         public float Discount => discount / 100f;
     }

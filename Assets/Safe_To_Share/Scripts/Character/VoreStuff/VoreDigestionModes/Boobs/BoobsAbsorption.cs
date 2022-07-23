@@ -7,7 +7,7 @@ namespace Character.VoreStuff.VoreDigestionModes.Boobs
         public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer)
         {
             baseOrgan.Vore.NoDigestTick();
-            pred.Vore.AltDigestionPerk(pred,VoreOrganDigestionMode.Absorption, baseOrgan.Vore, VoreType.Breast);
+            pred.Vore.AltDigestionPerk(pred, VoreOrganDigestionMode.Absorption, baseOrgan.Vore, VoreType.Breast);
             return true;
         }
     }

@@ -8,24 +8,23 @@ namespace Items.Editor
     [CustomEditor(typeof(Item))]
     public class ItemEditor : UnityEditor.Editor
     {
-        readonly string[] options = {"Heal",};
+        const int Rows = 2;
+        readonly string[] options = { "Heal", };
+
+        SerializedProperty effectsTree;
 
         Item myTarget;
+        SerializedProperty showEffect;
 
-        const int Rows = 2;
         void OnEnable()
         {
             myTarget = (Item)target;
-            
-             effectsTree = serializedObject.FindProperty("effectsTree");
+
+            effectsTree = serializedObject.FindProperty("effectsTree");
         }
 
-        SerializedProperty effectsTree;
-        SerializedProperty showEffect;
         public override void OnInspectorGUI()
         {
-
-
             int length = ItemEffectsTree.PropertyNames.Length;
             int effectIndex = 0;
             int leftOver = length % Rows;
@@ -37,6 +36,7 @@ namespace Items.Editor
                     rowLength++;
                     leftOver--;
                 }
+
                 EditorGUILayout.BeginHorizontal();
                 for (int i = 0; i < rowLength; i++)
                 {
@@ -45,13 +45,14 @@ namespace Items.Editor
                     DrawEffectBtn(effectIndex);
                     effectIndex++;
                 }
+
                 EditorGUILayout.EndHorizontal();
             }
 
-       
+
             if (showEffect != null)
                 EditorGUILayout.PropertyField(showEffect);
-         
+
 
             base.OnInspectorGUI();
             // Rect rect = EditorGUILayout.BeginVertical("box");
@@ -79,7 +80,7 @@ namespace Items.Editor
             var orgColor = GUI.backgroundColor;
             var itemEffect = effectsTree.FindPropertyRelative(propertyName);
             GUI.backgroundColor = itemEffect.FindPropertyRelative("active").boolValue ? Color.green : Color.gray;
-            if (GUILayout.Button(UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(cleanName, true)))
+            if (GUILayout.Button(UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(cleanName)))
                 showEffect = effectsTree.FindPropertyRelative(propertyName);
             GUI.backgroundColor = orgColor;
         }

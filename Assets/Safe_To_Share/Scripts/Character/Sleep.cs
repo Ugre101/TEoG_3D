@@ -1,8 +1,6 @@
 ﻿using Character.PlayerStuff;
 using Character.StatsStuff;
 using Character.StatsStuff.Mods;
-using System;
-using System.Text;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
@@ -11,17 +9,21 @@ namespace Character
     public static class SleepExtensions
     {
         const int SleepCooldown = 12;
-
-        public static bool PlayerCanSleep(this Player player) => DateSystem.DateSaveHoursAgo(player.LastTimeSlept) >= SleepCooldown;
-        public static int HoursBeforeCanSleep(Player player) => Mathf.Max(-1,SleepCooldown - DateSystem.DateSaveHoursAgo(player.LastTimeSlept));
         public const string ModFrom = "Sleep";
+
+        public static bool PlayerCanSleep(this Player player) =>
+            DateSystem.DateSaveHoursAgo(player.LastTimeSlept) >= SleepCooldown;
+
+        public static int HoursBeforeCanSleep(Player player) =>
+            Mathf.Max(-1, SleepCooldown - DateSystem.DateSaveHoursAgo(player.LastTimeSlept));
 
         public static void Sleep(this Player player, int sleepQuality, BaseCharacter[] sleepEnemies)
         {
             if (SleepAttack(player, sleepEnemies))
                 return;
             Sleep(player, sleepQuality);
-        } 
+        }
+
         public static void Sleep(this Player player, int sleepQuality)
         {
             player.BaseSleep(sleepQuality);
@@ -29,21 +31,21 @@ namespace Character
             player.CheckAilments();
         }
 
-        private static bool SleepAttack(Player player, BaseCharacter[] sleepEnemies)
+        static bool SleepAttack(Player player, BaseCharacter[] sleepEnemies)
         {
             if (sleepEnemies == null)
                 return false;
             int attackChance = 30; // sub perk values
-            if (UnityEngine.Random.Range(0, 100) >= attackChance)
+            if (Random.Range(0, 100) >= attackChance)
                 return false;
             TerribleSleep(player);
-           // player.TriggerCombat(sleepEnemies[UnityEngine.Random.Range(0, sleepEnemies.Length)]);
+            // player.TriggerCombat(sleepEnemies[UnityEngine.Random.Range(0, sleepEnemies.Length)]);
             return true;
         }
 
         public static void BaseSleep(this BaseCharacter character, int sleepQuality)
         {
-            int roll = UnityEngine.Random.Range(0, 100);
+            int roll = Random.Range(0, 100);
             roll += sleepQuality;
             if (roll < 100)
                 BadSleep(character);
@@ -99,17 +101,15 @@ namespace Character
             SleepMods(character, 30, 3, 5, 2);
         }
 
-        public static string SleepTitle(float hpPer)
-        {
-            return hpPer switch
+        public static string SleepTitle(float hpPer) =>
+            hpPer switch
             {
                 -30 => "Slept terrible",
                 -10 => "Slept bad",
                 5 => "Slept",
                 15 => "Slept good",
                 30 => "Slept great",
-                _ => "Slept"
+                _ => "Slept",
             };
-        }
     }
 }

@@ -8,19 +8,15 @@ namespace QuestStuff
 {
     public class StaticQuestObject : MiniMapBaseObject
     {
-        public static event Action<StaticQuestObject> PrintMe;
-        public static event Action<StaticQuestObject> RemoveMe;
-
         [SerializeField] bool triggerComplete, triggerProgress;
         [SerializeField, HideInInspector,] string guid;
 
         bool loaded;
         QuestInfo loadedInfo;
 
-        void Start()
-        {
-            Addressables.LoadAssetAsync<QuestInfo>(guid).Completed += Loaded;
-        }
+        public bool HasQuest { get; private set; }
+
+        void Start() => Addressables.LoadAssetAsync<QuestInfo>(guid).Completed += Loaded;
 
         void OnDestroy()
         {
@@ -41,7 +37,9 @@ namespace QuestStuff
                 StartCoroutine(PlayerQuests.ProgressQuest(loadedInfo));
         }
 
-        public bool HasQuest { get; private set; }
+        public static event Action<StaticQuestObject> PrintMe;
+        public static event Action<StaticQuestObject> RemoveMe;
+
         void Loaded(AsyncOperationHandle<QuestInfo> obj)
         {
             loaded = true;
@@ -70,7 +68,7 @@ namespace QuestStuff
             PrintMe?.Invoke(this);
             HasQuest = true;
         }
-#if UNITY_EDITOR 
+#if UNITY_EDITOR
         [SerializeField] QuestInfo questInfo;
 
         void OnValidate()

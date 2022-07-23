@@ -11,16 +11,16 @@ namespace QuestStuff
 {
     public static class PlayerQuests
     {
-        public static event Action<QuestInfo> QuestAdded;
-        public static event Action<QuestInfo> QuestRemoved;
-
-        public static event Action<QuestReward> QuestReward;
         static Dictionary<QuestInfo, QuestProgress> PrivateQuests { get; set; } = new();
 
         public static IReadOnlyDictionary<QuestInfo, QuestProgress> PrintQuests { get; private set; } = PrivateQuests;
         static List<QuestReturnInfo> PrivateCompletedQuests { get; set; } = new();
 
         public static ReadOnlyCollection<QuestReturnInfo> CompletedQuests { get; private set; }
+        public static event Action<QuestInfo> QuestAdded;
+        public static event Action<QuestInfo> QuestRemoved;
+
+        public static event Action<QuestReward> QuestReward;
 
         public static bool HasQuest(QuestInfo info) => PrivateQuests.ContainsKey(info);
 
@@ -35,7 +35,7 @@ namespace QuestStuff
         {
             if (!HasQuest(info))
                 yield break;
-            if (info.HasInstantReward) 
+            if (info.HasInstantReward)
                 QuestReward?.Invoke(info.QuestReward);
             yield return info.QuestChain ? LoadNextQuest(info.NextGuid) : LoadReturnTo(info.ReturnGuid);
             RemoveQuest(info);
@@ -90,6 +90,7 @@ namespace QuestStuff
             yield return LoadQuestProgress(toLoad);
             yield return LoadCompledtedQuests(toLoad);
         }
+
         static IEnumerator LoadQuestProgress(QuestsSave toLoad)
         {
             if (toLoad.Quests == null)
@@ -99,30 +100,35 @@ namespace QuestStuff
             {
                 var info = Addressables.LoadAssetAsync<QuestInfo>(loadQuest.QuestId);
                 yield return info;
-                if (NotSafe(info)) 
+                if (NotSafe(info))
                     continue;
                 PrivateQuests.Add(info.Result, new QuestProgress(info.Result, loadQuest.Progress));
                 QuestAdded?.Invoke(info.Result);
             }
+
             PrintQuests = PrivateQuests;
         }
 
-        static bool NotSafe(AsyncOperationHandle<QuestInfo> info) => info.Status != AsyncOperationStatus.Succeeded || PrivateQuests.ContainsKey(info.Result);
+        static bool NotSafe(AsyncOperationHandle<QuestInfo> info) => info.Status != AsyncOperationStatus.Succeeded ||
+                                                                     PrivateQuests.ContainsKey(info.Result);
 
         static IEnumerator LoadCompledtedQuests(QuestsSave toLoad)
         {
             if (toLoad.Completed == null)
                 yield break;
             PrivateCompletedQuests = new List<QuestReturnInfo>();
-            foreach (AsyncOperationHandle<QuestReturnInfo> info in toLoad.Completed.Select(Addressables.LoadAssetAsync<QuestReturnInfo>))
+            foreach (AsyncOperationHandle<QuestReturnInfo> info in toLoad.Completed.Select(Addressables
+                         .LoadAssetAsync<QuestReturnInfo>))
             {
                 yield return info;
                 if (info.Status == AsyncOperationStatus.Succeeded)
                     PrivateCompletedQuests.Add(info.Result);
             }
+
             CompletedQuests = PrivateCompletedQuests.AsReadOnly();
         }
     }
+
     [Serializable]
     public struct QuestsSave
     {

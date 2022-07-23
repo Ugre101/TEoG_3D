@@ -4,13 +4,10 @@
     {
         public static void Milk(BaseCharacter character)
         {
-            
-        }
-        public static void Masturbate(BaseCharacter character, SexualOrganType with)
-        {
-               
         }
 
-    
+        public static void Masturbate(BaseCharacter character, SexualOrganType with)
+        {
+        }
     }
 }

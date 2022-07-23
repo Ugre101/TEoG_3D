@@ -9,14 +9,11 @@ namespace Character.VoreStuff.VoreDigestionModes.Balls
         {
             baseOrgan.Vore.NoDigestTick();
             foreach (int preysId in baseOrgan.Vore.PreysIds)
-            {
                 if (VoredCharacters.PreyDict.TryGetValue(preysId, out var prey))
-                {
-                    if (DateSystem.DateSaveHoursAgo(prey.VoredDate) > 8) // Takes time before they start finding there way in
+                    if (DateSystem.DateSaveHoursAgo(prey.VoredDate) >
+                        8) // Takes time before they start finding there way in
                         if (prey.EndosomaTryImpregnate(pred))
                             break; // Only impregnate max one each tick
-                }
-            }
             // try impregnate
             return false;
         }

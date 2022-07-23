@@ -1,6 +1,5 @@
 ﻿using System;
 using AvatarStuff.Holders;
-using Character.PlayerStuff;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,15 +15,12 @@ namespace GameUIAndMenus.Menus.Level
         protected bool Afford = false;
         protected PlayerHolder player;
 
-        void Start()
-        {
-            btn.onClick.AddListener(OnClick);
-        }
-
-        public abstract void Setup(PlayerHolder player);
+        void Start() => btn.onClick.AddListener(OnClick);
 
 
         public void OnPointerExit(PointerEventData eventData) => StopShowPerkInfo?.Invoke();
+
+        public abstract void Setup(PlayerHolder player);
 
         protected abstract void CanAfford(int obj);
 

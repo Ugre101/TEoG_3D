@@ -7,7 +7,8 @@ namespace Options
 {
     public class GraphicsTierDropDown : MonoBehaviour
     {
-        [SerializeField]  TMP_Dropdown dropdown;
+        [SerializeField] TMP_Dropdown dropdown;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -16,7 +17,7 @@ namespace Options
         }
 
         static void ChangeTier(int arg0)
-        { 
+        {
             if (arg0 < 0 || arg0 >= QualitySettings.names.Length)
                 return;
             QualitySettings.SetQualityLevel(arg0);
@@ -25,7 +26,8 @@ namespace Options
         void Setup()
         {
             dropdown.ClearOptions();
-            List<TMP_Dropdown.OptionData> qualities = QualitySettings.names.Select(q => new TMP_Dropdown.OptionData(q)).ToList();
+            List<TMP_Dropdown.OptionData> qualities =
+                QualitySettings.names.Select(q => new TMP_Dropdown.OptionData(q)).ToList();
             dropdown.AddOptions(qualities);
             dropdown.value = QualitySettings.GetQualityLevel();
         }

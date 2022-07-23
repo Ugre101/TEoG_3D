@@ -205,9 +205,9 @@ namespace Safe_To_Share.Scripts.Special_Items
             {
                 ChangeLog log = new();
                 if (UnityEngine.Random.value > 0.5f)
-                    user.GainFemi(user.LoseMasc(user.DrainAmount(user),log));
+                    user.GainFemi(user.LoseMasc(user.DrainAmount(user), log));
                 else
-                    user.GainMasc(user.LoseFemi(user.DrainAmount(user),log));
+                    user.GainMasc(user.LoseFemi(user.DrainAmount(user), log));
             }
         }
 

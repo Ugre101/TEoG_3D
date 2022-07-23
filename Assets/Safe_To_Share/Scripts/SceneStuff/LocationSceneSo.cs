@@ -2,7 +2,6 @@
 using System.Linq;
 using SaveStuff;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace SceneStuff
 {
@@ -18,6 +17,8 @@ namespace SceneStuff
         public Sprite WorldMap => worldMap;
 
 
-        public IEnumerable<string> SaveActiveSubLocations() => from subLocationSceneSo in subLocations where subLocationSceneSo.SceneReference.IsValid() select subLocationSceneSo.Guid;
+        public IEnumerable<string> SaveActiveSubLocations() => from subLocationSceneSo in subLocations
+            where subLocationSceneSo.SceneReference.IsValid()
+            select subLocationSceneSo.Guid;
     }
 }

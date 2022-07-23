@@ -8,13 +8,15 @@ namespace GameUIAndMenus.MinimapUI
     {
         [SerializeField] Transform leftContainer, rightContainer;
         [SerializeField] BigMapNamedIcon prefab;
+
         protected override void Start()
         {
             base.Start();
             GetBigMapNamedIcons();
         }
+
         void GetBigMapNamedIcons()
-        { 
+        {
             AddNamedIcons(PairedStaticObjects);
             AddNamedIcons(PairedObjects);
             //var enemyZone = FindObjectsOfType<EnemyZoneMiniMapObject>();
@@ -27,10 +29,12 @@ namespace GameUIAndMenus.MinimapUI
             {
                 var miniMapBaseObject = miniMapObject.GlobalTrans;
                 if (miniMapBaseObject.AddIconToBigMap)
-                    Instantiate(prefab, ContainerWithLessChildren()).Setup(miniMapBaseObject.AddedIconText, miniMapBaseObject.Icon);
+                    Instantiate(prefab, ContainerWithLessChildren())
+                        .Setup(miniMapBaseObject.AddedIconText, miniMapBaseObject.Icon);
             }
         }
 
-        Transform ContainerWithLessChildren() => rightContainer.childCount >= leftContainer.childCount ? leftContainer : rightContainer;
+        Transform ContainerWithLessChildren() =>
+            rightContainer.childCount >= leftContainer.childCount ? leftContainer : rightContainer;
     }
 }

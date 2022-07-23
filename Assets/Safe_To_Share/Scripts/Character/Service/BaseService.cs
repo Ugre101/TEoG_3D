@@ -6,7 +6,7 @@ namespace Character.Service
     public abstract class BaseService : ScriptableObject
     {
         [SerializeField] string title;
-        [SerializeField, TextArea] string desc;
+        [SerializeField, TextArea,] string desc;
         [SerializeField] int cost;
 
         public string Title => title;
@@ -17,7 +17,6 @@ namespace Character.Service
 
         public virtual void OnUse(Player player)
         {
-            
         }
     }
 }

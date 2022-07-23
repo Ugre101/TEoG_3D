@@ -12,10 +12,11 @@ namespace Safe_To_Share.Scripts
         [SerializeField] InputAction inputAction;
 
         EventSystem system;
+
         void Start()
         {
             system = EventSystem.current;
-            inputAction.performed += ctx =>  Next();
+            inputAction.performed += ctx => Next();
         }
 
         void OnEnable() => inputAction.Enable();
@@ -24,18 +25,25 @@ namespace Safe_To_Share.Scripts
 
         void Next()
         {
-            Selectable selected = system.currentSelectedGameObject != null ? system.currentSelectedGameObject.GetComponent<Selectable>() : null;
+            Selectable selected = system.currentSelectedGameObject != null
+                ? system.currentSelectedGameObject.GetComponent<Selectable>()
+                : null;
             Selectable[] selectables = GetComponentsInChildren<Selectable>();
             if (selectables.Length == 0)
                 return;
-            int nextIndex = selected == null ? 0 :
-                Array.IndexOf(selectables, selected) < selectables.Length - 1 ? Array.IndexOf(selectables, selected) + 1 :
-                0;
+            int nextIndex = selected == null
+                ? 0
+                :
+                Array.IndexOf(selectables, selected) < selectables.Length - 1
+                    ?
+                    Array.IndexOf(selectables, selected) + 1
+                    :
+                    0;
 
             GameObject nextObject = selectables[nextIndex].gameObject;
             if (nextObject.TryGetComponent(out TMP_InputField inputField))
                 inputField.OnPointerClick(new PointerEventData(system));
-            system.SetSelectedGameObject(nextObject,new BaseEventData(system));
+            system.SetSelectedGameObject(nextObject, new BaseEventData(system));
         }
     }
 }

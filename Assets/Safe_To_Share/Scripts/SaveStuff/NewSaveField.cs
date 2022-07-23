@@ -11,7 +11,7 @@ namespace SaveStuff
         [SerializeField] TMP_InputField saveName;
         [SerializeField] Button saveBtn;
         [SerializeField] InputActionAsset actionMap;
-        [SerializeField] InputAction saveHotKey = new InputAction();
+        [SerializeField] InputAction saveHotKey = new();
 
         void Start()
         {

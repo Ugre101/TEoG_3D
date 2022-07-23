@@ -22,6 +22,7 @@ namespace Character.Organs.OrgansContainers
                 list.Remove(littleDick);
                 return GrowNewCost;
             }
+
             changeLog.LogDrainChange("a dick shrunk");
             return base.ReCycleOnce(changeLog);
         }

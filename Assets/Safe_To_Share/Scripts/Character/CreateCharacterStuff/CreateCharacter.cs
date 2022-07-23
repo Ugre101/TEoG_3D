@@ -1,8 +1,5 @@
-﻿using Character.GenderStuff;
-using Character.IdentityStuff;
-using Character.LevelStuff;
+﻿using Character.LevelStuff;
 using Character.Race.Races;
-using Character.SkillsAndSpells;
 using Character.StatsStuff;
 using Items;
 

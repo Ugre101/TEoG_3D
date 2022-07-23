@@ -2,7 +2,6 @@
 using AvatarStuff.Holders;
 using Character.EssenceStuff;
 using Character.LevelStuff;
-using Character.PlayerStuff;
 using GameUIAndMenus.Menus.Level;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -23,7 +22,7 @@ namespace GameUIAndMenus.Menus.EssenceMenu
             Addressables.LoadAssetAsync<EssencePerk>(guid).Completed += LoadedPerk;
         }
 
-        private void LoadedPerk(AsyncOperationHandle<EssencePerk> obj)
+        void LoadedPerk(AsyncOperationHandle<EssencePerk> obj)
         {
             loaded = obj.Result;
             CanAfford(player.Player.LevelSystem.Points);
@@ -35,14 +34,16 @@ namespace GameUIAndMenus.Menus.EssenceMenu
             bool hasPerk = player.Player.Essence.EssencePerks.Contains(result);
             HaveFade(hasPerk);
         }
+
         protected override void OnClick()
         {
-            if (Have || !loaded.MeetsRequirements(player.Player) || !player.Player.LevelSystem.TryUsePoints(loaded.Cost))
+            if (Have || !loaded.MeetsRequirements(player.Player) ||
+                !player.Player.LevelSystem.TryUsePoints(loaded.Cost))
                 return;
             if (loaded is not EssencePerk perk)
                 return;
             HaveFade(true);
-            EssenceExtensions.GainPerk(perk, player.Player);
+            perk.GainPerk(player.Player);
         }
     }
 }

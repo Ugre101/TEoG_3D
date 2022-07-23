@@ -1,6 +1,5 @@
 ﻿using System;
 using Battle.SkillsAndSpells;
-using Character.SkillsAndSpells;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,17 +8,12 @@ namespace Battle.UI
 {
     public class AssignAbilityIcon : MonoBehaviour, IPointerEnterHandler
     {
-        public static event Action<Ability> AbilityLastHovered;
-        public static event Action AbilityBound;
         [SerializeField] Image icon;
-        [SerializeField]  Button btn;
+        [SerializeField] Button btn;
         Ability ability;
         AttackBtn bindTo;
 
-        void Start()
-        {
-            btn.onClick.AddListener(BindAbility);
-        }
+        void Start() => btn.onClick.AddListener(BindAbility);
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -27,6 +21,9 @@ namespace Battle.UI
             AbilityLastHovered?.Invoke(ability);
             // Display ability info
         }
+
+        public static event Action<Ability> AbilityLastHovered;
+        public static event Action AbilityBound;
 
         public void Setup(Ability parAbility, AttackBtn parBindTo)
         {

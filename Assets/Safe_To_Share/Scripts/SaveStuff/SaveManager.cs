@@ -53,7 +53,8 @@ namespace SaveStuff
 
             string fullSaveName = Path.Combine(SavePath, cleanSaveName);
             SaveSummary summary = new(Player.Identity.FullName, Player.LevelSystem.Level, addedText);
-            Save newSave = new(new PlayerSave(new ControlledCharacterSave(Player), playerHolder.transform.position, Player.Inventory.Save()));
+            Save newSave = new(new PlayerSave(new ControlledCharacterSave(Player), playerHolder.transform.position,
+                Player.Inventory.Save()));
             LastSave = newSave;
             FullSave fullSave = new(summary, newSave);
             if (File.Exists(fullSaveName))

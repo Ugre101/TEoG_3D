@@ -1,5 +1,4 @@
-﻿using Character.EnemyStuff;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
 {
@@ -29,6 +28,7 @@ namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
     public class EnemyBrainStopChase : State<EnemyAiHolder>
     {
         float waitUntil;
+
         public EnemyBrainStopChase(EnemyAiHolder behaviour) : base(behaviour)
         {
         }
@@ -43,15 +43,16 @@ namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
         {
             if (behaviour.DistanceToPlayer <= behaviour.AggroRange)
                 behaviour.ChangeState(new EnemyBrainChase(behaviour));
-            else switch (Time.time >= waitUntil)
-            {
-                case true when Vector3.Distance(behaviour.transform.position,behaviour.SpawnLocation) > 2f:
-                    behaviour.AIMover.AISetDest(behaviour.SpawnLocation);
-                    break;
-                case true:
-                    behaviour.ChangeState(new EnemyBrainIdle(behaviour));
-                    break;
-            }
+            else
+                switch (Time.time >= waitUntil)
+                {
+                    case true when Vector3.Distance(behaviour.transform.position, behaviour.SpawnLocation) > 2f:
+                        behaviour.AIMover.AISetDest(behaviour.SpawnLocation);
+                        break;
+                    case true:
+                        behaviour.ChangeState(new EnemyBrainIdle(behaviour));
+                        break;
+                }
         }
     }
 }

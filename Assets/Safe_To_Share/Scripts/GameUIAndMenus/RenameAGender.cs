@@ -24,7 +24,7 @@ namespace Options
                 orgGenderName.text = UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(gender.ToString());
         }
 #endif
-        
+
 
         void ChangeName(string arg0) => GenderSettings.ReNameGender(gender, arg0);
     }

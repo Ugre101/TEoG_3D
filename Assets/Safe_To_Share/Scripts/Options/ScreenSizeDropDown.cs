@@ -8,7 +8,7 @@ namespace Options
 {
     public class ScreenSizeDropDown : MonoBehaviour
     {
-       [SerializeField] TMP_Dropdown dropdown;
+        [SerializeField] TMP_Dropdown dropdown;
 
         Resolution[] resolutions;
 

@@ -46,7 +46,7 @@ namespace Dialogue.Editor
                     selected.DeleteChildNode(deletingNode);
                     deletingNode = null;
                 }
-                else if (creatingNode != null) 
+                else if (creatingNode != null)
                     AddNewNode();
             }
         }
@@ -143,7 +143,7 @@ namespace Dialogue.Editor
             EditorGUILayout.LabelField("Add child of type");
             nodeType = UgreTools.IntToEnum(EditorGUILayout.Popup(nodeType.IndexOfEnum(), options), NodeTypes.Basic);
             PrintButtons(node);
-            
+
             GUILayout.EndArea();
         }
 

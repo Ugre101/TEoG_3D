@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Runtime.InteropServices.ComTypes;
 using Options;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +10,7 @@ namespace Battle.UI
         [SerializeField] Button leave, fuck;
 
 
-        readonly WaitForSeconds waitForSeconds= new(0.2f);
+        readonly WaitForSeconds waitForSeconds = new(0.2f);
 
         void Start()
         {
@@ -31,17 +30,16 @@ namespace Battle.UI
             GoToAfterBattle();
         }
 
-         void Leave()
-         {
-             BattleManager.Instance.Leave();
-             leave.gameObject.SetActive(false);
-         }
+        void Leave()
+        {
+            BattleManager.Instance.Leave();
+            leave.gameObject.SetActive(false);
+        }
 
-         void GoToAfterBattle()
+        void GoToAfterBattle()
         {
             BattleManager.Instance.GoToAfterBattle();
             fuck.gameObject.SetActive(false);
         }
-
     }
 }

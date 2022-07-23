@@ -36,10 +36,10 @@ namespace Safe_To_Share.Scripts.CustomContent
             if (scenario?.Enemies == null)
                 return;
             foreach (EnemyPreset enemy in from enemy in enemyPresets
-                from savedEnemy in
-                    scenario.Enemies.Where(savedEnemy =>
-                        savedEnemy == enemy.name && !enemy.customLoseScenarios.Contains(scenario))
-                select enemy)
+                     from savedEnemy in
+                         scenario.Enemies.Where(savedEnemy =>
+                             savedEnemy == enemy.name && !enemy.customLoseScenarios.Contains(scenario))
+                     select enemy)
                 FoundEnemy(scenario, enemy);
         }
 

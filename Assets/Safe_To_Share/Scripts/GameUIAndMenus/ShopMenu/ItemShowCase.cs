@@ -13,12 +13,22 @@ namespace Shop.UI
         [SerializeField] TextMeshProUGUI amountText, totalValue;
         [SerializeField] Slider amountSlider;
         [SerializeField] Button btn;
-        
-        Item item;
-        int amount;
-        float discountMulti; 
-        GoldBag buyerGold;
         bool afford;
+        int amount;
+        GoldBag buyerGold;
+        float discountMulti;
+
+        Item item;
+
+        public void Reset()
+        {
+            title.text = string.Empty;
+            desc.text = "Click on a item";
+            value.text = string.Empty;
+            totalValue.text = string.Empty;
+            amountSlider.onValueChanged.RemoveAllListeners();
+            btn.onClick.RemoveAllListeners();
+        }
 
         void ChangeAmount(float arg0) => SetQuantity(Mathf.RoundToInt(arg0));
 
@@ -32,7 +42,7 @@ namespace Shop.UI
             totalValue.color = afford ? Color.green : Color.red;
         }
 
-        public void Setup(Item newItem,GoldBag haveGold,float discount = 0)
+        public void Setup(Item newItem, GoldBag haveGold, float discount = 0)
         {
             Reset();
             buyerGold = haveGold;
@@ -42,25 +52,16 @@ namespace Shop.UI
             desc.text = item.Desc;
             value.text = $"{item.Value}g";
             SetQuantity(1);
-            int maxAfford = Mathf.FloorToInt(haveGold.Gold / (newItem.Value *  discountMulti));
+            int maxAfford = Mathf.FloorToInt(haveGold.Gold / (newItem.Value * discountMulti));
             amountSlider.maxValue = maxAfford;
             amountSlider.value = 1;
             amountSlider.onValueChanged.AddListener(ChangeAmount);
-            
+
             btn.onClick.AddListener(BuyItem);
         }
 
-        public void Reset()
-        {
-            title.text = string.Empty;
-            desc.text = "Click on a item";
-            value.text = string.Empty;
-            totalValue.text = string.Empty;
-            amountSlider.onValueChanged.RemoveAllListeners();
-            btn.onClick.RemoveAllListeners();
-        }
+        public static event Action<Item, int> BuyItemInAmount;
 
-        public static event Action<Item, int> BuyItemInAmount; 
         void BuyItem()
         {
             if (afford)

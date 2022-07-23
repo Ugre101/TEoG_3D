@@ -6,7 +6,6 @@ using Character.Family;
 using Character.IslandData;
 using Character.PlayerStuff.Currency;
 using Character.VoreStuff;
-using Currency;
 using DormAndHome.Dorm;
 using DormAndHome.Dorm.Buildings;
 using Map;
@@ -33,6 +32,7 @@ namespace SaveStuff
         [SerializeField] string avatarDetails;
         [SerializeField] string islandStones;
         [SerializeField] string playerGold;
+
         public Save(PlayerSave character)
         {
             lastId = IDGiver.Save();
@@ -90,7 +90,7 @@ namespace SaveStuff
                 {
                     LoadError?.Invoke("Dorm Failed to load");
                     Console.WriteLine(e);
-                    return new DormSave(new List<DormMate>(),new DormBuildings());
+                    return new DormSave(new List<DormMate>(), new DormBuildings());
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace SaveStuff
             {
                 try
                 {
-                  return JsonUtility.FromJson<DayCareSave>(dayCare);
+                    return JsonUtility.FromJson<DayCareSave>(dayCare);
                 }
                 catch (Exception e)
                 {
@@ -135,13 +135,14 @@ namespace SaveStuff
                 Debug.Log(errTest);
                 int end = player.IndexOf("}", start, StringComparison.Ordinal);
                 if (start == -1 || end == -1) return 200;
-                string substring = player.Substring(start,end - start);
+                string substring = player.Substring(start, end - start);
                 Debug.Log(substring);
                 return int.TryParse(substring, out int res) ? res : 200;
                 // if (int.TryParse(JObject))
                 // "gold\\\":99999}}\"
             }
         }
+
         public static event Action<string> LoadError;
     }
 }

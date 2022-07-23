@@ -73,7 +73,8 @@ namespace Safe_To_Share.Scripts.Static
         static TMP_Dropdown.OptionData EnumToData<TEum>(TEum o) where TEum : Enum =>
             new(StringFormatting.AddSpaceAfterCapitalLetter(o.ToString()));
 
-        public static void SetupTmpDropDown<TEum>(this TMP_Dropdown dropdown, TEum currentValue, UnityAction<int> onChange,
+        public static void SetupTmpDropDown<TEum>(this TMP_Dropdown dropdown, TEum currentValue,
+            UnityAction<int> onChange,
             params TEum[] altExcludeOptions) where TEum : Enum
         {
             dropdown.ClearOptions();

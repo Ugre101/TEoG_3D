@@ -8,14 +8,6 @@ namespace Character.Organs.Fluids.UI
         [SerializeField] FluidInfo milkInfo;
 
         BaseCharacter character;
-        public void Setup(BaseCharacter myCharacter)
-        {
-            character = myCharacter;
-            UpdateCum(0f);
-            UpdateMilk(0f);
-            character.SexualOrgans.Balls.Fluid.CurrentValueChange += UpdateCum;
-            character.SexualOrgans.Boobs.Fluid.CurrentValueChange += UpdateMilk;
-        }
 
         void OnDisable()
         {
@@ -33,7 +25,16 @@ namespace Character.Organs.Fluids.UI
             character.SexualOrgans.Boobs.Fluid.CurrentValueChange -= UpdateMilk;
         }
 
-        void UpdateMilk(float obj) => milkInfo.UpdateFluid(character.SexualOrgans.Boobs,character.Body.Height.Value);
-        void UpdateCum(float obj) => cumInfo.UpdateFluid(character.SexualOrgans.Balls,character.Body.Height.Value);
+        public void Setup(BaseCharacter myCharacter)
+        {
+            character = myCharacter;
+            UpdateCum(0f);
+            UpdateMilk(0f);
+            character.SexualOrgans.Balls.Fluid.CurrentValueChange += UpdateCum;
+            character.SexualOrgans.Boobs.Fluid.CurrentValueChange += UpdateMilk;
+        }
+
+        void UpdateMilk(float obj) => milkInfo.UpdateFluid(character.SexualOrgans.Boobs, character.Body.Height.Value);
+        void UpdateCum(float obj) => cumInfo.UpdateFluid(character.SexualOrgans.Balls, character.Body.Height.Value);
     }
 }

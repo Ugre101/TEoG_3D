@@ -11,29 +11,20 @@ namespace AvatarStuff.Holders
     {
         [SerializeField] ThirdPersonEcm2Character movement;
 
-        [SerializeField,HideInInspector] float defaultSprint;
-    
-    
-        [SerializeField,HideInInspector] int defaultJumpCount;
-        [SerializeField,HideInInspector] float defaultJumpStrength;
-        [SerializeField,HideInInspector] float defaultWalkSpeed;
-        [SerializeField,HideInInspector] float defaultSwimSpeed;
-        BaseFloatStat sprintSpeed;
-        BaseFloatStat jumpCount;
-        BaseFloatStat jumpStrength;
-        BaseFloatStat walkSpeed;
-        BaseFloatStat swimSpeed;
+        [SerializeField, HideInInspector,] float defaultSprint;
+
+
+        [SerializeField, HideInInspector,] int defaultJumpCount;
+        [SerializeField, HideInInspector,] float defaultJumpStrength;
+        [SerializeField, HideInInspector,] float defaultWalkSpeed;
+        [SerializeField, HideInInspector,] float defaultSwimSpeed;
 
         bool firstUse = true;
-        void FirstSetup()
-        {
-            firstUse = false;
-            sprintSpeed = new BaseFloatStat(defaultSprint);
-            jumpCount = new BaseFloatStat(defaultJumpCount);
-            jumpStrength = new BaseFloatStat(defaultJumpStrength);
-            walkSpeed = new BaseFloatStat(defaultWalkSpeed);
-            swimSpeed = new BaseFloatStat(defaultSwimSpeed);
-        }
+        BaseFloatStat jumpCount;
+        BaseFloatStat jumpStrength;
+        BaseFloatStat sprintSpeed;
+        BaseFloatStat swimSpeed;
+        BaseFloatStat walkSpeed;
         public void Reset()
         {
             FirstSetup();
@@ -45,6 +36,28 @@ namespace AvatarStuff.Holders
             DateSystem.TickHour -= TickHour;
             DateSystem.TickHour += TickHour;
         }
+#if UNITY_EDITOR
+        void OnValidate()
+        {
+            if (movement == null || Application.isPlaying)
+                return;
+            defaultSprint = movement.sprintSpeedMultiplier;
+            defaultJumpCount = movement.jumpMaxCount;
+            defaultJumpStrength = movement.jumpImpulse;
+            defaultWalkSpeed = movement.maxWalkSpeed;
+            defaultSwimSpeed = movement.maxSwimSpeed;
+        }
+#endif
+        void FirstSetup()
+        {
+            firstUse = false;
+            sprintSpeed = new BaseFloatStat(defaultSprint);
+            jumpCount = new BaseFloatStat(defaultJumpCount);
+            jumpStrength = new BaseFloatStat(defaultJumpStrength);
+            walkSpeed = new BaseFloatStat(defaultWalkSpeed);
+            swimSpeed = new BaseFloatStat(defaultSwimSpeed);
+        }
+
         public void AddWalkTempEffect(TempIntMod tempMod)
         {
             if (firstUse)
@@ -85,7 +98,7 @@ namespace AvatarStuff.Holders
             SetValues();
         }
 
-        private void SetValues()
+        void SetValues()
         {
             movement.jumpMaxCount = Mathf.RoundToInt(jumpCount.Value);
             movement.sprintSpeedMultiplier = sprintSpeed.Value;
@@ -93,18 +106,7 @@ namespace AvatarStuff.Holders
             movement.maxWalkSpeed = walkSpeed.Value;
             movement.maxSwimSpeed = swimSpeed.Value;
         }
-#if UNITY_EDITOR
-        void OnValidate()
-        {
-            if (movement == null || Application.isPlaying)
-                return;
-            defaultSprint = movement.sprintSpeedMultiplier;
-            defaultJumpCount = movement.jumpMaxCount;
-            defaultJumpStrength = movement.jumpImpulse;
-            defaultWalkSpeed = movement.maxWalkSpeed;
-            defaultSwimSpeed = movement.maxSwimSpeed;
-        }
-#endif
+
         public void TickHour(int ticks = 1)
         {
             jumpCount.TickHour(ticks);

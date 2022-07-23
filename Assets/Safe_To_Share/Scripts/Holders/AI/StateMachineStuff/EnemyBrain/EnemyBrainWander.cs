@@ -1,5 +1,4 @@
-﻿using Character.EnemyStuff;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
 {
@@ -18,7 +17,7 @@ namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
             {
                 Vector3 randomDest = behaviour.SpawnLocation; // Always wander around start pos
                 randomDest += new Vector3(Random.Range(-range, range), 20, Random.Range(-range, range));
-                if (behaviour.AIMover.AISetDest(randomDest)) 
+                if (behaviour.AIMover.AISetDest(randomDest))
                     return;
             }
 

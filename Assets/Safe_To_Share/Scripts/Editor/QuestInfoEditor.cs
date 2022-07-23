@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Editors
 {
     [CustomEditor(typeof(QuestInfo))]
-    public class QuestInfoEditor : UnityEditor.Editor
+    public class QuestInfoEditor : Editor
     {
         SerializedProperty id;
         QuestInfo myTarget;
@@ -13,7 +13,7 @@ namespace Editors
 
         void OnEnable()
         {
-            myTarget = (QuestInfo) target;
+            myTarget = (QuestInfo)target;
             id = serializedObject.FindProperty("questId");
         }
 

@@ -8,13 +8,12 @@ namespace AvatarStuff
         [SerializeField] Transform[] genitals;
         [SerializeField, Range(0.1f, 0.5f),] float downBend = 0.1f;
         [SerializeField, Min(0.01f),] float dickMin, dickMax = 3f;
-        [SerializeField] Vector3 hideOffset = new(0,-0.1f,-0.05f);
+        [SerializeField] Vector3 hideOffset = new(0, -0.1f, -0.05f);
         [SerializeField] float hideSize = 1f;
         [SerializeField, HideInInspector,] bool hasGenitals;
         [SerializeField, HideInInspector,] bool hasShapes;
 
         [Header("Boner Morph"), SerializeField,]
-        
         List<SkinnedMeshRenderer> bodyShapes = new();
 
         [SerializeField] int bonerId;

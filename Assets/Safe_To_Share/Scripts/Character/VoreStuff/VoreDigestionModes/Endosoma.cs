@@ -8,7 +8,8 @@ namespace Character.VoreStuff.VoreDigestionModes
         {
             baseOrgan.Vore.NoDigestTick();
             return false;
-        }        
+        }
+
         public override bool Tick(BaseCharacter pred, VoreOrgan voreOrgan, bool predIsPlayer)
         {
             voreOrgan.NoDigestTick();

@@ -7,9 +7,9 @@ namespace Safe_To_Share.Scripts
     [RequireComponent(typeof(AudioSource))]
     public class RandomMusicTrack : MonoBehaviour
     {
-        static readonly Random Rnd = new Random();
+        static readonly Random Rnd = new();
 
-        [SerializeField] List<AudioClip> tracks = new List<AudioClip>();
+        [SerializeField] List<AudioClip> tracks = new();
 
         // Start is called before the first frame update
         void Start()

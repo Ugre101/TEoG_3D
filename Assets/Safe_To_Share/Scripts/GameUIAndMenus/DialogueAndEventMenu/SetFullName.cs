@@ -9,6 +9,13 @@ namespace GameUIAndMenus.DialogueAndEventMenu
 {
     public class SetFullName : MonoBehaviour
     {
+        public enum LastNameOptions
+        {
+            Yours,
+            Partners,
+            Custom,
+        }
+
         [SerializeField] TMP_InputField firstName, lastName;
         [SerializeField] TMP_Dropdown lastNameOption;
 
@@ -19,19 +26,18 @@ namespace GameUIAndMenus.DialogueAndEventMenu
         public void SetLast(string arg0) => identity.ChangeLastName(arg0);
 
 
-        public void Setup(BaseCharacter father,BaseCharacter mother, Identity toChange,bool birtEvent)
+        public void Setup(BaseCharacter father, BaseCharacter mother, Identity toChange, bool birtEvent)
         {
             identity = toChange;
             if (birtEvent)
             {
                 lastNameOption.gameObject.SetActive(true);
-                lastNameOption.SetupTmpDropDown(LastNameOptions.Yours,ChangeDefault);
+                lastNameOption.SetupTmpDropDown(LastNameOptions.Yours, ChangeDefault);
             }
             else
-            {
                 lastNameOption.gameObject.SetActive(false);
-            }
         }
+
         void ChangeDefault(int arg0)
         {
             var res = UgreTools.IntToEnum(arg0, LastNameOptions.Yours);
@@ -48,17 +54,6 @@ namespace GameUIAndMenus.DialogueAndEventMenu
             }
         }
 
-        public Identity Done()
-        {
-            return identity;
-        }
-        
-        public enum LastNameOptions
-        {
-            Yours,
-            Partners,
-            Custom,
-        }
-
+        public Identity Done() => identity;
     }
 }

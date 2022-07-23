@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+
 //using Character;
 
 namespace Safe_To_Share.Scripts.Static
 {
     public static class DateSystem
     {
-        public static event Action<int> TickMinute;
-        public static event Action<int> NewMinute;
-        public static event  Action<int> TickHour;
-        public static event Action<int> NewHour; 
-        public static event Action<int> TickDay;
-        public static event Action<int> NewDay;
         static int day;
         static int hour = 12;
         static int minute;
 
         static readonly Dictionary<int, string> Months = new()
         {
-            {1, "January"}, {2, "February"}, {3, "March"}, {4, "April"}, {5, "May"}, {6, "June"},
-            {7, "July"}, {8, "August"}, {9, "September"}, {10, "October"}, {11, "November"}, {12, "December"},
+            { 1, "January" }, { 2, "February" }, { 3, "March" }, { 4, "April" }, { 5, "May" }, { 6, "June" },
+            { 7, "July" }, { 8, "August" }, { 9, "September" }, { 10, "October" }, { 11, "November" },
+            { 12, "December" },
         };
 
         public static int Year { get; private set; }
@@ -38,6 +34,7 @@ namespace Safe_To_Share.Scripts.Static
                     day -= 365;
                     Year++;
                 }
+
                 NewDay?.Invoke(day);
             }
         }
@@ -56,6 +53,7 @@ namespace Safe_To_Share.Scripts.Static
                     hour -= 24;
                     Day++;
                 }
+
                 NewHour?.Invoke(hour);
             }
         }
@@ -73,6 +71,7 @@ namespace Safe_To_Share.Scripts.Static
                     minute -= 60;
                     Hour++;
                 }
+
                 NewMinute?.Invoke(minute);
             }
         }
@@ -82,6 +81,12 @@ namespace Safe_To_Share.Scripts.Static
         public static string CurrentShort => $"{Year} : {GetMonth(true)} : {GetDayName(true)} : {Minute}";
 
         public static string CurrentLong => $"{Year} : {GetMonth()} : {GetDayName()} : {Minute}";
+        public static event Action<int> TickMinute;
+        public static event Action<int> NewMinute;
+        public static event Action<int> TickHour;
+        public static event Action<int> NewHour;
+        public static event Action<int> TickDay;
+        public static event Action<int> NewDay;
 
         public static int GetMonthInt()
         {
@@ -146,6 +151,7 @@ namespace Safe_To_Share.Scripts.Static
             days += Day - date.Day;
             return days;
         }
+
         public static int DateSaveHoursAgo(DateSave date)
         {
             int hours = DateSaveDaysAgo(date) * 24;
@@ -159,8 +165,8 @@ namespace Safe_To_Share.Scripts.Static
             minutes += Minute - date.Min;
             return minutes;
         }
-        
-       // public static BirthDay BirthedToday(int yearsAgo = 0) => new BirthDay(Year - yearsAgo, Day);
+
+        // public static BirthDay BirthedToday(int yearsAgo = 0) => new BirthDay(Year - yearsAgo, Day);
     }
 
     [Serializable]

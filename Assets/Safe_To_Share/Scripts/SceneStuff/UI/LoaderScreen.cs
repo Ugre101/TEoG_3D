@@ -6,15 +6,15 @@ namespace SceneStuff
 {
     public class LoaderScreen : MonoBehaviour
     {
-        private const float Interval = 0.192f;
+        const float Interval = 0.192f;
         [SerializeField] TextMeshProUGUI progressText;
         [SerializeField] CanvasGroup group;
-        [SerializeField, Range(0.2f, 0.8f)] float aplhaCutOff = 0.2f;
+        [SerializeField, Range(0.2f, 0.8f),] float aplhaCutOff = 0.2f;
+
+        Coroutine running;
         public void LoadProgress(float value) => progressText.text = $"Loading... {value}";
         public void LoadingAvatar() => progressText.text = "Loading avatar";
         public void UnLoadProgress(float value) => progressText.text = $"Unloading... {value}";
-
-        Coroutine running;
 
         [ContextMenu("Fade In")]
         public void StopFade()
@@ -23,6 +23,7 @@ namespace SceneStuff
                 StopCoroutine(running);
             running = StartCoroutine(FadeIn());
         }
+
         [ContextMenu("Fade out")]
         public void StartFade()
         {
@@ -31,7 +32,7 @@ namespace SceneStuff
             running = StartCoroutine(FadeOut());
         }
 
-        private IEnumerator FadeOut()
+        IEnumerator FadeOut()
         {
             float startTime = Time.realtimeSinceStartup;
             group.blocksRaycasts = true;
@@ -41,7 +42,8 @@ namespace SceneStuff
                 yield return null;
             }
         }
-        private IEnumerator FadeIn()
+
+        IEnumerator FadeIn()
         {
             float startTime = Time.realtimeSinceStartup;
             while (group.alpha > aplhaCutOff)
@@ -50,10 +52,11 @@ namespace SceneStuff
                 // group.alpha = Mathf.Max(group.alpha - intrevall * Time.deltaTime, 0f);
                 yield return null;
             }
+
             group.alpha = 0f;
             group.blocksRaycasts = false;
         }
 
-        private static float TimeStep(float startTime) => (Time.realtimeSinceStartup - startTime) * 4f;
+        static float TimeStep(float startTime) => (Time.realtimeSinceStartup - startTime) * 4f;
     }
 }

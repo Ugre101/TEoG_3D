@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class CheatMenu : MonoBehaviour,ICancelMeBeforeOpenPauseMenu
+    public class CheatMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] Button expBtn, goldBtn, mascBtn, femiBtn;
         Player player;
+
         void Start()
         {
             expBtn.onClick.AddListener(ExpCheat);
@@ -17,20 +18,6 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             mascBtn.onClick.AddListener(MascCheat);
             femiBtn.onClick.AddListener(FemiCheat);
         }
-
-        public void Enter(Player parPlayer)
-        {
-            gameObject.SetActive(true);
-            this.player = parPlayer;
-        }
-
-        void FemiCheat() => player.Essence.Femininity.Amount += 200;
-
-        void MascCheat() => player.Essence.Masculinity.Amount += 200;
-
-        void GoldCheat() => PlayerGold.GoldBag.GainGold(200);
-
-        void ExpCheat() => player.LevelSystem.GainExp(200);
 
         public bool BlockIfActive()
         {
@@ -42,5 +29,19 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 
             return false;
         }
+
+        public void Enter(Player parPlayer)
+        {
+            gameObject.SetActive(true);
+            player = parPlayer;
+        }
+
+        void FemiCheat() => player.Essence.Femininity.Amount += 200;
+
+        void MascCheat() => player.Essence.Masculinity.Amount += 200;
+
+        void GoldCheat() => PlayerGold.GoldBag.GainGold(200);
+
+        void ExpCheat() => player.LevelSystem.GainExp(200);
     }
 }

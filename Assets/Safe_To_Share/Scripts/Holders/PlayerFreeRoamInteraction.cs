@@ -16,32 +16,33 @@ namespace AvatarStuff.Holders
         [SerializeField] TextMeshProUGUI btnText;
         [SerializeField] PlayerHolder playerHolder;
         [SerializeField] Camera cam;
-        [Header("Settings")]
-        [SerializeField] List<Vector3> rays = new();
+
+        [Header("Settings"), SerializeField,]
+        
+        List<Vector3> rays = new();
+
         [SerializeField, Range(0.1f, 3f),] float rayDist = 1f;
         [SerializeField] LayerMask searchLayers;
         [SerializeField] InputActionReference hotKey;
-        Vector3 lastHitPos;
-        IInteractable lastHit;
-        bool hasHit;
-        float stopHoverDist;
-        JobHandle handle;
-        NativeArray<RaycastHit> results;
+        [SerializeField] float cameraRayDist = 12f;
         NativeArray<RaycastCommand> commands;
+        JobHandle handle;
+        bool hasHit;
+        IInteractable lastHit;
+        Vector3 lastHitPos;
+        NativeArray<RaycastHit> results;
+        float stopHoverDist;
+
+        bool timeToCheck;
 
         void Start()
         {
-            results = new NativeArray<RaycastHit>(rays.Count + 1 , Allocator.Persistent);
+            results = new NativeArray<RaycastHit>(rays.Count + 1, Allocator.Persistent);
             commands = new NativeArray<RaycastCommand>(rays.Count + 1, Allocator.Persistent);
 
             optionButton.onClick.AddListener(DoInteraction);
             stopHoverDist = rayDist * 3f;
         }
-
-        private void DoInteraction() => lastHit?.DoInteraction(playerHolder.Player);
-
-        bool timeToCheck;
-        [SerializeField] float cameraRayDist = 12f;
 
         void Update()
         {
@@ -49,7 +50,7 @@ namespace AvatarStuff.Holders
                 return;
             if (timeToCheck)
             {
-                if (CheckRayCastResult()) 
+                if (CheckRayCastResult())
                     ShowOptionsShowFor(lastHit);
                 timeToCheck = false;
             }
@@ -58,9 +59,18 @@ namespace AvatarStuff.Holders
                 ScheduleRaycast();
                 timeToCheck = true;
             }
+
             if (hasHit && Vector3.Distance(lastHitPos, transform.position) > stopHoverDist)
                 StopShowText();
         }
+
+        void OnDestroy()
+        {
+            results.Dispose();
+            commands.Dispose();
+        }
+
+        void DoInteraction() => lastHit?.DoInteraction(playerHolder.Player);
 
         void StopShowText()
         {
@@ -76,15 +86,17 @@ namespace AvatarStuff.Holders
             hasHit = true;
         }
 
-        string HotkeyHumanReadableString() => InputControlPath.ToHumanReadableString(hotKey.action.bindings[0].path, InputControlPath.HumanReadableStringOptions.OmitDevice);
+        string HotkeyHumanReadableString() => InputControlPath.ToHumanReadableString(hotKey.action.bindings[0].path,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
 
-        private void ScheduleRaycast()
+        void ScheduleRaycast()
         {
             Vector3 transformDirection = transform.TransformDirection(Vector3.forward);
             Ray camRay = cam.ScreenPointToRay(Pointer.current.position.ReadValue());
             int i;
             for (i = 0; i < rays.Count; i++)
-                commands[i] = new RaycastCommand(transform.position + rays[i], transformDirection,rayDist,searchLayers);
+                commands[i] = new RaycastCommand(transform.position + rays[i], transformDirection, rayDist,
+                    searchLayers);
             commands[i] = new RaycastCommand(camRay.origin, camRay.direction, cameraRayDist, searchLayers);
             handle = RaycastCommand.ScheduleBatch(commands, results, 1);
         }
@@ -103,13 +115,8 @@ namespace AvatarStuff.Holders
                     return true;
                 }
             }
-            return false;
-        }
 
-        void OnDestroy()
-        {
-            results.Dispose();
-            commands.Dispose();        
+            return false;
         }
 
         public void OnInterAction(InputAction.CallbackContext ctx)

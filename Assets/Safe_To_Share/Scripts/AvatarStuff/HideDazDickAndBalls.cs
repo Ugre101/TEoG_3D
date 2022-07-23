@@ -9,7 +9,7 @@ namespace AvatarStuff
         [SerializeField] Material invisibleMat;
 
         bool hidden;
-        
+
         void Hide(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers)
         {
             hidden = true;

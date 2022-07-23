@@ -13,7 +13,7 @@ namespace Safe_To_Share.Scripts.Optimazation
 #endif
         readonly WaitForEndOfFrame waitForEndOfFrame = new();
         readonly WaitForSecondsRealtime waitForSecondsRealtime = new(0.2f);
-    
+
         IEnumerator Start()
         {
 #if UNITY_EDITOR

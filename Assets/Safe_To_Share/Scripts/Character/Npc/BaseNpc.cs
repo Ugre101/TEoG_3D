@@ -1,8 +1,9 @@
-﻿using Character.PlayerStuff;
+﻿using System;
+using Character.PlayerStuff;
 
 namespace Character.Npc
 {
-    [System.Serializable]
+    [Serializable]
     public abstract class BaseNpc : BaseCharacter, IInteractable
     {
         public abstract string HoverText(Player player);

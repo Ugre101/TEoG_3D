@@ -3,7 +3,6 @@ using System.Linq;
 using Character.BodyStuff;
 using Character.Organs;
 using Character.Organs.Fluids;
-using Character.PlayerStuff;
 using Character.PregnancyStuff;
 using Character.StatsStuff;
 using Character.StatsStuff.Mods;

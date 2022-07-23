@@ -15,7 +15,7 @@ namespace Character.BodyStuff
         [SerializeField] BaseConstFloatStat fatBurnRate = new(2.5f);
         [SerializeField] BodyMorphs bodyMorphs = new();
         [SerializeField] float skinTone;
-        
+
         Dictionary<BodyStatType, BodyStat> bodyStats;
 
         public Body(int muscle, int fat, int height, float thickset = 0f)
@@ -60,7 +60,7 @@ namespace Character.BodyStuff
         public float SkinTone
         {
             get => skinTone;
-            set => skinTone = Mathf.Clamp(value,0f,1f);
+            set => skinTone = Mathf.Clamp(value, 0f, 1f);
         }
 
 

@@ -5,7 +5,7 @@ namespace Character.Ailments
 {
     public class Impregnated : Ailment
     {
-        public Impregnated(int modValue, string @from, ModType modType) : base(modValue, @from, modType)
+        public Impregnated(int modValue, string from, ModType modType) : base(modValue, from, modType)
         {
         }
 

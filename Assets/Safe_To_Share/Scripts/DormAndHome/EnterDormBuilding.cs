@@ -1,4 +1,5 @@
 // using DormAndHome.Dorm.UI;
+
 using Movement.ECM2.Source.Characters;
 using UnityEngine;
 
@@ -6,18 +7,18 @@ namespace DormAndHome
 {
     public class EnterDormBuilding : MonoBehaviour
     {
-      //  [SerializeField] DormBuildingCanvas dormBuildingCanvas;
+        //  [SerializeField] DormBuildingCanvas dormBuildingCanvas;
 
         void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player")) return;
-        //    dormBuildingCanvas.EnterBuilding();
+            //    dormBuildingCanvas.EnterBuilding();
             if (other.TryGetComponent(out ThirdPersonEcm2Character mover)) mover.Stop();
         }
 
         void OnTriggerExit(Collider other)
         {
-          //  if (other.CompareTag("Player"))
+            //  if (other.CompareTag("Player"))
             //    dormBuildingCanvas.LeaveBuilding();
         }
     }

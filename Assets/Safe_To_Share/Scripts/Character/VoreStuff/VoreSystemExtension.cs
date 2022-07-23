@@ -36,13 +36,13 @@ namespace Character.VoreStuff
 
         public static bool OralVore(this BaseCharacter pred, BaseCharacter prey)
         {
-            if (!CanOralVore(pred, prey)) 
+            if (!CanOralVore(pred, prey))
                 return false;
             pred.Vore.Stomach.Vore(prey);
             pred.Vore.Stomach.SetStretch(OralVoreCapacity(pred));
             return true;
-
         }
+
         public static bool CanOrganVore(BaseCharacter pred, BaseOrgan organ, BaseCharacter prey)
         {
             float preyWeight = VoredCharacters.CurrentPreyTotalWeight(organ.Vore.PreysIds);
@@ -52,20 +52,24 @@ namespace Character.VoreStuff
 
         public static bool OrganVore(this BaseCharacter pred, BaseCharacter prey, SexualOrganType organType)
         {
-            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container) || !container.HaveAny()) 
+            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container) ||
+                !container.HaveAny())
                 return false;
             foreach (BaseOrgan baseOrgan in container.List.Where(baseOrgan => CanOrganVore(pred, baseOrgan, prey)))
             {
                 baseOrgan.Vore.Vore(prey);
-                baseOrgan.Vore.SetStretch(OrganVoreCapacity(pred,baseOrgan));
+                baseOrgan.Vore.SetStretch(OrganVoreCapacity(pred, baseOrgan));
                 return true;
             }
+
             return false;
-        }        
+        }
+
         public static bool SpecialOrganVore(this BaseCharacter pred, BaseCharacter prey, SexualOrganType organType,
             SpecialVoreOptions specialVoreOptions, bool onePreyOnly)
         {
-            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container) || !container.HaveAny()) 
+            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container) ||
+                !container.HaveAny())
                 return false;
             foreach (BaseOrgan baseOrgan in container.List)
             {
@@ -77,18 +81,22 @@ namespace Character.VoreStuff
                 baseOrgan.Vore.SpecialPreysIds.Add(prey.Identity.ID);
                 VoredCharacters.AddPrey(myPrey);
                 myPrey.SetSpecialDigestionMode(GetMode());
+
                 string GetMode() => specialVoreOptions switch
                 {
                     SpecialVoreOptions.Ctf => VoreOrganDigestionMode.Absorption,
                     SpecialVoreOptions.BoobsTf => VoreOrganDigestionMode.Absorption,
                     _ => string.Empty,
                 };
+
                 return true;
             }
+
             return false;
         }
 
-        static bool HandleInsta(BaseCharacter pred, Prey prey, SexualOrganType organType, SpecialVoreOptions specialVoreOptions,BaseOrgan baseOrgan)
+        static bool HandleInsta(BaseCharacter pred, Prey prey, SexualOrganType organType,
+            SpecialVoreOptions specialVoreOptions, BaseOrgan baseOrgan)
         {
             if ((specialVoreOptions == SpecialVoreOptions.Ctf || specialVoreOptions == SpecialVoreOptions.BoobsTf) &&
                 SexualOrganAbsorption.CanInstaMorph(prey, baseOrgan))
@@ -131,20 +139,23 @@ namespace Character.VoreStuff
                 default:
                     throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null);
             }
+
             return false;
         }
+
         public static bool CanDoOfType(BaseCharacter pred, BaseCharacter prey, VoreType voreType) =>
             voreType switch
             {
                 VoreType.Oral => CanOralVore(pred, prey),
                 VoreType.Balls => pred.SexualOrgans.Balls.List.Any(baseOrgan => CanOrganVore(pred, baseOrgan, prey)),
-                VoreType.UnBirth => pred.SexualOrgans.Vaginas.List.Any(baseOrgan => CanOrganVore(pred, baseOrgan, prey)),
+                VoreType.UnBirth =>
+                    pred.SexualOrgans.Vaginas.List.Any(baseOrgan => CanOrganVore(pred, baseOrgan, prey)),
                 VoreType.Anal => false,
                 VoreType.Breast => pred.SexualOrgans.Boobs.List.Any(baseOrgan => CanOrganVore(pred, baseOrgan, prey)),
                 _ => false,
             };
 
-        public static void RegurgitatePrey(BaseCharacter pred,VoreType from,int id)
+        public static void RegurgitatePrey(BaseCharacter pred, VoreType from, int id)
         {
             switch (from)
             {
@@ -153,23 +164,23 @@ namespace Character.VoreStuff
                     break;
                 case VoreType.Cock:
                 case VoreType.Balls:
-                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Balls.List) 
+                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Balls.List)
                         baseOrgan.Vore.ReleasePrey(id);
                     break;
                 case VoreType.UnBirth:
-                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Vaginas.List) 
+                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Vaginas.List)
                         baseOrgan.Vore.ReleasePrey(id);
                     break;
                 case VoreType.Anal:
-                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Boobs.List) 
+                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Boobs.List)
                         baseOrgan.Vore.ReleasePrey(id);
                     break;
                 case VoreType.Breast:
-                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Boobs.List) 
+                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Boobs.List)
                         baseOrgan.Vore.ReleasePrey(id);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(@from), @from, null);
+                    throw new ArgumentOutOfRangeException(nameof(from), from, null);
             }
         }
     }

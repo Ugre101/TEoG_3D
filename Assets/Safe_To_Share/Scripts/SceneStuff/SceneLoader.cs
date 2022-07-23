@@ -61,7 +61,6 @@ namespace SceneStuff
             }
         }
 
-        public static event Action<Player, BaseCharacter[], BaseCharacter[], bool> ActionSceneLoaded;
         public LoaderScreen LoaderScreen => loaderScreen;
 
         void Awake()
@@ -83,20 +82,18 @@ namespace SceneStuff
             Player.StartCombat += LoadCombat;
         }
 
-        void LoadDormSex(PlayerHolder arg1, DormMate arg2)
-        {
-            StartCoroutine(LoadAfterBattleDirectly(arg1.Player, new []{arg2}));
-        }
+        public static event Action<Player, BaseCharacter[], BaseCharacter[], bool> ActionSceneLoaded;
+
+        void LoadDormSex(PlayerHolder arg1, DormMate arg2) =>
+            StartCoroutine(LoadAfterBattleDirectly(arg1.Player, new[] { arg2, }));
 
 
         public static event Action NewScene;
 
-        public void ReturnToLastLocation(Player player)
-        {
+        public void ReturnToLastLocation(Player player) =>
             StartCoroutine(CurrentLocation != null
                 ? LoadSceneOp(CurrentLocation, player, lastPos)
                 : LoadGoHomeSObj(player));
-        }
 
         IEnumerator UpdateProgressWhileSceneNotDone(AsyncOperationHandle<SceneInstance> handle)
         {
@@ -161,6 +158,7 @@ namespace SceneStuff
                 Debug.LogError("Trying to load current scene");
                 yield break;
             }
+
             CurrentLocation = loaded.Result;
             StartLoadStuff();
             yield return fadeDelay;
@@ -168,19 +166,16 @@ namespace SceneStuff
             yield return UpdateProgressWhileSceneNotDone(asyncLoad);
             yield return gameUI.LoadGameUI();
             if (asyncLoad.Status == AsyncOperationStatus.Succeeded)
-                 SetNewSceneStuff(loaded.Result, asyncLoad);
+                SetNewSceneStuff(loaded.Result, asyncLoad);
         }
-        
-        static IEnumerator  GetPlayerHolderAndReplacePlayer(Player player, Vector3 exitPos)
+
+        static IEnumerator GetPlayerHolderAndReplacePlayer(Player player, Vector3 exitPos)
         {
             PlayerHolder holder = PlayerHolder.Instance;
             if (holder == null)
                 yield break;
             Task wait = holder.ReplacePlayer(player);
-            while (!wait.IsCompleted)
-            {
-                yield return null;
-            }
+            while (!wait.IsCompleted) yield return null;
             if (wait.IsFaulted)
                 throw wait.Exception;
             holder.transform.position = exitPos;
@@ -200,7 +195,6 @@ namespace SceneStuff
             yield return BaseLoadLocationOp(sceneSo);
             yield return waitAFrame; // Let scene start
             yield return LoadSubScenes(toLoad);
-
         }
 
         public static IEnumerator LoadSubScenes(List<string> toLoad)
@@ -222,7 +216,8 @@ namespace SceneStuff
 
             foreach (AsyncOperationHandle<SceneInstance> loadSubOp in loadSubOps)
                 yield return loadSubOp;
-        }  
+        }
+
         public void GoHome(Player player)
         {
             if (CurrentLocation != null && CurrentLocation.Guid == defaultScene.guid)
@@ -241,7 +236,7 @@ namespace SceneStuff
 
 
         public void FinishPreloadAfterBattleDefeat(Player player, BaseCharacter[] enemyTeamChars)
-            => StartCoroutine(FinishPreloadAfter(false,player, enemyTeamChars));
+            => StartCoroutine(FinishPreloadAfter(false, player, enemyTeamChars));
 
 
         #region ReturnToLastLocation
@@ -251,14 +246,17 @@ namespace SceneStuff
             if (lastLocation != null)
                 Addressables.DownloadDependenciesAsync(lastLocation.SceneReference.AssetGUID, true);
         }
+
         public void LoadLastLocation(Player player)
         {
             if (lastLocation == null)
             {
-                Addressables.LoadAssetAsync<LocationSceneSo>(defaultScene.guid).Completed += obj =>  PreloadDefault(obj, player);
+                Addressables.LoadAssetAsync<LocationSceneSo>(defaultScene.guid).Completed +=
+                    obj => PreloadDefault(obj, player);
                 return;
             }
-            scenePreload =  lastLocation.SceneReference.LoadSceneAsync();
+
+            scenePreload = lastLocation.SceneReference.LoadSceneAsync();
             StartCoroutine(FinishLoadLastLocation(player));
         }
 
@@ -285,7 +283,7 @@ namespace SceneStuff
             if (CurrentLocation != null)
                 yield return GetPlayerHolderAndReplacePlayer(player, lastPos);
             else
-               yield return PlayerHolder.Instance.ReplacePlayer(player);
+                yield return PlayerHolder.Instance.ReplacePlayer(player);
             yield return gameUI.LoadGameUI();
             yield return AllDone(false);
         }

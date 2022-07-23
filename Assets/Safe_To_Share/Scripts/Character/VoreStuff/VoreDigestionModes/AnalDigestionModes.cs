@@ -22,9 +22,6 @@ namespace Character.VoreStuff.VoreDigestionModes
 
     public class DigestionAnal : DigestionMethod
     {
-        public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer)
-        {
-            return true;
-        }
+        public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer) => true;
     }
 }

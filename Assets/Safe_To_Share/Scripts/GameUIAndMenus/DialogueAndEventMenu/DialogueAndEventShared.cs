@@ -38,6 +38,18 @@ namespace GameUIAndMenus.DialogueAndEventMenu
             }
         }
 
+        protected virtual void Start()
+        {
+            DialogueButton.ChoosesOption += HandleOption;
+            slider.maxValue = 0.1f;
+            slider.minValue = 0.00001f;
+            slider.value = textSpeed;
+            slider.onValueChanged.AddListener(ChangeTextSpeed);
+            skipBtn.onClick.AddListener(Skip);
+        }
+
+        protected virtual void OnDestroy() => DialogueButton.ChoosesOption -= HandleOption;
+
         protected static void ChangeTextSpeed(float arg0) => TextSpeed = arg0;
 
         protected IEnumerator PrintText(IEnumerable<string> nodeText)
@@ -63,18 +75,6 @@ namespace GameUIAndMenus.DialogueAndEventMenu
         }
 
         public override bool BlockIfActive() => false;
-
-        protected virtual void Start()
-        {
-            DialogueButton.ChoosesOption += HandleOption;
-            slider.maxValue = 0.1f;
-            slider.minValue = 0.00001f;
-            slider.value = textSpeed;
-            slider.onValueChanged.AddListener(ChangeTextSpeed);
-            skipBtn.onClick.AddListener(Skip);
-        }
-
-        protected  virtual void OnDestroy() => DialogueButton.ChoosesOption -= HandleOption;
 
         protected void ShowNodeText(DialogueBaseNode node)
         {

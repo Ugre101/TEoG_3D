@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Character.PlayerStuff;
 using Character.VoreStuff;
 using CustomClasses;
-using Dialogue.DialogueActions;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEditor;
 using UnityEngine;
@@ -21,15 +19,17 @@ namespace Dialogue
                 nodes.Add(MakeNode<DialogueBaseNode>());
             if (AssetDatabase.GetAssetPath(this) != string.Empty)
                 foreach (BaseEditorCanvasNode dialogueBaseNode in GetAllNodes().Where(dialogueBaseNode =>
-                    AssetDatabase.GetAssetPath(dialogueBaseNode) == string.Empty))
+                             AssetDatabase.GetAssetPath(dialogueBaseNode) == string.Empty))
                     AssetDatabase.AddObjectToAsset(dialogueBaseNode, this);
 #endif
         }
 
         public static event Action<BaseDialogue> StartDialogue;
-        public static event Action<BaseDialogue,Player,Prey,VoreOrgan> StartVoreEvent;
+        public static event Action<BaseDialogue, Player, Prey, VoreOrgan> StartVoreEvent;
         public void StartTalking() => StartDialogue?.Invoke(this);
-        public void TriggerVoreEvent(Player player, Prey prey, VoreOrgan voreOrgan) => StartVoreEvent?.Invoke(this, player, prey, voreOrgan);
+
+        public void TriggerVoreEvent(Player player, Prey prey, VoreOrgan voreOrgan) =>
+            StartVoreEvent?.Invoke(this, player, prey, voreOrgan);
 
 
 #if UNITY_EDITOR

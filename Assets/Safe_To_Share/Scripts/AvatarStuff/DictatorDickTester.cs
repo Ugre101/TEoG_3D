@@ -7,6 +7,7 @@ namespace AvatarStuff
         [SerializeField] DictatorDick dick;
         [SerializeField, Range(0, 10f),] float size;
         [SerializeField] bool hidden;
+
         void OnValidate()
         {
             if (dick == null)

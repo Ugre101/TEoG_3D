@@ -6,7 +6,6 @@ namespace Map
 {
     public class RunTimeReSizeRectTransform : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        public event Action ChangedSize;
         static Vector2 newSize;
         [SerializeField] float minSize = 100f, maxSize = 600f;
         [SerializeField] bool invertX, invertY;
@@ -35,6 +34,7 @@ namespace Map
         }
 
         public void OnEndDrag(PointerEventData eventData) => newSize = rect.sizeDelta;
+        public event Action ChangedSize;
 
         void ChangeAccordingToMousePos(Vector2 mousePos, Vector2 prevPos)
         {

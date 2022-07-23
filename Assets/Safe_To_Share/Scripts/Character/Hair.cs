@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Character
@@ -9,6 +8,7 @@ namespace Character
     {
         [SerializeField] bool bald;
         [SerializeField] Color color;
+
         public Hair(bool b, Color getColor)
         {
             bald = b;

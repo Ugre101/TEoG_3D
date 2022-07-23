@@ -15,13 +15,13 @@ namespace Character.SkillsAndSpells.Editor
 
         void OnEnable()
         {
-            myTarget = (Ability) target;
+            myTarget = (Ability)target;
             abilityTree = serializedObject.FindProperty("effectsTree");
         }
 
         public override void OnInspectorGUI()
         {
-            myTarget = (Ability) target;
+            myTarget = (Ability)target;
 
             serializedObject.Update();
             EffectEditor.PaintEffectTree(abilityTree, ref showEffect);
@@ -44,6 +44,5 @@ namespace Character.SkillsAndSpells.Editor
     [CustomEditor(typeof(Surrender))]
     public class SurrenderEditor : AbilityBaseEditor
     {
-        
     }
 }

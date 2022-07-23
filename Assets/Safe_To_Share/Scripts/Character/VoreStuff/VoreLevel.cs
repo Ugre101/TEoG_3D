@@ -24,19 +24,17 @@ namespace Character.VoreStuff
             if (toLoad.SavedGuids == null)
                 yield break;
             foreach (AsyncOperationHandle<VorePerk> op in toLoad.SavedGuids.Select(
-                Addressables.LoadAssetAsync<VorePerk>))
+                         Addressables.LoadAssetAsync<VorePerk>))
             {
                 yield return op;
                 if (op.Status == AsyncOperationStatus.Succeeded)
                     OwnedPerks.Add(op.Result);
             }
         }
+
         public void LoadMyPerkAssets()
         {
-            foreach(var perk in OwnedPerks)
-            {
-                Addressables.LoadAssetAsync<VorePerk>(perk.Guid);
-            }
+            foreach (var perk in OwnedPerks) Addressables.LoadAssetAsync<VorePerk>(perk.Guid);
         }
     }
 }

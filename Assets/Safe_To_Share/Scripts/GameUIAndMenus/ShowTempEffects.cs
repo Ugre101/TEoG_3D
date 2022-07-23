@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Character;
 using Character.Ailments;
 using Character.StatsStuff.Mods;
@@ -12,7 +11,6 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Pool;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace GameUIAndMenus
 {
@@ -27,14 +25,57 @@ namespace GameUIAndMenus
         [SerializeField] EffectHoverText hoverText;
 
         ObjectPool<TempEffectIcon> iconsPool;
+
+        Coroutine loadItemEffects;
+
+        float sleepTier;
+
         public ObjectPool<TempEffectIcon> IconsPool
         {
             get
             {
                 if (iconsPool == null)
-                    iconsPool = new ObjectPool<TempEffectIcon>(CreateFunc, ActionOnGet, ActionOnRelease,ActionOnDestroy);
+                    iconsPool = new ObjectPool<TempEffectIcon>(CreateFunc, ActionOnGet, ActionOnRelease,
+                        ActionOnDestroy);
                 return iconsPool;
             }
+        }
+
+
+        void Start()
+        {
+            sleepPrefab.HoverInfo += hoverText.ShowHoverText;
+            tiredEffectIcon.HoverInfo += hoverText.ShowHoverText;
+
+            sleepPrefab.StopHoverInfo += hoverText.StopHoverText;
+            tiredEffectIcon.StopHoverInfo += hoverText.StopHoverText;
+        }
+
+        void OnEnable()
+        {
+            hoverText.gameObject.SetActive(false);
+            ShowTempModsEffects();
+            ShowAilments();
+            Player.UpdateAilments += ShowAilments;
+            LoadManager.LoadedSave += ShowTempModsEffects;
+        }
+
+        void OnDisable()
+        {
+            Player.UpdateAilments -= ShowAilments;
+            LoadManager.LoadedSave -= ShowTempModsEffects;
+            if (loadItemEffects != null)
+                StopCoroutine(loadItemEffects);
+        }
+
+        void OnDestroy()
+        {
+            IconsPool.Dispose();
+            sleepPrefab.HoverInfo -= hoverText.ShowHoverText;
+            tiredEffectIcon.HoverInfo -= hoverText.ShowHoverText;
+
+            sleepPrefab.StopHoverInfo -= hoverText.StopHoverText;
+            tiredEffectIcon.StopHoverInfo -= hoverText.StopHoverText;
         }
 
         static void ActionOnDestroy(TempEffectIcon obj) => Destroy(obj.gameObject);
@@ -55,29 +96,6 @@ namespace GameUIAndMenus
             return obj;
         }
 
-        Coroutine loadItemEffects;
-
-        float sleepTier;
-
-        
-
-        void Start()
-        {
-            sleepPrefab.HoverInfo += hoverText.ShowHoverText;
-            tiredEffectIcon.HoverInfo += hoverText.ShowHoverText;
-
-            sleepPrefab.StopHoverInfo += hoverText.StopHoverText;
-            tiredEffectIcon.StopHoverInfo += hoverText.StopHoverText;
-        }
-        void OnEnable()
-        {
-            hoverText.gameObject.SetActive(false);
-            ShowTempModsEffects();
-            ShowAilments();
-            Player.UpdateAilments += ShowAilments;
-            LoadManager.LoadedSave += ShowTempModsEffects;
-        }
-
         void ShowTempModsEffects()
         {
             Dictionary<string, List<TempIntMod>> tempItems = new();
@@ -96,24 +114,6 @@ namespace GameUIAndMenus
             AddTempModsFrom(tempItems, Player.SexStats.BaseMaxArousal.Mods.TempBaseStatMods);
             GetTempVoreMods(tempItems);
             loadItemEffects = StartCoroutine(ShowItemEffects(tempItems));
-        }
-
-        void OnDisable()
-        {
-            Player.UpdateAilments -= ShowAilments;
-            LoadManager.LoadedSave -= ShowTempModsEffects;
-            if (loadItemEffects != null)
-                StopCoroutine(loadItemEffects);
-        }
-
-        void OnDestroy()
-        {
-            IconsPool.Dispose();
-            sleepPrefab.HoverInfo -= hoverText.ShowHoverText;
-            tiredEffectIcon.HoverInfo -= hoverText.ShowHoverText;
-
-            sleepPrefab.StopHoverInfo -= hoverText.StopHoverText;
-            tiredEffectIcon.StopHoverInfo -= hoverText.StopHoverText;
         }
 
         void ShowAilments()
@@ -163,7 +163,7 @@ namespace GameUIAndMenus
         IEnumerator ShowItemEffects(Dictionary<string, List<TempIntMod>> dict)
         {
             HandleSleepEffects(dict);
-            foreach (KeyValuePair<string, List<TempIntMod>> pair in dict) 
+            foreach (KeyValuePair<string, List<TempIntMod>> pair in dict)
                 yield return LoadKeysAndThenItems(pair);
         }
 
@@ -182,13 +182,13 @@ namespace GameUIAndMenus
 
         IEnumerator LoadKeysAndThenItems(KeyValuePair<string, List<TempIntMod>> hashSet)
         {
-            var keys = Addressables.LoadResourceLocationsAsync(hashSet.Key,typeof(Item));
+            var keys = Addressables.LoadResourceLocationsAsync(hashSet.Key, typeof(Item));
             yield return keys;
             if (keys.Status != AsyncOperationStatus.Succeeded) yield break;
             if (keys.Result.Count <= 0) yield break;
             var item = Addressables.LoadAssetAsync<Item>(keys.Result[0]);
             yield return item;
-            if (item.Status != AsyncOperationStatus.Succeeded) 
+            if (item.Status != AsyncOperationStatus.Succeeded)
                 yield break;
             var icon = IconsPool.Get();
             icon.Setup(item.Result, hashSet.Value);

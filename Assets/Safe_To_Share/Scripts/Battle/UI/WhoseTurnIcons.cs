@@ -19,7 +19,7 @@ namespace Battle.UI
         public void AddCombatant(CombatCharacter character)
         {
             WhoseTurnIcon turnIcon = Instantiate(icon, transform);
-            turnIcon.Setup(character.Ally,character.Character.Identity.FirstName);
+            turnIcon.Setup(character.Ally, character.Character.Identity.FirstName);
             pairedList.Add(new Paired(turnIcon, character));
             RefreshList();
         }

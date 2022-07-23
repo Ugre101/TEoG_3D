@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CustomClasses;
@@ -15,13 +14,13 @@ namespace GameUIAndMenus
     public class CanvasPauseMenu : MonoBehaviour
     {
         public static List<ICancelMeBeforeOpenPauseMenu> CancelMe = new();
+        static bool sceneDirty = true;
         [SerializeField] InputAction bindings;
         [SerializeField] GameObject mainMenu, settingMenu;
         [SerializeField] Button pauseBtn;
         [SerializeField] LoadMasterAudio masterAudio;
         readonly WaitForEndOfFrame waitForEndOfFrame = new();
         IEnumerable<ICancelMeBeforeOpenPauseMenu> cancelThese;
-        static bool sceneDirty = true;
 
         void Start()
         {
@@ -32,16 +31,16 @@ namespace GameUIAndMenus
             LoadSettings();
         }
 
+        void OnEnable() => bindings.Enable();
+
+        void OnDisable() => bindings.Disable();
+
         void OnDestroy()
         {
             bindings.Dispose();
             SceneLoader.NewScene -= SetDirty;
             LoadSubSceneWhenClose.SubSceneChange -= SetDirty;
         }
-
-        void OnEnable() => bindings.Enable();
-
-        void OnDisable() => bindings.Disable();
 
         void LoadSettings()
         {

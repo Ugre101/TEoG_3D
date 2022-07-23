@@ -5,11 +5,9 @@ using UnityEngine;
 namespace Character.StatsStuff.HealthStuff
 {
     [Serializable]
-    public class RecoveryIntStat : BaseConstIntStat, ITickMinute,ITickHour
+    public class RecoveryIntStat : BaseConstIntStat, ITickMinute, ITickHour
     {
         [SerializeField] int currentValue;
-        public event Action<int> MaxValueChange, CurrentValueChange;
-        public event Action<int> ValueIncrease, ValueDecrease;
         public RecoveryIntStat(int baseValue, IntRecovery intRecovery) : base(baseValue) => IntRecovery = intRecovery;
 
         public IntRecovery IntRecovery { get; }
@@ -31,6 +29,8 @@ namespace Character.StatsStuff.HealthStuff
             }
         }
 
+        public bool TickHour(int ticks = 1) => Mods.TickHour(ticks) | IntRecovery.Mods.TickHour(ticks);
+
         public void TickMin(int ticks = 1)
         {
             if (CurrentValue >= Value && IntRecovery.Value >= 0)
@@ -38,7 +38,9 @@ namespace Character.StatsStuff.HealthStuff
             // % of max health heal per tick
             CurrentValue += Mathf.CeilToInt(Value * (IntRecovery.Value / 100f) * ticks);
         }
-        public bool TickHour(int ticks = 1) => Mods.TickHour(ticks) | IntRecovery.Mods.TickHour(ticks);
+
+        public event Action<int> MaxValueChange, CurrentValueChange;
+        public event Action<int> ValueIncrease, ValueDecrease;
 
         public bool DecreaseCurrentValue(int dmg) => (CurrentValue -= dmg) <= 0;
 
@@ -51,6 +53,7 @@ namespace Character.StatsStuff.HealthStuff
                 CurrentValue = Value;
                 return;
             }
+
             int want = Mathf.RoundToInt(Value * (percent / 100f));
             if (CurrentValue < want)
                 currentValue = want;
@@ -61,6 +64,7 @@ namespace Character.StatsStuff.HealthStuff
             MaxValueChange?.Invoke(Value);
             CurrentValueChange?.Invoke(CurrentValue);
         }
+
         protected void InvokeMaxChange() => MaxValueChange?.Invoke(Value);
     }
 }

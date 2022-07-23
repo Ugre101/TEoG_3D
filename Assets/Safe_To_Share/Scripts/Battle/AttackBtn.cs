@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using Battle.SkillsAndSpells;
-using Character.SkillsAndSpells;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine.UI;
 
 namespace Battle
@@ -17,9 +14,6 @@ namespace Battle
     [RequireComponent(typeof(Button))]
     public class AttackBtn : MonoBehaviour, IPointerClickHandler
     {
-        public static event Action<Ability> PlayerAction;
-        public static event Action<AttackBtn> BindActionToMe;
-        public static event Action<int, Ability> BoundAbility;
         [SerializeField] InputActionReference reference;
         [SerializeField] TextMeshProUGUI numberText;
         [SerializeField] Image icon;
@@ -39,6 +33,10 @@ namespace Battle
             if (eventData.button == PointerEventData.InputButton.Right)
                 BindNewAbility();
         }
+
+        public static event Action<Ability> PlayerAction;
+        public static event Action<AttackBtn> BindActionToMe;
+        public static event Action<int, Ability> BoundAbility;
 
         public void ChangedDevice(PlayerInput inputs) => UpdateRefText();
 
@@ -68,7 +66,7 @@ namespace Battle
 
         public void BindAbility(string newAbility) => StartCoroutine(DoesThisWork(newAbility));
 
-        private IEnumerator DoesThisWork(string newAbility)
+        IEnumerator DoesThisWork(string newAbility)
         {
             var obj = Addressables.LoadResourceLocationsAsync(newAbility);
             yield return obj;
@@ -78,6 +76,7 @@ namespace Battle
                 Clear();
                 yield break;
             }
+
             var ab = Addressables.LoadAssetAsync<Ability>(obj.Result[0]);
             yield return ab;
             ability = ab.Result;
@@ -89,7 +88,7 @@ namespace Battle
         {
             ability = newAbility;
             icon.gameObject.SetActive(true);
-            icon.sprite = ability.Icon;            
+            icon.sprite = ability.Icon;
             BoundAbility?.Invoke(id, newAbility);
         }
 

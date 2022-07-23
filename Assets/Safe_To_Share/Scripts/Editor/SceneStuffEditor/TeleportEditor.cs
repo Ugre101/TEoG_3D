@@ -14,7 +14,7 @@ namespace SceneStuff.Editor
 
         void OnEnable()
         {
-            myTarget = (SceneChangeTeleport) target;
+            myTarget = (SceneChangeTeleport)target;
             sceneTarget = serializedObject.FindProperty("sceneToLoad");
         }
 

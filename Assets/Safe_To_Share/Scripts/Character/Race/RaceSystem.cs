@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Character.Race.Races;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -12,12 +11,13 @@ namespace Character.Race
     {
         public delegate void RaceChanged(BasicRace oldRace, BasicRace newRace);
 
+        Dictionary<BasicRace, RaceEssence> dict;
+
         public RaceSystem() => SortRaces();
 
         public List<RaceEssence> AllRaceEssence { get; private set; } = new();
-        Dictionary<BasicRace, RaceEssence> dict;
         Dictionary<BasicRace, RaceEssence> RaceDict => dict ??= AllRaceEssence.ToDictionary(r => r.Race);
-        
+
 
         public BasicRace Race { get; private set; }
         public BasicRace SecRace { get; private set; }
@@ -35,6 +35,7 @@ namespace Character.Race
                 AllRaceEssence.Add(new RaceEssence(race, raceEssAmount));
                 dict = null;
             }
+
             SortRaces();
         }
 
@@ -59,6 +60,7 @@ namespace Character.Race
             if (oldSecRace != null && oldSecRace != SecRace)
                 SecRaceChangedEvent?.Invoke(oldSecRace, SecRace);
         }
+
         public RacesSave Save() => new(AllRaceEssence);
 
         public IEnumerator Load(RacesSave load)
@@ -72,6 +74,7 @@ namespace Character.Race
                 if (op.Status == AsyncOperationStatus.Succeeded)
                     AllRaceEssence.Add(new RaceEssence(op.Result, save.amount));
             }
+
             SortRaces();
         }
     }

@@ -15,19 +15,21 @@ namespace AvatarStuff
             [SerializeField] int boner;
             [SerializeField] DictatorDick dictatorDick;
             [SerializeField] DictatorBalls dictatorBalls;
-            [Header("Hide"), SerializeField] Material[] dickMats;
+            [Header("Hide"), SerializeField,] Material[] dickMats;
             [SerializeField] Material invisible;
+
             public void ChangeShape(IEnumerable<SkinnedMeshRenderer> shapes, int arousal)
             {
                 if (!hasDictatorDick)
                     return;
                 float flaccidValue = Mathf.Clamp(100f - arousal * 1.6f, 0f, 100f);
                 float bonerValue = Mathf.Clamp(arousal - 60f, 0f, 25f);
-                foreach (SkinnedMeshRenderer shape in shapes) 
+                foreach (SkinnedMeshRenderer shape in shapes)
                 {
-                    shape.SetBlendShapeWeight(flaccid,flaccidValue);
-                    shape.SetBlendShapeWeight(boner,bonerValue);
+                    shape.SetBlendShapeWeight(flaccid, flaccidValue);
+                    shape.SetBlendShapeWeight(boner, bonerValue);
                 }
+
                 dictatorDick.SetBoner(arousal);
             }
 
@@ -44,6 +46,7 @@ namespace AvatarStuff
                     return;
                 dictatorBalls.ReSize(biggestBalls);
             }
+
             public void UpdateBallsFluid(float biggestBalls)
             {
                 if (!hasDictatorBalls)
@@ -60,17 +63,13 @@ namespace AvatarStuff
                 {
                     var rendererMaterials = meshRenderer.materials;
                     for (int index = 0; index < rendererMaterials.Length; index++)
-                    {
                         foreach (Material dickMat in dickMats)
-                        {
                             if (rendererMaterials[index].name.Contains(dickMat.name))
                             {
                                 rendererMaterials[index] = invisible;
                                 break;
                             }
-                        }
 
-                    }
                     meshRenderer.materials = rendererMaterials;
                 }
             }

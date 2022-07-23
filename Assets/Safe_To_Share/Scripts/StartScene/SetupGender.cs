@@ -24,16 +24,16 @@ namespace Safe_To_Share.Scripts.StartScene
         [SerializeField] AssetReference dickgirl;
         [SerializeField] AssetReference futa;
         [SerializeField] AssetReference maleFuta;
-        Gender startGender = Gender.Doll;
         StartGenderPerk loaded;
         AsyncOperationHandle<StartGenderPerk> loadingOp;
+        Gender startGender = Gender.Doll;
 
         public void SetupGenderDropDown()
         {
-            genderDropdown.SetupTmpDropDown(startGender,ChangeStartGender);    
-            ChangeStartGender(UgreTools.IndexOfEnum(startGender));
+            genderDropdown.SetupTmpDropDown(startGender, ChangeStartGender);
+            ChangeStartGender(startGender.IndexOfEnum());
         }
-       
+
         public IEnumerator SetStartGender(Player tempPlayer)
         {
             if (!loadingOp.IsDone)
@@ -54,9 +54,7 @@ namespace Safe_To_Share.Scripts.StartScene
                 case Gender.CuntBoy:
                     essence.Femininity.Amount += startEssence;
                     if (tempPlayer.SexualOrgans.Vaginas.TryGrowNew(essence.Femininity))
-                    {
                         tempPlayer.SexualOrgans.Vaginas.GrowFirstAsMuchAsPossible(essence.Femininity);
-                    }
 
                     essence.Femininity.Amount = 0;
                     break;
@@ -65,9 +63,7 @@ namespace Safe_To_Share.Scripts.StartScene
                     essence.Femininity.Amount += startEssence / 2;
                     if (tempPlayer.SexualOrgans.Boobs.HaveAny() ||
                         tempPlayer.SexualOrgans.Boobs.TryGrowNew(essence.Femininity))
-                    {
                         tempPlayer.SexualOrgans.Boobs.GrowFirstAsMuchAsPossible(essence.Femininity);
-                    }
 
                     essence.Femininity.Amount = 0;
                     break;
@@ -80,18 +76,18 @@ namespace Safe_To_Share.Scripts.StartScene
                     essence.Femininity.Amount += startEssence / 2;
                     if (tempPlayer.SexualOrgans.Vaginas.HaveAny() ||
                         tempPlayer.SexualOrgans.Vaginas.TryGrowNew(essence.Femininity))
-                    {
                         tempPlayer.SexualOrgans.Vaginas.GrowFirstAsMuchAsPossible(essence.Femininity);
-                    }
                     essence.Femininity.Amount = 0;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
             tempPlayer.GrowOrgans();
             essence.Femininity.Amount = 0;
             essence.Masculinity.Amount = 0;
         }
+
         void ChangeStartGender(int arg0)
         {
             genderInfo.text = "Loading..";
@@ -120,8 +116,9 @@ namespace Safe_To_Share.Scripts.StartScene
 
         void PrintGenderInfo()
         {
-            genderInfo.text = $"{UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(loaded.ToString(), true)}\n" +
+            genderInfo.text = $"{UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(loaded.ToString())}\n" +
                               $"{Info()}\n\n(In future builds there will more effects of your start gender)";
+
             string Info() =>
                 startGender switch
                 {

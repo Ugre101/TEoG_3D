@@ -16,23 +16,21 @@ namespace AvatarStuff
 
         public Color Lightest => lightest;
 
-        public void SetSkinTone(float value, IEnumerable<SkinnedMeshRenderer> renderers,bool forceUpdate)
+        public void SetSkinTone(float value, IEnumerable<SkinnedMeshRenderer> renderers, bool forceUpdate)
         {
             if (!forceUpdate && Math.Abs(value - current) < 0.01f)
                 return;
             current = value;
-            var tone = Color.Lerp( Lightest, Darkest, value);
-            
+            var tone = Color.Lerp(Lightest, Darkest, value);
+
             foreach (var meshRenderer in renderers)
             foreach (Material rendererMaterial in meshRenderer.materials)
             foreach (Material skinMat in skinMats)
-            {
                 if (rendererMaterial.name.Contains(skinMat.name))
                 {
                     rendererMaterial.color = tone;
                     break;
                 }
-            }
         }
     }
 }

@@ -1,14 +1,13 @@
-﻿using Character.GenderStuff;
-using System;
-using UnityEngine;
+﻿using System;
 using Assets.Scripts.Character.EssenceStuff.Perks;
+using UnityEngine;
 
 namespace Character.EssenceStuff
 {
     [Serializable]
     public class EssenceOptions
     {
-        [SerializeField] bool selfDrain = false;
+        [SerializeField] bool selfDrain;
         [SerializeField] bool giveHeight = true;
         [SerializeField] DrainEssenceType transmuteTo = DrainEssenceType.Femi;
         [SerializeField] GenderMorph.MorphToGender morphPartnerToGender;
@@ -30,10 +29,11 @@ namespace Character.EssenceStuff
             get => transmuteTo;
             set => transmuteTo = value;
         }
-        public GenderMorph.MorphToGender MorphPartnerToGender 
-        { 
-            get => morphPartnerToGender; 
-            set => morphPartnerToGender = value; 
+
+        public GenderMorph.MorphToGender MorphPartnerToGender
+        {
+            get => morphPartnerToGender;
+            set => morphPartnerToGender = value;
         }
     }
 }

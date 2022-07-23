@@ -13,6 +13,8 @@ namespace Options
 
 
         AudioMixer loaded;
+
+        void OnDestroy() => PlayerPrefs.SetFloat(volumeParameter, slider.value);
         // Start is called before the first frame update
 
         public void SetupMixer(AudioMixer mixer)
@@ -23,11 +25,9 @@ namespace Options
             //Load();
         }
 
-        void OnDestroy() => PlayerPrefs.SetFloat(volumeParameter,slider.value);
-
         void ChangeMaster(float arg0)
         {
-            float newValue = arg0 == 0 ?  -80f :Mathf.Log10(arg0) * stepMultiplier;
+            float newValue = arg0 == 0 ? -80f : Mathf.Log10(arg0) * stepMultiplier;
             loaded.SetFloat(volumeParameter, newValue);
         }
     }

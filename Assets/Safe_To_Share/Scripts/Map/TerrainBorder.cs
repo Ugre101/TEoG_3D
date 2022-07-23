@@ -23,7 +23,7 @@ namespace Map
             SetScales(data);
         }
 
-        private void SetScales(TerrainData data)
+        void SetScales(TerrainData data)
         {
             Vector3 zScaleWall = new(0, borderHeight, data.bounds.size.z);
             Vector3 xScaleWall = new(data.bounds.size.x, borderHeight, 0);

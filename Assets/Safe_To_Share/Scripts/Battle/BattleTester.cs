@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Character;
 using Character.CreateCharacterStuff;
 using Character.EnemyStuff;
@@ -20,14 +19,14 @@ namespace Battle
         {
             if (!GameTester.GetFirstCall())
                 return;
-            
+
             await playerPreset.LoadAssets();
             BaseCharacter[] playerTeam = { new Player(playerPreset.NewCharacter()), };
             await enemyPreset.LoadAssets();
             List<BaseCharacter> enemyTeam = new();
             for (int i = 0; i < enemies; i++)
                 enemyTeam.Add(new Enemy(enemyPreset.NewEnemy()));
-            BattleManager.Instance.Setup(new Player(playerPreset.NewCharacter()), enemyTeam.ToArray(),null,false);
+            BattleManager.Instance.Setup(new Player(playerPreset.NewCharacter()), enemyTeam.ToArray(), null, false);
         }
     }
 }

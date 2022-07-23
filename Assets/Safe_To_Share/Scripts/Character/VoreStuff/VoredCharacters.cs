@@ -17,6 +17,7 @@ namespace Character.VoreStuff
                 if (PreyDict.TryGetValue(id, out Prey prey))
                     yield return prey;
         }
+
         public static void AddPrey(Prey newPrey)
         {
             if (PreyDict.ContainsKey(newPrey.Identity.ID))

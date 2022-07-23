@@ -10,11 +10,13 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.StartScene
 {
-    public class StartCanvas : MonoBehaviour,ICancelMeBeforeOpenPauseMenu
+    public class StartCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] GameObject startMenu;
         [SerializeField] SetupPlayer setupPlayer;
+
         [SerializeField] SaveButton continueLastGame;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -22,7 +24,9 @@ namespace Safe_To_Share.Scripts.StartScene
             Addressables.InitializeAsync().Completed += AssetsLoaded;
             setupPlayer.LoadAssets();
         }
-        
+
+        public bool BlockIfActive() => true; // Always block
+
 
         void AssetsLoaded(AsyncOperationHandle<IResourceLocator> obj)
         {
@@ -33,7 +37,6 @@ namespace Safe_To_Share.Scripts.StartScene
         public void ReturnToStartMenu() => transform.SleepChildren(startMenu);
 
         public void QuitGame() => Application.Quit();
-        public bool BlockIfActive() => true; // Always block
 
         void LoadLastGame()
         {
@@ -43,7 +46,6 @@ namespace Safe_To_Share.Scripts.StartScene
             if (string.IsNullOrEmpty(savePath))
                 continueLastGame.gameObject.SetActive(false);
             else
-            {
                 try
                 {
                     FullSave fullSave = JsonUtility.FromJson<FullSave>(File.ReadAllText(savePath));
@@ -54,7 +56,6 @@ namespace Safe_To_Share.Scripts.StartScene
                 {
                     continueLastGame.gameObject.SetActive(false);
                 }
-            }
         }
     }
 }

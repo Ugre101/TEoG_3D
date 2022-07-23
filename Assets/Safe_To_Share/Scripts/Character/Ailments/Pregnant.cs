@@ -5,7 +5,7 @@ namespace Character.Ailments
 {
     public class Pregnant : Ailment
     {
-        public Pregnant(int modValue, string @from, ModType modType) : base(modValue, @from, modType)
+        public Pregnant(int modValue, string from, ModType modType) : base(modValue, from, modType)
         {
         }
 

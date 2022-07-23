@@ -9,10 +9,11 @@ namespace GameUIAndMenus.Menus.Vore
 {
     public class SexualVoreOrganContainerInfo : VoreOrganContainerInfo
     {
-        public static event Action<SexualOrganType> ShowOrganSettingForMe; 
         [SerializeField] SexualVoreOrganCapacityInfo prefab;
 
         SexualOrganType voreOrganType;
+        public static event Action<SexualOrganType> ShowOrganSettingForMe;
+
         public void Setup(BaseCharacter pred, SexualOrganType organType)
         {
             voreOrganType = organType;

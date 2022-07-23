@@ -14,9 +14,11 @@ namespace Safe_To_Share.Scripts
             DateSystem.NewHour += UpdateText;
             DateSystem.NewMinute += UpdateText;
         }
+
         void OnDisable() => UnSub();
         void OnDestroy() => UnSub();
-        private void UnSub()
+
+        void UnSub()
         {
             DateSystem.NewHour -= UpdateText;
             DateSystem.NewMinute -= UpdateText;

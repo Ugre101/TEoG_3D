@@ -14,17 +14,17 @@ namespace Safe_To_Share.Scripts
             DormManager.Instance.Buildings.Dungeon.Upgraded += CheckOwnsDungeon;
         }
 
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            DormManager.Instance.Buildings.Dungeon.Upgraded -= CheckOwnsDungeon;
-        }
-
 
         protected override void Update()
         {
             if (ownsDungeon)
                 base.Update();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            DormManager.Instance.Buildings.Dungeon.Upgraded -= CheckOwnsDungeon;
         }
 
         protected override void LoadedMe()

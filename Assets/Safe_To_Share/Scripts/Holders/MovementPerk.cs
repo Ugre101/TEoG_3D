@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using Character.LevelStuff;
-using Character.PlayerStuff;
 using Character.StatsStuff.Mods;
 using UnityEngine;
 
 namespace AvatarStuff.Holders
 {
-    
     [CreateAssetMenu(menuName = "Character/Movement/Perk", fileName = "MovementPerk", order = 0)]
     public class MovementPerk : BasicPerk
     {
@@ -16,8 +14,8 @@ namespace AvatarStuff.Holders
         [SerializeField] float sprintBoost;
         [SerializeField] List<TempIntMod> tempSprintBoost = new();
         [SerializeField] IntMod[] swimSpeedMods;
-        
-        
+
+
         public override PerkType PerkType => PerkType.Movement;
         public float SprintBoost => sprintBoost;
 

@@ -1,8 +1,5 @@
 ﻿using System;
-using Character.EnemyStuff;
-using Character.PlayerStuff;
 using Character.Race;
-using Character.VoreStuff;
 using CustomClasses;
 using UnityEngine;
 

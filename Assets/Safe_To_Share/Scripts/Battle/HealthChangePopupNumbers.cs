@@ -36,7 +36,7 @@ namespace Battle
 
         void HealWp(int obj)
         {
-            float changePercent = (float) obj / wp.Value;
+            float changePercent = (float)obj / wp.Value;
             text.color = Color.green;
             text.fontSize = CalcFontSize(changePercent);
             BaseChange(obj, "wp");
@@ -44,7 +44,7 @@ namespace Battle
 
         void HealHp(int obj)
         {
-            float changePercent = (float) obj / hp.Value;
+            float changePercent = (float)obj / hp.Value;
             text.color = Color.blue;
             text.fontSize = CalcFontSize(changePercent);
             BaseChange(obj, "hp");
@@ -52,7 +52,7 @@ namespace Battle
 
         void TakeWillDamage(int obj)
         {
-            float changePercent = (float) obj / wp.Value;
+            float changePercent = (float)obj / wp.Value;
             text.color = DamageColor(changePercent);
             text.fontSize = CalcFontSize(changePercent);
             BaseChange(obj, "wp");
@@ -64,7 +64,7 @@ namespace Battle
 
         void TakeHpDamage(int obj)
         {
-            float changePercent = (float) obj / hp.Value;
+            float changePercent = (float)obj / hp.Value;
             text.color = DamageColor(changePercent);
             text.fontSize = CalcFontSize(changePercent);
             BaseChange(obj, "hp");

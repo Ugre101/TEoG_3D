@@ -1,29 +1,29 @@
 {
-    "name": "MyScriptsEditors",
-    "rootNamespace": "",
-    "references": [
-        "GUID:6bda2aa7a6b7d184e854459b576121e6",
-        "GUID:9d8681c8201c491cb2cbd531f2753f52",
-        "GUID:6d7ff88c5e2f40a896bfb867eea772a6",
-        "GUID:1dd4efe6b41648509aececc3ef871ff6",
-        "GUID:554cfee237274d14870c275b2d814328",
-        "GUID:0ac65b8fcf4ecc241ba337792a733b93",
-        "GUID:3924299c4090ce042b191c0a418cc394",
-        "GUID:ca91fa3097344081af31083bb32cbde5",
-        "GUID:3569e5de841d45758fe8159e4d0a38e3",
-        "GUID:a6019578e9e74b48bb31ea37c31b14d3",
-        "GUID:2e4f7a357bbb8164b853dc2cc9e0c558",
-        "GUID:3627295ec002ed84fad2824b1681bedf"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "MyScriptsEditors",
+  "rootNamespace": "",
+  "references": [
+    "GUID:6bda2aa7a6b7d184e854459b576121e6",
+    "GUID:9d8681c8201c491cb2cbd531f2753f52",
+    "GUID:6d7ff88c5e2f40a896bfb867eea772a6",
+    "GUID:1dd4efe6b41648509aececc3ef871ff6",
+    "GUID:554cfee237274d14870c275b2d814328",
+    "GUID:0ac65b8fcf4ecc241ba337792a733b93",
+    "GUID:3924299c4090ce042b191c0a418cc394",
+    "GUID:ca91fa3097344081af31083bb32cbde5",
+    "GUID:3569e5de841d45758fe8159e4d0a38e3",
+    "GUID:a6019578e9e74b48bb31ea37c31b14d3",
+    "GUID:2e4f7a357bbb8164b853dc2cc9e0c558",
+    "GUID:3627295ec002ed84fad2824b1681bedf"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

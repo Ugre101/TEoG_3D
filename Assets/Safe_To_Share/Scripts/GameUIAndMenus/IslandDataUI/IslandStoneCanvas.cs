@@ -11,9 +11,6 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 
         public void CLoseMenus() => transform.SleepChildren();
 
-        public void Open(Player player)
-        {
-            menu.Open(player);
-        }
+        public void Open(Player player) => menu.Open(player);
     }
 }

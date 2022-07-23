@@ -27,16 +27,16 @@ namespace Battle
         static readonly int Tease = Animator.StringToHash("tease");
 
         public static readonly Dictionary<TriggerBattleAnimations, int> TriggerAnimations = new()
-            {
-                { TriggerBattleAnimations.BasicAttack, BasicAttack },
-                { TriggerBattleAnimations.Dead, Dead },
-                { TriggerBattleAnimations.Tease, Tease },
-            };
+        {
+            { TriggerBattleAnimations.BasicAttack, BasicAttack },
+            { TriggerBattleAnimations.Dead, Dead },
+            { TriggerBattleAnimations.Tease, Tease },
+        };
 
         public static readonly Dictionary<FloatBattleAnimations, int> FloatAnimations = new()
-            {
-                { FloatBattleAnimations.TakeHealthDamage, HpDmg },
-                { FloatBattleAnimations.TakeWillDamage, WpDmg },
-            };
+        {
+            { FloatBattleAnimations.TakeHealthDamage, HpDmg },
+            { FloatBattleAnimations.TakeWillDamage, WpDmg },
+        };
     }
 }

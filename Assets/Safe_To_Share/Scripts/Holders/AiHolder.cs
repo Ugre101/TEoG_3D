@@ -8,17 +8,27 @@ namespace AvatarStuff.Holders
     public abstract class AiHolder : Holder
     {
         const int FrameLimit = 4;
-        bool outOfRange;
         static PlayerHolder foundPlayer;
         [SerializeField] NavMeshAgent move;
         [SerializeField] AIAgentEcm2Character aIMover;
+        bool outOfRange;
+        protected bool Stopped;
 
         public PlayerHolder Player { get; private set; }
-        public NavMeshAgent Move { get => move; private set => move = value; }
 
-        public AIAgentEcm2Character AIMover { get => aIMover; private set => aIMover = value; }
+        public NavMeshAgent Move
+        {
+            get => move;
+            private set => move = value;
+        }
+
+        public AIAgentEcm2Character AIMover
+        {
+            get => aIMover;
+            private set => aIMover = value;
+        }
+
         public float DistanceToPlayer { get; private set; } = float.MaxValue;
-        protected bool Stopped;
 
         protected bool OutOfRange
         {
@@ -42,6 +52,7 @@ namespace AvatarStuff.Holders
                 Debug.LogWarning("Holder spawned off navmesh", this);
                 gameObject.SetActive(false);
             }
+
             if (AIMover == null && TryGetComponent(out AIAgentEcm2Character aiAgent))
                 AIMover = aiAgent;
             if (foundPlayer != null)
@@ -49,6 +60,23 @@ namespace AvatarStuff.Holders
             else
                 TryFindPlayer();
         }
+
+        protected virtual void Update()
+        {
+            if (Stopped) return;
+            if (Time.frameCount % FrameLimit != 0)
+                return;
+
+            DistanceToPlayer = Vector3.Distance(transform.position, Player.transform.position);
+
+            OutOfRange = OutOfRange switch
+            {
+                false when DistanceToPlayer > SpawnSettings.SpawnWhenPlayerAreWithinDistance => true,
+                true when DistanceToPlayer <= SpawnSettings.SpawnWhenPlayerAreWithinDistance => false,
+                _ => OutOfRange,
+            };
+        }
+
         void TryFindPlayer()
         {
             foundPlayer = PlayerHolder.Instance;
@@ -65,22 +93,8 @@ namespace AvatarStuff.Holders
                 if (player.TryGetComponent(out PlayerHolder playerHolder))
                     foundPlayer = playerHolder;
             }
+
             Player = foundPlayer;
-        }
-        protected virtual void Update()
-        {
-            if (Stopped) return;
-            if (Time.frameCount % FrameLimit != 0)
-                return;
-
-            DistanceToPlayer = Vector3.Distance(transform.position, Player.transform.position);
-
-            OutOfRange = OutOfRange switch
-            {
-                false when DistanceToPlayer > SpawnSettings.SpawnWhenPlayerAreWithinDistance => true,
-                true when DistanceToPlayer <= SpawnSettings.SpawnWhenPlayerAreWithinDistance => false,
-                _ => OutOfRange,
-            };
         }
 
 

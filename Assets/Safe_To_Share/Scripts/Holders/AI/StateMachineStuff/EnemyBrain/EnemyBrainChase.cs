@@ -1,5 +1,4 @@
-﻿using Character.EnemyStuff;
-using Safe_To_Share.Scripts.Static;
+﻿using Safe_To_Share.Scripts.Static;
 
 namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
 {
@@ -9,10 +8,7 @@ namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
         {
         }
 
-        public override void OnEnter()
-        {
-            GameManager.EnemyGrowsCloser(GameManager.EnemyClose.Chasing);
-        }
+        public override void OnEnter() => GameManager.EnemyGrowsCloser(GameManager.EnemyClose.Chasing);
 
         public override void OnUpdate()
         {

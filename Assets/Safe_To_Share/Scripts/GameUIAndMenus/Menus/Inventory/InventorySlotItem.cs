@@ -22,6 +22,8 @@ namespace GameUIAndMenus.Menus.Inventory
         bool blockHoverInfo;
         InventoryItem invItem;
         float lastClick;
+
+        bool loaded;
         Item loadedItem;
         Coroutine loadItemOp;
         Transform orgParent;
@@ -98,7 +100,6 @@ namespace GameUIAndMenus.Menus.Inventory
             loadItemOp = StartCoroutine(LoadItem());
         }
 
-        bool loaded;
         IEnumerator LoadItem()
         {
             var op = Addressables.LoadAssetAsync<Item>(invItem.ItemGuid);

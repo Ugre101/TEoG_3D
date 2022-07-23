@@ -26,7 +26,8 @@ namespace Safe_To_Share.Scripts.Interactable
             }
         }
 
-        public string HoverText(Player player) => needItem.Any(item => player.Inventory.HasItemOfGuid(item.Guid)) ? title : needText;
+        public string HoverText(Player player) =>
+            needItem.Any(item => player.Inventory.HasItemOfGuid(item.Guid)) ? title : needText;
 
         public void DoInteraction(Player player)
         {
@@ -37,19 +38,18 @@ namespace Safe_To_Share.Scripts.Interactable
                     break;
                 }
         }
+
         void UseItemAndDoAction(Player player, string guid)
         {
             player.Inventory.UseItemItemID(guid);
             StringBuilder returnText = new("You spent an hour working out and ");
             if (trainMuscle)
-            {
-                returnText.Append($"gained {BodyExtensions.Train(player.Body, intensityMuscle).ConvertKg()} of muscle and ");
-            }
-            returnText.Append($"burned {player.Body.BurnFatHour(1,intensityFat).ConvertKg()} of fat.");
+                returnText.Append(
+                    $"gained {BodyExtensions.Train(player.Body, intensityMuscle).ConvertKg()} of muscle and ");
+            returnText.Append($"burned {player.Body.BurnFatHour(1, intensityFat).ConvertKg()} of fat.");
             EventLog.AddEvent(returnText.ToString());
             player.InvokeUpdateAvatar();
             DateSystem.PassHour();
         }
-
     }
 }

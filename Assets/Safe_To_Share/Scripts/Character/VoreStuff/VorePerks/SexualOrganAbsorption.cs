@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Character.Organs;
 using Character.VoreStuff.VoreDigestionModes;
 using CustomClasses;
-using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
 namespace Character.VoreStuff.VorePerks
@@ -16,11 +14,11 @@ namespace Character.VoreStuff.VorePerks
         public override string DigestionMode => VoreOrganDigestionMode.Absorption;
 
 
-        public override IEnumerable<VoreType> OrganType => new[] { VoreType.Cock, VoreType.Breast,};
+        public override IEnumerable<VoreType> OrganType => new[] { VoreType.Cock, VoreType.Breast, };
 
 
         public override void SpecialOrganDigestion(BaseCharacter pred, BaseOrgan organ, SexualOrganType type, int prey,
-            bool predIsPlayer) => AbsorbPrey(pred,organ,prey,type);
+            bool predIsPlayer) => AbsorbPrey(pred, organ, prey, type);
 
         static void AbsorbPrey(BaseCharacter pred, BaseOrgan baseOrgan, int preyId, SexualOrganType type)
         {
@@ -31,6 +29,7 @@ namespace Character.VoreStuff.VorePerks
                 FullyAbsorbed(pred, baseOrgan, prey, preyId, type);
                 return;
             }
+
             MorphToOrgan(prey, baseOrgan);
         }
 
@@ -40,11 +39,13 @@ namespace Character.VoreStuff.VorePerks
             prey.AltDigest(diff);
         }
 
-        static float MorphTickAmount(BaseCharacter prey, BaseIntStat baseOrgan) => baseOrgan.Value / prey.Body.Weight * AbsorbSpeedMod;
+        static float MorphTickAmount(BaseCharacter prey, BaseIntStat baseOrgan) =>
+            baseOrgan.Value / prey.Body.Weight * AbsorbSpeedMod;
 
         public static bool CanInstaMorph(BaseCharacter prey, BaseIntStat baseOrgan) =>
             MorphTickAmount(prey, baseOrgan) >= 100f;
-        static void FullyAbsorbed(BaseCharacter pred,BaseOrgan organ, Prey prey, int preyId, SexualOrganType type)
+
+        static void FullyAbsorbed(BaseCharacter pred, BaseOrgan organ, Prey prey, int preyId, SexualOrganType type)
         {
             organ.Vore.RemovePrey(preyId);
             VoredCharacters.RemovePrey(prey);

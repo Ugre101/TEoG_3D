@@ -1,24 +1,24 @@
 {
-    "name": "MySceneScripts",
-    "rootNamespace": "",
-    "references": [
-        "GUID:84651a3751eca9349aac36a66bba901b",
-        "GUID:9e24947de15b9834991c9d8411ea37cf",
-        "GUID:9d8681c8201c491cb2cbd531f2753f52",
-        "GUID:554cfee237274d14870c275b2d814328",
-        "GUID:1dd4efe6b41648509aececc3ef871ff6",
-        "GUID:ca91fa3097344081af31083bb32cbde5",
-        "GUID:904d80dccad704a3f95e42bd0ad5d960",
-        "GUID:7657b0c4830f12041b8e3046ea267ca5",
-        "GUID:3627295ec002ed84fad2824b1681bedf"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "MySceneScripts",
+  "rootNamespace": "",
+  "references": [
+    "GUID:84651a3751eca9349aac36a66bba901b",
+    "GUID:9e24947de15b9834991c9d8411ea37cf",
+    "GUID:9d8681c8201c491cb2cbd531f2753f52",
+    "GUID:554cfee237274d14870c275b2d814328",
+    "GUID:1dd4efe6b41648509aececc3ef871ff6",
+    "GUID:ca91fa3097344081af31083bb32cbde5",
+    "GUID:904d80dccad704a3f95e42bd0ad5d960",
+    "GUID:7657b0c4830f12041b8e3046ea267ca5",
+    "GUID:3627295ec002ed84fad2824b1681bedf"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

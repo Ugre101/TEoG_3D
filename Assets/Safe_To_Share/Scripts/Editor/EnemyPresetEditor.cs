@@ -5,10 +5,11 @@ namespace Character.CreateCharacterStuff.EditorPresets
     [CustomEditor(typeof(EnemyPreset))]
     public class EnemyPresetEditor : CharacterPresetEditor
     {
-        static bool rewardFold, canTakeFold,loseFold;
+        static bool rewardFold, canTakeFold, loseFold;
         SerializedProperty canTake;
-        SerializedProperty reward;
         SerializedProperty loseScenario;
+        SerializedProperty reward;
+
         void OnEnable()
         {
             BaseOnEnable();
@@ -31,13 +32,13 @@ namespace Character.CreateCharacterStuff.EditorPresets
             EditorGUILayout.BeginHorizontal();
             FoldButton("Reward", ref rewardFold);
             FoldButton("Take To Dorm", ref canTakeFold);
-            FoldButton("Lose Scenario",ref loseFold);
+            FoldButton("Lose Scenario", ref loseFold);
             EditorGUILayout.EndHorizontal();
 
             PropertyFolds();
             BasicPropertyFold(rewardFold, reward);
             BasicPropertyFold(canTakeFold, canTake);
-            BasicPropertyFold(loseFold,loseScenario);
+            BasicPropertyFold(loseFold, loseScenario);
             BottomStuff();
         }
 

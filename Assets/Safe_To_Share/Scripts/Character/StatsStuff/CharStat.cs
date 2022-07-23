@@ -1,6 +1,5 @@
 ﻿using System;
 using CustomClasses;
-using Safe_to_Share.Scripts.CustomClasses;
 
 namespace Character.StatsStuff
 {

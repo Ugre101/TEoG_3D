@@ -7,8 +7,8 @@ namespace GameUIAndMenus.Menus.Vore
 {
     public class StomachVoreOrganContainerInfo : VoreOrganContainerInfo
     {
-        public static event Action ShowStomachSettings;
         [SerializeField] VoreOrganCapacityInfo prefab;
+        public static event Action ShowStomachSettings;
 
         public void Setup(string title, VoreOrgan voreOrgan, float capcity)
         {

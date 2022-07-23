@@ -6,6 +6,7 @@ namespace AvatarStuff
     {
         [SerializeField, Range(0, 10f),] float size;
         [SerializeField] bool hidden;
+
         void OnValidate()
         {
             if (!TryGetComponent(out DazBallsController ballsController))

@@ -19,8 +19,8 @@ namespace Character.Organs.UI
         SexualOrganType organType;
 
         ManualOrganGrowth.SharedInfo shared;
-        
-        public void Setup(BaseOrgan org, ManualOrganGrowth.SharedInfo shared,bool canShrink = false)
+
+        public void Setup(BaseOrgan org, ManualOrganGrowth.SharedInfo shared, bool canShrink = false)
         {
             organ = org;
             this.shared = shared;
@@ -33,7 +33,8 @@ namespace Character.Organs.UI
             altShrinkBtn.gameObject.SetActive(canShrink);
         }
 
-        public event Action<SexualOrganType, BaseOrgan> RecycleMe; 
+        public event Action<SexualOrganType, BaseOrgan> RecycleMe;
+
         void Shrink()
         {
             essence.Amount += Mathf.RoundToInt(organ.Shrink() * 0.7f);
@@ -41,17 +42,18 @@ namespace Character.Organs.UI
             Change = true;
             if (organ.BaseValue <= 0)
             {
-                RecycleMe?.Invoke(organType,organ); 
+                RecycleMe?.Invoke(organType, organ);
                 Destroy(gameObject);
             }
         }
 
         void UpdateText() =>
-            text.text = $"{organType} {organ.ScaledWithHeight(shared.height).ConvertCm()} {organ.GrowCost}{essenceType}";
+            text.text =
+                $"{organType} {organ.ScaledWithHeight(shared.height).ConvertCm()} {organ.GrowCost}{essenceType}";
 
         void Grow()
         {
-            if (!organ.Grow(essence)) 
+            if (!organ.Grow(essence))
                 return;
             UpdateText();
             Change = true;

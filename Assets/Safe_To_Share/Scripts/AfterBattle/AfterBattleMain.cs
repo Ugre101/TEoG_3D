@@ -83,6 +83,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             {
                 // TODO
             }
+
             SetEnemyActor(enemies[0]);
             AfterBattleMainUI.Setup(player, activePlayerActor.Actor, activeEnemyActor.Actor);
             SceneLoader.Instance.PreLoadDepLast();

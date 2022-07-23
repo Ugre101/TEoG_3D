@@ -8,11 +8,11 @@ namespace Map
     {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] Image image;
+
         public void Setup(string text, Sprite sprite)
         {
             title.text = text;
             image.sprite = sprite;
         }
-
     }
 }

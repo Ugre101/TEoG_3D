@@ -6,13 +6,13 @@ namespace Character.Ailments
     {
         const string Cause = "Hungry";
 
-        public static bool Has(BaseCharacter character) => 
-            character.Stats.Health.IntRecovery.Mods.StatMods.Exists(m => m.From == Cause) || 
-            character.Stats.WillPower.IntRecovery.Mods.StatMods.Exists(m => m.From == Cause);
-
         public Hungry() : base(-1, Cause, ModType.Flat)
         {
         }
+
+        public static bool Has(BaseCharacter character) =>
+            character.Stats.Health.IntRecovery.Mods.StatMods.Exists(m => m.From == Cause) ||
+            character.Stats.WillPower.IntRecovery.Mods.StatMods.Exists(m => m.From == Cause);
 
         public override bool Gain(BaseCharacter character)
         {
@@ -32,7 +32,8 @@ namespace Character.Ailments
             return change;
         }
 
-        public override bool Cure(BaseCharacter character) => 
-            character.Stats.Health.IntRecovery.Mods.RemoveStatModsFromSource(Cause) | character.Stats.WillPower.IntRecovery.Mods.RemoveStatModsFromSource(Cause);
+        public override bool Cure(BaseCharacter character) =>
+            character.Stats.Health.IntRecovery.Mods.RemoveStatModsFromSource(Cause) |
+            character.Stats.WillPower.IntRecovery.Mods.RemoveStatModsFromSource(Cause);
     }
 }

@@ -9,7 +9,10 @@ namespace Character.DefeatScenarios.Nodes
     {
         [SerializeField] VoreType[] voreTypes;
 
-        public override bool CanDo(BaseCharacter caster, BaseCharacter target) => OptionalContent.Vore.Enabled && voreTypes.Any(voreType => VoreSystemExtension.CanDoOfType(caster, target, voreType));
+        public override bool CanDo(BaseCharacter caster, BaseCharacter target) => OptionalContent.Vore.Enabled &&
+                                                                                  voreTypes.Any(voreType =>
+                                                                                      VoreSystemExtension.CanDoOfType(
+                                                                                          caster, target, voreType));
 
         public override void HandleEffects(BaseCharacter caster, BaseCharacter target)
         {

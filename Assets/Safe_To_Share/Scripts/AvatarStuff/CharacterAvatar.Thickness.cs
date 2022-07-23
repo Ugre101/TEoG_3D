@@ -12,6 +12,7 @@ namespace AvatarStuff
             [SerializeField] bool hasShape;
             [SerializeField] int thick;
             [SerializeField] int thin;
+
             public void ChangeShape(SkinnedMeshRenderer shape, Thickset thickset)
             {
                 if (!hasShape)
@@ -25,7 +26,7 @@ namespace AvatarStuff
                 else
                 {
                     shape.SetBlendShapeWeight(thick, 0);
-                    shape.SetBlendShapeWeight(thin,  clampedValue);
+                    shape.SetBlendShapeWeight(thin, clampedValue);
                 }
             }
 

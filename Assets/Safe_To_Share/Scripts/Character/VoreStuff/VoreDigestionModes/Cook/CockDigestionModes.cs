@@ -9,6 +9,7 @@ namespace Character.VoreStuff.VoreDigestionModes.Cook
     public class CockDigestionModes : VoreOrganDigestionMode
     {
         public override string[] AllDigestionTypes => new[] { Endo, Digestion, Absorption, };
+
         public override IEnumerable<string> GetPossibleDigestionTypes(BaseCharacter pred)
         {
             yield return Endo;

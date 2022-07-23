@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using Character.PlayerStuff.Currency;
 using Character.StatsStuff;
-using Currency;
 using Currency.UI;
 using Items;
 using TMPro;
@@ -14,13 +13,13 @@ namespace GameUIAndMenus.Menus.Inventory
     public class InventoryMenu : GameMenu
     {
         [SerializeField] Transform content;
-        bool firstUse = true;
         [SerializeField] HaveGold haveGold;
         [SerializeField] InventorySlot[] preInstancedSlots;
         [SerializeField] InventorySlot slot;
+        [SerializeField] TextMeshProUGUI stats;
+        bool firstUse = true;
         protected Dictionary<Vector2, InventorySlot> Slots = new();
         Queue<InventorySlot> slotsPool;
-        [SerializeField] TextMeshProUGUI stats;
 
 
         void OnEnable()

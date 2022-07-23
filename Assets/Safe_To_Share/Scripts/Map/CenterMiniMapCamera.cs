@@ -6,6 +6,8 @@ namespace Map
     {
         [SerializeField] float yOffset;
 
+        void OnValidate() => Center();
+
         // Start is called before the first frame update
         void Center()
         {
@@ -17,7 +19,5 @@ namespace Map
             Vector3 terrainPos = Terrain.activeTerrain.GetPosition();
             transform.position = new Vector3(terrainPos.x + xMid, biggest, terrainPos.z + zMid);
         }
-
-        void OnValidate() => Center();
     }
 }

@@ -10,6 +10,7 @@ namespace GameUIAndMenus.Menus.Vore
         [SerializeField] SexualVoreOrganContainerInfo cock, balls, anal, boobs, vagina;
         [SerializeField] GameObject start, perk;
         [SerializeField] VoreOrganSettings voreOrganSettings;
+
         void OnEnable()
         {
             start.gameObject.SetActive(true);
@@ -20,7 +21,7 @@ namespace GameUIAndMenus.Menus.Vore
         void Setup()
         {
             stomach.Setup("Stomach", Player.Vore.Stomach, VoreSystemExtension.OralVoreCapacity(Player));
-            cock.Setup(Player,SexualOrganType.Dick);
+            cock.Setup(Player, SexualOrganType.Dick);
             balls.Setup(Player, SexualOrganType.Balls);
             anal.Setup(Player, SexualOrganType.Anal);
             boobs.Setup(Player, SexualOrganType.Boobs);

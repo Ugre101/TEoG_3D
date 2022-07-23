@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using AvatarStuff.Holders;
-using Character.PlayerStuff;
 
 namespace DormAndHome.Dorm.Buildings
 {

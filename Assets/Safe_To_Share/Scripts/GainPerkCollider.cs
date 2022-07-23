@@ -22,7 +22,8 @@ namespace Safe_To_Share.Scripts
 
         void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Player") || !other.TryGetComponent(out PlayerHolder playerHolder) || playerHolder.Player.LevelSystem.OwnedPerks.Contains(loaded))
+            if (!other.CompareTag("Player") || !other.TryGetComponent(out PlayerHolder playerHolder) ||
+                playerHolder.Player.LevelSystem.OwnedPerks.Contains(loaded))
                 return;
             loaded.GainPerk(playerHolder);
             EventLog.AddEvent($"Allowing you to {loaded.Desc}");

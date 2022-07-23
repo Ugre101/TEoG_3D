@@ -1,6 +1,4 @@
-using System;
 using AvatarStuff.Holders;
-using Character.PlayerStuff;
 using SceneStuff;
 using UnityEngine;
 using UnityEngine.UI;

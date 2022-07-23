@@ -13,7 +13,7 @@ namespace Safe_To_Share.Scripts
 
         IEnumerator Start()
         {
-            if (!GameTester.GetFirstCall()) 
+            if (!GameTester.GetFirstCall())
                 yield break;
             if (locationSceneSo == null)
                 Debug.LogError("You forgot to add sceneData to editorTools, saving won't work in editor now.");

@@ -39,10 +39,7 @@ namespace DormAndHome
                 array[i].SetActive(i == tier - 1);
         }
 
-        void ShowOwnedBuildings()
-        {
-            CheckBrothel();
-        }
+        void ShowOwnedBuildings() => CheckBrothel();
 
         void CheckBrothel() => SetActiveBuildingTier(brothels, dormBuildings.VillageBuildings.Brothel.Level);
     }

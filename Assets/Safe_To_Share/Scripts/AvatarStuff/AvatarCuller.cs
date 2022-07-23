@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AvatarStuff
 {
@@ -21,11 +20,6 @@ namespace AvatarStuff
         {
             avatarChanger.NewAvatar += Add;
             cam = Camera.main;
-        }
-
-        void OnDestroy()
-        {
-            avatarChanger.NewAvatar -= Add;
         }
 
         void Update()
@@ -58,6 +52,8 @@ namespace AvatarStuff
                 }
             }
         }
+
+        void OnDestroy() => avatarChanger.NewAvatar -= Add;
 
         void Add(CharacterAvatar obj)
         {

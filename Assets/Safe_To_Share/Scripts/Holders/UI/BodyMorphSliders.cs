@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Character;
-using Safe_To_Share.Scripts.Static;
+﻿using Character;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -11,15 +9,16 @@ namespace AvatarStuff.UI
         [SerializeField] BodyMorphSlider prefab;
         [SerializeField] Transform content;
 
+        bool firstSetup = true;
+
         ObjectPool<BodyMorphSlider> sliderPool;
 
-        bool firstSetup = true;
         public void Setup(BodyMorphs.AvatarBodyMorphs morphs, CharacterAvatar avatar)
         {
             if (firstSetup)
                 SetupSliderPool();
             foreach (var subStruct in morphs.bodyAvatarMorphs)
-                sliderPool.Get().Setup(subStruct, avatar,sliderPool);
+                sliderPool.Get().Setup(subStruct, avatar, sliderPool);
         }
 
 
@@ -31,14 +30,14 @@ namespace AvatarStuff.UI
             {
                 var found = morphs.bodyAvatarMorphs.Find(b => b.title == bodyShape.Title);
                 if (found != null)
-                    sliderPool.Get().Setup(found, avatar,sliderPool);
+                    sliderPool.Get().Setup(found, avatar, sliderPool);
             }
         }
 
         void SetupSliderPool()
         {
             firstSetup = false;
-            sliderPool = new ObjectPool<BodyMorphSlider>(CreateFunc,ActionOnGet,ActionOnRelease);
+            sliderPool = new ObjectPool<BodyMorphSlider>(CreateFunc, ActionOnGet, ActionOnRelease);
             foreach (var slider in GetComponentsInChildren<BodyMorphSlider>())
                 sliderPool.Release(slider);
         }
@@ -52,6 +51,5 @@ namespace AvatarStuff.UI
         static void ActionOnGet(BodyMorphSlider obj) => obj.gameObject.SetActive(true);
 
         BodyMorphSlider CreateFunc() => Instantiate(prefab, content);
-
     }
 }

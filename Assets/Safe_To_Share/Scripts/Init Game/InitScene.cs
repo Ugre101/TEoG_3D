@@ -22,6 +22,7 @@ namespace Safe_To_Share.Scripts.Init_Game
                 Destroy(gameObject);
                 return;
             }
+
             init = true;
 
             foreach (GameObject toAdd in dontDestroyObjects)
@@ -29,7 +30,7 @@ namespace Safe_To_Share.Scripts.Init_Game
             StartCoroutine(InstanceAssets());
         }
 
-        private IEnumerator InstanceAssets()
+        IEnumerator InstanceAssets()
         {
             var ops = assetRefs.Select(asset => asset.InstantiateAsync()).ToArray();
             while (StillLoadingOperations(ops))
@@ -38,7 +39,7 @@ namespace Safe_To_Share.Scripts.Init_Game
                 DontDestroyOnLoad(operation.Result);
         }
 
-        private static bool StillLoadingOperations(IEnumerable<AsyncOperationHandle<GameObject>> ops) 
+        static bool StillLoadingOperations(IEnumerable<AsyncOperationHandle<GameObject>> ops)
             => ops.Any(operation => operation.Status != AsyncOperationStatus.Succeeded);
     }
 }

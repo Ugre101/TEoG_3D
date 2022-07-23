@@ -9,7 +9,6 @@ namespace GameUIAndMenus.Menus
 {
     public class SaveMenu : GameMenu
     {
-      
         static string[] saves;
         [SerializeField] Transform content;
         [SerializeField] SaveButton saveBtn;
@@ -17,18 +16,12 @@ namespace GameUIAndMenus.Menus
         [SerializeField] ShowSavesAmountSlider showSavesAmount;
         [SerializeField] SaveButton[] preInstanced;
 
-        Queue<SaveButton> ButtonPool;
+        readonly List<SaveButton> activeButtons = new();
 
-        List<SaveButton> activeButtons = new();
-        SaveButton GetButton()
-        {
-            if (ButtonPool.Count <= 0) return Instantiate(saveBtn, content);
-            var btn = ButtonPool.Dequeue();
-            btn.gameObject.SetActive(true);
-            return btn;
-        }
-        bool firstStart = true;
+        Queue<SaveButton> ButtonPool;
         int failed;
+        bool firstStart = true;
+
         void Start()
         {
             firstStart = false;
@@ -46,23 +39,30 @@ namespace GameUIAndMenus.Menus
             SaveManager.NewSave += AddNewSave;
             showSavesAmount.NewShowAmount += AddAllSaves;
         }
-#if UNITY_EDITOR
-        void OnValidate()
-        {
-            if (Application.isPlaying) return;
-
-            var saveButtons = content.GetComponentsInChildren<SaveButton>(true);
-            foreach (SaveButton saveButton in saveButtons) 
-                saveButton.gameObject.SetActive(false);
-            preInstanced = saveButtons;
-        }
-#endif
 
         void OnDisable()
         {
             SaveButton.WantToDeleteSave -= ToggleAreYouSure;
             SaveManager.NewSave -= AddNewSave;
             showSavesAmount.NewShowAmount -= AddAllSaves;
+        }
+#if UNITY_EDITOR
+        void OnValidate()
+        {
+            if (Application.isPlaying) return;
+
+            var saveButtons = content.GetComponentsInChildren<SaveButton>(true);
+            foreach (SaveButton saveButton in saveButtons)
+                saveButton.gameObject.SetActive(false);
+            preInstanced = saveButtons;
+        }
+#endif
+        SaveButton GetButton()
+        {
+            if (ButtonPool.Count <= 0) return Instantiate(saveBtn, content);
+            var btn = ButtonPool.Dequeue();
+            btn.gameObject.SetActive(true);
+            return btn;
         }
 
         void AddNewSave(FullSave obj, string path)
@@ -77,7 +77,7 @@ namespace GameUIAndMenus.Menus
 
         void RefreshSaves()
         {
-           // saves = Directory.GetFiles(SaveManager.SavePath).OrderByDescending(Directory.GetLastWriteTime);
+            // saves = Directory.GetFiles(SaveManager.SavePath).OrderByDescending(Directory.GetLastWriteTime);
             saves = new DirectoryInfo(SaveManager.SavePath).GetFiles()
                 .OrderByDescending(f => f.LastWriteTime).Select(fileInfo => fileInfo.FullName).ToArray();
             AddAllSaves();
@@ -92,21 +92,22 @@ namespace GameUIAndMenus.Menus
                 activeButton.gameObject.SetActive(false);
                 ButtonPool.Enqueue(activeButton);
             }
+
             activeButtons.Clear();
             for (int i = 0; i < GetShowAmount() && i < saves.Length; i++)
                 TryAddSave(i);
         }
 
-        private int GetShowAmount() => ShowSavesAmountSlider.ShowAmount + failed;
+        int GetShowAmount() => ShowSavesAmountSlider.ShowAmount + failed;
 
-        private void TryAddSave(int i)
+        void TryAddSave(int i)
         {
             try
             {
                 FullSave fullSave = JsonUtility.FromJson<FullSave>(File.ReadAllText(saves[i]));
                 SaveButton button = GetButton();
                 button.transform.SetSiblingIndex(i);
-                button.Setup(fullSave,saves[i]);
+                button.Setup(fullSave, saves[i]);
                 activeButtons.Add(button);
             }
             catch
@@ -114,7 +115,6 @@ namespace GameUIAndMenus.Menus
                 Debug.LogWarning("Bad save file");
                 failed++;
             }
-
         }
     }
 }

@@ -5,16 +5,16 @@ namespace Options
 {
     public class PersistentKeyBinds : MonoBehaviour
     {
-        [SerializeField] InputActionAsset freePlay;
-        [SerializeField] InputActionAsset thirdPersonCamera;
-        [SerializeField] InputActionAsset gameMenusBinds;
-        [SerializeField] InputActionAsset quickSaveBinds;
         const string FreePlaySave = "FreePlayKeyBindsSave";
         const string ThirdPersonSave = "ThirdPersonKeyBindsSave";
         const string GameMenusSave = "GameMenuKeyBindsSave";
         const string QuickSaveSave = "quickSaveKeyBindsSave";
+        [SerializeField] InputActionAsset freePlay;
+        [SerializeField] InputActionAsset thirdPersonCamera;
+        [SerializeField] InputActionAsset gameMenusBinds;
+        [SerializeField] InputActionAsset quickSaveBinds;
 
-        private void Start()
+        void Start()
         {
             OverWriteIfNotNull(freePlay, FreePlaySave);
             OverWriteIfNotNull(thirdPersonCamera, ThirdPersonSave);
@@ -22,14 +22,7 @@ namespace Options
             OverWriteIfNotNull(quickSaveBinds, QuickSaveSave);
         }
 
-        static void OverWriteIfNotNull(InputActionAsset toRebind,string playerPrefPath)
-        {
-            string save = PlayerPrefs.GetString(playerPrefPath, string.Empty);
-            if (!string.IsNullOrWhiteSpace(save))
-                toRebind.LoadBindingOverridesFromJson(save);
-        }
-
-        private void OnApplicationQuit()
+        void OnApplicationQuit()
         {
             PlayerPrefs.SetString(FreePlaySave, freePlay.SaveBindingOverridesAsJson());
             PlayerPrefs.SetString(ThirdPersonSave, thirdPersonCamera.SaveBindingOverridesAsJson());
@@ -37,5 +30,11 @@ namespace Options
             PlayerPrefs.SetString(QuickSaveSave, quickSaveBinds.SaveBindingOverridesAsJson());
         }
 
+        static void OverWriteIfNotNull(InputActionAsset toRebind, string playerPrefPath)
+        {
+            string save = PlayerPrefs.GetString(playerPrefPath, string.Empty);
+            if (!string.IsNullOrWhiteSpace(save))
+                toRebind.LoadBindingOverridesFromJson(save);
+        }
     }
 }

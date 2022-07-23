@@ -13,17 +13,16 @@ namespace GameUIAndMenus.Menus.Vore
 {
     public class PreyShowCase : MonoBehaviour
     {
-        public event Action<int,VoreType> RegurgitateMe;
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI digestionModeInfo;
         [SerializeField] Button regurgitateBtn;
 
         int myPrey;
         VoreType type;
-        void Start()
-        {
-            regurgitateBtn.onClick.AddListener(Regurgitate);
-        }
+
+        void Start() => regurgitateBtn.onClick.AddListener(Regurgitate);
+
+        public event Action<int, VoreType> RegurgitateMe;
 
         void Regurgitate()
         {
@@ -31,7 +30,7 @@ namespace GameUIAndMenus.Menus.Vore
             Destroy(gameObject);
         }
 
-        public void Setup(Prey prey,VoreType voreType, string mode)
+        public void Setup(Prey prey, VoreType voreType, string mode)
         {
             myPrey = prey.Identity.ID;
             type = voreType;
@@ -48,6 +47,7 @@ namespace GameUIAndMenus.Menus.Vore
             {
                 case VoreOrganDigestionMode.Endo:
                     sb.Append($"Is resting inside your {Inside()}");
+
                     string Inside() => voreType switch
                     {
                         VoreType.Oral => "stomach",
@@ -56,8 +56,9 @@ namespace GameUIAndMenus.Menus.Vore
                         VoreType.Anal => "",
                         VoreType.Breast => "boobs",
                         VoreType.Cock => "cock",
-                        _ => throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null)
+                        _ => throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null),
                     };
+
                     return sb.ToString();
                 case VoreOrganDigestionMode.Digestion:
                     sb.Append(
@@ -65,6 +66,7 @@ namespace GameUIAndMenus.Menus.Vore
                     return sb.ToString();
                 case VoreOrganDigestionMode.Absorption:
                     sb.Append($"{prey.Gender.HeShe()} is {prey.AltProgress:#0.##}% merged into your {Into()}");
+
                     string Into() => voreType switch
                     {
                         VoreType.Oral => "body",
@@ -73,8 +75,9 @@ namespace GameUIAndMenus.Menus.Vore
                         VoreType.Anal => "body",
                         VoreType.Breast => "boobs",
                         VoreType.Cock => "cock",
-                        _ => throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null)
+                        _ => throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null),
                     };
+
                     return sb.ToString();
                 default:
                     switch (voreType)
@@ -96,8 +99,10 @@ namespace GameUIAndMenus.Menus.Vore
                         default:
                             throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null);
                     }
+
                     break;
             }
+
             return sb.ToString();
         }
     }

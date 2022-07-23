@@ -17,13 +17,10 @@ namespace Dialogue.DialogueActions.Vore
         public override void Invoke(BaseCharacter toAdd, Prey prey, VoreOrgan container)
         {
             foreach (TempIntMod tempIntMod in mods)
-            {
                 if (pleasure)
                     toAdd.Vore.pleasureDigestion.Mods.AddTempStatMod(tempIntMod);
                 else
                     toAdd.Vore.digestionStrength.Mods.AddTempStatMod(tempIntMod);
-            }
-            
         }
     }
 }

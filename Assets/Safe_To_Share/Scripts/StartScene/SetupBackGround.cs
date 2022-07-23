@@ -13,11 +13,11 @@ namespace Safe_To_Share.Scripts.StartScene
     [Serializable]
     public class SetupBackGround
     {
-        [SerializeField] private AssetReference poorRef, merchantRef, nobleRef;
-        [SerializeField] private TMP_Dropdown backGround;
-        private StartPerks startPerk = StartPerks.Poor;
-        private BasicPerk loadedPerk;
-        private AsyncOperationHandle<BasicPerk> loadOp;
+        [SerializeField] AssetReference poorRef, merchantRef, nobleRef;
+        [SerializeField] TMP_Dropdown backGround;
+        BasicPerk loadedPerk;
+        AsyncOperationHandle<BasicPerk> loadOp;
+        StartPerks startPerk = StartPerks.Poor;
 
         public void Setup() => backGround.SetupTmpDropDown(startPerk, ChangedStartPerk);
 
@@ -42,7 +42,7 @@ namespace Safe_To_Share.Scripts.StartScene
             loadOp.Completed += LoadedStartPerk;
         }
 
-        private void LoadedStartPerk(AsyncOperationHandle<BasicPerk> obj)
+        void LoadedStartPerk(AsyncOperationHandle<BasicPerk> obj)
         {
             if (obj.Status == AsyncOperationStatus.Succeeded)
                 loadedPerk = obj.Result;
@@ -56,7 +56,7 @@ namespace Safe_To_Share.Scripts.StartScene
             loadedPerk.PerkGainedEffect(player);
         }
 
-        private enum StartPerks
+        enum StartPerks
         {
             Poor,
             Merchant,

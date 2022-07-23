@@ -7,9 +7,8 @@ namespace Safe_To_Share.Scripts.DebugTools
     {
         [SerializeField] DebugTeleportPoint prefab;
         public LayerMask validRaycastTargets;
-        public void AddNewPoint(Vector3 hitInfoPoint)
-        {
+
+        public void AddNewPoint(Vector3 hitInfoPoint) =>
             Instantiate(prefab, hitInfoPoint, quaternion.identity, transform);
-        }
     }
 }

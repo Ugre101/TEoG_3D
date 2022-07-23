@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using Character.EssenceStuff;
@@ -29,13 +28,13 @@ namespace Character.CreateCharacterStuff
         [SerializeField] StartBody startBody;
         [SerializeField] StartHair startHair;
         [SerializeField] StartSkinColor startSkinColor;
+
+        bool loading, done;
+        AsyncOperationHandle<BasicRace> raceOp;
         BasicRace startRace;
 
         //private IEnumerable<AsyncOperationHandle<Ability>> ai;
         public void DefaultValues() => startBody.Default();
-
-        bool loading, done;
-        AsyncOperationHandle<BasicRace> raceOp;
 
         public async Task LoadAssets()
         {
@@ -43,10 +42,7 @@ namespace Character.CreateCharacterStuff
                 return;
             if (loading)
             {
-                while (!done)
-                {
-                    await Task.Delay(100);
-                }
+                while (!done) await Task.Delay(100);
                 return;
             }
 
@@ -59,10 +55,6 @@ namespace Character.CreateCharacterStuff
                 done = true;
                 Addressables.Release(raceOp);
             }
-            else
-            {
-                //TODO crash
-            }
         }
 
 
@@ -72,15 +64,14 @@ namespace Character.CreateCharacterStuff
             loading = false;
             done = false;
         }
-        
+
         public CreateCharacter NewCharacter()
         {
-
             var longWay = Array.Empty<string>();
             if (startAbilitiesGuids is { Length: > 0, })
                 longWay = startAbilitiesGuids.Select(dropSerializableObject => dropSerializableObject.guid).ToArray();
             return new CreateCharacter(startIdentity, startStats.GetStats(),
-                longWay, startItems, startRace, startGender, startBody, startPerks, startHair,startSkinColor);
+                longWay, startItems, startRace, startGender, startBody, startPerks, startHair, startSkinColor);
         }
     }
 }

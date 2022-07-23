@@ -1,6 +1,4 @@
-﻿
-using System;
-using Safe_To_Share.Scripts.Static;
+﻿using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Map
@@ -11,6 +9,7 @@ namespace Map
 
         bool active = true;
         Transform playerTrans;
+
         void Start()
         {
             var player = GameObject.FindGameObjectWithTag("Player");

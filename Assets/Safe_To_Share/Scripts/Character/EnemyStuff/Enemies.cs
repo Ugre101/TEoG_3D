@@ -4,6 +4,6 @@ namespace Character.EnemyStuff
 {
     public static class Enemies
     {
-        static List<Enemy> enemies = new List<Enemy>();
+        static List<Enemy> enemies = new();
     }
 }

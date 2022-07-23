@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +7,7 @@ namespace Character.StatsStuff.HealthStuff.UI
     public class HealthSlider : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI text;
-        [SerializeField]  Slider slider;
+        [SerializeField] Slider slider;
         Health health;
 
         void OnDisable() => UnBindValueChange();
@@ -20,11 +19,11 @@ namespace Character.StatsStuff.HealthStuff.UI
             if (slider != null) return;
             if (TryGetComponent(out Slider healthSlider))
                 slider = healthSlider;
-            else 
-                Debug.LogWarning("Has no slider",this);
+            else
+                Debug.LogWarning("Has no slider", this);
         }
 #endif
-        
+
         void BindValueChange()
         {
             health.CurrentValueChange += ChangeValue;

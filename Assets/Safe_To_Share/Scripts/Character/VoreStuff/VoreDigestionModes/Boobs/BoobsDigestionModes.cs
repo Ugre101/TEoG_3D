@@ -8,7 +8,8 @@ namespace Character.VoreStuff.VoreDigestionModes.Boobs
     [Serializable]
     public class BoobsDigestionModes : VoreOrganDigestionMode
     {
-        public override string[] AllDigestionTypes => new[] { Endo, Digestion, Absorption,};
+        public override string[] AllDigestionTypes => new[] { Endo, Digestion, Absorption, };
+
         public override IEnumerable<string> GetPossibleDigestionTypes(BaseCharacter pred)
         {
             yield return Endo;

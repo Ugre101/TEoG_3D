@@ -19,7 +19,7 @@ namespace GameUIAndMenus.Menus.Level
         [SerializeField] protected TextMeshProUGUI exclusivePerk;
         [SerializeField] protected Vector2 offset;
         [SerializeField] RectTransform rectTransform;
-        [SerializeField,Range(0.5f,1f)] float flipOffsetThreshold = 0.75f;
+        [SerializeField, Range(0.5f, 1f),] float flipOffsetThreshold = 0.75f;
 
         protected virtual void Start() => gameObject.SetActive(false);
 
@@ -37,42 +37,44 @@ namespace GameUIAndMenus.Menus.Level
             gameObject.SetActive(true);
         }
 
-        private void PrintAltExclusivePerks(BasicPerk perk)
+        void PrintAltExclusivePerks(BasicPerk perk)
         {
             if (perk.ExclusiveWithPerkGuids.Count <= 0)
             {
                 exclusivePerk.text = string.Empty;
                 return;
             }
+
             exclusivePerk.text = "Exclusive perks";
             foreach (string exclusiveWithPerkGuid in perk.ExclusiveWithPerkGuids)
                 Addressables.LoadAssetAsync<BasicPerk>(exclusiveWithPerkGuid).Completed += AddExclusive;
         }
 
-        private void PrintAltReqPerks(BasicPerk perk)
+        void PrintAltReqPerks(BasicPerk perk)
         {
             if (perk.NeedPerkGuids.Count <= 0)
             {
                 needPerk.text = string.Empty;
                 return;
             }
+
             needPerk.text = "Needed perks";
             foreach (string perkNeedPerkGuid in perk.NeedPerkGuids)
                 Addressables.LoadAssetAsync<BasicPerk>(perkNeedPerkGuid).Completed += AddNeed;
         }
 
-        private void PrintAltReqStats(BasicPerk perk)
+        void PrintAltReqStats(BasicPerk perk)
         {
             if (perk.RequireCharStats.Count <= 0)
             {
                 needCharStat.text = string.Empty;
                 return;
             }
+
             StringBuilder sb = new("Need stat");
             foreach (RequireCharStat perkRequireCharStat in perk.RequireCharStats)
                 sb.Append($" {perkRequireCharStat.StatType} {perkRequireCharStat.Amount}");
             needCharStat.text = sb.ToString();
-            
         }
 
         protected void SetPos(Vector2 pos)

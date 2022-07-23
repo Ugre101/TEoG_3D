@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Character.StatsStuff.Mods;
@@ -15,9 +14,9 @@ namespace GameUIAndMenus
     public class TempEffectIcon : EffectIcon
     {
         [SerializeField] TextMeshProUGUI timeLeft;
-        public IObjectPool<TempEffectIcon> pool;
         Item item;
         List<TempIntMod> mod;
+        public IObjectPool<TempEffectIcon> pool;
 
         protected override string HoverText
         {
@@ -30,10 +29,9 @@ namespace GameUIAndMenus
             }
         }
 
-        void OnDisable()
-        {
-            pool.Release(this);
-        }
+        void OnDisable() => pool.Release(this);
+
+        void OnDestroy() => DateSystem.NewHour -= UpdateTimeLeft;
 
         public void Setup(Item gotItem, List<TempIntMod> tempIntMod)
         {
@@ -51,8 +49,6 @@ namespace GameUIAndMenus
             mod = null;
             DateSystem.NewHour -= UpdateTimeLeft;
         }
-
-        void OnDestroy() => DateSystem.NewHour -= UpdateTimeLeft;
 
         void UpdateTimeLeft(int obj)
         {

@@ -10,7 +10,8 @@ public class ImpToggle : MonoBehaviour
         if (TryGetComponent(out Toggle toggle))
         {
             toggle.isOn = !MetricOrImperial.Metric.Enabled;
-            toggle.onValueChanged.AddListener((arg0 => MetricOrImperial.Metric.Enabled = !arg0));
-        } else gameObject.SetActive(false);
+            toggle.onValueChanged.AddListener(arg0 => MetricOrImperial.Metric.Enabled = !arg0);
+        }
+        else gameObject.SetActive(false);
     }
 }

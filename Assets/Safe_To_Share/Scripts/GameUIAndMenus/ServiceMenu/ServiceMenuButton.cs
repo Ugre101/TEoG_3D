@@ -12,10 +12,12 @@ namespace GameUIAndMenus.ServiceMenu
         [SerializeField] TextMeshProUGUI title, desc, cost;
         [SerializeField] Button btn;
 
+        BaseService myService;
+        void OnDisable() => btn.onClick.RemoveListener(BuyService);
+
         public static event Action<BaseService> PayAndUse;
 
-        BaseService myService;
-        public void Setup(BaseService service,Player player)
+        public void Setup(BaseService service, Player player)
         {
             myService = service;
             title.text = service.Title;
@@ -23,7 +25,7 @@ namespace GameUIAndMenus.ServiceMenu
             cost.text = $"Pay {service.Cost}g";
             btn.onClick.AddListener(BuyService);
         }
-        void OnDisable() => btn.onClick.RemoveListener(BuyService);
+
         void BuyService() => PayAndUse?.Invoke(myService);
     }
 }

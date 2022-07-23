@@ -4,7 +4,6 @@ using Character;
 using Character.BodyStuff;
 using Character.Organs;
 using Character.Race.Races;
-using Character.SkillsAndSpells;
 using Character.StatsStuff;
 using Character.StatsStuff.HealthStuff;
 using Character.StatsStuff.Mods;
@@ -201,6 +200,7 @@ namespace Items
     public class LearnAbilityItemEffect : ItemEffect
     {
         [SerializeField] DropSerializableObject dropSerializableObject;
+
         public override void OnUse(BaseCharacter user, string itemGuid)
         {
             if (user is ControlledCharacter controlledCharacter)

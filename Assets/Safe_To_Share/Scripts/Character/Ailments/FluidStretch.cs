@@ -5,6 +5,7 @@ namespace Character.Ailments
     public class FluidStretch : Ailment
     {
         const string Cause = "FluidStretch";
+
         public FluidStretch() : base(20, Cause, ModType.Percent)
         {
         }
@@ -27,6 +28,7 @@ namespace Character.Ailments
                 character.SexStats.GainArousalFactor.Mods.RemoveStatModsFromSource(Cause);
                 return true;
             }
+
             // Cure
             return false;
         }

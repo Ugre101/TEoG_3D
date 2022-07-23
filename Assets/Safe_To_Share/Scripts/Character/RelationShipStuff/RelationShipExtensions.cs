@@ -4,6 +4,7 @@
     {
         public const float FirstThreesHold = 10;
         public const float SecondThreesHold = 25;
+
         public static string DominanceTitle(this RelationShip relationsShip)
         {
             float sub = relationsShip.Submission;
@@ -16,14 +17,14 @@
             return "neutral";
         }
 
-        private static string DomisionTree(float sub)
+        static string DomisionTree(float sub)
         {
             if (sub < -SecondThreesHold)
                 return "dominant";
             return "arrogant";
         }
 
-        private static string SubmissionTree(float sub)
+        static string SubmissionTree(float sub)
         {
             if (sub > SecondThreesHold)
                 return "submissive";
@@ -41,14 +42,14 @@
             return "neutral";
         }
 
-        private static string LikeTree(float affection)
+        static string LikeTree(float affection)
         {
             if (affection > SecondThreesHold)
                 return "friendly";
             return "acquaintance";
         }
 
-        private static string DislikeTree(float affection)
+        static string DislikeTree(float affection)
         {
             if (affection < -SecondThreesHold)
                 return "dislike";

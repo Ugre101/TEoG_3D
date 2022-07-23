@@ -1,5 +1,4 @@
 ﻿using AvatarStuff.Holders;
-using Character.PlayerStuff;
 using UnityEngine;
 
 namespace DormAndHome.Dorm.UI

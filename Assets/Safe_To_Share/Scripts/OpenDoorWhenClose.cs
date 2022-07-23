@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts
@@ -18,7 +17,6 @@ namespace Safe_To_Share.Scripts
             occlusionPortal.open = true;
         }
 
-        
 
         void OnTriggerExit(Collider other)
         {

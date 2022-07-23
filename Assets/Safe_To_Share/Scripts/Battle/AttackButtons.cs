@@ -20,7 +20,7 @@ namespace Battle
         int CurrentRow
         {
             get => currentRow;
-            set => currentRow = Mathf.Clamp(value,MINRow,MAXRow);
+            set => currentRow = Mathf.Clamp(value, MINRow, MAXRow);
         }
 
 # if UNITY_EDITOR

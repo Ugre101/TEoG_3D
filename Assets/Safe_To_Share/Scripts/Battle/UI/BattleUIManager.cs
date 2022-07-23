@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Battle.SkillsAndSpells;
 using Character;
-using Character.SkillsAndSpells;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
@@ -10,19 +9,19 @@ namespace Battle.UI
 {
     public class BattleUIManager : MonoBehaviour
     {
-        public static BattleUIManager Instance { get; private set; }
         [SerializeField] AttackButtons attackButtons;
         [SerializeField] GameObject winPanel, defeatPanel;
         [SerializeField] WhoseTurnIcons turnIcons;
         [SerializeField] GameObject sfwWinPanel;
         [SerializeField] bool sfw;
         [SerializeField] AssignAbilityMenu abilityMenu;
+        public static BattleUIManager Instance { get; private set; }
 
         void Awake()
         {
             if (Instance == null)
                 Instance = this;
-            else 
+            else
                 Destroy(gameObject);
         }
 
@@ -61,16 +60,16 @@ namespace Battle.UI
 
         public void EnemyTurn() => attackButtons.gameObject.SetActive(false);
 
-       public void HandleTurnAlly(CombatCharacter myTurn)
+        public void HandleTurnAlly(CombatCharacter myTurn)
         {
             attackButtons.gameObject.SetActive(true);
             attackButtons.Setup(myTurn.Character as ControlledCharacter);
         }
 
-       public async Task Hide()
-       {
-           gameObject.SetActive(false);
-           await Task.Yield();
-       }
+        public async Task Hide()
+        {
+            gameObject.SetActive(false);
+            await Task.Yield();
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using AvatarStuff.Holders;
 using Character;
-using Character.PlayerStuff;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +12,7 @@ namespace AvatarStuff.UI
         [SerializeField] Button body, face;
         PlayerHolder playerHolder;
         CharacterAvatar Current => playerHolder.Changer.CurrentAvatar;
+
         void Start()
         {
             all.onClick.AddListener(Setup);
@@ -31,7 +31,8 @@ namespace AvatarStuff.UI
         {
             var assetGuid = Current.Prefab.AssetGUID;
             if (!playerHolder.Player.Body.Morphs.Dict.TryGetValue(assetGuid, out var match))
-                match = playerHolder.Player.Body.Morphs.AddNew(Current.Prefab.AssetGUID,Current.AvatarBodyShapes.AddToCharacter());
+                match = playerHolder.Player.Body.Morphs.AddNew(Current.Prefab.AssetGUID,
+                    Current.AvatarBodyShapes.AddToCharacter());
             return match;
         }
 

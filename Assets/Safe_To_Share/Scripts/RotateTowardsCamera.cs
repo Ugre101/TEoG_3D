@@ -6,7 +6,7 @@ namespace Safe_To_Share.Scripts
     {
         void Start()
         {
-            if (Camera.main is { }) 
+            if (Camera.main is { })
                 FaceCamera(Camera.main.transform);
         }
 

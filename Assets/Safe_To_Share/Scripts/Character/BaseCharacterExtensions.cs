@@ -7,6 +7,7 @@ namespace Character
     public static class BaseCharacterExtensions
     {
         const int MaxLoop = 99;
+
         public static void GrowOrgans(this BaseCharacter character)
         {
             static bool DidGrowSmallest(Essence essence, OrgansContainer container)
@@ -23,7 +24,7 @@ namespace Character
             {
                 if (MaxLoop < breakOut) break;
                 breakOut++;
-                
+
                 float dickSum = dicks.List.Sum(d => d.BaseValue);
                 float ballsSum = balls.List.Sum(b => b.BaseValue);
                 didGrowSomething = dickSum == 0 || dickSum * dickDiv <= ballsSum

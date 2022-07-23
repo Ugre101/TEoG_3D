@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Character.PlayerStuff.Currency;
 using Character.Service;
-using Currency;
 using Currency.UI;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
@@ -35,7 +34,7 @@ namespace GameUIAndMenus.ServiceMenu
         void ShowServices(List<BaseService> services)
         {
             content.KillChildren();
-            foreach (BaseService service in services) 
+            foreach (BaseService service in services)
                 Instantiate(prefab, content).Setup(service, Player);
         }
 

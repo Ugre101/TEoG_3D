@@ -7,8 +7,8 @@ namespace Character.PlayerStuff.Currency
     public struct GoldSave
     {
         [SerializeField] int gold;
-        public int Gold => gold;
 
         public GoldSave(int gold) => this.gold = gold;
+        public int Gold => gold;
     }
 }

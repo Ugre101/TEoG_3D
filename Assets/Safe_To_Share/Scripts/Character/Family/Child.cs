@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Character.CreateCharacterStuff;
 using Character.IdentityStuff;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
@@ -20,6 +19,7 @@ namespace Character.Family
             this.familyTree = familyTree;
             this.raceGuids = raceGuids;
         }
+
         public Identity Identity => identity;
 
         public FamilyTree FamilyTree => familyTree;

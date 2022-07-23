@@ -1,21 +1,32 @@
-﻿using Character;
+﻿using System.Linq;
+using Character;
 using Character.EssenceStuff;
 using Character.Organs;
 using Character.Organs.OrgansContainers;
-using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Assets.Scripts.Character.EssenceStuff.Perks
 {
-
     [CreateAssetMenu(menuName = "Character/Essence/Create GenderMoprh Perk", fileName = "Gender morph perk", order = 0)]
     public class GenderMorph : EssencePerk
     {
-        private const int AmountToLose = 100;
-        [SerializeField, Range(25, 200)] int bonus = 30;
-        [SerializeField, Range(0, 25)] int stableGain = 15;
+        public enum MorphToGender
+        {
+            Disabled,
+            Male,
+            Female,
+            CuntBoy,
+            DickGirl,
+            Futanari,
+        }
 
-        readonly System.Random rng = new();
+        const int AmountToLose = 100;
+        [SerializeField, Range(25, 200),] int bonus = 30;
+        [SerializeField, Range(0, 25),] int stableGain = 15;
+
+        readonly Random rng = new();
+
         public override void OnCasterOrgasmPerkEffect(BaseCharacter perkOwner, BaseCharacter partner)
         {
             MorphToGender morphTo = perkOwner.Essence.EssenceOptions.MorphPartnerToGender;
@@ -46,10 +57,11 @@ namespace Assets.Scripts.Character.EssenceStuff.Perks
                         partner.GainFemi(partner.LoseMasc(AmountToLose, changeLog) + bonus);
                     break;
             }
+
             partner.InvokeUpdateAvatar();
         }
 
-        private void MorphToDickgirl(BaseCharacter partner, ChangeLog changeLog)
+        void MorphToDickgirl(BaseCharacter partner, ChangeLog changeLog)
         {
             partner.Essence.StableEssence.BaseValue += stableGain;
             if (partner.SexualOrgans.Vaginas.HaveAny())
@@ -58,6 +70,7 @@ namespace Assets.Scripts.Character.EssenceStuff.Perks
                 partner.Essence.Femininity.Amount += gain / 2;
                 partner.Essence.Masculinity.Amount += gain / 2;
             }
+
             if (partner.SexualOrgans.Boobs.HaveAny())
                 partner.SexualOrgans.Boobs.TryGrowSmallest(partner.Essence.Femininity);
             else
@@ -65,7 +78,7 @@ namespace Assets.Scripts.Character.EssenceStuff.Perks
             partner.GrowOrgans();
         }
 
-        private void MorphToCuntBoy(BaseCharacter partner, SexualOrgans organs, ChangeLog changeLog)
+        void MorphToCuntBoy(BaseCharacter partner, SexualOrgans organs, ChangeLog changeLog)
         {
             partner.Essence.StableEssence.BaseValue += stableGain;
             var toTakeFrom = new OrgansContainer[] { organs.Balls, organs.Dicks, organs.Boobs, };
@@ -76,16 +89,6 @@ namespace Assets.Scripts.Character.EssenceStuff.Perks
             else
                 partner.SexualOrgans.Vaginas.TryGrowNew(partner.Essence.Femininity);
             partner.GrowOrgans();
-        }
-
-        public enum MorphToGender
-        {
-            Disabled,
-            Male,
-            Female,
-            CuntBoy,
-            DickGirl,
-            Futanari,
         }
     }
 }

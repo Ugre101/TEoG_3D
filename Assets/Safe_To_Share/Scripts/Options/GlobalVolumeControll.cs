@@ -5,8 +5,9 @@ namespace Options
 {
     public class GlobalVolumeControll : MonoBehaviour
     {
-        [SerializeField] Slider slider;
         const string GlobalAudioSave = "GlobalVolumeSave";
+        [SerializeField] Slider slider;
+
         void Start()
         {
             slider.value = PlayerPrefs.GetFloat(GlobalAudioSave, 1f);

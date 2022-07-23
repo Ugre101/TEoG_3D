@@ -9,13 +9,14 @@ namespace Safe_To_Share.Scripts.DebugTools
     public class DebugTeleport : MonoBehaviour
     {
         [SerializeField] List<ButtonToPoint> teleportBtns = new();
+
         // Start is called before the first frame update
         void Start()
         {
-            foreach (ButtonToPoint point in teleportBtns) 
+            foreach (ButtonToPoint point in teleportBtns)
                 point.Setup();
         }
-        
+
         [Serializable]
         public class ButtonToPoint
         {

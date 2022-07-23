@@ -1,9 +1,10 @@
-﻿using Safe_to_Share.Scripts.CustomClasses;
+﻿using System;
+using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
 namespace Character.CreateCharacterStuff
 {
-    [System.Serializable]
+    [Serializable]
     public struct BattleReward
     {
         [SerializeField] int goldReward;

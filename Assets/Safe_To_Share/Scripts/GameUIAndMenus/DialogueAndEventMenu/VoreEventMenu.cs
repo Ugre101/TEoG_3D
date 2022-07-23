@@ -10,9 +10,10 @@ namespace GameUIAndMenus.DialogueAndEventMenu
 {
     public class VoreEventMenu : DialogueAndEventShared
     {
+        VoreOrgan organ;
         BaseCharacter pred;
         Prey prey;
-        VoreOrgan organ;
+
         public void Setup(BaseDialogue dialogue, BaseCharacter pred, Prey prey, VoreOrgan organ)
         {
             currentDialogue = dialogue;
@@ -23,13 +24,14 @@ namespace GameUIAndMenus.DialogueAndEventMenu
             AddOptionButtons(currentNode);
             ShowNodeText(currentNode);
         }
+
         protected override void HandleOption(DialogueBaseNode obj)
         {
             currentNode = obj;
-            foreach (DialogueBaseAction dialogueBaseAction in currentNode.Actions) 
+            foreach (DialogueBaseAction dialogueBaseAction in currentNode.Actions)
                 dialogueBaseAction.Invoke(pred);
-            foreach (DialogueVoreAction currentNodeVoreAction in obj.VoreActions) 
-                currentNodeVoreAction.Invoke(pred,prey,organ);
+            foreach (DialogueVoreAction currentNodeVoreAction in obj.VoreActions)
+                currentNodeVoreAction.Invoke(pred, prey, organ);
             AddOptionButtons(currentNode);
             ShowNodeText(currentNode);
             switch (currentNode)

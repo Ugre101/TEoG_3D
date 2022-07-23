@@ -1,17 +1,17 @@
 {
-    "name": "StaticScripts",
-    "rootNamespace": "",
-    "references": [
-        "GUID:1dd4efe6b41648509aececc3ef871ff6",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "StaticScripts",
+  "rootNamespace": "",
+  "references": [
+    "GUID:1dd4efe6b41648509aececc3ef871ff6",
+    "GUID:6055be8ebefd69e48b49212b09b47b2f"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

@@ -20,6 +20,7 @@ namespace SaveStuff
 {
     public class LoadManager : MonoBehaviour
     {
+        static readonly WaitForEndOfFrame WaitForEndOfFrame = new();
         public static LoadManager Instance { get; private set; }
 
         void Awake()
@@ -30,14 +31,12 @@ namespace SaveStuff
                 Destroy(gameObject);
         }
 
-        static readonly WaitForEndOfFrame WaitForEndOfFrame = new();
-
         public void QuickLoad()
         {
             if (SaveManager.LastSave.HasValue)
-                 Load(SaveManager.LastSave.Value);
+                Load(SaveManager.LastSave.Value);
         }
-        
+
         public static event Action StartLoadingSave;
         public static event Action LoadedSave;
 

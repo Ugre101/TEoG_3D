@@ -4,26 +4,27 @@ namespace Safe_To_Share.Scripts
 {
     public class HideTerrainTiles : MonoBehaviour
     {
-        GameObject[] terrainTiles;
+        [SerializeField, Range(1, 5),] int cullingRange = 1;
 
-        [SerializeField,Range(1,5),] int cullingRange = 1;
+        Vector3 lastPos;
 
         Vector3 offset;
+        GameObject[] terrainTiles;
+
         void Start()
         {
             terrainTiles = GameObject.FindGameObjectsWithTag("Terrain Tile");
-            if(terrainTiles[0].TryGetComponent(out  Terrain terrain))
+            if (terrainTiles[0].TryGetComponent(out Terrain terrain))
             {
                 var terrainData = terrain.terrainData;
                 offset = terrainData.size / 2;
             }
         }
 
-        Vector3 lastPos;
         // Update is called once per frame
         void Update()
         {
-            if (lastPos == transform.position) 
+            if (lastPos == transform.position)
                 return;
             lastPos = transform.position;
             foreach (GameObject terrainTile in terrainTiles)

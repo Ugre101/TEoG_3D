@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using Map;
-using SaveStuff;
 using SceneStuff;
 using TMPro;
 using UnityEngine;
@@ -13,12 +12,12 @@ namespace GameUIAndMenus.SceneUI
 {
     public class ShoreOptionButton : MonoBehaviour
     {
-        public static event Action<LocationSceneSo, SceneTeleportExit> LoadScene;
         [SerializeField] TextMeshProUGUI titleText;
         [SerializeField] TextMeshProUGUI descText;
         [SerializeField] Button[] exitBtns;
 
         LocationSceneSo gameSceneSo;
+        public static event Action<LocationSceneSo, SceneTeleportExit> LoadScene;
 
         public void Setup(KnowLocationsManager.Location location) => StartCoroutine(LoadAssets(location));
 
@@ -34,8 +33,9 @@ namespace GameUIAndMenus.SceneUI
             }
 
             for (int index = 0; index < location.ExitsGuids.Count; index++)
-                yield return SetupExitButton(location.ExitsGuids[index],exitBtns[index]);
+                yield return SetupExitButton(location.ExitsGuids[index], exitBtns[index]);
         }
+
         IEnumerator SetupExitButton(string v, Button button)
         {
             var exitOp = Addressables.LoadAssetAsync<SceneTeleportExit>(v);

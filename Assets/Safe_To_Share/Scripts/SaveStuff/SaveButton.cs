@@ -13,6 +13,7 @@ namespace SaveStuff
         [SerializeField] TextMeshProUGUI text;
 
         [SerializeField] bool needsDoubleClick = true;
+
         // [SerializeField] Button loadBtn, deleteSaveBtn;
         bool firstClick = true;
         bool loading;

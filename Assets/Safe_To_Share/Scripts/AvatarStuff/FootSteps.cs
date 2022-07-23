@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Random = System.Random;
 
 namespace AvatarStuff
 {
@@ -11,13 +12,14 @@ namespace AvatarStuff
         [SerializeField] AudioClip[] giantAudioClips;
         [SerializeField] AudioSource source;
 
-        readonly System.Random rng = new();
+        readonly Random rng = new();
         bool valid;
+
         void Start()
         {
             if (audioClips == null || audioClips.Length == 0)
                 return;
-            if (source == null) 
+            if (source == null)
                 return;
             valid = true;
         }
@@ -25,12 +27,16 @@ namespace AvatarStuff
         void Step()
         {
             if (!valid) return;
-            source.clip = transform.lossyScale.y > 3f ? giantAudioClips[rng.Next(giantAudioClips.Length)] : audioClips[rng.Next(audioClips.Length)];
+            source.clip = transform.lossyScale.y > 3f
+                ? giantAudioClips[rng.Next(giantAudioClips.Length)]
+                : audioClips[rng.Next(audioClips.Length)];
             source.Play();
         }
 #if UNITY_EDITOR
-        [Header("Editor stuff")]
-        [SerializeField] bool validated;
+        [Header("Editor stuff"), SerializeField,]
+        
+        bool validated;
+
         void OnValidate()
         {
             if (validated) return;
@@ -40,7 +46,8 @@ namespace AvatarStuff
                 source = gotSource;
                 source.playOnAwake = false;
             }
-            var assets =  AssetDatabase.FindAssets("t:AudioClip",new[] {"Assets/Imported/Foot_Steps"});
+
+            var assets = AssetDatabase.FindAssets("t:AudioClip", new[] { "Assets/Imported/Foot_Steps", });
             List<AudioClip> clips = new();
             List<AudioClip> giantClips = new();
             foreach (string asset in assets)
@@ -56,9 +63,9 @@ namespace AvatarStuff
                         clips.Add(clip);
                 }
             }
+
             audioClips = clips.ToArray();
             giantAudioClips = giantClips.ToArray();
-
         }
 #endif
     }

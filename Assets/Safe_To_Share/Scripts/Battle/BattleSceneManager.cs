@@ -2,7 +2,6 @@
 using Battle.UI;
 using Character;
 using Character.PlayerStuff;
-using Defeated;
 using SceneStuff;
 using UnityEngine;
 
@@ -43,7 +42,6 @@ namespace Battle
             await BattleUIManager.Instance.Hide(); // Enforece hide before load
             SceneLoader.Instance.FinishPreloadAfterBattleDefeat(player, enemyTeamChars);
             preloading = false;
-
         }
 
         public static void Leave(Player player)

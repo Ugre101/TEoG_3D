@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Safe_To_Share.Scripts.Static;
-using Static;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ namespace EffectStuff.Editor
         {
             EditorGUI.indentLevel++;
             EditorGUILayout.BeginHorizontal();
-            string[] effects = {"dealDamage", "dealWillDamage", "healDamage", "shrinkBody", "growBody",};
+            string[] effects = { "dealDamage", "dealWillDamage", "healDamage", "shrinkBody", "growBody", };
             foreach (string effect in effects)
             {
                 var tempShowEffect = abilityTree.FindPropertyRelative(effect);
@@ -21,7 +20,7 @@ namespace EffectStuff.Editor
                 var orgColor = GUI.backgroundColor;
                 GUI.backgroundColor = active.boolValue ? Color.green : Color.gray;
                 string betterTitle = effect.First().ToString().ToUpper() + effect.Substring(1);
-                betterTitle = UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(betterTitle, true);
+                betterTitle = UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(betterTitle);
                 if (GUILayout.Button(betterTitle)) showEffect = tempShowEffect;
 
                 GUI.backgroundColor = orgColor;

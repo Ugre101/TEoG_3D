@@ -3,18 +3,20 @@ using Character.GenderStuff;
 using Character.Race.Races;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace AvatarStuff
 {
     [CreateAssetMenu(fileName = "New avatar Info", menuName = "Character/Avatar Info", order = 0)]
-
     public class AvatarInfo : ScriptableObject
     {
         [SerializeField] AssetReference prefab;
         [SerializeField] AssetReference playerPrefab;
         [SerializeField] Gender[] supportedGenders;
         [SerializeField] BasicRace[] supportedRaces;
+        GameObject loaded;
+
+        bool loading, done;
+        GameObject playerLoaded;
 
         public Gender[] SupportedGenders => supportedGenders;
         public BasicRace[] SupportedRaces => supportedRaces;
@@ -23,9 +25,6 @@ namespace AvatarStuff
 
         public AssetReference PlayerPrefab => playerPrefab;
 
-        bool loading, done;
-        GameObject loaded;
-        GameObject playerLoaded = null;
         public async Task<GameObject> GetLoadedPrefab(bool player)
         {
             if (player)
@@ -45,10 +44,7 @@ namespace AvatarStuff
                 return loaded;
             if (loading)
             {
-                while (!done)
-                {
-                    await Task.Delay(100);
-                }
+                while (!done) await Task.Delay(100);
 
                 return loaded;
             }
@@ -60,5 +56,5 @@ namespace AvatarStuff
             done = true;
             return loaded;
         }
-}
+    }
 }

@@ -10,7 +10,7 @@ namespace Spawner.Editor
         SpawnZones myTarget;
 
 
-        void OnEnable() => myTarget = (SpawnZones) target;
+        void OnEnable() => myTarget = (SpawnZones)target;
 
         void OnSceneGUI()
         {

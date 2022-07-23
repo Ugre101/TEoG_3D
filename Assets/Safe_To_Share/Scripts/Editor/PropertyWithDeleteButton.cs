@@ -11,10 +11,10 @@ namespace Assets.Editors
         {
             EditorGUI.BeginProperty(position, label, property);
             //   position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
-            Rect perk = new Rect(position.x, position.y, position.width - 30, PropertyHeight);
+            Rect perk = new(position.x, position.y, position.width - 30, PropertyHeight);
             EditorGUI.PropertyField(perk, property, GUIContent.none);
 
-            Rect btn = new Rect(perk.xMax, position.y, 30, PropertyHeight);
+            Rect btn = new(perk.xMax, position.y, 30, PropertyHeight);
             if (GUI.Button(btn, "X"))
             {
                 if (property.objectReferenceValue != null)

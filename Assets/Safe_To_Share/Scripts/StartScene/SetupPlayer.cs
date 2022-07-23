@@ -19,32 +19,37 @@ namespace Safe_To_Share.Scripts.StartScene
 {
     public class SetupPlayer : MonoBehaviour
     {
-        [SerializeField]  CharacterPreset characterPreset;
-        [SerializeField]  TMP_InputField firstName, lastName;
-        [SerializeField]  Button startBtn;
-        [SerializeField]  TextMeshProUGUI heightAndWeight;
-        [SerializeField]  Toggle impToggle;
-        [SerializeField]  AssetReference mainQuest;
+        [SerializeField] CharacterPreset characterPreset;
+        [SerializeField] TMP_InputField firstName, lastName;
+        [SerializeField] Button startBtn;
+        [SerializeField] TextMeshProUGUI heightAndWeight;
+        [SerializeField] Toggle impToggle;
+        [SerializeField] AssetReference mainQuest;
 
-        [SerializeField]  List<LearnStartLocation> startMaps = new();
-        [SerializeField]  GameObject page1, page2;
-        [SerializeField]  SetupGender setupGender;
-        [SerializeField]  SetupBackGround background;
-         QuestInfo loaded;
-         Player tempPlayer;
+        [SerializeField] List<LearnStartLocation> startMaps = new();
+        [SerializeField] GameObject page1, page2;
+        [SerializeField] SetupGender setupGender;
+        [SerializeField] SetupBackGround background;
+        QuestInfo loaded;
+        Player tempPlayer;
 
         // Start is called before the first frame update
-        private async void Start()
-        {  
+        async void Start()
+        {
             await LoadPlayer();
 
             startBtn.onClick.AddListener(LaunchGame);
             background.Setup();
             //  LoadAssets();
-
         }
 
-        private void LaunchGame() => StartCoroutine(StartGame());
+        void OnEnable()
+        {
+            page1.SetActive(true);
+            page2.SetActive(false);
+        }
+
+        void LaunchGame() => StartCoroutine(StartGame());
 
         public void LoadAssets()
         {
@@ -54,7 +59,7 @@ namespace Safe_To_Share.Scripts.StartScene
             setupGender.SetupGenderDropDown();
         }
 
-        private async Task LoadPlayer()
+        async Task LoadPlayer()
         {
             await characterPreset.LoadAssets();
             tempPlayer = new Player(characterPreset.NewCharacter());
@@ -64,21 +69,15 @@ namespace Safe_To_Share.Scripts.StartScene
             impToggle.onValueChanged.AddListener(arg0 => UpdateUnits());
         }
 
-        private void OnEnable()
-        {
-            page1.SetActive(true);
-            page2.SetActive(false);
-        }
+        void UpdateUnits() => heightAndWeight.text = tempPlayer.Body.HeightAndWeight();
 
-        private void UpdateUnits() => heightAndWeight.text = tempPlayer.Body.HeightAndWeight();
-
-        private void QuestLoaded(AsyncOperationHandle<QuestInfo> obj)
+        void QuestLoaded(AsyncOperationHandle<QuestInfo> obj)
         {
             loaded = obj.Result;
             startBtn.gameObject.SetActive(true);
         }
 
-        private IEnumerator StartGame()
+        IEnumerator StartGame()
         {
             startBtn.gameObject.SetActive(false);
             PlayerQuests.AddQuest(loaded);
@@ -92,10 +91,10 @@ namespace Safe_To_Share.Scripts.StartScene
         }
 
         [Serializable]
-        private struct LearnStartLocation
+        struct LearnStartLocation
         {
-            [SerializeField] private string guid;
-            [SerializeField] private string[] exitGuids;
+            [SerializeField] string guid;
+            [SerializeField] string[] exitGuids;
 
             public LearnStartLocation(string guid, string[] exitGuids)
             {
@@ -110,20 +109,20 @@ namespace Safe_To_Share.Scripts.StartScene
 
 # if UNITY_EDITOR
 
-        private void OnValidate()
+        void OnValidate()
         {
             startMaps = new List<LearnStartLocation>();
             foreach (StartLocation startLocation in startLocations)
                 startMaps.Add(new LearnStartLocation(startLocation.StartLoc.Guid, startLocation.Exits));
         }
 
-        [SerializeField] private List<StartLocation> startLocations = new();
+        [SerializeField] List<StartLocation> startLocations = new();
 
         [Serializable]
-        private struct StartLocation
+        struct StartLocation
         {
-            [SerializeField] private LocationSceneSo startLoc;
-            [SerializeField] private SceneTeleportExit[] exits;
+            [SerializeField] LocationSceneSo startLoc;
+            [SerializeField] SceneTeleportExit[] exits;
 
             public LocationSceneSo StartLoc => startLoc;
 

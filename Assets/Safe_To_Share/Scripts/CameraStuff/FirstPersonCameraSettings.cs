@@ -6,6 +6,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
     {
         const string SaveName = "FirstPersonCameraSensitivity";
         static float? sensitivity;
+
         public static float Sensitivity
         {
             get
@@ -16,7 +17,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             set
             {
                 sensitivity = value;
-                PlayerPrefs.SetFloat(SaveName,value);
+                PlayerPrefs.SetFloat(SaveName, value);
             }
         }
     }

@@ -1,6 +1,6 @@
-﻿using Defeated;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Character.DefeatScenarios.Custom;
+using Defeated;
 using UnityEngine;
 
 namespace Character.CreateCharacterStuff
@@ -13,8 +13,10 @@ namespace Character.CreateCharacterStuff
         [SerializeField] LoseScenario loseScenarios;
         [SerializeField] string desc;
         [SerializeField] bool giveRandomBodyMorphs;
-        public string Desc => desc;
         public List<CustomLoseScenario> customLoseScenarios = new();
-        public CreateEnemy NewEnemy() => new(NewCharacter(), battleReward, canTakeEnemyHome, loseScenarios.Guid, giveRandomBodyMorphs, customLoseScenarios);
+        public string Desc => desc;
+
+        public CreateEnemy NewEnemy() => new(NewCharacter(), battleReward, canTakeEnemyHome, loseScenarios.Guid,
+            giveRandomBodyMorphs, customLoseScenarios);
     }
 }

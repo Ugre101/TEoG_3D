@@ -6,7 +6,7 @@ namespace Character.CreateCharacterStuff
     public readonly struct CreateEnemy
     {
         public CreateEnemy(CreateCharacter character, BattleReward battleReward, CanTakeEnemyHome canTake,
-            string loseScenarios,bool giveRandomBodyMorphs, List<CustomLoseScenario> customScenarios)
+            string loseScenarios, bool giveRandomBodyMorphs, List<CustomLoseScenario> customScenarios)
         {
             Character = character;
             BattleReward = battleReward;
@@ -22,6 +22,5 @@ namespace Character.CreateCharacterStuff
         public string LoseScenarios { get; }
         public List<CustomLoseScenario> CustomLoseScenarios { get; }
         public bool GiveRandomBodyMorphs { get; }
-
     }
 }

@@ -8,14 +8,16 @@ namespace Safe_To_Share.Scripts
 {
     public class InvokeEventWhenPlayerIsClose : MonoBehaviour
     {
-
         [SerializeField] List<InRangeOf> inRangeOfs = new();
 
-        [Header("Settings")]
-        [SerializeField] float frameLimit = 10f;
-        [SerializeField] float exitPadding = 1f;
+        [Header("Settings"), SerializeField,]
         
+        float frameLimit = 10f;
+
+        [SerializeField] float exitPadding = 1f;
+
         Transform player;
+
         void Start()
         {
             if (PlayerHolder.Instance != null)

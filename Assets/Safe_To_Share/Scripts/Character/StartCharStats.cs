@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Character.StatsStuff;
 using TMPro;
 using UnityEngine;

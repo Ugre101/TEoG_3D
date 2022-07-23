@@ -5,8 +5,8 @@ namespace Options
 {
     public class HideGameUIStuff : MonoBehaviour
     {
-        public static bool LowerBarsHidden = false;
-        public static bool MiniMapHidden = false;
+        public static bool LowerBarsHidden;
+        public static bool MiniMapHidden;
         [SerializeField] Toggle hideLowerBars;
         [SerializeField] Toggle hideMap;
 
@@ -14,7 +14,7 @@ namespace Options
         {
             hideLowerBars.SetIsOnWithoutNotify(LowerBarsHidden);
             hideLowerBars.onValueChanged.AddListener(ToggleHealthBars);
-            
+
             hideMap.SetIsOnWithoutNotify(MiniMapHidden);
             hideMap.onValueChanged.AddListener(ToggleMap);
         }

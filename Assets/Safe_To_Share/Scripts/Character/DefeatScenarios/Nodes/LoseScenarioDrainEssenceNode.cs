@@ -8,9 +8,8 @@ namespace Character.DefeatScenarios.Nodes
     {
         [SerializeField] DrainEssenceType drainEssenceType = DrainEssenceType.Both;
 
-        public override bool CanDo(BaseCharacter caster, BaseCharacter target)
-        {
-            return drainEssenceType switch
+        public override bool CanDo(BaseCharacter caster, BaseCharacter target) =>
+            drainEssenceType switch
             {
                 DrainEssenceType.None => true,
                 DrainEssenceType.Masc => target.CanDrainMasc(),
@@ -18,7 +17,6 @@ namespace Character.DefeatScenarios.Nodes
                 DrainEssenceType.Both => target.CanDrainMasc() || target.CanDrainFemi(),
                 _ => throw new ArgumentOutOfRangeException(),
             };
-        }
 
         public override void HandleEffects(BaseCharacter caster, BaseCharacter target)
         {

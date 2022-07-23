@@ -7,7 +7,6 @@ namespace Character.VoreStuff.VoreDigestionModes.Vagina
     {
         public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer)
         {
- 
             baseOrgan.Vore.NoDigestTick();
             return false;
         }

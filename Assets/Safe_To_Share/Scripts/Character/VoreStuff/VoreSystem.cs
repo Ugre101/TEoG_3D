@@ -66,7 +66,7 @@ namespace Character.VoreStuff
 
         public bool TickHour(BaseCharacter pred, int ticks = 1)
         {
-            TickPreyHour(pred,ticks);
+            TickPreyHour(pred, ticks);
             return digestionStrength.Mods.TickHour(ticks) |
                    pleasureDigestion.Mods.TickHour(ticks) |
                    orgasmDrain.Mods.TickHour(ticks) |
@@ -77,28 +77,26 @@ namespace Character.VoreStuff
         {
             stomach.TickHour(ticks);
             foreach ((SexualOrganType type, VoreOrganDigestionMode mode) in VoreOrgans)
-            {
                 if (pred.SexualOrgans.Containers.TryGetValue(type, out OrgansContainer container))
                     foreach (var baseOrgan in container.List)
                         baseOrgan.Vore.TickHour(ticks);
-            }
         }
 
         VoreOrganDigestionMode GetDigestionMode(VoreType type) => type switch
-            {
-                VoreType.Oral => stomachDigestionMode,
-                VoreType.Balls => ballsDigest,
-                VoreType.UnBirth => vaginaDigest,
-                VoreType.Anal => analDigest,
-                VoreType.Breast => boobsDigest,
-                VoreType.Cock => cockDigest,
-                _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
-            };
+        {
+            VoreType.Oral => stomachDigestionMode,
+            VoreType.Balls => ballsDigest,
+            VoreType.UnBirth => vaginaDigest,
+            VoreType.Anal => analDigest,
+            VoreType.Breast => boobsDigest,
+            VoreType.Cock => cockDigest,
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
+        };
 
         public static event Action<int> Digested;
         public static void HaveDigested(int id) => Digested?.Invoke(id);
 
-        public bool VoreTick(BaseCharacter pred,bool predIsPlayer, int ticks)
+        public bool VoreTick(BaseCharacter pred, bool predIsPlayer, int ticks)
         {
             bool change = false;
             CanPleasurePreys = pleasureDigestion.Value > 0;
@@ -106,9 +104,9 @@ namespace Character.VoreStuff
             {
                 foreach (VorePerk vorePerk in Level.OwnedPerks)
                     vorePerk.OnTick(pred);
-                if (OrganContainersTick(pred,predIsPlayer))
+                if (OrganContainersTick(pred, predIsPlayer))
                     change = true;
-                if (StomachTick(pred,predIsPlayer))
+                if (StomachTick(pred, predIsPlayer))
                     change = true;
             }
 
@@ -128,7 +126,7 @@ namespace Character.VoreStuff
             }
 
             PleasureDigestion(pred, stomach.PreysIds);
-            if (StomachDigestionMode.DigestionMethod.Tick(pred, Stomach,predIsPlayer))
+            if (StomachDigestionMode.DigestionMethod.Tick(pred, Stomach, predIsPlayer))
                 change = true;
             Level.GainExp(Mathf.RoundToInt(10 * stomach.Stretch));
             return change;
@@ -148,7 +146,7 @@ namespace Character.VoreStuff
         {
             bool change = false;
             foreach (var organDigestionMode in VoreOrgans)
-                if (TickOrganContainer(pred, organDigestionMode,predIsPlayer))
+                if (TickOrganContainer(pred, organDigestionMode, predIsPlayer))
                     change = true;
             return change;
         }
@@ -160,7 +158,7 @@ namespace Character.VoreStuff
                 return false;
             bool change = false;
             foreach (BaseOrgan baseOrgan in container.List.TakeWhile(OrganHasPreys))
-                if (TickOrgan(pred, organDigestionMode, baseOrgan,predIsPlayer))
+                if (TickOrgan(pred, organDigestionMode, baseOrgan, predIsPlayer))
                     change = true;
             return change;
         }
@@ -202,7 +200,8 @@ namespace Character.VoreStuff
         }
 
 
-        void HandleSpecialSexOrganDigestion(BaseCharacter pred, SexualOrganType key, BaseOrgan baseOrgan, bool predIsPlayer)
+        void HandleSpecialSexOrganDigestion(BaseCharacter pred, SexualOrganType key, BaseOrgan baseOrgan,
+            bool predIsPlayer)
         {
             for (int index = baseOrgan.Vore.SpecialPreysIds.Count; index-- > 0;)
             {
@@ -217,7 +216,7 @@ namespace Character.VoreStuff
             if (!VoredCharacters.PreyDict.TryGetValue(preyId, out var prey))
                 return;
             if (perkOnes.TryGetValue(prey.SpecialDigestion, out var perk))
-                perk.SpecialOrganDigestion(pred, baseOrgan, key, preyId,predIsPlayer);
+                perk.SpecialOrganDigestion(pred, baseOrgan, key, preyId, predIsPlayer);
             else if (!(Level.OwnedPerks.OfType<VorePerkNewDigestionMode>().Any() && FindPerk(pred,
                          prey.SpecialDigestion, baseOrgan.Vore, key.OrganToVoreType(), true)))
                 Debug.Log("Didn't find special perk");

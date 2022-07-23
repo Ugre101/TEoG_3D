@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Character.StatsStuff.HealthStuff;
-using Character.StatsStuff.Mods;
-using CustomClasses;
-using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
 namespace Character.StatsStuff
@@ -14,6 +11,7 @@ namespace Character.StatsStuff
         [SerializeField] CharStat strength, intelligence, constitution, charisma, agility;
 
         [SerializeField] Health health, willPower;
+        Dictionary<CharStatType, CharStat> getCharStats;
 
 
         public Stats(int strength, int intelligence, int constitution, int charisma, int agility)
@@ -44,17 +42,16 @@ namespace Character.StatsStuff
 
         public Health WillPower => willPower;
         public bool Dead => WillPower.Dead || Health.Dead;
-        Dictionary<CharStatType, CharStat> getCharStats;
 
         public Dictionary<CharStatType, CharStat> GetCharStats =>
             getCharStats ??= new Dictionary<CharStatType, CharStat>
             {
-                {CharStatType.Strength, Strength},
-                {CharStatType.Intelligence, Intelligence},
-                {CharStatType.Constitution, Constitution},
-                {CharStatType.Charisma, Charisma},
-                {CharStatType.Agility, Agility},
-            };    
+                { CharStatType.Strength, Strength },
+                { CharStatType.Intelligence, Intelligence },
+                { CharStatType.Constitution, Constitution },
+                { CharStatType.Charisma, Charisma },
+                { CharStatType.Agility, Agility },
+            };
 
         // Dictionary<HealthTypes, BaseIntStat> getHealthBaseStats;
 
@@ -108,6 +105,5 @@ namespace Character.StatsStuff
             //         baseStat.Mods.AddStatMod(mod.Mod);
             // }
         }
-        
     }
 }

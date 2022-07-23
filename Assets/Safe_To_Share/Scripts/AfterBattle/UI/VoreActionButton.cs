@@ -1,8 +1,6 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI
 {

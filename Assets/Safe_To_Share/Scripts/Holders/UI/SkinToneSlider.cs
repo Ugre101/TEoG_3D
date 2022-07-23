@@ -1,5 +1,4 @@
 ﻿using AvatarStuff.Holders;
-using Character.PlayerStuff;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +9,8 @@ namespace AvatarStuff.UI
         [SerializeField] Slider slider;
 
         PlayerHolder playerHolder;
-        void Start()
-        {
-            slider.onValueChanged.AddListener(Change);
-        }
+
+        void Start() => slider.onValueChanged.AddListener(Change);
 
         void Change(float arg0)
         {

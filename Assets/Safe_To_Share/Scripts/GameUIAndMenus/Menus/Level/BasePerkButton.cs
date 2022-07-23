@@ -1,6 +1,5 @@
 ﻿using AvatarStuff.Holders;
 using Character.LevelStuff;
-using Character.PlayerStuff;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -19,6 +18,7 @@ namespace GameUIAndMenus.Menus.Level
             CanAfford(player.Player.LevelSystem.Points);
             HasPerk(obj.Result);
         }
+
         public override void Setup(PlayerHolder player)
         {
             this.player = player;
@@ -42,7 +42,7 @@ namespace GameUIAndMenus.Menus.Level
             rune.color = color;
         }
 
-        private float GetAplha(bool havePerk) => havePerk ? 1f : loaded.MeetsRequirements(player.Player) ? 0.4f : 0.15f;
+        float GetAplha(bool havePerk) => havePerk ? 1f : loaded.MeetsRequirements(player.Player) ? 0.4f : 0.15f;
 #if UNITY_EDITOR
         [SerializeField] BasicPerk basicPerk;
 
