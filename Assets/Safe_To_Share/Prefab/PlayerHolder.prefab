@@ -333,13 +333,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289452861187385655}
-  m_Material: {fileID: 13400000, guid: 7ea3cfdfc72c2e046bcc3d60af503cad, type: 2}
+  m_Material: {fileID: 13400000, guid: 870559f761eb90243ba09333475b5046, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.25
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &3278331065733202694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,17 +349,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 289452861187385655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f2b9af079ce80f40a9e72b1ddc7f3f6, type: 3}
+  m_Script: {fileID: 11500000, guid: ca34e011548a18947b1c22a16b3ece70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationRate: 540
   _rotationMode: 1
-  _maxWalkSpeed: 6
+  _maxWalkSpeed: 7
   _minAnalogWalkSpeed: 0
   _maxAcceleration: 20
   _brakingDecelerationWalking: 20
   _groundFriction: 8
-  _sprintSpeedMultiplier: 1.5
+  _sprintSpeedMultiplier: 1.6
   _sprintAccelerationMultiplier: 1
   _maxWalkSpeedCrouched: 3
   _crouchedHeight: 1
@@ -375,10 +375,10 @@ MonoBehaviour:
   _jumpPostGroundedTime: 0.15
   _gravity: {x: 0, y: -30, z: 0}
   _canSwim: 1
-  _maxSwimSpeed: 3
+  _maxSwimSpeed: 4
   _brakingDecelerationSwimming: 0
   _swimmingFriction: 0.5
-  _buoyancy: 1.5
+  _buoyancy: 1
   _maxFlySpeed: 6
   _brakingDecelerationFlying: 0
   _flyingFriction: 0.3
@@ -395,7 +395,7 @@ MonoBehaviour:
   _useRootMotion: 0
   _camera: {fileID: 0}
   _characterMovement: {fileID: 2013445793559307153}
-  _rootMotionController: {fileID: 7901559667170267606}
+  _rootMotionController: {fileID: 6935338679454454903}
   _cameraTransform: {fileID: 0}
   cameraTargetTransform: {fileID: 0}
 --- !u!114 &71678109998498014
@@ -411,11 +411,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 3278331065733202694}
-  defaultSprint: 1.5
+  defaultSprint: 1.6
   defaultJumpCount: 1
   defaultJumpStrength: 6
-  defaultWalkSpeed: 6
-  defaultSwimSpeed: 3
+  defaultWalkSpeed: 7
+  defaultSwimSpeed: 4
 --- !u!114 &2013445793559307153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,22 +425,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 289452861187385655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ec98a008bee16d4297327d4ce890e4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3432e116e26fb884fbb184061f22784c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _constrainToPlane: 0
-  _capsuleRadius: 0.5
-  _capsuleHeight: 2
+  _capsuleRadius: 0.25
+  _capsuleHeight: 1.8
   _slopeLimit: 60
-  _stepOffset: 0.45
-  _perchOffset: 0.5
+  _stepOffset: 0.55
+  _perchOffset: 0
   _unperchOffset: 0
-  _perchAdditionalHeight: 0.4
+  _perchAdditionalHeight: 0
   _collideWithTriggers: 0
   _groundMask:
     serializedVersion: 2
     m_Bits: 19977
-  _groundProbingDistance: 0.5
+  _groundProbingDistance: 1
   _transform: {fileID: 6156461748408585082}
   _rigidbody: {fileID: 4535136299084643760}
   _capsuleCollider: {fileID: 5205167599377470840}
@@ -645,6 +645,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8388608
   hotKey: {fileID: -5130363453463973827, guid: 909c985f98606244581be8905cf2f256, type: 3}
+  cameraRayDist: 12
 --- !u!114 &2129189652066983429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,10 +895,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4264186504093821022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4b7b5e119f395f4e8d5add705235f67, type: 3}
+  m_Script: {fileID: 11500000, guid: 83e89aa94a969d64c8d9ecfc68bbdb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 3278331065733202694}
   avatarChangerBase: {fileID: 6265009824166565540}
 --- !u!114 &7901559667170267606
 MonoBehaviour:
@@ -908,9 +908,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4264186504093821022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 838519e5d02343249e0d4ddd7578cba4, type: 3}
+  m_Script: {fileID: 11500000, guid: e7c481b890df0f64bb79aae0443ee756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 3278331065733202694}
   avatarChangerBase: {fileID: 6265009824166565540}
 --- !u!114 &3417229716285459534
 MonoBehaviour:
