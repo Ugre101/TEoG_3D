@@ -75,7 +75,7 @@ crashlytics-build.properties
 /[Aa]ssets/Daz3D/
 /[Aa]ssets/Gaia User Data/
 /[Aa]ssets/Imported/
-/[Aa]ssets/IImported Referenced/
+/[Aa]ssets/Imported Referenced/
 /[Aa]ssets/LOD_Meshes/
 /[Aa]ssets/NatureManufacture Assets/
 /[Aa]ssets/Plugins/
@@ -87,5 +87,6 @@ crashlytics-build.properties
 /[Aa]ssets/TextMesh Pro
 /[Aa]ssets/Total Music Collection/
 /[Aa]ssets/Navigation
+/[Aa]ssets/ToLargePrefabs/
 #/[Aa]ssets/
 #/[Aa]ssets/

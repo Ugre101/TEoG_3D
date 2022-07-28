@@ -18,6 +18,7 @@ TagManager:
   - Animal
   - Water
   - Enemy
+  - Flora Tree Collision
   layers:
   - Default
   - TransparentFX

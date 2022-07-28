@@ -16,15 +16,15 @@ namespace DormAndHome.Dorm
         void Start()
         {
             dormManager = DormManager.Instance;
-            dormSceneManager = FindObjectOfType<DormSceneManager>();
+            dormSceneManager = FindObjectOfType<DormSceneManager>(true);
         }
 
         [ContextMenu("Add Mate")]
-        void AddMate() => StartCoroutine(AddLoadedMate());
+        void AddMate() => AddLoadedMate();
 
-        IEnumerator AddLoadedMate()
+        async void AddLoadedMate()
         {
-            yield return dormMate.LoadAssets();
+            await dormMate.LoadAssets();
             Enemy enemy = new(dormMate.NewEnemy());
             dormManager.AddToDorm(new DormMate(enemy));
             dormSceneManager.Loaded();
