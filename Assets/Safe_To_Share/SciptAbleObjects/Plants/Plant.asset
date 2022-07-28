@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9aa966419cd4a23a1aaca7f43b4bd25, type: 3}
   m_Name: Plant
   m_EditorClassIdentifier: 
-  growHours: 0
+  <Drops>k__BackingField:
+  - <Item>k__BackingField: {fileID: 0}
+    <Chance>k__BackingField: 0
