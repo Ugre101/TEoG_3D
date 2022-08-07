@@ -356,7 +356,7 @@ MonoBehaviour:
   _rotationMode: 1
   _maxWalkSpeed: 7
   _minAnalogWalkSpeed: 0
-  _maxAcceleration: 20
+  _maxAcceleration: 10
   _brakingDecelerationWalking: 20
   _groundFriction: 8
   _sprintSpeedMultiplier: 1.6
@@ -375,10 +375,10 @@ MonoBehaviour:
   _jumpPostGroundedTime: 0.15
   _gravity: {x: 0, y: -30, z: 0}
   _canSwim: 1
-  _maxSwimSpeed: 4
-  _brakingDecelerationSwimming: 0
+  _maxSwimSpeed: 6
+  _brakingDecelerationSwimming: 0.25
   _swimmingFriction: 0.5
-  _buoyancy: 1
+  _buoyancy: 2
   _maxFlySpeed: 6
   _brakingDecelerationFlying: 0
   _flyingFriction: 0.3
@@ -415,7 +415,7 @@ MonoBehaviour:
   defaultJumpCount: 1
   defaultJumpStrength: 6
   defaultWalkSpeed: 7
-  defaultSwimSpeed: 4
+  defaultSwimSpeed: 6
 --- !u!114 &2013445793559307153
 MonoBehaviour:
   m_ObjectHideFlags: 0

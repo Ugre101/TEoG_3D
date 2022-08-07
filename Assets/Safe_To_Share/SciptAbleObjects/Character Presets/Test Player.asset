@@ -47,6 +47,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 37d50a59c926f1147abae502534d4710, type: 2}
   - {fileID: 11400000, guid: 7c66f324afbf3f44687b543d659183ba, type: 2}
   - {fileID: 11400000, guid: abcffbb5d3b1d2a48ad943157297ac46, type: 2}
+  - {fileID: 11400000, guid: 3ff39f04fde183447b3dec0b05c94b74, type: 2}
   startPerks: []
   startEssencePerks:
   - {fileID: 11400000, guid: cf01d105a662d374bbf8b2f6be12be9d, type: 2}

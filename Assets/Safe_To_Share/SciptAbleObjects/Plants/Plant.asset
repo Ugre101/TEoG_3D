@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9aa966419cd4a23a1aaca7f43b4bd25, type: 3}
   m_Name: Plant
   m_EditorClassIdentifier: 
-  <Drops>k__BackingField:
-  - <Item>k__BackingField: {fileID: 0}
-    <Chance>k__BackingField: 0
+  guid: d2d75529a69b05e44975456ef53e19bb
+  <Drops>k__BackingField: []
+  <Icon>k__BackingField: {fileID: 21300000, guid: cbfd0c1fd83b972468fdc495339fe9a8, type: 3}
+  <Prefab>k__BackingField: {fileID: 2842422728238606547, guid: f0115ac20954b5a409cff9ed39e50ced, type: 3}

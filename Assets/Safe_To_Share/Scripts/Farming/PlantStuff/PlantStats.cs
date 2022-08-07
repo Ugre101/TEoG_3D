@@ -7,6 +7,7 @@ namespace Safe_To_Share.Scripts.Farming
     [Serializable]
     public class PlantStats
     {
+        public event Action<float> Grown; 
         public PlantStats(Vector3 pos,string plantGuid,int maxHours)
         {
             Pos = pos;
@@ -22,11 +23,20 @@ namespace Safe_To_Share.Scripts.Farming
             PlantGuid = save.PlantGuid;
             MaxHours = maxHours;
         }
+
+        public PlantStats(Plant plant,Vector3 pos)
+        {
+            PlantGuid = plant.Guid;
+            MaxHours = plant.GrowTime;
+            Pos = pos;
+        }
+
         public float Quality { get; private set; }
         public int Hours { get; private set; }
         public Vector3 Pos { get; }
         public string PlantGuid { get; }
         public int MaxHours { get; }
+        public float PercentDone => (float)Hours / MaxHours;
 
         public void TickHour(int hours, float qualityMod = 0f)
         {
@@ -35,6 +45,7 @@ namespace Safe_To_Share.Scripts.Farming
             {
                 Quality += Random.value * qualityMod / MaxHours;
             }
+            Grown?.Invoke(PercentDone);
         }
         public struct  Save
         {
