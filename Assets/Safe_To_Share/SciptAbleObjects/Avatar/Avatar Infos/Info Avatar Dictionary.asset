@@ -21,5 +21,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1314e4ea8628d5641bbae6634d981ecc, type: 2}
   - {fileID: 11400000, guid: a634f6ebc6eefb34f8c45d2593307f14, type: 2}
   - {fileID: 11400000, guid: 4cf6509439121f540b57d51a04d3be2b, type: 2}
+  - {fileID: 11400000, guid: 9e771f92506982940a5ab79edde6a54f, type: 2}
   sfwAvatar: {fileID: 0}
   sfwMode: 0

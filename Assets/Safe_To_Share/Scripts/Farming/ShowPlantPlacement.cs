@@ -1,36 +1,68 @@
 ﻿using System;
-using AvatarStuff.Holders;
+using CustomClasses;
 using Items;
 using Safe_To_Share.Scripts.Farming.UI;
+using Safe_To_Share.Scripts.Helpers;
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.PlayerLoop;
 
 namespace Safe_To_Share.Scripts.Farming
 {
-    public class ShowPlantPlacement : MonoBehaviour
+    public class ShowPlantPlacement : MonoBehaviour,ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] Camera cam;
         [SerializeField] LayerMask searchLayers;
-        [SerializeField] InputActionReference hotKey;
-        [SerializeField] float cameraRayDist = 12f;
-        const int FrameLimit = 10;
-         NativeArray<RaycastCommand> commands;
+        [SerializeField] float distFromPlayer = 12f;
+        [SerializeField, Range(0.1f, 1f),] float timeInterval = 0.5f;
+        NativeArray<RaycastCommand> commands;
         JobHandle handle;
-        NativeArray<RaycastHit> results;
-        PlantedPlant hoverPrefab;
         bool hovering;
-        Plant plant;
+        PlantedPlant hoverPrefab;
         InventoryItem item;
+        Inventory inventory;
+
+        float lastTick = 0;
+        Plant plant;
+        NativeArray<RaycastHit> results;
 
         bool validPlacement;
+        Vector2 lastValue;
+        Vector2 newValue;
+        [SerializeField,Range(float.Epsilon,1f)] float tolerance = 0.2f;
+
+        public static event Action UpdateSeedsOptions;
         void Start()
         {
-            results = new NativeArray<RaycastHit>(1, Allocator.Persistent); 
+            results = new NativeArray<RaycastHit>(1, Allocator.Persistent);
             commands = new NativeArray<RaycastCommand>(1, Allocator.Persistent);
             PlantOptionButton.ShowPlacement += ShowHowever;
             // optionButton.onClick.AddListener(DoInteraction);
+        }
+        void OnEnable()
+        {
+        }
+
+        void OnDisable()
+        {
+        }
+
+
+        void Update()
+        {
+            if (hovering is false) return;
+
+            if (Time.time < lastTick + timeInterval)
+                return;
+            lastTick = Time.time;
+            newValue = Pointer.current.position.ReadValue();
+            if (Vector2.Distance(newValue,lastValue) < tolerance)
+                return;
+            ScheduleRayCast();
+            CheckResults();
+            lastValue = newValue;
         }
 
         void OnDestroy()
@@ -40,15 +72,21 @@ namespace Safe_To_Share.Scripts.Farming
             commands.Dispose();
         }
 
-        void ShowHowever( Plant obj, InventoryItem inventoryItem)
+        PlantOptionButton plantButton;
+        void ShowHowever(Plant obj,Inventory inventory, InventoryItem inventoryItem, PlantOptionButton button)
         {
             plant = obj;
+            this.inventory = inventory;
             item = inventoryItem;
+            plantButton = button;
             StartHover(obj.Prefab);
         }
 
+        PlantedPlant lastPrefab;
+
         public void StartHover(PlantedPlant prefab)
         {
+            lastPrefab = prefab;
             hoverPrefab = Instantiate(prefab); // just dump it
             hovering = true;
             validPlacement = false;
@@ -56,50 +94,61 @@ namespace Safe_To_Share.Scripts.Farming
 
         public void CancelHovering()
         {
-            Destroy(hoverPrefab);
+            Destroy(hoverPrefab.gameObject);
+            hoverPrefab = null;
             hovering = false;
             validPlacement = false;
-        }
-        void Update()
-        {
-            if (hovering is false) return;
-                
-            if (Time.frameCount % FrameLimit != 0)
-                return;
-            ScheduleRayCast();
-            CheckResults();
         }
 
         void CheckResults()
         {
             handle.Complete();
-            foreach (RaycastHit raycastHit in results)
+            foreach (var raycastHit in results)
             {
-                if (raycastHit.collider is TerrainCollider)
-                {
-                    hoverPrefab.transform.position = raycastHit.point;
-                    validPlacement = true;
-                }
+                if (raycastHit.collider is not TerrainCollider) continue;
+                Vector3 position = raycastHit.point;
+                if (!(Vector3.Distance(PlayerPosition.Pos, position) < distFromPlayer)) continue;
+                hoverPrefab.transform.position = position;
+                validPlacement = true;
             }
         }
 
-        public void ConfirmPlacement()
+        public async void ConfirmPlacement(InputAction.CallbackContext callbackContext)
         {
-            if (validPlacement)
+            if (callbackContext.performed is false) return;
+            if (!validPlacement) return;
+
+            var planted = Instantiate(hoverPrefab);
+            planted.Plant(new PlantStats(plant, hoverPrefab.transform.position));
+            bool stillHave = await inventory.LowerItemAmountAndReturnIfStillHave(item);
+            if (stillHave is false)
             {
-                hoverPrefab.Plant(new PlantStats(plant,hoverPrefab.transform.position));
-                item.Amount--;
-                if (item.Amount <= 0)
-                {
-                    // Stop
-                }
+                // Stop
+                CancelHovering();
+                Destroy(plantButton.gameObject);
+                UpdateSeedsOptions?.Invoke();
             }
+            else
+            {
+                hovering = true;
+            }
+            validPlacement = false;            
         }
+    
+        
         void ScheduleRayCast()
         {
-            Ray camRay = cam.ScreenPointToRay(Pointer.current.position.ReadValue());
-            commands[0] = new RaycastCommand(camRay.origin, camRay.direction, cameraRayDist, searchLayers);
+            Ray camRay = cam.ScreenPointToRay(lastValue);
+            commands[0] = new RaycastCommand(camRay.origin, camRay.direction, Mathf.Infinity, searchLayers);
             handle = RaycastCommand.ScheduleBatch(commands, results, 1);
+        }
+
+        public bool BlockIfActive()
+        {
+            if (!hovering) return false;
+            CancelHovering();
+            return true;
+
         }
     }
 }

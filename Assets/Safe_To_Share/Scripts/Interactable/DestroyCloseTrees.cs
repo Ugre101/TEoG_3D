@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AvatarStuff.Holders;
 using Map;
+using Safe_To_Share.Scripts.Helpers;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Interactable
@@ -28,6 +30,7 @@ namespace Safe_To_Share.Scripts.Interactable
                 return;
             }
 
+            PlayerPosition.PlayerMoved += Tick; 
             var activeTerrain = Terrain.activeTerrain;
             pvecTerrainPosition = activeTerrain.transform.position;
             var terrainData = activeTerrain.terrainData;
@@ -42,20 +45,19 @@ namespace Safe_To_Share.Scripts.Interactable
 #endif
         }
 
-        void Update()
+        void OnDestroy() => PlayerPosition.PlayerMoved -= Tick;
+
+        void Tick(Vector3 vector3)
         {
 #if UNITY_EDITOR
             if (!runInEditor)
                 return;
 
 #endif
-            if (Time.frameCount % FrameLimit != 0)
-                return;
             if (transform.localScale.x < heightReq)
                 return;
 
             bool removedTree = false;
-            Vector3 vecFlier = PlayerHolder.Instance.transform.position;
             List<int> toRemove = new();
 
             for (int l = 0; l < paryTrees.Length; l++)
@@ -64,7 +66,7 @@ namespace Safe_To_Share.Scripts.Interactable
                 Vector3 vecTree = triTree.position;
                 // Get the world coordinates of the tree position
                 Vector3 vec3 = Vector3.Scale(pvecTerrainSize, vecTree) + pvecTerrainPosition;
-                float fltProximity = Vector3.Distance(vecFlier, vec3);
+                float fltProximity = Vector3.Distance(vector3, vec3);
                 if (fltProximity < removeDist)
                     toRemove.Add(l);
             }
@@ -77,9 +79,8 @@ namespace Safe_To_Share.Scripts.Interactable
                 var treeName = Terrain.activeTerrain.terrainData.treePrototypes[protoIndex].prefab.name;
                 if (treeName.Contains("Tree") && !treeName.Contains("Small"))
                 {
-                    var treePos = PlayerHolder.Instance.transform.position;
                     if (hasDebrisPool)
-                        TreeDebrisObjectPool.Instance.IfHasDebrisAddFor(treeName, treePos);
+                        TreeDebrisObjectPool.Instance.IfHasDebrisAddFor(treeName, vector3);
                     trees.RemoveAt(i);
                     removedTree = true;
                 }

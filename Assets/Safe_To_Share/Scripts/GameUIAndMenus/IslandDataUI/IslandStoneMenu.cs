@@ -1,6 +1,8 @@
-﻿using Character.PlayerStuff;
+﻿using System;
+using Character.PlayerStuff;
 using CustomClasses;
 using GameUIAndMenus;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
@@ -15,7 +17,9 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             options = GetComponentsInChildren<IslandStoneOption>();
         }
 #endif
-        public bool Block => gameObject.activeInHierarchy;
+        void OnEnable() => GameUIManager.BlockList.Add(this);
+
+        void OnDisable() => GameUIManager.BlockList.Remove(this);
 
         public bool BlockIfActive()
         {

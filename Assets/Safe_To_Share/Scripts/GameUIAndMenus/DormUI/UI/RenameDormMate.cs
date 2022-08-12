@@ -1,4 +1,6 @@
-﻿using GameUIAndMenus;
+﻿using System;
+using GameUIAndMenus;
+using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,7 +23,10 @@ namespace DormAndHome.Dorm.UI
             lastName.onValueChanged.AddListener(LastChange);
         }
 
-        void OnDisable() => gameObject.SetActive(false);
+        void OnEnable() => GameUIManager.BlockList.Add(this);
+
+        void OnDisable() => GameUIManager.BlockList.Remove(this);
+
         public bool Block => gameObject.activeInHierarchy;
 
         void FirstChange(string arg0) => tempFirst = arg0;

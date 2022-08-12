@@ -15,7 +15,6 @@ namespace Character.Organs.OrgansContainers
     {
         [SerializeField] protected SexualFluid fluid;
         [SerializeField] protected List<BaseOrgan> list = new();
-
         protected OrgansContainer(FluidType fluidType, float startRec = 0f) =>
             fluid = new SexualFluid(fluidType, startRec);
 

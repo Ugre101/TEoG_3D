@@ -28,21 +28,6 @@ namespace GameUIAndMenus
         [SerializeField] HideGameUI hideGameUI;
         [SerializeField] Button closeMenuBtn;
         IEnumerable<IBlockGameUI> cancelThese;
-        bool sceneDirty = true;
-
-        IEnumerable<IBlockGameUI> CancelThese
-        {
-            get
-            {
-                if (sceneDirty)
-                {
-                    cancelThese = FindObjectsOfType<MonoBehaviour>(true).OfType<IBlockGameUI>();
-                    sceneDirty = false;
-                }
-
-                return cancelThese;
-            }
-        }
 
         void Start()
         {
@@ -50,10 +35,11 @@ namespace GameUIAndMenus
             TriggerBoatMenu.OpenBoatMenu += OpenBoatMenu;
             TradeAbleCharacter.OpenShopMenu += OpenShopMenu;
             LoadManager.LoadedSave += CloseMenus;
-            SceneLoader.NewScene += SetDirty;
             BaseDialogue.StartDialogue += OpenDialogueMenu;
             BaseDialogue.StartVoreEvent += OpenVoreEvent;
+            GameUIManager.HideGameUI += ForceHide;
         }
+
 
 
         void OnDestroy()
@@ -61,11 +47,18 @@ namespace GameUIAndMenus
             TriggerBoatMenu.OpenBoatMenu -= OpenBoatMenu;
             TradeAbleCharacter.OpenShopMenu -= OpenShopMenu;
             LoadManager.LoadedSave -= CloseMenus;
-            SceneLoader.NewScene -= SetDirty;
             BaseDialogue.StartDialogue -= OpenDialogueMenu;
             BaseDialogue.StartVoreEvent -= OpenVoreEvent;
+            GameUIManager.HideGameUI -= ForceHide;
         }
 
+        void ForceHide(bool obj)
+        {
+            if (obj)
+                hideGameUI.ForceHide();
+            else
+                hideGameUI.StopForceHide();
+        }
         public bool BlockIfActive()
         {
             if (gameMenus.activeInHierarchy || boatMenu.activeInHierarchy)
@@ -77,7 +70,6 @@ namespace GameUIAndMenus
             return false;
         }
 
-        void SetDirty() => sceneDirty = true;
 
         public void OpenShopMenu(string arg1, List<Item> arg2)
         {
@@ -103,7 +95,7 @@ namespace GameUIAndMenus
 
         public void TriggerMenu(GameObject menu)
         {
-            if (CancelThese.Any(blocking => blocking.Block) || menu == null)
+            if (GameUIManager.BlockList.Any() || menu == null)
                 return;
             if (gameMenus.activeSelf && menu.activeSelf)
                 CloseMenus();
@@ -138,10 +130,5 @@ namespace GameUIAndMenus
             SwitchPanels(voreEventMenu.gameObject);
             voreEventMenu.Setup(arg1, arg2, arg3, arg4);
         }
-    }
-
-    public interface IBlockGameUI
-    {
-        bool Block { get; }
     }
 }

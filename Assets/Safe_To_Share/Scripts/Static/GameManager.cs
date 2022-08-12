@@ -30,6 +30,7 @@ namespace Safe_To_Share.Scripts.Static
             Cursor.lockState = CursorLockMode.None;
         }
 
+
         public static void Resume(bool forceFreeCursor)
         {
             Paused = false;

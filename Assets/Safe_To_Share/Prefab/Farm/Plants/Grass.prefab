@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3482905644177371615}
   - component: {fileID: 2842422728238606547}
   - component: {fileID: 1577874448462224424}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plant: {fileID: 92105080465864957}
-  minSize: 0.2
-  maxSize: 3
+  minSize: 1
+  maxSize: 4
 --- !u!136 &1577874448462224424
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -126,9 +126,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1831465794063080983, guid: 8c808c7d01a49b74e8301d9be83b90de, type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
     - target: {fileID: 4455619197112527440, guid: 8c808c7d01a49b74e8301d9be83b90de, type: 3}
       propertyPath: m_Name
       value: PW_Plant_Grass_Mountine_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455619197112527440, guid: 8c808c7d01a49b74e8301d9be83b90de, type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 7329499511815239298, guid: 8c808c7d01a49b74e8301d9be83b90de, type: 3}
+      propertyPath: m_Layer
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8544697899130989519, guid: 8c808c7d01a49b74e8301d9be83b90de, type: 3}
+      propertyPath: m_Layer
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c808c7d01a49b74e8301d9be83b90de, type: 3}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Management.Instrumentation;
 using Items;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,17 +9,20 @@ namespace Safe_To_Share.Scripts.Farming.UI
 {
     public class PlantOptionButton : Selectable //,IDeselectHandler,ISelectHandler,IPointerEnterHandler,IPointerExitHandler
     {
-        public static event Action<Plant,InventoryItem> ShowPlacement;
+        public static event Action<Plant,Inventory,InventoryItem,PlantOptionButton> ShowPlacement;
         Plant plant;
 
         InventoryItem item;
+
+        Inventory inventory;
         
         [SerializeField] Image icon;
 
-        public void Setup(Plant plant,InventoryItem inventory)
+        public void Setup(Plant plant, InventoryItem inventoryItem, Inventory inventory1)
         {
             this.plant = plant;
-            this.item = inventory;
+            this.item = inventoryItem;
+            this.inventory = inventory1;
         }
 
         public override void OnDeselect(BaseEventData eventData)
@@ -28,7 +32,7 @@ namespace Safe_To_Share.Scripts.Farming.UI
 
         public override void OnSelect(BaseEventData eventData)
         {
-            ShowPlacement?.Invoke(plant,item);
+            ShowPlacement?.Invoke(plant,inventory,item,this);
             base.OnSelect(eventData);
         }
 

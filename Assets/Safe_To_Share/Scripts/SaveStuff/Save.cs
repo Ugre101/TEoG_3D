@@ -10,6 +10,7 @@ using DormAndHome.Dorm;
 using DormAndHome.Dorm.Buildings;
 using Map;
 using QuestStuff;
+using Safe_To_Share.Scripts.Farming;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
@@ -32,7 +33,7 @@ namespace SaveStuff
         [SerializeField] string avatarDetails;
         [SerializeField] string islandStones;
         [SerializeField] string playerGold;
-
+        [SerializeField] string farmsSave;
         public Save(PlayerSave character)
         {
             lastId = IDGiver.Save();
@@ -48,6 +49,7 @@ namespace SaveStuff
             avatarDetails = AvatarDetails.Save();
             islandStones = IslandStonesDatas.Save();
             playerGold = JsonUtility.ToJson(PlayerGold.Save());
+            farmsSave = JsonUtility.ToJson(FarmAreas.Save());
         }
 
         public int LastId => lastId;
@@ -142,6 +144,8 @@ namespace SaveStuff
                 // "gold\\\":99999}}\"
             }
         }
+
+        public FarmAreas.FarmSave FarmsSave => JsonUtility.FromJson<FarmAreas.FarmSave>(farmsSave);
 
         public static event Action<string> LoadError;
     }

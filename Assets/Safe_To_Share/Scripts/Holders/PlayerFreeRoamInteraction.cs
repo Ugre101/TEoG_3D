@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Character.PlayerStuff;
 using TMPro;
 using Unity.Collections;
@@ -44,6 +45,7 @@ namespace AvatarStuff.Holders
             stopHoverDist = rayDist * 3f;
         }
 
+      
         void Update()
         {
             if (Time.frameCount % FrameLimit != 0)

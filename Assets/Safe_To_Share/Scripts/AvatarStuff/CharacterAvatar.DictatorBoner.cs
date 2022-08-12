@@ -15,6 +15,7 @@ namespace AvatarStuff
             [SerializeField] int boner;
             [SerializeField] DictatorDick dictatorDick;
             [SerializeField] DictatorBalls dictatorBalls;
+            [SerializeField] HideDictatorDickAndBalls hideDictator;
             [Header("Hide"), SerializeField,] Material[] dickMats;
             [SerializeField] Material invisible;
 
@@ -59,20 +60,9 @@ namespace AvatarStuff
                 if (!hasDictatorDick)
                     return;
                 dictatorDick.HideOrShow(hasDick);
-                foreach (var meshRenderer in skinnedMeshRenderers)
-                {
-                    var rendererMaterials = meshRenderer.materials;
-                    for (int index = 0; index < rendererMaterials.Length; index++)
-                        foreach (Material dickMat in dickMats)
-                            if (rendererMaterials[index].name.Contains(dickMat.name))
-                            {
-                                rendererMaterials[index] = invisible;
-                                break;
-                            }
-
-                    meshRenderer.materials = rendererMaterials;
-                }
             }
+
+            public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls) => hideDictator.Handle(skinnedMeshRenderers, hasDick,hasBalls);
         }
     }
 }

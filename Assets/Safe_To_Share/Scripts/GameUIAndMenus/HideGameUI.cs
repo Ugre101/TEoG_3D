@@ -16,6 +16,9 @@ namespace GameUIAndMenus
                 transform.AwakeChildren(expect);
         }
 
+        public void ForceHide() => transform.SleepChildren();
+        public void StopForceHide() => Start();
+
         public void ToggleHide()
         {
             hidden = !hidden;

@@ -28,6 +28,7 @@ namespace AvatarStuff
         [SerializeField] DazDickController dickController;
         [SerializeField] DazBallsController ballsController;
         [SerializeField] protected List<SkinnedMeshRenderer> bodyMeshRenderers;
+        [SerializeField] protected List<SkinnedMeshRenderer> detailsMeshRenderers;
         [SerializeField] protected List<SkinnedMeshRenderer> hairMeshRenderers;
 
         [Header("Body Morphs"), SerializeField,]
@@ -65,6 +66,7 @@ namespace AvatarStuff
                 if (shapes == null)
                 {
                     var temp = bodyMeshRenderers.Concat(hairMeshRenderers);
+                    temp = temp.Concat(detailsMeshRenderers);
                     shapes = temp.ToArray();
                 }
 
@@ -133,8 +135,7 @@ namespace AvatarStuff
         {
             bool hasDick = sexualOrgans.Dicks.HaveAny();
             bool hasBalls = sexualOrgans.Balls.HaveAny();
-            if (hasHideDaz)
-                forceSkinUpdate = hideDazDickAndBalls.Handle(bodyMeshRenderers, hasDick, hasBalls);
+            forceSkinUpdate = hasHideDaz ? hideDazDickAndBalls.Handle(bodyMeshRenderers, hasDick, hasBalls) : dictatorBoner.Handle(bodyMeshRenderers,hasDick,hasDick);
             HandleDick(sexualOrgans.Dicks, hasDick);
             HandleBalls(sexualOrgans.Balls, hasBalls);
         }
@@ -249,7 +250,8 @@ namespace AvatarStuff
                 if (!hasShape || ids.Length == 0)
                     return;
                 foreach (int id in ids)
-                    shape.SetBlendShapeWeight(id, value + offSet);
+                    if (id < shape.sharedMesh.blendShapeCount)
+                        shape.SetBlendShapeWeight(id, value + offSet);
             }
 #if UNITY_EDITOR
             public void EditorQuickAdd(int id)

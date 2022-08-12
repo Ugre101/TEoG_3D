@@ -10,7 +10,6 @@ namespace DormAndHome.Dorm.UI
         [SerializeField] protected GameObject dormPanel;
         [SerializeField] protected GameObject upgradePanel;
 
-        public bool Block => dormPanel.activeInHierarchy || upgradePanel.activeInHierarchy;
 
         public bool BlockIfActive()
         {
@@ -27,12 +26,14 @@ namespace DormAndHome.Dorm.UI
         {
             GameManager.Pause();
             gameObject.SetActive(true);
+            GameUIManager.BlockList.Add(this);
         }
 
         public virtual void Leave()
         {
             GameManager.Resume(false);
             transform.SleepChildren();
+            GameUIManager.BlockList.Remove(this);
         }
     }
 }

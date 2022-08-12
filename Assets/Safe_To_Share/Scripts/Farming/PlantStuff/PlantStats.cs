@@ -8,13 +8,6 @@ namespace Safe_To_Share.Scripts.Farming
     public class PlantStats
     {
         public event Action<float> Grown; 
-        public PlantStats(Vector3 pos,string plantGuid,int maxHours)
-        {
-            Pos = pos;
-            PlantGuid = plantGuid;
-            MaxHours = maxHours;
-        }
-
         public PlantStats(Save save,int maxHours)
         {
             Quality = save.Quality;
@@ -47,12 +40,23 @@ namespace Safe_To_Share.Scripts.Farming
             }
             Grown?.Invoke(PercentDone);
         }
+
+        public Save SaveStats() => new Save(Quality, Hours, Pos, PlantGuid);
+        [Serializable]
         public struct  Save
         {
             public float Quality;
             public int Hours;
             public Vector3 Pos;
             public string PlantGuid;
+
+            public Save(float quality, int hours, Vector3 pos, string plantGuid)
+            {
+                Quality = quality;
+                Hours = hours;
+                Pos = pos;
+                PlantGuid = plantGuid;
+            }
         }
     }
 }

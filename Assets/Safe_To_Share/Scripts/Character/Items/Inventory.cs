@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Character;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -39,6 +41,84 @@ namespace Items
         }
 
         public void UseItemItemID(string id, int times = 1) => LoadAndUseItem(GetItemByID(id), times);
+
+        public async Task<bool> LoadAndUseItemId(string guid, BaseCharacter user, int times = 1)
+        {
+            var invenItem = GetItemByID(guid);
+            if (invenItem == null)
+                return false;
+            var task = Addressables.LoadAssetAsync<Item>(invenItem.ItemGuid);
+            await task.Task;
+            if (task.Status == AsyncOperationStatus.Succeeded)
+            {
+                Item item = task.Result;
+                item.Use(user);
+                if (!item.UnlimitedUse)
+                    invenItem.Amount -= times;
+                if (invenItem.Amount >= 1)
+                    return false;
+                Items.Remove(invenItem);
+            }
+
+            return false;
+            // .Completed += i => UseAfterLoad(i, item, times);
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <returns>If you had enough of item</returns>
+        public async Task<bool> LowerItemAmountWithGuid(string guid, int amount = 1)
+        {
+            var item = GetItemByID(guid);
+            if (item == null) return false;
+            item.Amount -= amount;
+            var task = Addressables.LoadAssetAsync<Item>(item.ItemGuid);
+            await task.Task;
+            if (task.Status == AsyncOperationStatus.Succeeded)
+            {
+                if (task.Result.UnlimitedUse) return true;
+
+                if (item.Amount < amount)
+                    return false;
+                item.Amount -= amount;
+                return true;
+            }
+
+            throw new Exception("Failed to load item");
+        }
+
+        public async Task<bool> LowerItemAmount(InventoryItem item, int amount = 1)
+        {
+            if (item == null) return false;
+            var task = Addressables.LoadAssetAsync<Item>(item.ItemGuid);
+            await task.Task;
+            if (task.Status != AsyncOperationStatus.Succeeded) throw new Exception("Failed to load item");
+            if (task.Result.UnlimitedUse) return true;
+            if (item.Amount < amount)
+                return false;
+                
+            item.Amount -= amount;
+            if (item.Amount <= 0)
+            {
+                items.Remove(item);
+            }
+            return true;
+
+        }
+
+        public async Task<bool> LowerItemAmountAndReturnIfStillHave(InventoryItem item, int amount = 1)
+        {
+            var op = await LowerItemAmount(item, amount);
+            if (op)
+            {
+                if (items.Contains(item))
+                    return item.Amount > 0;
+                return false;
+            }
+
+            return false;
+        }
+
         public void UseItemOnCords(Vector2 pos, int times = 1) => LoadAndUseItem(GetItemOnPos(pos), times);
 
         public bool UseLoadedItem(Item item, Vector2 pos, int times = 1)

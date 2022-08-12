@@ -19,7 +19,6 @@ namespace Safe_To_Share.Scripts.Optimazation
 #if UNITY_EDITOR
             if (editorWaitForColdStart && SceneLoader.CurrentLocation == null)
             {
-                Debug.Log("Scene not properly stated yet");
                 yield break;
             }
 #endif

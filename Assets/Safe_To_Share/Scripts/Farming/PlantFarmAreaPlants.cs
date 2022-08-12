@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using SaveStuff;
 using SceneStuff;
@@ -11,25 +12,44 @@ namespace Safe_To_Share.Scripts.Farming
 {
     public class PlantFarmAreaPlants : MonoBehaviour
     {
+        List<PlantedPlant> plantedPlants = new List<PlantedPlant>();
         Coroutine routine;
 
+        FarmArea currentArea;
         void Start()
         {
-            LoadManager.LoadedSave += StartRefresh;
+            if (FarmAreas.TryGetCurrentArea(out var area))
+            {
+                currentArea = area;
+                currentArea.Loaded += StartRefresh;
+                StartCoroutine(RefreshArea());
+            }
         }
 
         void OnDestroy()
         {
-            LoadManager.LoadedSave -= StartRefresh;
-            StopCoroutine(routine);
+            if (currentArea != null)
+                currentArea.Loaded -= StartRefresh;
         }
 
-        void StartRefresh() => routine = StartCoroutine(RefreshArea());
-
-
-        static IEnumerator  RefreshArea()
+        public void PlantPlant(PlantedPlant prefab, PlantStats plantStats)
         {
-            if (!FarmAreas.FarmDict.TryGetValue(SceneLoader.CurrentLocationSceneGuid, out var area)) yield break;
+            if (FarmAreas.TryGetCurrentArea(out var area))
+            {
+                area.AddPlant(plantStats);
+                plantedPlants.Add(prefab);
+            }
+        }
+        void StartRefresh()
+        {
+            routine = StartCoroutine(RefreshArea());
+        }
+
+
+        IEnumerator  RefreshArea()
+        {
+            print("Start Refresh");
+            if (!FarmAreas.TryGetCurrentArea(out var area)) yield break;
             Dictionary<string, List<PlantStats>> loadDict = new();
             List<AsyncOperationHandle<Plant>> ops = new();
             foreach (PlantStats valuePlant in area.Plants)
@@ -50,11 +70,23 @@ namespace Safe_To_Share.Scripts.Farming
                 yield return handle;
                 if (loadDict.TryGetValue(handle.Result.Guid, out var values))
                 {
+                    print($"Start count {values.Count}");
+                    var tempList = values;
+                    foreach (var plantedPlant in plantedPlants)
+                    {
+                        if (plantedPlant.HasMatch(values,out var match))
+                        {
+                            values.Remove(match);
+                            print("Had plant match");
+                        }
+                    }
+                    print($"Cleaned count {values.Count}");
                     foreach (PlantStats plantStats in values)
                     {
                         var temp = Instantiate(handle.Result.Prefab, plantStats.Pos,quaternion.identity);
                         temp.Load(plantStats);
                     }
+                    Addressables.Release(handle);
                 }
 
             }

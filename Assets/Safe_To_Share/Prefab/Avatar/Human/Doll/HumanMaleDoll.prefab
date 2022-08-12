@@ -9546,6 +9546,7 @@ MonoBehaviour:
   - {fileID: 7393443875444038945}
   - {fileID: 7203935637825454859}
   - {fileID: 5444213311490763623}
+  detailsMeshRenderers: []
   hairMeshRenderers:
   - {fileID: 9011210301496623714}
   - {fileID: 3727679139805283970}
@@ -9599,6 +9600,7 @@ MonoBehaviour:
     boner: 0
     dictatorDick: {fileID: 0}
     dictatorBalls: {fileID: 0}
+    hideDictator: {fileID: 0}
     dickMats: []
     invisible: {fileID: 0}
   hasBallsController: 0

@@ -10,6 +10,7 @@ using Character.VoreStuff;
 using DormAndHome.Dorm;
 using Map;
 using QuestStuff;
+using Safe_To_Share.Scripts.Farming;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
@@ -57,6 +58,7 @@ namespace SaveStuff
             yield return VoredCharacters.Load(toLoad.VoreSave);
             yield return DormManager.Instance.Load(toLoad.DormSave);
             yield return PlayerQuests.Load(toLoad.PlayerQuests);
+            yield return FarmAreas.Load(toLoad.FarmsSave);
             string locGuid = toLoad.SceneGuid;
             if (SceneLoader.CurrentScene != null && locGuid == SceneLoader.CurrentScene.Guid)
             {

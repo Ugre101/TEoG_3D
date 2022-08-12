@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SceneStuff;
@@ -13,14 +14,23 @@ namespace Safe_To_Share.Scripts.Farming
         
         public static Dictionary<string, FarmArea> FarmDict = new Dictionary<string, FarmArea>();
 
-        public static FarmArea GetCurrentArea()
+        public static bool TryGetCurrentArea(out FarmArea farm)
         {
-            if (FarmDict.TryGetValue(SceneLoader.CurrentLocationSceneGuid, out var area)) return area;
+            farm = null;
+            if (SceneLoader.CurrentLocationSceneGuid == null)
+                return false;
+            if (FarmDict.TryGetValue(SceneLoader.CurrentLocationSceneGuid, out var area))
+            {
+                farm = area;
+                return true;
+            }
             AddFarm(new FarmArea(SceneLoader.CurrentLocationSceneGuid));
-            if (FarmDict.TryGetValue(SceneLoader.CurrentLocationSceneGuid, out var newArea)) return newArea;
-
-            throw new NullReferenceException(); // Something went wrong
-
+            if (FarmDict.TryGetValue(SceneLoader.CurrentLocationSceneGuid, out var newArea))
+            {
+                farm = newArea;
+                return true;
+            }
+            return false;
         }
         public static void AddFarm(FarmArea area)
         {
@@ -29,14 +39,54 @@ namespace Safe_To_Share.Scripts.Farming
             farmAreas.Add(area);
             FarmDict = farmAreas.ToDictionary(a => a.SceneGuid);
         }
-        public static void Load()
+
+        public static void Tick(int ticks)
         {
-            
+            foreach (var farmArea in farmAreas)
+                farmArea.TickHour(ticks);
+        }
+        public static IEnumerator Load(FarmSave load)
+        {
+            foreach (var farmArea in farmAreas)
+                farmArea.Clear();
+
+            foreach (var areaSave in load.FarmAreaSaves)
+            {
+                bool foundMatch = false;
+                foreach (var farmArea in farmAreas)
+                {
+                    if (farmArea.SceneGuid == areaSave.SceneGuid)
+                    {
+                        foundMatch = true;
+                        yield return farmArea.Load(areaSave);
+                        break;
+                    }
+                }
+
+                if (foundMatch is false)
+                {
+                    var newArea = new FarmArea(areaSave.SceneGuid);
+                    yield return newArea.Load(areaSave);
+                    farmAreas.Add(newArea);
+                }
+            }
         }
 
-        public static void Save()
+        public static FarmSave Save()
         {
-            
+            var saves = farmAreas.Select(farmArea => farmArea.Save()).ToList();
+            return new FarmSave(saves);
+        }
+
+        [Serializable]
+        public struct FarmSave
+        {
+            [field: SerializeField] public List<FarmArea.FarmAreaSave> FarmAreaSaves;
+
+            public FarmSave(List<FarmArea.FarmAreaSave> farmAreaSaves)
+            {
+                FarmAreaSaves = farmAreaSaves;
+            }
         }
     }
 }
