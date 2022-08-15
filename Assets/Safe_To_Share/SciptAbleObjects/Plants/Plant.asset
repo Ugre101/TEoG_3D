@@ -13,6 +13,13 @@ MonoBehaviour:
   m_Name: Plant
   m_EditorClassIdentifier: 
   guid: d2d75529a69b05e44975456ef53e19bb
-  <Drops>k__BackingField: []
+  <Drops>k__BackingField:
+  - <Item>k__BackingField: {fileID: 11400000, guid: 91845c5ecd7be4e45aa0c73028955eeb, type: 2}
+    <Chance>k__BackingField: 1
+  - <Item>k__BackingField: {fileID: 11400000, guid: 91845c5ecd7be4e45aa0c73028955eeb, type: 2}
+    <Chance>k__BackingField: 0.5
+  - <Item>k__BackingField: {fileID: 11400000, guid: 3ff39f04fde183447b3dec0b05c94b74, type: 2}
+    <Chance>k__BackingField: 0.5
   <Icon>k__BackingField: {fileID: 21300000, guid: cbfd0c1fd83b972468fdc495339fe9a8, type: 3}
   <Prefab>k__BackingField: {fileID: 2842422728238606547, guid: f0115ac20954b5a409cff9ed39e50ced, type: 3}
+  <GrowTime>k__BackingField: 52

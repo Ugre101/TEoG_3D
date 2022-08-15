@@ -8,5 +8,7 @@ namespace Character.Npc
     {
         public abstract string HoverText(Player player);
         public abstract void DoInteraction(Player player);
+        public event Action<IInteractable> UpdateHoverText;
+        public event Action RemoveIInteractableHit;
     }
 }

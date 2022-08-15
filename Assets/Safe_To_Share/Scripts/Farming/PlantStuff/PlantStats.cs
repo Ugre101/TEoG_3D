@@ -31,6 +31,8 @@ namespace Safe_To_Share.Scripts.Farming
         public int MaxHours { get; }
         public float PercentDone => (float)Hours / MaxHours;
 
+        public bool Done => MaxHours <= Hours;
+
         public void TickHour(int hours, float qualityMod = 0f)
         {
             Hours += hours;

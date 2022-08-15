@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Text;
 using Character.BodyStuff;
 using Character.PlayerStuff;
@@ -39,6 +40,9 @@ namespace Safe_To_Share.Scripts.Interactable
                 }
         }
 
+        public event Action<IInteractable> UpdateHoverText;
+        public event Action RemoveIInteractableHit;
+
         void UseItemAndDoAction(Player player, string guid)
         {
             player.Inventory.UseItemItemID(guid);
@@ -50,6 +54,7 @@ namespace Safe_To_Share.Scripts.Interactable
             EventLog.AddEvent(returnText.ToString());
             player.InvokeUpdateAvatar();
             DateSystem.PassHour();
+            UpdateHoverText?.Invoke(this);
         }
     }
 }

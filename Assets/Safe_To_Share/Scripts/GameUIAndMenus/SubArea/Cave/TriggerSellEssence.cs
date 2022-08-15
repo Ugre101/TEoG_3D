@@ -1,4 +1,5 @@
-﻿using Character.PlayerStuff;
+﻿using System;
+using Character.PlayerStuff;
 using UnityEngine;
 
 namespace SubArea.Cave
@@ -8,6 +9,8 @@ namespace SubArea.Cave
         [SerializeField] SellEssenceMenu menu;
 
         public void DoInteraction(Player player) => menu.Setup(player);
+        public event Action<IInteractable> UpdateHoverText;
+        public event Action RemoveIInteractableHit;
 
         public string HoverText(Player player) => "Sell Essence";
     }

@@ -1,4 +1,5 @@
-﻿using Character;
+﻿using System;
+using Character;
 using Character.EnemyStuff;
 using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
@@ -31,6 +32,10 @@ namespace Safe_To_Share.Scripts.Interactable
             player.Sleep(sleepQuality);
             SavedEnemies.ClearEnemies();
             SpawnZones.Instance.ClearEnemies();
+            UpdateHoverText?.Invoke(this);
         }
+
+        public event Action<IInteractable> UpdateHoverText;
+        public event Action RemoveIInteractableHit;
     }
 }

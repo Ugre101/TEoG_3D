@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Character.BodyStuff;
 using Character.PlayerStuff;
 using DormAndHome.Dorm;
@@ -17,6 +18,8 @@ namespace AvatarStuff.Holders
 
         public string HoverText(Player player) => "Fuck";
         public void DoInteraction(Player player) => PlayerHolder.Instance.TriggerSex(Mate);
+        public event Action<IInteractable> UpdateHoverText;
+        public event Action RemoveIInteractableHit;
 
         public void AddMate(DormMate dormMate)
         {

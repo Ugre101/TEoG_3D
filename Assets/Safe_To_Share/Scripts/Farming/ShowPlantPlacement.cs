@@ -17,6 +17,7 @@ namespace Safe_To_Share.Scripts.Farming
         [SerializeField] LayerMask searchLayers;
         [SerializeField] float distFromPlayer = 12f;
         [SerializeField, Range(0.1f, 1f),] float timeInterval = 0.5f;
+        [SerializeField] PlantFarmAreaPlants areaPlants;
         NativeArray<RaycastCommand> commands;
         JobHandle handle;
         bool hovering;
@@ -113,13 +114,17 @@ namespace Safe_To_Share.Scripts.Farming
             }
         }
 
+        bool planting;
         public async void ConfirmPlacement(InputAction.CallbackContext callbackContext)
         {
+            if (planting) return;
             if (callbackContext.performed is false) return;
             if (!validPlacement) return;
-
+            planting = true;
             var planted = Instantiate(hoverPrefab);
-            planted.Plant(new PlantStats(plant, hoverPrefab.transform.position));
+            var position = hoverPrefab.transform.position;
+            areaPlants.AddToArea(planted,new PlantStats(plant,position));
+            planted.Plant(new PlantStats(plant, position));
             bool stillHave = await inventory.LowerItemAmountAndReturnIfStillHave(item);
             if (stillHave is false)
             {
@@ -132,8 +137,10 @@ namespace Safe_To_Share.Scripts.Farming
             {
                 hovering = true;
             }
-            validPlacement = false;            
+            validPlacement = false;
+            planting = false;
         }
+        
     
         
         void ScheduleRayCast()

@@ -1,3 +1,4 @@
+using System;
 using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
 using UnityEngine;
@@ -36,7 +37,11 @@ namespace Map
             hideAfterLooted.SetActive(false);
             chestController.SetTrigger(CloseLid);
             looted = true;
+            UpdateHoverText?.Invoke(this);
         }
+
+        public event Action<IInteractable> UpdateHoverText;
+        public event Action RemoveIInteractableHit;
 
         int GetGoldGain() => Mathf.RoundToInt(gold * (1f + UnityEngine.Random.Range(-GoldRngRange, GoldRngRange)));
     }

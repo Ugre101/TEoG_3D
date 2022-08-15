@@ -32,11 +32,10 @@ namespace Safe_To_Share.Scripts.Farming
                 currentArea.Loaded -= StartRefresh;
         }
 
-        public void PlantPlant(PlantedPlant prefab, PlantStats plantStats)
+        public void AddToArea(PlantedPlant prefab, PlantStats plantStats)
         {
             if (FarmAreas.TryGetCurrentArea(out var area))
             {
-                area.AddPlant(plantStats);
                 plantedPlants.Add(prefab);
             }
         }
@@ -70,21 +69,22 @@ namespace Safe_To_Share.Scripts.Farming
                 yield return handle;
                 if (loadDict.TryGetValue(handle.Result.Guid, out var values))
                 {
-                    print($"Start count {values.Count}");
                     var tempList = values;
+                    print($"Start count {tempList.Count}");
                     foreach (var plantedPlant in plantedPlants)
                     {
                         if (plantedPlant.HasMatch(values,out var match))
                         {
-                            values.Remove(match);
+                            tempList.Remove(match);
                             print("Had plant match");
                         }
                     }
-                    print($"Cleaned count {values.Count}");
-                    foreach (PlantStats plantStats in values)
+                    print($"Cleaned count {tempList.Count}");
+                    foreach (PlantStats plantStats in tempList)
                     {
                         var temp = Instantiate(handle.Result.Prefab, plantStats.Pos,quaternion.identity);
                         temp.Load(plantStats);
+                        plantedPlants.Add(temp);
                     }
                     Addressables.Release(handle);
                 }

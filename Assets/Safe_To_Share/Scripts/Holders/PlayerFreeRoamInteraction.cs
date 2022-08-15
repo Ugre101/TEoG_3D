@@ -59,7 +59,6 @@ namespace AvatarStuff.Holders
             else
             {
                 ScheduleRaycast();
-                timeToCheck = true;
             }
 
             if (hasHit && Vector3.Distance(lastHitPos, transform.position) > stopHoverDist)
@@ -77,9 +76,11 @@ namespace AvatarStuff.Holders
         void StopShowText()
         {
             optionButton.gameObject.SetActive(false);
-            lastHit = null;
+            ClearLastHit();
             hasHit = false;
         }
+
+    
 
         void ShowOptionsShowFor(IInteractable interactable)
         {
@@ -91,17 +92,40 @@ namespace AvatarStuff.Holders
         string HotkeyHumanReadableString() => InputControlPath.ToHumanReadableString(hotKey.action.bindings[0].path,
             InputControlPath.HumanReadableStringOptions.OmitDevice);
 
+        Ray? lastCamRay;
+        Vector3? lastPos;
+        Vector3? lastDir;
         void ScheduleRaycast()
         {
             Vector3 transformDirection = transform.TransformDirection(Vector3.forward);
             Ray camRay = cam.ScreenPointToRay(Pointer.current.position.ReadValue());
-            int i;
-            for (i = 0; i < rays.Count; i++)
-                commands[i] = new RaycastCommand(transform.position + rays[i], transformDirection, rayDist,
-                    searchLayers);
-            commands[i] = new RaycastCommand(camRay.origin, camRay.direction, cameraRayDist, searchLayers);
+
+            if (ShouldISkipBodyRay(transformDirection))
+            {
+                for (int i = 0; i < rays.Count; i++)
+                    commands[i] = new RaycastCommand(transform.position + rays[i], transformDirection, rayDist,
+                        searchLayers);
+                lastPos = transform.position;
+                lastDir = transformDirection;
+            }
+
+            if (ShouldISkipPointerRay(camRay))
+            {
+                commands[rays.Count] = new RaycastCommand(camRay.origin, camRay.direction, cameraRayDist, searchLayers);
+                lastCamRay = camRay;
+            }
+
             handle = RaycastCommand.ScheduleBatch(commands, results, 1);
+            timeToCheck = true;
         }
+
+        bool ShouldISkipPointerRay(Ray camRay) =>
+            !lastCamRay.HasValue || lastCamRay.Value.origin != camRay.origin ||
+            lastCamRay.Value.direction != camRay.direction;
+
+        bool ShouldISkipBodyRay(Vector3 transformDirection) =>
+            !lastPos.HasValue || !lastDir.HasValue || lastPos.Value != transform.position ||
+            lastDir.Value != transformDirection;
 
         bool CheckRayCastResult()
         {
@@ -113,7 +137,7 @@ namespace AvatarStuff.Holders
                 if (hit.transform.TryGetComponent(out IInteractable interactable))
                 {
                     lastHitPos = hit.transform.position;
-                    lastHit = interactable;
+                    SetLastHit(interactable);
                     return true;
                 }
             }
@@ -121,6 +145,19 @@ namespace AvatarStuff.Holders
             return false;
         }
 
+        void SetLastHit(IInteractable interactable)
+        {
+            lastHit = interactable;
+            lastHit.UpdateHoverText += ShowOptionsShowFor;
+            lastHit.RemoveIInteractableHit += StopShowText;
+        }
+        void ClearLastHit()
+        {
+            if (lastHit == null) return; 
+            lastHit.UpdateHoverText -= ShowOptionsShowFor;
+            lastHit.RemoveIInteractableHit -= ClearLastHit;
+            lastHit = null;
+        }
         public void OnInterAction(InputAction.CallbackContext ctx)
         {
             if (ctx.performed)

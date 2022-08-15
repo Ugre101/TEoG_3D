@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Character.PlayerStuff;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using Random = UnityEngine.Random;
 
 namespace Safe_To_Share.Scripts.Farming
 {
-    public class PlantedPlant : MonoBehaviour
+    public class PlantedPlant : MonoBehaviour,IInteractable
     {
         [SerializeField] GameObject plant;
         [SerializeField, Range(float.Epsilon, 10f)] float minSize = 0.1f;
@@ -29,6 +34,7 @@ namespace Safe_To_Share.Scripts.Farming
         {
             stats = plantStats;
             transform.position = plantStats.Pos;
+            stats.Grown -= GrowPlant;
             stats.Grown += GrowPlant;
         }
         
@@ -41,8 +47,9 @@ namespace Safe_To_Share.Scripts.Farming
 
         public void GrowPlant(float growValue)
         {
-            float percentDone = Mathf.Clamp(growValue,minSize,maxSize);
-            plant.transform.localScale = new Vector3(percentDone, percentDone, percentDone);
+            float size = Mathf.Clamp(growValue * maxSize,minSize,maxSize);
+            plant.transform.localScale = new Vector3(size, size, size);
+            UpdateHoverText?.Invoke(this);
         }
 
         public bool HasMatch(List<PlantStats> values,out PlantStats match)
@@ -59,6 +66,37 @@ namespace Safe_To_Share.Scripts.Farming
             }
 
             return false;
+        }
+
+        public string HoverText(Player player) => stats.Done ? "Harvest" : $"{stats.PercentDone * 100f:##.#}% done";
+
+        bool harvesting;
+        public void DoInteraction(Player player)
+        {
+            if (!stats.Done || harvesting) return;
+            harvesting = true;
+            StartCoroutine(HarvestPlant(player));
+        }
+
+        public event Action<IInteractable> UpdateHoverText;
+        public event Action RemoveIInteractableHit;
+
+        IEnumerator HarvestPlant(Player player)
+        {
+            var handle = Addressables.LoadAssetAsync<Plant>(stats.PlantGuid);
+            yield return handle;
+            if (handle.Status != AsyncOperationStatus.Succeeded) yield break;
+            foreach (var plantDropItem in handle.Result.Drops)
+            {
+                var roll = Random.value;
+                if (roll < plantDropItem.Chance)
+                {
+                    player.Inventory.AddItem(plantDropItem.Item);
+                }
+            }
+            RemoveIInteractableHit?.Invoke();
+            Addressables.Release(handle);
+            Destroy(gameObject);
         }
     }
 }

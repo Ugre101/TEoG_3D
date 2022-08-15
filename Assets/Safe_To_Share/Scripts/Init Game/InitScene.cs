@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Safe_To_Share.Scripts.Farming;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -25,6 +26,7 @@ namespace Safe_To_Share.Scripts.Init_Game
 
             init = true;
 
+            FarmAreas.Initialize();
             foreach (GameObject toAdd in dontDestroyObjects)
                 DontDestroyOnLoad(Instantiate(toAdd));
             StartCoroutine(InstanceAssets());

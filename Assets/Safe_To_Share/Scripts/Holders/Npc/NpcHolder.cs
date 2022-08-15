@@ -1,4 +1,5 @@
-﻿using Character.PlayerStuff;
+﻿using System;
+using Character.PlayerStuff;
 using UnityEngine;
 
 namespace AvatarStuff.Holders.Npc
@@ -7,5 +8,7 @@ namespace AvatarStuff.Holders.Npc
     {
         public abstract string HoverText(Player player);
         public abstract void DoInteraction(Player player);
+        public event Action<IInteractable> UpdateHoverText;
+        public event Action RemoveIInteractableHit;
     }
 }

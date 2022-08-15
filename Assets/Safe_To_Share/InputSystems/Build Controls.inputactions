@@ -46,17 +46,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "09c3b056-5988-4cd9-96f6-a32b01cfda32",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Mouse & Keyboard",
-                    "action": "Place",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "1D Axis",
                     "id": "9505d528-dfdb-458c-9584-8ae0dc95613f",
                     "path": "1DAxis",

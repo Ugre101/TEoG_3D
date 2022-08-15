@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
 
@@ -9,10 +10,10 @@ namespace Safe_To_Share.Scripts.Farming
 {
     public static class FarmAreas
     {
-        static List<FarmArea> farmAreas = new List<FarmArea>();
+        static List<FarmArea> farmAreas = new();
 
-        
-        public static Dictionary<string, FarmArea> FarmDict = new Dictionary<string, FarmArea>();
+        public static void Initialize() => DateSystem.TickHour += TickHour;
+        public static Dictionary<string, FarmArea> FarmDict = new();
 
         public static bool TryGetCurrentArea(out FarmArea farm)
         {
@@ -40,7 +41,7 @@ namespace Safe_To_Share.Scripts.Farming
             FarmDict = farmAreas.ToDictionary(a => a.SceneGuid);
         }
 
-        public static void Tick(int ticks)
+        static void TickHour(int ticks)
         {
             foreach (var farmArea in farmAreas)
                 farmArea.TickHour(ticks);
