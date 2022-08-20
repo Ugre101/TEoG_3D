@@ -56,12 +56,12 @@ namespace GameUIAndMenus.Menus.Inventory
             foreach (RaycastResult o in results)
             {
                 if (!o.gameObject.TryGetComponent(out InventorySlot slot)) continue;
-                ResetPosistion();
-                slot.MoveTo(invItem);
+                ResetPosition();
+                slot.MoveTo(invItem,slot);
                 return;
             }
 
-            ResetPosistion();
+            ResetPosition();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -71,9 +71,9 @@ namespace GameUIAndMenus.Menus.Inventory
         }
 
         public void OnPointerExit(PointerEventData eventData) => StopShowing?.Invoke();
-        public static event Action<Item, InventoryItem> Use;
+        public static event Action<Item, InventoryItem,InventorySlot> Use;
 
-        void ResetPosistion()
+        void ResetPosition()
         {
             transform.SetParent(orgParent);
             transform.position = orgParent.position;
@@ -91,9 +91,10 @@ namespace GameUIAndMenus.Menus.Inventory
         }
 
         void SetAmount(int value) => amount.text = value.ToString();
-
-        public void Setup(InventoryItem invItem)
+        InventorySlot slot;
+        public void Setup(InventoryItem invItem, InventorySlot inventorySlot)
         {
+            slot = inventorySlot;
             gameObject.SetActive(true);
             this.invItem = invItem;
             SetAmount(invItem.Amount);
@@ -115,7 +116,7 @@ namespace GameUIAndMenus.Menus.Inventory
             float newClick = Time.unscaledTime;
             if (newClick - lastClick < doubleClickResetTime)
             {
-                Use?.Invoke(loadedItem, invItem);
+                Use?.Invoke(loadedItem, invItem,slot);
                 SetAmount(invItem.Amount);
             }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Holders
 {
-    [RequireComponent(typeof(CapsuleCollider))]
+    [RequireComponent(typeof(Collider))]
     public class TradeAbleCharHolder : NpcHolder
     {
         [SerializeField] TradeAbleCharacter tradeAbleCharacter;

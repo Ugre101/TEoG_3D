@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a655863191b44069e60712a20250f11, type: 3}
-  m_Name: Breast Milker Kit
+  m_Name: Cock Milker Kit
   m_EditorClassIdentifier: 
-  guid: 7c66f324afbf3f44687b543d659183ba
-  title: Breast milking kit
-  desc: Where does the flasks come from?
-  sprite: {fileID: 21300000, guid: 7cad9c863b842084fb32605a61365529, type: 3}
+  guid: 928fb2d6619bf6d4f92c1e831bdfd944
+  title: 
+  desc: 
+  sprite: {fileID: 0}
   size: {x: 1, y: 1}
-  unlimitedUse: 1
-  value: 250
+  unlimitedUse: 0
+  value: 0
   canSell: 1
   effectsTree:
     healingItemEffects:
@@ -82,18 +82,18 @@ MonoBehaviour:
     hasRaceReq: 0
     races: []
   smallFlask:
-    m_AssetGUID: 07ddc4071fdbc0646998f2158d7bb1b9
+    m_AssetGUID: 2381b1603ed793848821080a2098fac8
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   flask:
-    m_AssetGUID: c1b97960582a48f4da668745a5de3302
+    m_AssetGUID: 1c4eca6044e610a408437ead3bfe8431
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   largeFlask:
-    m_AssetGUID: c556cf63c49138742bf74aac696580b6
+    m_AssetGUID: 29d953e39a4f09941a652add2c8bbc06
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  milkOrgan: 2
+  milkOrgan: 1

@@ -85,20 +85,19 @@ namespace GameUIAndMenus.Menus.Inventory
         void AddInventorySlot(int x, int y)
         {
             InventorySlot newSlot = GetSlot();
-            newSlot.Setup(new Vector2(x, y));
+            newSlot.Setup(Player.Inventory,new Vector2(x, y));
             newSlot.MovedItem += MoveItem;
             Slots.Add(newSlot.Position, newSlot);
         }
 
-        void MoveItem(InventoryItem item, Vector2 pos)
+        void MoveItem(Items.Inventory from, InventoryItem item, Vector2 newPos, InventorySlot oldSlot, InventorySlot newSlot)
         {
-            Slots[item.Position].ClearItem();
-            if (Player.Inventory.MoveItem(item, pos, out InventoryItem oldItem))
+            oldSlot.ClearItem();
+            if (Player.Inventory.MoveItemInsideInventory(item, newPos, out var oldItem))
             {
                 AddInventoryItem(oldItem);
-                Slots[pos].ClearItem();
+                newSlot.ClearItem();
             }
-
             AddInventoryItem(item);
         }
 
@@ -126,21 +125,19 @@ namespace GameUIAndMenus.Menus.Inventory
 
         public static event Action StopHoverInfo;
 
-        void UseItem(Item loaded, InventoryItem item)
+        void UseItem(Item loaded, InventoryItem item, InventorySlot arg3)
         {
             loaded.Use(Player);
             if (Player.Inventory.UseLoadedItem(loaded, item.Position))
-                InventoryClearItemOnCord(item.Position);
+            {
+                arg3.ClearItem();
+                StopHoverInfo?.Invoke();
+            }
+
             if (loaded.UpdateInventoryAfterUse)
                 AddItems();
             holder.UpdateAvatar();
             holder.HeightsChange(Player.Body.Height.Value);
-        }
-
-        void InventoryClearItemOnCord(Vector2 pos)
-        {
-            Slots[pos].ClearItem();
-            StopHoverInfo?.Invoke();
         }
     }
 }

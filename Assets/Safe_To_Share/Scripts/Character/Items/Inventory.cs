@@ -163,12 +163,30 @@ namespace Items
             return false; // inventory full
         }
 
+        public bool HasSpace(string itemGuid, Vector2 size)
+        {
+            if (Items.Exists(i => i.ItemGuid == itemGuid))
+            {
+                return true; // Can stack
+            }
+            for (int x = 0; x < InventorySize.x; x++)
+            for (int y = 0; y < InventorySize.y; y++)
+            {
+                Vector2 pos = new(x, y);
+                if (ItemExists(pos)) continue;
+                // TODO check if larger than 1x1 fits
+                return true;
+            }
+
+            return false;
+        }
+
         bool ItemExists(Vector2 pos) => Items.Exists(i => ItemExistOnPos(i, pos));
         static bool ItemExistOnPos(InventoryItem i, Vector2 pos) => i.Position == pos;
         InventoryItem GetItemOnPos(Vector2 pos) => Items.Find(i => ItemExistOnPos(i, pos));
         InventoryItem GetItemByID(string id) => Items.Find(i => i.ItemGuid == id);
 
-        bool TryGetItemOnPos(Vector2 pos, out InventoryItem item)
+        public bool TryGetItemOnPos(Vector2 pos, out InventoryItem item)
         {
             item = null;
             if (!ItemExists(pos))
@@ -177,13 +195,36 @@ namespace Items
             return true;
         }
 
-        public bool MoveItem(InventoryItem toMove, Vector2 newPos, out InventoryItem oldItem)
+        public bool MoveItemInsideInventory(InventoryItem toMove, Vector2 newPos, out InventoryItem oldItem)
         {
             bool hadItem = TryGetItemOnPos(newPos, out oldItem);
             if (hadItem)
                 oldItem.Position = toMove.Position;
             toMove.Position = newPos;
             return hadItem;
+        }
+
+        public bool AddInventoryItemToPos(InventoryItem toAdd, Vector2 toPos, out InventoryItem oldItem)
+        {
+            bool hadItem = TryGetItemOnPos(toPos, out oldItem);
+            toAdd.Position = toPos;
+            return hadItem;
+        }
+
+        public bool MoveToAnotherInventory(Inventory moveTo,InventoryItem toMove,Vector2 toPos,out InventoryItem oldItem)
+        {
+            oldItem = null;
+            Vector2 oldPos = toMove.Position;
+            Items.Remove(toMove);
+            if (moveTo.AddInventoryItemToPos(toMove, toPos, out var item))
+            {
+                oldItem = item;
+                oldItem.Position = oldPos;
+                Items.Add(oldItem);
+                return true;
+            }
+
+            return false;
         }
 
         public InventorySave Save() => new(Items);

@@ -13,7 +13,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Character.CreateCharacterStuff
 {
-    [CreateAssetMenu(menuName = "Create CharacterPreset", fileName = "CharacterPreset", order = 0)]
+    [CreateAssetMenu(menuName = "Character/Presets/Create CharacterPreset", fileName = "CharacterPreset")]
     public class CharacterPreset : ScriptableObject
     {
         [SerializeField] StartGender startGender;

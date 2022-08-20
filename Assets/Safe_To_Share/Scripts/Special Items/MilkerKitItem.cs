@@ -1,4 +1,5 @@
 ﻿using Character;
+using Character.Organs;
 using Character.PlayerStuff;
 using Items;
 using UnityEngine;
@@ -13,10 +14,13 @@ namespace Safe_To_Share.Scripts.Special_Items
         [SerializeField] AssetReference flask;
         [SerializeField] AssetReference largeFlask;
 
+        [SerializeField] SexualOrganType milkOrgan; 
         public override void Use(BaseCharacter user)
         {
             if (user is not Player player) return;
-            float fluid = user.SexualOrgans.Boobs.FluidCurrent;
+            if(!user.SexualOrgans.Containers.TryGetValue(milkOrgan,out var container))
+                return;
+            float fluid = container.FluidCurrent;
             if (fluid > 1000)
             {
                 int largeFlasks = Mathf.FloorToInt(fluid / 1000);
@@ -37,7 +41,7 @@ namespace Safe_To_Share.Scripts.Special_Items
                 player.Inventory.AddItem(smallFlask.AssetGUID, flasks);
             }
 
-            user.SexualOrgans.Boobs.Fluid.DecreaseCurrentValue(100);
+            container.Fluid.DecreaseCurrentValue(100);
         }
     }
 }

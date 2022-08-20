@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Character.CreateCharacterStuff
 {
-    [CreateAssetMenu(menuName = "Create EnemyPreset", fileName = "EnemyPreset", order = 0)]
+    [CreateAssetMenu(menuName = "Character/Presets/Create EnemyPreset", fileName = "EnemyPreset")]
     public class EnemyPreset : CharacterPreset
     {
         [SerializeField] BattleReward battleReward;

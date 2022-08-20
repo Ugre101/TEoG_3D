@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &721401079964308305
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 837215691301157017, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    - target: {fileID: 935951849993774574, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    - target: {fileID: 4191040126370555505, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    - target: {fileID: 5045230256407761730, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_Name
+      value: Player BovineRemakeVore Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5570832357055564280, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971850523996937505, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    - target: {fileID: 7896356705257363673, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: prefab.m_AssetGUID
+      value: ef8dc52fc910a73419a3ab4cbfa9f11e
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896356705257363673, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: hairMats.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}

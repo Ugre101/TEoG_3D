@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    [CreateAssetMenu(fileName = "Avatar Dictionary", menuName = "Avatar/Dictionary", order = 0)]
+    [CreateAssetMenu(fileName = "Avatar Dictionary", menuName = "Character/Avatar/Dictionary", order = 0)]
     public class AvatarDict : ScriptableObject
     {
         [SerializeField] CharacterAvatar defaultAvatar;

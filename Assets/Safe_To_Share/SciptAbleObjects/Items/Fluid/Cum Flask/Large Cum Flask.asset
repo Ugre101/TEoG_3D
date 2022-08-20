@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a655863191b44069e60712a20250f11, type: 3}
-  m_Name: Breast Milker Kit
+  m_Script: {fileID: 11500000, guid: 934feff1ae37482491df60716ed99121, type: 3}
+  m_Name: Large Cum Flask
   m_EditorClassIdentifier: 
-  guid: 7c66f324afbf3f44687b543d659183ba
-  title: Breast milking kit
-  desc: Where does the flasks come from?
-  sprite: {fileID: 21300000, guid: 7cad9c863b842084fb32605a61365529, type: 3}
+  guid: 29d953e39a4f09941a652add2c8bbc06
+  title: 
+  desc: 
+  sprite: {fileID: 0}
   size: {x: 1, y: 1}
-  unlimitedUse: 1
-  value: 250
+  unlimitedUse: 0
+  value: 0
   canSell: 1
   effectsTree:
     healingItemEffects:
@@ -77,23 +77,8 @@ MonoBehaviour:
       active: 0
       fatBurnMods: []
   tempEffectDesc: 
-  updateInventoryAfterUse: 1
+  updateInventoryAfterUse: 0
   raceReq:
     hasRaceReq: 0
     races: []
-  smallFlask:
-    m_AssetGUID: 07ddc4071fdbc0646998f2158d7bb1b9
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  flask:
-    m_AssetGUID: c1b97960582a48f4da668745a5de3302
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  largeFlask:
-    m_AssetGUID: c556cf63c49138742bf74aac696580b6
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  milkOrgan: 2
+  kcal: 3213

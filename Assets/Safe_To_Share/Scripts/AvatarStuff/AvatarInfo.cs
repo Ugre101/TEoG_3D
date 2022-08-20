@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 
 namespace AvatarStuff
 {
-    [CreateAssetMenu(fileName = "New avatar Info", menuName = "Character/Avatar Info", order = 0)]
+    [CreateAssetMenu(fileName = "New avatar Info", menuName = "Character/Avatar/Avatar Info", order = 0)]
     public class AvatarInfo : ScriptableObject
     {
         [SerializeField] AssetReference prefab;

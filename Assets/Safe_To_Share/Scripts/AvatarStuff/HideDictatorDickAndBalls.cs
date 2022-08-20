@@ -25,7 +25,7 @@ namespace AvatarStuff
             if (!hasMatches) 
                 FindMats(meshRenderers);
 
-            foreach (SkinnedMeshRenderer meshRenderer in meshRenderers)
+            foreach (var meshRenderer in meshRenderers)
             {
                 var rendererMaterials = meshRenderer.materials;
                 if(dickMatsDict.TryGetValue(meshRenderer,out var valuePairs))
@@ -64,7 +64,7 @@ namespace AvatarStuff
             dickHidden = false;
             if (hasMatches is false) return;
 
-            foreach (SkinnedMeshRenderer meshRenderer in skinnedMeshRenderers)
+            foreach (var meshRenderer in skinnedMeshRenderers)
             {
                 Material[] rendererMaterials = meshRenderer.materials;
                 if (dickMatsDict.TryGetValue(meshRenderer, out var pairs))
@@ -102,7 +102,7 @@ namespace AvatarStuff
         {
             if (ballsIndex.HasValue is false) return;
             ballsHidden = false;
-            foreach (SkinnedMeshRenderer meshRenderer in skinnedMeshRenderers)
+            foreach (var meshRenderer in skinnedMeshRenderers)
             {
                 Material[] rendererMaterials = meshRenderer.materials;
                 rendererMaterials[ballsIndex.Value] = ballsTargetMat;
@@ -114,14 +114,14 @@ namespace AvatarStuff
         {
             ballsHidden = true;
             if (ballsIndex.HasValue)
-                foreach (SkinnedMeshRenderer meshRenderer in skinnedMeshRenderers)
+                foreach (var meshRenderer in skinnedMeshRenderers)
                 {
                     var rendererMaterials = meshRenderer.materials;
                     rendererMaterials[ballsIndex.Value] = invisibleMat;
                     meshRenderer.materials = rendererMaterials;
                 }
             else
-                foreach (SkinnedMeshRenderer meshRenderer in skinnedMeshRenderers)
+                foreach (var meshRenderer in skinnedMeshRenderers)
                 {
                     var rendererMaterials = meshRenderer.materials;
                     for (int index = 0; index < rendererMaterials.Length; index++)

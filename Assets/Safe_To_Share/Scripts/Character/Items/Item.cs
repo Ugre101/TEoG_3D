@@ -1,4 +1,5 @@
 ﻿using Character;
+using Character.Race;
 using Character.StatsStuff.Mods;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
@@ -14,10 +15,10 @@ namespace Items
         [SerializeField] int value;
         [SerializeField] bool canSell = true;
         [SerializeField] ItemEffectsTree effectsTree = new();
-
         [SerializeField, TextArea,] string tempEffectDesc;
-
         [SerializeField] bool updateInventoryAfterUse;
+        [Header("Requirements")]
+        [SerializeField] RaceReq raceReq;
         // public IEnumerable<Effect> Effects => effectsTree.ActiveEffects;
 
         public Vector2 Size => size;
@@ -32,8 +33,16 @@ namespace Items
 
         public bool UpdateInventoryAfterUse => updateInventoryAfterUse;
 
+        public virtual bool CanUse(BaseCharacter user)
+        {
+            if (!raceReq.IsRace(user.RaceSystem))
+                return false;
+            return true;
+        }
         public virtual void Use(BaseCharacter user)
         {
+            if (!CanUse(user))
+                return;
             foreach (ItemEffect activeEffect in effectsTree.ActiveEffects)
                 activeEffect.OnUse(user, Guid);
             //  foreach (Effect effect in Effects) effect.UseEffect(user);

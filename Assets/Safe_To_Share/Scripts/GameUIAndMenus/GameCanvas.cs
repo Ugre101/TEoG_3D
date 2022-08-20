@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Character.Npc;
@@ -7,8 +8,10 @@ using Character.VoreStuff;
 using CustomClasses;
 using Dialogue;
 using GameUIAndMenus.DialogueAndEventMenu;
+using GameUIAndMenus.Menus.Inventory;
 using Items;
 using Map;
+using Safe_To_Share.Scripts.Building;
 using Safe_To_Share.Scripts.Static;
 using SaveStuff;
 using SceneStuff;
@@ -27,6 +30,7 @@ namespace GameUIAndMenus
         [SerializeField] ServiceMenu.ServiceMenu serviceMenu;
         [SerializeField] HideGameUI hideGameUI;
         [SerializeField] Button closeMenuBtn;
+        [SerializeField] InventoryMenu2 inventoryMenu;
         IEnumerable<IBlockGameUI> cancelThese;
 
         void Start()
@@ -38,8 +42,14 @@ namespace GameUIAndMenus
             BaseDialogue.StartDialogue += OpenDialogueMenu;
             BaseDialogue.StartVoreEvent += OpenVoreEvent;
             GameUIManager.HideGameUI += ForceHide;
+            InventoryChest.OpenInventory += OpenSecInv;
         }
 
+        void OpenSecInv(Inventory obj)
+        {
+            TriggerMenu(inventoryMenu.gameObject);
+            inventoryMenu.SetupSecondaryInventory(obj);
+        }
 
 
         void OnDestroy()
@@ -50,6 +60,7 @@ namespace GameUIAndMenus
             BaseDialogue.StartDialogue -= OpenDialogueMenu;
             BaseDialogue.StartVoreEvent -= OpenVoreEvent;
             GameUIManager.HideGameUI -= ForceHide;
+            InventoryChest.OpenInventory -= OpenSecInv;
         }
 
         void ForceHide(bool obj)

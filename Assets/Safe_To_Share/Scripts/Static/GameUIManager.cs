@@ -9,5 +9,7 @@ namespace Safe_To_Share.Scripts.Static
         public static void TriggerHideGameUI(bool hide) => HideGameUI?.Invoke(hide);
 
         public static readonly List<IBlockGameUI> BlockList = new();
+
+        
     }
 }

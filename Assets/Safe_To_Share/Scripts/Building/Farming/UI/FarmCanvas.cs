@@ -7,12 +7,17 @@ namespace Safe_To_Share.Scripts.Farming.UI
     public class FarmCanvas : MonoBehaviour
     {
         [SerializeField] ShowPlantOptions showPlantOptions;
+
         public void Open(Player player)
         {
             gameObject.SetActive(true);
             GameUIManager.TriggerHideGameUI(true);
+            showPlantOptions.gameObject.SetActive(true);
             showPlantOptions.Setup(player.Inventory);
         }
+
+        public void ToggleBuildMenu() => showPlantOptions.gameObject.SetActive(!showPlantOptions.gameObject.activeSelf);
+        
 
         public void Close()
         {

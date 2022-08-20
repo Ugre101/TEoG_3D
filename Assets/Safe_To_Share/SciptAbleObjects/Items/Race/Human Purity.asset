@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a655863191b44069e60712a20250f11, type: 3}
-  m_Name: Breast Milker Kit
+  m_Script: {fileID: 11500000, guid: a41e503f608c61c46916e5442705378d, type: 3}
+  m_Name: Human Purity
   m_EditorClassIdentifier: 
-  guid: 7c66f324afbf3f44687b543d659183ba
-  title: Breast milking kit
-  desc: Where does the flasks come from?
-  sprite: {fileID: 21300000, guid: 7cad9c863b842084fb32605a61365529, type: 3}
+  guid: c7a743befa8cbe24bb3b63c1697dbfe7
+  title: 
+  desc: 
+  sprite: {fileID: 0}
   size: {x: 1, y: 1}
-  unlimitedUse: 1
-  value: 250
+  unlimitedUse: 0
+  value: 0
   canSell: 1
   effectsTree:
     healingItemEffects:
@@ -60,9 +60,9 @@ MonoBehaviour:
       dropSerializableObject:
         guid: 
     raceEssenceItemEffects:
-      active: 0
-      race: {fileID: 0}
-      toGain: 0
+      active: 1
+      race: {fileID: 11400000, guid: 4d8d0eb9b96993249aa87052e588b749, type: 2}
+      toGain: 50
     charStatItemEffects:
       active: 0
       assignCharStatTempMods: []
@@ -77,23 +77,4 @@ MonoBehaviour:
       active: 0
       fatBurnMods: []
   tempEffectDesc: 
-  updateInventoryAfterUse: 1
-  raceReq:
-    hasRaceReq: 0
-    races: []
-  smallFlask:
-    m_AssetGUID: 07ddc4071fdbc0646998f2158d7bb1b9
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  flask:
-    m_AssetGUID: c1b97960582a48f4da668745a5de3302
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  largeFlask:
-    m_AssetGUID: c556cf63c49138742bf74aac696580b6
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  milkOrgan: 2
+  updateInventoryAfterUse: 0
