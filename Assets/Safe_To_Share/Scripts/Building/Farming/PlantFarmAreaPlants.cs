@@ -47,7 +47,6 @@ namespace Safe_To_Share.Scripts.Farming
 
         IEnumerator  RefreshArea()
         {
-            print("Start Refresh");
             if (!FarmAreas.TryGetCurrentArea(out var area)) yield break;
             Dictionary<string, List<PlantStats>> loadDict = new();
             List<AsyncOperationHandle<Plant>> ops = new();
@@ -67,27 +66,23 @@ namespace Safe_To_Share.Scripts.Farming
             foreach (AsyncOperationHandle<Plant> handle in ops)
             {
                 yield return handle;
-                if (loadDict.TryGetValue(handle.Result.Guid, out var values))
+                if (!loadDict.TryGetValue(handle.Result.Guid, out var values)) continue;
+                var tempList = values;
+                foreach 
+                    (var plantedPlant in plantedPlants)
                 {
-                    var tempList = values;
-                    print($"Start count {tempList.Count}");
-                    foreach (var plantedPlant in plantedPlants)
+                    if (plantedPlant.HasMatch(values,out var match))
                     {
-                        if (plantedPlant.HasMatch(values,out var match))
-                        {
-                            tempList.Remove(match);
-                            print("Had plant match");
-                        }
+                        tempList.Remove(match);
                     }
-                    print($"Cleaned count {tempList.Count}");
-                    foreach (PlantStats plantStats in tempList)
-                    {
-                        var temp = Instantiate(handle.Result.Prefab, plantStats.Pos,quaternion.identity);
-                        temp.Load(plantStats);
-                        plantedPlants.Add(temp);
-                    }
-                    Addressables.Release(handle);
                 }
+                foreach (PlantStats plantStats in tempList)
+                {
+                    var temp = Instantiate(handle.Result.Prefab, plantStats.Pos,quaternion.identity);
+                    temp.Load(plantStats);
+                    plantedPlants.Add(temp);
+                }
+                Addressables.Release(handle);
 
             }
         }

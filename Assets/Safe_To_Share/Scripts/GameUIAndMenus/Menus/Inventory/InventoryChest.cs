@@ -1,19 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using Character.PlayerStuff;
+using CustomClasses;
 using Items;
-using Safe_To_Share.Scripts.Static;
+using Safe_To_Share.Scripts.Character.Items;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Building
 {
     public class InventoryChest : MonoBehaviour,IInteractable
     {
-        [SerializeField] string guid;
+
+        [SerializeField] DropSerializableObject<Item>[] items;
+        
+        [SerializeField,HideInInspector] string guid;
         Inventory inventory = new();
 
         public static event Action<Inventory> OpenInventory; 
-        void Start()
+        IEnumerator Start()
         {
             if (WorldInventories.Inventories.TryGetValue(guid, out var myInventory))
                 inventory = myInventory;
@@ -21,6 +25,10 @@ namespace Safe_To_Share.Scripts.Building
             {
                 if (!WorldInventories.Inventories.TryAdd(guid, inventory))
                     throw new Exception("Couldn't find or add world inventory");
+                foreach (var toAdd in items)
+                {
+                   yield return inventory.AddItemWithGuid(toAdd.guid);
+                }
             }
         }
         
@@ -41,19 +49,5 @@ namespace Safe_To_Share.Scripts.Building
 
         public event Action<IInteractable> UpdateHoverText;
         public event Action RemoveIInteractableHit;
-    }
-    public static class WorldInventories
-    {
-        public static Dictionary<string, Inventory> Inventories = new();
-
-        public static void Save()
-        {
-            
-        }
-
-        public static void Load()
-        {
-            
-        }
     }
 }

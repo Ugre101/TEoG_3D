@@ -10,6 +10,7 @@ using Character.VoreStuff;
 using DormAndHome.Dorm;
 using Map;
 using QuestStuff;
+using Safe_To_Share.Scripts.Character.Items;
 using Safe_To_Share.Scripts.Farming;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
@@ -55,6 +56,7 @@ namespace SaveStuff
             AvatarDetails.Load(toLoad.SavedAvatarDetails);
             IslandStonesDatas.Load(toLoad.IslandStones);
             PlayerGold.Load(toLoad.Gold);
+            WorldInventories.Load(toLoad.WorldInventoriesSave);
             yield return VoredCharacters.Load(toLoad.VoreSave);
             yield return DormManager.Instance.Load(toLoad.DormSave);
             yield return PlayerQuests.Load(toLoad.PlayerQuests);

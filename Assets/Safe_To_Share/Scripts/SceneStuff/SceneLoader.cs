@@ -23,7 +23,7 @@ namespace SceneStuff
     {
         static GameSceneSo currentScene;
         static LocationSceneSo lastLocation;
-        [SerializeField] DropSerializableObject defaultScene;
+        [SerializeField] DropSerializableObject<GameSceneSo> defaultScene;
         [SerializeField] FreePlayUILoader gameUI;
         [SerializeField] SceneTeleportExit defaultExit;
         [SerializeField] GameSceneSo battleScene;

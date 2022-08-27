@@ -4131,6 +4131,10 @@ PrefabInstance:
       propertyPath: m_BlendShapeWeights.Array.data[11]
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -37662192748111154, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[26]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 14260785240734973, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
       propertyPath: m_RootBone
       value: 
@@ -8837,7 +8841,7 @@ AudioSource:
   m_GameObject: {fileID: 5045230256407761730}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -34729557156960890, guid: e5d7a395829fb5f47988fa3dea20ba1f, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

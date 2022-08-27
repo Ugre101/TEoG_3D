@@ -1,5 +1,6 @@
 ﻿using Battle.SkillsAndSpells;
 using EffectStuff.Editor;
+using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
 using UnityEditor;
 
 namespace Character.SkillsAndSpells.Editor

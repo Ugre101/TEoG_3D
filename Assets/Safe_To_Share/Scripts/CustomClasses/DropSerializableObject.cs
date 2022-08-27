@@ -3,7 +3,7 @@
 namespace CustomClasses
 {
     [Serializable]
-    public struct DropSerializableObject
+    public struct DropSerializableObject<T> where T : SerializableScriptableObject
     {
         public string guid;
     }

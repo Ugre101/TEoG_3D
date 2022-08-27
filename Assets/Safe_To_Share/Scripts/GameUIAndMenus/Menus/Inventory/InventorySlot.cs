@@ -5,11 +5,11 @@ namespace GameUIAndMenus.Menus.Inventory
 {
     public class InventorySlot : MonoBehaviour
     {
-        public delegate void MoveItems(Items.Inventory from, InventoryItem item, Vector2 newPos,InventorySlot oldSlot,InventorySlot newSlot);
+        public delegate void MoveItems(InventoryItem item, Vector2 newPos,InventorySlot oldSlot,InventorySlot newSlot);
 
         [SerializeField] InventorySlotItem slotItem;
         public Vector2 Position { get; private set; }
-        Items.Inventory belongsTo;
+        public Items.Inventory belongsTo { get; private set; }
         public void Setup(Items.Inventory inventory, Vector2 position)
         {
             belongsTo = inventory;
@@ -22,6 +22,6 @@ namespace GameUIAndMenus.Menus.Inventory
 
         public event MoveItems MovedItem;
 
-        public void MoveTo(InventoryItem p, InventorySlot inventorySlot) => MovedItem?.Invoke(belongsTo, p, Position,inventorySlot,this);
+        public void MoveTo(InventoryItem p, InventorySlot inventorySlot) => MovedItem?.Invoke(p, Position,inventorySlot,this);
     }
 }

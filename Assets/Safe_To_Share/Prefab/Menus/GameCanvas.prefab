@@ -25894,7 +25894,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5672994207067890512}
   - component: {fileID: 5672994207067890514}
-  - component: {fileID: 5093240494510894693}
   - component: {fileID: 6398644003538708758}
   m_Layer: 6
   m_Name: Inventory
@@ -25936,53 +25935,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5672994207067890543}
   m_CullTransparentMesh: 1
---- !u!114 &5093240494510894693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5672994207067890543}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347d0cb68fa14536a839c026d0340fe8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  holder: {fileID: 0}
-  gameCanvas: {fileID: 0}
-  content: {fileID: 6992022861281158178}
-  haveGold: {fileID: 2804620107423130442}
-  preInstancedSlots:
-  - {fileID: 2368742645923929431}
-  - {fileID: 6500488211242853705}
-  - {fileID: 2897828485167175973}
-  - {fileID: 3194737573264641804}
-  - {fileID: 5136455827651180340}
-  - {fileID: 512413450192414961}
-  - {fileID: 4729930429482230517}
-  - {fileID: 3884591418618235558}
-  - {fileID: 2192718157602383660}
-  - {fileID: 2633044390253831412}
-  - {fileID: 7205141112661845675}
-  - {fileID: 4358554274868282799}
-  - {fileID: 1265159823918228761}
-  - {fileID: 5932254288776131285}
-  - {fileID: 1403707795918715843}
-  - {fileID: 5018880317149643104}
-  - {fileID: 5063372303193670773}
-  - {fileID: 2818845358145285066}
-  - {fileID: 3692744953691063875}
-  - {fileID: 101177008074613581}
-  - {fileID: 795962069235554401}
-  - {fileID: 8566226783373809168}
-  - {fileID: 6228987972983789349}
-  - {fileID: 8218522977504561794}
-  - {fileID: 7284089545120210571}
-  - {fileID: 8008050357607999425}
-  - {fileID: 5834127736880610050}
-  - {fileID: 3647297861351554432}
-  slot: {fileID: 2163587866770038447, guid: eaf5ef49fe25ea142a782368e1e15809, type: 3}
-  stats: {fileID: 1356299930}
 --- !u!114 &6398644003538708758
 MonoBehaviour:
   m_ObjectHideFlags: 0

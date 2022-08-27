@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Battle.EffectStuff;
+using Battle.SkillsAndSpells;
 using Character;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Battle.SkillsAndSpells
+namespace Safe_To_Share.Scripts.Battle.SkillsAndSpells
 {
     public abstract class Ability : SObjSavableTitleDescIcon
     {

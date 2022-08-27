@@ -55,10 +55,12 @@ namespace GameUIAndMenus.Menus.Inventory
             EventSystem.current.RaycastAll(eventData, results);
             foreach (RaycastResult o in results)
             {
-                if (!o.gameObject.TryGetComponent(out InventorySlot slot)) continue;
+                if (!o.gameObject.TryGetComponent(out InventorySlot newSlot)) continue;
                 ResetPosition();
-                slot.MoveTo(invItem,slot);
+                newSlot.MoveTo(invItem,slot);
                 return;
+                
+                
             }
 
             ResetPosition();

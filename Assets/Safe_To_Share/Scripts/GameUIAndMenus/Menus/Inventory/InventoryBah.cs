@@ -58,9 +58,9 @@ namespace GameUIAndMenus.Menus.Inventory
             Slots.Add(newSlot.Position, newSlot);
         }
 
-        void MoveItem(Items.Inventory from, InventoryItem item, Vector2 newPos, InventorySlot oldSlot, InventorySlot newSlot)
+        void MoveItem(InventoryItem item, Vector2 newPos, InventorySlot oldSlot, InventorySlot newSlot)
         {
-            if (inventory == from)
+            if (inventory == oldSlot.belongsTo)
             {
                 oldSlot.ClearItem();
                 if (inventory.MoveItemInsideInventory(item, newPos, out var oldItem))
@@ -74,9 +74,9 @@ namespace GameUIAndMenus.Menus.Inventory
             {
                 if (!inventory.HasSpace(item.ItemGuid, Vector2.one)) return;
                 oldSlot.ClearItem();
-                if (from.MoveToAnotherInventory(inventory, item, newPos, out var oldItem))
+                if (oldSlot.belongsTo.MoveToAnotherInventory(inventory, item, newPos, out var oldItem))
                 {
-                    newSlot.AddItem(oldItem);
+                    oldSlot.AddItem(oldItem);
                     newSlot.ClearItem();
                 }
                 AddInventoryItem(item);
@@ -87,7 +87,6 @@ namespace GameUIAndMenus.Menus.Inventory
         {
             foreach (var pair in Slots)
                 pair.Value.ClearItem();
-            print(inventory.Items.Count);
             foreach (InventoryItem invItem in inventory.Items)
                 AddInventoryItem(invItem);
         }

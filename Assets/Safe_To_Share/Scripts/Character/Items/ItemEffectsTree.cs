@@ -199,7 +199,7 @@ namespace Items
     [Serializable]
     public class LearnAbilityItemEffect : ItemEffect
     {
-        [SerializeField] DropSerializableObject dropSerializableObject;
+        [SerializeField] DropSerializableObject<SerializableScriptableObject> dropSerializableObject;
 
         public override void OnUse(BaseCharacter user, string itemGuid)
         {

@@ -19,7 +19,7 @@ namespace Character.CreateCharacterStuff
         [SerializeField] StartGender startGender;
         [SerializeField] StartIdentity startIdentity;
         [SerializeField] StartStats startStats;
-        [SerializeField] DropSerializableObject[] startAbilitiesGuids;
+        [SerializeField] DropSerializableObject<SerializableScriptableObject>[] startAbilitiesGuids;
         [SerializeField] Item[] startItems;
         [SerializeField] BasicPerk[] startPerks;
         [SerializeField] EssencePerk[] startEssencePerks;

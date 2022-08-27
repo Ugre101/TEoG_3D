@@ -27,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186323663789122818}
-  m_LocalRotation: {x: 0.03327813, y: -0, z: -0, w: 0.99944615}
-  m_LocalPosition: {x: 0, y: 1.4000015, z: -6}
+  m_LocalRotation: {x: 0.033278, y: -0, z: -0, w: 0.99944615}
+  m_LocalPosition: {x: 0, y: 1.4, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -385,8 +385,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118149562951615183}
-  m_LocalRotation: {x: 0.03327813, y: -0, z: -0, w: 0.99944615}
-  m_LocalPosition: {x: 0, y: 1.4000015, z: -6}
+  m_LocalRotation: {x: 0.03327797, y: -0, z: -0, w: 0.99944615}
+  m_LocalPosition: {x: 357.34, y: 23.99, z: 116.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -772,9 +772,9 @@ MonoBehaviour:
   CameraDistance: 6
   CameraCollisionFilter:
     serializedVersion: 2
-    m_Bits: 3081
+    m_Bits: 19465
   IgnoreTag: Player
-  CameraRadius: 0.15
+  CameraRadius: 0.25
   DampingIntoCollision: 0
   DampingFromCollision: 0
 --- !u!114 &5052960118534952323

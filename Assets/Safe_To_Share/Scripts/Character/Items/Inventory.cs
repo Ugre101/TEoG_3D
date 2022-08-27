@@ -208,6 +208,7 @@ namespace Items
         {
             bool hadItem = TryGetItemOnPos(toPos, out oldItem);
             toAdd.Position = toPos;
+            Items.Add(toAdd);
             return hadItem;
         }
 
@@ -216,8 +217,10 @@ namespace Items
             oldItem = null;
             Vector2 oldPos = toMove.Position;
             Items.Remove(toMove);
+            Debug.Log("Removed from items");
             if (moveTo.AddInventoryItemToPos(toMove, toPos, out var item))
             {
+                Debug.Log("Had item on pos");
                 oldItem = item;
                 oldItem.Position = oldPos;
                 Items.Add(oldItem);

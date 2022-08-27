@@ -10,10 +10,12 @@ using DormAndHome.Dorm;
 using DormAndHome.Dorm.Buildings;
 using Map;
 using QuestStuff;
+using Safe_To_Share.Scripts.Building;
 using Safe_To_Share.Scripts.Farming;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
+using Safe_To_Share.Scripts.Character.Items;
 
 namespace SaveStuff
 {
@@ -34,6 +36,7 @@ namespace SaveStuff
         [SerializeField] string islandStones;
         [SerializeField] string playerGold;
         [SerializeField] string farmsSave;
+        [SerializeField] string worldInventories;
         public Save(PlayerSave character)
         {
             lastId = IDGiver.Save();
@@ -50,6 +53,7 @@ namespace SaveStuff
             islandStones = IslandStonesDatas.Save();
             playerGold = JsonUtility.ToJson(PlayerGold.Save());
             farmsSave = JsonUtility.ToJson(FarmAreas.Save());
+            worldInventories = JsonUtility.ToJson(WorldInventories.Save());
         }
 
         public int LastId => lastId;
@@ -146,6 +150,22 @@ namespace SaveStuff
         }
 
         public FarmAreas.FarmSave FarmsSave => JsonUtility.FromJson<FarmAreas.FarmSave>(farmsSave);
+
+        public WorldInventoriesSave WorldInventoriesSave
+        {
+            get
+            {
+                try
+                {
+                    return JsonUtility.FromJson<WorldInventoriesSave>(worldInventories);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return new WorldInventoriesSave();
+                }
+            }
+        }
 
         public static event Action<string> LoadError;
     }

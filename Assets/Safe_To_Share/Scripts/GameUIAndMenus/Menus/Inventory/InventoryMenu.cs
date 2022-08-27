@@ -90,7 +90,7 @@ namespace GameUIAndMenus.Menus.Inventory
             Slots.Add(newSlot.Position, newSlot);
         }
 
-        void MoveItem(Items.Inventory from, InventoryItem item, Vector2 newPos, InventorySlot oldSlot, InventorySlot newSlot)
+        void MoveItem(InventoryItem item, Vector2 newPos, InventorySlot oldSlot, InventorySlot newSlot)
         {
             oldSlot.ClearItem();
             if (Player.Inventory.MoveItemInsideInventory(item, newPos, out var oldItem))

@@ -3,6 +3,7 @@ using Battle.SkillsAndSpells;
 using Character.StatsStuff;
 using Character.StatsStuff.HealthStuff;
 using CustomClasses;
+using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -12,11 +13,11 @@ namespace Battle
     [CreateAssetMenu(menuName = "Create BattleAI", fileName = "BattleAI", order = 0)]
     public class BattleAI : ScriptableObject
     {
-        [SerializeField,] DropSerializableObject hitStandardGuid;
-        [SerializeField,] DropSerializableObject teaseStandardGuid;
-        [SerializeField,] DropSerializableObject rareUseGuid;
-        [SerializeField,] DropSerializableObject lowHpGuid;
-        [SerializeField,] DropSerializableObject lowWpGuid;
+        [SerializeField,] DropSerializableObject<Skill> hitStandardGuid;
+        [SerializeField,] DropSerializableObject<Ability>  teaseStandardGuid;
+        [SerializeField,] DropSerializableObject<Ability>  rareUseGuid;
+        [SerializeField,] DropSerializableObject<Ability>  lowHpGuid;
+        [SerializeField,] DropSerializableObject<Ability>  lowWpGuid;
         [SerializeField] float rareCastChance = 0.1f;
         Ability castOnSelfWhenLowHealth;
         Ability castOnSelfWhenLowWillHealth;

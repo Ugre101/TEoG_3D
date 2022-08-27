@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Editorasd
 {
-    [CustomPropertyDrawer(typeof(DropSerializableObject))]
+    [CustomPropertyDrawer(typeof(DropSerializableObject<>))]
     public class DropSerializedScriptableObjectPropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -41,7 +41,7 @@ namespace Editorasd
                     if (evt.type == EventType.DragPerform)
                     {
                         DragAndDrop.AcceptDrag();
-
+                        
                         foreach (Object dragged_object in DragAndDrop.objectReferences)
                             if (dragged_object is SerializableScriptableObject serilized)
                                 property.FindPropertyRelative("guid").stringValue = serilized.Guid;
