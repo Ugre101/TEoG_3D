@@ -947,6 +947,10 @@ PrefabInstance:
       propertyPath: m_BlendShapeWeights.Array.size
       value: 41
       objectReference: {fileID: 0}
+    - target: {fileID: -6714023179375563668, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -4513934201982904694, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
       propertyPath: m_RootBone
       value: 
@@ -2475,6 +2479,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3c243e86f0eff4a4f95909f299bb1cc1, type: 2}
+    - target: {fileID: -3307001748328842655, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1086287577343309726, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
       propertyPath: m_RootBone
       value: 
@@ -4899,6 +4907,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e0d59b1806f43ab41a32455c5134e300, type: 2}
+    - target: {fileID: 269458872725746998, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
       propertyPath: m_Name
       value: BovineRemakeVore
@@ -6431,6 +6443,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 285150e4e9689ca45a3afc575cdc651e, type: 2}
+    - target: {fileID: 4654467415720177469, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 714f6ab83d0614745a7374680a36ca9d, type: 3}
       propertyPath: m_Size
       value: 214.70213
@@ -9029,7 +9045,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 3c243e86f0eff4a4f95909f299bb1cc1, type: 2}
   skinTone:
     lightest: {r: 1, g: 1, b: 1, a: 1}
-    darkest: {r: 0.2264151, g: 0.15769927, b: 0.06728373, a: 0}
+    darkest: {r: 0.16981131, g: 0.11249121, b: 0.039248843, a: 0}
     skinMats:
     - {fileID: 2100000, guid: b6a665ba7988f5f49bd6a27ff6025228, type: 2}
     - {fileID: 2100000, guid: 74475da6c1f9260429672a17446b48c0, type: 2}

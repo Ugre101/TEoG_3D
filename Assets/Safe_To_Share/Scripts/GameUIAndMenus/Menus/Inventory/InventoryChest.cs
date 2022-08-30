@@ -6,32 +6,36 @@ using Items;
 using Safe_To_Share.Scripts.Character.Items;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Building
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
     public class InventoryChest : MonoBehaviour,IInteractable
     {
 
-        [SerializeField] DropSerializableObject<Item>[] items;
+        [SerializeField] ChestItems[] items;
         
         [SerializeField,HideInInspector] string guid;
-        Inventory inventory = new();
+        Items.Inventory inventory = new();
 
-        public static event Action<Inventory> OpenInventory; 
-        IEnumerator Start()
+        public static event Action<Items.Inventory> OpenInventory; 
+        IEnumerator GetInventory()
         {
             if (WorldInventories.Inventories.TryGetValue(guid, out var myInventory))
                 inventory = myInventory;
             else
+                yield return NewInventory();
+            OpenInventory?.Invoke(inventory);
+        }
+
+        IEnumerator NewInventory()
+        {
+            if (!WorldInventories.Inventories.TryAdd(guid, inventory))
+                throw new Exception("Couldn't find or add world inventory");
+            foreach (var toAdd in items)
             {
-                if (!WorldInventories.Inventories.TryAdd(guid, inventory))
-                    throw new Exception("Couldn't find or add world inventory");
-                foreach (var toAdd in items)
-                {
-                   yield return inventory.AddItemWithGuid(toAdd.guid);
-                }
+                yield return inventory.AddItemWithGuid(toAdd.Item.guid, toAdd.Amount);
             }
         }
-        
+
 
 #if UNITY_EDITOR
         void OnValidate()
@@ -44,10 +48,16 @@ namespace Safe_To_Share.Scripts.Building
 
         public void DoInteraction(Player player)
         {
-            OpenInventory?.Invoke(inventory);
+            StartCoroutine(GetInventory());
         }
 
         public event Action<IInteractable> UpdateHoverText;
         public event Action RemoveIInteractableHit;
+        [Serializable]
+        struct ChestItems
+        {
+            [field: SerializeField] public DropSerializableObject<Item> Item { get; private set; }
+            [field: SerializeField] public int Amount { get; private set; }
+        }
     }
 }

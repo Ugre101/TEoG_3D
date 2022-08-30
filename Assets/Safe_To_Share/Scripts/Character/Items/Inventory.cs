@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Character;
 using UnityEngine;
@@ -87,33 +88,44 @@ namespace Items
             throw new Exception("Failed to load item");
         }
 
-        public async Task<bool> LowerItemAmount(InventoryItem item, int amount = 1)
+        public async Task<bool> LowerItemAmount(string itemGuid, int amount = 1)
         {
-            if (item == null) return false;
-            var task = Addressables.LoadAssetAsync<Item>(item.ItemGuid);
+            if (itemGuid == null) return false;
+            var task = Addressables.LoadAssetAsync<Item>(itemGuid);
             await task.Task;
             if (task.Status != AsyncOperationStatus.Succeeded) throw new Exception("Failed to load item");
             if (task.Result.UnlimitedUse) return true;
-            if (item.Amount < amount)
+            var invItem = Items.FindAll(i => i.ItemGuid == itemGuid);
+            if (invItem.Count <= 0)
                 return false;
-                
-            item.Amount -= amount;
-            if (item.Amount <= 0)
+            int tot = invItem.Sum(i => i.Amount);
+            if (tot < amount)
+                return false;
+
+            int toRemove = amount;
+            foreach (var inventoryItem in invItem)
             {
-                items.Remove(item);
+                if (inventoryItem.Amount <= toRemove)
+                {
+                    toRemove -= inventoryItem.Amount;
+                    items.Remove(inventoryItem);
+                }
+                else
+                {
+                    inventoryItem.Amount -= toRemove;
+                }
             }
             return true;
 
         }
 
-        public async Task<bool> LowerItemAmountAndReturnIfStillHave(InventoryItem item, int amount = 1)
+        public async Task<bool> LowerItemAmountAndReturnIfStillHave(string itemGuid, int amount = 1)
         {
-            var op = await LowerItemAmount(item, amount);
+            var op = await LowerItemAmount(itemGuid, amount);
             if (op)
             {
-                if (items.Contains(item))
-                    return item.Amount > 0;
-                return false;
+                if (!HasItemOfGuid(itemGuid)) return false;
+                return GetItemSymByID(itemGuid) > 0;
             }
 
             return false;
@@ -186,6 +198,12 @@ namespace Items
         InventoryItem GetItemOnPos(Vector2 pos) => Items.Find(i => ItemExistOnPos(i, pos));
         InventoryItem GetItemByID(string id) => Items.Find(i => i.ItemGuid == id);
 
+        int GetItemSymByID(string id)
+        {
+           var finds =  Items.FindAll(i => i.ItemGuid == id);
+           if (finds.Count <= 0) return 0;
+           return finds.Sum(i => i.Amount);
+        }
         public bool TryGetItemOnPos(Vector2 pos, out InventoryItem item)
         {
             item = null;
@@ -204,21 +222,26 @@ namespace Items
             return hadItem;
         }
 
-        public bool AddInventoryItemToPos(InventoryItem toAdd, Vector2 toPos, out InventoryItem oldItem)
+        public bool AddInventoryItemToPos(ref InventoryItem toAdd, Vector2 toPos, out InventoryItem oldItem)
         {
             bool hadItem = TryGetItemOnPos(toPos, out oldItem);
+            if (hadItem && oldItem.ItemGuid == toAdd.ItemGuid)
+            {
+                oldItem.Amount += toAdd.Amount;
+                toAdd = oldItem;
+                return false; 
+            }
             toAdd.Position = toPos;
             Items.Add(toAdd);
             return hadItem;
         }
 
-        public bool MoveToAnotherInventory(Inventory moveTo,InventoryItem toMove,Vector2 toPos,out InventoryItem oldItem)
+        public bool MoveToAnotherInventory(Inventory moveTo,ref InventoryItem toMove,Vector2 toPos,out InventoryItem oldItem)
         {
             oldItem = null;
             Vector2 oldPos = toMove.Position;
             Items.Remove(toMove);
-            Debug.Log("Removed from items");
-            if (moveTo.AddInventoryItemToPos(toMove, toPos, out var item))
+            if (moveTo.AddInventoryItemToPos(ref toMove, toPos, out var item))
             {
                 Debug.Log("Had item on pos");
                 oldItem = item;

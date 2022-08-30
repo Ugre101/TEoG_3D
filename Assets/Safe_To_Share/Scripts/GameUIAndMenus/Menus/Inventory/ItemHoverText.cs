@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Inventory
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
     public abstract class ItemBaseHoverText : MonoBehaviour
     {

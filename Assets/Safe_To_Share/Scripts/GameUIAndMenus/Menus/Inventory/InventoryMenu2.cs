@@ -3,11 +3,13 @@ using System.Text;
 using Character.PlayerStuff.Currency;
 using Character.StatsStuff;
 using Currency.UI;
+using GameUIAndMenus;
 using Items;
+using Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Inventory
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
     public class InventoryMenu2 : GameMenu
     {
@@ -15,13 +17,14 @@ namespace GameUIAndMenus.Menus.Inventory
         [SerializeField] InventoryBah secondaryInventory;
         [SerializeField] TextMeshProUGUI stats;
         [SerializeField] HaveGold haveGold;
-
+        [SerializeField] CraftingTable craftingTable;
         void OnEnable()
         {
             playerInventory.Setup(Player.Inventory);
+            craftingTable.Setup(Player);
             ShowStats();
             haveGold.GoldChanged(PlayerGold.GoldBag.Gold);
-            foreach (CharStat charStat in Player.Stats.GetCharStats.Values)
+            foreach (var charStat in Player.Stats.GetCharStats.Values)
                 charStat.StatDirtyEvent += ShowStats;
             InventorySlotItem.Use += UseItem;
         }
@@ -50,7 +53,7 @@ namespace GameUIAndMenus.Menus.Inventory
         }
 
 
-        void ShowStats()
+        public void ShowStats()
         {
             StringBuilder sb = new();
             foreach ((CharStatType key, CharStat value) in Player.Stats.GetCharStats)

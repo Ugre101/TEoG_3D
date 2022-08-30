@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Inventory
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
     public class SecondaryInventory : MonoBehaviour
     {

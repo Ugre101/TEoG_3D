@@ -4,11 +4,12 @@ using System.Text;
 using Character.PlayerStuff.Currency;
 using Character.StatsStuff;
 using Currency.UI;
+using GameUIAndMenus;
 using Items;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Inventory
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
     public class InventoryMenu : GameMenu
     {

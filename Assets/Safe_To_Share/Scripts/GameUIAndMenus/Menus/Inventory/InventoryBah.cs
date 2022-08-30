@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using AvatarStuff.Holders;
-using Character.PlayerStuff;
 using Items;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Inventory
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
     public class InventoryBah : MonoBehaviour
     {
@@ -13,7 +11,7 @@ namespace GameUIAndMenus.Menus.Inventory
         [SerializeField] InventorySlot[] preInstancedSlots;
         [SerializeField] InventorySlot slot;
         bool firstUse = true;
-        protected Dictionary<Vector2, InventorySlot> Slots = new();
+        Dictionary<Vector2, InventorySlot> slots = new();
         Queue<InventorySlot> slotsPool;
 
         Items.Inventory inventory;
@@ -26,7 +24,7 @@ namespace GameUIAndMenus.Menus.Inventory
                 firstUse = false;
                 SetupSlotPool();
                 // Reset
-                Slots = new Dictionary<Vector2, InventorySlot>();
+                slots = new Dictionary<Vector2, InventorySlot>();
                 // Add slots
                 for (int x = 0; x < inventory.InventorySize.x; x++)
                 for (int y = 0; y < inventory.InventorySize.y; y++)
@@ -55,7 +53,7 @@ namespace GameUIAndMenus.Menus.Inventory
             InventorySlot newSlot = GetSlot();
             newSlot.Setup(inventory,new Vector2(x, y));
             newSlot.MovedItem += MoveItem;
-            Slots.Add(newSlot.Position, newSlot);
+            slots.Add(newSlot.Position, newSlot);
         }
 
         void MoveItem(InventoryItem item, Vector2 newPos, InventorySlot oldSlot, InventorySlot newSlot)
@@ -74,7 +72,7 @@ namespace GameUIAndMenus.Menus.Inventory
             {
                 if (!inventory.HasSpace(item.ItemGuid, Vector2.one)) return;
                 oldSlot.ClearItem();
-                if (oldSlot.belongsTo.MoveToAnotherInventory(inventory, item, newPos, out var oldItem))
+                if (oldSlot.belongsTo.MoveToAnotherInventory(inventory,ref item, newPos, out var oldItem))
                 {
                     oldSlot.AddItem(oldItem);
                     newSlot.ClearItem();
@@ -85,7 +83,7 @@ namespace GameUIAndMenus.Menus.Inventory
 
        public void AddItems()
         {
-            foreach (var pair in Slots)
+            foreach (var pair in slots)
                 pair.Value.ClearItem();
             foreach (InventoryItem invItem in inventory.Items)
                 AddInventoryItem(invItem);
@@ -103,7 +101,7 @@ namespace GameUIAndMenus.Menus.Inventory
         }
 
 
-        void AddInventoryItem(InventoryItem invItem) => Slots[invItem.Position].AddItem(invItem);
+        void AddInventoryItem(InventoryItem invItem) => slots[invItem.Position].AddItem(invItem);
 
         public static event Action StopHoverInfo;
 
@@ -111,7 +109,7 @@ namespace GameUIAndMenus.Menus.Inventory
 
         void InventoryClearItemOnCord(Vector2 pos)
         {
-            Slots[pos].ClearItem();
+            slots[pos].ClearItem();
             StopHoverInfo?.Invoke();
         }
 

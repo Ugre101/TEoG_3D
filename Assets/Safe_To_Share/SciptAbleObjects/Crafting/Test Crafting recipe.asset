@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e474c5ad3a724f6d8f457ac1f44a32f8, type: 3}
+  m_Name: Test Crafting recipe
+  m_EditorClassIdentifier: 
+  <FirstItem>k__BackingField:
+    guid: 102d4e4f17b176e4b98c6625e6fc6b02
+  <SecondItem>k__BackingField:
+    guid: cfa7031ae3441fc4388f7e7679b6ff22
+  <Result>k__BackingField:
+    guid: 6fcc2def4006ae44cac694e12cb18b0a

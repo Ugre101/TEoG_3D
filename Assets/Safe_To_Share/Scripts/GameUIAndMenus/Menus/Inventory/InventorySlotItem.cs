@@ -8,7 +8,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.Menus.Inventory
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
     public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler,
         IPointerEnterHandler, IPointerExitHandler
@@ -20,7 +20,7 @@ namespace GameUIAndMenus.Menus.Inventory
         [SerializeField] new Transform transform;
 
         bool blockHoverInfo;
-        InventoryItem invItem;
+        protected InventoryItem invItem;
         float lastClick;
 
         bool loaded;
@@ -35,7 +35,7 @@ namespace GameUIAndMenus.Menus.Inventory
 
         void OnDisable() => StopCoroutine(loadItemOp);
 
-        public void OnBeginDrag(PointerEventData eventData)
+        public virtual void OnBeginDrag(PointerEventData eventData)
         {
             blockHoverInfo = true;
             StopShowing?.Invoke();
@@ -49,7 +49,7 @@ namespace GameUIAndMenus.Menus.Inventory
 
         public void OnDrag(PointerEventData eventData) => transform.position = eventData.position;
 
-        public void OnEndDrag(PointerEventData eventData)
+        public virtual void OnEndDrag(PointerEventData eventData)
         {
             List<RaycastResult> results = new();
             EventSystem.current.RaycastAll(eventData, results);
@@ -75,7 +75,7 @@ namespace GameUIAndMenus.Menus.Inventory
         public void OnPointerExit(PointerEventData eventData) => StopShowing?.Invoke();
         public static event Action<Item, InventoryItem,InventorySlot> Use;
 
-        void ResetPosition()
+        protected void ResetPosition()
         {
             transform.SetParent(orgParent);
             transform.position = orgParent.position;
@@ -93,13 +93,13 @@ namespace GameUIAndMenus.Menus.Inventory
         }
 
         void SetAmount(int value) => amount.text = value.ToString();
-        InventorySlot slot;
-        public void Setup(InventoryItem invItem, InventorySlot inventorySlot)
+        protected InventorySlot slot;
+        public void Setup(InventoryItem parInvItem, InventorySlot inventorySlot)
         {
             slot = inventorySlot;
             gameObject.SetActive(true);
-            this.invItem = invItem;
-            SetAmount(invItem.Amount);
+            this.invItem = parInvItem;
+            SetAmount(parInvItem.Amount);
             loadItemOp = StartCoroutine(LoadItem());
         }
 

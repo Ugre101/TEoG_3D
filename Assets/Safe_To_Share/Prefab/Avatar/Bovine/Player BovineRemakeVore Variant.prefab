@@ -72,6 +72,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
     - target: {fileID: 7896356705257363673, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
+      propertyPath: changeHairColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7896356705257363673, guid: 2751505141cb3ef47be87c5c26cda090, type: 3}
       propertyPath: prefab.m_AssetGUID
       value: ef8dc52fc910a73419a3ab4cbfa9f11e
       objectReference: {fileID: 0}

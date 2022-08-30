@@ -14,7 +14,8 @@ namespace Safe_To_Share.Scripts.Farming
         [SerializeField] GameObject plant;
         [SerializeField, Range(float.Epsilon, 10f)] float minSize = 0.1f;
         [SerializeField, Range(1, 50f)] float maxSize = 3f;
-        
+        bool placed = false;
+
         PlantStats stats;
         // ADD stages
         public void Plant(PlantStats plantStats)
@@ -28,6 +29,7 @@ namespace Safe_To_Share.Scripts.Farming
 
             GrowPlant(0);
             stats.Grown += GrowPlant;
+            placed = true;
         }
 
         public void Load(PlantStats plantStats)
@@ -36,6 +38,7 @@ namespace Safe_To_Share.Scripts.Farming
             transform.position = plantStats.Pos;
             stats.Grown -= GrowPlant;
             stats.Grown += GrowPlant;
+            placed = true;
         }
         
 
@@ -68,12 +71,16 @@ namespace Safe_To_Share.Scripts.Farming
             return false;
         }
 
-        public string HoverText(Player player) => stats.Done ? "Harvest" : $"{stats.PercentDone * 100f:##.#}% done";
+        public string HoverText(Player player)
+        {
+            if (!placed) return string.Empty;
+            return stats.Done ? "Harvest" : $"{stats.PercentDone * 100f:##.#}% done";
+        }
 
         bool harvesting;
         public void DoInteraction(Player player)
         {
-            if (!stats.Done || harvesting) return;
+            if (!placed || !stats.Done || harvesting) return;
             harvesting = true;
             StartCoroutine(HarvestPlant(player));
         }
@@ -98,5 +105,6 @@ namespace Safe_To_Share.Scripts.Farming
             Addressables.Release(handle);
             Destroy(gameObject);
         }
+
     }
 }

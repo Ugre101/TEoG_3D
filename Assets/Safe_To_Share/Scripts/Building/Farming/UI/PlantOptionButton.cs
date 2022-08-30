@@ -9,20 +9,22 @@ namespace Safe_To_Share.Scripts.Farming.UI
 {
     public class PlantOptionButton : Selectable //,IDeselectHandler,ISelectHandler,IPointerEnterHandler,IPointerExitHandler
     {
-        public static event Action<Plant,Inventory,InventoryItem,PlantOptionButton> ShowPlacement;
+        public static event Action<Plant,Inventory,string,PlantOptionButton> ShowPlacement;
         Plant plant;
 
-        InventoryItem item;
-
+    //       InventoryItem item;
+        string guid;
         Inventory inventory;
         
         [SerializeField] Image icon;
 
-        public void Setup(Plant plant, InventoryItem inventoryItem, Inventory inventory1)
+        public void Setup(Plant plant, string handleKey, Inventory inventory1)
         {
             this.plant = plant;
-            this.item = inventoryItem;
+           // this.item = inventoryItem;
+           guid = handleKey;
             this.inventory = inventory1;
+            icon.sprite = plant.Icon;
         }
 
         public override void OnDeselect(BaseEventData eventData)
@@ -32,7 +34,7 @@ namespace Safe_To_Share.Scripts.Farming.UI
 
         public override void OnSelect(BaseEventData eventData)
         {
-            ShowPlacement?.Invoke(plant,inventory,item,this);
+            ShowPlacement?.Invoke(plant,inventory,guid,this);
             base.OnSelect(eventData);
         }
 
