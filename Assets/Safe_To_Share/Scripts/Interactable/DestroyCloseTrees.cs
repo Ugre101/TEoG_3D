@@ -58,23 +58,24 @@ namespace Safe_To_Share.Scripts.Interactable
                 return;
 
             bool removedTree = false;
-            List<int> toRemove = new();
+            List<int> checkRemove = new();
 
-            for (int l = 0; l < paryTrees.Length; l++)
+            for (int l = 0; l < paryTrees.Length; l++) // counts up
             {
-                TreeInstance triTree = paryTrees[l];
+                var triTree = paryTrees[l];
                 Vector3 vecTree = triTree.position;
                 // Get the world coordinates of the tree position
                 Vector3 vec3 = Vector3.Scale(pvecTerrainSize, vecTree) + pvecTerrainPosition;
                 float fltProximity = Vector3.Distance(vector3, vec3);
                 if (fltProximity < removeDist)
-                    toRemove.Add(l);
+                    checkRemove.Add(l);
             }
 
-            if (toRemove.Count <= 0) return;
+            if (checkRemove.Count <= 0) return;
             List<TreeInstance> trees = new(paryTrees);
-            foreach (int i in toRemove)
+            for (var index = checkRemove.Count - 1; index >= 0; index--) // counts down to avoid conflict
             {
+                var i = checkRemove[index];
                 int protoIndex = trees[i].prototypeIndex;
                 var treeName = Terrain.activeTerrain.terrainData.treePrototypes[protoIndex].prefab.name;
                 if (treeName.Contains("Tree") && !treeName.Contains("Small"))
@@ -92,7 +93,7 @@ namespace Safe_To_Share.Scripts.Interactable
                 RefreshTerrainColliders();
         }
 
-        void RefreshTerrainColliders()
+        void RefreshTerrainColliders() // bad but best way I found to refresh terrain colliders
         {
             if (!foundCollider) return;
             terrainCollider.enabled = false;

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Cock Milker Kit
   m_EditorClassIdentifier: 
   guid: 928fb2d6619bf6d4f92c1e831bdfd944
-  title: 
+  title: Experimental cock milker
   desc: 
   sprite: {fileID: 0}
   size: {x: 1, y: 1}
   unlimitedUse: 0
-  value: 0
+  value: 220
   canSell: 1
   effectsTree:
     healingItemEffects:
@@ -76,6 +76,10 @@ MonoBehaviour:
     miscItemEffects:
       active: 0
       fatBurnMods: []
+    sexualOrganItemEffect:
+      active: 0
+      affects: 
+      mods: []
   tempEffectDesc: 
   updateInventoryAfterUse: 1
   raceReq:

@@ -18,6 +18,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         [SerializeField] TextMeshProUGUI stats;
         [SerializeField] HaveGold haveGold;
         [SerializeField] CraftingTable craftingTable;
+        [SerializeField] GameObject altStuff;
         void OnEnable()
         {
             playerInventory.Setup(Player.Inventory);
@@ -33,7 +34,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         void OnDisable()
         {
             InventorySlotItem.Use -= UseItem;
-            stats.gameObject.SetActive(true);
+            altStuff.SetActive(true);
             secondaryInventory.gameObject.SetActive(false);
         }
         public static event Action StopHoverInfo;
@@ -63,7 +64,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 
         public void SetupSecondaryInventory(Items.Inventory inventory)
         {
-            stats.gameObject.SetActive(false);
+            altStuff.SetActive(false);
             secondaryInventory.gameObject.SetActive(true);
             secondaryInventory.Setup(inventory);
         }

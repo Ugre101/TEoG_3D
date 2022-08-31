@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sellingItems:
   - {fileID: 11400000, guid: 47003b6db26b507488d31aa76d322b54, type: 2}
+  - {fileID: 11400000, guid: 7c66f324afbf3f44687b543d659183ba, type: 2}

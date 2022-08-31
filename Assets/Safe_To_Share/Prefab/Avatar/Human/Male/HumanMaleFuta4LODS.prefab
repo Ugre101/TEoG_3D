@@ -15091,6 +15091,7 @@ MonoBehaviour:
   dictatorBoner:
     hasDictatorDick: 0
     hasDictatorBalls: 0
+    hasHide: 0
     flaccid: 0
     boner: 0
     dictatorDick: {fileID: 0}

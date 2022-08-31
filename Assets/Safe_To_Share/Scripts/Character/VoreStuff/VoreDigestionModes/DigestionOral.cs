@@ -4,8 +4,8 @@
     {
         public override bool Tick(BaseCharacter pred, VoreOrgan voreOrgan, bool predIsPlayer)
         {
-            pred.Body.Fat.BaseValue += voreOrgan.DigestTick(pred.Vore.digestionStrength.Value, voreOrgan.Stretch,
-                HandleStomachDigestion, predIsPlayer) / 5f; // 50%
+            float toGain = voreOrgan.DigestTick(pred.Vore.digestionStrength.Value, voreOrgan.Stretch, HandleStomachDigestion, predIsPlayer);
+            pred.Body.Fat.BaseValue += toGain / (pred.Body.Height.Value / 14); // 50%
             return true;
 
             void HandleStomachDigestion(Prey obj)

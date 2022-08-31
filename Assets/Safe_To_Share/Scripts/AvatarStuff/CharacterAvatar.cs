@@ -96,6 +96,7 @@ namespace AvatarStuff
             hasDickController = dickController != null;
             hasBallsController = ballsController != null;
             hasHideDaz = hideDazDickAndBalls != null;
+            dictatorBoner.OnValidate();
             if (Application.isPlaying) return;
             if (bodyMeshRenderers is not { Count: > 0, }) return;
             foreach (SkinnedMeshRenderer skinnedMeshRenderer in bodyMeshRenderers)

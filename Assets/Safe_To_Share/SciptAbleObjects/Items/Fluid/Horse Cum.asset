@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Horse Cum
   m_EditorClassIdentifier: 
   guid: 216f6763a5220d243b9c650fb6ee532a
-  title: 
+  title: Horse Cum
   desc: It's just cum... for now.
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 45ef035cd5861f94f9b25c6a16f20f3f, type: 3}
   size: {x: 1, y: 1}
   unlimitedUse: 0
-  value: 0
+  value: 3
   canSell: 1
   effectsTree:
     healingItemEffects:
@@ -76,9 +76,13 @@ MonoBehaviour:
     miscItemEffects:
       active: 0
       fatBurnMods: []
+    sexualOrganItemEffect:
+      active: 0
+      affects: 
+      mods: []
   tempEffectDesc: 
   updateInventoryAfterUse: 0
   raceReq:
     hasRaceReq: 0
     races: []
-  kcal: 0
+  kcal: 3000

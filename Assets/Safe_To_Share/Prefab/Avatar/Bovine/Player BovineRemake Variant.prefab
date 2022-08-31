@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2753231534908544838
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -6939971810550879453, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: changeHairColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6939971810550879453, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: prefab.m_AssetGUID
+      value: af02e01df97c41148a9a46c61141031d
+      objectReference: {fileID: 0}
+    - target: {fileID: -6939971810550879453, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: hairMats.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    - target: {fileID: 2013244858003574686, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    - target: {fileID: 2059046131009295081, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    - target: {fileID: 3046553749380501878, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    - target: {fileID: 4795874956910881318, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c58ec361cdff4a49b3072483c2b615c, type: 2}
+    - target: {fileID: 6226889059452642373, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_Name
+      value: Player BovineRemake Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710796889505185535, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 08fdb9fe036f2ad4186c9e4a3fb3471c, type: 3}

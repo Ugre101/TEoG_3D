@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Bovine
   m_EditorClassIdentifier: 
   prefab:
-    m_AssetGUID: 2751505141cb3ef47be87c5c26cda090
+    m_AssetGUID: 08fdb9fe036f2ad4186c9e4a3fb3471c
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   playerPrefab:
-    m_AssetGUID: ef8dc52fc910a73419a3ab4cbfa9f11e
+    m_AssetGUID: af02e01df97c41148a9a46c61141031d
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

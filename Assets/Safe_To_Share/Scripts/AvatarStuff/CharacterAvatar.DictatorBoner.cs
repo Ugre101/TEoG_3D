@@ -11,6 +11,7 @@ namespace AvatarStuff
         {
             [SerializeField] bool hasDictatorDick;
             [SerializeField] bool hasDictatorBalls;
+            [SerializeField] bool hasHide;
             [SerializeField] int flaccid;
             [SerializeField] int boner;
             [SerializeField] DictatorDick dictatorDick;
@@ -62,7 +63,13 @@ namespace AvatarStuff
                 dictatorDick.HideOrShow(hasDick);
             }
 
-            public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls) => hideDictator.Handle(skinnedMeshRenderers, hasDick,hasBalls);
+            public void OnValidate()
+            {
+                hasHide = hideDictator != null;
+                hasDictatorBalls = dictatorBalls != null;
+                hasDictatorDick = dictatorDick != null;
+            }
+            public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls) => hasHide && hideDictator.Handle(skinnedMeshRenderers, hasDick, hasBalls);
         }
     }
 }

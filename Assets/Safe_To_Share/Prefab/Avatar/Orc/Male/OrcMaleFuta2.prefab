@@ -6120,6 +6120,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -835688578137663476, guid: c430e151e08d770408355298697e70a5, type: 3}
   m_PrefabInstance: {fileID: 7822021240627750352}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1875634152661065765 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -681466641873549835, guid: c430e151e08d770408355298697e70a5, type: 3}
+  m_PrefabInstance: {fileID: 7822021240627750352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2181221149549210151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875634152661065765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797e8f116c8a4c438b78af80434d0ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMats:
+  - {fileID: 2100000, guid: 7b10f5bf139fed64c977a3b1b129c4e2, type: 2}
+  - {fileID: 2100000, guid: 39e7d4c91ce0adc45b27ce535e54ec14, type: 2}
+  ballsTargetMat: {fileID: 2100000, guid: 54073993d7630d64db5877b967c98d9d, type: 2}
+  invisibleMat: {fileID: 2100000, guid: 33f0d7504f4e96644b1893f71ce1fd55, type: 2}
 --- !u!137 &1946323565796876353 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8615346610846958993, guid: c430e151e08d770408355298697e70a5, type: 3}
@@ -6883,7 +6905,7 @@ MonoBehaviour:
     boner: 8
     dictatorDick: {fileID: 315017366357126282}
     dictatorBalls: {fileID: 2190967159143475889}
-    hideDictator: {fileID: 0}
+    hideDictator: {fileID: 2181221149549210151}
     dickMats: []
     invisible: {fileID: 0}
   hasBallsController: 0

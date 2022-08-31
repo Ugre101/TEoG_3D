@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Bovine Milk
   m_EditorClassIdentifier: 
   guid: 47003b6db26b507488d31aa76d322b54
-  title: 
+  title: Bovine Milk
   desc: Rich and creamy,
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: a333557f01f5a674384c1b8dd308875b, type: 3}
   size: {x: 1, y: 1}
   unlimitedUse: 0
-  value: 30
+  value: 10
   canSell: 1
   effectsTree:
     healingItemEffects:
@@ -26,9 +26,13 @@ MonoBehaviour:
       hpGain: 0
       wpGain: 0
     pregnancyItemEffect:
-      active: 0
+      active: 1
       fertilityMods:
-        mod: []
+        mod:
+        - modValue: 1
+          from: 
+          modType: 0
+          hoursLeft: 8
       virilityMods:
         mod: []
       growthSpeedMods:
@@ -36,10 +40,10 @@ MonoBehaviour:
       permFertility: 0
       permVirility: 0
     bodyStatItemEffect:
-      active: 0
+      active: 1
       bodyTempMods: []
       bodyChanges: []
-      thickSetChange: 0
+      thickSetChange: 0.007
       tempThickMods: []
     voreItemEffect:
       active: 0
@@ -62,7 +66,7 @@ MonoBehaviour:
     raceEssenceItemEffects:
       active: 1
       race: {fileID: 11400000, guid: 7c596fb2be9bc2f4882a620ee187df56, type: 2}
-      toGain: 35
+      toGain: 20
     charStatItemEffects:
       active: 0
       assignCharStatTempMods: []
@@ -70,9 +74,16 @@ MonoBehaviour:
       active: 0
       assignCharStatTempMods: []
     sexualFluidItemEffects:
-      active: 0
+      active: 1
       fluidCapStretch: []
-      fluidRecMods: []
+      fluidRecMods:
+      - organType: 2
+        mods:
+          mod:
+          - modValue: 1
+            from: 
+            modType: 0
+            hoursLeft: 16
     miscItemEffects:
       active: 0
       fatBurnMods: []

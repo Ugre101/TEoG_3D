@@ -1,14 +1,16 @@
 ﻿using System;
 using Dialogue;
 using Dialogue.DialogueActions;
+using GameUIAndMenus.DialogueAndEventMenu;
 using QuestStuff;
 using SceneStuff;
 
-namespace GameUIAndMenus.DialogueAndEventMenu
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 {
     public class DialogueMenu : DialogueAndEventShared
     {
         public void Setup(BaseDialogue dialogue)
+        
         {
             currentDialogue = dialogue;
             currentNode = dialogue.GetRootNode() as DialogueBaseNode;
