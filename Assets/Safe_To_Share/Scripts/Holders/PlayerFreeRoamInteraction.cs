@@ -134,12 +134,10 @@ namespace AvatarStuff.Holders
             foreach (RaycastHit hit in results)
             {
                 if (hit.collider == null) continue;
-                if (hit.transform.TryGetComponent(out IInteractable interactable))
-                {
-                    lastHitPos = hit.transform.position;
-                    SetLastHit(interactable);
-                    return true;
-                }
+                if (!hit.transform.TryGetComponent(out IInteractable interactable)) continue;
+                lastHitPos = hit.transform.position;
+                SetLastHit(interactable);
+                return true;
             }
 
             return false;

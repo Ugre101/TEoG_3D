@@ -21,6 +21,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI
                 ResetPosition();
                 return;
             }
+            ResetPosition();
             slot.ClearItem();
         }
     }

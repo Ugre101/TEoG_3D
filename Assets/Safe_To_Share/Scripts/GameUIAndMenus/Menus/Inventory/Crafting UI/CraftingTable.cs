@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Character.PlayerStuff;
 using Items;
 using Safe_To_Share.Scripts.Character.Items.Crafting;
@@ -14,7 +16,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI
         [SerializeField] CraftingRecipesDict craftingDictionary;
         [SerializeField] CraftingInventorySlot slot1, slot2;
         [SerializeField] CraftingResult result;
-
+        [SerializeField] InventoryBah inventoryBag;
         CraftingRecipe canMake;
         bool hasValidRecipe;
         string item1, item2;
@@ -123,9 +125,32 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI
             if (handle.Status == AsyncOperationStatus.Succeeded) result.AddResult(handle.Result);
         }
 
-        public void Craft()
+        bool crafting = false;
+        public async void Craft()
         {
-            StartCoroutine(player.Inventory.AddItemWithGuid(canMake.Result.guid));
+            if (crafting) return;
+            if (!hasValidRecipe) return;
+            crafting = true;
+            if (player.Inventory.AddAndReturnIfNewItem(canMake.Result.guid,out var newItem))
+            {
+                inventoryBag.AddInventoryItem(newItem);
+            }
+            var op1  = await player.Inventory.LowerItemAmountAndReturnIfStillHave(item1);
+            if (!op1)
+            {
+                ClearValidRecipe();
+                slot1.ClearOrgItemThenClear();
+            }
+
+            var op2 = await player.Inventory.LowerItemAmountAndReturnIfStillHave(item2);
+            if (!op2)
+            {
+                if (op1)
+                    ClearValidRecipe();
+                slot2.ClearOrgItemThenClear();
+            }
+        
+            crafting = false;
         }
     }
 }

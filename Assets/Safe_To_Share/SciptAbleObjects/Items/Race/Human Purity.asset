@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid: c7a743befa8cbe24bb3b63c1697dbfe7
   title: 
-  desc: 
-  sprite: {fileID: 0}
+  desc: Produced and promoted by the imperial church to undo the wave of race transformations
+    among the youth following breakthrough in race essence theory, which allowed
+    cheap tf solutions.
+  sprite: {fileID: 21300000, guid: 8569b829f73e27b4991d38b75bd35448, type: 3}
   size: {x: 1, y: 1}
   unlimitedUse: 0
-  value: 0
+  value: 10
   canSell: 1
   effectsTree:
     healingItemEffects:
@@ -76,5 +78,12 @@ MonoBehaviour:
     miscItemEffects:
       active: 0
       fatBurnMods: []
+    sexualOrganItemEffect:
+      active: 0
+      affects: 
+      mods: []
   tempEffectDesc: 
   updateInventoryAfterUse: 0
+  raceReq:
+    hasRaceReq: 0
+    races: []

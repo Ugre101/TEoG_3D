@@ -54,7 +54,8 @@ namespace Safe_To_Share.Scripts.Farming
 
         void OnDisable()
         {
-            CancelHovering();
+            if (hovering)
+                CancelHovering();
         }
 
         void Update()

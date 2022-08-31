@@ -33,12 +33,8 @@ namespace Items
 
         public bool UpdateInventoryAfterUse => updateInventoryAfterUse;
 
-        public virtual bool CanUse(BaseCharacter user)
-        {
-            if (!raceReq.IsRace(user.RaceSystem))
-                return false;
-            return true;
-        }
+        public virtual bool CanUse(BaseCharacter user) => raceReq.IsRace(user.RaceSystem);
+
         public virtual void Use(BaseCharacter user)
         {
             if (!CanUse(user))

@@ -92,9 +92,11 @@ namespace Safe_To_Share.Scripts.CameraStuff
 
         public void OnScrollOut(InputAction.CallbackContext ctx)
         {
-            if (!ctx.performed || ctx.ReadValue<float>() >= 0)
+            if (!ctx.performed)
                 return;
-            ExitFirstPerson();
+            var value = ctx.ReadValue<float>();
+            if (value < 0)
+                ExitFirstPerson();
         }
 
         void ExitFirstPerson()

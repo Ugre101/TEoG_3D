@@ -33,7 +33,12 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             set => iconSprite.sprite = value;
         }
 
-        void OnDisable() => StopCoroutine(loadItemOp);
+        void OnDisable()
+        {
+            StopCoroutine(loadItemOp);
+            if (invItem != null)
+                invItem.AmountChange -= SetAmount;
+        }
 
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
@@ -101,6 +106,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             this.invItem = parInvItem;
             SetAmount(parInvItem.Amount);
             loadItemOp = StartCoroutine(LoadItem());
+            invItem.AmountChange += SetAmount;
         }
 
         IEnumerator LoadItem()
@@ -130,8 +136,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 
         public void Clear()
         {
+            if (invItem != null)
+                invItem.AmountChange -= SetAmount;
             loaded = false;
             gameObject.SetActive(false);
         }
+
     }
 }

@@ -14,14 +14,22 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         {
             belongsTo = inventory;
             Position = position;
+            
         }
 
-        public void AddItem(InventoryItem invItem) => slotItem.Setup(invItem,this);
+        public void AddItem(InventoryItem invItem)
+        {
+            slotItem.Setup(invItem, this);
+        }
 
-        public virtual void ClearItem() => slotItem.Clear();
+        public virtual void ClearItem()
+        {
+            slotItem.Clear();
+        }
 
         public event MoveItems MovedItem;
 
         public virtual void MoveTo(InventoryItem p, InventorySlot inventorySlot) => MovedItem?.Invoke(p, Position,inventorySlot,this);
+
     }
 }

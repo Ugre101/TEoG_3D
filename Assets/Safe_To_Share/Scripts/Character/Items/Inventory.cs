@@ -173,6 +173,28 @@ namespace Items
             }
 
             return false; // inventory full
+        }        
+        
+        public bool AddAndReturnIfNewItem(string itemGuid,out InventoryItem newItem, int quantity = 1)
+        {
+            newItem = null;
+            if (Items.Exists(i => i.ItemGuid == itemGuid))
+            {
+                Items.Find(i => i.ItemGuid == itemGuid).Amount += quantity;
+                return false;
+            }
+
+            for (int x = 0; x < InventorySize.x; x++)
+            for (int y = 0; y < InventorySize.y; y++)
+            {
+                Vector2 pos = new(x, y);
+                if (ItemExists(pos)) continue;
+                newItem = new InventoryItem(itemGuid, quantity, pos);
+                Items.Add(newItem);
+                return true;
+            }
+
+            return false; // inventory full
         }
 
         public bool HasSpace(string itemGuid, Vector2 size)

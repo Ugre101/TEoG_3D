@@ -2,12 +2,13 @@
 using Character.Race.Races;
 using Character.StatsStuff;
 using Items;
+using Safe_To_Share.Scripts.CustomClasses;
 
 namespace Character.CreateCharacterStuff
 {
     public readonly struct CreateCharacter
     {
-        public CreateCharacter(StartIdentity identity, Stats stats, string[] startAbilities, Item[] startItems,
+        public CreateCharacter(StartIdentity identity, Stats stats, string[] startAbilities, AddAmountOf<Item>[] startItems,
             BasicRace startRace, StartGender startGender, StartBody startBody, BasicPerk[] startPerks, StartHair hair,
             StartSkinColor skin)
         {
@@ -29,7 +30,7 @@ namespace Character.CreateCharacterStuff
 
         public string[] StartAbilities { get; }
 
-        public Item[] StartItems { get; }
+        public AddAmountOf<Item>[] StartItems { get; }
         public BasicPerk[] StartPerks { get; }
         public BasicRace StartRace { get; }
         public StartGender StartGender { get; }

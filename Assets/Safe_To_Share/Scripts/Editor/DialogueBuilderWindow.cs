@@ -17,6 +17,7 @@ namespace Dialogue.Editor
             NodeTypes.Quest.ToString(),
             NodeTypes.PreBattle.ToString(),
             NodeTypes.Service.ToString(),
+            NodeTypes.Shop.ToString(),
         };
 
         [NonSerialized] NodeTypes nodeType;
@@ -69,6 +70,9 @@ namespace Dialogue.Editor
                     break;
                 case NodeTypes.Service:
                     selected.CreateNewNode<ServiceMenuDialogueNode>(creatingNode);
+                    break;
+                case NodeTypes.Shop:
+                    selected.CreateNewNode<OpenShopDialogueNode>(creatingNode);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -167,6 +171,7 @@ namespace Dialogue.Editor
             Quest,
             PreBattle,
             Service,
+            Shop,
         }
     }
 }

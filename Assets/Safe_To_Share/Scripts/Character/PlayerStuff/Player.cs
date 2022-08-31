@@ -25,8 +25,8 @@ namespace Character.PlayerStuff
 
         public Player(CreateCharacter character) : base(character)
         {
-            foreach (Item startItem in character.StartItems)
-                Inventory.AddItem(startItem);
+            foreach (var startItem in character.StartItems)
+                Inventory.AddItem(startItem.Value,startItem.Amount);
         }
 
         public Inventory Inventory { get; } = new();

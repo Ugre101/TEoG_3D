@@ -28,7 +28,7 @@
                     "type": "Value",
                     "id": "90f36e3d-4b75-4f13-97a2-2085a0c8394e",
                     "expectedControlType": "Vector2",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 }
@@ -105,7 +105,7 @@
                     "id": "801d3d7d-7763-4523-8027-437d81f6ceb2",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "StickDeadzone",
+                    "processors": "",
                     "groups": "Mouse & Keyboard",
                     "action": "Look",
                     "isComposite": false,

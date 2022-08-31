@@ -433,8 +433,8 @@ MonoBehaviour:
   _capsuleHeight: 1.8
   _slopeLimit: 60
   _stepOffset: 0.55
-  _perchOffset: 0
-  _unperchOffset: 0
+  _perchOffset: 0.15
+  _unperchOffset: 0.2
   _perchAdditionalHeight: 0
   _collideWithTriggers: 0
   _groundMask:

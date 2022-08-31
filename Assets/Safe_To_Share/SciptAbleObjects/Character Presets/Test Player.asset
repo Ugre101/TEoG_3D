@@ -42,14 +42,11 @@ MonoBehaviour:
   - guid: 9a470fc5a623e6a45838ef7a05b21094
   - guid: 82b631246acbd724dad0841a5d66072f
   - guid: 7a0b1ca80586e0a4c926392b079badb3
-  startItems:
-  - {fileID: 11400000, guid: e35b4beceb55d664ca41901c925af336, type: 2}
-  - {fileID: 11400000, guid: 37d50a59c926f1147abae502534d4710, type: 2}
-  - {fileID: 11400000, guid: 7c66f324afbf3f44687b543d659183ba, type: 2}
-  - {fileID: 11400000, guid: abcffbb5d3b1d2a48ad943157297ac46, type: 2}
-  - {fileID: 11400000, guid: 3ff39f04fde183447b3dec0b05c94b74, type: 2}
-  - {fileID: 11400000, guid: 102d4e4f17b176e4b98c6625e6fc6b02, type: 2}
-  - {fileID: 11400000, guid: cfa7031ae3441fc4388f7e7679b6ff22, type: 2}
+  startItemsWithAmountOf:
+  - <Value>k__BackingField: {fileID: 11400000, guid: 102d4e4f17b176e4b98c6625e6fc6b02, type: 2}
+    <Amount>k__BackingField: 5
+  - <Value>k__BackingField: {fileID: 11400000, guid: cfa7031ae3441fc4388f7e7679b6ff22, type: 2}
+    <Amount>k__BackingField: 3
   startPerks: []
   startEssencePerks:
   - {fileID: 11400000, guid: cf01d105a662d374bbf8b2f6be12be9d, type: 2}

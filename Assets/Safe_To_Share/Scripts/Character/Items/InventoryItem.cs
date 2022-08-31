@@ -10,7 +10,8 @@ namespace Items
         [SerializeField] Vector2 position;
         [SerializeField] int amount;
 
-        public InventoryItem(string itemGuid, int amount, Vector2 position)
+        public event Action<int> AmountChange;
+         public InventoryItem(string itemGuid, int amount, Vector2 position)
         {
             this.itemGuid = itemGuid;
             Amount = amount;
@@ -29,7 +30,11 @@ namespace Items
         public int Amount
         {
             get => amount;
-            set => amount = value;
+            set
+            {
+                amount = value;
+                AmountChange?.Invoke(amount);
+            }
         }
     }
 }

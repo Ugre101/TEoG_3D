@@ -27,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186323663789122818}
-  m_LocalRotation: {x: 0.033278, y: -0, z: -0, w: 0.99944615}
-  m_LocalPosition: {x: 0, y: 1.4, z: -6}
+  m_LocalRotation: {x: 0.03327797, y: -0, z: -0, w: 0.99944615}
+  m_LocalPosition: {x: 0, y: 1.3999996, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -386,7 +386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118149562951615183}
   m_LocalRotation: {x: 0.03327797, y: -0, z: -0, w: 0.99944615}
-  m_LocalPosition: {x: 357.34, y: 23.99, z: 116.95}
+  m_LocalPosition: {x: 0, y: 1.3999996, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -836,7 +836,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5879070846810230980}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.006958008, y: 256, z: 0.0014190674}
+  m_LocalPosition: {x: 0, y: 512, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1236,7 +1236,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6620388355518405090}
-        m_TargetAssemblyTypeName: Assets.Scripts.Camera.FirstPersonCamera, Assembly-CSharp
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.CameraStuff.FirstPersonCamera,
+          MyScripts
         m_MethodName: OnScrollOut
         m_Mode: 0
         m_Arguments:

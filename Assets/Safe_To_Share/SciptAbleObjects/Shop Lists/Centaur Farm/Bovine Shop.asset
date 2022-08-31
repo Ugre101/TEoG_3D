@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8fd210f6110435e9edc2dd1551be191, type: 3}
   m_Name: Bovine Shop
   m_EditorClassIdentifier: 
-  sellingItems: []
+  sellingItems:
+  - {fileID: 11400000, guid: 47003b6db26b507488d31aa76d322b54, type: 2}

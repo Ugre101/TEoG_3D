@@ -9,6 +9,7 @@
             InventorySlotItem.ShowItem += ShowItem;
             InventorySlotItem.StopShowing += StopShowing;
             InventoryMenu.StopHoverInfo += StopShowing;
+            InventoryMenu2.StopHoverInfo += StopShowing;
             gameObject.SetActive(false);
             started = true;
         }
@@ -24,6 +25,7 @@
             InventorySlotItem.ShowItem -= ShowItem;
             InventorySlotItem.StopShowing -= StopShowing;
             InventoryMenu.StopHoverInfo -= StopShowing;
+            InventoryMenu2.StopHoverInfo -= StopShowing;
         }
     }
 }

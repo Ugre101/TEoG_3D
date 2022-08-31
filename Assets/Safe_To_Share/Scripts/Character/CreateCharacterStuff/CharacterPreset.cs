@@ -7,6 +7,7 @@ using Character.Race.Races;
 using Character.VoreStuff;
 using CustomClasses;
 using Items;
+using Safe_To_Share.Scripts.CustomClasses;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -20,7 +21,7 @@ namespace Character.CreateCharacterStuff
         [SerializeField] StartIdentity startIdentity;
         [SerializeField] StartStats startStats;
         [SerializeField] DropSerializableObject<SerializableScriptableObject>[] startAbilitiesGuids;
-        [SerializeField] Item[] startItems;
+        [SerializeField] AddAmountOf<Item>[] startItemsWithAmountOf;
         [SerializeField] BasicPerk[] startPerks;
         [SerializeField] EssencePerk[] startEssencePerks;
         [SerializeField] VorePerk[] startVorePerks;
@@ -71,7 +72,7 @@ namespace Character.CreateCharacterStuff
             if (startAbilitiesGuids is { Length: > 0, })
                 longWay = startAbilitiesGuids.Select(dropSerializableObject => dropSerializableObject.guid).ToArray();
             return new CreateCharacter(startIdentity, startStats.GetStats(),
-                longWay, startItems, startRace, startGender, startBody, startPerks, startHair, startSkinColor);
+                longWay, startItemsWithAmountOf, startRace, startGender, startBody, startPerks, startHair, startSkinColor);
         }
     }
 }

@@ -101,7 +101,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         }
 
 
-        void AddInventoryItem(InventoryItem invItem) => slots[invItem.Position].AddItem(invItem);
+        public void AddInventoryItem(InventoryItem invItem) => slots[invItem.Position].AddItem(invItem);
 
         public static event Action StopHoverInfo;
 

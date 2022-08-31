@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using Character;
 using Character.StatsStuff.Mods;
+using Items;
 using UnityEngine;
 
-namespace Items
+namespace Safe_To_Share.Scripts.Character.Items.Item_Effects
 {
     [Serializable]
     public class MiscItemEffects : ItemEffect

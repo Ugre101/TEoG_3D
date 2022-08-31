@@ -1,32 +1,31 @@
 ﻿using System;
 using Items;
-using UnityEngine.EventSystems;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI
 {
-    public class CraftingInventorySlot : InventorySlot,IPointerClickHandler
+    public class CraftingInventorySlot : InventorySlot
     {
         public event Action<InventoryItem> ReceivedItem;
         public event Action ClearedItem;
+        InventorySlot orgSlot;
+
         public override void MoveTo(InventoryItem p, InventorySlot inventorySlot)
         {
-            slotItem.Setup(p,this);
+            orgSlot = inventorySlot;
+            slotItem.Setup(p, this);
             ReceivedItem?.Invoke(p);
         }
 
+        public void ClearOrgItemThenClear()
+        {
+            orgSlot.ClearItem();
+            base.ClearItem();
+            ClearedItem?.Invoke();
+        }
         public override void ClearItem()
         {
             base.ClearItem();
             ClearedItem?.Invoke();
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            print("Clicked");
-            if (eventData.button == PointerEventData.InputButton.Right)
-            {
-                ClearItem();
-            }
         }
     }
 }
