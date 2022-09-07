@@ -30,16 +30,7 @@ namespace GameUIAndMenus
 
         float sleepTier;
 
-        public ObjectPool<TempEffectIcon> IconsPool
-        {
-            get
-            {
-                if (iconsPool == null)
-                    iconsPool = new ObjectPool<TempEffectIcon>(CreateFunc, ActionOnGet, ActionOnRelease,
-                        ActionOnDestroy);
-                return iconsPool;
-            }
-        }
+        ObjectPool<TempEffectIcon> IconsPool => iconsPool ??= new ObjectPool<TempEffectIcon>(CreateFunc, ActionOnGet, ActionOnRelease, ActionOnDestroy);
 
 
         void Start()
@@ -57,13 +48,14 @@ namespace GameUIAndMenus
             ShowTempModsEffects();
             ShowAilments();
             Player.UpdateAilments += ShowAilments;
-            LoadManager.LoadedSave += ShowTempModsEffects;
+            LoadManager.LoadedSave += Loaded;
         }
+
 
         void OnDisable()
         {
             Player.UpdateAilments -= ShowAilments;
-            LoadManager.LoadedSave -= ShowTempModsEffects;
+            LoadManager.LoadedSave -= Loaded;
             if (loadItemEffects != null)
                 StopCoroutine(loadItemEffects);
         }
@@ -94,6 +86,17 @@ namespace GameUIAndMenus
             var obj = Instantiate(prefab, content);
             obj.pool = IconsPool;
             return obj;
+        }
+        void Loaded()
+        {
+            if (loadItemEffects != null)
+                StopCoroutine(loadItemEffects);
+            foreach (Transform icon in content.transform)
+            {
+                icon.gameObject.SetActive(false);
+            }
+            ShowTempModsEffects();
+            ShowAilments();
         }
 
         void ShowTempModsEffects()
@@ -130,7 +133,7 @@ namespace GameUIAndMenus
 
         void HackGetSleepTier()
         {
-            List<TempIntMod> tempIntMods = Player.Stats.Health.Mods.TempBaseStatMods;
+            var tempIntMods = Player.Stats.Health.Mods.TempBaseStatMods;
             if (tempIntMods.Exists(m => m.From == SleepExtensions.ModFrom))
                 sleepTier = tempIntMods.Find(m => m.From == SleepExtensions.ModFrom).ModValue;
         }
@@ -163,8 +166,9 @@ namespace GameUIAndMenus
         IEnumerator ShowItemEffects(Dictionary<string, List<TempIntMod>> dict)
         {
             HandleSleepEffects(dict);
-            foreach (KeyValuePair<string, List<TempIntMod>> pair in dict)
+            foreach (var pair in dict)
                 yield return LoadKeysAndThenItems(pair);
+            loadItemEffects = null;
         }
 
         void HandleSleepEffects(IDictionary<string, List<TempIntMod>> dict)

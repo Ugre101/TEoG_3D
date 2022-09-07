@@ -3,6 +3,7 @@ using Character.GenderStuff;
 using Character.Race.Races;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace AvatarStuff
 {
@@ -17,6 +18,7 @@ namespace AvatarStuff
 
         bool loading, done;
         GameObject playerLoaded;
+        AsyncOperationHandle<GameObject> playerOp;
 
         public Gender[] SupportedGenders => supportedGenders;
         public BasicRace[] SupportedRaces => supportedRaces;
@@ -31,7 +33,7 @@ namespace AvatarStuff
             {
                 if (playerLoaded != null)
                     return playerLoaded;
-                var playerOp = playerPrefab.LoadAssetAsync<GameObject>();
+                playerOp = playerPrefab.LoadAssetAsync<GameObject>();
                 await playerOp.Task;
                 if (playerOp.Task.IsCompletedSuccessfully)
                 {
@@ -55,6 +57,13 @@ namespace AvatarStuff
             loaded = op.Result;
             done = true;
             return loaded;
+        }
+
+        public void UnLoadPlayer()
+        {
+            if (!playerOp.IsValid()) return;
+            Debug.Log("Unloaded old player avatar");
+            Addressables.Release(playerOp);
         }
     }
 }

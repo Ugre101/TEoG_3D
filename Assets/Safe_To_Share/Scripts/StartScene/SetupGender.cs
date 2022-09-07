@@ -38,7 +38,7 @@ namespace Safe_To_Share.Scripts.StartScene
         {
             if (!loadingOp.IsDone)
                 yield return loadingOp;
-            const int startEssence = 100;
+            const int startEssence = 160;
             EssenceSystem essence = tempPlayer.Essence;
             loaded.GainPerk(tempPlayer);
             switch (startGender)
@@ -68,8 +68,8 @@ namespace Safe_To_Share.Scripts.StartScene
                     essence.Femininity.Amount = 0;
                     break;
                 case Gender.Futanari:
-                    essence.Masculinity.Amount += startEssence / 2;
-                    essence.Femininity.Amount += startEssence / 2;
+                    essence.Femininity.Amount += Mathf.RoundToInt(startEssence * 0.6f);
+                    essence.Masculinity.Amount += Mathf.RoundToInt(startEssence * 0.4f);
                     break;
                 case Gender.MaleFutanari:
                     essence.Masculinity.Amount += startEssence / 2;

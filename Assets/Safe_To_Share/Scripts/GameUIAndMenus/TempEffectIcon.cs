@@ -55,7 +55,10 @@ namespace GameUIAndMenus
             int max = mod.Max(m => m.HoursLeft);
             timeLeft.text = $"{max}h";
             if (max <= 0)
-                Destroy(gameObject);
+            {
+                Clear();
+                gameObject.SetActive(false);
+            }
         }
     }
 }

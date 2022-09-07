@@ -149,7 +149,21 @@ namespace SaveStuff
             }
         }
 
-        public FarmAreas.FarmSave FarmsSave => JsonUtility.FromJson<FarmAreas.FarmSave>(farmsSave);
+        public FarmAreas.FarmSave FarmsSave
+        {
+            get
+            {
+                try
+                {
+                    return JsonUtility.FromJson<FarmAreas.FarmSave>(farmsSave);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return new FarmAreas.FarmSave();
+                }
+            }
+        }
 
         public WorldInventoriesSave WorldInventoriesSave
         {

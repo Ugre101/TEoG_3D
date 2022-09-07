@@ -34,6 +34,7 @@ namespace AvatarStuff
             return player ? GetInfo(character).PlayerPrefab : GetInfo(character).Prefab;
         }
 
+        AvatarInfo lastPlayer;
         public AvatarInfo GetInfo(BaseCharacter character)
         {
 #if UNITY_EDITOR
@@ -50,7 +51,6 @@ namespace AvatarStuff
                 if (bestMatch == null)
                     bestMatch = avatar;
             }
-
             return bestMatch ? bestMatch : defaultAvatar;
         }
 
@@ -61,7 +61,8 @@ namespace AvatarStuff
             {
             }
 #endif
-            return await GetInfo(character).GetLoadedPrefab(player);
+            var avatarInfo = GetInfo(character);
+            return await avatarInfo.GetLoadedPrefab(player);
         }
 #if UNITY_EDITOR
         [SerializeField] AvatarInfo sfwAvatar;
