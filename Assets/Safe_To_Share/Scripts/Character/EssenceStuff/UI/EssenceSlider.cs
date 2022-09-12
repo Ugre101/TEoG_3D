@@ -11,32 +11,31 @@ namespace Character.EssenceStuff.UI
         [SerializeField] TextMeshProUGUI text;
 
         Essence ess;
-        int lastVal;
 
         void OnDisable()
         {
             if (ess != null)
-                ess.EssenceChange -= EssChange;
+                ess.EssenceValueChange -= EssValueChange;
         }
 
         public void Setup(Essence essence)
         {
             ess = essence;
-            ess.EssenceChange += EssChange;
-            EssChange(ess.Amount);
+            ess.EssenceValueChange += EssValueChange;
+            EssValueChange(ess.Amount);
         }
 
-        void EssChange(int obj)
+        void EssValueChange(int obj)
         {
             if (obj <= 0)
                 slider.value = 0f;
-            else if (obj < lastVal)
-                slider.value = (float)obj / lastVal;
+            else if (obj <= slider.maxValue)
+                slider.value = obj;
             else
             {
                 // Needs testing if look good
-                slider.value = 1f;
-                lastVal = obj; // First or new biggest value
+                slider.maxValue = obj;
+                slider.value = obj;
             }
 
             text.text = $"{obj} {afterValueTexT}";

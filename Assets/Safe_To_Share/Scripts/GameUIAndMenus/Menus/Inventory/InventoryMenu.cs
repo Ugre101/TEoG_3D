@@ -37,14 +37,14 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             haveGold.GoldChanged(PlayerGold.GoldBag.Gold);
             foreach (CharStat charStat in Player.Stats.GetCharStats.Values)
                 charStat.StatDirtyEvent += ReDraw;
-            InventorySlotItem.Use += UseItem;
+            //InventorySlotItem.Use += UseItem;
         }
 
         void OnDisable()
         {
             foreach (CharStat charStat in Player.Stats.GetCharStats.Values)
                 charStat.StatDirtyEvent -= ReDraw;
-            InventorySlotItem.Use -= UseItem;
+            //InventorySlotItem.Use -= UseItem;
         }
 
 #if UNITY_EDITOR

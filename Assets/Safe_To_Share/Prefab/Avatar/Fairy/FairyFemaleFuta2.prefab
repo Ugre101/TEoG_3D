@@ -9161,11 +9161,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
       propertyPath: m_LocalReferencePoint.y
-      value: 0.92041665
+      value: 0.9204166
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
       propertyPath: m_LocalReferencePoint.z
-      value: 0.0052005053
+      value: 0.005200565
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
+      propertyPath: m_LODs.Array.data[2].renderers.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
       propertyPath: m_LODs.Array.data[0].renderers.Array.data[1].renderer
@@ -9207,6 +9211,10 @@ PrefabInstance:
       propertyPath: m_LODs.Array.data[2].renderers.Array.data[1].renderer
       value: 
       objectReference: {fileID: 4253566259064305260}
+    - target: {fileID: 4742473837712756890, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
+      propertyPath: m_LODs.Array.data[2].renderers.Array.data[2].renderer
+      value: 
+      objectReference: {fileID: 6649954301734742263}
     - target: {fileID: 4789196012826680495, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
       propertyPath: m_Layer
       value: 25
@@ -15476,6 +15484,7 @@ MonoBehaviour:
   dictatorBoner:
     hasDictatorDick: 0
     hasDictatorBalls: 0
+    hasHide: 0
     flaccid: 0
     boner: 0
     dictatorDick: {fileID: 0}

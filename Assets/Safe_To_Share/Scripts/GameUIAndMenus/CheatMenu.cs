@@ -36,9 +36,9 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             player = parPlayer;
         }
 
-        void FemiCheat() => player.Essence.Femininity.Amount += 200;
+        void FemiCheat() => player.Essence.Femininity.GainEssence(200);
 
-        void MascCheat() => player.Essence.Masculinity.Amount += 200;
+        void MascCheat() => player.Essence.Masculinity.GainEssence(200);
 
         void GoldCheat() => PlayerGold.GoldBag.GainGold(200);
 

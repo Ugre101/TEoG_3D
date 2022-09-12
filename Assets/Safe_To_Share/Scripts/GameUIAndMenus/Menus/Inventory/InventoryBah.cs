@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Character.PlayerStuff;
 using Items;
 using UnityEngine;
 
@@ -53,6 +54,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             InventorySlot newSlot = GetSlot();
             newSlot.Setup(inventory,new Vector2(x, y));
             newSlot.MovedItem += MoveItem;
+            newSlot.Use += OnUse;
             slots.Add(newSlot.Position, newSlot);
         }
 
@@ -101,7 +103,23 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         }
 
 
-        public void AddInventoryItem(InventoryItem invItem) => slots[invItem.Position].AddItem(invItem);
+        public void AddInventoryItem(InventoryItem invItem)
+        {
+            var inventorySlot = slots[invItem.Position];
+            inventorySlot.AddItem(invItem);
+        }
+
+        public static event Action<Item> Use;
+
+        void OnUse(Item loaded, InventoryItem item, InventorySlot arg3)
+        {
+            Use?.Invoke(loaded);
+            if (inventory.UseLoadedItem(loaded, item.Position))
+            {
+                arg3.ClearItem();
+                StopHoverInfo?.Invoke();
+            }
+        }
 
         public static event Action StopHoverInfo;
 

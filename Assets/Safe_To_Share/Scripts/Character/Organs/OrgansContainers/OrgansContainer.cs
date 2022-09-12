@@ -19,8 +19,8 @@ namespace Character.Organs.OrgansContainers
             fluid = new SexualFluid(fluidType, startRec);
 
 
-        public abstract int GrowNewCost { get; }
-
+        public int GrowNewCost => GrowNewCostAt(list.Count);
+        public abstract int GrowNewCostAt(int amount);
         public string FluidType => Fluid.FluidType.Title;
         public int FluidCurrent => Mathf.RoundToInt(Fluid.CurrentValue / 100f * FluidMax);
 
@@ -56,7 +56,7 @@ namespace Character.Organs.OrgansContainers
         {
             if (essence.Amount < GrowNewCost)
                 return false;
-            essence.Amount -= GrowNewCost;
+            essence.LoseEssence(GrowNewCost);
             BaseOrgan newOrgan = new();
             if (list.Count > 0 && list[0].Mods.StatMods.Count > 0)
                 // A bit of a hack but it should work

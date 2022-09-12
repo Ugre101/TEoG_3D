@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
+using Character.GenderStuff;
 using Character.PlayerStuff.Currency;
+using Character.Race.Races;
 using Character.StatsStuff;
 using Currency.UI;
 using GameUIAndMenus;
@@ -27,20 +29,32 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             haveGold.GoldChanged(PlayerGold.GoldBag.Gold);
             foreach (var charStat in Player.Stats.GetCharStats.Values)
                 charStat.StatDirtyEvent += ShowStats;
-            InventorySlotItem.Use += UseItem;
+            // InventorySlotItem.Use += UseItem;
+            InventoryBah.Use += InventoryBahOnUse;
         }
-        
+
+        void InventoryBahOnUse(Item loaded)
+        {
+            loaded.Use(Player);
+            if (loaded.UpdateInventoryAfterUse)
+                playerInventory.AddItems();
+        }
+
 
         void OnDisable()
         {
-            InventorySlotItem.Use -= UseItem;
+            //    InventorySlotItem.Use -= UseItem;
+            InventoryBah.Use -= InventoryBahOnUse;
             altStuff.SetActive(true);
             secondaryInventory.gameObject.SetActive(false);
         }
         public static event Action StopHoverInfo;
 
+
         void UseItem(Item loaded, InventoryItem item, InventorySlot arg3)
         {
+            BasicRace startRace = Player.RaceSystem.Race;
+            Gender startGender = Player.Gender;
             loaded.Use(Player);
             if (Player.Inventory.UseLoadedItem(loaded, item.Position))
             {
@@ -49,8 +63,6 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             }
             if (loaded.UpdateInventoryAfterUse)
                 playerInventory.AddItems();
-            holder.UpdateAvatar();
-            holder.HeightsChange(Player.Body.Height.Value);
         }
 
 

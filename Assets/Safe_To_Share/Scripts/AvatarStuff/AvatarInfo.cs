@@ -16,7 +16,7 @@ namespace AvatarStuff
         [SerializeField] BasicRace[] supportedRaces;
         GameObject loaded;
 
-        bool loading, done;
+        bool loading,playerLoading, done,playerDone;
         GameObject playerLoaded;
         AsyncOperationHandle<GameObject> playerOp;
 
@@ -33,11 +33,21 @@ namespace AvatarStuff
             {
                 if (playerLoaded != null)
                     return playerLoaded;
+                if (playerLoading)
+                {
+                    while (!playerDone)
+                    {
+                        await Task.Delay(100);
+                        return loaded;
+                    }
+                }
+                playerLoading = true;
                 playerOp = playerPrefab.LoadAssetAsync<GameObject>();
                 await playerOp.Task;
                 if (playerOp.Task.IsCompletedSuccessfully)
                 {
                     playerLoaded = playerOp.Task.Result;
+                    playerDone = true;
                     return playerLoaded;
                 }
             }

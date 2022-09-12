@@ -49,7 +49,7 @@ namespace SubArea.Cave
 
         void SellMyEssence()
         {
-            myEss.Amount -= amount;
+            myEss.LoseEssence( amount);
             myGold.GainGold(SellValue());
 
             amount = Mathf.Min(myEss.Amount, amount);

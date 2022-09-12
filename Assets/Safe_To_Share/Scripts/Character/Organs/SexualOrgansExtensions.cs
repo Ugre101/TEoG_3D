@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Character.Organs.Fluids;
+using Character.Organs.OrgansContainers;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
@@ -47,6 +48,16 @@ namespace Character.Organs
 
         static float HeightScaleValue(float height) => 0.1f + height / 177f;
 
+        public static int TotalEssenceCost(this OrgansContainer organs)
+        {
+            int cost = 0;
+            for (int i = 0; i < organs.List.Count(); i++) 
+                cost += organs.GrowNewCostAt(i);
+            foreach (var baseOrgan in organs.List)
+                for (var i = 1; i < baseOrgan.BaseValue; i++)
+                    cost += baseOrgan.GrowCostAt(i);
+            return cost;
+        }
 
         public static string OrganDesc(SexualOrganType type, BaseOrgan organ, bool capitalLeter = true) => type switch
         {

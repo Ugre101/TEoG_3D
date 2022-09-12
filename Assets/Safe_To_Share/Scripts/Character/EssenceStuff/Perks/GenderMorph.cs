@@ -67,8 +67,8 @@ namespace Assets.Scripts.Character.EssenceStuff.Perks
             if (partner.SexualOrgans.Vaginas.HaveAny())
             {
                 int gain = partner.SexualOrgans.Vaginas.ReCycleOnce(changeLog);
-                partner.Essence.Femininity.Amount += gain / 2;
-                partner.Essence.Masculinity.Amount += gain / 2;
+                partner.Essence.Femininity.GainEssence( gain / 2);
+                partner.Essence.Masculinity.GainEssence(gain / 2);
             }
 
             if (partner.SexualOrgans.Boobs.HaveAny())
@@ -83,7 +83,8 @@ namespace Assets.Scripts.Character.EssenceStuff.Perks
             partner.Essence.StableEssence.BaseValue += stableGain;
             var toTakeFrom = new OrgansContainer[] { organs.Balls, organs.Dicks, organs.Boobs, };
             var withOrgans = toTakeFrom.Where(c => c.HaveAny()).ToArray();
-            partner.Essence.Femininity.Amount += withOrgans[rng.Next(withOrgans.Length)].ReCycleOnce(changeLog);
+            int toGain = withOrgans[rng.Next(withOrgans.Length)].ReCycleOnce(changeLog);
+            partner.Essence.Femininity.GainEssence( toGain);
             if (partner.SexualOrgans.Vaginas.HaveAny())
                 partner.SexualOrgans.Vaginas.TryGrowSmallest(partner.Essence.Femininity);
             else

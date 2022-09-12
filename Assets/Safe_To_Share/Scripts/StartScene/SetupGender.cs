@@ -46,46 +46,46 @@ namespace Safe_To_Share.Scripts.StartScene
                 case Gender.Doll:
                     break;
                 case Gender.Male:
-                    essence.Masculinity.Amount += startEssence;
+                    essence.Masculinity.GainEssence(startEssence);
                     break;
                 case Gender.Female:
-                    essence.Femininity.Amount += startEssence;
+                    essence.Femininity.GainEssence(startEssence);
                     break;
                 case Gender.CuntBoy:
-                    essence.Femininity.Amount += startEssence;
+                    essence.Femininity.GainEssence(startEssence);
                     if (tempPlayer.SexualOrgans.Vaginas.TryGrowNew(essence.Femininity))
                         tempPlayer.SexualOrgans.Vaginas.GrowFirstAsMuchAsPossible(essence.Femininity);
 
-                    essence.Femininity.Amount = 0;
+                    essence.Femininity.LoseEssence(essence.Femininity.Amount);
                     break;
                 case Gender.DickGirl:
-                    essence.Masculinity.Amount += startEssence / 2;
-                    essence.Femininity.Amount += startEssence / 2;
+                    essence.Masculinity.GainEssence(startEssence / 2);
+                    essence.Femininity.GainEssence(startEssence / 2);
                     if (tempPlayer.SexualOrgans.Boobs.HaveAny() ||
                         tempPlayer.SexualOrgans.Boobs.TryGrowNew(essence.Femininity))
                         tempPlayer.SexualOrgans.Boobs.GrowFirstAsMuchAsPossible(essence.Femininity);
 
-                    essence.Femininity.Amount = 0;
+                    essence.Femininity.LoseEssence(essence.Femininity.Amount);
                     break;
                 case Gender.Futanari:
-                    essence.Femininity.Amount += Mathf.RoundToInt(startEssence * 0.6f);
-                    essence.Masculinity.Amount += Mathf.RoundToInt(startEssence * 0.4f);
+                    essence.Femininity.GainEssence(Mathf.RoundToInt(startEssence * 0.6f));
+                    essence.Masculinity.GainEssence( Mathf.RoundToInt(startEssence * 0.4f));
                     break;
                 case Gender.MaleFutanari:
-                    essence.Masculinity.Amount += startEssence / 2;
-                    essence.Femininity.Amount += startEssence / 2;
+                    essence.Masculinity.GainEssence(startEssence / 2);
+                    essence.Femininity.GainEssence(startEssence / 2);
                     if (tempPlayer.SexualOrgans.Vaginas.HaveAny() ||
                         tempPlayer.SexualOrgans.Vaginas.TryGrowNew(essence.Femininity))
                         tempPlayer.SexualOrgans.Vaginas.GrowFirstAsMuchAsPossible(essence.Femininity);
-                    essence.Femininity.Amount = 0;
+                    essence.Femininity.LoseEssence(essence.Femininity.Amount);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
             tempPlayer.GrowOrgans();
-            essence.Femininity.Amount = 0;
-            essence.Masculinity.Amount = 0;
+            essence.Femininity.Clear();
+            essence.Masculinity.Clear();
         }
 
         void ChangeStartGender(int arg0)

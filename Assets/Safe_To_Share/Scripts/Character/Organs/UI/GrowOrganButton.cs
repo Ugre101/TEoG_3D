@@ -37,7 +37,7 @@ namespace Character.Organs.UI
 
         void Shrink()
         {
-            essence.Amount += Mathf.RoundToInt(organ.Shrink() * 0.7f);
+            essence.GainEssence( Mathf.RoundToInt(organ.Shrink() * 0.7f));
             UpdateText();
             Change = true;
             if (organ.BaseValue <= 0)

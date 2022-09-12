@@ -7,28 +7,31 @@ namespace Safe_To_Share.Scripts.Map
     [RequireComponent(typeof(BoxCollider))]
     public class CombinedHeightLimitArea : MonoBehaviour
     {
-        static readonly HashSet<CombinedHeightLimitArea> InsideArea = new();
+        static readonly Dictionary<int, HashSet<CombinedHeightLimitArea>> InsideArea = new();
         [SerializeField] int sharedId;
         [SerializeField] float heightLimit = 1f;
 
-        void OnDestroy() => InsideArea.Remove(this);
+        void OnDestroy() => InsideArea.Remove(sharedId);
 
         void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out Holder holder))
                 return;
-            holder.Scaler.AreaHasHeightLimit(heightLimit);
-            InsideArea.Add(this);
+            if (InsideArea.TryGetValue(sharedId, out var list))
+                list.Add(this);
+            else if (InsideArea.TryAdd(sharedId,new HashSet<CombinedHeightLimitArea> {this}))
+                holder.Scaler.AreaHasHeightLimit(heightLimit);
         }
 
         void OnTriggerExit(Collider other)
         {
             if (!other.TryGetComponent(out Holder holder))
                 return;
-            InsideArea.Remove(this);
-            if (InsideArea.Count > 0)
-                return;
+            if (!InsideArea.TryGetValue(sharedId, out var hashSet)) return;
+            hashSet.Remove(this);
+            if (hashSet.Count > 0) return;
             holder.Scaler.ExitHeightLimitArea();
+            InsideArea.Remove(sharedId);
         }
     }
 }

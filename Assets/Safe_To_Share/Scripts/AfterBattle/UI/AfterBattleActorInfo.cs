@@ -20,6 +20,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         [SerializeField] MoreAfterBattleActorInfo moreInfo;
         [SerializeField] TextMeshProUGUI pregnant;
         [SerializeField] FluidInfos fluidInfos;
+        [SerializeField] AfterBattleEssenceSliders afterBattleEssenceSliders;
 
         public void Setup(BaseCharacter character)
         {
@@ -33,6 +34,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             moreInfo.Setup(character);
             pregnant.text = character.IsPregnant() ? "P" : string.Empty;
             fluidInfos.Setup(character);
+            afterBattleEssenceSliders.Setup(character);
         }
 
         void ChangeOrgasmText(int obj) => orgasmCounter.text = $"Orgasms: {obj}";

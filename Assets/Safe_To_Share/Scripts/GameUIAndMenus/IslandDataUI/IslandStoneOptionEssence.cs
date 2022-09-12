@@ -41,7 +41,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
         {
             if (!CanAfford(out var playerBody) ||
                 !IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data)) return;
-            playerBody.Amount -= DonateAmount;
+            playerBody.LoseEssence( DonateAmount);
             data.essenceData.IncreaseMaxValueOfType(essenceType);
             int maxValue = data.essenceData.GetMaxValueOfType(essenceType);
             slider.maxValue = maxValue;

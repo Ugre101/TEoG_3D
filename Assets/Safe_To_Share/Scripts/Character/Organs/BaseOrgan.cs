@@ -17,11 +17,8 @@ namespace Character.Organs
         {
         }
 
-        public virtual int GrowCost => BaseCost;
-
-        protected int BaseCost => 9 + Mathf.FloorToInt(Mathf.Pow(BaseValue, 1.2f));
-
-        protected int HigherCost => 19 + Mathf.FloorToInt(Mathf.Pow(BaseValue, 1.23f));
+        public virtual int GrowCost => GrowCostAt(BaseValue);
+        public virtual int GrowCostAt(int size) => 9 + Mathf.FloorToInt(Mathf.Pow(size, 1.2f));
 
         public VoreOrgan Vore => voreOrgan;
 
@@ -31,7 +28,7 @@ namespace Character.Organs
         {
             if (essence.Amount < GrowCost)
                 return false;
-            essence.Amount -= GrowCost;
+            essence.LoseEssence( GrowCost);
             BaseValue++;
             return true;
         }

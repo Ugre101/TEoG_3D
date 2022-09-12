@@ -49,9 +49,12 @@ MonoBehaviour:
     <Amount>k__BackingField: 3
   - <Value>k__BackingField: {fileID: 11400000, guid: 3ff39f04fde183447b3dec0b05c94b74, type: 2}
     <Amount>k__BackingField: 3
+  - <Value>k__BackingField: {fileID: 11400000, guid: df09cfcab1900f446a6ae94d45eb0e39, type: 2}
+    <Amount>k__BackingField: 61
+  - <Value>k__BackingField: {fileID: 11400000, guid: 6fc3204e6b86d164e839d1f2527e0883, type: 2}
+    <Amount>k__BackingField: 27
   startPerks: []
-  startEssencePerks:
-  - {fileID: 11400000, guid: cf01d105a662d374bbf8b2f6be12be9d, type: 2}
+  startEssencePerks: []
   startVorePerks: []
   startRaceRef:
     m_AssetGUID: 7c596fb2be9bc2f4882a620ee187df56

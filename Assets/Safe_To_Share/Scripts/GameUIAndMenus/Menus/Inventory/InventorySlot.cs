@@ -1,3 +1,4 @@
+using System;
 using Items;
 using UnityEngine;
 
@@ -20,10 +21,17 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         public void AddItem(InventoryItem invItem)
         {
             slotItem.Setup(invItem, this);
+            slotItem.Use += SlotItemOnUse;
+        }
+
+        void SlotItemOnUse(Item arg1, InventoryItem arg2, InventorySlot arg3)
+        {
+            Use?.Invoke(arg1,arg2,arg3);
         }
 
         public virtual void ClearItem()
         {
+            slotItem.Use -= SlotItemOnUse;
             slotItem.Clear();
         }
 
@@ -31,5 +39,6 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 
         public virtual void MoveTo(InventoryItem p, InventorySlot inventorySlot) => MovedItem?.Invoke(p, Position,inventorySlot,this);
 
+        public event Action<Item, InventoryItem, InventorySlot> Use;
     }
 }

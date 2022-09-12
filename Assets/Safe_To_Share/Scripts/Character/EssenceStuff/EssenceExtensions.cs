@@ -38,25 +38,14 @@ namespace Character.EssenceStuff
         }
 
         public static ChangeLog DrainEssenceOfType(this BaseCharacter drainer, BaseCharacter loser,
-            DrainEssenceType ofType, int bonusAmount = 0)
-        {
-            ChangeLog changeLog = new();
-            switch (ofType)
+            DrainEssenceType ofType, int bonusAmount = 0) => ofType switch
             {
-                case DrainEssenceType.None:
-                    break;
-                case DrainEssenceType.Masc:
-                    return drainer.DrainMasc(loser, bonusAmount);
-                case DrainEssenceType.Femi:
-                    return drainer.DrainFemi(loser, bonusAmount);
-                case DrainEssenceType.Both:
-                    return drainer.DrainBoth(loser, bonusAmount);
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            return changeLog;
-        }
+                DrainEssenceType.None => new(),
+                DrainEssenceType.Masc => drainer.DrainMasc(loser, bonusAmount),
+                DrainEssenceType.Femi => drainer.DrainFemi(loser, bonusAmount),
+                DrainEssenceType.Both => drainer.DrainBoth(loser, bonusAmount),
+                _ => throw new ArgumentOutOfRangeException()
+            };
 
         public static ChangeLog DrainBoth(this BaseCharacter drainer, BaseCharacter loser, int bonusAmount = 0)
         {
@@ -81,12 +70,34 @@ namespace Character.EssenceStuff
             return changeLog; // TODO fix
         }
 
+        public static Essence GetEssenceOfType(this BaseCharacter character, EssenceType essenceType) => essenceType switch
+            {
+                EssenceType.Masc => character.Essence.Masculinity,
+                EssenceType.Femi => character.Essence.Femininity,
+                _ => throw new ArgumentOutOfRangeException(nameof(essenceType), essenceType, null)
+            };
+
+        public static int CalcTotalEssenceOfType(this BaseCharacter character, EssenceType essenceType) => essenceType switch
+            {
+                EssenceType.Masc => CalcTotalMasc(character),
+                EssenceType.Femi => CalcTotalFemi(character),
+                _ => throw new ArgumentOutOfRangeException(nameof(essenceType), essenceType, null)
+            };
+
         #region Masc
 
+        public static int CalcTotalMasc(this BaseCharacter ofCharacter)
+        {
+            int tot = ofCharacter.Essence.Masculinity.Amount;
+            tot += ofCharacter.SexualOrgans.Balls.TotalEssenceCost();
+            tot += ofCharacter.SexualOrgans.Dicks.TotalEssenceCost();
+            return tot;
+        }
         public static void GainMasc(this BaseCharacter gainer, int toGain)
         {
-            gainer.Essence.Masculinity.Amount += toGain;
+            gainer.Essence.Masculinity.GainEssence(toGain);
             gainer.GrowOrgans();
+            gainer.Essence.Masculinity.InvokeEssenceChange();
         }
 
         public static int LoseMasc(this BaseCharacter loser, int amountToLose, ChangeLog changeLog)
@@ -116,10 +127,16 @@ namespace Character.EssenceStuff
                 // Shrink relevant organs
             }
 
-            if (amountCollected <= amountToLose) return amountCollected;
+            if (amountCollected <= amountToLose)
+            {
+                loser.Essence.Masculinity.InvokeEssenceChange();
+                return amountCollected;
+            }
             amountCollected -= amountToLose;
-            loser.Essence.Masculinity.Amount += amountCollected;
+            loser.Essence.Masculinity.GainEssence(amountCollected);
+            loser.Essence.Masculinity.InvokeEssenceChange();
             return amountToLose;
+
         }
 
         public static ChangeLog DrainMasc(this BaseCharacter drainer, BaseCharacter loser, int bonusAmount = 0)
@@ -158,10 +175,16 @@ namespace Character.EssenceStuff
         #endregion
 
         #region Femi
-
+        public static int CalcTotalFemi(this BaseCharacter ofCharacter)
+        {
+            int tot = ofCharacter.Essence.Femininity.Amount;
+            tot += ofCharacter.SexualOrgans.Vaginas.TotalEssenceCost();
+            tot += ofCharacter.SexualOrgans.Boobs.TotalEssenceCost();
+            return tot;
+        }
         public static void GainFemi(this BaseCharacter gainer, int toGain)
         {
-            gainer.Essence.Femininity.Amount += toGain;
+            gainer.Essence.Femininity.GainEssence(toGain);
             gainer.GrowOrgans();
         }
 
@@ -195,9 +218,15 @@ namespace Character.EssenceStuff
                 // Shrink relevant organs
             }
 
-            if (amountCollected <= amountToLose) return amountCollected;
+            if (amountCollected <= amountToLose)
+            {
+                loser.Essence.Femininity.InvokeEssenceChange();
+                return amountCollected;
+            }
+
             amountCollected -= amountToLose;
-            loser.Essence.Femininity.Amount += amountCollected;
+            loser.Essence.Femininity.GainEssence(amountCollected);
+            loser.Essence.Femininity.InvokeEssenceChange();
             return amountToLose;
         }
 
@@ -212,6 +241,7 @@ namespace Character.EssenceStuff
             foreach (BasicPerk perk in loser.LevelSystem.PerksOfType(PerkType.Essence))
                 if (perk is EssencePerk essencePerk)
                     essencePerk.PerkGetDrainedEssenceEffect(loser, drainer);
+            drainer.Essence.Femininity.InvokeEssenceChange();
             return changeLog; // TODO fix
         }
 
@@ -224,8 +254,7 @@ namespace Character.EssenceStuff
         }
 
         public static ChangeLog GiveFemi(this BaseCharacter giver, BaseCharacter receiver) =>
-            GiveFemi(giver, receiver,
-                giver.Essence.EssenceOptions.SelfDrain
+            GiveFemi(giver, receiver, giver.Essence.EssenceOptions.SelfDrain
                     ? giver.Essence.GiveAmount.Value
                     : Mathf.Min(giver.Essence.GiveAmount.Value, giver.Essence.Femininity.Amount));
 

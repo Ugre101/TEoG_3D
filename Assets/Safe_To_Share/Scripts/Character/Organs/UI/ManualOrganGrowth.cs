@@ -60,7 +60,7 @@ namespace Character.Organs.UI
                 !container.RemoveOrgan(arg2) ||
                 !character.Essence.GetEssence.TryGetValue(essenceType, out Essence ess))
                 return;
-            ess.Amount += Mathf.RoundToInt(container.GrowNewCost * 0.7f);
+            ess.GainEssence( Mathf.RoundToInt(container.GrowNewCost * 0.7f));
         }
 
         void UpdateNewCost(OrgansContainer organsContainer) =>

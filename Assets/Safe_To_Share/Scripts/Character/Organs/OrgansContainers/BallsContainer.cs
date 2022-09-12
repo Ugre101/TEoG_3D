@@ -13,7 +13,7 @@ namespace Character.Organs.OrgansContainers
         }
 
 
-        public override int GrowNewCost => 19 + Mathf.FloorToInt(Mathf.Pow(52f, list.Count));
+        public override int GrowNewCostAt(int count) => 19 + Mathf.FloorToInt(Mathf.Pow(52f, count));
 
         public override void TickMin(int ticks = 1) => base.TickMin(ticks);
 

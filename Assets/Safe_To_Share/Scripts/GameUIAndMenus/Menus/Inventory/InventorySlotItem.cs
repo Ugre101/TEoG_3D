@@ -78,7 +78,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         }
 
         public void OnPointerExit(PointerEventData eventData) => StopShowing?.Invoke();
-        public static event Action<Item, InventoryItem,InventorySlot> Use;
+        public event Action<Item, InventoryItem,InventorySlot> Use;
 
         protected void ResetPosition()
         {

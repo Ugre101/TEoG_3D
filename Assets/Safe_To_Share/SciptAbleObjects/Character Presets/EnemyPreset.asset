@@ -16,7 +16,7 @@ MonoBehaviour:
     allowedGenders:
     - weight: 2
       gender: 1
-    startEssence: 60
+    startEssence: 2648
   startIdentity:
     customIdentity: 0
     identity:
@@ -36,7 +36,7 @@ MonoBehaviour:
     intelligence: 10
     agility: 10
   startAbilitiesGuids: []
-  startItems: []
+  startItemsWithAmountOf: []
   startPerks: []
   startEssencePerks:
   - {fileID: 11400000, guid: 805c419f5cc46ba419a77f37f6f53172, type: 2}

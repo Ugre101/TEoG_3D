@@ -11,20 +11,34 @@ namespace Character.EssenceStuff
         public int Amount
         {
             get => amount;
-            set
+            private set
             {
                 amount = Mathf.Max(0, value);
-                EssenceChange?.Invoke(amount);
+                EssenceValueChange?.Invoke(amount);
             }
         }
 
-        public event Action<int> EssenceChange;
+        public event Action<int> EssenceValueChange;
+        public event Action EssenceTotalChange;
+
+        public void InvokeEssenceChange() => EssenceTotalChange?.Invoke();
+
+        public int GainEssence(int toGain)
+        {
+            Amount += toGain;
+            return Amount;
+        }
 
         public int LoseEssence(int toLose)
         {
-            int have = Mathf.Min(toLose, Amount);
+            var have = Mathf.Min(toLose, Amount);
             Amount -= toLose;
             return have;
+        }
+
+        public void Clear()
+        {
+            Amount = 0;
         }
     }
 }

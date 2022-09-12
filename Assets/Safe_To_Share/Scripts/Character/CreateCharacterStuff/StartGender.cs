@@ -50,48 +50,46 @@ namespace Character.CreateCharacterStuff
                 case Gender.Doll:
                     essence.StableEssence.BaseValue +=
                         Mathf.RoundToInt(startEssence / 1.9f); // 1.9f for a little head space
-                    essence.Femininity.Amount += startEssence / 2;
-                    essence.Masculinity.Amount += startEssence / 2;
+                    essence.Femininity.GainEssence(startEssence / 2);
+                    essence.Masculinity.GainEssence(startEssence / 2);
                     break;
                 case Gender.Male:
-                    essence.Masculinity.Amount += startEssence;
+                    essence.Masculinity.GainEssence(startEssence);
                     break;
                 case Gender.Female:
-                    essence.Femininity.Amount += startEssence;
+                    essence.Femininity.GainEssence(startEssence);
                     break;
                 case Gender.CuntBoy:
                     Essence tempEss = new();
-                    tempEss.Amount += startEssence;
+                    tempEss.GainEssence( startEssence);
                     if (character.SexualOrgans.Vaginas.TryGrowNew(tempEss))
                     {
                         character.SexualOrgans.Vaginas.GrowFirstAsMuchAsPossible(tempEss);
                         essence.StableEssence.BaseValue +=
                             Mathf.RoundToInt(tempEss.Amount * 1.1f); // Whats left plus a small head space
-                        essence.Masculinity.Amount += tempEss.Amount / 2;
-                        essence.Femininity.Amount += tempEss.Amount / 2;
+                        essence.Masculinity.GainEssence(tempEss.Amount / 2);
+                        essence.Femininity.GainEssence(tempEss.Amount / 2);
                     }
 
                     break;
                 case Gender.DickGirl:
-                    essence.Masculinity.Amount += startEssence / 2;
+                    essence.Masculinity.GainEssence( startEssence / 2);
                     character.GrowOrgans(); // Grow male stuff before stable essence if added
-                    Essence dickGirlEssence = new()
-                    {
-                        Amount = startEssence / 2,
-                    };
+                    Essence dickGirlEssence = new();
+                    dickGirlEssence.GainEssence(startEssence / 2);
                     if (character.SexualOrgans.Boobs.HaveAny() ||
                         character.SexualOrgans.Boobs.TryGrowNew(dickGirlEssence))
                     {
                         character.SexualOrgans.Boobs.GrowFirstAsMuchAsPossible(dickGirlEssence);
                         essence.StableEssence.BaseValue +=
                             Mathf.RoundToInt(dickGirlEssence.Amount * 1.1f); // Whats left plus a small head space
-                        essence.Masculinity.Amount += dickGirlEssence.Amount / 2;
-                        essence.Femininity.Amount += dickGirlEssence.Amount / 2;
+                        essence.Masculinity.GainEssence( dickGirlEssence.Amount / 2);
+                        essence.Femininity.GainEssence( dickGirlEssence.Amount / 2);
                     }
 
                     break;
                 case Gender.MaleFutanari:
-                    essence.Femininity.Amount += startEssence / 2;
+                    essence.Femininity.GainEssence(startEssence / 2);
                     if (character.SexualOrgans.Vaginas.TryGrowNew(essence.Femininity))
                     {
                         character.SexualOrgans.Vaginas.GrowFirstAsMuchAsPossible(essence.Femininity);
@@ -99,12 +97,12 @@ namespace Character.CreateCharacterStuff
                             Mathf.RoundToInt(essence.Femininity.Amount * 1.1f); // Whats left plus a small head space
                     }
 
-                    essence.Masculinity.Amount += startEssence / 2;
+                    essence.Masculinity.GainEssence( startEssence / 2);
                     break;
                 case Gender.Futanari:
                 default:
-                    essence.Femininity.Amount += startEssence / 2;
-                    essence.Masculinity.Amount += startEssence / 2;
+                    essence.Femininity.GainEssence(startEssence / 2);
+                    essence.Masculinity.GainEssence( startEssence / 2);
                     break;
             }
 
