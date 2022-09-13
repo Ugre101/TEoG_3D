@@ -128,7 +128,6 @@ namespace SaveStuff
         {
             get
             {
-                Debug.Log(playerGold);
                 if (!string.IsNullOrEmpty(playerGold))
                 {
                     GoldSave gold = JsonUtility.FromJson<GoldSave>(playerGold);
@@ -138,11 +137,9 @@ namespace SaveStuff
                 if (!player.Contains("gold\":")) return 100;
                 int start = player.LastIndexOf("gold\":", StringComparison.Ordinal);
                 int errTest = player.LastIndexOf("goldgf\"aas:", StringComparison.Ordinal);
-                Debug.Log(errTest);
                 int end = player.IndexOf("}", start, StringComparison.Ordinal);
                 if (start == -1 || end == -1) return 200;
                 string substring = player.Substring(start, end - start);
-                Debug.Log(substring);
                 return int.TryParse(substring, out int res) ? res : 200;
                 // if (int.TryParse(JObject))
                 // "gold\\\":99999}}\"

@@ -45,6 +45,10 @@ namespace Character.EssenceStuff.UI
             sessionChange.text = $"{changeTot}";
             sessionChange.color = changeTot == 0 ? Color.gray : changeTot < 0 ? Color.red : Color.green;
 
+            if (essenceSlider.maxValue < totalEssenceOfType)
+            {
+                essenceSlider.maxValue = totalEssenceOfType;
+            }
             essenceSlider.value = totalEssenceOfType;
             currentEssence.text = $"{totalEssenceOfType} ({essence.Amount})";
         }

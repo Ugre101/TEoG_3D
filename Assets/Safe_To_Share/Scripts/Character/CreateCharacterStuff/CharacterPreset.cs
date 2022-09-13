@@ -54,7 +54,6 @@ namespace Character.CreateCharacterStuff
             {
                 startRace = raceOp.Result;
                 done = true;
-                Addressables.Release(raceOp);
             }
         }
 

@@ -72,7 +72,6 @@ namespace AvatarStuff
         public void UnLoadPlayer()
         {
             if (!playerOp.IsValid()) return;
-            Debug.Log("Unloaded old player avatar");
             Addressables.Release(playerOp);
         }
     }

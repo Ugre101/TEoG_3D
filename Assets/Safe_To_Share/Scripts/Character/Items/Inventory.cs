@@ -265,7 +265,6 @@ namespace Items
             Items.Remove(toMove);
             if (moveTo.AddInventoryItemToPos(ref toMove, toPos, out var item))
             {
-                Debug.Log("Had item on pos");
                 oldItem = item;
                 oldItem.Position = oldPos;
                 Items.Add(oldItem);

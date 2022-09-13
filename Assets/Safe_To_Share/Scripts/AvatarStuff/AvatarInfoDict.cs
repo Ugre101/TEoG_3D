@@ -43,14 +43,15 @@ namespace AvatarStuff
             }
 #endif
             AvatarInfo bestMatch = null;
-            foreach (AvatarInfo avatar in avatars.Where(avatar =>
-                         avatar.SupportedRaces.Contains(character.RaceSystem.Race)))
+            foreach (AvatarInfo avatar in avatars)
             {
-                if (avatar.SupportedGenders.Contains(character.Gender))
-                    return avatar;
-                if (bestMatch == null)
-                    bestMatch = avatar;
+                if (avatar.SupportedRaces.Contains(character.RaceSystem.Race))
+                {
+                    if (avatar.SupportedGenders.Contains(character.Gender)) return avatar;
+                    if (bestMatch == null) bestMatch = avatar;
+                }
             }
+
             return bestMatch ? bestMatch : defaultAvatar;
         }
 

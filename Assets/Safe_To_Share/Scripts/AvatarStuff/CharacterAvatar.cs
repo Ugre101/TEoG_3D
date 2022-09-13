@@ -47,9 +47,7 @@ namespace AvatarStuff
         [SerializeField] HairColor hairColor = new();
         [SerializeField] DictatorBoner dictatorBoner;
 
-        [Header("Dont touch"), SerializeField,]
-        bool hasBallsController;
-
+        [Header("Dont touch"), SerializeField,] bool hasBallsController;
         [SerializeField] bool hasDickController;
         [SerializeField] bool hasHideDaz;
 
@@ -136,7 +134,9 @@ namespace AvatarStuff
         {
             bool hasDick = sexualOrgans.Dicks.HaveAny();
             bool hasBalls = sexualOrgans.Balls.HaveAny();
-            forceSkinUpdate = hasHideDaz ? hideDazDickAndBalls.Handle(bodyMeshRenderers, hasDick, hasBalls) : dictatorBoner.Handle(bodyMeshRenderers,hasDick,hasDick);
+            forceSkinUpdate = hasHideDaz ? 
+                hideDazDickAndBalls.Handle(bodyMeshRenderers, hasDick, hasBalls) : 
+                dictatorBoner.HandleHideDickAndBalls(bodyMeshRenderers,hasDick,hasDick);
             HandleDick(sexualOrgans.Dicks, hasDick);
             HandleBalls(sexualOrgans.Balls, hasBalls);
         }
@@ -174,27 +174,44 @@ namespace AvatarStuff
 
         void HandleBalls(OrgansContainer balls, bool hasBalls)
         {
-            if (!hasBallsController)
-                return;
-            ballsController.ShowOrHide(hasBalls);
-            if (!hasBalls)
-                return;
-            ballsController.SetupFluidStretch(balls);
-            balls.Fluid.CurrentValueChange -= UpdateBallsStretch;
-            balls.Fluid.CurrentValueChange += UpdateBallsStretch;
-            ballSize = SetOrganSize(balls.Biggest);
-            if (!balls.List.Any(b => b.Vore.PreysIds.Any())) ballsController.ReSize(ballSize);
+            if (hasBallsController)
+            {
+                ballsController.ShowOrHide(hasBalls);
+                if (!hasBalls)
+                    return;
+                ballsController.SetupFluidStretch(balls);
+                balls.Fluid.CurrentValueChange -= UpdateBallsStretch;
+                balls.Fluid.CurrentValueChange += UpdateBallsStretch;
+                ballSize = SetOrganSize(balls.Biggest);
+                if (!balls.List.Any(b => b.Vore.PreysIds.Any()))
+                {
+                    ballsController.ReSize(ballSize);
+                }
+            }
+            else if (dictatorBoner.hasDictatorBalls)
+            {
+                if (!hasBalls)
+                    return;
+                dictatorBoner.SetupFluidStretch(balls);
+                balls.Fluid.CurrentValueChange -= UpdateDictatorBallsStretch;
+                balls.Fluid.CurrentValueChange += UpdateDictatorBallsStretch;
+                if (!balls.List.Any(b => b.Vore.PreysIds.Any()))
+                {
+                    dictatorBoner.SetBallsSize(SetOrganSize(balls.Biggest));
+                }
+            }
         }
 
         void UpdateBallsStretch(float obj) => ballsController.SetFluidStretch(obj);
+        void UpdateDictatorBallsStretch(float obj) => dictatorBoner.SetFluidStretch(obj);
 
         void HandleDick(OrgansContainer sexualOrgans, bool hasDick)
         {
             if (hasDickController)
                 DazDick(sexualOrgans, hasDick);
-            else
+            else if (dictatorBoner.hasDictatorDick)
             {
-                dictatorBoner.HideOrShow(hasDick, bodyMeshRenderers);
+                dictatorBoner.HideOrShowDick(hasDick);
                 dictatorBoner.SetDickSize(SetOrganSize(sexualOrgans.Biggest));
             }
         }

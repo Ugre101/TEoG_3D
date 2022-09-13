@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Character.Organs.OrgansContainers;
 using UnityEngine;
 
 namespace AvatarStuff
@@ -9,8 +10,8 @@ namespace AvatarStuff
         [Serializable]
         public struct DictatorBoner
         {
-            [SerializeField] bool hasDictatorDick;
-            [SerializeField] bool hasDictatorBalls;
+            [field: SerializeField] public bool hasDictatorDick { get; private set; }
+            [field: SerializeField] public bool hasDictatorBalls { get; private set; }
             [SerializeField] bool hasHide;
             [SerializeField] int flaccid;
             [SerializeField] int boner;
@@ -48,15 +49,13 @@ namespace AvatarStuff
                     return;
                 dictatorBalls.ReSize(biggestBalls);
             }
+            
 
-            public void UpdateBallsFluid(float biggestBalls)
-            {
-                if (!hasDictatorBalls)
-                    return;
-                dictatorBalls.ReSize(biggestBalls);
-            }
+            public void SetupFluidStretch(OrgansContainer container) => dictatorBalls.SetupFluidStretch(container);
 
-            public void HideOrShow(bool hasDick, List<SkinnedMeshRenderer> skinnedMeshRenderers)
+            public void SetFluidStretch(float current) => dictatorBalls.SetFluidStretch(current);
+
+            public void HideOrShowDick(bool hasDick)
             {
                 if (!hasDictatorDick)
                     return;
@@ -69,7 +68,7 @@ namespace AvatarStuff
                 hasDictatorBalls = dictatorBalls != null;
                 hasDictatorDick = dictatorDick != null;
             }
-            public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls) => hasHide && hideDictator.Handle(skinnedMeshRenderers, hasDick, hasBalls);
+            public bool HandleHideDickAndBalls(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls) => hasHide && hideDictator.Handle(skinnedMeshRenderers, hasDick, hasBalls);
         }
     }
 }

@@ -19,7 +19,6 @@ namespace AvatarStuff.Holders
         {
             var res = await avatarDict.GetAvatarLoaded(whom, playerAvatar);
             Changer.UpdateAvatar(res);
-            await Task.Yield();
         }
 
         public virtual void HeightsChange(float newHeight) => Scaler.ChangeScale(newHeight);

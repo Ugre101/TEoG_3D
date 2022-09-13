@@ -221,7 +221,7 @@ namespace SceneStuff
         public void GoHome(Player player)
         {
             if (CurrentLocation != null && CurrentLocation.Guid == defaultScene.guid)
-                GetPlayerHolderAndReplacePlayer(player, defaultExit.ExitPos);
+                StartCoroutine(GetPlayerHolderAndReplacePlayer(player, defaultExit.ExitPos));
             else
                 StartCoroutine(LoadGoHomeSObj(player));
         }
