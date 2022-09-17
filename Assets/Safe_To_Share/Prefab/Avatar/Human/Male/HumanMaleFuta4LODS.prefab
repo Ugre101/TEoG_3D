@@ -15089,8 +15089,8 @@ MonoBehaviour:
     skip:
     - {fileID: 2100000, guid: c3df0b8ac836d2b4da9b49811fe05acb, type: 2}
   dictatorBoner:
-    hasDictatorDick: 0
-    hasDictatorBalls: 0
+    <hasDictatorDick>k__BackingField: 0
+    <hasDictatorBalls>k__BackingField: 0
     hasHide: 0
     flaccid: 0
     boner: 0

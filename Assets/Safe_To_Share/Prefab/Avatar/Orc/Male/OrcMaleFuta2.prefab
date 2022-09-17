@@ -6899,8 +6899,9 @@ MonoBehaviour:
   hairColor:
     skip: []
   dictatorBoner:
-    hasDictatorDick: 1
-    hasDictatorBalls: 1
+    <hasDictatorDick>k__BackingField: 1
+    <hasDictatorBalls>k__BackingField: 1
+    hasHide: 1
     flaccid: 1
     boner: 8
     dictatorDick: {fileID: 315017366357126282}
