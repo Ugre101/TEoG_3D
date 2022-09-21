@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using AvatarStuff;
+using Cinemachine;
 using Movement.ECM2.Source.Characters;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,12 +13,14 @@ namespace Safe_To_Share.Scripts.CameraStuff
 #endif
         [SerializeField] FreePlayCameraController thirdPerson;
         [SerializeField] CinemachineVirtualCamera brain;
-        [SerializeField] float crounchFactor;
+        [SerializeField,Range(1.5f,2.5f)] float crounchFactor;
         [SerializeField, HideInInspector,] float orgZoom;
         [SerializeField, HideInInspector,] Vector3 orgCameraHeight;
 
         [SerializeField, Range(5f, 45f),] float zoomTo;
         [SerializeField, Range(10f, 25f),] float zoomRate;
+        [SerializeField,Header("Scale clipping")] AvatarScaler avatarScaler;
+        [SerializeField, Range(0.1f,0.5f),] float nearClipping = 0.5f;
         bool zoomIn;
         bool zoomOut;
 
@@ -43,8 +46,18 @@ namespace Safe_To_Share.Scripts.CameraStuff
             mover.Uncrouched += UnCrouched;
             mover.MovementModeChanged += IfSwimming;
 #endif
+            avatarScaler.SizeChange += AvatarScalerOnSizeChange;
             UnCrouched();
+            AvatarScalerOnSizeChange(avatarScaler.Height);
         }
+
+        void AvatarScalerOnSizeChange(float obj)
+        {
+            float clip = obj * nearClipping;
+            brain.m_Lens.NearClipPlane = clip;
+        }
+
+    
 
         protected override void OnDisable()
         {
@@ -54,6 +67,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             mover.Uncrouched -= UnCrouched;
             mover.MovementModeChanged -= IfSwimming;
 #endif
+            avatarScaler.SizeChange -= AvatarScalerOnSizeChange;
         }
 # if UNITY_EDITOR
         void OnValidate()

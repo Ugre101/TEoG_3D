@@ -20,7 +20,7 @@ namespace Character.Organs.OrgansContainers
         {
             if (list.Count == 0)
                 return 0;
-            if (list.Find(b => b.BaseValue <= 0) is { } smallestBoob)
+            if (list.Find(b => b.BaseValue <= 1) is { } smallestBoob)
             {
                 list.Remove(smallestBoob);
                 changeLog.LogDrainChange("a pair of breasts shrunk completely leaving nothing behind");

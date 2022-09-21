@@ -21,7 +21,6 @@ namespace Character.EssenceStuff.UI
             essenceType = type;
             Essence parEssence = parCharacter.GetEssenceOfType(type);
             startTot = parCharacter.CalcTotalEssenceOfType(type);
-            print(startTot);
             essence = parEssence;
             parEssence.EssenceTotalChange += ValueTotalChange;
             essenceSlider.maxValue = startTot;

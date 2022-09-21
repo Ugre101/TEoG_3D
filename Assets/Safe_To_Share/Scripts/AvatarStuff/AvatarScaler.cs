@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Movement.ECM2.Source.Components;
 using UnityEngine;
@@ -12,7 +13,8 @@ namespace AvatarStuff
 
         bool areaHasHeightLimit;
         bool firstUse = true;
-        float height;
+        public float Height { get; private set; }
+        public event Action<float> SizeChange;
         Coroutine heightChangeRoutine;
         float orgCapWidth, orgCapHeight;
         float originalHeight = 160f;
@@ -36,13 +38,19 @@ namespace AvatarStuff
             while (endHeight < transform.localScale.x)
             {
                 float stepSize = Mathf.SmoothStep(startSize, endHeight, TimeStep());
-                transform.localScale = new Vector3(stepSize, stepSize, stepSize);
+                SetScale(stepSize);
                 yield return null;
             }
 
             characterMovement.SetCapsuleDimensions(orgCapWidth * endHeight, orgCapHeight * endHeight);
-            transform.localScale = new Vector3(endHeight, endHeight, endHeight);
+            SetScale(endHeight);
             float TimeStep() => (Time.time - startTime) / duration;
+        }
+
+        void SetScale(float stepSize)
+        {
+            SizeChange?.Invoke(stepSize);
+            transform.localScale = new Vector3(stepSize, stepSize, stepSize);
         }
 
         public void ExitHeightLimitArea()
@@ -59,10 +67,10 @@ namespace AvatarStuff
             float startSize = transform.localScale.x;
             const float duration = 1.2f;
             float startTime = Time.time;
-            while (transform.localScale.x < height)
+            while (transform.localScale.x < Height)
             {
-                float stepSize = Mathf.SmoothStep(startSize, height, TimeStep());
-                transform.localScale = new Vector3(stepSize, stepSize, stepSize);
+                float stepSize = Mathf.SmoothStep(startSize, Height, TimeStep());
+                SetScale(stepSize);
                 yield return null;
             }
 
@@ -76,7 +84,7 @@ namespace AvatarStuff
         {
             if (firstUse)
                 FirstUseSetup();
-            height = Mathf.Clamp(newHeight / originalHeight, minSize, maxSize);
+            Height = Mathf.Clamp(newHeight / originalHeight, minSize, maxSize);
             if (areaHasHeightLimit)
                 return;
             SetStoredHeight();
@@ -85,8 +93,8 @@ namespace AvatarStuff
 
         void SetStoredHeight()
         {
-            characterMovement.SetCapsuleDimensions(orgCapWidth * height, orgCapHeight * height);
-            transform.localScale = new Vector3(height, height, height);
+            characterMovement.SetCapsuleDimensions(orgCapWidth * Height, orgCapHeight * Height);
+            SetScale(Height);
         }
 
         void FirstUseSetup()
