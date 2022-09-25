@@ -26,6 +26,18 @@ namespace Character.Family
             ChildDict = Children.ToDictionary(c => c.Identity.ID);
         }
 
+        public static void RenameChild(Child child,string firstName)
+        {
+            for (var index = 0; index < Children.Count; index++)
+            {
+                if (Children[index].Identity.ID == child.Identity.ID)
+                {
+                    Children[index].Identity.ChangeFirstName(firstName);
+                    break;
+                }
+            }
+        }
+
         public static void TickBirthDays(int ticks = 1)
         {
             List<Child> birthDayChilds = Children.Where(child => child.MyBirthDayToday()).ToList();

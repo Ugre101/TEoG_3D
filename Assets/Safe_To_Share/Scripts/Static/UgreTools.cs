@@ -156,9 +156,6 @@ namespace Safe_To_Share.Scripts.Static
                 return sb.ToString();
             }
 
-            public static string AddNewLineAfter(params string[] lines) =>
-                lines.Aggregate(string.Empty, (current, line) => $"{current}{line}\n");
-
             public static string CleanFilePath(string path)
             {
                 char[] invalids = Path.GetInvalidFileNameChars();

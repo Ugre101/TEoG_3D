@@ -11,6 +11,7 @@ namespace Dialogue.DialogueActions.Vore
 
         public override void Invoke(BaseCharacter toAdd, Prey prey, VoreOrgan container)
         {
+            container.ReleasePrey(prey.Identity.ID);
         }
     }
 }

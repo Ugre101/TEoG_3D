@@ -232,6 +232,7 @@ namespace AvatarStuff.Holders
         }
         */
 #if UNITY_EDITOR
+        [Header("Debug stuff")] 
         [SerializeField] CharacterPreset playerChar;
         public async Task EditorSetup() => await LoadPresetThenReplace();
 
@@ -242,6 +243,19 @@ namespace AvatarStuff.Holders
             player.LevelSystem.GainExp(999);
             Player.Vore.Level.GainExp(999);
             PlayerGold.GoldBag.GainGold(9999);
+        }
+        
+        [SerializeField] int fetusDaysOld = 279;
+
+        [ContextMenu("Give fetus")]
+        public void AddDebugFetus()
+        {
+            foreach (var baseOrgan in Player.SexualOrgans.Vaginas.List)
+            {
+                baseOrgan.Womb.AddFetus(Player,Player);
+                baseOrgan.Womb.GrowFetuses(Player.OnBirth,fetusDaysOld);
+                break;
+            }
         }
 #endif
     }

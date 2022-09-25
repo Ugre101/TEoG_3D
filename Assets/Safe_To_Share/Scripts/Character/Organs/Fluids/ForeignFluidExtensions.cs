@@ -16,27 +16,27 @@ namespace Character.Organs.Fluids
 
             StringBuilder desc = new();
             float tot = organ.Womb.ForeignFluids.GetFluids.Sum(f => f.Amount);
-            var biggest = organ.Womb.ForeignFluids.GetFluids.OrderByDescending(f => f.Amount).ToArray();
-            if (biggest.Length == 0)
+            var sorted = organ.Womb.ForeignFluids.GetFluids.OrderByDescending(f => f.Amount).ToArray();
+            if (sorted.Length == 0)
                 return string.Empty;
             float biggestPer = organ.Womb.ForeignFluids.GetFluids.Max(f => f.Amount) / tot;
-            if (biggest.Length == 1 || biggestPer > 0.9f)
-                desc.Append(biggest[0].FluidType);
-            else if (biggest.Length > 1 && biggestPer > 0.5f)
-                desc.Append($"{biggest[0].FluidType} with traces of  {biggest[1].FluidType}");
+            if (sorted.Length == 1 || biggestPer > 0.9f)
+                desc.Append(sorted[0].FluidType);
+            else if (sorted.Length > 1 && biggestPer > 0.5f)
+                desc.Append($"{sorted[0].FluidType} with traces of  {sorted[1].FluidType}");
             else
             {
                 desc.Append(" a mix of ");
-                if (biggest.Length > 0)
-                    desc.Append(biggest[0].FluidType);
-                if (biggest.Length > 1)
+                if (sorted.Length > 0)
+                    desc.Append(sorted[0].FluidType);
+                if (sorted.Length > 1)
                 {
-                    desc.Append(biggest.Length < 3 ? " and " : ", ");
-                    desc.Append(biggest[1].FluidType);
+                    desc.Append(sorted.Length < 3 ? " and " : ", ");
+                    desc.Append(sorted[1].FluidType);
                 }
 
-                if (biggest.Length > 2)
-                    desc.Append($" and {biggest[2].FluidType}");
+                if (sorted.Length > 2)
+                    desc.Append($" and {sorted[2].FluidType}");
             }
 
             switch (type)

@@ -237,9 +237,9 @@ namespace Character
             InvokeUpdateAvatar();
         }
 
-        protected Child BaseOnBirth(Fetus obj)
+        public Child BaseOnBirth(Fetus obj,string firstName = "Child")
         {
-            Child newBorn = obj.GetBorn("Child");
+            Child newBorn = obj.GetBorn(firstName);
             FamilyTree.Children.Add(newBorn.Identity.ID);
             DayCare.AddChild(newBorn);
             InvokeUpdateAvatar();
@@ -261,5 +261,7 @@ namespace Character
         public virtual void InvokeUpdateAvatar() => UpdateAvatar?.Invoke();
 
         public void InvokeRemoveAvatar() => RemoveAvatar?.Invoke();
+
+
     }
 }

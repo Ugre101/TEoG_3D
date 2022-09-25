@@ -9,7 +9,7 @@ namespace Character.Organs.Fluids
     {
         [SerializeField] List<ForeignFluid> fluids = new();
 
-        public IEnumerable<ForeignFluid> GetFluids => fluids;
+        public List<ForeignFluid> GetFluids => fluids;
 
         public void AddFluid(string fluidType, float amount)
         {

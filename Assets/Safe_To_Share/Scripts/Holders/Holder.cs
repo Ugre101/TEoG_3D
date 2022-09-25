@@ -11,6 +11,7 @@ namespace AvatarStuff.Holders
         [SerializeField] protected AvatarScaler avatarScaler;
         [SerializeField] protected bool playerAvatar;
 
+
         public AvatarScaler Scaler => avatarScaler;
 
         public AvatarChanger Changer => avatarChanger;
