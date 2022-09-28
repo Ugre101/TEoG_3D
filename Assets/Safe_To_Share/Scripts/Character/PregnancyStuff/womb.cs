@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Character.Organs.Fluids;
@@ -17,19 +18,24 @@ namespace Character.PregnancyStuff
         public bool HasFetus => FetusList.Any();
 
 
-        public void GrowFetuses(Action<Fetus> bornEvent, int days = 1)
+        public IEnumerable<Fetus> GrowFetuses(int days = 1)
         {
             for (int i = FetusList.Count; i-- > 0;)
-                GrowAFetus(bornEvent, days, FetusList[i]);
+            {
+                var fetus = FetusList[i];
+                if (GrowAFetus(days, fetus))
+                {
+                    yield return fetus;
+                }
+            }
         }
 
-        void GrowAFetus(Action<Fetus> bornEvent, int days, Fetus fetus)
+        
+        bool GrowAFetus(int days, Fetus fetus)
         {
-            if (fetus.GrowChild(days))
-            {
-                FetusList.Remove(fetus);
-                bornEvent?.Invoke(fetus);
-            }
+            if (!fetus.GrowChild(days)) return  false;
+            FetusList.Remove(fetus);
+            return true;
         }
 
         public void AddFetus(BaseCharacter mother, BaseCharacter father) => FetusList.Add(new Fetus(mother, father));

@@ -8,6 +8,7 @@ using Character.LevelStuff;
 using Character.Organs.Fluids;
 using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
+using Character.PregnancyStuff;
 using Character.Race.Races;
 using DormAndHome.Dorm;
 using Movement.ECM2.Source.Characters;
@@ -253,7 +254,7 @@ namespace AvatarStuff.Holders
             foreach (var baseOrgan in Player.SexualOrgans.Vaginas.List)
             {
                 baseOrgan.Womb.AddFetus(Player,Player);
-                baseOrgan.Womb.GrowFetuses(Player.OnBirth,fetusDaysOld);
+                baseOrgan.Womb.GrowFetuses(fetusDaysOld);
                 break;
             }
         }

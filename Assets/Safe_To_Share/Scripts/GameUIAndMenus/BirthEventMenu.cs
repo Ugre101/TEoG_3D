@@ -1,0 +1,57 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using Character;
+using Character.IdentityStuff;
+using Character.PregnancyStuff;
+using Safe_To_Share.Scripts.GameUIAndMenus.BirthMenu;
+using Safe_To_Share.Scripts.Static;
+using TMPro;
+using UnityEngine;
+
+namespace Safe_To_Share.Scripts.GameUIAndMenus
+{
+    public class BirthEventMenu : MonoBehaviour
+    {
+        [SerializeField] TextMeshProUGUI title;
+
+        [SerializeField] TextMeshProUGUI content;
+        [SerializeField] GenderedNameList childNames;
+
+        [SerializeField] Transform inputsContainer;
+        [SerializeField] BabyNameInput babyNameInput;
+        string[] nameList;
+        Fetus[] born;
+        BaseCharacter mother;
+        
+        public void PlayerMotherBirthEvent(BaseCharacter mother, IEnumerable<Fetus> born)
+        {
+            this.mother = mother;
+            var fetusEnumerable = born as Fetus[] ?? born.ToArray();
+            this.born = fetusEnumerable;
+            nameList = new string[fetusEnumerable.Length];
+            for (var index = 0; index < nameList.Length; index++)
+            {
+                nameList[index] = childNames.GetRandomNeutralName;
+            }
+            title.text = "Birth";
+            inputsContainer.KillChildren();
+            for (var i = 0; i < fetusEnumerable.Length; i++)
+            {
+                var imp = Instantiate(babyNameInput, inputsContainer);
+                imp.Setup(i,nameList[i]);
+                imp.NameChange += NewBabyName;
+            }
+        }
+
+        void NewBabyName(string arg1, int arg2) => nameList[arg2] = arg1;
+
+        public void GiveBirth()
+        {
+            for (var i = 0; i < born.Length; i++)
+            {
+                var fetus = born[i];
+                mother.BaseOnBirth(fetus, nameList[i]);
+            }
+        }
+    }
+}

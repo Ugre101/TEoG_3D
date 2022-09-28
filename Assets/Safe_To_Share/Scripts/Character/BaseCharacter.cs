@@ -229,10 +229,13 @@ namespace Character
 
         public static event Action<Child> PlayerIsTheFather;
 
-        public virtual void OnBirth(Fetus obj)
+        public virtual void OnBirth(IEnumerable<Fetus> obj)
         {
-            Child newBorn = BaseOnBirth(obj);
-            PlayerIsTheFather?.Invoke(newBorn);
+            foreach (var f in obj)
+            {
+                Child newBorn = BaseOnBirth(f);
+                PlayerIsTheFather?.Invoke(newBorn);
+            }
             CharacterEvents.CharacterEvents.BirthEvent.StartEvent(this);
             InvokeUpdateAvatar();
         }

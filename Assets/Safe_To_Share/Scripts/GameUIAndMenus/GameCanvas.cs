@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Character;
+using Character.CharacterEvents;
 using Character.Npc;
 using Character.PlayerStuff;
+using Character.PregnancyStuff;
 using Character.Service;
 using Character.VoreStuff;
 using CustomClasses;
@@ -11,6 +14,7 @@ using GameUIAndMenus.DialogueAndEventMenu;
 using Items;
 using Map;
 using Safe_To_Share.Scripts.Building;
+using Safe_To_Share.Scripts.GameUIAndMenus;
 using Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu;
 using Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory;
 using Safe_To_Share.Scripts.Static;
@@ -32,6 +36,7 @@ namespace GameUIAndMenus
         [SerializeField] HideGameUI hideGameUI;
         [SerializeField] Button closeMenuBtn;
         [SerializeField] InventoryMenu2 inventoryMenu;
+        [SerializeField] BirthEventMenu birthEventMenu;
         IEnumerable<IBlockGameUI> cancelThese;
 
         void Start()
@@ -44,6 +49,14 @@ namespace GameUIAndMenus
             BaseDialogue.StartVoreEvent += OpenVoreEvent;
             GameUIManager.HideGameUI += ForceHide;
             InventoryChest.OpenInventory += OpenSecInv;
+            CharacterEvents.PlayerEvents.PlayerBirthEvent.TriggerBirthMenu += PlayerBirthEventOnTriggerBirthMenu;
+            SwitchPanels(gameUI);
+        }
+
+        void PlayerBirthEventOnTriggerBirthMenu(BaseCharacter arg1, IEnumerable<Fetus> arg2)
+        {
+            SwitchPanels(birthEventMenu.gameObject);
+            birthEventMenu.PlayerMotherBirthEvent(arg1,arg2);
         }
 
         void OpenSecInv(Inventory obj)
@@ -62,6 +75,7 @@ namespace GameUIAndMenus
             BaseDialogue.StartVoreEvent -= OpenVoreEvent;
             GameUIManager.HideGameUI -= ForceHide;
             InventoryChest.OpenInventory -= OpenSecInv;
+            CharacterEvents.PlayerEvents.PlayerBirthEvent.TriggerBirthMenu -= PlayerBirthEventOnTriggerBirthMenu;
         }
 
         void ForceHide(bool obj)

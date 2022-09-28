@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Character.Ailments;
 using Character.CreateCharacterStuff;
 using Character.Family;
@@ -67,12 +68,12 @@ namespace Character.PlayerStuff
             PlayerQuests.QuestReward -= CollectQuestReward;
         }
 
-        public override void OnBirth(Fetus obj)
+        public override void OnBirth(IEnumerable<Fetus> obj)
         {
-            Child newBorn = BaseOnBirth(obj);
-            CharacterEvents.CharacterEvents.PlayerEvents.PlayerBirthEvent.StartEvent(this);
+            CharacterEvents.CharacterEvents.PlayerEvents.PlayerBirthEvent.StartEvent(this,obj);
             InvokeUpdateAvatar();
         }
+
 
         public override void TickMin(int ticks = 1)
         {

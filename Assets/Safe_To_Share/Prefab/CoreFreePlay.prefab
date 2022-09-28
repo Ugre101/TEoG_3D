@@ -1412,6 +1412,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3363178119443704957}
+    - target: {fileID: 5724918184586351700, guid: 816804747de79194f8ef39be257e57b6, type: 3}
+      propertyPath: fetusDaysOld
+      value: 278
+      objectReference: {fileID: 0}
     - target: {fileID: 6098252413859740441, guid: 816804747de79194f8ef39be257e57b6, type: 3}
       propertyPath: cam
       value: 

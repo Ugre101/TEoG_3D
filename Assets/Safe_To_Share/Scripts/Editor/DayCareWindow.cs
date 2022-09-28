@@ -25,10 +25,12 @@ namespace EditorFolder
 
             foreach (Child child in DayCare.ChildDict.Values)
             {
+                EditorGUILayout.BeginVertical("Box");
                 EditorGUILayout.TextField("Name", child.Identity.FullName);
                 EditorGUILayout.IntField("Age", child.Identity.BirthDay.DaysOld());
                 EditorGUILayout.TextField("Mother", child.FamilyTree.Mother.FullName);
                 EditorGUILayout.TextField("Father", child.FamilyTree.Father.FullName);
+                EditorGUILayout.EndVertical();
             }
         }
 
