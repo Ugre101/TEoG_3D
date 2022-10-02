@@ -11,6 +11,23 @@ namespace Safe_To_Share.Scripts.Static
             InView,
             Chasing,
         }
+        
+        public enum GameState
+        {
+            FreePlay,
+            Paused,
+        }
+
+        public static Action<GameState> StateChange;
+        static GameState currentState;
+
+        public static GameState CurrentState => currentState;
+
+        static void SetCurrentState(GameState value)
+        {
+            currentState = value;
+            StateChange?.Invoke(value);
+        }
 
         static bool cursorOrgState;
         static CursorLockMode lockState;
@@ -28,6 +45,7 @@ namespace Safe_To_Share.Scripts.Static
             Cursor.visible = true;
             lockState = Cursor.lockState;
             Cursor.lockState = CursorLockMode.None;
+            SetCurrentState(GameState.Paused);
         }
 
 
@@ -45,6 +63,7 @@ namespace Safe_To_Share.Scripts.Static
                 Cursor.visible = cursorOrgState;
                 Cursor.lockState = lockState;
             }
+            SetCurrentState(GameState.FreePlay);
         }
 
         public static void EnemyInRange(EnemyClose howClose)

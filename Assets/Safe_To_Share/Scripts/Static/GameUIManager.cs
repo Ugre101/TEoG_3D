@@ -10,6 +10,8 @@ namespace Safe_To_Share.Scripts.Static
 
         public static readonly List<IBlockGameUI> BlockList = new();
 
-        
+        public static event Action SleepEffect;
+
+        public static void TriggerSleepEffect() => SleepEffect?.Invoke();
     }
 }

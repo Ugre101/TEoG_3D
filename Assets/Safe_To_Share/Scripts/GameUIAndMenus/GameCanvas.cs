@@ -37,6 +37,7 @@ namespace GameUIAndMenus
         [SerializeField] Button closeMenuBtn;
         [SerializeField] InventoryMenu2 inventoryMenu;
         [SerializeField] BirthEventMenu birthEventMenu;
+        [SerializeField] SleepCanvas sleepCanvas;
         IEnumerable<IBlockGameUI> cancelThese;
 
         void Start()
@@ -48,9 +49,16 @@ namespace GameUIAndMenus
             BaseDialogue.StartDialogue += OpenDialogueMenu;
             BaseDialogue.StartVoreEvent += OpenVoreEvent;
             GameUIManager.HideGameUI += ForceHide;
+            GameUIManager.SleepEffect += GameUIManagerOnSleepEffect;
             InventoryChest.OpenInventory += OpenSecInv;
             CharacterEvents.PlayerEvents.PlayerBirthEvent.TriggerBirthMenu += PlayerBirthEventOnTriggerBirthMenu;
             SwitchPanels(gameUI);
+        }
+
+        void GameUIManagerOnSleepEffect()
+        {
+            SwitchPanels(sleepCanvas.gameObject);
+            sleepCanvas.Sleep();
         }
 
         void PlayerBirthEventOnTriggerBirthMenu(BaseCharacter arg1, IEnumerable<Fetus> arg2)
@@ -74,6 +82,7 @@ namespace GameUIAndMenus
             BaseDialogue.StartDialogue -= OpenDialogueMenu;
             BaseDialogue.StartVoreEvent -= OpenVoreEvent;
             GameUIManager.HideGameUI -= ForceHide;
+            GameUIManager.SleepEffect -= GameUIManagerOnSleepEffect;
             InventoryChest.OpenInventory -= OpenSecInv;
             CharacterEvents.PlayerEvents.PlayerBirthEvent.TriggerBirthMenu -= PlayerBirthEventOnTriggerBirthMenu;
         }

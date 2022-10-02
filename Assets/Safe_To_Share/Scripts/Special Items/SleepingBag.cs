@@ -1,5 +1,6 @@
 ﻿using Character;
 using Items;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Special_Items
@@ -12,6 +13,7 @@ namespace Safe_To_Share.Scripts.Special_Items
         {
             base.Use(user);
             user.BaseSleep(sleepQuality);
+            GameUIManager.TriggerSleepEffect();
         }
     }
 }

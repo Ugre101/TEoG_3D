@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Character.Ailments;
 using Character.CreateCharacterStuff;
 using Character.Family;
@@ -26,8 +27,9 @@ namespace Character.PlayerStuff
 
         public Player(CreateCharacter character) : base(character)
         {
-            foreach (var startItem in character.StartItems)
-                Inventory.AddItem(startItem.Value,startItem.Amount);
+            if (character.StartItems != null && character.StartItems.Any())
+                foreach (var startItem in character.StartItems)
+                    Inventory.AddItem(startItem.Value,startItem.Amount);
         }
 
         public Inventory Inventory { get; } = new();

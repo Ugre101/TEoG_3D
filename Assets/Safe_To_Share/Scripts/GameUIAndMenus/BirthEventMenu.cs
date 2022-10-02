@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Character;
 using Character.IdentityStuff;
@@ -22,6 +23,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
         string[] nameList;
         Fetus[] born;
         BaseCharacter mother;
+
+        BabyNameInput[] added;
         
         public void PlayerMotherBirthEvent(BaseCharacter mother, IEnumerable<Fetus> born)
         {
@@ -35,12 +38,25 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             }
             title.text = "Birth";
             inputsContainer.KillChildren();
+            added = new BabyNameInput[fetusEnumerable.Length];
             for (var i = 0; i < fetusEnumerable.Length; i++)
             {
                 var imp = Instantiate(babyNameInput, inputsContainer);
                 imp.Setup(i,nameList[i]);
                 imp.NameChange += NewBabyName;
+                added[i] = imp;
             }
+        }
+
+        void OnDisable()
+        {
+            foreach (var nameInput in added)
+            {
+                nameInput.NameChange -= NewBabyName;
+            }
+
+            added = Array.Empty<BabyNameInput>();
+            inputsContainer.KillChildren();
         }
 
         void NewBabyName(string arg1, int arg2) => nameList[arg2] = arg1;
