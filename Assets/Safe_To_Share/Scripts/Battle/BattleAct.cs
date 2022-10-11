@@ -6,7 +6,8 @@ using UnityEngine;
 namespace Battle
 {
     [Serializable]
-    public class BattleAct
+    public class 
+        BattleAct
     {
         [SerializeField] BattlePrefabEffect onCasterEffect;
         [SerializeField] bool instancePrefabOnCasterFirst;

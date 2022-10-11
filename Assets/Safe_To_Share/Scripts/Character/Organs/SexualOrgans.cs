@@ -20,7 +20,7 @@ namespace Character.Organs
         public BallsContainer Balls => balls;
         public BoobsContainer Boobs => boobs;
         public VaginaContainer Vaginas => vaginas;
-
+        public AnalsContainer Anals => anals;
         public Dictionary<SexualOrganType, OrgansContainer> Containers => organsContainers ??=
             new Dictionary<SexualOrganType, OrgansContainer>
             {

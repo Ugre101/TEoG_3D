@@ -16,5 +16,7 @@ namespace Character.Organs.Fluids
         public FluidType FluidType => FluidTypes.GetFluid(fluidName);
 
         public void ChangeFluidType(FluidType newFluid) => fluidName = newFluid.GetType().Name;
+
+        public void SetEmpty() => CurrentValue = 0;
     }
 }

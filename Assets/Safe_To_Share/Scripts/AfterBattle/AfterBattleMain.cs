@@ -38,8 +38,8 @@ namespace Safe_To_Share.Scripts.AfterBattle
         void BasePlayerActionReaction(AfterBattleBaseAction obj)
         {
             SexActData data = obj.Use(activePlayerActor, activeEnemyActor);
-            activePlayerActor.SetActAnimation(data.Giver);
-            activeEnemyActor.SetActAnimation(data.Receiver);
+            activePlayerActor.SetActAnimation(data.SexActionAnimation.GiveAnimationName);
+            activeEnemyActor.SetActAnimation(data.SexActionAnimation.ReceiveAnimationName);
             AfterBattleMainUI.LogText(data);
         }
 

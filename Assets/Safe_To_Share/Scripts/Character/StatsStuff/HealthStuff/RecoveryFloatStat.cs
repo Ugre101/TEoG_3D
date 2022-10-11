@@ -19,7 +19,7 @@ namespace Character.StatsStuff.HealthStuff
         public float CurrentValue
         {
             get => currentValue;
-            private set
+            protected set
             {
                 Dead = value <= 0;
                 if (value < currentValue)

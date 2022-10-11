@@ -10,6 +10,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
         [SerializeField] AvatarInfoDict avatarDict;
         [SerializeField] AvatarChanger avatarChanger;
         [SerializeField] AfterBattleAvatarScaler avatarScaler;
+        [SerializeField] SexAnimationManager sexAnimationManager;
         [SerializeField] bool playerAvatar;
         Animator animator;
         CharacterAvatar avatar;
@@ -89,14 +90,17 @@ namespace Safe_To_Share.Scripts.AfterBattle
             //  avatarChanger.UpdateAvatar(avatarDict.GetAvatar(Actor,false));
         }
 
-        public void SetActAnimation(AddedAnimations.SexAnimations ani)
+        public void SetActAnimation(string id)
         {
+            sexAnimationManager.TryPlayAnimation(animator,id);
+            /*
             if (lastAnimation.HasValue)
                 animator.SetBool(AddedAnimations.GetAnimationHash[lastAnimation.Value], false);
             if (!AddedAnimations.GetAnimationHash.TryGetValue(ani, out int hash))
                 return;
             animator.SetBool(hash, true);
             lastAnimation = ani;
+            */
         }
 
         public void Removed() => avatarChanger.gameObject.SetActive(false);

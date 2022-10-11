@@ -9,6 +9,7 @@ using Character.Organs.Fluids;
 using Character.Organs.OrgansContainers;
 using Character.PregnancyStuff;
 using Character.SexStatsStuff;
+using Safe_To_Share.Scripts.AfterBattle.Vore;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 using Random = System.Random;
@@ -260,6 +261,8 @@ namespace Safe_To_Share.Scripts.AfterBattle
     public struct SexActData
     {
         [SerializeField] AddedAnimations.SexAnimations giver, receiver;
+
+        [field: SerializeField] public SexActionAnimation SexActionAnimation { get; private set; }
         [SerializeField] string text;
         [SerializeField] List<string> afterText;
         public AddedAnimations.SexAnimations Giver => giver;

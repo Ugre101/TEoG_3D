@@ -41,7 +41,7 @@ namespace Safe_To_Share.Scripts.Special_Items
                 player.Inventory.AddItem(smallFlask.AssetGUID, flasks);
             }
 
-            container.Fluid.DecreaseCurrentValue(100);
+            container.Fluid.SetEmpty();
         }
     }
 }

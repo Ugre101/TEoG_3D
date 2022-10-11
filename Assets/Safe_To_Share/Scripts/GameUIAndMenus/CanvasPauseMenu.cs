@@ -87,7 +87,8 @@ namespace GameUIAndMenus
         public void Resume()
         {
             SetActive(false);
-            GameManager.Resume(false);
+            GameManager.
+                Resume(false);
         }
 
         void SetActive(bool paused)
