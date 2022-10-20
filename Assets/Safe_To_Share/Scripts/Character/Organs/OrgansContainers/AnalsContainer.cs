@@ -10,6 +10,7 @@ namespace Character.Organs.OrgansContainers
     {
         public AnalsContainer() : base(new Scat())
         {
+            list.Add(new BaseOrgan());
         }
 
         public override int GrowNewCostAt(int count) => 19 + Mathf.FloorToInt(Mathf.Pow(52f, count));

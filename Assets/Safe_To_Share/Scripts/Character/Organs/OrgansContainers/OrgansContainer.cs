@@ -11,7 +11,7 @@ using Random = System.Random;
 namespace Character.Organs.OrgansContainers
 {
     [Serializable]
-    public abstract class OrgansContainer : ITickMinute, ITickHour
+    public abstract class  OrgansContainer : ITickMinute, ITickHour
     {
         [SerializeField] protected SexualFluid fluid;
         [SerializeField] protected List<BaseOrgan> list = new();

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Character;
+using Character.EssenceStuff;
 using Character.PlayerStuff;
 using Character.VoreStuff;
 using UnityEngine;
@@ -25,6 +26,17 @@ namespace SaveStuff
         {
             CheckAbilities(player);
             CheckVore(player);
+            CheckButt(player);
+        }
+
+        void CheckButt(Player player)
+        {
+            if (player.SexualOrgans.Anals.HaveAny()) 
+                return;
+            Essence tempEss = new ();
+            tempEss.GainEssence(9999);
+            player.SexualOrgans.Anals.TryGrowNew(tempEss);
+            Debug.Log("Added anal organ");
         }
 
         void CheckAbilities(ControlledCharacter player)

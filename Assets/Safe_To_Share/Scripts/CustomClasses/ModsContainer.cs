@@ -34,7 +34,8 @@ namespace Character.StatsStuff.Mods
 
         public void RemoveStatMod(IntMod mod) => Dirty = StatMods.Remove(mod);
 
-        public bool RemoveStatModsFromSource(string source)
+        public bool 
+            RemoveStatModsFromSource(string source)
         {
             Dirty = StatMods.RemoveAll(mod => mod.From.Equals(source)) > 0;
             return Dirty;
