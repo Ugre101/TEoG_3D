@@ -25,5 +25,10 @@ namespace Character.Organs.OrgansContainers
 
             return base.ReCycleOnce(changeLog);
         }
+
+        public override void TickMin(int ticks = 1)
+        {
+            base.TickMin(ticks);
+        }
     }
 }

@@ -3,12 +3,13 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class SexAnimationManager : MonoBehaviour
+    public class SexAnimationManager 
     {
         readonly Dictionary<string, int> dict = new();
         int? lastHash;
         public void TryPlayAnimation(Animator animator, string ani)
         {
+            if (animator == null) return;
             if (dict.TryGetValue(ani, out int hash))
                 SetAnimatorBool(animator, hash);
             else
@@ -22,6 +23,8 @@ namespace Safe_To_Share.Scripts.AfterBattle
                 }
             }
         }
+
+        public void Clear() => dict.Clear();
 
         void SetAnimatorBool(Animator animator, int hash)
         {

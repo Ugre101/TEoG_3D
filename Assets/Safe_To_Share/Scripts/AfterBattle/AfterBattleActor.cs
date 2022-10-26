@@ -10,11 +10,11 @@ namespace Safe_To_Share.Scripts.AfterBattle
         [SerializeField] AvatarInfoDict avatarDict;
         [SerializeField] AvatarChanger avatarChanger;
         [SerializeField] AfterBattleAvatarScaler avatarScaler;
-        [SerializeField] SexAnimationManager sexAnimationManager;
         [SerializeField] bool playerAvatar;
         Animator animator;
         CharacterAvatar avatar;
 
+        SexAnimationManager sexAnimationManager = new ();
         AvatarInfo currentInfo;
         bool hasAvatar;
         AddedAnimations.SexAnimations? lastAnimation;
@@ -74,6 +74,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         public void NewAnimator(Animator obj)
         {
+            sexAnimationManager.Clear();
             animator = obj;
             animator.SetBool(Idle, true);
         }

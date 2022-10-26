@@ -170,7 +170,7 @@ namespace Character.VoreStuff
             BaseOrgan baseOrgan, bool predIsPlayer)
         {
             bool change = false;
-            baseOrgan.Vore.SetStretch(VoreSystemExtension.OrganVoreCapacity(pred, baseOrgan));
+            baseOrgan.Vore.SetStretch(VoreSystemExtension.OrganVoreCapacity(pred, baseOrgan, organDigestionMode.Key));
             if (HandleOrganRegurgitation(pred, organDigestionMode.Key, baseOrgan))
                 change = true;
             PleasureSexualOrganDigestion(pred, baseOrgan, organDigestionMode.Value.DigestionMethod);

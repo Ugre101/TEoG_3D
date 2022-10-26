@@ -22,8 +22,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.Vore
             return container.List.Min(organ => LacksCapacityBy(pred, prey, organ));
         }
 
-        static float LacksCapacityBy(BaseCharacter pred, BaseCharacter prey, BaseOrgan organ)
-            => prey.Body.Weight - (VoreSystemExtension.OrganVoreCapacity(pred, organ) -
+        float LacksCapacityBy(BaseCharacter pred, BaseCharacter prey, BaseOrgan organ)
+            => prey.Body.Weight - (VoreSystemExtension.OrganVoreCapacity(pred, organ, organType) -
                                    VoredCharacters.CurrentPreyTotalWeight(organ.Vore.PreysIds));
 
         public override bool CanUse(BaseCharacter giver, BaseCharacter receiver)
@@ -35,7 +35,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Vore
                 return false;
             return onePreyOnly
                 ? container.List.Any(o => o.Vore.SpecialPreysIds.Count == 0)
-                : container.List.Any(baseOrgan => VoreSystemExtension.CanOrganVore(giver, baseOrgan, receiver));
+                : container.List.Any(baseOrgan => VoreSystemExtension.CanOrganVore(giver, baseOrgan, receiver, organType));
         }
 
         public override SexActData Use(AfterBattleActor caster, AfterBattleActor target) =>

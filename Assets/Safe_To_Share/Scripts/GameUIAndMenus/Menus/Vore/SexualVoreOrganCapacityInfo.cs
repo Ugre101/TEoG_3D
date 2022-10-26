@@ -8,7 +8,7 @@ namespace GameUIAndMenus.Menus.Vore
     {
         public void Setup(BaseCharacter pred, SexualOrganType type, BaseOrgan organ)
         {
-            float capacity = VoreSystemExtension.OrganVoreCapacity(pred, organ);
+            float capacity = VoreSystemExtension.OrganVoreCapacity(pred, organ, type);
             Setup(type.ToString(), organ.Vore, capacity);
         }
     }
