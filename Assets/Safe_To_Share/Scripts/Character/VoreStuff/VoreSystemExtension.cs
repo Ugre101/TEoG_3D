@@ -3,8 +3,8 @@ using System.Linq;
 using Character.Organs;
 using Character.Organs.OrgansContainers;
 using Character.StatsStuff.Mods;
-using Character.VoreStuff.VoreDigestionModes;
 using Character.VoreStuff.VorePerks;
+using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes;
 using UnityEngine;
 
 namespace Character.VoreStuff

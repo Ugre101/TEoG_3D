@@ -6,7 +6,7 @@ namespace Safe_To_Share.Scripts.Character.Scat
     public static class ScatExtensions
     {
         static NeedToShit needToShit = new();
-        public static string Status(this BaseCharacter character)
+        public static string CheckBodyNeeds(this BaseCharacter character)
         {
             if (character.SexualOrgans.Anals.HaveAny())
             {
@@ -40,6 +40,8 @@ namespace Safe_To_Share.Scripts.Character.Scat
                
 
             }
+
+            // var pressure = character.BodyFunctions.Bladder
             return String.Empty;
         }
     }

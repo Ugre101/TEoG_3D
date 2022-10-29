@@ -4,7 +4,7 @@ using System.Linq;
 using Character.Organs;
 using Character.PlayerStuff;
 using Character.VoreStuff;
-using Character.VoreStuff.VoreDigestionModes;
+using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;

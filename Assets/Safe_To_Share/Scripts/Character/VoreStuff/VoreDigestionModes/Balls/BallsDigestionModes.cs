@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Character.VoreStuff.VoreDigestionModes.Balls
+namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Balls
 {
     [Serializable]
     public class BallsDigestionModes : VoreOrganDigestionMode

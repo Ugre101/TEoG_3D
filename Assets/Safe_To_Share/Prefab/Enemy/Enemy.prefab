@@ -277,6 +277,11 @@ MonoBehaviour:
     hair:
       bald: 0
       color: {r: 1, g: 1, b: 1, a: 1}
+    <BodyFunctions>k__BackingField:
+      <HydrationLevel>k__BackingField: 5
+      <MaxHydration>k__BackingField:
+        mods:
+          tempBaseStatMods: []
     reward:
       goldReward: 0
       expReward: 0

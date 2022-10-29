@@ -329,6 +329,11 @@ MonoBehaviour:
     hair:
       bald: 0
       color: {r: 1, g: 1, b: 1, a: 1}
+    <BodyFunctions>k__BackingField:
+      <HydrationLevel>k__BackingField: 5
+      <MaxHydration>k__BackingField:
+        mods:
+          tempBaseStatMods: []
     sleepIn: 0
     workTitle: 
 --- !u!114 &7015019659552944969

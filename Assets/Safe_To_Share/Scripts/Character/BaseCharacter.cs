@@ -17,6 +17,7 @@ using Character.RelationShipStuff;
 using Character.SexStatsStuff;
 using Character.StatsStuff;
 using Character.VoreStuff;
+using Safe_To_Share.Scripts.Character.Scat;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
@@ -37,6 +38,7 @@ namespace Character
         [SerializeField] PregnancySystem pregnancySystem = new();
         [SerializeField] RelationsShips relationsShips = new();
         [SerializeField] Hair hair = new(false, Color.white);
+        [field: SerializeField] public BodyFunctions BodyFunctions { get; private set; } = new BodyFunctions();
         Gender lastGender;
 
         protected BaseCharacter(BaseCharacter oldCharacter)

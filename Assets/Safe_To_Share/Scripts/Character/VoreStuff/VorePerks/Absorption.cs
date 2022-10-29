@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Character.BodyStuff;
-using Character.VoreStuff.VoreDigestionModes;
+using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 

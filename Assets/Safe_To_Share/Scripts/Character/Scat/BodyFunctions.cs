@@ -11,31 +11,44 @@ namespace Safe_To_Share.Scripts.Character.Scat
         [field: SerializeField] public float HydrationLevel { get; private set; } = 5f;
         [field: SerializeField] public BaseConstIntStat MaxHydration { get; private set; } = new(10);
         [field: SerializeField] public Bladder Bladder { get; private set; } = new();
-        public float IncreaseHydrationLevel(float by)
-        {
-            float orgHyd = HydrationLevel;
-            HydrationLevel = Mathf.Min(HydrationLevel + by, MaxHydration.Value);
-            return 0;
-        }
 
         public bool TickHour(int ticks = 1)
         {
-            HydrationLevel -= 0.2f;
+            switch (HydrationLevel)
+            {
+                case > 0.2f:
+                    Bladder.Fill(0.1f);
+                    DecreaseHydrationLevel(0.2f);
+                    break;
+                case > 0:
+                    Bladder.Fill(HydrationLevel / 2);
+                    HydrationLevel = 0;
+                    break;
+            }
+
             return false;
         }
-    }
 
-    public static class FoodAndDrinkExtensions
-    {
-        public static void Drink(this BaseCharacter character, int amount)
+        public void FullHydration()
         {
-            
-            // 10 per kg
+            HydrationLevel = MaxHydration.Value;
         }
 
-        public static void TickFoodAndDrink(this BaseCharacter character, int ticks = 1)
+        public void IncreaseHydrationLevel(float by)
         {
-            
+            if (HydrationLevel + by > MaxHydration.Value)
+            {
+                // Overflow
+                var overflow = HydrationLevel + by - MaxHydration.Value;
+                Bladder.Fill(overflow);
+            }
+
+            HydrationLevel = Mathf.Clamp(HydrationLevel + by, 0, MaxHydration.Value);
+        }
+
+        public void DecreaseHydrationLevel(float by)
+        {
+            HydrationLevel = Mathf.Clamp(HydrationLevel - by, 0, MaxHydration.Value);
         }
     }
 }

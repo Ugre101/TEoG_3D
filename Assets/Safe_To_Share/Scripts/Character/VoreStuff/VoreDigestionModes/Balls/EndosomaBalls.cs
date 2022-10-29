@@ -1,7 +1,9 @@
-﻿using Character.Organs;
+﻿using Character;
+using Character.Organs;
+using Character.VoreStuff;
 using Safe_To_Share.Scripts.Static;
 
-namespace Character.VoreStuff.VoreDigestionModes.Balls
+namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Balls
 {
     public class EndosomaBalls : DigestionMethod
     {

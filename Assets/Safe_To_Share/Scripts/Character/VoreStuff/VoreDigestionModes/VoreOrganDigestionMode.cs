@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Character;
 using UnityEngine;
 
-namespace Character.VoreStuff.VoreDigestionModes
+namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes
 {
     [Serializable]
     public abstract class VoreOrganDigestionMode

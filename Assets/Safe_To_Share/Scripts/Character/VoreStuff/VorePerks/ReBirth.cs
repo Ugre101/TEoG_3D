@@ -2,7 +2,7 @@
 using System.Linq;
 using Character.BodyStuff;
 using Character.Organs;
-using Character.VoreStuff.VoreDigestionModes.Vagina;
+using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Vagina;
 using UnityEngine;
 
 namespace Character.VoreStuff.VorePerks

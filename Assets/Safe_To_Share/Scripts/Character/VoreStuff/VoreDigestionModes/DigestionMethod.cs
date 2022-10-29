@@ -1,6 +1,8 @@
-﻿using Character.Organs;
+﻿using Character;
+using Character.Organs;
+using Character.VoreStuff;
 
-namespace Character.VoreStuff.VoreDigestionModes
+namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes
 {
     public abstract class DigestionMethod
     {

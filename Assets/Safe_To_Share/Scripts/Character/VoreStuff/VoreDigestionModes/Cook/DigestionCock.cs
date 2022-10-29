@@ -1,6 +1,7 @@
-﻿using Character.Organs;
+﻿using Character;
+using Character.Organs;
 
-namespace Character.VoreStuff.VoreDigestionModes.Cook
+namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Cook
 {
     public class DigestionCock : DigestionMethod
     {

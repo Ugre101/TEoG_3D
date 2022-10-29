@@ -4,8 +4,8 @@ using Character.CharacterEvents.Pregnancy;
 using Character.CharacterEvents.Vore;
 using Character.Organs;
 using Character.PregnancyStuff;
-using Character.VoreStuff.VoreDigestionModes;
-using Character.VoreStuff.VoreDigestionModes.Vagina;
+using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes;
+using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Vagina;
 using Safe_To_Share.Scripts.Static;
 
 namespace Character.CharacterEvents

@@ -1,7 +1,9 @@
-﻿using Character.Organs;
+﻿using Character;
+using Character.Organs;
 using Character.PregnancyStuff;
+using Character.VoreStuff;
 
-namespace Character.VoreStuff.VoreDigestionModes.Vagina
+namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Vagina
 {
     public class VaginaEndosoma : DigestionMethod
     {

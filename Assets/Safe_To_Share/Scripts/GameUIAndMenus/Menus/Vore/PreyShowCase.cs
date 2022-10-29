@@ -2,8 +2,8 @@
 using System.Text;
 using Character.GenderStuff;
 using Character.VoreStuff;
-using Character.VoreStuff.VoreDigestionModes;
-using Character.VoreStuff.VoreDigestionModes.Vagina;
+using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes;
+using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Vagina;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;

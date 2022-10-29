@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Character;
 using Character.VoreStuff.VorePerks;
 
-namespace Character.VoreStuff.VoreDigestionModes.Vagina
+namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Vagina
 {
     [Serializable]
     public class VaginaDigestionModes : VoreOrganDigestionMode

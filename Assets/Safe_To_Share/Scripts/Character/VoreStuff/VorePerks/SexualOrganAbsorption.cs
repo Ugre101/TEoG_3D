@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Character.Organs;
-using Character.VoreStuff.VoreDigestionModes;
 using CustomClasses;
+using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes;
 using UnityEngine;
 
 namespace Character.VoreStuff.VorePerks
