@@ -1,5 +1,4 @@
 ﻿using Character;
-using Character.Ailments;
 using Safe_To_Share.Scripts.Character.Scat;
 using UnityEngine;
 

@@ -1,41 +1,52 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-namespace AvatarStuff
+namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
     public class ScatPrefab : MonoBehaviour
     {
-        [SerializeField] Animator animator;
+        [SerializeField] Animation animator;
+        [SerializeField] Rigidbody rigid;
+        [SerializeField] Collider coll;
+        readonly WaitForSeconds waitForSeconds = new(10f);
 
-        [SerializeField, Range(float.Epsilon, 1f)]
-        float speed= 0.5f;
-        [SerializeField] float fallDist = 1f;
-        [SerializeField] int playHash;
-#if UNITY_EDITOR
-        void OnValidate()
+        void OnCollisionEnter(Collision collisionInfo)
         {
-            if (Application.isPlaying)return;
-            playHash = Animator.StringToHash("Play");
-        }
-#endif
-
-        public void Play()
-        {
-            StartCoroutine(FallOut());
-        }
-
-        IEnumerator FallOut()
-        {
-            float dist = 0;
-            while (dist < fallDist)
+            if (IsAvatarHolder(collisionInfo)) return;
+            Freeze();
+            transform.rotation = collisionInfo.transform.rotation;
+            transform.Rotate(0,Random.Range(0,360),0);
+            foreach (AnimationState state in animator)
             {
-                var downDist = Vector3.down * speed;
-                transform.localPosition += downDist;
-                dist += downDist.magnitude;
-                yield return null;
+                state.speed = VelocityGivenSpeed();
             }
-            animator.SetTrigger(playHash);
+            animator.Play();
+            StartCoroutine(DelayedDestroy());
+        }
+
+        float VelocityGivenSpeed()
+        {
+            // TODO  float speed = rigid.velocity.magnitude;
+            return 2f;
+        }
+
+        void Freeze()
+        {
+            rigid.constraints = RigidbodyConstraints.FreezeAll;
+            coll.enabled = false;
+        }
+
+        bool IsAvatarHolder(Collision collisionInfo)
+        {
+            return false;
+        }
+
+        IEnumerator DelayedDestroy()
+        {
+            yield return waitForSeconds;
+            Destroy(gameObject);
         }
     }
 }

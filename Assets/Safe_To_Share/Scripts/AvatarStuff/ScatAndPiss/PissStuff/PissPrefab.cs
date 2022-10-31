@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace AvatarStuff
+namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
     public class PissPrefab : MonoBehaviour
     {

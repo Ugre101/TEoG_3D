@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AvatarStuff
+namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
     public class ScatHandler : MonoBehaviour
     {
@@ -9,7 +9,6 @@ namespace AvatarStuff
         public void Scat(int size)
         {
             ScatPrefab scat = Instantiate(prefab, transform);
-            scat.Play();
         }
 
         public void Piss(float pressure)
