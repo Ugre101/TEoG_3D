@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
@@ -10,18 +8,21 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
         [SerializeField] Animation animator;
         [SerializeField] Rigidbody rigid;
         [SerializeField] Collider coll;
+
+        [SerializeField] [Range(float.Epsilon, 0.05f)]
+        float upMulti = 0.03f;
+
+        [SerializeField] new Transform transform;
         readonly WaitForSeconds waitForSeconds = new(10f);
 
         void OnCollisionEnter(Collision collisionInfo)
         {
             if (IsAvatarHolder(collisionInfo)) return;
             Freeze();
-            transform.rotation = collisionInfo.transform.rotation;
-            transform.Rotate(0,Random.Range(0,360),0);
-            foreach (AnimationState state in animator)
-            {
-                state.speed = VelocityGivenSpeed();
-            }
+            transform.SetPositionAndRotation(transform.position + transform.up * upMulti,
+                collisionInfo.transform.rotation);
+            transform.Rotate(0, Random.Range(0, 360), 0);
+            foreach (AnimationState state in animator) state.speed = VelocityGivenSpeed();
             animator.Play();
             StartCoroutine(DelayedDestroy());
         }

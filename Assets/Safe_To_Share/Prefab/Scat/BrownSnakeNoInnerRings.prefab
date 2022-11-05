@@ -13,15 +13,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2402de88e2c87974e953df3a37b489fc, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2402de88e2c87974e953df3a37b489fc, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2402de88e2c87974e953df3a37b489fc, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2402de88e2c87974e953df3a37b489fc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -256,6 +256,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -5234448375175369897, guid: 2402de88e2c87974e953df3a37b489fc, type: 3}
   m_PrefabInstance: {fileID: 7056473960202578329}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &7378893810766859890 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2402de88e2c87974e953df3a37b489fc, type: 3}
+  m_PrefabInstance: {fileID: 7056473960202578329}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7866883100933231816 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2402de88e2c87974e953df3a37b489fc, type: 3}
@@ -322,6 +327,8 @@ MonoBehaviour:
   animator: {fileID: 3297576704099983553}
   rigid: {fileID: -4258022986334518847}
   coll: {fileID: 2690513692302300044}
+  upMulti: 0.03
+  transform: {fileID: 7378893810766859890}
 --- !u!137 &8868672861410461090 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1945127692885011515, guid: 2402de88e2c87974e953df3a37b489fc, type: 3}

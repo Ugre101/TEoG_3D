@@ -10651,6 +10651,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7852235072578032369, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
   m_PrefabInstance: {fileID: 8714897209203713418}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1452196054540726882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1380718012000184344, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
+  m_PrefabInstance: {fileID: 8714897209203713418}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6036442166519978165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452196054540726882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105ca742f142469e8b5c10934d906e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4128311287057495823, guid: cf50d0140c7e79e4797dd2e3c24e0658, type: 3}
+  pissHole: {fileID: 8341284011160710325}
+  zSpawnOffset: -0.01
 --- !u!4 &1500307474510782751 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7792249232772383893, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
@@ -11088,6 +11108,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -5046767769673625566, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
   m_PrefabInstance: {fileID: 8714897209203713418}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4751363569075919728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4107761322154917626, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
+  m_PrefabInstance: {fileID: 8714897209203713418}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8341284011160710325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4751363569075919728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9130e790d846490ab5e5f6d947c7bedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5727506264806497230, guid: 710a85e809f057c419e3255ca4ef9778, type: 3}
+  force: 100
+  delayBetweenDrops: 0.5
 --- !u!4 &4784531734555571772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4222013143886713782, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
