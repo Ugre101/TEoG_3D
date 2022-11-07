@@ -11128,6 +11128,7 @@ MonoBehaviour:
   prefab: {fileID: 5727506264806497230, guid: 710a85e809f057c419e3255ca4ef9778, type: 3}
   force: 100
   delayBetweenDrops: 0.5
+  stopTime: 0.5
 --- !u!4 &4784531734555571772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4222013143886713782, guid: c49f9996d49a2394c94cb798b893c252, type: 3}

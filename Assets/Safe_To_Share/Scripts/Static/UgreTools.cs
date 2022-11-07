@@ -134,7 +134,6 @@ namespace Safe_To_Share.Scripts.Static
             }
         }
 
-
         public static class StringFormatting
         {
             public static string AddSpaceAfterCapitalLetter(string text, bool preserveAcronyms = true)
