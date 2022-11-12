@@ -29,13 +29,18 @@ namespace Character.StatsStuff.Mods
             Dirty = true;
         }
 
-        public bool HaveModFrom(string from) => StatMods.Exists(m => m.From == from);
+        public bool HaveModFrom(string from)
+        {
+            return StatMods.Exists(m => m.From == from);
+        }
 
 
-        public void RemoveStatMod(IntMod mod) => Dirty = StatMods.Remove(mod);
+        public void RemoveStatMod(IntMod mod)
+        {
+            Dirty = StatMods.Remove(mod);
+        }
 
-        public bool 
-            RemoveStatModsFromSource(string source)
+        public bool RemoveStatModsFromSource(string source)
         {
             Dirty = StatMods.RemoveAll(mod => mod.From.Equals(source)) > 0;
             return Dirty;
@@ -45,8 +50,8 @@ namespace Character.StatsStuff.Mods
         {
             if (TempBaseStatMods.Exists(m => m.From == mod.From && m.ModType == mod.ModType))
             {
-                TempIntMod current = TempBaseStatMods.Find(m => m.From == mod.From && m.ModType == mod.ModType);
-                int progressiveLess = mod.HoursLeft - current.HoursLeft / 2;
+                var current = TempBaseStatMods.Find(m => m.From == mod.From && m.ModType == mod.ModType);
+                var progressiveLess = mod.HoursLeft - current.HoursLeft / 2;
                 if (progressiveLess > 0)
                     current.AddHours(progressiveLess);
             }
@@ -57,17 +62,27 @@ namespace Character.StatsStuff.Mods
             }
         }
 
-        public float GetValueOfType(ModType type) =>
-            StatMods.Where(mod => mod.ModType == type).Sum(mod => mod.ModValue) +
-            TempBaseStatMods.Where(mod => mod.ModType == type).Sum(mod => mod.ModValue);
+        public float GetValueOfType(ModType type)
+        {
+            return StatMods.Where(mod => mod.ModType == type).Sum(mod => mod.ModValue) +
+                   TempBaseStatMods.Where(mod => mod.ModType == type).Sum(mod => mod.ModValue);
+        }
 
         public void AddTempStatMod(int duration, int value, string from, ModType type)
-            => AddTempStatMod(new TempIntMod(duration, value, from, type));
+        {
+            AddTempStatMod(new TempIntMod(duration, value, from, type));
+        }
 
         // if false do not reset dirty
-        public void RemoveTempStatMod(TempIntMod mod) => Dirty = TempBaseStatMods.Remove(mod) || Dirty;
+        public void RemoveTempStatMod(TempIntMod mod)
+        {
+            Dirty = TempBaseStatMods.Remove(mod) || Dirty;
+        }
 
-        public void RemoveTempStatModsFromSource(string source) => Dirty =
-            TempBaseStatMods.RemoveAll(mod => mod.From.Equals(source)) > 0 || Dirty;
+        public void RemoveTempStatModsFromSource(string source)
+        {
+            Dirty =
+                TempBaseStatMods.RemoveAll(mod => mod.From.Equals(source)) > 0 || Dirty;
+        }
     }
 }

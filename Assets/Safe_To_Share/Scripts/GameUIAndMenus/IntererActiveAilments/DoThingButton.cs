@@ -1,12 +1,20 @@
-﻿using UnityEngine;
+﻿using AvatarStuff.Holders;
+using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.IntererActiveAilments
 {
     public abstract class DoThingButton : MonoBehaviour
     {
-        public void Show()
+
+        
+        [SerializeField] protected PlayerHolder holder;
+#if UNITY_EDITOR
+        public void EditorSetup(PlayerHolder playerHolder) => holder = playerHolder;
+#endif
+        public void ValueChange(float pressure)
         {
-            throw new System.NotImplementedException();
         }
+
+        public abstract void OnClick();
     }
 }

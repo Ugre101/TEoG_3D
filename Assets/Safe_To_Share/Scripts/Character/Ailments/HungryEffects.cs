@@ -16,4 +16,4 @@ namespace Character.Ailments
             return Hungry.Cure(character) | Starving.Cure(character);
         }
     }
-}
+} 

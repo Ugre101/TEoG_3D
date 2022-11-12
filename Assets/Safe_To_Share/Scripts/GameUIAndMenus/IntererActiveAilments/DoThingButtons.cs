@@ -1,19 +1,56 @@
-﻿using Character;
-using Safe_To_Share.Scripts.Character.Scat;
+﻿using System;
+using GameUIAndMenus;
+using SaveStuff;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.IntererActiveAilments
 {
-    public class DoThingButtons : MonoBehaviour
+    public class DoThingButtons : GameMenu
     {
         [SerializeField] NeedToShitButton shitButton;
         [SerializeField] NeedToPissButton pissButton;
-        public void CheckPlayer(BaseCharacter character)
+
+        
+        void Start()
         {
-            if (NeedToShit.Has(character))
+            Player.BodyFunctions.Bladder.BladderPressure += CheckNeedToPiss;
+            Player.SexualOrgans.Anals.Fluid.CurrentValueChange += CheckNeedToShit;
+            LoadManager.LoadedSave += ReCheck;
+        }
+
+#if UNITY_EDITOR
+        void OnValidate()
+        {
+            if (holder != null)
             {
-                shitButton.Show();
+                shitButton.EditorSetup(holder);
+                pissButton.EditorSetup(holder);
             }
+        }
+#endif
+
+        void ReCheck()
+        {
+            
+        }
+
+        void CheckNeedToShit(float obj)
+        {
+            var pressure = obj / Player.SexualOrgans.Anals.Fluid.Value;
+            shitButton.ValueChange(pressure);
+        }
+
+
+        void OnDestroy()
+        {
+            Player.BodyFunctions.Bladder.BladderPressure -= CheckNeedToPiss;
+            Player.SexualOrgans.Anals.Fluid.CurrentValueChange -= CheckNeedToShit;
+            LoadManager.LoadedSave -= ReCheck;
+        }
+
+        void CheckNeedToPiss(float obj)
+        {
+            pissButton.ValueChange(obj);
         }
     }
 }

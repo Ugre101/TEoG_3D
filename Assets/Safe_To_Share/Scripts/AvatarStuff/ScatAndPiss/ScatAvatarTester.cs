@@ -12,6 +12,18 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
         [Header("Pissing")] [SerializeField] PissHole pissHole;
         [SerializeField] [Range(1f, 10f)] float pissTime = 1f;
 
+        IEnumerator LosePresure()
+        {
+            yield return new WaitForSeconds(pissTime);
+            pissHole.StopPissing();
+        }
+
+
+        void TakeaShit()
+        {
+            scatHandler.Scat(shitSize);
+        }
+#if UNITY_EDITOR
         void OnValidate()
         {
             if (animator == null && TryGetComponent(out Animator ani))
@@ -38,23 +50,14 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
             pissHole.StartPissing();
             StartCoroutine(LosePresure());
         }
-
-        IEnumerator LosePresure()
-        {
-            yield return new WaitForSeconds(pissTime);
-            pissHole.StopPissing();
-        }
-
+        
         [ContextMenu("Test Scat")]
-        public void Test()
+        public void TestScat()
         {
             if (animator == null) return;
             animator.SetTrigger(shitHash);
         }
+#endif
 
-        void TakeaShit()
-        {
-            scatHandler.Scat(shitSize);
-        }
     }
 }

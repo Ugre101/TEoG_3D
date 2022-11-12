@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 1730966630505399153}
   - component: {fileID: 5228439658617713492}
   - component: {fileID: 937877442994500317}
+  - component: {fileID: 3580322806019390536}
   m_Layer: 0
   m_Name: Interactive Effects
   m_TagString: Untagged
@@ -557,6 +558,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &3580322806019390536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1406912613751948955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10befe62e0534e36b1bf47def066141f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holder: {fileID: 0}
+  gameCanvas: {fileID: 0}
+  shitButton: {fileID: 0}
+  pissButton: {fileID: 0}
 --- !u!1 &1582000187209926733
 GameObject:
   m_ObjectHideFlags: 0

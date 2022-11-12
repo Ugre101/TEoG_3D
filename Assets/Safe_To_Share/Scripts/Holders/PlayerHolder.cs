@@ -259,5 +259,14 @@ namespace AvatarStuff.Holders
             }
         }
 #endif
+        public void TakeAShit()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void TakeAPiss()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
