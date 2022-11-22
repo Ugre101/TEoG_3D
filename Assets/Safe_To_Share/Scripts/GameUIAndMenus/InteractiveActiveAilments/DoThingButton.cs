@@ -1,7 +1,7 @@
 ﻿using AvatarStuff.Holders;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.IntererActiveAilments
+namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments
 {
     public abstract class DoThingButton : MonoBehaviour
     {

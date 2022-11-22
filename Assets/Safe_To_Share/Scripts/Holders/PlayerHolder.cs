@@ -13,6 +13,7 @@ using Character.Race.Races;
 using DormAndHome.Dorm;
 using Movement.ECM2.Source.Characters;
 using Movement.ECM2.Source.Components;
+using Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss;
 using UnityEngine;
 
 namespace AvatarStuff.Holders
@@ -26,10 +27,10 @@ namespace AvatarStuff.Holders
         public static Action<PlayerHolder, DormMate> LoadDormSex;
         [SerializeField] MovementModHandler movementMoveModHandler;
         [SerializeField] ThirdPersonEcm2Character thirdPersonEcm2Character;
-
         [SerializeField] Player player;
 
         [SerializeField] LayerMask validLayers;
+        [field:SerializeField] public ScatAvatarTester ScatPissHandler { get; private set; }
 
         bool combat;
 
@@ -259,14 +260,6 @@ namespace AvatarStuff.Holders
             }
         }
 #endif
-        public void TakeAShit()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void TakeAPiss()
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

@@ -51,13 +51,13 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated
 
         void SetupEnemy(BaseCharacter enemies)
         {
-            activeEnemyActor.Setup(enemies);
+            activeEnemyActor.Setup(enemies,animatorController);
             UI.SetupPartner(enemies);
         }
 
         void SetupPlayer(BaseCharacter player)
         {
-            activePlayerActor.Setup(player);
+            activePlayerActor.Setup(player,animatorController);
             UI.SetupPlayer(player);
         }
 

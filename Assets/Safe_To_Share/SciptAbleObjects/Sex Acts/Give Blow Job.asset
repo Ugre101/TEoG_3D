@@ -17,11 +17,21 @@ MonoBehaviour:
   data:
     giver: 0
     receiver: 0
+    <SexActionAnimation>k__BackingField:
+      <GiveAnimationHash>k__BackingField: 2107559693
+      <GiveOffset>k__BackingField: {x: 0, y: 0, z: 0}
+      <ReceiveAnimationHash>k__BackingField: 1854610204
+      <ReceiveOffset>k__BackingField: {x: 0, y: 0, z: 0}
     text: 
     afterText: []
   errorData:
     giver: 0
     receiver: 0
+    <SexActionAnimation>k__BackingField:
+      <GiveAnimationHash>k__BackingField: 0
+      <GiveOffset>k__BackingField: {x: 0, y: 0, z: 0}
+      <ReceiveAnimationHash>k__BackingField: 0
+      <ReceiveOffset>k__BackingField: {x: 0, y: 0, z: 0}
     text: 
     afterText: []
   arousalGain:

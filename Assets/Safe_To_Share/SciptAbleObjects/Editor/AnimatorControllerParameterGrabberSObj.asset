@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87af572787ad479296631cb059db549e, type: 3}
+  m_Name: AnimatorControllerParameterGrabberSObj
+  m_EditorClassIdentifier: 
+  animatorController: {fileID: 9100000, guid: e4a3d0a02604ae4478ed2ba411285511, type: 2}
+  <Parameters>k__BackingField:
+  - <Name>k__BackingField: Give BlowJob
+    <Hash>k__BackingField: 2107559693
+  - <Name>k__BackingField: Take BlowJob
+    <Hash>k__BackingField: 1854610204
+  - <Name>k__BackingField: Missionary
+    <Hash>k__BackingField: 368362137

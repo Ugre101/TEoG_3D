@@ -17,6 +17,8 @@ namespace AvatarStuff
     public partial class CharacterAvatar : MonoBehaviour
     {
         const float OrganMulti = 0.7f;
+        [field: SerializeField] public  Animator Animator { get; private set; }
+        [field: SerializeField] public AvatarKeyAreas KeyAreas { get; private set; }
         [SerializeField] Gender[] supportedGenders;
         [SerializeField] BasicRace[] supportedRaces;
         [SerializeField] AssetReference prefab;
@@ -102,6 +104,19 @@ namespace AvatarStuff
                 bodyMuscle.ChangeShape(skinnedMeshRenderer, 0f);
                 bodyFat.ChangeShape(skinnedMeshRenderer, 0f);
             }
+
+            if (Animator == null)
+            {
+                if (TryGetComponent(out Animator animator))
+                    Animator = animator;
+            }
+
+            if (KeyAreas == null)
+                KeyAreas = TryGetComponent(out AvatarKeyAreas keyAreas)
+                    ? keyAreas
+                    : gameObject.AddComponent<AvatarKeyAreas>();
+            else
+                KeyAreas.OnValidate();
         }
 #endif
 

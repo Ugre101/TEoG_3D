@@ -5218,6 +5218,7 @@ MonoBehaviour:
     - id: 16
       title: _phmfaceround
       type: 1
+  <Animator>k__BackingField: {fileID: 7513352743761256337}
   supportedGenders: 00000000
   supportedRaces:
   - {fileID: 11400000, guid: 96817023700d0764793f5b1dcfe15bd9, type: 2}
@@ -5645,6 +5646,11 @@ Transform:
 --- !u!4 &7390935715298819710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -2323927822034658178, guid: 8fd09f7d1adf0454f80e88e3c4b84d75, type: 3}
+  m_PrefabInstance: {fileID: 4120335346034024960}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7513352743761256337 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 8fd09f7d1adf0454f80e88e3c4b84d75, type: 3}
   m_PrefabInstance: {fileID: 4120335346034024960}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7513434210503740041 stripped

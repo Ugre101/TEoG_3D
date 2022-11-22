@@ -12,8 +12,9 @@ namespace Safe_To_Share.Scripts.AfterBattle
         [SerializeField] AfterBattleAvatarScaler avatarScaler;
         [SerializeField] bool playerAvatar;
         Animator animator;
-        CharacterAvatar avatar;
+        public CharacterAvatar avatar { get; private set; }
 
+        RuntimeAnimatorController animatorController;
         SexAnimationManager sexAnimationManager = new ();
         AvatarInfo currentInfo;
         bool hasAvatar;
@@ -42,11 +43,13 @@ namespace Safe_To_Share.Scripts.AfterBattle
         public void NewAvatar(CharacterAvatar obj)
         {
             avatar = obj;
+            
             hasAvatar = true;
             currentInfo = avatarDict.GetInfo(Actor);
             avatar.Setup(Actor);
             UpdateHeight();
             avatar.SetArousal(Actor.SexStats.Arousal);
+            obj.Animator.runtimeAnimatorController = animatorController;
         }
 
         public async void ModifyAvatar()
@@ -76,12 +79,13 @@ namespace Safe_To_Share.Scripts.AfterBattle
         {
             sexAnimationManager.Clear();
             animator = obj;
-            animator.SetBool(Idle, true);
+            // animator.SetBool(Idle, true);
         }
 
-        public void Setup(BaseCharacter character)
+        public void Setup(BaseCharacter character, RuntimeAnimatorController controller)
         {
             Actor = character;
+            animatorController = controller;
             UnSub();
             Actor.UpdateAvatar += ModifyAvatar;
             Actor.Body.Height.StatDirtyEvent += UpdateHeight;
@@ -91,9 +95,9 @@ namespace Safe_To_Share.Scripts.AfterBattle
             //  avatarChanger.UpdateAvatar(avatarDict.GetAvatar(Actor,false));
         }
 
-        public void SetActAnimation(string id)
+        public void SetActAnimation(int hash)
         {
-            sexAnimationManager.TryPlayAnimation(animator,id);
+            sexAnimationManager.TryPlayAnimation(animator,hash);
             /*
             if (lastAnimation.HasValue)
                 animator.SetBool(AddedAnimations.GetAnimationHash[lastAnimation.Value], false);
@@ -105,5 +109,6 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
         public void Removed() => avatarChanger.gameObject.SetActive(false);
+
     }
 }

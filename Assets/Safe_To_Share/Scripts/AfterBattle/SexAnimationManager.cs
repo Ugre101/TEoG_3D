@@ -3,28 +3,30 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class SexAnimationManager 
+    public class SexAnimationManager
     {
-        readonly Dictionary<string, int> dict = new();
+        readonly HashSet<int> validHashes = new();
         int? lastHash;
-        public void TryPlayAnimation(Animator animator, string ani)
+        public void TryPlayAnimation(Animator animator, int hash)
         {
             if (animator == null) return;
-            if (dict.TryGetValue(ani, out int hash))
+            if (validHashes.Contains(hash))
                 SetAnimatorBool(animator, hash);
             else
             {
                 foreach (var parameter in animator.parameters)
                 {
-                    if (parameter.name != ani) continue;
-                    dict.TryAdd(ani, parameter.nameHash);
-                    SetAnimatorBool(animator, parameter.nameHash);
-                    break;
+                    if (parameter.nameHash == hash) // Check controller have parameter
+                    {
+                        validHashes.Add(hash);
+                        SetAnimatorBool(animator, hash);
+                        break;
+                    }
                 }
             }
         }
 
-        public void Clear() => dict.Clear();
+        public void Clear() => validHashes.Clear();
 
         void SetAnimatorBool(Animator animator, int hash)
         {

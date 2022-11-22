@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8843118134831830665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3151945202858479790}
+  m_Layer: 25
+  m_Name: Anus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3151945202858479790
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843118134831830665}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.1264, z: -0.0993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4111747445343809115}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8714897209203713418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11717,6 +11748,7 @@ MonoBehaviour:
     - id: 29
       title: _cb hala body
       type: 0
+  <Animator>k__BackingField: {fileID: 3052527092817511570}
   supportedGenders: 020000000400000005000000
   supportedRaces:
   - {fileID: 11400000, guid: 4d8d0eb9b96993249aa87052e588b749, type: 2}
@@ -11847,6 +11879,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 40bf2aad2e9d28e4db57c581974cc95e, type: 3}
   source: {fileID: 2114678050203151138}
   validated: 1
+--- !u!114 &3856904466124183313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8372439129554442459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931cbd3bf9434bd68a4f4a107fa927b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Mouth>k__BackingField: {fileID: 5193442116022454500}
+  <ShaftRoot>k__BackingField: {fileID: 7560385308837343321}
+  <Vagina>k__BackingField: {fileID: 7560385308837343321}
+  <Anus>k__BackingField: {fileID: 3151945202858479790}
 --- !u!4 &8386078076584542043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 905466804214848209, guid: c49f9996d49a2394c94cb798b893c252, type: 3}

@@ -4898,6 +4898,7 @@ MonoBehaviour:
     - id: 21
       title: _cb hala body
       type: 0
+  <Animator>k__BackingField: {fileID: 4378859519238130154}
   supportedGenders: 020000000400000005000000
   supportedRaces:
   - {fileID: 11400000, guid: 96817023700d0764793f5b1dcfe15bd9, type: 2}

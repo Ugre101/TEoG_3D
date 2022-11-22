@@ -15,7 +15,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
     public class AfterBattleMain : AfterBattleShared
     {
         static AfterBattleMainUI AfterBattleMainUI => AfterBattleMainUI.Instance;
-
+        
         void OnDestroy()
         {
             SexActionButton.PlayerAction -= HandlePlayerAction;
@@ -38,8 +38,8 @@ namespace Safe_To_Share.Scripts.AfterBattle
         void BasePlayerActionReaction(AfterBattleBaseAction obj)
         {
             SexActData data = obj.Use(activePlayerActor, activeEnemyActor);
-            activePlayerActor.SetActAnimation(data.SexActionAnimation.GiveAnimationName);
-            activeEnemyActor.SetActAnimation(data.SexActionAnimation.ReceiveAnimationName);
+            activePlayerActor.SetActAnimation(data.SexActionAnimation.GiveAnimationHash);
+            activeEnemyActor.SetActAnimation(data.SexActionAnimation.ReceiveAnimationHash);
             AfterBattleMainUI.LogText(data);
         }
 
@@ -92,7 +92,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         void SetPlayerActor(BaseCharacter character)
         {
-            activePlayerActor.Setup(character);
+            activePlayerActor.Setup(character,animatorController);
             LoadEssencePerks(character.LevelSystem.OwnedPerks.OfType<EssencePerk>());
             AfterBattleMainUI.SetupPlayer(character);
         }
@@ -107,7 +107,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         void SetEnemyActor(BaseCharacter character)
         {
-            activeEnemyActor.Setup(character);
+            activeEnemyActor.Setup(character,animatorController);
             LoadEssencePerks(character.LevelSystem.OwnedPerks.OfType<EssencePerk>());
             AfterBattleMainUI.SetupPartner(character);
         }

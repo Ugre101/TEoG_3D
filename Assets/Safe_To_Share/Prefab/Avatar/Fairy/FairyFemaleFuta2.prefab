@@ -15396,6 +15396,7 @@ MonoBehaviour:
     - id: 28
       title: cb hala body
       type: 0
+  <Animator>k__BackingField: {fileID: 3083849336835490592}
   supportedGenders: 00000000010000000200000003000000040000000500000006000000
   supportedRaces:
   - {fileID: 11400000, guid: b546dc197130164478b6444f864b5f12, type: 2}
