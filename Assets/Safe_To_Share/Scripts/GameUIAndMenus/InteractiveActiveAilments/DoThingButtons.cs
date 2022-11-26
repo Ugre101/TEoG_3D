@@ -1,4 +1,6 @@
-﻿using GameUIAndMenus;
+﻿using AvatarStuff.Holders;
+using GameUIAndMenus;
+using Safe_To_Share.Scripts.Holders;
 using SaveStuff;
 using UnityEngine;
 
@@ -17,16 +19,15 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments
             LoadManager.LoadedSave += ReCheck;
         }
 
-#if UNITY_EDITOR
-        void OnValidate()
+        public override void SetPlayer(PlayerHolder value, GameCanvas canvas)
         {
-            if (holder != null)
-            {
-                shitButton.EditorSetup(holder);
-                pissButton.EditorSetup(holder);
-            }
+            base.SetPlayer(value, canvas);
+            shitButton.Setup(holder);
+            shitButton.ValueChange(Player.SexualOrgans.Anals.Fluid.CurrentValue / Player.SexualOrgans.Anals.Fluid.Value);
+            pissButton.Setup(holder);
+            pissButton.ValueChange(Player.BodyFunctions.Bladder.Pressure());
         }
-#endif
+
 
         void ReCheck()
         {

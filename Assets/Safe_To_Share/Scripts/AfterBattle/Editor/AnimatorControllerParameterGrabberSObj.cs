@@ -20,6 +20,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Editor
                 Parameters.Add(new NameAndHash(para.name, para.nameHash));
         }
         
+        
         [Serializable]
         public struct NameAndHash
         {

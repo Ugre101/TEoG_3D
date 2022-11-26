@@ -2,6 +2,7 @@
 using AvatarStuff.Holders;
 using Character.StatsStuff.Mods;
 using Movement.ECM2.Source.Characters;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Movement

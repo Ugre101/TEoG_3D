@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AvatarStuff.Holders;
+using Safe_To_Share.Scripts.Holders;
 
 namespace DormAndHome.Dorm.Buildings
 {

@@ -9,6 +9,8 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
         const float MaxFlyTime = 10f;
         [SerializeField] Rigidbody rigid;
         [SerializeField] PissPuddle puddle;
+        [SerializeField] Vector3 orgSize;
+            
         float beenActiveTime;
         IObjectPool<PissPrefab> pool;
 
@@ -37,11 +39,12 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
             return false;
         }
 
-        public void ResetPosAndRot()
+        public void ResetPosAndRot(Vector3 transformPosition, Vector3 direction,float scaleFactor)
         {
             rigid.velocity = Vector3.zero;
             rigid.angularVelocity = Vector3.zero;
-            transform.SetLocalPositionAndRotation(Vector3.zero, new Quaternion());
+            transform.SetLocalPositionAndRotation(transformPosition, Quaternion.Euler(direction));
+            transform.localScale = orgSize * scaleFactor;
             beenActiveTime = 0;
         }
 
@@ -53,7 +56,7 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
                 existingPuddle.Grow();
                 return;
             }
-            var newPuddle = Instantiate(puddle, cords + new Vector3(0,0.1f,0), transformRotation);
+            var newPuddle = Instantiate(puddle, cords , transformRotation);
             PissPuddle.ExistingPuddles.Add(newPuddle);
         }
     }

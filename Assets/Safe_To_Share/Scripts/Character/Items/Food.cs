@@ -8,10 +8,11 @@ namespace Items
     public class Food : Item
     {
         [SerializeField, Min(0f),] int kcal;
-
+        [SerializeField, Range(0f, 10f)] float reHydration;
         public override void Use(BaseCharacter user)
         {
             user.Eat(kcal);
+            user.BodyFunctions.IncreaseHydrationLevel(reHydration);
             base.Use(user);
         }
     }

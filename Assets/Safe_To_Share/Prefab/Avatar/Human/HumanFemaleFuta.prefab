@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3151945202858479790}
+  - component: {fileID: 4990865190251246143}
   m_Layer: 25
   m_Name: Anus
   m_TagString: Untagged
@@ -31,6 +32,21 @@ Transform:
   m_Father: {fileID: 4111747445343809115}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4990865190251246143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843118134831830665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105ca742f142469e8b5c10934d906e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4128311287057495823, guid: cf50d0140c7e79e4797dd2e3c24e0658, type: 3}
+  zSpawnOffset: 0.01
+  ySpawnOffset: -0.075
 --- !u!1001 &8714897209203713418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10700,8 +10716,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 4128311287057495823, guid: cf50d0140c7e79e4797dd2e3c24e0658, type: 3}
-  pissHole: {fileID: 8341284011160710325}
   zSpawnOffset: -0.01
+  ySpawnOffset: -0.01
 --- !u!4 &1500307474510782751 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7792249232772383893, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
@@ -11749,6 +11765,7 @@ MonoBehaviour:
       title: _cb hala body
       type: 0
   <Animator>k__BackingField: {fileID: 3052527092817511570}
+  <KeyAreas>k__BackingField: {fileID: 3856904466124183313}
   supportedGenders: 020000000400000005000000
   supportedRaces:
   - {fileID: 11400000, guid: 4d8d0eb9b96993249aa87052e588b749, type: 2}
@@ -11895,6 +11912,24 @@ MonoBehaviour:
   <ShaftRoot>k__BackingField: {fileID: 7560385308837343321}
   <Vagina>k__BackingField: {fileID: 7560385308837343321}
   <Anus>k__BackingField: {fileID: 3151945202858479790}
+--- !u!114 &7168800235907757204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8372439129554442459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94d538417a8419ea1151f1f577bfec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3052527092817511570}
+  shitHash: 1567588355
+  scatHandler: {fileID: 6036442166519978165}
+  shitSize: 1
+  pissHole: {fileID: 8341284011160710325}
+  pissTime: 5
 --- !u!4 &8386078076584542043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 905466804214848209, guid: c49f9996d49a2394c94cb798b893c252, type: 3}

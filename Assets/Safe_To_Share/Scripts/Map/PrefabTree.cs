@@ -1,4 +1,5 @@
 ﻿using AvatarStuff.Holders;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Map

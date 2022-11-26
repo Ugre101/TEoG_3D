@@ -19,13 +19,15 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
         {
             if (IsAvatarHolder(collisionInfo)) return;
             Freeze();
-            transform.SetPositionAndRotation(transform.position + transform.up * upMulti,
-                collisionInfo.transform.rotation);
-            transform.Rotate(0, Random.Range(0, 360), 0);
+            var normal = collisionInfo.GetContact(0).normal;
+            var angle = Vector3.Angle(normal, Vector3.up);
+            transform.SetPositionAndRotation(transform.position + Vector3.up * upMulti,Quaternion.identity);
+            transform.Rotate(0, Random.Range(0, 360), angle);
             foreach (AnimationState state in animator) state.speed = VelocityGivenSpeed();
             animator.Play();
             StartCoroutine(DelayedDestroy());
         }
+
 
         float VelocityGivenSpeed()
         {
@@ -35,12 +37,15 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 
         void Freeze()
         {
+            rigid.velocity = Vector3.zero;
+            rigid.angularVelocity = Vector3.zero;
             rigid.constraints = RigidbodyConstraints.FreezeAll;
             coll.enabled = false;
         }
 
         bool IsAvatarHolder(Collision collisionInfo)
         {
+            if (collisionInfo.gameObject.CompareTag("Player")) return true;
             return false;
         }
 

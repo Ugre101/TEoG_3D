@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Pool;
 
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
@@ -8,9 +6,9 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
     public class PissHole : MonoBehaviour
     {
         [SerializeField] PissPrefab prefab;
-        [SerializeField] float force;
-        [SerializeField, Range(float.Epsilon, 0.3f)] float delayBetweenDrops = 0.2f;
-        [SerializeField,Range(1f,4f)] float stopTime = 2f;
+        const float Force = 90f;
+        const float DelayBetweenDrops = 0.075f;
+        const float StopTime = 2f;
         ObjectPool<PissPrefab> pissPool;
         bool pissing;
         bool stopRoutineActive;
@@ -30,12 +28,12 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
                 return;
             }
             if (!pissing) return;
-            if (timeSinceLastDrop < delayBetweenDrops)
+            if (timeSinceLastDrop < DelayBetweenDrops)
             {
                 timeSinceLastDrop += Time.deltaTime;
                 return;
             }
-            Piss(force);
+            Piss(transform.up * Force);
             timeSinceLastDrop = 0;
         }
 
@@ -43,53 +41,55 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
         {
             stoppingTimeSpent += Time.deltaTime;
             timeSinceLastDrop += Time.deltaTime;
-            float percent = (stoppingTimeSpent / stopTime);
+            float percent = (stoppingTimeSpent / StopTime);
             // print($"{delayBetweenDrops} + {delayBetweenDrops * percent} < {timeSinceLastDrop}");
-            if (delayBetweenDrops + (delayBetweenDrops * percent) < timeSinceLastDrop)
+            if (DelayBetweenDrops + (DelayBetweenDrops * percent) < timeSinceLastDrop)
             {
-                float f = force - force * percent;
-                Piss(f);
+                
+                float f = Force - Force * percent;
+                
+                Piss(transform.up * f);
                 timeSinceLastDrop = 0;
             }
 
-            if (stopTime < stoppingTimeSpent)
+            if (StopTime < stoppingTimeSpent)
             {
                 stopRoutineActive = false;
                 stoppingTimeSpent = 0;
             }
         }
 
-        [ContextMenu("Start Pissing")]
-        public void StartPissing() => pissing = true;
+        float avatarHeight = 1f;
+        public void StartPissing(float height)
+        {
+            avatarHeight = height;
+            pissing = true;
+        }
 
-        [ContextMenu("Stop Pissing")]
         public void StopPissing()
         {
             stopRoutineActive = true;
             pissing = false;
         }
-
      
-
-        [ContextMenu("One Piss")]
-        public void Piss(float f)
+         void Piss(Vector3 f)
         {
            var drop =  pissPool.Get();
-           drop.Launch(new Vector3(0,f,0), pissPool);
+           drop.Launch(f, pissPool);
         }
 
         void ActionOnRelease(PissPrefab obj)
         {
             obj.gameObject.SetActive(false);
-            obj.ResetPosAndRot();
+            obj.ResetPosAndRot(transform.position,transform.forward,avatarHeight);
         }
 
         void ActionOnGet(PissPrefab obj) => obj.gameObject.SetActive(true);
 
         PissPrefab CreateFunc()
         {
-            var pissPrefab = Instantiate(prefab, transform);
-            pissPrefab.ResetPosAndRot();
+            var pissPrefab = Instantiate(prefab);
+            pissPrefab.ResetPosAndRot(transform.position,transform.forward,avatarHeight);
             return pissPrefab;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Character.LevelStuff;
 using Character.StatsStuff.Mods;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
 namespace AvatarStuff.Holders

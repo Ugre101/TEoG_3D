@@ -12,6 +12,7 @@ using Map;
 using QuestStuff;
 using Safe_To_Share.Scripts.Character.Items;
 using Safe_To_Share.Scripts.Farming;
+using Safe_To_Share.Scripts.Holders;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;

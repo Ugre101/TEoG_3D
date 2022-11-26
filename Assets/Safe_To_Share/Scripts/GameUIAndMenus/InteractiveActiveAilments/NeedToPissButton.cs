@@ -4,7 +4,8 @@
     {
         public override void OnClick()
         {
-            holder.ScatPissHandler.Piss();
+            holder.StartPissing();
+            gameObject.SetActive(false);
         }
     }
 }

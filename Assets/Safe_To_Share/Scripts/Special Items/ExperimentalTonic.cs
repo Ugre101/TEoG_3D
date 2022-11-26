@@ -7,6 +7,7 @@ using Character.EssenceStuff;
 using Character.Organs;
 using Character.StatsStuff.Mods;
 using Items;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 using Random = System.Random;
 

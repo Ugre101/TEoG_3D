@@ -3,18 +3,17 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
-    public class ScatAvatarTester : MonoBehaviour
+    public class AvatarScatPissManager : MonoBehaviour
     {
         [SerializeField] Animator animator;
         [SerializeField] int shitHash;
         [SerializeField] ScatHandler scatHandler;
-        [SerializeField] [Range(0.5f, 5f)] float shitSize = 1f;
         [Header("Pissing")] [SerializeField] PissHole pissHole;
-        [SerializeField] [Range(1f, 10f)] float pissTime = 1f;
+        [SerializeField] [Range(1f, 10f)] float pissTime = 5f;
 
-        IEnumerator LosePressure()
+        IEnumerator LosePressure(float bladderCurrent)
         {
-            yield return new WaitForSeconds(pissTime);
+            yield return new WaitForSeconds(bladderCurrent);
             pissHole.StopPissing();
         }
 
@@ -30,6 +29,8 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
                 var found = GetComponentInChildren<ScatHandler>();
                 if (found != null)
                     scatHandler = found;
+                else 
+                    print($"{gameObject.name} has no scatHandler");
             }
 
             if (pissHole == null)
@@ -37,22 +38,34 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
                 var found = GetComponentInChildren<PissHole>();
                 if (found != null)
                     pissHole = found;
+                else
+                    print($"{gameObject.name} has no pissHole");
             }
         }
 #endif
 
         [ContextMenu("Test piss")]
-        public void Piss()
+        void TestPiss() => Piss(pissTime,1f);
+
+        public void Piss(float current, float height)
         {
-            pissHole.StartPissing();
-            StartCoroutine(LosePressure());
+            pissHole.StartPissing(height);
+            StartCoroutine(LosePressure(current * 1.2f));
         }
-        
+
+        float avatarHeight;
         [ContextMenu("Test Scat")]
-        public void Scat()
+        void TextScat() => Scat(1f);
+        public void Scat(float height)
         {
             if (animator == null) return;
+            avatarHeight = height;
             animator.SetTrigger(shitHash);
+        }
+
+        void TakeaShit()
+        {
+            scatHandler.Scat(avatarHeight);
         }
 
     }

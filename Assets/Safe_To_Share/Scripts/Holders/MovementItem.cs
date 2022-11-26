@@ -4,6 +4,7 @@ using Character;
 using Character.PlayerStuff;
 using Character.StatsStuff.Mods;
 using Items;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
 namespace Special_Items

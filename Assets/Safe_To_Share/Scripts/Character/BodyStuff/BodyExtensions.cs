@@ -23,8 +23,9 @@ namespace Character.BodyStuff
             daily *= body.FatBurnRate.Value + extraActivityFactor; // you are moving around
             float perHour = daily / 24f;
             float inFat = perHour / 9000f;
-            body.Fat.BaseValue -= inFat * ticks;
-            return inFat * ticks; // Starving
+            var burned = inFat * ticks;
+            body.Fat.BaseValue -= burned;
+            return burned; // Starving
         }
 
         public static string BodyDesc(this BaseCharacter character, bool isYou = true)

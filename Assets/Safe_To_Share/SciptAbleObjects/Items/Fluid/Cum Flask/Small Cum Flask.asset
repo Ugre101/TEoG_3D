@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934feff1ae37482491df60716ed99121, type: 3}
   m_Name: Small Cum Flask
   m_EditorClassIdentifier: 
-  guid: 
+  guid: 2381b1603ed793848821080a2098fac8
   title: 
   desc: 
   sprite: {fileID: 0}
@@ -76,6 +76,14 @@ MonoBehaviour:
     miscItemEffects:
       active: 0
       fatBurnMods: []
+    sexualOrganItemEffect:
+      active: 0
+      affects: 
+      mods: []
   tempEffectDesc: 
   updateInventoryAfterUse: 0
+  raceReq:
+    hasRaceReq: 0
+    races: []
   kcal: 0
+  reHydration: 1

@@ -86,3 +86,4 @@ MonoBehaviour:
     hasRaceReq: 0
     races: []
   kcal: 3000
+  reHydration: 2

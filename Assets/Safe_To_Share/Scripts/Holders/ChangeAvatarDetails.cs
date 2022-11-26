@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AvatarStuff.Holders;
 using AvatarStuff.UI;
+using Safe_To_Share.Scripts.Holders;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.UI;

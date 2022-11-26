@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5313433278691761284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6453906814227168269}
+  - component: {fileID: 2757122145332341233}
+  m_Layer: 25
+  m_Name: Anus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6453906814227168269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313433278691761284}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.1132, z: -0.126}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5671298928480570733}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2757122145332341233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313433278691761284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105ca742f142469e8b5c10934d906e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4128311287057495823, guid: cf50d0140c7e79e4797dd2e3c24e0658, type: 3}
+  zSpawnOffset: 0.01
+  ySpawnOffset: -0.075
 --- !u!1001 &7485149268650465728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15043,6 +15090,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4716747166528390791, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
   m_PrefabInstance: {fileID: 7485149268650465728}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6445258193412154447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4714495064507777649, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
+  m_PrefabInstance: {fileID: 7485149268650465728}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7360217732612786517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6445258193412154447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9130e790d846490ab5e5f6d947c7bedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5727506264806497230, guid: 710a85e809f057c419e3255ca4ef9778, type: 3}
+  force: 90
+  delayBetweenDrops: 0.125
+  stopTime: 2
 --- !u!4 &6526179808550036768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4427375363091086560, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
@@ -15397,6 +15465,7 @@ MonoBehaviour:
       title: cb hala body
       type: 0
   <Animator>k__BackingField: {fileID: 3083849336835490592}
+  <KeyAreas>k__BackingField: {fileID: 5810590861592092704}
   supportedGenders: 00000000010000000200000003000000040000000500000006000000
   supportedRaces:
   - {fileID: 11400000, guid: b546dc197130164478b6444f864b5f12, type: 2}
@@ -15518,6 +15587,40 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 40bf2aad2e9d28e4db57c581974cc95e, type: 3}
   source: {fileID: 2735915762991972548}
   validated: 1
+--- !u!114 &5810590861592092704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7719730838470042769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931cbd3bf9434bd68a4f4a107fa927b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Mouth>k__BackingField: {fileID: 706579722514124873}
+  <ShaftRoot>k__BackingField: {fileID: 4968354243455155175}
+  <Vagina>k__BackingField: {fileID: 4968354243455155175}
+  <Anus>k__BackingField: {fileID: 6453906814227168269}
+--- !u!114 &5376847497894677180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7719730838470042769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94d538417a8419ea1151f1f577bfec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3083849336835490592}
+  shitHash: 1567588355
+  scatHandler: {fileID: 2757122145332341233}
+  shitSize: 1
+  pissHole: {fileID: 7360217732612786517}
+  pissTime: 5
 --- !u!4 &7720017691197481023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 919742207301335551, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}

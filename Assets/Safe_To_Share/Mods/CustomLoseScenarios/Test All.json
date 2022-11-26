@@ -1,1 +1,84 @@
-{"Title":"Test All","introNode":{"id":"973e9c26-2494-497d-863f-4f703904922b","introText":"Intro","resistText":"","giveInText":"","resistCost":0,"canvasPos":{"x":100.0,"y":-200.0},"childNodesIds":["06b10e4f-2d6b-4960-abe8-face9c736725"]},"drainNodes":[{"id":"06b10e4f-2d6b-4960-abe8-face9c736725","introText":"Drian","resistText":"","giveInText":"","resistCost":0,"canvasPos":{"x":388.6639709472656,"y":-186.335205078125},"childNodesIds":["81baac00-459c-45c1-8e75-4dfa1be11778"],"drainEssenceType":1,"giveEssenceType":2,"DrainBonus":97,"GiveBonus":45}],"bodyNodes":[{"id":"81baac00-459c-45c1-8e75-4dfa1be11778","introText":"Shrink","resistText":"","giveInText":"","resistCost":0,"canvasPos":{"x":687.1283569335938,"y":-298.44134521484377},"childNodesIds":["49a96016-9394-4c67-aff2-66d747f1a421"],"bodyType":2,"tempMods":[{"Duration":1,"Value":-51,"ModType":1}],"permChange":-7.0,"transfer":false}],"voreNodes":[{"id":"49a96016-9394-4c67-aff2-66d747f1a421","introText":"Vore","resistText":"","giveInText":"","resistCost":0,"canvasPos":{"x":1023.4468994140625,"y":-292.61761474609377},"childNodesIds":[],"voreTypes":[0,1,2,4]}],"enemies":[]}
+{
+  "Title": "Test All",
+  "introNode": {
+    "id": "973e9c26-2494-497d-863f-4f703904922b",
+    "introText": "Intro",
+    "resistText": "",
+    "giveInText": "",
+    "resistCost": 0,
+    "canvasPos": {
+      "x": 100.0,
+      "y": -200.0
+    },
+    "childNodesIds": [
+      "06b10e4f-2d6b-4960-abe8-face9c736725"
+    ]
+  },
+  "drainNodes": [
+    {
+      "id": "06b10e4f-2d6b-4960-abe8-face9c736725",
+      "introText": "Drian",
+      "resistText": "",
+      "giveInText": "",
+      "resistCost": 0,
+      "canvasPos": {
+        "x": 388.6639709472656,
+        "y": -186.335205078125
+      },
+      "childNodesIds": [
+        "81baac00-459c-45c1-8e75-4dfa1be11778"
+      ],
+      "drainEssenceType": 1,
+      "giveEssenceType": 2,
+      "DrainBonus": 97,
+      "GiveBonus": 45
+    }
+  ],
+  "bodyNodes": [
+    {
+      "id": "81baac00-459c-45c1-8e75-4dfa1be11778",
+      "introText": "Shrink",
+      "resistText": "",
+      "giveInText": "",
+      "resistCost": 0,
+      "canvasPos": {
+        "x": 687.1283569335938,
+        "y": -298.44134521484377
+      },
+      "childNodesIds": [
+        "49a96016-9394-4c67-aff2-66d747f1a421"
+      ],
+      "bodyType": 2,
+      "tempMods": [
+        {
+          "Duration": 1,
+          "Value": -51,
+          "ModType": 1
+        }
+      ],
+      "permChange": -7.0,
+      "transfer": false
+    }
+  ],
+  "voreNodes": [
+    {
+      "id": "49a96016-9394-4c67-aff2-66d747f1a421",
+      "introText": "Vore",
+      "resistText": "",
+      "giveInText": "",
+      "resistCost": 0,
+      "canvasPos": {
+        "x": 1023.4468994140625,
+        "y": -292.61761474609377
+      },
+      "childNodesIds": [],
+      "voreTypes": [
+        0,
+        1,
+        2,
+        4
+      ]
+    }
+  ],
+  "enemies": []
+}

@@ -144,9 +144,11 @@ namespace Character
             PregnancySystem.TickHour(ticks);
             Vore.TickHour(this, ticks);
             essenceSystem.TickHour(ticks);
+            BodyFunctions.TickHour(ticks);
+            SexualOrgans.TickHour(ticks);
             bool modifyAvatar = TickHourIfChangeModifyAvatar(ticks);
             SexStats.TickHour(ticks);
-            Body.BurnFatHour(ticks);
+            var burned = Body.BurnFatHour(ticks);
             if (modifyAvatar)
                 InvokeUpdateAvatar();
         }

@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
+using AvatarStuff;
+using AvatarStuff.Holders;
 using Character;
 using Character.CreateCharacterStuff;
 using Character.LevelStuff;
 using Character.Organs.Fluids;
 using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
-using Character.PregnancyStuff;
 using Character.Race.Races;
 using DormAndHome.Dorm;
 using Movement.ECM2.Source.Characters;
@@ -16,7 +17,7 @@ using Movement.ECM2.Source.Components;
 using Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss;
 using UnityEngine;
 
-namespace AvatarStuff.Holders
+namespace Safe_To_Share.Scripts.Holders
 {
     [SelectionBase]
     public class PlayerHolder : Holder
@@ -30,7 +31,7 @@ namespace AvatarStuff.Holders
         [SerializeField] Player player;
 
         [SerializeField] LayerMask validLayers;
-        [field:SerializeField] public ScatAvatarTester ScatPissHandler { get; private set; }
+        AvatarScatPissManager avatarScatPissHandler;
 
         bool combat;
 
@@ -51,7 +52,9 @@ namespace AvatarStuff.Holders
         void Awake()
         {
             if (Instance == null)
+            {
                 Instance = this;
+            }
             else
             {
                 Debug.LogError("Duplicate player holders");
@@ -121,6 +124,8 @@ namespace AvatarStuff.Holders
             Player.UpdateAvatar -= ModifyCurrentAvatar;
             Changer.CurrentAvatar.Setup(Player);
             Player.UpdateAvatar += ModifyCurrentAvatar;
+            if (obj.TryGetComponent(out AvatarScatPissManager pissManager))
+                avatarScatPissHandler = pissManager;
         }
 
         public void ModifyCurrentAvatar()
@@ -162,7 +167,7 @@ namespace AvatarStuff.Holders
             bool RayCast(float yOffset, float distance)
             {
                 if (!Physics.Raycast(new Ray(toLoad + new Vector3(0, yOffset, 0), Vector3.down),
-                        out RaycastHit hit, distance, validLayers))
+                        out var hit, distance, validLayers))
                     return false;
                 transform.position = hit.point + new Vector3(0, 2, 0);
                 return true;
@@ -171,8 +176,8 @@ namespace AvatarStuff.Holders
 
         void SetPlayerToDefaultPos()
         {
-            Vector3 terrainDataSize = Terrain.activeTerrain.terrainData.size;
-            Vector3 terrainPos = Terrain.activeTerrain.GetPosition();
+            var terrainDataSize = Terrain.activeTerrain.terrainData.size;
+            var terrainPos = Terrain.activeTerrain.GetPosition();
             Vector3 center = new(terrainPos.x + terrainDataSize.x / 2, 100f, terrainPos.z + terrainDataSize.z / 2);
             transform.position = center;
         }
@@ -180,7 +185,7 @@ namespace AvatarStuff.Holders
         void AddMovementMods()
         {
             MoveModHandler.Reset();
-            foreach (BasicPerk perk in Player.LevelSystem.OwnedPerks.Where(op => op.PerkType == PerkType.Movement))
+            foreach (var perk in Player.LevelSystem.OwnedPerks.Where(op => op.PerkType == PerkType.Movement))
                 if (perk is MovementPerk movementPerk)
                     movementPerk.GainMovementMods(this);
         }
@@ -214,6 +219,11 @@ namespace AvatarStuff.Holders
 
         public void TriggerSex(DormMate mate) => LoadDormSex?.Invoke(this, mate);
 
+        public void StartPissing() =>
+            avatarScatPissHandler.Piss(player.BodyFunctions.Bladder.Empty(), avatarScaler.Height);
+
+        public void StartShitting() => avatarScatPissHandler.Scat(avatarScaler.Height);
+
         /*
          bool loadingBattle;
 
@@ -234,8 +244,10 @@ namespace AvatarStuff.Holders
         }
         */
 #if UNITY_EDITOR
-        [Header("Debug stuff")] 
-        [SerializeField] CharacterPreset playerChar;
+        [Header("Debug stuff"), SerializeField,] 
+        
+        CharacterPreset playerChar;
+
         public async Task EditorSetup() => await LoadPresetThenReplace();
 
         async Task LoadPresetThenReplace()
@@ -246,7 +258,7 @@ namespace AvatarStuff.Holders
             Player.Vore.Level.GainExp(999);
             PlayerGold.GoldBag.GainGold(9999);
         }
-        
+
         [SerializeField] int fetusDaysOld = 279;
 
         [ContextMenu("Give fetus")]
@@ -254,12 +266,11 @@ namespace AvatarStuff.Holders
         {
             foreach (var baseOrgan in Player.SexualOrgans.Vaginas.List)
             {
-                baseOrgan.Womb.AddFetus(Player,Player);
+                baseOrgan.Womb.AddFetus(Player, Player);
                 baseOrgan.Womb.GrowFetuses(fetusDaysOld);
                 break;
             }
         }
 #endif
-      
     }
 }

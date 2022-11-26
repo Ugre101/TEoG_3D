@@ -76,9 +76,14 @@ MonoBehaviour:
     miscItemEffects:
       active: 0
       fatBurnMods: []
+    sexualOrganItemEffect:
+      active: 0
+      affects: 
+      mods: []
   tempEffectDesc: 
   updateInventoryAfterUse: 0
   raceReq:
     hasRaceReq: 0
     races: []
   kcal: 3213
+  reHydration: 2

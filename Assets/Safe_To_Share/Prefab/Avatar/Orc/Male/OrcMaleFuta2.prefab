@@ -6212,6 +6212,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5364771941365509291, guid: c430e151e08d770408355298697e70a5, type: 3}
   m_PrefabInstance: {fileID: 7822021240627750352}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2834231165870111338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5465207048204066746, guid: c430e151e08d770408355298697e70a5, type: 3}
+  m_PrefabInstance: {fileID: 7822021240627750352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4164943008322804765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2834231165870111338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9130e790d846490ab5e5f6d947c7bedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5727506264806497230, guid: 710a85e809f057c419e3255ca4ef9778, type: 3}
+  force: 90
+  delayBetweenDrops: 0.125
+  stopTime: 2
 --- !u!137 &3025433933663531384 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 5004034382860653736, guid: c430e151e08d770408355298697e70a5, type: 3}
@@ -6813,6 +6834,7 @@ MonoBehaviour:
       title: _phmfaceround
       type: 1
   <Animator>k__BackingField: {fileID: 7790249569877942758}
+  <KeyAreas>k__BackingField: {fileID: 8601777950509779950}
   supportedGenders: 010000000300000006000000
   supportedRaces:
   - {fileID: 11400000, guid: 96817023700d0764793f5b1dcfe15bd9, type: 2}
@@ -6935,6 +6957,40 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 40bf2aad2e9d28e4db57c581974cc95e, type: 3}
   source: {fileID: 1739509565438731144}
   validated: 1
+--- !u!114 &8601777950509779950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938937832306137217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931cbd3bf9434bd68a4f4a107fa927b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Mouth>k__BackingField: {fileID: 3076776211688847571}
+  <ShaftRoot>k__BackingField: {fileID: 0}
+  <Vagina>k__BackingField: {fileID: 0}
+  <Anus>k__BackingField: {fileID: 0}
+--- !u!114 &6286510496537690836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938937832306137217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94d538417a8419ea1151f1f577bfec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7790249569877942758}
+  shitHash: 1567588355
+  scatHandler: {fileID: 7746941216479261564}
+  shitSize: 1
+  pissHole: {fileID: 4164943008322804765}
+  pissTime: 5
 --- !u!4 &6970628302026244249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8344673808419756727, guid: c430e151e08d770408355298697e70a5, type: 3}
@@ -7175,6 +7231,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1304336016410558652, guid: c430e151e08d770408355298697e70a5, type: 3}
   m_PrefabInstance: {fileID: 7822021240627750352}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9137728322312584752 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1315857715852663776, guid: c430e151e08d770408355298697e70a5, type: 3}
+  m_PrefabInstance: {fileID: 7822021240627750352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7746941216479261564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137728322312584752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105ca742f142469e8b5c10934d906e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4128311287057495823, guid: cf50d0140c7e79e4797dd2e3c24e0658, type: 3}
+  zSpawnOffset: 0.01
+  ySpawnOffset: -0.075
 --- !u!4 &9138895523208754081 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1323644800346265201, guid: c430e151e08d770408355298697e70a5, type: 3}

@@ -9,6 +9,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
         [SerializeField] protected AfterBattleActor activePlayerActor;
         [SerializeField] protected AfterBattleActor activeEnemyActor;
         [SerializeField] protected RuntimeAnimatorController animatorController;
+        [SerializeField] protected SexAnimationTransformPositionManager actorPositionManager;
         public abstract void Setup(Player player, BaseCharacter[] enemies, params BaseCharacter[] allies);
     }
 }

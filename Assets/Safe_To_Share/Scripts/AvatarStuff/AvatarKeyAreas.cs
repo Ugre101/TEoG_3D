@@ -34,7 +34,9 @@ namespace AvatarStuff
 
             if (ShaftRoot == null)
             {
-                var found = ts.FirstOrDefault(c => c.gameObject.name == "Gen1");
+               // string[] match = { "Gen1", "Shaft1" };
+                // Transform found = ts.FirstOrDefault(c => match.Contains(c.gameObject.name));
+                var found = ts.FirstOrDefault(c => c.gameObject.name is "Gen1" or "shaft1");
                 if (found != null)
                     ShaftRoot = found;
                 else
@@ -43,7 +45,7 @@ namespace AvatarStuff
 
             if (Vagina == null)
             {
-                var found = ts.FirstOrDefault(c => c.gameObject.name == "Gen1");
+                var found = ts.FirstOrDefault(c => c.gameObject.name is "Gen1" or "legsCrease");
                 if (found != null)
                     Vagina = found;
                 else
@@ -52,7 +54,7 @@ namespace AvatarStuff
 
             if (Anus == null)
             {
-                var found = ts.FirstOrDefault(c => c.gameObject.name == "Anus");
+                var found = ts.FirstOrDefault(c => c.gameObject.name is "Anus" or "rectum1");
                 if (found != null)
                     Anus = found;
                 else

@@ -20,9 +20,12 @@ namespace Safe_To_Share.Scripts.AfterBattle
                     {
                         validHashes.Add(hash);
                         SetAnimatorBool(animator, hash);
-                        break;
+                        return;
                     }
                 }
+
+                if (lastHash.HasValue) // No hit
+                    animator.SetBool(lastHash.Value, false);
             }
         }
 

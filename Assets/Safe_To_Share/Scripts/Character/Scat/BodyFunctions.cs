@@ -14,16 +14,21 @@ namespace Safe_To_Share.Scripts.Character.Scat
 
         public bool TickHour(int ticks = 1)
         {
-            switch (HydrationLevel)
+
+            for (int i = 0; i < ticks; i++)
             {
-                case > 0.2f:
-                    Bladder.Fill(0.1f);
-                    DecreaseHydrationLevel(0.2f);
-                    break;
-                case > 0:
-                    Bladder.Fill(HydrationLevel / 2);
-                    HydrationLevel = 0;
-                    break;
+                switch (HydrationLevel)
+                {
+                    case > 0.2f:
+                        var amount = HydrationLevel / 7f;
+                        Bladder.Fill(amount / 2f);
+                        DecreaseHydrationLevel(amount);
+                        break;
+                    case > 0:
+                        Bladder.Fill(HydrationLevel / 2);
+                        HydrationLevel = 0;
+                        break;
+                }
             }
 
             return false;

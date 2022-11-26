@@ -1,6 +1,7 @@
 ﻿using System;
 using AvatarStuff.Holders;
 using Character.StatsStuff;
+using Safe_To_Share.Scripts.Holders;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;

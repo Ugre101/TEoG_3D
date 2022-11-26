@@ -10,47 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31cdbce6d6724ed0a90b4653828c2e5e, type: 3}
-  m_Name: Blow Job
+  m_Name: Give Rim job
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  title: Blow job
+  icon: {fileID: 21300000, guid: 14db09f08b4f19647b56714e8f1abcae, type: 3}
+  title: Rim job
   data:
-    giver: 0
-    receiver: 0
     <SexActionAnimation>k__BackingField:
-      <GiveAnimationHash>k__BackingField: 1854610204
-      <GiveOffset>k__BackingField: {x: 0, y: 0, z: 0}
-      <ReceiveAnimationHash>k__BackingField: 2107559693
-      <ReceiveOffset>k__BackingField: {x: 0, y: 0, z: 0}
+      <GiveAnimationHash>k__BackingField: 1307923250
+      <GivePos>k__BackingField:
+        <KeyArea>k__BackingField: 0
+        <TowardsPartner>k__BackingField: 0
+      <ReceiveAnimationHash>k__BackingField: 1624106876
+      <ReceivePos>k__BackingField:
+        <KeyArea>k__BackingField: 3
+        <TowardsPartner>k__BackingField: 1
     text: 
     afterText: []
   errorData:
-    giver: 0
-    receiver: 0
     <SexActionAnimation>k__BackingField:
       <GiveAnimationHash>k__BackingField: 0
-      <GiveOffset>k__BackingField: {x: 0, y: 0, z: 0}
+      <GivePos>k__BackingField:
+        <KeyArea>k__BackingField: 0
+        <TowardsPartner>k__BackingField: 0
       <ReceiveAnimationHash>k__BackingField: 0
-      <ReceiveOffset>k__BackingField: {x: 0, y: 0, z: 0}
+      <ReceivePos>k__BackingField:
+        <KeyArea>k__BackingField: 0
+        <TowardsPartner>k__BackingField: 0
     text: 
     afterText: []
   arousalGain:
-    casterBaseAmount: 20
-    targetBaseAmount: 15
+    casterBaseAmount: 15
+    targetBaseAmount: 20
     rng:
       minValue: 1
       maxValue: 1
-  casterNeedsSexualOrgan:
-  - organType: 0
-    minSize:
-      need: 1
-      size: 2
-    maxSize:
-      need: 0
-      size: 0
-    amount:
-      need: 0
-      size: 0
+  casterNeedsSexualOrgan: []
   partnerNeedsSexualOrgan: []
   casterNeedsBody: []
   partnerNeedsBody: []
@@ -60,7 +54,4 @@ MonoBehaviour:
   canImpregnate: 0
   canGetImpregnated: 0
   organToBeImpregnated: 0
-  cumFluidsFromInto:
-  - fromPartner: 0
-    form: 1
-    into: 1
+  cumFluidsFromInto: []

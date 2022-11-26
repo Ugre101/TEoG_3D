@@ -1,5 +1,6 @@
 ﻿using AvatarStuff.Holders;
 using Character.VoreStuff;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
 namespace Dialogue.Events

@@ -1,4 +1,5 @@
-﻿using AvatarStuff;
+﻿using System;
+using AvatarStuff;
 using Character;
 using UnityEngine;
 
@@ -6,23 +7,34 @@ namespace Safe_To_Share.Scripts.AfterBattle
 {
     public class AfterBattleActor : MonoBehaviour
     {
-        static readonly int Idle = Animator.StringToHash("AfterBattle");
         [SerializeField] AvatarInfoDict avatarDict;
         [SerializeField] AvatarChanger avatarChanger;
         [SerializeField] AfterBattleAvatarScaler avatarScaler;
         [SerializeField] bool playerAvatar;
+        readonly SexAnimationManager sexAnimationManager = new();
         Animator animator;
-        public CharacterAvatar avatar { get; private set; }
+
 
         RuntimeAnimatorController animatorController;
-        SexAnimationManager sexAnimationManager = new ();
         AvatarInfo currentInfo;
         bool hasAvatar;
         AddedAnimations.SexAnimations? lastAnimation;
 
+        Vector3 startPos;
+        Quaternion startRot;
+
+        public CharacterAvatar Avatar { get; private set; }
+
         public BaseCharacter Actor { get; private set; }
 
-        void OnDestroy() => UnSub();
+        [field: SerializeField] public RotateActor RotateActor { get; private set; }
+
+        
+
+        void OnDestroy()
+        {
+            UnSub();
+        }
 
         void UnSub()
         {
@@ -37,18 +49,18 @@ namespace Safe_To_Share.Scripts.AfterBattle
         void UpdateArousal(int obj)
         {
             if (hasAvatar)
-                avatar.SetArousal(obj);
+                Avatar.SetArousal(obj);
         }
 
         public void NewAvatar(CharacterAvatar obj)
         {
-            avatar = obj;
-            
+            Avatar = obj;
+
             hasAvatar = true;
             currentInfo = avatarDict.GetInfo(Actor);
-            avatar.Setup(Actor);
+            Avatar.Setup(Actor);
             UpdateHeight();
-            avatar.SetArousal(Actor.SexStats.Arousal);
+            Avatar.SetArousal(Actor.SexStats.Arousal);
             obj.Animator.runtimeAnimatorController = animatorController;
         }
 
@@ -68,9 +80,9 @@ namespace Safe_To_Share.Scripts.AfterBattle
         public void UpdateCurrentAvatar()
         {
             if (!hasAvatar) return;
-            avatar.Setup(Actor);
+            Avatar.Setup(Actor);
             UpdateHeight();
-            avatar.SetArousal(Actor.SexStats.Arousal);
+            Avatar.SetArousal(Actor.SexStats.Arousal);
         }
 
         public void UpdateHeight() => avatarScaler.ChangeScale(Actor.Body.Height.Value);
@@ -79,7 +91,6 @@ namespace Safe_To_Share.Scripts.AfterBattle
         {
             sexAnimationManager.Clear();
             animator = obj;
-            // animator.SetBool(Idle, true);
         }
 
         public void Setup(BaseCharacter character, RuntimeAnimatorController controller)
@@ -95,20 +106,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             //  avatarChanger.UpdateAvatar(avatarDict.GetAvatar(Actor,false));
         }
 
-        public void SetActAnimation(int hash)
-        {
-            sexAnimationManager.TryPlayAnimation(animator,hash);
-            /*
-            if (lastAnimation.HasValue)
-                animator.SetBool(AddedAnimations.GetAnimationHash[lastAnimation.Value], false);
-            if (!AddedAnimations.GetAnimationHash.TryGetValue(ani, out int hash))
-                return;
-            animator.SetBool(hash, true);
-            lastAnimation = ani;
-            */
-        }
-
+        public void SetActAnimation(int hash) => sexAnimationManager.TryPlayAnimation(animator, hash);
         public void Removed() => avatarChanger.gameObject.SetActive(false);
-
     }
 }

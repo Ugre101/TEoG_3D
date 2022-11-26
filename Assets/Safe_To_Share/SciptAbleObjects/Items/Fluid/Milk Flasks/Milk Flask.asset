@@ -39,6 +39,8 @@ MonoBehaviour:
       active: 0
       bodyTempMods: []
       bodyChanges: []
+      thickSetChange: 0
+      tempThickMods: []
     voreItemEffect:
       active: 0
       digestionMods:
@@ -55,7 +57,8 @@ MonoBehaviour:
       arousalMods: []
     learnAbilityItemEffect:
       active: 0
-      ability: {fileID: 0}
+      dropSerializableObject:
+        guid: 
     raceEssenceItemEffects:
       active: 0
       race: {fileID: 0}
@@ -102,6 +105,14 @@ MonoBehaviour:
         from: 
         modType: 0
         hoursLeft: 24
+    sexualOrganItemEffect:
+      active: 0
+      affects: 
+      mods: []
   tempEffectDesc: 
   updateInventoryAfterUse: 0
+  raceReq:
+    hasRaceReq: 0
+    races: []
   kcal: 1334
+  reHydration: 3

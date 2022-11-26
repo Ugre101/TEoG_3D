@@ -1,6 +1,7 @@
 ﻿using AvatarStuff.Holders;
 using Character.EssenceStuff;
 using DormAndHome.Dorm.Buildings;
+using Safe_To_Share.Scripts.Holders;
 using Safe_To_Share.Scripts.Static;
 using SaveStuff;
 using SceneStuff;
