@@ -1,6 +1,6 @@
-﻿using System;
-using AvatarStuff;
+﻿using AvatarStuff;
 using Character;
+using Safe_To_Share.Scripts.AfterBattle.Actor;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle
@@ -9,7 +9,6 @@ namespace Safe_To_Share.Scripts.AfterBattle
     {
         [SerializeField] AvatarInfoDict avatarDict;
         [SerializeField] AvatarChanger avatarChanger;
-        [SerializeField] AfterBattleAvatarScaler avatarScaler;
         [SerializeField] bool playerAvatar;
         readonly SexAnimationManager sexAnimationManager = new();
         Animator animator;
@@ -27,8 +26,9 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         public BaseCharacter Actor { get; private set; }
 
+        [field: SerializeField] public AfterBattleAvatarScaler AvatarScaler { get; private set; }
         [field: SerializeField] public RotateActor RotateActor { get; private set; }
-
+        [field: SerializeField] public AlignActor AlignActor { get; private set; }
         
 
         void OnDestroy()
@@ -85,7 +85,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             Avatar.SetArousal(Actor.SexStats.Arousal);
         }
 
-        public void UpdateHeight() => avatarScaler.ChangeScale(Actor.Body.Height.Value);
+        public void UpdateHeight() => AvatarScaler.ChangeScale(Actor.Body.Height.Value);
 
         public void NewAnimator(Animator obj)
         {

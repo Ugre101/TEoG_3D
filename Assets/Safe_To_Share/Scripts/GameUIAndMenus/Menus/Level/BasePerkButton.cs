@@ -16,13 +16,13 @@ namespace GameUIAndMenus.Menus.Level
         void LoadedPerk(AsyncOperationHandle<BasicPerk> obj)
         {
             loaded = obj.Result;
-            CanAfford(player.Player.LevelSystem.Points);
+            CanAfford(PlayerHolder.Player.LevelSystem.Points);
             HasPerk(obj.Result);
         }
 
         public override void Setup(PlayerHolder player)
         {
-            this.player = player;
+            this.PlayerHolder = player;
             Addressables.LoadAssetAsync<BasicPerk>(guid).Completed += LoadedPerk;
         }
 
@@ -31,7 +31,7 @@ namespace GameUIAndMenus.Menus.Level
 
         protected void HasPerk(BasicPerk result)
         {
-            bool hasPerk = player.Player.LevelSystem.OwnedPerks.Contains(result);
+            bool hasPerk = PlayerHolder.Player.LevelSystem.OwnedPerks.Contains(result);
             HaveFade(hasPerk);
         }
 
@@ -43,7 +43,7 @@ namespace GameUIAndMenus.Menus.Level
             rune.color = color;
         }
 
-        float GetAplha(bool havePerk) => havePerk ? 1f : loaded.MeetsRequirements(player.Player) ? 0.4f : 0.15f;
+        float GetAplha(bool havePerk) => havePerk ? 1f : loaded.MeetsRequirements(PlayerHolder.Player) ? 0.4f : 0.15f;
 #if UNITY_EDITOR
         [SerializeField] BasicPerk basicPerk;
 

@@ -63,6 +63,8 @@ namespace Character.CreateCharacterStuff
             startRace = null;
             loading = false;
             done = false;
+            if (raceOp.IsValid())
+                Addressables.Release(raceOp);
         }
 
         public CreateCharacter NewCharacter()

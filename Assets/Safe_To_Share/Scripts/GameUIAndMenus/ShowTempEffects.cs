@@ -47,14 +47,21 @@ namespace GameUIAndMenus
             hoverText.gameObject.SetActive(false);
             ShowTempModsEffects();
             ShowAilments();
+            holder.RePlaced += ReBind;
             Player.UpdateAilments += ShowAilments;
             LoadManager.LoadedSave += Loaded;
+        }
+
+        void ReBind()
+        {
+            // TODO
         }
 
 
         void OnDisable()
         {
             Player.UpdateAilments -= ShowAilments;
+            holder.RePlaced -= ReBind;
             LoadManager.LoadedSave -= Loaded;
             if (loadItemEffects != null)
                 StopCoroutine(loadItemEffects);

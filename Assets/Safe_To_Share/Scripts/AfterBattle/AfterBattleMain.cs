@@ -38,10 +38,15 @@ namespace Safe_To_Share.Scripts.AfterBattle
         void BasePlayerActionReaction(AfterBattleBaseAction obj)
         {
             SexActData data = obj.Use(activePlayerActor, activeEnemyActor);
+            AfterBattleMainUI.LogText(data);
+            if (LastAct != null && LastAct == obj)
+                return;
+            activePlayerActor.RotateActor.ResetPosAndRot();
+            activeEnemyActor.RotateActor.ResetPosAndRot();
             actorPositionManager.PosActors(activePlayerActor,data.SexActionAnimation.GivePos,activeEnemyActor,data.SexActionAnimation.ReceivePos);
             activePlayerActor.SetActAnimation(data.SexActionAnimation.GiveAnimationHash);
             activeEnemyActor.SetActAnimation(data.SexActionAnimation.ReceiveAnimationHash);
-            AfterBattleMainUI.LogText(data);
+            LastAct = obj;
         }
 
 

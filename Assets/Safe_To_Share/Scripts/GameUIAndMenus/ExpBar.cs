@@ -14,20 +14,13 @@ namespace GameUIAndMenus
         void OnEnable()
         {
             Setup();
-            Bind();
+            holder.RePlaced += Setup;
         }
 
 
         void OnDisable() => UnBind();
 
         public override bool BlockIfActive() => false;
-
-        void Bind()
-        {
-            holder.RePlaced += Setup;
-            Player.LevelSystem.ExpGained += UpdateExp;
-            Player.LevelSystem.LevelGained += UpdateNeeded;
-        }
 
         void UnBind()
         {
@@ -41,6 +34,8 @@ namespace GameUIAndMenus
 
         void Setup()
         {
+            Player.LevelSystem.ExpGained += UpdateExp;
+            Player.LevelSystem.LevelGained += UpdateNeeded;
             var levelSys = Player.LevelSystem;
             bar.value = (float)levelSys.Exp / levelSys.ExpNeeded;
             UpdateExp(levelSys.Exp);

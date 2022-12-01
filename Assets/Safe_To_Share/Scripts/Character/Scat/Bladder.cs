@@ -10,38 +10,22 @@ namespace Safe_To_Share.Scripts.Character.Scat
         [SerializeField] float current;
         [field: SerializeField] public BaseConstFloatStat MaxPressure { get; private set; } = new(10);
 
-        float Current
-        {
-            get => current;
-            set
-            {
-                current = Mathf.Clamp(current + value, 0, MaxPressure.Value);;
-                BladderPressure?.Invoke(Pressure());
-            }
-        }
+        float Current => current;
 
         public float Empty()
         {
-            float cur = current;
+            float cur = Current;
             current = 0;
+            BladderPressure?.Invoke(0);
             return cur;
         }
 
         public event Action<float> BladderPressure;
         public float Pressure() => Current / MaxPressure.Value;
-        public void Fill(float amount) => Current += amount;
-
-        public float Relieve()
+        public void Fill(float amount)
         {
-            if (Current > 1)
-            {
-                Current -= 1;
-                return 1f;
-            }
-
-            float have = Current;
-            Current = 0;
-            return have;
+            current += amount;
+            BladderPressure?.Invoke(Pressure());
         }
     }
 }

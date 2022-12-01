@@ -4,6 +4,7 @@ using Character;
 using Character.BodyStuff;
 using Character.Organs.Fluids.UI;
 using Character.Race.UI;
+using GameUIAndMenus.Menus.Looks;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace GameUIAndMenus
         [SerializeField] RaceInfo raceInfo;
         [SerializeField] BodyInfo bodyInfo;
         [SerializeField] FluidInfo cumInfo, milkInfo;
+        [SerializeField] BowelBladderPressure bowelBladderPressure;
 
         void OnEnable()
         {
@@ -23,6 +25,7 @@ namespace GameUIAndMenus
             bodyInfo.PrintBodyInfo(Player);
             cumInfo.UpdateFluid(Player.SexualOrgans.Balls, Player.Body.Height.Value);
             milkInfo.UpdateFluid(Player.SexualOrgans.Boobs, Player.Body.Height.Value);
+            bowelBladderPressure.Setup(Player);
             PrintSummary();
             transform.SleepChildren(transform.GetChild(0).gameObject);
         }

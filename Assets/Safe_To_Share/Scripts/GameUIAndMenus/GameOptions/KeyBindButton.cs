@@ -15,7 +15,6 @@ namespace GameUIAndMenus.GameOptions
         InputActionReference reference;
 
         public Button Btn => btn;
-        public TextMeshProUGUI BtnTitle => btnTitle;
 
         void OnDisable()
         {
@@ -31,10 +30,11 @@ namespace GameUIAndMenus.GameOptions
             btn.onClick.AddListener(StartRebind);
         }
 
-        void UpdateText() => BtnTitle.text = reference.action.bindings.Count > index
-            ? InputControlPath.ToHumanReadableString(reference.action.bindings[index].effectivePath,
-                InputControlPath.HumanReadableStringOptions.UseShortNames)
-            : string.Empty;
+        void UpdateText() =>
+            btnTitle.text = reference.action.bindings.Count > index
+                ? InputControlPath.ToHumanReadableString(reference.action.bindings[index].effectivePath,
+                    InputControlPath.HumanReadableStringOptions.UseShortNames)
+                : string.Empty;
 
         void StartRebind()
         {
@@ -42,24 +42,31 @@ namespace GameUIAndMenus.GameOptions
             InputAction action = reference.action;
             if (action.bindings.Count + 1 <= index)
             {
-                BtnTitle.text = "Wrong button";
+                btnTitle.text = "Wrong button";
                 return;
             }
 
-            if (action.bindings.Count <= index) action.AddBinding("<Keyboard>p");
+            print($"{action.bindings.Count} <= {index}");
+            if (action.bindings.Count <= index)
+            {
+                print("Had no bindings");
+                action.AddBinding("<Keyboard>p");
+            }
 
             action.Disable();
-            BtnTitle.text = "Press Key";
+            btnTitle.text = "Press Key";
             rebindingOperation = action.PerformInteractiveRebinding(index).WithCancelingThrough("<Keyboard>/escape")
                 .OnMatchWaitForAnother(0.1f)
                 .OnCancel(operation =>
                 {
+                    print("Canceled");
                     CleanUp();
                     RebindCancelled();
                     UpdateText();
                 })
                 .OnComplete(operation =>
                 {
+                    print($"Completed rebound to {operation.selectedControl}");
                     if (CheckConflict())
                         RebindCancelled();
                     else

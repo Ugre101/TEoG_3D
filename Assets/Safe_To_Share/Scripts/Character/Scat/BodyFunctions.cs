@@ -19,10 +19,17 @@ namespace Safe_To_Share.Scripts.Character.Scat
             {
                 switch (HydrationLevel)
                 {
+                    case > 4f:
+                        Bladder.Fill(0.4f);
+                        DecreaseHydrationLevel(0.5f);
+                        break;
+                    case > 2f:
+                        Bladder.Fill(0.2f);
+                        DecreaseHydrationLevel(0.3f);
+                        break;
                     case > 0.2f:
-                        var amount = HydrationLevel / 7f;
-                        Bladder.Fill(amount / 2f);
-                        DecreaseHydrationLevel(amount);
+                        Bladder.Fill(0.1f);
+                        DecreaseHydrationLevel(0.2f);
                         break;
                     case > 0:
                         Bladder.Fill(HydrationLevel / 2);
@@ -34,10 +41,7 @@ namespace Safe_To_Share.Scripts.Character.Scat
             return false;
         }
 
-        public void FullHydration()
-        {
-            HydrationLevel = MaxHydration.Value;
-        }
+        public void FullHydration() => HydrationLevel = MaxHydration.Value;
 
         public void IncreaseHydrationLevel(float by)
         {
@@ -51,9 +55,6 @@ namespace Safe_To_Share.Scripts.Character.Scat
             HydrationLevel = Mathf.Clamp(HydrationLevel + by, 0, MaxHydration.Value);
         }
 
-        public void DecreaseHydrationLevel(float by)
-        {
-            HydrationLevel = Mathf.Clamp(HydrationLevel - by, 0, MaxHydration.Value);
-        }
+        public void DecreaseHydrationLevel(float by) => HydrationLevel = Mathf.Clamp(HydrationLevel - by, 0, MaxHydration.Value);
     }
 }

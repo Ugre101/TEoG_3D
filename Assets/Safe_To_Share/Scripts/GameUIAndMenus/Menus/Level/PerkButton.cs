@@ -13,10 +13,10 @@ namespace GameUIAndMenus.Menus.Level
 
         protected override void OnClick()
         {
-            if (Have || !loaded.MeetsRequirements(player.Player) ||
-                !player.Player.LevelSystem.TryUsePoints(loaded.Cost))
+            if (Have || !loaded.MeetsRequirements(PlayerHolder.Player) ||
+                !PlayerHolder.Player.LevelSystem.TryUsePoints(loaded.Cost))
                 return;
-            loaded.GainPerk(player);
+            loaded.GainPerk(PlayerHolder);
             HaveFade(true);
             //GainPerk?.Invoke(loaded.Cost, loaded);
         }

@@ -4547,9 +4547,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5727506264806497230, guid: 710a85e809f057c419e3255ca4ef9778, type: 3}
-  force: 90
-  delayBetweenDrops: 0.125
-  stopTime: 2
 --- !u!4 &1884350241154286429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -6300132851585573841, guid: a6b222c5907159a439ce9dd41cb392cd, type: 3}
@@ -4937,6 +4934,39 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &939289851907485735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500936418798363171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 931cbd3bf9434bd68a4f4a107fa927b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Mouth>k__BackingField: {fileID: 6672418315199583995}
+  <ShaftRoot>k__BackingField: {fileID: 1271233650100813141}
+  <Vagina>k__BackingField: {fileID: 1271233650100813141}
+  <Anus>k__BackingField: {fileID: 284972802628403905}
+--- !u!114 &1268660717827614480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500936418798363171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94d538417a8419ea1151f1f577bfec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4378859519238130154}
+  shitHash: 1567588355
+  scatHandler: {fileID: 5751633936498056602}
+  pissHole: {fileID: 4953900898059885486}
+  pissTime: 5
 --- !u!114 &6015389042395492071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5084,40 +5114,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 40bf2aad2e9d28e4db57c581974cc95e, type: 3}
   source: {fileID: 4079669128918938406}
   validated: 1
---- !u!114 &939289851907485735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4500936418798363171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 931cbd3bf9434bd68a4f4a107fa927b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Mouth>k__BackingField: {fileID: 6672418315199583995}
-  <ShaftRoot>k__BackingField: {fileID: 1271233650100813141}
-  <Vagina>k__BackingField: {fileID: 1271233650100813141}
-  <Anus>k__BackingField: {fileID: 284972802628403905}
---- !u!114 &1268660717827614480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4500936418798363171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94d538417a8419ea1151f1f577bfec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 4378859519238130154}
-  shitHash: 1567588355
-  scatHandler: {fileID: 5751633936498056602}
-  shitSize: 1
-  pissHole: {fileID: 4953900898059885486}
-  pissTime: 5
 --- !u!4 &4578196166418907403 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8268919894160892295, guid: a6b222c5907159a439ce9dd41cb392cd, type: 3}

@@ -19,32 +19,32 @@ namespace GameUIAndMenus.Menus.EssenceMenu
 //        new EssencePerk loaded;
         public override void Setup(PlayerHolder player)
         {
-            this.player = player;
+            PlayerHolder = player;
             Addressables.LoadAssetAsync<EssencePerk>(guid).Completed += LoadedPerk;
         }
 
         void LoadedPerk(AsyncOperationHandle<EssencePerk> obj)
         {
             loaded = obj.Result;
-            CanAfford(player.Player.LevelSystem.Points);
+            CanAfford(Player.LevelSystem.Points);
             HasPerk(obj.Result);
         }
 
         protected void HasPerk(EssencePerk result)
         {
-            bool hasPerk = player.Player.Essence.EssencePerks.Contains(result);
+            bool hasPerk = Player.Essence.EssencePerks.Contains(result);
             HaveFade(hasPerk);
         }
 
         protected override void OnClick()
         {
-            if (Have || !loaded.MeetsRequirements(player.Player) ||
-                !player.Player.LevelSystem.TryUsePoints(loaded.Cost))
+            if (Have || !loaded.MeetsRequirements(Player) ||
+                !Player.LevelSystem.TryUsePoints(loaded.Cost))
                 return;
             if (loaded is not EssencePerk perk)
                 return;
             HaveFade(true);
-            perk.GainPerk(player.Player);
+            perk.GainPerk(Player);
         }
     }
 }

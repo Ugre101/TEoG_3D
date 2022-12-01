@@ -33,7 +33,7 @@ namespace Safe_To_Share.Scripts.Character.Scat
         {
             character.Body.Fat.BaseValue += kcal / 9000f; // Might change to account for height
             character.CheckHungry();
-            float p = kcal / foodQuality; // Better quality less p
+            float p = kcal / 2f / foodQuality; // Better quality less p
             character.SexualOrgans.Anals.Fluid.IncreaseCurrentValue(p);
         }
         public static void TickFoodAndDrink(this BaseCharacter character, int ticks = 1)

@@ -14970,6 +14970,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2179114255229705107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936251318935590112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94d538417a8419ea1151f1f577bfec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7926048333756692695}
+  shitHash: 1567588355
+  scatHandler: {fileID: 7787222049468977747}
+  pissHole: {fileID: 780618522880574899}
+  pissTime: 5
 --- !u!114 &3636588612261890251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15167,24 +15184,6 @@ MonoBehaviour:
   hasBallsController: 1
   hasDickController: 1
   hasHideDaz: 1
---- !u!114 &2179114255229705107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4936251318935590112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94d538417a8419ea1151f1f577bfec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 7926048333756692695}
-  shitHash: 1567588355
-  scatHandler: {fileID: 7787222049468977747}
-  shitSize: 1
-  pissHole: {fileID: 780618522880574899}
-  pissTime: 5
 --- !u!4 &5048459227052812205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1031259793466986012, guid: 0cff51f39044efc4babdaa3541d73a8f, type: 3}
@@ -15507,9 +15506,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5727506264806497230, guid: 710a85e809f057c419e3255ca4ef9778, type: 3}
-  force: 90
-  delayBetweenDrops: 0.125
-  stopTime: 2
 --- !u!4 &7483896650237000196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5792654002367491147, guid: 0cff51f39044efc4babdaa3541d73a8f, type: 3}

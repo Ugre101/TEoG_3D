@@ -29,7 +29,7 @@ namespace GameUIAndMenus.Menus.Level
 
         public override void Setup(PlayerHolder player)
         {
-            this.player = player;
+            this.PlayerHolder = player;
             UpdateValue();
         }
 
@@ -38,7 +38,7 @@ namespace GameUIAndMenus.Menus.Level
 
         void UpdateValue()
         {
-            if (player.Player.Stats.GetCharStats.TryGetValue(statType, out CharStat stat))
+            if (PlayerHolder.Player.Stats.GetCharStats.TryGetValue(statType, out CharStat stat))
                 currentAmount.text = stat.BaseValue.ToString();
         }
 
@@ -46,9 +46,9 @@ namespace GameUIAndMenus.Menus.Level
 
         protected override void OnClick()
         {
-            if (!player.Player.LevelSystem.TryUsePoints(cost))
+            if (!PlayerHolder.Player.LevelSystem.TryUsePoints(cost))
                 return;
-            player.Player.Stats.GetCharStats[statType].BaseValue++;
+            PlayerHolder.Player.Stats.GetCharStats[statType].BaseValue++;
             UpdateValue();
         }
     }

@@ -6,28 +6,31 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments
 {
     public abstract class DoThingButton : MonoBehaviour
     {
-        [SerializeField] float threesHold = 0.4f;
         [SerializeField] Color start, end;
         [SerializeField] protected PlayerHolder holder;
         [SerializeField] Image backGround;
-        public void Setup(PlayerHolder playerHolder) => holder = playerHolder;
+        protected abstract float ThreesHold { get; }
+        protected abstract bool Enabled { get; }
 #if UNITY_EDITOR
-        
+
         void OnValidate()
         {
-            if (backGround != null) 
+            if (backGround != null)
                 backGround.color = start;
         }
 #endif
+        public void Setup(PlayerHolder playerHolder) => holder = playerHolder;
 
         public void ValueChange(float pressure)
         {
-            if (pressure < threesHold)
+            if (Enabled is false)
+                gameObject.SetActive(false);
+            else if (pressure < ThreesHold)
                 gameObject.SetActive(false);
             else
             {
                 gameObject.SetActive(true);
-                var percent = (pressure - threesHold) / (1f - threesHold);
+                var percent = (pressure - ThreesHold) / (1f - ThreesHold);
                 var newColor = Color.Lerp(start, end, percent);
                 backGround.color = newColor;
             }

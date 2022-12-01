@@ -1,5 +1,6 @@
 ﻿using System;
 using AvatarStuff.Holders;
+using Character.PlayerStuff;
 using Safe_To_Share.Scripts.Holders;
 using TMPro;
 using UnityEngine;
@@ -14,8 +15,8 @@ namespace GameUIAndMenus.Menus.Level
         [SerializeField] protected TextMeshProUGUI btnText;
         [SerializeField] Button btn;
         protected bool Afford = false;
-        protected PlayerHolder player;
-
+        protected PlayerHolder PlayerHolder;
+        protected Player Player => PlayerHolder.Player;
         void Start() => btn.onClick.AddListener(OnClick);
 
 

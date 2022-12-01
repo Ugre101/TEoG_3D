@@ -1,4 +1,6 @@
-﻿using Character;
+﻿using System.Globalization;
+using System.Text;
+using Character;
 using Safe_To_Share.Scripts.Character.Scat;
 using UnityEngine;
 
@@ -14,6 +16,26 @@ namespace Items
             user.Eat(kcal);
             user.BodyFunctions.IncreaseHydrationLevel(reHydration);
             base.Use(user);
+        }
+
+        public string ExtraInfo()
+        {
+            var sb = new StringBuilder();
+            if (kcal > 0)
+            {
+                sb.Append("+");
+                sb.Append(kcal.ToString());
+                sb.AppendLine(" Kcal");
+            }
+
+            if (reHydration > 0)
+            {
+                sb.Append("+");
+                sb.Append(reHydration.ToString(CultureInfo.InvariantCulture));
+                sb.Append(" Hydration");
+            }
+
+            return sb.ToString();
         }
     }
 }

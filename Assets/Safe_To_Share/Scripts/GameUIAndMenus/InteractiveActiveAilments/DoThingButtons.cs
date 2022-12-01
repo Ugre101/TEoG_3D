@@ -11,27 +11,28 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments
         [SerializeField] NeedToShitButton shitButton;
         [SerializeField] NeedToPissButton pissButton;
 
-        
-        void Start()
-        {
-            Player.BodyFunctions.Bladder.BladderPressure += CheckNeedToPiss;
-            Player.SexualOrgans.Anals.Fluid.CurrentValueChange += CheckNeedToShit;
-            LoadManager.LoadedSave += ReCheck;
-        }
 
         public override void SetPlayer(PlayerHolder value, GameCanvas canvas)
         {
             base.SetPlayer(value, canvas);
             shitButton.Setup(holder);
-            shitButton.ValueChange(Player.SexualOrgans.Anals.Fluid.CurrentValue / Player.SexualOrgans.Anals.Fluid.Value);
             pissButton.Setup(holder);
-            pissButton.ValueChange(Player.BodyFunctions.Bladder.Pressure());
+            ReCheck();
+            ReBind();
+            holder.RePlaced += ReBind;
+            LoadManager.LoadedSave += ReCheck;
         }
 
+        void ReBind()
+        {
+            Player.BodyFunctions.Bladder.BladderPressure += CheckNeedToPiss;
+            Player.SexualOrgans.Anals.Fluid.CurrentValueChange += CheckNeedToShit;
+        }
 
         void ReCheck()
         {
-            
+            shitButton.ValueChange(Player.SexualOrgans.Anals.Fluid.CurrentValue / Player.SexualOrgans.Anals.Fluid.Value);
+            pissButton.ValueChange(Player.BodyFunctions.Bladder.Pressure());
         }
 
         void CheckNeedToShit(float obj)
@@ -46,11 +47,9 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments
             Player.BodyFunctions.Bladder.BladderPressure -= CheckNeedToPiss;
             Player.SexualOrgans.Anals.Fluid.CurrentValueChange -= CheckNeedToShit;
             LoadManager.LoadedSave -= ReCheck;
+            holder.RePlaced -= ReBind;
         }
 
-        void CheckNeedToPiss(float obj)
-        {
-            pissButton.ValueChange(obj);
-        }
+        void CheckNeedToPiss(float obj) => pissButton.ValueChange(obj);
     }
 }

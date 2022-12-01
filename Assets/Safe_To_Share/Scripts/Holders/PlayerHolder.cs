@@ -15,6 +15,8 @@ using DormAndHome.Dorm;
 using Movement.ECM2.Source.Characters;
 using Movement.ECM2.Source.Components;
 using Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss;
+using Safe_To_Share.Scripts.Character.Scat;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Holders
@@ -39,11 +41,7 @@ namespace Safe_To_Share.Scripts.Holders
         public static int PlayerID { get; private set; }
         public static Vector3 Position => Instance != null ? Instance.transform.position : Vector3.zero;
 
-        public Player Player
-        {
-            get => player;
-            private set => player = value;
-        }
+        public Player Player => player;
 
         public MovementModHandler MoveModHandler => movementMoveModHandler;
 
@@ -84,12 +82,12 @@ namespace Safe_To_Share.Scripts.Holders
         {
             base.Sub();
             // UpdateAvatar(Player);
-            Player.RaceSystem.RaceChangedEvent += RaceChange;
-            Player.Body.Height.StatDirtyEvent += UpdateHeightsChange;
+            player.RaceSystem.RaceChangedEvent += RaceChange;
+            player.Body.Height.StatDirtyEvent += UpdateHeightsChange;
             player.Body.Muscle.StatDirtyEvent += ModifyCurrentAvatar;
             player.Body.Fat.StatDirtyEvent += ModifyCurrentAvatar;
-            HeightsChange(Player.Body.Height.Value);
-            Player.Sub();
+            HeightsChange(player.Body.Height.Value);
+            player.Sub();
             PersonEcm2Character.PhysicsVolumeChanged += IsSwimming;
         }
 
@@ -99,31 +97,31 @@ namespace Safe_To_Share.Scripts.Holders
             ForeignFluidExtensions.CleanBody(player);
         }
 
-        public async void UpdateAvatar() => await UpdateAvatar(Player);
+        public async void UpdateAvatar() => await UpdateAvatar(player);
 
         protected override void UnSub()
         {
             base.UnSub();
-            if (Player == null)
+            if (player == null)
                 return;
-            if (Player.RaceSystem != null)
-                Player.RaceSystem.RaceChangedEvent -= RaceChange;
-            Player.UpdateAvatar -= ModifyCurrentAvatar;
-            Player.Body.Height.StatDirtyEvent -= UpdateHeightsChange;
+            if (player.RaceSystem != null)
+                player.RaceSystem.RaceChangedEvent -= RaceChange;
+            player.UpdateAvatar -= ModifyCurrentAvatar;
+            player.Body.Height.StatDirtyEvent -= UpdateHeightsChange;
             player.Body.Muscle.StatDirtyEvent -= ModifyCurrentAvatar;
             player.Body.Fat.StatDirtyEvent -= ModifyCurrentAvatar;
             PersonEcm2Character.PhysicsVolumeChanged -= IsSwimming;
-            Player.Unsub();
+            player.Unsub();
         }
 
-        void UpdateHeightsChange() => HeightsChange(Player.Body.Height.Value);
+        void UpdateHeightsChange() => HeightsChange(player.Body.Height.Value);
 
 
         protected override void NewAvatar(CharacterAvatar obj)
         {
-            Player.UpdateAvatar -= ModifyCurrentAvatar;
-            Changer.CurrentAvatar.Setup(Player);
-            Player.UpdateAvatar += ModifyCurrentAvatar;
+            player.UpdateAvatar -= ModifyCurrentAvatar;
+            Changer.CurrentAvatar.Setup(player);
+            player.UpdateAvatar += ModifyCurrentAvatar;
             if (obj.TryGetComponent(out AvatarScatPissManager pissManager))
                 avatarScatPissHandler = pissManager;
         }
@@ -131,25 +129,25 @@ namespace Safe_To_Share.Scripts.Holders
         public void ModifyCurrentAvatar()
         {
             if (Changer.CurrentAvatar == null) return;
-            Changer.CurrentAvatar.Setup(Player);
+            Changer.CurrentAvatar.Setup(player);
             HeightsChange(player.Body.Height.Value);
         }
 
-        async void RaceChange(BasicRace oldrace, BasicRace newrace) => await UpdateAvatar(Player);
+        async void RaceChange(BasicRace oldrace, BasicRace newrace) => await UpdateAvatar(player);
 
         public IEnumerator Load(PlayerSave toLoad)
         {
             UnSub();
-            Player = JsonUtility.FromJson<Player>(toLoad.ControlledCharacterSave.CharacterSave.RawCharacter);
+            player = JsonUtility.FromJson<Player>(toLoad.ControlledCharacterSave.CharacterSave.RawCharacter);
             PersonEcm2Character.StopSwimming();
             SetPlayerPosition(toLoad.Posistion);
 
-            yield return Player.Load(toLoad.ControlledCharacterSave.CharacterSave);
+            yield return player.Load(toLoad.ControlledCharacterSave.CharacterSave);
             AddMovementMods();
 
-            Player.Inventory.Load(toLoad.InventorySave);
-            Player.AndSpellBook.Load(toLoad.ControlledCharacterSave.AbilitySave);
-            var wait = UpdateAvatar(Player);
+            player.Inventory.Load(toLoad.InventorySave);
+            player.AndSpellBook.Load(toLoad.ControlledCharacterSave.AbilitySave);
+            var wait = UpdateAvatar(player);
             while (!wait.IsCompleted) yield return null;
             NewAvatar(Changer.CurrentAvatar);
             if (wait is { IsFaulted: true, Exception: { }, }) throw wait.Exception;
@@ -185,7 +183,7 @@ namespace Safe_To_Share.Scripts.Holders
         void AddMovementMods()
         {
             MoveModHandler.Reset();
-            foreach (var perk in Player.LevelSystem.OwnedPerks.Where(op => op.PerkType == PerkType.Movement))
+            foreach (var perk in player.LevelSystem.OwnedPerks.Where(op => op.PerkType == PerkType.Movement))
                 if (perk is MovementPerk movementPerk)
                     movementPerk.GainMovementMods(this);
         }
@@ -193,10 +191,10 @@ namespace Safe_To_Share.Scripts.Holders
         public async Task ReplacePlayer(Player newPlayer)
         {
             UnSub();
-            Player = newPlayer;
+            player = newPlayer;
             AddMovementMods();
-            Player.Vore.Level.LoadMyPerkAssets();
-            Player.Essence.LoadMyPerkAssets();
+            player.Vore.Level.LoadMyPerkAssets();
+            player.Essence.LoadMyPerkAssets();
             await UpdateAvatar(newPlayer);
             NewAvatar(Changer.CurrentAvatar);
             NewPlayer();
@@ -204,9 +202,9 @@ namespace Safe_To_Share.Scripts.Holders
 
         void NewPlayer()
         {
-            Player.Loaded();
+            player.Loaded();
             Sub();
-            PlayerID = Player.Identity.ID;
+            PlayerID = player.Identity.ID;
             RePlaced?.Invoke();
         }
 
@@ -214,15 +212,27 @@ namespace Safe_To_Share.Scripts.Holders
         {
             if (combat) return;
             combat = true;
-            LoadCombat?.Invoke(Player, enemy);
+            LoadCombat?.Invoke(player, enemy);
         }
 
         public void TriggerSex(DormMate mate) => LoadDormSex?.Invoke(this, mate);
 
-        public void StartPissing() =>
+        public void StartPissing()
+        {
+            if (OptionalContent.Scat.Enabled is false) return;
+            if (player.BodyFunctions.Bladder.Pressure() < ScatExtensions.NeedToPissThreesHold) 
+                return;
             avatarScatPissHandler.Piss(player.BodyFunctions.Bladder.Empty(), avatarScaler.Height);
+        }
 
-        public void StartShitting() => avatarScatPissHandler.Scat(avatarScaler.Height);
+        public void StartShitting()
+        {
+            if (OptionalContent.Scat.Enabled is false) return;
+            if (player.SexualOrgans.Anals.Fluid.CurrentValue / player.SexualOrgans.Anals.Fluid.Value < ScatExtensions.NeedToShitThreesHold) 
+                return;
+            avatarScatPissHandler.Scat(avatarScaler.Height);
+            player.SexualOrgans.Anals.Fluid.SetEmpty();
+        }
 
         /*
          bool loadingBattle;
@@ -255,7 +265,7 @@ namespace Safe_To_Share.Scripts.Holders
             await playerChar.LoadAssets();
             await ReplacePlayer(new Player(playerChar.NewCharacter()));
             player.LevelSystem.GainExp(999);
-            Player.Vore.Level.GainExp(999);
+            player.Vore.Level.GainExp(999);
             PlayerGold.GoldBag.GainGold(9999);
         }
 
@@ -264,9 +274,9 @@ namespace Safe_To_Share.Scripts.Holders
         [ContextMenu("Give fetus")]
         public void AddDebugFetus()
         {
-            foreach (var baseOrgan in Player.SexualOrgans.Vaginas.List)
+            foreach (var baseOrgan in player.SexualOrgans.Vaginas.List)
             {
-                baseOrgan.Womb.AddFetus(Player, Player);
+                baseOrgan.Womb.AddFetus(player, player);
                 baseOrgan.Womb.GrowFetuses(fetusDaysOld);
                 break;
             }

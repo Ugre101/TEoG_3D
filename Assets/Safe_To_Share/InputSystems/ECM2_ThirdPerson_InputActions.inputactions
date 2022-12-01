@@ -58,6 +58,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Piss",
+                    "type": "Button",
+                    "id": "594ca2e7-5fad-4745-9951-cd4e4d9cf447",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Shit",
+                    "type": "Button",
+                    "id": "e8773515-7b0e-4ccc-a9d6-61c5a6da3c3d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

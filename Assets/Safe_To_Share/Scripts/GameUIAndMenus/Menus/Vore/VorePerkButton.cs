@@ -18,7 +18,7 @@ namespace GameUIAndMenus.Menus.Vore
         //  new VorePerk loaded;
         public override void Setup(PlayerHolder player)
         {
-            this.player = player;
+            this.PlayerHolder = player;
             Addressables.LoadAssetAsync<VorePerk>(guid).Completed += Loaded;
         }
 
@@ -26,7 +26,7 @@ namespace GameUIAndMenus.Menus.Vore
 
         void HasPerk(VorePerk obj)
         {
-            bool havePerk = player.Player.Vore.Level.OwnedPerks.Contains(loaded as VorePerk);
+            bool havePerk = Player.Vore.Level.OwnedPerks.Contains(loaded as VorePerk);
             HaveFade(havePerk);
             CanAfford(loaded.Cost);
         }
@@ -34,7 +34,7 @@ namespace GameUIAndMenus.Menus.Vore
         void Loaded(AsyncOperationHandle<VorePerk> obj)
         {
             loaded = obj.Result;
-            CanAfford(player.Player.Vore.Level.Points);
+            CanAfford(Player.Vore.Level.Points);
             HasPerk(obj.Result);
         }
 
@@ -42,11 +42,11 @@ namespace GameUIAndMenus.Menus.Vore
 
         protected override void OnClick()
         {
-            if (Have || !loaded.MeetsRequirements(player.Player) || !player.Player.Vore.Level.TryUsePoints(loaded.Cost))
+            if (Have || !loaded.MeetsRequirements(Player) || !Player.Vore.Level.TryUsePoints(loaded.Cost))
                 return;
             if (loaded is not VorePerk perk)
                 return;
-            perk.GainPerk(player.Player);
+            perk.GainPerk(Player);
             HaveFade(true);
         }
 

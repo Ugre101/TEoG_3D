@@ -21,7 +21,7 @@ namespace AvatarStuff
 #if UNITY_EDITOR
         public void OnValidate()
         {
-            print($"Called OnVali on {gameObject.name}");
+            if (Application.isPlaying) return;
             Transform[] ts = transform.GetComponentsInChildren<Transform>(true);
             if (Mouth == null)
             {

@@ -5,6 +5,8 @@ namespace Safe_To_Share.Scripts.Character.Scat
 {
     public static class ScatExtensions
     {
+        public const float NeedToShitThreesHold = 0.4f;
+        public const float NeedToPissThreesHold = 0.4f;
         static NeedToShit needToShit = new();
         public static string CheckBodyNeeds(this BaseCharacter character)
         {
