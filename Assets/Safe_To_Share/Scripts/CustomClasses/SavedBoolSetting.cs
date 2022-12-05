@@ -7,7 +7,12 @@ namespace CustomClasses
         readonly string saveName;
 
         bool? enabled;
-        public SavedBoolSetting(string saveName) => this.saveName = saveName;
+        public SavedBoolSetting(string saveName,bool startValue = false)
+        {
+            this.saveName = saveName;
+            if (PlayerPrefs.HasKey(saveName) is false) 
+                Enabled = startValue;
+        }
 
         public bool Enabled
         {

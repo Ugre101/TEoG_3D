@@ -34,6 +34,11 @@ namespace Safe_To_Share.Scripts.CameraStuff
 
         void OnEnable()
         {
+            if (FirstPersonCameraSettings.FirstPersonCameraEnabled.Enabled is false)
+            {
+                ExitFirstPerson();
+                return;
+            }
             //  print(transform.localEulerAngles);
             //  print(thirdPerson.transform.localEulerAngles);
             brain.ForceCameraPosition(transform.position, thirdPerson.transform.rotation);

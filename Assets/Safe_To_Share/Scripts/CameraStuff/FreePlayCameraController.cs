@@ -131,6 +131,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
         void SetDistance(float newDistance)
         {
             followCam.CameraDistance = Mathf.Clamp(followCam.CameraDistance - newDistance, minDistance, maxDistance);
+            if (FirstPersonCameraSettings.FirstPersonCameraEnabled.Enabled is false) return;
             if (Math.Abs(followCam.CameraDistance - minDistance) < float.Epsilon)
             {
                 gameObject.SetActive(false);

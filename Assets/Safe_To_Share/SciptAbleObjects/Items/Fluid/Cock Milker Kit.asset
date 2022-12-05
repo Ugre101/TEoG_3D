@@ -17,7 +17,7 @@ MonoBehaviour:
   desc: 
   sprite: {fileID: 0}
   size: {x: 1, y: 1}
-  unlimitedUse: 0
+  unlimitedUse: 1
   value: 220
   canSell: 1
   effectsTree:

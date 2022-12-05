@@ -27,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186323663789122818}
-  m_LocalRotation: {x: 0.03327797, y: -0, z: -0, w: 0.99944615}
-  m_LocalPosition: {x: 0, y: 1.3999996, z: -6}
+  m_LocalRotation: {x: 0.039179027, y: -0, z: -0, w: 0.99923223}
+  m_LocalPosition: {x: 0, y: 1.4, z: -5.093019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -385,8 +385,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2118149562951615183}
-  m_LocalRotation: {x: 0.03327797, y: -0, z: -0, w: 0.99944615}
-  m_LocalPosition: {x: 0, y: 1.3999996, z: -6}
+  m_LocalRotation: {x: 0.039179027, y: -0, z: -0, w: 0.99923223}
+  m_LocalPosition: {x: 0, y: 1.4, z: -5.093019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1121,7 +1121,6 @@ GameObject:
   - component: {fileID: 7004627993087508327}
   - component: {fileID: 6620388355518405090}
   - component: {fileID: 8254489817098735847}
-  - component: {fileID: 4637380045803258697}
   - component: {fileID: 1646272977911113232}
   m_Layer: 0
   m_Name: CM vcam2 FirstPerson
@@ -1164,7 +1163,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 4463620243802127725}
+  m_LookAt: {fileID: 0}
   m_Follow: {fileID: 4463620243802127725}
   m_Lens:
     FieldOfView: 60
@@ -1277,18 +1276,6 @@ MonoBehaviour:
   m_DefaultActionMap: Camera
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4637380045803258697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7529076848855293081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f846c07535c4125ae00c1488343f7e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1646272977911113232
 MonoBehaviour:
   m_ObjectHideFlags: 0

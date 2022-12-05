@@ -1,6 +1,9 @@
 ﻿using System;
 using Character;
 using Character.Organs;
+using Character.VoreStuff;
+using Safe_To_Share.Scripts.Character.Scat;
+using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes
 {
@@ -23,6 +26,24 @@ namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes
 
     public class DigestionAnal : DigestionMethod
     {
-        public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer) => true;
+        public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer)
+        {
+            var digestTick = baseOrgan.Vore.DigestTick(
+                pred.Vore.digestionStrength.Value / 3f,
+                baseOrgan.Vore.Stretch, HandleAnalsDigestion,
+                predIsPlayer);
+            pred.SexualOrgans.Anals.Fluid.IncreaseCurrentValue(digestTick / 4f);
+            float toGain = digestTick / 4f;
+            var kcal = toGain / (pred.Body.Height.Value / 14);
+            pred.Eat(Mathf.RoundToInt(kcal * 9000));
+            return true;
+
+            void HandleAnalsDigestion(Prey obj)
+            {
+                pred.OnOrganDigestion(SexualOrganType.Anal, obj, VoreOrganDigestionMode.Digestion);
+                VoreSystem.HaveDigested(obj.Identity.ID);
+                VoredCharacters.RemovePrey(obj);
+            }
+        }
     }
 }

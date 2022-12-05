@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using CustomClasses;
+using UnityEngine;
 
 namespace Safe_To_Share.Scripts.CameraStuff
 {
-    public class FirstPersonCameraSettings : MonoBehaviour
+    public static class FirstPersonCameraSettings 
     {
         const string SaveName = "FirstPersonCameraSensitivity";
         static float? sensitivity;
-
+        public static SavedBoolSetting FirstPersonCameraEnabled { get; } = new("FirstPersonCameraEnabled",true);
         public static float Sensitivity
         {
             get
