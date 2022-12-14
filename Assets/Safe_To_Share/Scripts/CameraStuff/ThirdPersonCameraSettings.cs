@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CustomClasses;
+using UnityEngine;
 
 namespace Safe_To_Share.Scripts.CameraStuff
 {
@@ -10,7 +11,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
         static float? sensitivity;
         static bool? invertVerticalAxis;
         static bool? alwaysLook;
-
+        public static SavedBoolSetting InvertHorizontalAxis = new($"ThirdPersonInvertHorizontalAxis");
         public static float Sensitivity
         {
             get

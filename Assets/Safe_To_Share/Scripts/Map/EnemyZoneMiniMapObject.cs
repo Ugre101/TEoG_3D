@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Map
 {
+    [Serializable]
     public class EnemyZoneMiniMapObject : MiniMapBaseObject
     {
         [SerializeField, Range(0f, 1f),] float difficulty;

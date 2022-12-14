@@ -12,6 +12,7 @@ namespace Spawner.Editor
 
         void OnEnable() => myTarget = (SpawnZone)target;
 
+        bool addingEnemy;
         void OnSceneGUI()
         {
             if (!Application.isEditor) return;
@@ -32,8 +33,7 @@ namespace Spawner.Editor
             }
         }
 
-        public override void OnInspectorGUI() =>
-            //  EditorGUILayout.LabelField("hold control and left click mouse to spawn spawnzone");
-            base.OnInspectorGUI();
+     
+        
     }
 }

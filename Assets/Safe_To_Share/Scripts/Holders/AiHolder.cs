@@ -84,15 +84,14 @@ namespace AvatarStuff.Holders
             if (foundPlayer == null)
             {
                 GameObject player = GameObject.FindWithTag("Player");
-                if (player == null)
+                if (player != null && player.TryGetComponent(out PlayerHolder playerHolder))
+                    foundPlayer = playerHolder;
+                else
                 {
                     Debug.LogError("Holder can't find player");
                     enabled = false;
                     return;
                 }
-
-                if (player.TryGetComponent(out PlayerHolder playerHolder))
-                    foundPlayer = playerHolder;
             }
 
             Player = foundPlayer;

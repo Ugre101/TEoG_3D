@@ -6,10 +6,9 @@ namespace Character.CreateCharacterStuff.EditorPresets
     [CustomEditor(typeof(CharacterPreset))]
     public class CharacterPresetEditor : Editor
     {
-        static bool genderFold, identityFold, statsFold, raceFold, bodyFold, battleAIFold;
+        static bool genderFold, identityFold, statsFold, raceFold, bodyFold;
 
         static bool baseEditorFold;
-        SerializedProperty battleAI;
         SerializedProperty startBody;
         SerializedProperty startGender;
         SerializedProperty startIdentity;
@@ -25,7 +24,6 @@ namespace Character.CreateCharacterStuff.EditorPresets
             startStats = serializedObject.FindProperty("startStats");
             startRace = serializedObject.FindProperty("startRaceRef");
             startBody = serializedObject.FindProperty("startBody");
-            battleAI = serializedObject.FindProperty("battleAI");
         }
 
         protected virtual void CloseFolds()
@@ -35,7 +33,6 @@ namespace Character.CreateCharacterStuff.EditorPresets
             statsFold = false;
             raceFold = false;
             bodyFold = false;
-            battleAIFold = false;
         }
 
         public override void OnInspectorGUI()
@@ -58,7 +55,6 @@ namespace Character.CreateCharacterStuff.EditorPresets
             EditorGUILayout.BeginHorizontal();
             FoldButton("Race", ref raceFold);
             FoldButton("Body", ref bodyFold);
-            FoldButton("Battle AI", ref battleAIFold);
             EditorGUILayout.EndHorizontal();
         }
 
@@ -112,6 +108,25 @@ namespace Character.CreateCharacterStuff.EditorPresets
             }
 
             BasicPropertyFold(identityFold, startIdentity);
+            if (statsFold)
+            {
+                EditorGUILayout.BeginVertical("box");
+                serializedObject.Update();
+                int statSum = 0;
+                SerializedProperty strength = startStats.FindPropertyRelative("strength");
+                statSum += strength.intValue;
+                SerializedProperty charm = startStats.FindPropertyRelative("charm");
+                statSum += charm.intValue;
+                SerializedProperty constitution = startStats.FindPropertyRelative("constitution");
+                statSum += constitution.intValue;
+                SerializedProperty intelligence = startStats.FindPropertyRelative("intelligence");
+                statSum += intelligence.intValue;
+                SerializedProperty agility = startStats.FindPropertyRelative("agility");
+                statSum += agility.intValue;
+                EditorGUILayout.LabelField($"Stat sum: {statSum}");
+                serializedObject.ApplyModifiedProperties();
+                EditorGUILayout.EndVertical();
+            }
             BasicPropertyFold(statsFold, startStats);
             if (bodyFold)
             {
@@ -135,7 +150,6 @@ namespace Character.CreateCharacterStuff.EditorPresets
                 EditorGUILayout.EndVertical();
             }
 
-            BasicPropertyFold(battleAIFold, battleAI);
         }
 
         void BasicPropertyFold(bool fold, SerializedProperty property)

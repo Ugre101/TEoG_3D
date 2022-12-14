@@ -86,7 +86,7 @@ namespace SceneStuff
         public static event Action<Player, BaseCharacter[], BaseCharacter[], bool> ActionSceneLoaded;
 
         void LoadDormSex(PlayerHolder arg1, DormMate arg2) =>
-            StartCoroutine(LoadAfterBattleDirectly(arg1.Player, new[] { arg2, }));
+            StartCoroutine(LoadAfterBattleDirectly(arg1.Player, new BaseCharacter[] { arg2, }));
 
 
         public static event Action NewScene;
@@ -145,14 +145,14 @@ namespace SceneStuff
 
         IEnumerator LoadSceneOp(LocationSceneSo newScene, Player player, SceneTeleportExit teleportExit)
         {
-            yield return BaseLoadLocationOp(newScene);
+            yield return BaseLoadGameSceneSoOp(newScene);
             yield return GetPlayerHolderAndReplacePlayer(player, teleportExit.ExitPos);
             yield return AllDone(false);
         }
 
-        IEnumerator BaseLoadLocationOp(LocationSceneSo newScene)
+        IEnumerator BaseLoadGameSceneSoOp(GameSceneSo newScene)
         {
-            var loaded = Addressables.LoadAssetAsync<LocationSceneSo>(newScene.Guid);
+            var loaded = Addressables.LoadAssetAsync<GameSceneSo>(newScene.Guid);
             yield return loaded;
             if (CurrentScene != null && loaded.Result.Guid == CurrentScene.Guid)
             {
@@ -160,10 +160,15 @@ namespace SceneStuff
                 yield break;
             }
 
-            CurrentLocation = loaded.Result;
+            switch (loaded.Result)
+            {
+                case LocationSceneSo locationSceneSo:
+                    CurrentLocation = locationSceneSo;
+                    break;
+            }
             StartLoadStuff();
             yield return fadeDelay;
-            AsyncOperationHandle<SceneInstance> asyncLoad = loaded.Result.SceneReference.LoadSceneAsync();
+            var asyncLoad = loaded.Result.SceneReference.LoadSceneAsync();
             yield return UpdateProgressWhileSceneNotDone(asyncLoad);
             yield return gameUI.LoadGameUI();
             if (asyncLoad.Status == AsyncOperationStatus.Succeeded)
@@ -184,7 +189,7 @@ namespace SceneStuff
 
         IEnumerator LoadSceneOp(LocationSceneSo newScene, Player player, Vector3 playerPosition)
         {
-            yield return BaseLoadLocationOp(newScene);
+            yield return BaseLoadGameSceneSoOp(newScene);
             yield return GetPlayerHolderAndReplacePlayer(player, playerPosition);
             yield return AllDone(false);
         }
@@ -193,7 +198,7 @@ namespace SceneStuff
 
         public IEnumerator LoadSceneAndSubScenes(LocationSceneSo sceneSo, List<string> toLoad)
         {
-            yield return BaseLoadLocationOp(sceneSo);
+            yield return BaseLoadGameSceneSoOp(sceneSo);
             yield return waitAFrame; // Let scene start
             yield return LoadSubScenes(toLoad);
         }
@@ -202,10 +207,10 @@ namespace SceneStuff
         {
             if (!toLoad.Any())
                 yield break;
-            List<AsyncOperationHandle<SubLocationSceneSo>> subOps = toLoad
-                .Select(Addressables.LoadAssetAsync<SubLocationSceneSo>).ToList();
+            var subOps = toLoad.Select(Addressables
+                            .LoadAssetAsync<SubLocationSceneSo>).ToList();
             List<AsyncOperationHandle<SceneInstance>> loadSubOps = new();
-            foreach (AsyncOperationHandle<SubLocationSceneSo> subOp in subOps)
+            foreach (var subOp in subOps)
             {
                 yield return subOp;
                 if (subOp.Result.SceneActive)
@@ -215,7 +220,7 @@ namespace SceneStuff
                 loadSubOps.Add(subOp.Result.SceneReference.LoadSceneAsync(LoadSceneMode.Additive));
             }
 
-            foreach (AsyncOperationHandle<SceneInstance> loadSubOp in loadSubOps)
+            foreach (var loadSubOp in loadSubOps)
                 yield return loadSubOp;
         }
 
@@ -300,7 +305,7 @@ namespace SceneStuff
             await EditorSceneLoadOp(locationSo);
         }
 
-        async Task EditorSceneLoadOp(LocationSceneSo locationSceneSo)
+        async Task EditorSceneLoadOp(GameSceneSo locationSceneSo)
         {
             await locationSceneSo.SceneReference.LoadSceneAsync().Task;
             await PlayerHolder.Instance.EditorSetup();

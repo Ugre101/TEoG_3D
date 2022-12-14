@@ -99,7 +99,9 @@ namespace Safe_To_Share.Scripts.CameraStuff
             return axis switch
             {
                 0 => action.ReadValue<Vector2>().x * FirstPersonCameraSettings.Sensitivity,
-                1 => action.ReadValue<Vector2>().y * FirstPersonCameraSettings.Sensitivity,
+                1 => FirstPersonCameraSettings.HorizontalInverted.Enabled ?
+                    -(action.ReadValue<Vector2>().y * FirstPersonCameraSettings.Sensitivity)
+                    : action.ReadValue<Vector2>().y * FirstPersonCameraSettings.Sensitivity,
                 2 => action.ReadValue<float>() * FirstPersonCameraSettings.Sensitivity,
                 _ => 0,
             };

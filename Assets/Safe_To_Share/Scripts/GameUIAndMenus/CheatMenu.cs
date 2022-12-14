@@ -18,7 +18,6 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             mascBtn.onClick.AddListener(MascCheat);
             femiBtn.onClick.AddListener(FemiCheat);
         }
-
         public bool BlockIfActive()
         {
             if (gameObject.activeInHierarchy)

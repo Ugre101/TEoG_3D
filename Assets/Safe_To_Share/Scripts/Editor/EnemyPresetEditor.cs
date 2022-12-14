@@ -13,6 +13,11 @@ namespace Character.CreateCharacterStuff.EditorPresets
         void OnEnable()
         {
             BaseOnEnable();
+            EnemyOnEnable();
+        }
+
+        protected void EnemyOnEnable()
+        {
             reward = serializedObject.FindProperty("battleReward");
             canTake = serializedObject.FindProperty("canTakeEnemyHome");
             loseScenario = serializedObject.FindProperty("loseScenarios");

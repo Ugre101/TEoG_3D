@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faaa11c972c143e29da238ebbd4a340d, type: 3}
+  m_Name: Room 1
+  m_EditorClassIdentifier: 
+  startGender:
+    allowedGenders:
+    - weight: 3
+      gender: 1
+    - weight: 1
+      gender: 4
+    startEssence: 2000
+  startIdentity:
+    customIdentity: 0
+    identity:
+      id: 28
+      firstName: 
+      lastName: 
+      birthDay:
+        year: -21
+        day: 0
+    nameList: {fileID: 0}
+    minAge: 18
+    maxAge: 44
+  startStats:
+    strength: 20
+    charm: 8
+    constitution: 16
+    intelligence: 6
+    agility: 10
+  startAbilitiesGuids: []
+  startItemsWithAmountOf: []
+  startPerks: []
+  startEssencePerks: []
+  startVorePerks: []
+  startRaceRef:
+    m_AssetGUID: 96817023700d0764793f5b1dcfe15bd9
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  startBody:
+    height: 180
+    muscle: 22
+    fat: 16
+    rng:
+      minValue: 0.9
+      maxValue: 1.1
+  startHair:
+    bald: 0
+    hairColors:
+    - {r: 1, g: 1, b: 1, a: 1}
+  startSkinColor:
+    clampRandomColor: 0
+    whitest: 0
+    darkest: 0
+    manualSkinColor: 0
+    skinDarkness: 0
+  battleReward:
+    goldReward: 200
+    expReward: 200
+    rngValue:
+      minValue: 0.9
+      maxValue: 1.1
+  canTakeEnemyHome:
+    canTake: 1
+    orgasmsNeeded: 3
+  loseScenarios: {fileID: 0}
+  desc: 
+  giveRandomBodyMorphs: 0
+  customLoseScenarios: []

@@ -282,6 +282,11 @@ MonoBehaviour:
       <MaxHydration>k__BackingField:
         mods:
           tempBaseStatMods: []
+      <Bladder>k__BackingField:
+        current: 0
+        <MaxPressure>k__BackingField:
+          mods:
+            tempBaseStatMods: []
     reward:
       goldReward: 0
       expReward: 0

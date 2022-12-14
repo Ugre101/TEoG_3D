@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Map
 {
+    [Serializable]
     public abstract class MiniMapBaseObject : MonoBehaviour
     {
         [SerializeField] protected Sprite icon;

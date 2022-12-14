@@ -1,4 +1,3 @@
-using AvatarStuff.Holders;
 using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ namespace SceneStuff
         [SerializeField] Transform exitLocation;
 
         bool alreadyLoading;
-        public Vector3 ExitLocation => exitLocation.position;
+        Vector3 ExitLocation => exitLocation.position;
 
         void Start() => exit.SetExit(ExitLocation);
 

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Map;
 using QuestStuff;
+using Safe_To_Share.Scripts.Map;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
@@ -83,8 +83,7 @@ namespace GameUIAndMenus.MinimapUI
 
         public void RemoveStaticQuestMarker(StaticQuestObject staticStaticQuest)
         {
-            if (PairedStaticQuestObject.Find(q => q.GlobalTrans.GetInstanceID() == staticStaticQuest.GetInstanceID()) is
-                { } fund)
+            if (PairedStaticQuestObject.Find(q => q.GlobalTrans.GetInstanceID() == staticStaticQuest.GetInstanceID()) is { } fund)
             {
                 PairedStaticQuestObject.Remove(fund);
                 Destroy(fund.MiniMapTrans.gameObject);
@@ -141,12 +140,16 @@ namespace GameUIAndMenus.MinimapUI
 
         void Setup()
         {
-            if (Terrain.activeTerrain == null)
-                throw new Exception("No active terrain");
-            Vector3 terrainDataSize = Terrain.activeTerrain.terrainData.size;
+            if (MapData.Instance == null)
+            {
+                Debug.LogWarning("No mapData"); 
+                return;
+            }
+
+            var terrainDataSize = MapData.Instance.MapSize;
             xRadius = terrainDataSize.x / 2;
-            zRadius = terrainDataSize.z / 2;
-            Vector3 terrainPos = Terrain.activeTerrain.GetPosition();
+            zRadius = terrainDataSize.y / 2;
+            Vector3 terrainPos = MapData.Instance.MapPosition;
             center = new Vector2(terrainPos.x + xRadius, terrainPos.z + zRadius);
             FindAllAndInstance();
             FindAndInstanceQuests();
@@ -154,11 +157,11 @@ namespace GameUIAndMenus.MinimapUI
 
         void FindAllAndInstance()
         {
-            foreach (StaticMiniMapObject staticMiniMapObject in FindObjectsOfType<StaticMiniMapObject>(true))
+            foreach (StaticMiniMapObject staticMiniMapObject in MapData.Instance.Statics)
                 AddStaticObject(staticMiniMapObject);
             foreach (DynamicMiniMapObject mapObject in FindObjectsOfType<DynamicMiniMapObject>(true))
                 AddMovingObject(mapObject);
-            foreach (EnemyZoneMiniMapObject zone in FindObjectsOfType<EnemyZoneMiniMapObject>(true))
+            foreach (EnemyZoneMiniMapObject zone in MapData.Instance.enemyZones)
                 AddEnemyZone(zone);
         }
 

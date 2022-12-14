@@ -27,7 +27,8 @@ namespace DormAndHome.Dorm
             await dormMate.LoadAssets();
             Enemy enemy = new(dormMate.NewEnemy());
             dormManager.AddToDorm(new DormMate(enemy));
-            dormSceneManager.Loaded();
+            if (dormSceneManager != null)
+                dormSceneManager.Loaded();
         }
     }
 }

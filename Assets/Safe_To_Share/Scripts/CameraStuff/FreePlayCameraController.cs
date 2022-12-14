@@ -116,7 +116,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
                 return;
             mouseLookInput = ctx.performed ? ctx.ReadValue<Vector2>() : Vector2.zero;
             if (mouseLookInput.y != 0)
-                TiltTarget(mouseLookInput.y);
+                TiltTarget(ThirdPersonCameraSettings.InvertHorizontalAxis.Enabled ? -mouseLookInput.y :  mouseLookInput.y);
             if (mouseLookInput.x != 0)
                 RotateTarget(InvertVerticalAxis ? -mouseLookInput.x : mouseLookInput.x);
         }

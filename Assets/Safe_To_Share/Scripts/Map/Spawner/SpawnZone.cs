@@ -17,8 +17,6 @@ namespace Map.Spawner
     public class SpawnZone : MonoBehaviour
     {
         const float DontSpawnWithinRangeOfPlayer = 25f;
-
-
         static bool alreadyPreloading;
         [SerializeField] EnemyPreset[] enemyPresets;
         [SerializeField] AssetReference prefabRef;

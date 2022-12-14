@@ -8,6 +8,8 @@ namespace Safe_To_Share.Scripts.CameraStuff
         const string SaveName = "FirstPersonCameraSensitivity";
         static float? sensitivity;
         public static SavedBoolSetting FirstPersonCameraEnabled { get; } = new("FirstPersonCameraEnabled",true);
+
+        public static SavedBoolSetting HorizontalInverted { get; } = new("FirstPersonHorizontalInverted");
         public static float Sensitivity
         {
             get

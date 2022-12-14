@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1be4b900f25a463681e9773b52f52961, type: 3}
+  m_Name: Mine Dungeon
+  m_EditorClassIdentifier: 
+  guid: 8db9e90e3f7a1d5468238f4b6b508f1e
+  description: 
+  sceneType: 0
+  sceneReference:
+    m_AssetGUID: 33f45d6f2a5c69448b6157e719b44b21
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  subLocations: []
+  worldMap: {fileID: 0}
+  sceneName: 
