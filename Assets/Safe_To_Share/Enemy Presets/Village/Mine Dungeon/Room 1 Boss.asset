@@ -36,7 +36,7 @@ MonoBehaviour:
       birthDay:
         year: -21
         day: 0
-    nameList: {fileID: 0}
+    nameList: {fileID: 11400000, guid: a047e43d2031dd54c862cb59bf14aa29, type: 2}
     minAge: 18
     maxAge: 44
   startStats:
@@ -81,7 +81,7 @@ MonoBehaviour:
   canTakeEnemyHome:
     canTake: 0
     orgasmsNeeded: 0
-  loseScenarios: {fileID: 0}
+  loseScenarios: {fileID: 11400000, guid: d547ccf44044b6b41809a119bae15cc3, type: 2}
   desc: 
   giveRandomBodyMorphs: 0
   customLoseScenarios: []

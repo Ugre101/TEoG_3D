@@ -1,5 +1,6 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Character.CreateCharacterStuff;
 using Character.EnemyStuff;
 using Safe_To_Share.Scripts.Holders;
@@ -16,17 +17,30 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
         [SerializeField] EnemyPreset[] enemyPresets;   
         [SerializeField] BossPreset bossPreset;
         [SerializeField] LayerMask spawnOn;
-        [SerializeField] List<Vector3> spawnPoints = new();
-        [SerializeField] Vector3 bossSpawnPoint;
+        [SerializeField] List<Transform> spawnPoints = new();
+        [SerializeField] Transform bossSpawnPoint;
+
+        bool loaded;
+        async void Start()
+        {
+            Task[] tasks = new Task[enemyPresets.Length];
+            for(int i = 0; i < enemyPresets.Length; i++) 
+                tasks[i] = enemyPresets[i].LoadAssets();
+            await Task.WhenAll(tasks);
+            if (bossPreset != null) 
+                await bossPreset.LoadAssets();
+            loaded = true;
+        }
+
         void OnTriggerEnter(Collider other)
         {
-            if (gameObject.CompareTag("Player")) 
+            if (other.gameObject.CompareTag("Player")) 
                 SpawnEnemies();
         }
 
         void OnTriggerExit(Collider other)
         {
-            if (gameObject.CompareTag("Player")) 
+            if (other.gameObject.CompareTag("Player")) 
                 DeSpawnEnemies();
         }
 
@@ -39,11 +53,13 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
         static System.Random rng = new ();
         void SpawnEnemies()
         {
+            if (!loaded)
+                StartCoroutine(WaitForLoad());
             SpawnBoss();
             if (enemyPresets.Length <= 0) return;
             foreach (var spawnPoint in spawnPoints)
             {
-                Addressables.InstantiateAsync(enemyPrefab, spawnPoint, Quaternion.identity).Completed += op =>
+                Addressables.InstantiateAsync(enemyPrefab, spawnPoint.position, spawnPoint.rotation).Completed += op =>
                 {
                     if (op.Status != AsyncOperationStatus.Succeeded) return;
                     if (!op.Result.TryGetComponent(out SubRealmEnemy enemyHolder)) return;
@@ -54,10 +70,16 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
 
         }
 
+        IEnumerator WaitForLoad()
+        {
+            yield return new WaitUntil(() => loaded);
+            SpawnEnemies();
+        }
+
         void SpawnBoss()
         {
             if (bossPreset == null) return;
-            Addressables.InstantiateAsync(enemyPrefab, bossSpawnPoint, Quaternion.identity).Completed += op =>
+            Addressables.InstantiateAsync(enemyPrefab, bossSpawnPoint.position, bossSpawnPoint.rotation).Completed += op =>
             {
                 if (op.Status != AsyncOperationStatus.Succeeded) return;
                 if (!op.Result.TryGetComponent(out SubRealmEnemy enemyHolder)) return;
@@ -67,20 +89,34 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
 
         void OnDrawGizmosSelected()
         {
-            foreach (Vector3 spawnPoint in spawnPoints) 
-                Gizmos.DrawSphere(spawnPoint, 1f);
-            if (bossSpawnPoint != Vector3.zero) 
-                Gizmos.DrawSphere(bossSpawnPoint, 2f);
+            foreach (var spawnPoint in spawnPoints)
+            {
+                Gizmos.DrawSphere(spawnPoint.position, 1f);
+                Gizmos.DrawLine(spawnPoint.position, spawnPoint.position + spawnPoint.forward);
+            }
+
+            if (bossSpawnPoint == null) return;
+            Gizmos.DrawSphere(bossSpawnPoint.position, 2f);
+            Gizmos.DrawLine(bossSpawnPoint.position, bossSpawnPoint.position + bossSpawnPoint.forward);
         }
 #if UNITY_EDITOR
         public bool AddSpawnPosition(Ray ray)
         {
             NavMeshHit navHit = new();
-            bool valid = Physics.Raycast(ray, out RaycastHit hit) &&
+            bool valid = Physics.Raycast(ray, out var hit) &&
                          NavMesh.SamplePosition(hit.point, out navHit, 2f, spawnOn);
-            if (valid)
-                spawnPoints.Add(navHit.position);
-            return valid;
+            if (!valid) 
+                return false;
+            var go = new GameObject("SpawnPoint")
+            {
+                transform =
+                {
+                    position = navHit.position,
+                },
+            };
+            go.transform.SetParent(transform);
+            spawnPoints.Add(go.transform);
+            return true;
             //&& NotToClose(navHit) && NotToFarAway(navHit);
         }
         public bool AddBossPosition(Ray ray)
@@ -88,8 +124,13 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
             NavMeshHit navHit = new();
             bool valid = Physics.Raycast(ray, out RaycastHit hit) &&
                          NavMesh.SamplePosition(hit.point, out navHit, 2f, spawnOn);
-            if (valid)
-                bossSpawnPoint = navHit.position;
+            if (!valid) return valid;
+            GameObject go = new("BossSpawnPoint");
+            go.transform.position = navHit.position;
+            go.transform.SetParent(transform);
+            if (bossSpawnPoint != null)
+                DestroyImmediate(bossSpawnPoint.gameObject);
+            bossSpawnPoint = go.transform;
             return valid;
         }
 #endif

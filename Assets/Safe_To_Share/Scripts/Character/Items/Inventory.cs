@@ -152,7 +152,6 @@ namespace Items
             yield return op;
             if (op.Status == AsyncOperationStatus.Succeeded) AddItem(op.Result, quantity);
         }
-
         public bool AddItem(Item item, int quantity = 1) => AddItem(item.Guid, quantity);
 
         public bool AddItem(string itemGuid, int quantity = 1)
@@ -282,5 +281,7 @@ namespace Items
             foreach (InventorySave.SerializedItem loadItem in toLoad.items)
                 Items.Add(new InventoryItem(loadItem.guid, loadItem.amount, loadItem.pos));
         }
+
+       
     }
 }

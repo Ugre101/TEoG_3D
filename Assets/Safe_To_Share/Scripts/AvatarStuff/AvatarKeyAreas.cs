@@ -39,7 +39,7 @@ namespace AvatarStuff
                 var found = ts.FirstOrDefault(c => c.gameObject.name is "Gen1" or "shaft1");
                 if (found != null)
                     ShaftRoot = found;
-                else
+                else if (gameObject.name.Contains("Doll") is false)
                     print($"ShaftRoot is null for {gameObject.name}");
             }
 
@@ -48,7 +48,7 @@ namespace AvatarStuff
                 var found = ts.FirstOrDefault(c => c.gameObject.name is "Gen1" or "legsCrease");
                 if (found != null)
                     Vagina = found;
-                else
+                else if (gameObject.name.Contains("Doll") is false)
                     print($"Vagina is null for {gameObject.name}");
             }
 

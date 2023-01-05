@@ -72,8 +72,11 @@ namespace Safe_To_Share.Scripts.Holders
 
         void OnCollisionEnter(Collision collision)
         {
-            if (!collision.gameObject.TryGetComponent(out EnemyAiHolder enemy)) return;
-            TriggerCombat(enemy.Enemy);
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                if (collision.gameObject.TryGetComponent(out EnemyAiHolder enemy)) 
+                    TriggerCombat(enemy.Enemy);
+            }
         }
 
         public event Action RePlaced;
