@@ -11,7 +11,14 @@ namespace GameUIAndMenus
         [SerializeField] GameCanvas gameCanvas;
         [SerializeField] Image minimap, bigMap;
         [SerializeField] GameMenu[] menus;
-        void Start() => SetPlayer(SceneLoader.CurrentLocation.WorldMap);
+        void Start()
+        {
+            if (SceneLoader.Instance.InSubRealm)
+            {
+             // TODO Subrealm map   
+            }else 
+                SetPlayer(SceneLoader.CurrentLocation.WorldMap);
+        }
 
 #if UNITY_EDITOR
         void OnValidate() => menus = GetComponentsInChildren<GameMenu>(true);

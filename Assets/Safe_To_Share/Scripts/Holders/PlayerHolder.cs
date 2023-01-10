@@ -25,8 +25,10 @@ namespace Safe_To_Share.Scripts.Holders
     public class PlayerHolder : Holder
     {
         public delegate void CombatParameters(Player player, params BaseCharacter[] enemies);
+        public delegate void SubRealmCombatParameters(Player player,bool exitToLastLocationOnDefeat, params BaseCharacter[] enemies);
 
         public static CombatParameters LoadCombat;
+        public static SubRealmCombatParameters LoadSubRealmCombat;
         public static Action<PlayerHolder, DormMate> LoadDormSex;
         [SerializeField] MovementModHandler movementMoveModHandler;
         [SerializeField] ThirdPersonEcm2Character thirdPersonEcm2Character;
@@ -72,11 +74,11 @@ namespace Safe_To_Share.Scripts.Holders
 
         void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Enemy"))
-            {
-                if (collision.gameObject.TryGetComponent(out EnemyAiHolder enemy)) 
-                    TriggerCombat(enemy.Enemy);
-            }
+            // if (collision.gameObject.CompareTag("Enemy"))
+            // {
+            //     if (collision.gameObject.TryGetComponent(out EnemyAiHolder enemy)) 
+            //         TriggerCombat(enemy.Enemy);
+            // }
         }
 
         public event Action RePlaced;
@@ -120,7 +122,7 @@ namespace Safe_To_Share.Scripts.Holders
         void UpdateHeightsChange() => HeightsChange(player.Body.Height.Value);
 
 
-        protected override void NewAvatar(CharacterAvatar obj)
+        public override void NewAvatar(CharacterAvatar obj)
         {
             player.UpdateAvatar -= ModifyCurrentAvatar;
             Changer.CurrentAvatar.Setup(player);
@@ -217,7 +219,12 @@ namespace Safe_To_Share.Scripts.Holders
             combat = true;
             LoadCombat?.Invoke(player, enemy);
         }
-
+        public void TriggerSubRealmCombat(BaseCharacter[] enemy, bool kickOutOnDefeat)
+        {
+            if (combat) return;
+            combat = true;
+            LoadSubRealmCombat?.Invoke(player,kickOutOnDefeat, enemy);
+        }
         public void TriggerSex(DormMate mate) => LoadDormSex?.Invoke(this, mate);
 
         public void StartPissing()
@@ -285,5 +292,6 @@ namespace Safe_To_Share.Scripts.Holders
             }
         }
 #endif
+       
     }
 }

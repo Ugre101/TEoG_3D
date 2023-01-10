@@ -55,7 +55,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             if (leaving)
                 return;
             leaving = true;
-            SceneLoader.Instance.LoadLastLocation(player);
+            SceneLoader.Instance.LeaveAfterBattle(player);
         }
     }
 }

@@ -157,6 +157,7 @@ namespace Battle
             player.LevelSystem.GainExp(enemy.Reward.ExpReward);
             PlayerGold.GoldBag.GainGold(enemy.Reward.GoldReward);
             enemy.Stats.FullRecovery(80);
+            enemy.SetDefeated(true);
         }
 
         public void Leave()

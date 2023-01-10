@@ -251,6 +251,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "ffdb12f3-b23b-43b3-a145-82c68170a7f2",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Boost Spin",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "1D Axis",
                     "id": "26ec02a0-97bd-4d51-9782-dbceed1674ac",
                     "path": "1DAxis",

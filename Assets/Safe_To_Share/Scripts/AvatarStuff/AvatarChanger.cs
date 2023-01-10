@@ -2,6 +2,7 @@ using System;
 using Movement.ECM2.Source;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Events;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace AvatarStuff
@@ -12,6 +13,7 @@ namespace AvatarStuff
         public bool AvatarLoaded { get; private set; }
         public CharacterAvatar CurrentAvatar { get; private set; }
         public event Action<CharacterAvatar> NewAvatar;
+        public UnityEvent<CharacterAvatar> NewAvatarEvent;
 
         public void UpdateAvatar(AssetReference avatar)
         {
@@ -49,6 +51,7 @@ namespace AvatarStuff
             if (hasAvatar && CurrentAvatar.Prefab.AssetGUID == avatar.Prefab.AssetGUID)
             {
                 NewAvatar?.Invoke(CurrentAvatar);
+                NewAvatarEvent?.Invoke(CurrentAvatar);
                 return;
             }
 
@@ -63,6 +66,7 @@ namespace AvatarStuff
             if (instance.TryGetComponent(out Animator ani))
                 InvokeNewAnimator(ani);
             NewAvatar?.Invoke(instance);
+            NewAvatarEvent?.Invoke(instance);
             //    avatar.LoadAssetAsync<GameObject>().Completed += Done;
         }
     }

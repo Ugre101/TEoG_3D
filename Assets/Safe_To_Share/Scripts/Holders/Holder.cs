@@ -20,6 +20,7 @@ namespace AvatarStuff.Holders
         {
             var res = await avatarDict.GetAvatarLoaded(whom, playerAvatar);
             Changer.UpdateAvatar(res);
+            print("Avatar updated");
         }
 
         public virtual void HeightsChange(float newHeight) => Scaler.ChangeScale(newHeight);
@@ -28,6 +29,6 @@ namespace AvatarStuff.Holders
 
         protected virtual void UnSub() => Changer.NewAvatar -= NewAvatar;
 
-        protected abstract void NewAvatar(CharacterAvatar obj);
+        public abstract void NewAvatar(CharacterAvatar obj);
     }
 }

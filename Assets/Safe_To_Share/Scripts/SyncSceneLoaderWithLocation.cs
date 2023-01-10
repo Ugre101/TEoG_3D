@@ -1,6 +1,7 @@
 #if UNITY_EDITOR
 using System.Collections;
 using Safe_To_Share.Scripts.Static;
+using SaveStuff;
 using SceneStuff;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Safe_To_Share.Scripts
 {
     public class SyncSceneLoaderWithLocation : MonoBehaviour
     {
-        [SerializeField] LocationSceneSo locationSceneSo;
+        [SerializeField] GameSceneSo locationSceneSo;
         readonly WaitForSeconds coldStartAfterDelay = new(1f);
 
         IEnumerator Start()

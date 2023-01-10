@@ -31,6 +31,8 @@ namespace Character.EnemyStuff
             WantBodyMorph = character.GiveRandomBodyMorphs;
         }
 
+        [field: SerializeField] public bool Defeated { get; private set; }
+        public void SetDefeated(bool defeated) => Defeated = defeated;
         public BattleReward Reward => reward;
 
         public CanTakeEnemyHome CanTake => canTake;

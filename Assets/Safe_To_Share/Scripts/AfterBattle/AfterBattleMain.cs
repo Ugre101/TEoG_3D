@@ -74,6 +74,8 @@ namespace Safe_To_Share.Scripts.AfterBattle
             if (activeEnemyActor.Actor is not Enemy enemy)
                 return;
             enemy.GotRemoved();
+            activePlayerActor.RotateActor.ResetPosAndRot();
+            activePlayerActor.AlignActor.Stop();
         }
 
         public override void Setup(Player player, BaseCharacter[] enemies, params BaseCharacter[] allies)

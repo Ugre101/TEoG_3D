@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using AvatarStuff.Holders.AI.StateMachineStuff;
 using AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain;
+using Character;
 using Character.EnemyStuff;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
 namespace AvatarStuff.Holders
@@ -50,7 +53,7 @@ namespace AvatarStuff.Holders
             Changer.NewAvatar -= NewAvatar;
         }
 
-        void ModifyAvatar(CharacterAvatar obj)
+        public void ModifyAvatar(CharacterAvatar obj)
         {
             if (waitingToReturn)
                 ReturnMe?.Invoke(this);
@@ -77,7 +80,7 @@ namespace AvatarStuff.Holders
             HeightsChange(Enemy.Body.Height.Value);
         }
 
-        protected override void NewAvatar(CharacterAvatar obj)
+        public override void NewAvatar(CharacterAvatar obj)
         {
             if (enemy.WantBodyMorph)
             {
@@ -94,7 +97,13 @@ namespace AvatarStuff.Holders
             else
                 waitingToReturn = true;
         }
-
+        void OnTriggerEnter(Collider other)
+        {
+            if (Enemy.Defeated) return;
+            if (!other.gameObject.CompareTag("Player")) return;
+            if (!other.TryGetComponent(out PlayerHolder playerHolder)) return;
+            playerHolder.TriggerCombat(enemy);
+        }
         public event Action<EnemyAiHolder> ReturnMe;
     }
 }

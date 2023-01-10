@@ -24,6 +24,7 @@ namespace SceneStuff
     {
         static GameSceneSo currentScene;
         static LocationSceneSo lastLocation;
+        static SubRealmSceneSo currentSubRealm;
         [SerializeField] DropSerializableObject<GameSceneSo> defaultScene;
         [SerializeField] FreePlayUILoader gameUI;
         [SerializeField] SceneTeleportExit defaultExit;
@@ -80,6 +81,7 @@ namespace SceneStuff
             GameManager.EnemyGrowsCloser += PreloadCombat;
             PlayerHolder.LoadCombat += LoadCombat;
             PlayerHolder.LoadDormSex += LoadDormSex;
+            PlayerHolder.LoadSubRealmCombat += LoadSubRealmCombat;
             Player.StartCombat += LoadCombat;
         }
 
@@ -129,6 +131,11 @@ namespace SceneStuff
             SavedEnemies.ClearEnemies();
             StartCoroutine(LoadSceneOp(newScene, player, teleportExit));
         }
+        
+        public void LoadSubRealm(SubRealmSceneSo newScene, Player player, SceneTeleportExit teleportExit)
+        {
+            StartCoroutine(LoadSceneOp(newScene, player, teleportExit));
+        }
 
         public void TeleportToExit(PlayerHolder holder, SceneTeleportExit teleportExit) =>
             StartCoroutine(HideLoadSubScenes(holder, teleportExit));
@@ -143,7 +150,7 @@ namespace SceneStuff
             LoaderScreen.StopFade();
         }
 
-        IEnumerator LoadSceneOp(LocationSceneSo newScene, Player player, SceneTeleportExit teleportExit)
+        IEnumerator LoadSceneOp(GameSceneSo newScene, Player player, SceneTeleportExit teleportExit)
         {
             yield return BaseLoadGameSceneSoOp(newScene);
             yield return GetPlayerHolderAndReplacePlayer(player, teleportExit.ExitPos);
@@ -152,28 +159,34 @@ namespace SceneStuff
 
         IEnumerator BaseLoadGameSceneSoOp(GameSceneSo newScene)
         {
-            var loaded = Addressables.LoadAssetAsync<GameSceneSo>(newScene.Guid);
-            yield return loaded;
-            if (CurrentScene != null && loaded.Result.Guid == CurrentScene.Guid)
+            if (CurrentScene != null && newScene.Guid == CurrentScene.Guid)
             {
                 Debug.LogError("Trying to load current scene");
                 yield break;
             }
 
-            switch (loaded.Result)
+            switch (newScene)
             {
+                case SubRealmSceneSo subRealmSceneSo:
+                    currentSubRealm = subRealmSceneSo;
+                    InSubRealm = true;
+                    Debug.Log("Sub realm loaded");
+                    break;
                 case LocationSceneSo locationSceneSo:
+                    InSubRealm = false;
                     CurrentLocation = locationSceneSo;
                     break;
             }
             StartLoadStuff();
             yield return fadeDelay;
-            var asyncLoad = loaded.Result.SceneReference.LoadSceneAsync();
+            var asyncLoad = newScene.SceneReference.LoadSceneAsync();
             yield return UpdateProgressWhileSceneNotDone(asyncLoad);
             yield return gameUI.LoadGameUI();
             if (asyncLoad.Status == AsyncOperationStatus.Succeeded)
-                SetNewSceneStuff(loaded.Result, asyncLoad);
+                SetNewSceneStuff(newScene, asyncLoad);
         }
+
+        public bool InSubRealm { get; set; }
 
         static IEnumerator GetPlayerHolderAndReplacePlayer(Player player, Vector3 exitPos)
         {
@@ -187,7 +200,7 @@ namespace SceneStuff
             holder.transform.position = exitPos;
         }
 
-        IEnumerator LoadSceneOp(LocationSceneSo newScene, Player player, Vector3 playerPosition)
+        IEnumerator LoadSceneOp(GameSceneSo newScene, Player player, Vector3 playerPosition)
         {
             yield return BaseLoadGameSceneSoOp(newScene);
             yield return GetPlayerHolderAndReplacePlayer(player, playerPosition);
@@ -249,7 +262,9 @@ namespace SceneStuff
 
         public void PreLoadDepLast()
         {
-            if (lastLocation != null)
+            if (InSubRealm && currentSubRealm != null)
+                Addressables.DownloadDependenciesAsync(currentSubRealm.Guid, true);
+            else if (lastLocation != null)
                 Addressables.DownloadDependenciesAsync(lastLocation.SceneReference.AssetGUID, true);
         }
 
@@ -297,12 +312,21 @@ namespace SceneStuff
         #endregion
 
 #if UNITY_EDITOR
-        public async void EditorColdStart(LocationSceneSo locationSo)
+        public async void EditorColdStart(GameSceneSo gameSceneSo)
         {
-            CurrentLocationSceneGuid = locationSo.Guid;
-            CurrentLocation = locationSo;
-            currentScene = locationSo;
-            await EditorSceneLoadOp(locationSo);
+            currentScene = gameSceneSo;
+            switch (gameSceneSo)
+            {
+                case LocationSceneSo locationSceneSo:
+                    CurrentLocationSceneGuid = locationSceneSo.Guid;
+                    CurrentLocation = locationSceneSo;
+                    break;
+                case SubRealmSceneSo subRealmSceneSo:
+                    InSubRealm = true;
+                    currentSubRealm = subRealmSceneSo;
+                    break;
+            }
+            await EditorSceneLoadOp(gameSceneSo);
         }
 
         async Task EditorSceneLoadOp(GameSceneSo locationSceneSo)

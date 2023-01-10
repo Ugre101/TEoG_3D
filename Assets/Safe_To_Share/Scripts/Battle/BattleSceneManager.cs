@@ -46,10 +46,7 @@ namespace Battle
 
         public static void Leave(Player player)
         {
-            if (preloading)
-                SceneLoader.Instance.UnloadPreloadAndLeave(player);
-            else
-                SceneLoader.Instance.ReturnToLastLocation(player);
+            SceneLoader.Instance.LeaveBattle(player,preloading);
             preloading = false;
         }
 

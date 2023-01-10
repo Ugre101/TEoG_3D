@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Character.CreateCharacterStuff;
 using Character.EnemyStuff;
 using Safe_To_Share.Scripts.Holders;
+using SaveStuff;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
@@ -19,6 +20,7 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
         [SerializeField] LayerMask spawnOn;
         [SerializeField] List<Transform> spawnPoints = new();
         [SerializeField] Transform bossSpawnPoint;
+        [SerializeField] SubRealmSceneSo subRealmSceneSo;
 
         bool loaded;
         async void Start()
@@ -57,15 +59,33 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
                 StartCoroutine(WaitForLoad());
             SpawnBoss();
             if (enemyPresets.Length <= 0) return;
-            foreach (var spawnPoint in spawnPoints)
+            if (subRealmSceneSo.Enemies.TryGetValue(gameObject.name,out var list))
             {
-                Addressables.InstantiateAsync(enemyPrefab, spawnPoint.position, spawnPoint.rotation).Completed += op =>
+                foreach (var savedEnemy in list)
                 {
-                    if (op.Status != AsyncOperationStatus.Succeeded) return;
-                    if (!op.Result.TryGetComponent(out SubRealmEnemy enemyHolder)) return;
-                    var enemyPreset = enemyPresets[rng.Next(0, enemyPresets.Length)];
-                    enemyHolder.Setup(new Enemy(enemyPreset.NewEnemy()));
-                };
+                    Addressables.InstantiateAsync(enemyPrefab, savedEnemy.Position, savedEnemy.Rotation).Completed +=
+                        op =>
+                        {
+                            if (op.Status != AsyncOperationStatus.Succeeded) return;
+                            if (!op.Result.TryGetComponent(out SubRealmEnemy enemyHolder)) return;
+                            enemyHolder.Setup(savedEnemy.Enemy);
+                        };
+                }
+            }
+            else
+            {
+                subRealmSceneSo.Enemies.TryAdd(gameObject.name, new List<SubRealmSceneSo.SavedEnemy>());
+                foreach (var spawnPoint in spawnPoints)
+                {
+                    Addressables.InstantiateAsync(enemyPrefab, spawnPoint.position, spawnPoint.rotation).Completed += op =>
+                    {
+                        if (op.Status != AsyncOperationStatus.Succeeded) return;
+                        if (!op.Result.TryGetComponent(out SubRealmEnemy enemyHolder)) return;
+                        var enemyPreset = enemyPresets[rng.Next(0, enemyPresets.Length)];
+                        enemyHolder.Setup(new Enemy(enemyPreset.NewEnemy()));
+                        subRealmSceneSo.Enemies[gameObject.name].Add(new SubRealmSceneSo.SavedEnemy(enemyHolder.Enemy, enemyHolder.transform.position, enemyHolder.transform.rotation));
+                    };
+                }
             }
 
         }

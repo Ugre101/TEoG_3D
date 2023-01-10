@@ -24,14 +24,15 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
             var delta = maxDelta * Time.deltaTime;
             bool moved = true;
             var diff = toAlign.position - target.position;
+            float yDelta = Mathf.Min(delta * Mathf.Abs(diff.y), Mathf.Abs(diff.y));
             if (diff.y < -yTolerance)
-                trans.position += new Vector3(0, delta, 0);
+                trans.position += new Vector3(0, yDelta, 0);
             else if (diff.y > yTolerance)
-                trans.position -= new Vector3(0, delta, 0);
+                trans.position -= new Vector3(0, yDelta, 0);
             else
                 moved = false;
 
-            float xDelta = delta / 2f;
+            float xDelta = Mathf.Min(delta / 2f * Mathf.Abs(diff.x), Mathf.Abs(diff.x));
             if (xStartedPositive)
             {
                 if (diff.x < 0 + xTolerance / 2)
@@ -66,6 +67,12 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
         }
 #endif
 
+        public void Stop()
+        {
+            moving = false;
+            toAlign = null;
+            target = null;
+        }
         public void AlignWith(Transform mine, Transform theirs)
         {
             if (theirs == null || mine == null) return;

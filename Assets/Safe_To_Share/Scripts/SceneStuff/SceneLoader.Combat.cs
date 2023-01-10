@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using AvatarStuff.Holders;
 using Character;
 using Character.PlayerStuff;
 using Safe_To_Share.Scripts.Holders;
@@ -19,6 +18,7 @@ namespace SceneStuff
         AsyncOperationHandle<SceneInstance> battleUIOperationHandle;
         bool loadingBattle, loadingBattleUI;
 
+        bool subRealmExitOnDefeat;
         bool startedCombat;
 
         public void LoadCombatUIIfNotAlready()
@@ -61,6 +61,15 @@ namespace SceneStuff
             if (startedCombat) return;
             StartCoroutine(FinishLoadCombatScene(player, enemy));
         }
+        
+        void LoadSubRealmCombat(Player player,bool exitOnDefeat, params BaseCharacter[] enemy)
+        {
+            if (startedCombat) return;
+            LoadCombatIfNotAlready();
+            LoadCombatUIIfNotAlready();
+            StartCoroutine(FinishLoadCombatScene(player, enemy));
+            subRealmExitOnDefeat = exitOnDefeat;
+        }
 
         IEnumerator FinishLoadCombatScene(Player player, BaseCharacter[] enemyTeam, BaseCharacter[] allies = null)
         {
@@ -71,14 +80,14 @@ namespace SceneStuff
             }
 
             startedCombat = true;
-            if (CurrentScene is LocationSceneSo)
+            if (CurrentScene is LocationSceneSo || InSubRealm)
                 lastPos = PlayerHolder.Position;
             StartLoadStuff();
             LoadCombatUIIfNotAlready();
             if (battleUIOperationHandle.Status != AsyncOperationStatus.Succeeded)
                 yield return battleUIOperationHandle;
             var unloadUI = gameUI.UnLoadUI();
-            var unLoadScene = CurrentLocation.SceneReference.UnLoadScene();
+            var unLoadScene = InSubRealm ? currentSubRealm.SceneReference.UnLoadScene() : CurrentLocation.SceneReference.UnLoadScene();
             while (!unLoadScene.IsDone || !unloadUI.IsDone)
             {
                 LoaderScreen.UnLoadProgress(unLoadScene.PercentComplete);
@@ -96,6 +105,18 @@ namespace SceneStuff
             startedCombat = false;
             //  BattleManager.Instance.Setup(player.Player, enemyTeam, allies);
             yield return AllDone(true);
+        }
+
+        public void LeaveBattle(Player player, bool preloading)
+        {
+            if (InSubRealm)
+            {
+                StartCoroutine(LoadSceneOp(currentSubRealm, player, lastPos));
+            }
+            else
+            {
+                ReturnToLastLocation(player);
+            }
         }
     }
 }

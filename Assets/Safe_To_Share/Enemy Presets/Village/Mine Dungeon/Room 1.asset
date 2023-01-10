@@ -61,7 +61,7 @@ MonoBehaviour:
   startSkinColor:
     clampRandomColor: 0
     whitest: 0
-    darkest: 0
+    darkest: 1
     manualSkinColor: 0
     skinDarkness: 0
   battleReward:

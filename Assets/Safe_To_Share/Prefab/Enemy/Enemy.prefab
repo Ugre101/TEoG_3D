@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8944889634089466199}
   - component: {fileID: 455925092271563879}
   - component: {fileID: 7145013890565019600}
+  - component: {fileID: 20777117838483966}
   m_Layer: 23
   m_Name: Enemy
   m_TagString: Enemy
@@ -296,6 +297,7 @@ MonoBehaviour:
     canTake:
       canTake: 0
       orgasmsNeeded: 0
+    <Defeated>k__BackingField: 0
   aggroRange: 10
   initCombatRange: 2.1
 --- !u!114 &5308124802539930137
@@ -439,6 +441,19 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!135 &20777117838483966
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912623750545861898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7297204200486777659
 GameObject:
   m_ObjectHideFlags: 0

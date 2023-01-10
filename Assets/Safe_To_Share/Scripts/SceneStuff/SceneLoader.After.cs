@@ -60,6 +60,36 @@ namespace SceneStuff
             yield return AllDone(true);
         }
 
-        public void UnloadPreloadAndLeave(Player player) => ReturnToLastLocation(player);
+
+        public void LeaveDefeat(Player player)
+        {
+            if (InSubRealm)
+            {
+                if (subRealmExitOnDefeat)
+                {
+                    LoadLastLocation(player);
+                }
+                else
+                {
+                    StartCoroutine(LoadSceneOp(currentSubRealm, player, lastPos));
+                }
+            }
+            else
+            {
+                LoadLastLocation(player);
+            }
+        }
+
+        public void LeaveAfterBattle(Player player)
+        {
+            if (InSubRealm)
+            {
+                StartCoroutine(LoadSceneOp(currentSubRealm, player, lastPos ));
+            }
+            else
+            {
+                LoadLastLocation(player);
+            }
+        }
     }
 }

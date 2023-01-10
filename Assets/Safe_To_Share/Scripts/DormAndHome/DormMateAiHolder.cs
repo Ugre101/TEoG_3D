@@ -56,7 +56,7 @@ namespace AvatarStuff.Holders
             Mate.Unsub();
         }
 
-        protected override void NewAvatar(CharacterAvatar obj)
+        public override void NewAvatar(CharacterAvatar obj)
         {
             Mate.UpdateAvatar -= ModifyAvatar;
             Changer.CurrentAvatar.Setup(Mate);

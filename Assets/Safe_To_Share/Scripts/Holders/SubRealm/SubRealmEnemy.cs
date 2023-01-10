@@ -23,29 +23,29 @@ namespace Safe_To_Share.Scripts.Holders
 
         static readonly HashSet<SubRealmEnemy> ActiveEnemies = new();
         [SerializeField] float joinCombatRange = 4f;
+        static readonly int SittingOnGround = Animator.StringToHash("Sitting On Ground");
 
         protected override void Start()
         {
             base.Start();
             SpawnLocation = transform.position;
-            Changer.NewAvatar += ModifyAvatar;
-            Changer.NewAvatar += NewAvatar;
             ActiveEnemies.Add(this);
+            print("start called");
         }
         void OnDestroy()
         {
             Enemy.Unsub();
-            Changer.NewAvatar -= ModifyAvatar;
-            Changer.NewAvatar -= NewAvatar;
             ActiveEnemies.Remove(this);
         }
-        void ModifyAvatar(CharacterAvatar obj)
+        public void ModifyAvatar(CharacterAvatar obj)
         {
+            print("Called Modify Avatar");
             obj.Setup(Enemy);
         }
 
         void OnTriggerEnter(Collider other)
         {
+            if (Enemy.Defeated) return;
             if (!other.gameObject.CompareTag("Player")) return;
             if (!other.TryGetComponent(out PlayerHolder playerHolder)) return;
             List<BaseCharacter> enemies = new(){Enemy, };
@@ -55,17 +55,25 @@ namespace Safe_To_Share.Scripts.Holders
                 if (Vector3.Distance(transform.position, subRealmEnemy.transform.position) < joinCombatRange)
                     enemies.Add(subRealmEnemy.Enemy);
             }
-            playerHolder.TriggerCombat(enemies.ToArray());
+            playerHolder.TriggerSubRealmCombat(enemies.ToArray(), true);
         }
 
-        protected override void NewAvatar(CharacterAvatar obj)
+        public override void NewAvatar(CharacterAvatar obj)
         {
+            print("Called New Avatar");
             if (Enemy.WantBodyMorph)
             {
                 obj.GetRandomBodyMorphs(Enemy);
                 ModifyAvatar(obj);
                 Enemy.WantBodyMorph = false;
             }
+
+            if (Enemy.Defeated)
+            {
+                obj.Animator.SetBool(SittingOnGround,true);
+                // Set defeated state
+            }
+            
         }
 
         public void Setup(Enemy enemy)

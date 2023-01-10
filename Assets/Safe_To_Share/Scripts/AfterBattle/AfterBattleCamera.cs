@@ -19,14 +19,14 @@ namespace Safe_To_Share.Scripts.AfterBattle
         [Space, SerializeField,] float minTilt, maxTilt = 60f;
         [SerializeField, Range(0.01f, 0.5f),] float tiltRate = 0.5f;
         [SerializeField] CinemachineVirtualCamera virtualCamera;
-        Cinemachine3rdPersonFollow followCam;
+        CinemachineFramingTransposer followCam;
         bool isBoostingSpin;
         bool lookUnLocked;
         float? rotate;
         float? tilt;
         float? zoom;
 
-        void Start() => followCam = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        void Start() => followCam = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
 
         void Update()
         {
@@ -84,8 +84,8 @@ namespace Safe_To_Share.Scripts.AfterBattle
             TiltTarget(move.y);
         }
 
-        void SetDistance(float newDistance) => followCam.CameraDistance =
-            Mathf.Clamp(followCam.CameraDistance - newDistance, minDistance, maxDistance);
+        void SetDistance(float newDistance) => followCam.m_CameraDistance =
+            Mathf.Clamp(followCam.m_CameraDistance - newDistance, minDistance, maxDistance);
 
         public void BoostSpinRate(InputAction.CallbackContext ctx)
         {
@@ -95,13 +95,13 @@ namespace Safe_To_Share.Scripts.AfterBattle
                 isBoostingSpin = false;
         }
 
-        void RotateTarget(float value) => target.Rotate(0, isBoostingSpin ? value * spinBoost : value, 0, Space.World);
+        void RotateTarget(float value) => transform.Rotate(0, isBoostingSpin ? value * spinBoost : value, 0, Space.World);
 
         void TiltTarget(float value)
         {
-            Vector3 oldRot = target.eulerAngles;
+            Vector3 oldRot = transform.eulerAngles;
             oldRot.x = Mathf.Clamp(oldRot.x + value * tiltRate, minTilt, maxTilt);
-            target.eulerAngles = oldRot;
+            transform.eulerAngles = oldRot;
         }
     }
 }

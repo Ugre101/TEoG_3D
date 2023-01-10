@@ -60,7 +60,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
             if (alreadyLeaving)
                 return;
             alreadyLeaving = true;
-            SceneLoader.Instance.LoadLastLocation(player);
+            SceneLoader.Instance.LeaveDefeat(player);
         }
 
 

@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &5371309876367887605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4535154643207912620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9181852440c31040b690849097797ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 4535154643792564752}
-  mixer: {fileID: 24100000, guid: e5d7a395829fb5f47988fa3dea20ba1f, type: 2}
-  volumeParameter: Master Volume
-  stepMultiplier: 30
 --- !u!1001 &3339118483191274114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -129,19 +113,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1199916347119306737, guid: 25a32c5e2c0ffaf4b9dd501f167f2f18, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1199916347119306737, guid: 25a32c5e2c0ffaf4b9dd501f167f2f18, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1199916347119306737, guid: 25a32c5e2c0ffaf4b9dd501f167f2f18, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1199916347119306737, guid: 25a32c5e2c0ffaf4b9dd501f167f2f18, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 24.955282
       objectReference: {fileID: 0}
     - target: {fileID: 1199916347335197724, guid: 25a32c5e2c0ffaf4b9dd501f167f2f18, type: 3}
       propertyPath: m_Text
@@ -162,6 +146,21 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1199916345409431086, guid: 25a32c5e2c0ffaf4b9dd501f167f2f18, type: 3}
   m_PrefabInstance: {fileID: 3339118483191274114}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5371309876367887605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535154643207912620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9181852440c31040b690849097797ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 4535154643792564752}
+  volumeParameter: Master Volume
+  stepMultiplier: 30
 --- !u!114 &4535154643792564752 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1199916346968017042, guid: 25a32c5e2c0ffaf4b9dd501f167f2f18, type: 3}

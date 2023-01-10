@@ -16,9 +16,9 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
         [SerializeField] List<Vector3> spawnPoints = new();
         void Start()
         {
-            if (realmSceneSo.Enemies.Count > 0)
+            if (realmSceneSo.Enemies.ContainsKey(gameObject.name))
             {
-                foreach (SubRealmSceneSo.SavedEnemy enemy in realmSceneSo.Enemies)
+                foreach (SubRealmSceneSo.SavedEnemy enemy in realmSceneSo.Enemies[gameObject.name])
                 {
                     Addressables.InstantiateAsync(enemyPrefab).Completed += op =>
                     {
