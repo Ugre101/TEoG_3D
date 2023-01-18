@@ -57,6 +57,8 @@ MonoBehaviour:
     <Amount>k__BackingField: 27
   - <Value>k__BackingField: {fileID: 11400000, guid: f18005530fba9514486a79704f661bc7, type: 2}
     <Amount>k__BackingField: 27
+  - <Value>k__BackingField: {fileID: 11400000, guid: bf417634dd4da314f8fc4b0e9d0842d2, type: 2}
+    <Amount>k__BackingField: 11
   startPerks: []
   startEssencePerks: []
   startVorePerks: []
@@ -66,7 +68,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   startBody:
-    height: 145
+    height: 150
     muscle: 39
     fat: 16
     rng:

@@ -37,7 +37,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             player.Essence.GetEssence.TryGetValue(essenceType, out playerEssence) &&
             !(playerEssence.Amount < DonateAmount);
 
-        public override void Click()
+        public override void IncreaseClick()
         {
             if (!CanAfford(out var playerBody) ||
                 !IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data)) return;
@@ -52,6 +52,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             }
 
             UpdateValue(data.essenceData.GetValueOfType(essenceType));
+        }
+
+        public override void DecreaseClick()
+        {
+            throw new System.NotImplementedException();
         }
 
         void UpdateValue(int ess)

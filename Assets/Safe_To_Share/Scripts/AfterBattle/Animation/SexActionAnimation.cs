@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Vore
+namespace Safe_To_Share.Scripts.AfterBattle.Animation
 {
     [Serializable]
     public struct SexActionAnimation
@@ -10,5 +10,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Vore
         [field: SerializeField] public SexPositionPosAndRot GivePos { get; private set; }
         [field: SerializeField] public int ReceiveAnimationHash { get; private set; }
         [field: SerializeField] public SexPositionPosAndRot ReceivePos { get; private set; }
+        [field: SerializeField] public bool StayGrounded { get; private set; }
+        [field: SerializeField] public float Delay { get; private set; }
     }
 }

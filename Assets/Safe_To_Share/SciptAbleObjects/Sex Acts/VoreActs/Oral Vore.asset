@@ -15,12 +15,48 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 82be6f1f65eab43419ca59ca5c6da223, type: 3}
   title: Oral vore
   data:
-    giver: 0
-    receiver: 0
+    <SexAnimationFilterList>k__BackingField:
+      defaultAnimation:
+        <GiveAnimationHash>k__BackingField: 0
+        <GivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+        <ReceiveAnimationHash>k__BackingField: 0
+        <ReceivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+        <StayGrounded>k__BackingField: 0
+        <Delay>k__BackingField: 0
+      filters:
+      - <Animation>k__BackingField:
+          <GiveAnimationHash>k__BackingField: -2129081944
+          <GivePos>k__BackingField:
+            <KeyArea>k__BackingField: 4
+            <TowardsPartner>k__BackingField: 0
+          <ReceiveAnimationHash>k__BackingField: -2132584386
+          <ReceivePos>k__BackingField:
+            <KeyArea>k__BackingField: 6
+            <TowardsPartner>k__BackingField: 0
+          <StayGrounded>k__BackingField: 0
+          <Delay>k__BackingField: 8
+        <Requirement>k__BackingField: 0
+        xTimes: 2.75
     text: 
     afterText: []
   errorData:
-    giver: 0
-    receiver: 0
+    <SexAnimationFilterList>k__BackingField:
+      defaultAnimation:
+        <GiveAnimationHash>k__BackingField: 0
+        <GivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+        <ReceiveAnimationHash>k__BackingField: 0
+        <ReceivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+        <StayGrounded>k__BackingField: 0
+        <Delay>k__BackingField: 0
+      filters: []
     text: Something went wrong
     afterText: []
+  needVorePerk: []

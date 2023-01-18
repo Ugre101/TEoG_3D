@@ -9976,8 +9976,6 @@ MonoBehaviour:
     - id: 37
       title: hala body
       type: 0
-  <Animator>k__BackingField: {fileID: 6367775678390445593}
-  <KeyAreas>k__BackingField: {fileID: 4850898383951413310}
   supportedGenders: 00000000010000000200000003000000040000000500000006000000
   supportedRaces:
   - {fileID: 11400000, guid: 7c596fb2be9bc2f4882a620ee187df56, type: 2}
@@ -10081,6 +10079,8 @@ MonoBehaviour:
   hasBallsController: 0
   hasDickController: 0
   hasHideDaz: 0
+  <Animator>k__BackingField: {fileID: 6367775678390445593}
+  <KeyAreas>k__BackingField: {fileID: 4850898383951413310}
 --- !u!114 &2986542726746675267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10119,6 +10119,9 @@ MonoBehaviour:
   <ShaftRoot>k__BackingField: {fileID: 2594352280866461846}
   <Vagina>k__BackingField: {fileID: 8677963903248520888}
   <Anus>k__BackingField: {fileID: 9030332790189787501}
+  <RightHand>k__BackingField: {fileID: 3573855044509526150}
+  <LeftHand>k__BackingField: {fileID: 3046064637918276383}
+  <AbdomenLower>k__BackingField: {fileID: 7429014555402204798}
 --- !u!114 &8363268291599319353
 MonoBehaviour:
   m_ObjectHideFlags: 0

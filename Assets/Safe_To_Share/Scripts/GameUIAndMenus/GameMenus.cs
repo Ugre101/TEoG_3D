@@ -13,31 +13,30 @@ namespace GameUIAndMenus
         [SerializeField] GameMenu[] menus;
         void Start()
         {
-            if (SceneLoader.Instance.InSubRealm)
-            {
-             // TODO Subrealm map   
-            }else 
-                SetPlayer(SceneLoader.CurrentLocation.WorldMap);
+            SetPlayer();
+            if (!SceneLoader.Instance.InSubRealm) 
+                SetupMiniMap(SceneLoader.CurrentLocation.WorldMap);
         }
 
 #if UNITY_EDITOR
         void OnValidate() => menus = GetComponentsInChildren<GameMenu>(true);
 #endif
 
-        public void SetPlayer(Sprite map)
+        public void SetPlayer()
         {
             var holder = PlayerHolder.Instance;
             if (holder == null)
                 return;
             foreach (GameMenu gameMenu in menus)
                 gameMenu.SetPlayer(holder, gameCanvas);
-            if (map != null)
-            {
-                minimap.sprite = map;
-                bigMap.sprite = map;
-            }
-
             gameCanvas.gameObject.SetActive(true);
+        }
+
+        void SetupMiniMap(Sprite map)
+        {
+            if (map == null) return;
+            minimap.sprite = map;
+            bigMap.sprite = map;
         }
     }
 }

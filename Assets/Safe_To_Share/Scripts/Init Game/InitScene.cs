@@ -16,12 +16,12 @@ namespace Safe_To_Share.Scripts.Init_Game
         [SerializeField] List<AssetReference> assetRefs = new();
 
         // Start is called before the first frame update
-        void Start()
+        IEnumerator Start()
         {
             if (init)
             {
                 Destroy(gameObject);
-                return;
+                yield break;
             }
 
             init = true;
@@ -29,7 +29,7 @@ namespace Safe_To_Share.Scripts.Init_Game
             FarmAreas.Initialize();
             foreach (GameObject toAdd in dontDestroyObjects)
                 DontDestroyOnLoad(Instantiate(toAdd));
-            StartCoroutine(InstanceAssets());
+            yield return InstanceAssets();
         }
 
         IEnumerator InstanceAssets()

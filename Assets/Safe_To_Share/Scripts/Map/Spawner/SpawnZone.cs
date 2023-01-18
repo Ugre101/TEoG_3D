@@ -111,12 +111,7 @@ namespace Map.Spawner
 
         async Task PreLoadChars()
         {
-            Task[] tasks = new Task[enemyPresets.Length];
-            for (int i = 0; i < enemyPresets.Length; i++)
-                tasks[i] = enemyPresets[i].LoadAssets();
-
-            await Task.WhenAll(tasks);
-
+            await enemyPresets.LoadEnemyPresets();
             assetsLoaded = true;
             SetupEnemies();
         }

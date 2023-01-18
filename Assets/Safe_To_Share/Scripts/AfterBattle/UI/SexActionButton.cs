@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI
 {

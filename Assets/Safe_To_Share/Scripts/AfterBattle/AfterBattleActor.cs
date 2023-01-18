@@ -1,4 +1,5 @@
-﻿using AvatarStuff;
+﻿using System.Threading.Tasks;
+using AvatarStuff;
 using Character;
 using Safe_To_Share.Scripts.AfterBattle.Actor;
 using UnityEngine;
@@ -85,7 +86,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             Avatar.SetArousal(Actor.SexStats.Arousal);
         }
 
-        public void UpdateHeight() => AvatarScaler.ChangeScale(Actor.Body.Height.Value);
+        public void UpdateHeight() => AvatarScaler.ChangeScale(Actor.Body.Height.Value,playerAvatar);
 
         public void NewAnimator(Animator obj)
         {

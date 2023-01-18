@@ -6830,8 +6830,6 @@ MonoBehaviour:
     - id: 25
       title: _phmfaceround
       type: 1
-  <Animator>k__BackingField: {fileID: 7790249569877942758}
-  <KeyAreas>k__BackingField: {fileID: 8601777950509779950}
   supportedGenders: 010000000300000006000000
   supportedRaces:
   - {fileID: 11400000, guid: 96817023700d0764793f5b1dcfe15bd9, type: 2}
@@ -6932,6 +6930,8 @@ MonoBehaviour:
   hasBallsController: 0
   hasDickController: 0
   hasHideDaz: 0
+  <Animator>k__BackingField: {fileID: 7790249569877942758}
+  <KeyAreas>k__BackingField: {fileID: 8601777950509779950}
 --- !u!114 &3646814371252946147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6987,6 +6987,9 @@ MonoBehaviour:
   <ShaftRoot>k__BackingField: {fileID: 5146825269375644278}
   <Vagina>k__BackingField: {fileID: 6290486781033914531}
   <Anus>k__BackingField: {fileID: 553957040909494506}
+  <RightHand>k__BackingField: {fileID: 6332990737301448350}
+  <LeftHand>k__BackingField: {fileID: 6749301673505547187}
+  <AbdomenLower>k__BackingField: {fileID: 8110352977181387845}
 --- !u!4 &6970628302026244249 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8344673808419756727, guid: c430e151e08d770408355298697e70a5, type: 3}

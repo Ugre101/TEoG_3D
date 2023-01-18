@@ -1,10 +1,23 @@
 ﻿using UnityEditor;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Editor
 {
     public class SexAnimationsParameterWindow : EditorWindow
     {
+        AnimatorController selected;
+
+        void OnEnable()
+        {
+            Selection.selectionChanged += SelectionChanged;
+        }
+
+        void OnDisable()
+        {
+            Selection.selectionChanged -= SelectionChanged;
+        }
+
         [MenuItem("MENUITEM/Sex animations parameters")]
         private static void ShowWindow()
         {
@@ -16,22 +29,30 @@ namespace Safe_To_Share.Scripts.AfterBattle.Editor
         private void OnGUI()
         {
             GUILayout.Label("Name and Hash", EditorStyles.boldLabel);
-            if (AnimatorControllerParameterGrabberSObj.instance == null)
+            if (selected == null)
                 return;
-            foreach (var para in AnimatorControllerParameterGrabberSObj.instance.Parameters)
+            foreach (var para in selected.parameters)
             {
-                EditorGUILayout.BeginHorizontal();
-                GUI.enabled = false;
-                EditorGUILayout.TextField("Name", para.Name );
-                EditorGUILayout.IntField("Hash", para.Hash);
-                GUI.enabled = true;
+                EditorGUILayout.BeginHorizontal("Box");
+                EditorGUILayout.LabelField(para.name );
+                EditorGUILayout.LabelField(para.nameHash.ToString());
                 if (GUILayout.Button("Copy"))
                 {
-                    EditorGUIUtility.systemCopyBuffer = para.Hash.ToString();
+                    EditorGUIUtility.systemCopyBuffer = para.nameHash.ToString();
                 }
                 EditorGUILayout.EndHorizontal();
             }
 
+        }
+
+        void SelectionChanged()
+        {
+            var newObjet = Selection.activeObject;
+            if (newObjet is AnimatorController controller)
+            {
+                selected = controller;
+                Repaint();
+            }
         }
     }
 }

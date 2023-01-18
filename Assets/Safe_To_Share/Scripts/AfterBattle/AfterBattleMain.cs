@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Character;
 using Character.EnemyStuff;
@@ -8,6 +9,7 @@ using DormAndHome.Dorm;
 using Safe_To_Share.Scripts.AfterBattle.UI;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Safe_To_Share.Scripts.AfterBattle
@@ -15,7 +17,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
     public class AfterBattleMain : AfterBattleShared
     {
         static AfterBattleMainUI AfterBattleMainUI => AfterBattleMainUI.Instance;
-        
+
         void OnDestroy()
         {
             SexActionButton.PlayerAction -= HandlePlayerAction;
@@ -35,47 +37,68 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
 
-        void BasePlayerActionReaction(AfterBattleBaseAction obj)
+        IEnumerator BasePlayerActionReaction(AfterBattleBaseAction obj)
         {
-            SexActData data = obj.Use(activePlayerActor, activeEnemyActor);
+            var data = obj.Use(activePlayerActor, activeEnemyActor);
             AfterBattleMainUI.LogText(data);
             if (LastAct != null && LastAct == obj)
-                return;
+                yield break;
             activePlayerActor.RotateActor.ResetPosAndRot();
             activeEnemyActor.RotateActor.ResetPosAndRot();
-            actorPositionManager.PosActors(activePlayerActor,data.SexActionAnimation.GivePos,activeEnemyActor,data.SexActionAnimation.ReceivePos);
-            activePlayerActor.SetActAnimation(data.SexActionAnimation.GiveAnimationHash);
-            activeEnemyActor.SetActAnimation(data.SexActionAnimation.ReceiveAnimationHash);
+            var ani = data.SexAnimationFilterList.GetAnimation(activePlayerActor, activeEnemyActor);
+            // TODO Grounding
+            actorPositionManager.PosActors(activePlayerActor, ani.GivePos, activeEnemyActor,
+                ani.ReceivePos, ani.StayGrounded);
+            activePlayerActor.SetActAnimation(ani.GiveAnimationHash);
+            activeEnemyActor.SetActAnimation(ani.ReceiveAnimationHash);
             LastAct = obj;
+            if (ani.Delay > 0)
+                yield return new WaitForSeconds(ani.Delay);
         }
 
 
         void HandlePlayerAction(AfterBattleBaseAction obj)
         {
-            BasePlayerActionReaction(obj);
-            AfterBattleMainUI.RefreshButtons(activePlayerActor.Actor, activeEnemyActor.Actor);
+            StartCoroutine(PlayerActionReaction());
+
+            IEnumerator PlayerActionReaction()
+            {
+                yield return BasePlayerActionReaction(obj);
+                AfterBattleMainUI.RefreshButtons(activePlayerActor.Actor, activeEnemyActor.Actor);
+            }
         }
 
 
         void HandleDrainAction(AfterBattleBaseAction action)
         {
-            BasePlayerActionReaction(action);
-            activePlayerActor.ModifyAvatar();
-            activeEnemyActor.ModifyAvatar();
-            AfterBattleMainUI.RefreshButtons(activePlayerActor.Actor, activeEnemyActor.Actor);
+            StartCoroutine(DrainActionReaction());
+
+            IEnumerator DrainActionReaction()
+            {
+                yield return BasePlayerActionReaction(action);
+                activePlayerActor.ModifyAvatar();
+                activeEnemyActor.ModifyAvatar();
+                AfterBattleMainUI.RefreshButtons(activePlayerActor.Actor, activeEnemyActor.Actor);
+            }
         }
+
 
         void HandleVoreAction(AfterBattleBaseAction obj)
         {
-            BasePlayerActionReaction(obj);
-            activePlayerActor.ModifyAvatar();
-            activeEnemyActor.Removed();
-            AfterBattleMainUI.NoPartnerRefresh(activePlayerActor.Actor);
-            if (activeEnemyActor.Actor is not Enemy enemy)
-                return;
-            enemy.GotRemoved();
-            activePlayerActor.RotateActor.ResetPosAndRot();
-            activePlayerActor.AlignActor.Stop();
+            StartCoroutine(HandleVoreReaction());
+
+            IEnumerator HandleVoreReaction()
+            {
+                yield return BasePlayerActionReaction(obj);
+                activePlayerActor.ModifyAvatar();
+                activeEnemyActor.Removed();
+                AfterBattleMainUI.NoPartnerRefresh(activePlayerActor.Actor);
+                if (activeEnemyActor.Actor is not Enemy enemy)
+                    yield break;
+                enemy.GotRemoved();
+                activePlayerActor.RotateActor.ResetPosAndRot();
+                activePlayerActor.AlignActor.Stop();
+            }
         }
 
         public override void Setup(Player player, BaseCharacter[] enemies, params BaseCharacter[] allies)
@@ -86,6 +109,9 @@ namespace Safe_To_Share.Scripts.AfterBattle
             TakeToDormButton.TakeToDorm += HandleTakeToDorm;
             player.SexStats.NewSession();
             transform.AwakeChildren();
+            activePlayerActor.AvatarScaler.SetHeight(player.Body.Height.Value,true);
+            activeEnemyActor.AvatarScaler.SetHeight(enemies[0].Body.Height.Value,false);
+            
             SetPlayerActor(player);
             if (allies != null)
             {
@@ -100,7 +126,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         void SetPlayerActor(BaseCharacter character)
         {
-            activePlayerActor.Setup(character,animatorController);
+            activePlayerActor.Setup(character, animatorController);
             LoadEssencePerks(character.LevelSystem.OwnedPerks.OfType<EssencePerk>());
             AfterBattleMainUI.SetupPlayer(character);
         }
@@ -115,7 +141,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         void SetEnemyActor(BaseCharacter character)
         {
-            activeEnemyActor.Setup(character,animatorController);
+            activeEnemyActor.Setup(character, animatorController);
             LoadEssencePerks(character.LevelSystem.OwnedPerks.OfType<EssencePerk>());
             AfterBattleMainUI.SetupPartner(character);
         }

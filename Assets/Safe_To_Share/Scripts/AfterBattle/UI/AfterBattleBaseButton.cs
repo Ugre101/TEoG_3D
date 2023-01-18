@@ -1,4 +1,5 @@
-﻿using Character;
+﻿using System.Collections;
+using Character;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         [SerializeField] protected Image icon;
         protected AfterBattleBaseAction MyAct;
         public bool Empty { get; protected set; } = true;
+
 
         void BaseSetup(Sprite newIcon, string newTitle)
         {

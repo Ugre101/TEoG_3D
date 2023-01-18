@@ -3,6 +3,7 @@ using Character.IslandData;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
@@ -14,14 +15,21 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
         [SerializeField] TextMeshProUGUI amountText;
         [SerializeField] Image btnImage;
         [SerializeField] Slider slider;
-
-
+        [SerializeField] TextMeshProUGUI sliderText;
+        [SerializeField] AssetReference givesItem;
+        [SerializeField] Button decreaseButton;
         void OnEnable()
         {
             if (!IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))
                 return;
             amountText.text = $"Increase by donating {DonateAmount.ConvertKg()}";
             UpdateValue(data.bodyData.GetValueOfType(bodyType));
+            UpdateDecreaseButton();
+        }
+
+        void UpdateDecreaseButton()
+        {
+            decreaseButton.interactable = CanSteal();
         }
 
         public void SetCurrentValue(float arg0)
@@ -39,22 +47,40 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             player.Body.BodyStats.TryGetValue(bodyType, out playerBody) &&
             !(playerBody.BaseValue <= DonateAmount + 1);
 
-        public override void Click()
+        bool CanSteal() => player.Inventory.HasItemOfGuid(emptyGuid);
+
+        public override void IncreaseClick()
         {
             if (!CanAfford(out var playerBody) ||
                 !IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))
                 return;
             playerBody.BaseValue -= DonateAmount;
-            data.bodyData.IncreaseMaxValueOfType(bodyType);
-            int maxValue = data.bodyData.GetMaxValueOfType(bodyType);
+            bool isMax = data.bodyData.GetValueOfType(bodyType) == data.bodyData.GetMaxValueOfType(bodyType);
+            int maxValue = data.bodyData.IncreaseMaxValueOfType(bodyType);
             slider.maxValue = maxValue;
-            if (data.bodyData.GetValueOfType(bodyType) + 1 == maxValue)
+            if (isMax)
             {
                 data.bodyData.SetValueOfType(bodyType, maxValue);
                 slider.SetValueWithoutNotify(maxValue);
             }
 
             UpdateValue(data.bodyData.GetValueOfType(bodyType));
+        }
+
+        public override void DecreaseClick()
+        {
+            if (!CanSteal()) return;
+            if (!IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data)) return;
+            player.Inventory.AddItem(givesItem.AssetGUID);
+            bool isMin = data.bodyData.GetValueOfType(bodyType) == data.bodyData.GetMinValueOfType(bodyType);
+            var minValue = data.bodyData.DecreaseMinValueOfType(bodyType);
+            slider.minValue = minValue;
+            if (isMin)
+            {
+                data.bodyData.SetValueOfType(bodyType, minValue);
+                slider.SetValueWithoutNotify(minValue);
+            }
+            UpdateDecreaseButton();
         }
 
         void UpdateValue(int body)

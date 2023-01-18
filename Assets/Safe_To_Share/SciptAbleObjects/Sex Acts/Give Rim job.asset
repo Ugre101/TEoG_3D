@@ -15,27 +15,31 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 14db09f08b4f19647b56714e8f1abcae, type: 3}
   title: Rim job
   data:
-    <SexActionAnimation>k__BackingField:
-      <GiveAnimationHash>k__BackingField: 1307923250
-      <GivePos>k__BackingField:
-        <KeyArea>k__BackingField: 0
-        <TowardsPartner>k__BackingField: 0
-      <ReceiveAnimationHash>k__BackingField: 1624106876
-      <ReceivePos>k__BackingField:
-        <KeyArea>k__BackingField: 3
-        <TowardsPartner>k__BackingField: 1
+    <SexAnimationFilterList>k__BackingField:
+      defaultAnimation:
+        <GiveAnimationHash>k__BackingField: 1307923250
+        <GivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+        <ReceiveAnimationHash>k__BackingField: 1624106876
+        <ReceivePos>k__BackingField:
+          <KeyArea>k__BackingField: 3
+          <TowardsPartner>k__BackingField: 1
+      filters: []
     text: 
     afterText: []
   errorData:
-    <SexActionAnimation>k__BackingField:
-      <GiveAnimationHash>k__BackingField: 0
-      <GivePos>k__BackingField:
-        <KeyArea>k__BackingField: 0
-        <TowardsPartner>k__BackingField: 0
-      <ReceiveAnimationHash>k__BackingField: 0
-      <ReceivePos>k__BackingField:
-        <KeyArea>k__BackingField: 0
-        <TowardsPartner>k__BackingField: 0
+    <SexAnimationFilterList>k__BackingField:
+      defaultAnimation:
+        <GiveAnimationHash>k__BackingField: 0
+        <GivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+        <ReceiveAnimationHash>k__BackingField: 0
+        <ReceivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+      filters: []
     text: 
     afterText: []
   arousalGain:

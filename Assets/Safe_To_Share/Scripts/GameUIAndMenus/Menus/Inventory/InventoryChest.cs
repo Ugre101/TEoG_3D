@@ -32,7 +32,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
                 throw new Exception("Couldn't find or add world inventory");
             foreach (var toAdd in items)
             {
-                yield return inventory.AddItemWithGuid(toAdd.Item.guid, toAdd.Amount);
+                yield return inventory.LoadAndAddItemWithGuid(toAdd.Item.guid, toAdd.Amount);
             }
         }
 

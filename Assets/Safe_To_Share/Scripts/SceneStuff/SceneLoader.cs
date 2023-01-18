@@ -132,10 +132,8 @@ namespace SceneStuff
             StartCoroutine(LoadSceneOp(newScene, player, teleportExit));
         }
         
-        public void LoadSubRealm(SubRealmSceneSo newScene, Player player, SceneTeleportExit teleportExit)
-        {
+        public void LoadSubRealm(SubRealmSceneSo newScene, Player player, SceneTeleportExit teleportExit) => 
             StartCoroutine(LoadSceneOp(newScene, player, teleportExit));
-        }
 
         public void TeleportToExit(PlayerHolder holder, SceneTeleportExit teleportExit) =>
             StartCoroutine(HideLoadSubScenes(holder, teleportExit));

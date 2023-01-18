@@ -37,15 +37,20 @@ namespace Items
 
         public bool HasItemOfGuid(string guid, int amountNeeded = 1)
         {
-            var item = GetItemByID(guid);
+            var item = GetItemByGuid(guid);
             return item != null && item.Amount >= amountNeeded;
         }
 
-        public void UseItemItemID(string id, int times = 1) => LoadAndUseItem(GetItemByID(id), times);
+        public int GetAmountOfItem(string guid)
+        {
+            var item = GetItemByGuid(guid);
+            return item?.Amount ?? 0;
+        }
+        public void UseItemItemID(string id, int times = 1) => LoadAndUseItem(GetItemByGuid(id), times);
 
         public async Task<bool> LoadAndUseItemId(string guid, BaseCharacter user, int times = 1)
         {
-            var invenItem = GetItemByID(guid);
+            var invenItem = GetItemByGuid(guid);
             if (invenItem == null)
                 return false;
             var task = Addressables.LoadAssetAsync<Item>(invenItem.ItemGuid);
@@ -70,7 +75,7 @@ namespace Items
         /// <returns>If you had enough of item</returns>
         public async Task<bool> LowerItemAmountWithGuid(string guid, int amount = 1)
         {
-            var item = GetItemByID(guid);
+            var item = GetItemByGuid(guid);
             if (item == null) return false;
             item.Amount -= amount;
             var task = Addressables.LoadAssetAsync<Item>(item.ItemGuid);
@@ -146,7 +151,7 @@ namespace Items
             return true;
         }
 
-        public IEnumerator AddItemWithGuid(string itemGuid, int quantity = 1)
+        public IEnumerator LoadAndAddItemWithGuid(string itemGuid, int quantity = 1)
         {
             var op = Addressables.LoadAssetAsync<Item>(itemGuid);
             yield return op;
@@ -217,7 +222,7 @@ namespace Items
         bool ItemExists(Vector2 pos) => Items.Exists(i => ItemExistOnPos(i, pos));
         static bool ItemExistOnPos(InventoryItem i, Vector2 pos) => i.Position == pos;
         InventoryItem GetItemOnPos(Vector2 pos) => Items.Find(i => ItemExistOnPos(i, pos));
-        InventoryItem GetItemByID(string id) => Items.Find(i => i.ItemGuid == id);
+        InventoryItem GetItemByGuid(string id) => Items.Find(i => i.ItemGuid == id);
 
         int GetItemSymByID(string id)
         {
@@ -233,7 +238,14 @@ namespace Items
             item = GetItemOnPos(pos);
             return true;
         }
-
+        public bool TryGetItemByGuid(string guid, out InventoryItem item)
+        {
+            item = null;
+            if (!HasItemOfGuid(guid))
+                return false;
+            item = GetItemByGuid(guid);
+            return true;
+        }
         public bool MoveItemInsideInventory(InventoryItem toMove, Vector2 newPos, out InventoryItem oldItem)
         {
             bool hadItem = TryGetItemOnPos(newPos, out oldItem);
@@ -282,6 +294,7 @@ namespace Items
                 Items.Add(new InventoryItem(loadItem.guid, loadItem.amount, loadItem.pos));
         }
 
-       
+
+        
     }
 }

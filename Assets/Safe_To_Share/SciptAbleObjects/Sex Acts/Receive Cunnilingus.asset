@@ -15,27 +15,31 @@ MonoBehaviour:
   icon: {fileID: 0}
   title: Receive Cunnilingus
   data:
-    <SexActionAnimation>k__BackingField:
-      <GiveAnimationHash>k__BackingField: 1147748370
-      <GivePos>k__BackingField:
-        <KeyArea>k__BackingField: 2
-        <TowardsPartner>k__BackingField: 0
-      <ReceiveAnimationHash>k__BackingField: 267502098
-      <ReceivePos>k__BackingField:
-        <KeyArea>k__BackingField: 0
-        <TowardsPartner>k__BackingField: 0
+    <SexAnimationFilterList>k__BackingField:
+      defaultAnimation:
+        <GiveAnimationHash>k__BackingField: 1147748370
+        <GivePos>k__BackingField:
+          <KeyArea>k__BackingField: 2
+          <TowardsPartner>k__BackingField: 0
+        <ReceiveAnimationHash>k__BackingField: 267502098
+        <ReceivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+      filters: []
     text: 
     afterText: []
   errorData:
-    <SexActionAnimation>k__BackingField:
-      <GiveAnimationHash>k__BackingField: 0
-      <GivePos>k__BackingField:
-        <KeyArea>k__BackingField: 0
-        <TowardsPartner>k__BackingField: 0
-      <ReceiveAnimationHash>k__BackingField: 0
-      <ReceivePos>k__BackingField:
-        <KeyArea>k__BackingField: 0
-        <TowardsPartner>k__BackingField: 0
+    <SexAnimationFilterList>k__BackingField:
+      defaultAnimation:
+        <GiveAnimationHash>k__BackingField: 0
+        <GivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+        <ReceiveAnimationHash>k__BackingField: 0
+        <ReceivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+      filters: []
     text: 
     afterText: []
   arousalGain:

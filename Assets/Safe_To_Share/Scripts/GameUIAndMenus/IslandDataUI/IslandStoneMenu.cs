@@ -1,15 +1,17 @@
-﻿using System;
-using Character.PlayerStuff;
+﻿using Character.PlayerStuff;
 using CustomClasses;
-using GameUIAndMenus;
+using Items;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 {
     public class IslandStoneMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu, IBlockGameUI
     {
         [SerializeField] IslandStoneOption[] options;
+        [SerializeField] AssetReference emptyCraftingCrystal;
+        [SerializeField] AmountOfItem amountOfStones;
 #if UNITY_EDITOR
         void OnValidate()
         {
@@ -32,11 +34,15 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             return false;
         }
 
-        public void Open(Player player)
+        public async void Open(Player player)
         {
+            var op = emptyCraftingCrystal.LoadAssetAsync<Item>();
+            await op.Task;
             gameObject.SetActive(true);
             foreach (var stoneOption in options)
-                stoneOption.Setup(player);
+                stoneOption.Setup(player, op.Result.Guid);
+            amountOfStones.Setup(player, op.Result);
+            
         }
     }
 }

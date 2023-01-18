@@ -18,20 +18,34 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
         bool xStartedPositive;
         Transform toAlign, target;
         float timeSinceLastMoved;
+        bool grounded;
         void Update()
         {
             if (!moving) return;
             var delta = maxDelta * Time.deltaTime;
             bool moved = true;
             var diff = toAlign.position - target.position;
+            moved = MoveAlongYAxis(delta, diff);
+
+            MoveXAlongXAxis(delta, diff, moved);
+        }
+
+        bool MoveAlongYAxis(float delta, Vector3 diff)
+        {
             float yDelta = Mathf.Min(delta * Mathf.Abs(diff.y), Mathf.Abs(diff.y));
+            if (grounded)
+                yDelta = 0;
             if (diff.y < -yTolerance)
                 trans.position += new Vector3(0, yDelta, 0);
             else if (diff.y > yTolerance)
                 trans.position -= new Vector3(0, yDelta, 0);
             else
-                moved = false;
+                return false;
+            return true;
+        }
 
+        void MoveXAlongXAxis(float delta, Vector3 diff, bool moved)
+        {
             float xDelta = Mathf.Min(delta / 2f * Mathf.Abs(diff.x), Mathf.Abs(diff.x));
             if (xStartedPositive)
             {
@@ -39,16 +53,16 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
                     trans.position += new Vector3(xDelta, 0, 0);
                 else if (diff.x > xTolerance)
                     trans.position -= new Vector3(xDelta, 0, 0);
-                else if (moved) 
+                else if (moved)
                     TickTimeSpent();
             }
             else
             {
-                if (diff.x < -xTolerance )
+                if (diff.x < -xTolerance)
                     trans.position += new Vector3(xDelta, 0, 0);
                 else if (diff.x > 0 - xTolerance / 2)
                     trans.position -= new Vector3(xDelta, 0, 0);
-                else if (moved) 
+                else if (moved)
                     TickTimeSpent();
             }
         }
@@ -73,7 +87,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
             toAlign = null;
             target = null;
         }
-        public void AlignWith(Transform mine, Transform theirs)
+        public void AlignWith(Transform mine, Transform theirs, bool stayGrounded)
         {
             if (theirs == null || mine == null) return;
             moving = true;
@@ -82,6 +96,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
             timeSinceLastMoved = 0f;
             var diff = toAlign.position - target.position;
             xStartedPositive = diff.x > 0;
+            grounded = stayGrounded;
         }
     }
 }

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a41e503f608c61c46916e5442705378d, type: 3}
-  m_Name: Empty Essence Stone
+  m_Name: Fat Essence Stone
   m_EditorClassIdentifier: 
-  guid: bf417634dd4da314f8fc4b0e9d0842d2
-  title: Empty Essence Stone
+  guid: 
+  title: 
   desc: 
-  sprite: {fileID: 21300000, guid: e88939e4979cd464b9609ca316bef775, type: 3}
+  sprite: {fileID: 0}
   size: {x: 1, y: 1}
   unlimitedUse: 0
   value: 0
