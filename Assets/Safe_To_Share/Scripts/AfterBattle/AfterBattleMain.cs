@@ -47,8 +47,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             activeEnemyActor.RotateActor.ResetPosAndRot();
             var ani = data.SexAnimationFilterList.GetAnimation(activePlayerActor, activeEnemyActor);
             // TODO Grounding
-            actorPositionManager.PosActors(activePlayerActor, ani.GivePos, activeEnemyActor,
-                ani.ReceivePos, ani.StayGrounded);
+            actorPositionManager.PosActors(activePlayerActor, activeEnemyActor, ani);
             activePlayerActor.SetActAnimation(ani.GiveAnimationHash);
             activeEnemyActor.SetActAnimation(ani.ReceiveAnimationHash);
             LastAct = obj;

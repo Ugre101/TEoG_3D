@@ -69,30 +69,16 @@ namespace Items
             return false;
             // .Completed += i => UseAfterLoad(i, item, times);
         }
-
-        /// <summary>
-        /// </summary>
-        /// <returns>If you had enough of item</returns>
-        public async Task<bool> LowerItemAmountWithGuid(string guid, int amount = 1)
+        public bool LowerItemAmountWithoutLoading(string guid, int amount = 1)
         {
             var item = GetItemByGuid(guid);
-            if (item == null) return false;
+            if (item == null)
+                return false;
             item.Amount -= amount;
-            var task = Addressables.LoadAssetAsync<Item>(item.ItemGuid);
-            await task.Task;
-            if (task.Status == AsyncOperationStatus.Succeeded)
-            {
-                if (task.Result.UnlimitedUse) return true;
-
-                if (item.Amount < amount)
-                    return false;
-                item.Amount -= amount;
-                return true;
-            }
-
-            throw new Exception("Failed to load item");
+            if (item.Amount <= 0)
+                Items.Remove(item);
+            return true;
         }
-
         public async Task<bool> LowerItemAmount(string itemGuid, int amount = 1)
         {
             if (itemGuid == null) return false;

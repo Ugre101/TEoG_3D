@@ -9473,7 +9473,7 @@ AudioSource:
     m_RotationOrder: 4
 --- !u!95 &2312353065604103090
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -9490,7 +9490,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &724004162400470522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9524,6 +9524,9 @@ MonoBehaviour:
   <ShaftRoot>k__BackingField: {fileID: 0}
   <Vagina>k__BackingField: {fileID: 0}
   <Anus>k__BackingField: {fileID: 4348783708698811656}
+  <RightHand>k__BackingField: {fileID: 77592168843114936}
+  <LeftHand>k__BackingField: {fileID: 818162218069703829}
+  <AbdomenLower>k__BackingField: {fileID: 2773415967888405347}
 --- !u!114 &4140907484397756891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9602,8 +9605,6 @@ MonoBehaviour:
     - id: 20
       title: _phmfaceround
       type: 1
-  <Animator>k__BackingField: {fileID: 2312353065604103090}
-  <KeyAreas>k__BackingField: {fileID: 3276694527742169687}
   supportedGenders: 00000000
   supportedRaces:
   - {fileID: 11400000, guid: 4d8d0eb9b96993249aa87052e588b749, type: 2}
@@ -9703,6 +9704,8 @@ MonoBehaviour:
   hasBallsController: 0
   hasDickController: 0
   hasHideDaz: 0
+  <Animator>k__BackingField: {fileID: 2312353065604103090}
+  <KeyAreas>k__BackingField: {fileID: 3276694527742169687}
 --- !u!4 &4237200154859976022 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -9173817217542123616, guid: 470d33595b5e07c478444781c7bb50a5, type: 3}

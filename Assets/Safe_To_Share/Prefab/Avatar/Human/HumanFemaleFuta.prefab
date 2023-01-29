@@ -11173,9 +11173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5727506264806497230, guid: 710a85e809f057c419e3255ca4ef9778, type: 3}
-  force: 100
-  delayBetweenDrops: 0.5
-  stopTime: 0.5
 --- !u!4 &4784531734555571772 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4222013143886713782, guid: c49f9996d49a2394c94cb798b893c252, type: 3}
@@ -11699,7 +11696,7 @@ AudioSource:
     m_RotationOrder: 4
 --- !u!95 &3052527092817511570
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -11716,7 +11713,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &-1719109076878781011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11764,8 +11761,6 @@ MonoBehaviour:
     - id: 29
       title: _cb hala body
       type: 0
-  <Animator>k__BackingField: {fileID: 3052527092817511570}
-  <KeyAreas>k__BackingField: {fileID: 3856904466124183313}
   supportedGenders: 020000000400000005000000
   supportedRaces:
   - {fileID: 11400000, guid: 4d8d0eb9b96993249aa87052e588b749, type: 2}
@@ -11874,6 +11869,8 @@ MonoBehaviour:
   hasBallsController: 1
   hasDickController: 1
   hasHideDaz: 1
+  <Animator>k__BackingField: {fileID: 3052527092817511570}
+  <KeyAreas>k__BackingField: {fileID: 3856904466124183313}
 --- !u!114 &2335162311935223240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11912,6 +11909,9 @@ MonoBehaviour:
   <ShaftRoot>k__BackingField: {fileID: 7560385308837343321}
   <Vagina>k__BackingField: {fileID: 7560385308837343321}
   <Anus>k__BackingField: {fileID: 3151945202858479790}
+  <RightHand>k__BackingField: {fileID: 1423799003956827160}
+  <LeftHand>k__BackingField: {fileID: 585309873426913153}
+  <AbdomenLower>k__BackingField: {fileID: 4990994425051663072}
 --- !u!114 &7168800235907757204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11927,7 +11927,6 @@ MonoBehaviour:
   animator: {fileID: 3052527092817511570}
   shitHash: 1567588355
   scatHandler: {fileID: 6036442166519978165}
-  shitSize: 1
   pissHole: {fileID: 8341284011160710325}
   pissTime: 5
 --- !u!4 &8386078076584542043 stripped

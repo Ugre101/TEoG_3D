@@ -3007,6 +3007,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_Id
+      value: 5baf468f-a1ad-445f-9d26-4d32ec374f9c
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_Name
+      value: Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 49d574cf-122d-48ac-93f6-c9d8e9db50cc
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Input
+      objectReference: {fileID: 0}
     - target: {fileID: 7973828700283602457, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
       propertyPath: m_Name
       value: DialougueOptionBtn (2)
@@ -3108,6 +3132,30 @@ PrefabInstance:
     - target: {fileID: 5760145458766928469, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_Id
+      value: ca03f671-d1bd-448f-8e32-48511d972a9d
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_Name
+      value: Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 569c635f-8786-48e5-a674-31df06c30bad
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Input
       objectReference: {fileID: 0}
     - target: {fileID: 7973828700283602457, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
       propertyPath: m_Name
@@ -3211,6 +3259,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_Id
+      value: ad01e01f-5ef4-4b09-a0c7-ad35143ff3dc
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_Name
+      value: Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: ef9ab7a8-1f39-4739-9b20-9795188867df
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Input
+      objectReference: {fileID: 0}
     - target: {fileID: 7973828700283602457, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
       propertyPath: m_Name
       value: DialougueOptionBtn (1)
@@ -3312,6 +3384,30 @@ PrefabInstance:
     - target: {fileID: 5760145458766928469, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_Id
+      value: d1267722-debe-4ec1-b344-e2b4bac2e84e
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_Name
+      value: Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 82f8d29e-c21c-4b43-932b-6fc0e4c676c3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576643468341414371, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
+      propertyPath: inputAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Input
       objectReference: {fileID: 0}
     - target: {fileID: 7973828700283602457, guid: bacb987bc4d3fbb439741426d6209ad8, type: 3}
       propertyPath: m_Name

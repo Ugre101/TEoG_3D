@@ -1,5 +1,6 @@
 ﻿using Character.BodyStuff;
 using Character.IslandData;
+using Character.PlayerStuff;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
@@ -15,11 +16,12 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
         [SerializeField] TextMeshProUGUI amountText;
         [SerializeField] Image btnImage;
         [SerializeField] Slider slider;
-        [SerializeField] TextMeshProUGUI sliderText;
         [SerializeField] AssetReference givesItem;
         [SerializeField] Button decreaseButton;
-        void OnEnable()
+
+        public override void Setup(Player parPlayer, string opResult)
         {
+            base.Setup(parPlayer, opResult);
             if (!IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))
                 return;
             amountText.text = $"Increase by donating {DonateAmount.ConvertKg()}";
@@ -27,16 +29,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             UpdateDecreaseButton();
         }
 
-        void UpdateDecreaseButton()
-        {
-            decreaseButton.interactable = CanSteal();
-        }
+        void UpdateDecreaseButton() => decreaseButton.interactable = CanSteal();
 
         public void SetCurrentValue(float arg0)
         {
             if (!IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))
                 return;
-            int toInt = Mathf.RoundToInt(arg0);
+            var toInt = Mathf.RoundToInt(arg0);
             data.bodyData.SetValueOfType(bodyType, toInt);
             UpdateValue(toInt);
             slider.SetValueWithoutNotify(data.bodyData.GetValueOfType(bodyType));
@@ -47,7 +46,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             player.Body.BodyStats.TryGetValue(bodyType, out playerBody) &&
             !(playerBody.BaseValue <= DonateAmount + 1);
 
-        bool CanSteal() => player.Inventory.HasItemOfGuid(emptyGuid);
+        bool CanSteal() => player.Inventory.HasItemOfGuid(EmptyGuid);
 
         public override void IncreaseClick()
         {
@@ -55,8 +54,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
                 !IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))
                 return;
             playerBody.BaseValue -= DonateAmount;
-            bool isMax = data.bodyData.GetValueOfType(bodyType) == data.bodyData.GetMaxValueOfType(bodyType);
-            int maxValue = data.bodyData.IncreaseMaxValueOfType(bodyType);
+            var isMax = data.bodyData.GetValueOfType(bodyType) == data.bodyData.GetMaxValueOfType(bodyType);
+            var maxValue = data.bodyData.IncreaseMaxValueOfType(bodyType);
             slider.maxValue = maxValue;
             if (isMax)
             {
@@ -69,24 +68,33 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 
         public override void DecreaseClick()
         {
-            if (!CanSteal()) return;
+            if (!CanSteal())
+            {
+                UpdateDecreaseButton();
+
+                return;
+            }
+
             if (!IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data)) return;
+            if (!player.Inventory.LowerItemAmountWithoutLoading(EmptyGuid)) return;
             player.Inventory.AddItem(givesItem.AssetGUID);
-            bool isMin = data.bodyData.GetValueOfType(bodyType) == data.bodyData.GetMinValueOfType(bodyType);
+            var isMin = data.bodyData.GetValueOfType(bodyType) == data.bodyData.GetMinValueOfType(bodyType);
             var minValue = data.bodyData.DecreaseMinValueOfType(bodyType);
             slider.minValue = minValue;
             if (isMin)
             {
                 data.bodyData.SetValueOfType(bodyType, minValue);
                 slider.SetValueWithoutNotify(minValue);
+                currentAmount.text = bodyType == BodyStatType.Height ? minValue.ConvertCm() : minValue.ConvertKg();
             }
+
             UpdateDecreaseButton();
         }
 
         void UpdateValue(int body)
         {
-            currentAmount.text = body.ConvertKg();
-            btnImage.color = CanAfford(out BodyStat _) ? Color.green : Color.gray;
+            currentAmount.text = bodyType == BodyStatType.Height ? body.ConvertCm() : body.ConvertKg();
+            btnImage.color = CanAfford(out var _) ? Color.green : Color.gray;
         }
 #if UNITY_EDITOR
         [SerializeField] TextMeshProUGUI title;

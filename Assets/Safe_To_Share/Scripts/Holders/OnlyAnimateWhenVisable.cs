@@ -10,15 +10,13 @@ namespace Holders
         float lastTick = 999f;
         void Update()
         {
-            if (Time.time < lastTick + CheckEvery)
-            {
-                lastTick = Time.time;
-                bool visible = false;
-                foreach (Renderer rend in renderers)
-                    if (rend.isVisible)
-                        visible = true;
-                animator.enabled = visible;
-            }
+            if (!(Time.time < lastTick + CheckEvery)) return;
+            lastTick = Time.time;
+            bool visible = false;
+            foreach (Renderer rend in renderers)
+                if (rend.isVisible)
+                    visible = true;
+            animator.enabled = visible;
         }
 #if UNITY_EDITOR
 

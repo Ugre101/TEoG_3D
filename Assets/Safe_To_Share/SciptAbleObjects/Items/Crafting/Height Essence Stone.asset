@@ -18,7 +18,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   size: {x: 1, y: 1}
   unlimitedUse: 0
-  value: 0
+  value: 100
   canSell: 1
   effectsTree:
     healingItemEffects:

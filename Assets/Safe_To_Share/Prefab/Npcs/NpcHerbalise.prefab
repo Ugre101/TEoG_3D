@@ -13073,11 +13073,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 006ceed5ce99f484b86ea0ae61cd4200, type: 3}
       propertyPath: m_LODs.Array.data[0].screenRelativeHeight
-      value: 0.59874105
+      value: 0.80264086
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 006ceed5ce99f484b86ea0ae61cd4200, type: 3}
       propertyPath: m_LODs.Array.data[1].screenRelativeHeight
-      value: 0.25134605
+      value: 0.30007952
       objectReference: {fileID: 0}
     - target: {fileID: 4742473837712756890, guid: 006ceed5ce99f484b86ea0ae61cd4200, type: 3}
       propertyPath: m_LODs.Array.data[2].screenRelativeHeight
@@ -16706,7 +16706,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &7895472085567907985
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -16723,7 +16723,43 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &3486068499731088340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789784373051569172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7c1d11ecdc4b69a5fc18184e7b650f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 1751204275382707856}
+  - {fileID: 5845378230311873606}
+  - {fileID: 8090834573714600892}
+  - {fileID: 6470507134794972369}
+  - {fileID: 8200988190796764344}
+  - {fileID: 8365627048138058313}
+  - {fileID: 5536781900981859921}
+  - {fileID: 8589593614039007628}
+  - {fileID: 375014837421314462}
+  - {fileID: 4170590539790754200}
+  - {fileID: 647213337350406653}
+  - {fileID: 2345338407297291749}
+  - {fileID: 4740002386663986734}
+  - {fileID: 2030471752309227512}
+  - {fileID: 3832756968769746846}
+  - {fileID: 510158434461303090}
+  - {fileID: 4055135628633650339}
+  - {fileID: 5495207953394112801}
+  - {fileID: 4743759023659080275}
+  - {fileID: 5545666831288917092}
+  - {fileID: 269775815554769880}
+  - {fileID: 661060849527776855}
+  animator: {fileID: 7895472085567907985}
 --- !u!4 &6803703713766822804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 905466804214848209, guid: 006ceed5ce99f484b86ea0ae61cd4200, type: 3}

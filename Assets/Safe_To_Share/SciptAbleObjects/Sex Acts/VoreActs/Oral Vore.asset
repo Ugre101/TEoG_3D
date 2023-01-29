@@ -21,10 +21,18 @@ MonoBehaviour:
         <GivePos>k__BackingField:
           <KeyArea>k__BackingField: 0
           <TowardsPartner>k__BackingField: 0
+          <SetAsChild>k__BackingField: 0
+          <AfterDelay>k__BackingField: 0
+          <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+          <Offset>k__BackingField: {x: 0, y: 0, z: 0}
         <ReceiveAnimationHash>k__BackingField: 0
         <ReceivePos>k__BackingField:
           <KeyArea>k__BackingField: 0
           <TowardsPartner>k__BackingField: 0
+          <SetAsChild>k__BackingField: 0
+          <AfterDelay>k__BackingField: 0
+          <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+          <Offset>k__BackingField: {x: 0, y: 0, z: 0}
         <StayGrounded>k__BackingField: 0
         <Delay>k__BackingField: 0
       filters:
@@ -33,14 +41,22 @@ MonoBehaviour:
           <GivePos>k__BackingField:
             <KeyArea>k__BackingField: 4
             <TowardsPartner>k__BackingField: 0
+            <SetAsChild>k__BackingField: 0
+            <AfterDelay>k__BackingField: 0
+            <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+            <Offset>k__BackingField: {x: 0, y: 0, z: 0}
           <ReceiveAnimationHash>k__BackingField: -2132584386
           <ReceivePos>k__BackingField:
             <KeyArea>k__BackingField: 6
             <TowardsPartner>k__BackingField: 0
-          <StayGrounded>k__BackingField: 0
-          <Delay>k__BackingField: 8
+            <SetAsChild>k__BackingField: 1
+            <AfterDelay>k__BackingField: 2.99
+            <Rotation>k__BackingField: {x: 75, y: 0, z: 0}
+            <Offset>k__BackingField: {x: 0, y: -0.08, z: 0}
+          <StayGrounded>k__BackingField: 1
+          <Delay>k__BackingField: 8.21
         <Requirement>k__BackingField: 0
-        xTimes: 2.75
+        xTimes: 3.36
     text: 
     afterText: []
   errorData:
@@ -50,10 +66,18 @@ MonoBehaviour:
         <GivePos>k__BackingField:
           <KeyArea>k__BackingField: 0
           <TowardsPartner>k__BackingField: 0
+          <SetAsChild>k__BackingField: 0
+          <AfterDelay>k__BackingField: 0
+          <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+          <Offset>k__BackingField: {x: 0, y: 0, z: 0}
         <ReceiveAnimationHash>k__BackingField: 0
         <ReceivePos>k__BackingField:
           <KeyArea>k__BackingField: 0
           <TowardsPartner>k__BackingField: 0
+          <SetAsChild>k__BackingField: 0
+          <AfterDelay>k__BackingField: 0
+          <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+          <Offset>k__BackingField: {x: 0, y: 0, z: 0}
         <StayGrounded>k__BackingField: 0
         <Delay>k__BackingField: 0
       filters: []

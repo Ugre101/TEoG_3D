@@ -70,7 +70,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             if (GameManager.Paused) return;
             if (ctx.performed)
                 elevationRoutine = StartCoroutine(TargetElevation(elevationRate));
-            else if (ctx.canceled)
+            else if (ctx.canceled && elevationRoutine != null)
                 StopCoroutine(elevationRoutine);
         }
 
@@ -79,7 +79,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             if (GameManager.Paused) return;
             if (ctx.performed)
                 elevationRoutine = StartCoroutine(TargetElevation(-elevationRate));
-            else if (ctx.canceled)
+            else if (ctx.canceled && elevationRoutine != null)
                 StopCoroutine(elevationRoutine);
         }
 

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41e503f608c61c46916e5442705378d, type: 3}
   m_Name: Fat Essence Stone
   m_EditorClassIdentifier: 
-  guid: 
+  guid: 5ea23a7c8e3db914db594817a84f3b0e
   title: 
   desc: 
   sprite: {fileID: 0}
   size: {x: 1, y: 1}
   unlimitedUse: 0
-  value: 0
+  value: 100
   canSell: 1
   effectsTree:
     healingItemEffects:

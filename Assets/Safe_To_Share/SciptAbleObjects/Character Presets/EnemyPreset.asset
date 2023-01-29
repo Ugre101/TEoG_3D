@@ -49,7 +49,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   startBody:
-    height: 50
+    height: 120
     muscle: 21
     fat: 14
     rng:

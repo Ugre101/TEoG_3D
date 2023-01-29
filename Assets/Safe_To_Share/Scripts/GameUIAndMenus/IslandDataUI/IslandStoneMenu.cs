@@ -19,9 +19,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             options = GetComponentsInChildren<IslandStoneOption>();
         }
 #endif
-        void OnEnable() => GameUIManager.BlockList.Add(this);
-
-        void OnDisable() => GameUIManager.BlockList.Remove(this);
+        void OnDisable()
+        {
+            GameUIManager.BlockList.Remove(this);
+            emptyCraftingCrystal.ReleaseAsset();
+        }
 
         public bool BlockIfActive()
         {
@@ -36,13 +38,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 
         public async void Open(Player player)
         {
+            GameUIManager.BlockList.Add(this);
             var op = emptyCraftingCrystal.LoadAssetAsync<Item>();
             await op.Task;
             gameObject.SetActive(true);
             foreach (var stoneOption in options)
                 stoneOption.Setup(player, op.Result.Guid);
             amountOfStones.Setup(player, op.Result);
-            
         }
     }
 }

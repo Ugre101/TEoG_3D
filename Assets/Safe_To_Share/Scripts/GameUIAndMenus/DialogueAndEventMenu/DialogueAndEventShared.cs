@@ -24,8 +24,8 @@ namespace GameUIAndMenus.DialogueAndEventMenu
         [SerializeField] protected Slider slider;
         [SerializeField] protected Button skipBtn;
         [SerializeField] DialogueButton prefab;
-        protected BaseDialogue currentDialogue;
-        protected DialogueBaseNode currentNode;
+        protected BaseDialogue CurrentDialogue;
+        protected DialogueBaseNode CurrentNode;
         Coroutine printDialogue;
 
         static float TextSpeed
@@ -89,7 +89,7 @@ namespace GameUIAndMenus.DialogueAndEventMenu
             if (printDialogue != null)
                 StopCoroutine(printDialogue);
             StringBuilder sb = new();
-            foreach (string s in currentNode.Text)
+            foreach (string s in CurrentNode.Text)
             {
                 sb.AppendLine(s);
                 sb.AppendLine();
@@ -103,11 +103,15 @@ namespace GameUIAndMenus.DialogueAndEventMenu
         protected void AddOptionButtons(BaseEditorCanvasNode obj)
         {
             content.KillChildren();
-            foreach (DialogueBaseNode childNode in currentDialogue.GetChildNodes(obj).Cast<DialogueBaseNode>())
+            var dialogueBaseNodes = CurrentDialogue.GetChildNodes(obj).Cast<DialogueBaseNode>().ToArray();
+            for (var i = 0; i < dialogueBaseNodes.Length; i++)
+            {
+                var childNode = dialogueBaseNodes[i];
                 if (childNode.ShowNode)
-                    Instantiate(prefab, content).Setup(childNode);
+                    Instantiate(prefab, content).Setup(childNode,i);
                 else
-                    Instantiate(prefab, content).SetupBlocked(childNode);
+                    Instantiate(prefab, content).SetupBlocked(childNode,i);
+            }
         }
     }
 }

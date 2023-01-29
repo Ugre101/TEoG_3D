@@ -283,11 +283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69270962b424e04bfedccc073d72378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
-    m_AssetGUID: bf417634dd4da314f8fc4b0e9d0842d2
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
   amountText: {fileID: 2665385860671398880}
   itemImage: {fileID: 2665385860606486702}
 --- !u!1 &2665385860671398886
@@ -16077,6 +16072,11 @@ MonoBehaviour:
   - {fileID: 1926583887410116870}
   - {fileID: 8629546864453800547}
   - {fileID: 7498976442342222954}
+  emptyCraftingCrystal:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   amountOfStones: {fileID: 2665385860606486703}
 --- !u!1 &2665385862646297477
 GameObject:
@@ -16229,6 +16229,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 74268221672809340, guid: 8f5330e585279624a8cef43213bc6793, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4486081688568730283, guid: 8f5330e585279624a8cef43213bc6793, type: 3}
+      propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4486081688702974313, guid: 8f5330e585279624a8cef43213bc6793, type: 3}

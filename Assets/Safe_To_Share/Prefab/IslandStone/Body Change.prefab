@@ -103,7 +103,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Global Decrease Quest
+  m_text: Use Essence Crystal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
   m_sharedMaterial: {fileID: 5044788166237315566, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
@@ -663,6 +663,12 @@ MonoBehaviour:
   amountText: {fileID: 4486081689977831834}
   btnImage: {fileID: 4486081690128912387}
   slider: {fileID: 5758420317040858576}
+  givesItem:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  decreaseButton: {fileID: 4486081688568730283}
   title: {fileID: 4486081688750055202}
 --- !u!1 &4486081688750055200
 GameObject:

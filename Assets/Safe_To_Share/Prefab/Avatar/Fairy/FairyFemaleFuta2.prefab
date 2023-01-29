@@ -15108,9 +15108,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 5727506264806497230, guid: 710a85e809f057c419e3255ca4ef9778, type: 3}
-  force: 90
-  delayBetweenDrops: 0.125
-  stopTime: 2
 --- !u!4 &6526179808550036768 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4427375363091086560, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
@@ -15399,7 +15396,7 @@ AudioSource:
     m_RotationOrder: 4
 --- !u!95 &3083849336835490592
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -15416,7 +15413,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &-896821834447415668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15464,8 +15461,6 @@ MonoBehaviour:
     - id: 28
       title: cb hala body
       type: 0
-  <Animator>k__BackingField: {fileID: 3083849336835490592}
-  <KeyAreas>k__BackingField: {fileID: 5810590861592092704}
   supportedGenders: 00000000010000000200000003000000040000000500000006000000
   supportedRaces:
   - {fileID: 11400000, guid: b546dc197130164478b6444f864b5f12, type: 2}
@@ -15565,6 +15560,8 @@ MonoBehaviour:
   hasBallsController: 1
   hasDickController: 1
   hasHideDaz: 1
+  <Animator>k__BackingField: {fileID: 3083849336835490592}
+  <KeyAreas>k__BackingField: {fileID: 5810590861592092704}
 --- !u!114 &2422335808193439055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15587,6 +15584,23 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 40bf2aad2e9d28e4db57c581974cc95e, type: 3}
   source: {fileID: 2735915762991972548}
   validated: 1
+--- !u!114 &5376847497894677180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7719730838470042769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e94d538417a8419ea1151f1f577bfec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3083849336835490592}
+  shitHash: 1567588355
+  scatHandler: {fileID: 2757122145332341233}
+  pissHole: {fileID: 7360217732612786517}
+  pissTime: 5
 --- !u!114 &5810590861592092704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15603,24 +15617,9 @@ MonoBehaviour:
   <ShaftRoot>k__BackingField: {fileID: 4968354243455155175}
   <Vagina>k__BackingField: {fileID: 4968354243455155175}
   <Anus>k__BackingField: {fileID: 6453906814227168269}
---- !u!114 &5376847497894677180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7719730838470042769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94d538417a8419ea1151f1f577bfec0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 3083849336835490592}
-  shitHash: 1567588355
-  scatHandler: {fileID: 2757122145332341233}
-  shitSize: 1
-  pissHole: {fileID: 7360217732612786517}
-  pissTime: 5
+  <RightHand>k__BackingField: {fileID: 1963866803402783955}
+  <LeftHand>k__BackingField: {fileID: 5724630479078327791}
+  <AbdomenLower>k__BackingField: {fileID: 2563690745121494879}
 --- !u!4 &7720017691197481023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 919742207301335551, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}

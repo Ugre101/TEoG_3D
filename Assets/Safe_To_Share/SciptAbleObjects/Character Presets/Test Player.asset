@@ -61,7 +61,9 @@ MonoBehaviour:
     <Amount>k__BackingField: 11
   startPerks: []
   startEssencePerks: []
-  startVorePerks: []
+  startVorePerks:
+  - {fileID: 11400000, guid: 8e292cb85cff9ed4698217e089677565, type: 2}
+  - {fileID: 11400000, guid: d96b6e0901c5424439b19ffc5fd4d11a, type: 2}
   startRaceRef:
     m_AssetGUID: 7c596fb2be9bc2f4882a620ee187df56
     m_SubObjectName: 

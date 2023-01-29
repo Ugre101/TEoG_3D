@@ -12,20 +12,20 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
         public void Setup(BaseDialogue dialogue)
         
         {
-            currentDialogue = dialogue;
-            currentNode = dialogue.GetRootNode() as DialogueBaseNode;
-            AddOptionButtons(currentNode);
-            ShowNodeText(currentNode);
+            CurrentDialogue = dialogue;
+            CurrentNode = dialogue.GetRootNode() as DialogueBaseNode;
+            AddOptionButtons(CurrentNode);
+            ShowNodeText(CurrentNode);
         }
 
         protected override void HandleOption(DialogueBaseNode obj)
         {
-            currentNode = obj;
-            foreach (DialogueBaseAction dialogueBaseAction in currentNode.Actions)
+            CurrentNode = obj;
+            foreach (DialogueBaseAction dialogueBaseAction in CurrentNode.Actions)
                 dialogueBaseAction.Invoke(Player);
-            AddOptionButtons(currentNode);
-            ShowNodeText(currentNode);
-            switch (currentNode)
+            AddOptionButtons(CurrentNode);
+            ShowNodeText(CurrentNode);
+            switch (CurrentNode)
             {
                 case DialogueQuestNode dialogueQuestNode:
                     PlayerQuests.AddQuest(dialogueQuestNode.Quest);
@@ -46,7 +46,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
                 case { } baseNode:
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(currentNode));
+                    throw new ArgumentOutOfRangeException(nameof(CurrentNode));
             }
         }
     }

@@ -12,11 +12,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
         [SerializeField] protected Islands island;
         [SerializeField] protected TextMeshProUGUI currentAmount;
 
-        protected string emptyGuid;
-        public void Setup(Player player, string opResult)
+        protected string EmptyGuid;
+        public virtual void Setup(Player parPlayer, string opResult)
         {
-            this.player = player;
-            emptyGuid = opResult;
+            player = parPlayer;
+            EmptyGuid = opResult;
         }
 
         public abstract void IncreaseClick();
