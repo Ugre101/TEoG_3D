@@ -15,7 +15,7 @@ MonoBehaviour:
   guid: 5ea23a7c8e3db914db594817a84f3b0e
   title: 
   desc: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 8b526541b3403514ead12f5097f95643, type: 3}
   size: {x: 1, y: 1}
   unlimitedUse: 0
   value: 100

@@ -17,7 +17,7 @@ MonoBehaviour:
   data:
     <SexAnimationFilterList>k__BackingField:
       defaultAnimation:
-        <GiveAnimationHash>k__BackingField: 0
+        <GiveAnimationHash>k__BackingField: 392018721
         <GivePos>k__BackingField:
           <KeyArea>k__BackingField: 0
           <TowardsPartner>k__BackingField: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
           <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
           <Offset>k__BackingField: {x: 0, y: 0, z: 0}
         <StayGrounded>k__BackingField: 0
-        <Delay>k__BackingField: 0
+        <Delay>k__BackingField: 6.08
       filters:
       - <Animation>k__BackingField:
           <GiveAnimationHash>k__BackingField: -2129081944

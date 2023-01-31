@@ -79,7 +79,7 @@ namespace Items
                 Items.Remove(item);
             return true;
         }
-        public async Task<bool> LowerItemAmount(string itemGuid, int amount = 1)
+        async Task<bool> LowerItemAmount(string itemGuid, int amount = 1)
         {
             if (itemGuid == null) return false;
             var task = Addressables.LoadAssetAsync<Item>(itemGuid);

@@ -24,6 +24,7 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
         [SerializeField] SubRealmSceneSo subRealmSceneSo;
 
         bool loaded;
+        List<SubRealmEnemy> activeEnemies = new();
         async void Start()
         {
             await enemyPresets.LoadEnemyPresets();
@@ -52,8 +53,9 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
 
         void DeSpawnEnemies()
         {
-            
-            
+            foreach (var activeEnemy in activeEnemies) 
+                Addressables.ReleaseInstance(activeEnemy.gameObject);
+            activeEnemies.Clear();
         }
 
         static System.Random rng = new ();
@@ -82,6 +84,7 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
                     enemyHolder.Setup(new Enemy(enemyPreset.NewEnemy()));
                     subRealmSceneSo.Enemies[gameObject.name].Add(new SubRealmSceneSo.SavedEnemy(enemyHolder.Enemy,
                         enemyHolder.transform.position, enemyHolder.transform.rotation));
+                    activeEnemies.Add(enemyHolder);
                 };
         }
 
@@ -93,6 +96,7 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
                     if (op.Status != AsyncOperationStatus.Succeeded) return;
                     if (!op.Result.TryGetComponent(out SubRealmEnemy enemyHolder)) return;
                     enemyHolder.Setup(savedEnemy.Enemy);
+                    activeEnemies.Add(enemyHolder);
                 };
         }
 

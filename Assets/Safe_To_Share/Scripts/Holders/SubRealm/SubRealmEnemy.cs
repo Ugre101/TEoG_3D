@@ -30,18 +30,13 @@ namespace Safe_To_Share.Scripts.Holders
             base.Start();
             SpawnLocation = transform.position;
             ActiveEnemies.Add(this);
-            print("start called");
         }
         void OnDestroy()
         {
             Enemy.Unsub();
             ActiveEnemies.Remove(this);
         }
-        public void ModifyAvatar(CharacterAvatar obj)
-        {
-            print("Called Modify Avatar");
-            obj.Setup(Enemy);
-        }
+        public void ModifyAvatar(CharacterAvatar obj) => obj.Setup(Enemy);
 
         void OnTriggerEnter(Collider other)
         {
@@ -60,7 +55,6 @@ namespace Safe_To_Share.Scripts.Holders
 
         public override void NewAvatar(CharacterAvatar obj)
         {
-            print("Called New Avatar");
             if (Enemy.WantBodyMorph)
             {
                 obj.GetRandomBodyMorphs(Enemy);
