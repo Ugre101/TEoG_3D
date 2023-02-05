@@ -27,6 +27,11 @@ namespace GameUIAndMenus.Menus.Level
 
         protected void ShowPerkInfo(Vector3 pos, BasicPerk perk)
         {
+            if (perk == null)
+            {
+                StopShow();
+                return;
+            }
             SetPos(pos);
             title.text = perk.Title;
             cost.text = $"Cost {{{perk.Cost}}}";

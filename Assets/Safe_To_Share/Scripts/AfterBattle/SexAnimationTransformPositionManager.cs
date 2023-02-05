@@ -12,27 +12,11 @@ namespace Safe_To_Share.Scripts.AfterBattle
             var t2 = partner.Avatar.KeyAreas.GetArea(ani.ReceivePos.KeyArea);
             if (t1 == null || t2 == null) return;
 
-            if (ani.ReceivePos.SetAsChild)
-            {
-                if (ani.ReceivePos.AfterDelay > 0)
-                    StartCoroutine(WaitAndSetAsChild(ani.ReceivePos.AfterDelay, t1, t2, partner,ani.ReceivePos.Rotation,ani.ReceivePos.Offset));
-                else
-                {
-                    partner.transform.SetParent(t1);
-                    partner.transform.localPosition = Vector3.zero;
-                }
-            }
+            if (ani.ReceivePos.SetAsChild) 
+                SetAsChild(partner, t1, t2, ani.ReceivePos);
 
-            if (ani.GivePos.SetAsChild)
-            {
-                if (ani.GivePos.AfterDelay > 0)
-                    StartCoroutine(WaitAndSetAsChild(ani.GivePos.AfterDelay, t2,t1, playerControlled,ani.GivePos.Rotation,ani.GivePos.Offset));
-                else
-                {
-                    playerControlled.transform.SetParent(t2);
-                    playerControlled.transform.localPosition = Vector3.zero;
-                }
-            }
+            if (ani.GivePos.SetAsChild) 
+                SetAsChild(playerControlled, t2, t1, ani.GivePos);
 
             if (playerControlled.AvatarScaler.Height < partner.AvatarScaler.Height)
                 playerControlled.AlignActor.AlignWith(t1, t2, ani.StayGrounded);
@@ -41,6 +25,17 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
             playerControlled.RotateActor.SetFacingDirection(ani.GivePos.TowardsPartner);
             partner.RotateActor.SetFacingDirection(ani.ReceivePos.TowardsPartner);
+        }
+
+        void SetAsChild(AfterBattleActor child, Transform t1, Transform t2, SexPositionPosAndRot posAndRot)
+        {
+            if (posAndRot.AfterDelay > 0)
+                StartCoroutine(WaitAndSetAsChild(posAndRot.AfterDelay, t1, t2, child, posAndRot.Rotation, posAndRot.Offset));
+            else
+            {
+                child.transform.SetParent(t1);
+                child.transform.localPosition = Vector3.zero;
+            }
         }
 
         IEnumerator WaitAndSetAsChild(float receivePosAfterDelay, Transform area, Transform ownArea,

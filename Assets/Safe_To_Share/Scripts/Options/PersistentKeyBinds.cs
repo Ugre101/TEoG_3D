@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Options
@@ -25,17 +24,18 @@ namespace Options
 
         void OnApplicationQuit()
         {
-            PlayerPrefs.SetString(FreePlaySave, freePlay.SaveBindingOverridesAsJson());
-            PlayerPrefs.SetString(ThirdPersonSave, thirdPersonCamera.SaveBindingOverridesAsJson());
-            PlayerPrefs.SetString(GameMenusSave, gameMenusBinds.SaveBindingOverridesAsJson());
-            PlayerPrefs.SetString(QuickSaveSave, quickSaveBinds.SaveBindingOverridesAsJson());
+            PlayerPrefs.SetString(FreePlaySave, freePlay.ToJson());
+            PlayerPrefs.SetString(ThirdPersonSave, thirdPersonCamera.ToJson());
+            PlayerPrefs.SetString(GameMenusSave, gameMenusBinds.ToJson());
+            PlayerPrefs.SetString(QuickSaveSave, quickSaveBinds.ToJson());
         }
 
         static void OverWriteIfNotNull(InputActionAsset toRebind, string playerPrefPath)
         {
+            if (!PlayerPrefs.HasKey(playerPrefPath)) return;
             string save = PlayerPrefs.GetString(playerPrefPath, string.Empty);
             if (!string.IsNullOrWhiteSpace(save))
-                toRebind.LoadBindingOverridesFromJson(save);
+                toRebind.LoadFromJson(save);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             buttons.FirstSetup(buttonOwner, partner);
         }
 
-        public void NoPartnerRefresh(BaseCharacter buttonOwner) => buttons.Refresh(buttonOwner);
+        public void NoPartnerRefresh(BaseCharacter buttonOwner) => buttons.Clear(buttonOwner);
 
         public void RefreshButtons(BaseCharacter buttonOwner, BaseCharacter partner) =>
             buttons.Refresh(buttonOwner, partner);

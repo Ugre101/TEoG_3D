@@ -55,16 +55,14 @@ namespace Items
                 return false;
             var task = Addressables.LoadAssetAsync<Item>(invenItem.ItemGuid);
             await task.Task;
-            if (task.Status == AsyncOperationStatus.Succeeded)
-            {
-                Item item = task.Result;
-                item.Use(user);
-                if (!item.UnlimitedUse)
-                    invenItem.Amount -= times;
-                if (invenItem.Amount >= 1)
-                    return false;
-                Items.Remove(invenItem);
-            }
+            if (task.Status != AsyncOperationStatus.Succeeded) return false;
+            Item item = task.Result;
+            item.Use(user);
+            if (!item.UnlimitedUse)
+                invenItem.Amount -= times;
+            if (invenItem.Amount >= 1)
+                return false;
+            Items.Remove(invenItem);
 
             return false;
             // .Completed += i => UseAfterLoad(i, item, times);
@@ -260,15 +258,12 @@ namespace Items
             oldItem = null;
             Vector2 oldPos = toMove.Position;
             Items.Remove(toMove);
-            if (moveTo.AddInventoryItemToPos(ref toMove, toPos, out var item))
-            {
-                oldItem = item;
-                oldItem.Position = oldPos;
-                Items.Add(oldItem);
-                return true;
-            }
+            if (!moveTo.AddInventoryItemToPos(ref toMove, toPos, out var item)) return false;
+            oldItem = item;
+            oldItem.Position = oldPos;
+            Items.Add(oldItem);
+            return true;
 
-            return false;
         }
 
         public InventorySave Save() => new(Items);

@@ -1901,8 +1901,8 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6157018469783791462}
-        m_TargetAssemblyTypeName: GameUIAndMenus.TriggerMenus, MyScripts
-        m_MethodName: OpenEssenceMenu
+        m_TargetAssemblyTypeName: GameUIAndMenus.TriggerMenus, MyGameUIScripts
+        m_MethodName: OpenGameOptions
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

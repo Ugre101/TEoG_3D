@@ -88,10 +88,10 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
             IEnumerator HandleVoreReaction()
             {
+                AfterBattleMainUI.NoPartnerRefresh(activePlayerActor.Actor);
                 yield return BasePlayerActionReaction(obj);
                 activePlayerActor.ModifyAvatar();
                 activeEnemyActor.Removed();
-                AfterBattleMainUI.NoPartnerRefresh(activePlayerActor.Actor);
                 if (activeEnemyActor.Actor is not Enemy enemy)
                     yield break;
                 enemy.GotRemoved();

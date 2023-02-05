@@ -35,9 +35,9 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             foreach (VoreActionButton voreBtn in voreActButtons)
                 voreBtn.Clear();
             Refresh(buttonsOwner, partner);
-            if (!OptionalContent.Vore.Enabled)
-                foreach (VoreActionButton voreActionButton in voreActButtons)
-                    voreActionButton.Clear();
+            if (OptionalContent.Vore.Enabled) return;
+            foreach (VoreActionButton voreActionButton in voreActButtons)
+                voreActionButton.Clear();
         }
 
         public void Refresh(BaseCharacter buttonOwner, BaseCharacter partner)
@@ -47,9 +47,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             addedDrainActs = FirstStep(addedDrainActs, buttonOwner, partner);
             addedVoreActs = FirstStep(addedVoreActs, buttonOwner, partner);
             // Add new sex actions
-            AfterBattleBaseAction[] toAddAction =
-                dict.SexActsWeCanDo(buttonOwner, partner).Except(addedSexActs).ToArray();
-            SexActionButton[] emptyButtons = sexActButtons.Where(b => b.Empty).ToArray();
+            var toAddAction = dict.SexActsWeCanDo(buttonOwner, partner).Except(addedSexActs).ToArray();
+            var emptyButtons = sexActButtons.Where(b => b.Empty).ToArray();
             for (int i = 0; i < emptyButtons.Length && i < toAddAction.Length; i++)
             {
                 emptyButtons[i].Setup(toAddAction[i]);
@@ -57,9 +56,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             }
 
             // Add new drain actions
-            AfterBattleBaseAction[] toAddDrainAct =
-                dict.DrainActionsWeCanDo(buttonOwner, partner).Except(addedDrainActs).ToArray();
-            DrainActionButton[] emptyDrainButtons = drainButtons.Where(b => b.Empty).ToArray();
+            var toAddDrainAct = dict.DrainActionsWeCanDo(buttonOwner, partner).Except(addedDrainActs).ToArray();
+            var emptyDrainButtons = drainButtons.Where(b => b.Empty).ToArray();
             for (int i = 0; i < emptyDrainButtons.Length && i < toAddDrainAct.Length; i++)
             {
                 emptyDrainButtons[i].Setup(toAddDrainAct[i]);
@@ -74,8 +72,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         static List<AfterBattleBaseAction> FirstStep(List<AfterBattleBaseAction> list, BaseCharacter buttonOwner,
             BaseCharacter partner)
         {
-            List<AfterBattleBaseAction> actsWeCantDoAnymore = list.FindAll(a => !a.CanUse(buttonOwner, partner));
-            foreach (AfterBattleBaseAction afterBattleBaseAction in actsWeCantDoAnymore)
+            var actsWeCantDoAnymore = list.FindAll(a => !a.CanUse(buttonOwner, partner));
+            foreach (var afterBattleBaseAction in actsWeCantDoAnymore)
                 afterBattleBaseAction.OnClearMe();
             list = list.Except(actsWeCantDoAnymore).ToList();
             return list;
@@ -105,7 +103,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             }
         }
 
-        public void Refresh(BaseCharacter buttonOwner)
+        public void Clear(BaseCharacter buttonOwner)
         {
             foreach (DrainActionButton drainActionButton in drainButtons)
                 drainActionButton.Clear();
