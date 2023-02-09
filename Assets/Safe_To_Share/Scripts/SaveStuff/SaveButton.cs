@@ -51,7 +51,8 @@ namespace SaveStuff
         void ClearSaveAndDeleteBtn()
         {
             File.Delete(path);
-            Destroy(gameObject);
+            Clear();
+            gameObject.SetActive(false);
         }
 
         public void DeleteSave() => WantToDeleteSave?.Invoke(ClearSaveAndDeleteBtn);

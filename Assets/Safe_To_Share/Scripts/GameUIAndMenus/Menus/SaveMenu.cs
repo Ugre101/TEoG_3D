@@ -52,7 +52,7 @@ namespace GameUIAndMenus.Menus
             if (Application.isPlaying) return;
 
             var saveButtons = content.GetComponentsInChildren<SaveButton>(true);
-            foreach (SaveButton saveButton in saveButtons)
+            foreach (var saveButton in saveButtons)
                 saveButton.gameObject.SetActive(false);
             preInstanced = saveButtons;
         }
@@ -79,14 +79,15 @@ namespace GameUIAndMenus.Menus
         {
             // saves = Directory.GetFiles(SaveManager.SavePath).OrderByDescending(Directory.GetLastWriteTime);
             saves = new DirectoryInfo(SaveManager.SavePath).GetFiles()
-                .OrderByDescending(f => f.LastWriteTime).Select(fileInfo => fileInfo.FullName).ToArray();
+                                                           .OrderByDescending(f => f.LastWriteTime)
+                                                           .Select(fileInfo => fileInfo.FullName).ToArray();
             AddAllSaves();
             SaveManager.SavesDirty = false;
         }
 
         void AddAllSaves()
         {
-            foreach (SaveButton activeButton in activeButtons)
+            foreach (var activeButton in activeButtons)
             {
                 activeButton.Clear();
                 activeButton.gameObject.SetActive(false);
@@ -94,7 +95,7 @@ namespace GameUIAndMenus.Menus
             }
 
             activeButtons.Clear();
-            for (int i = 0; i < GetShowAmount() && i < saves.Length; i++)
+            for (var i = 0; i < GetShowAmount() && i < saves.Length; i++)
                 TryAddSave(i);
         }
 
@@ -102,10 +103,12 @@ namespace GameUIAndMenus.Menus
 
         void TryAddSave(int i)
         {
+            if (!File.Exists(saves[i]))
+                return;
             try
             {
-                FullSave fullSave = JsonUtility.FromJson<FullSave>(File.ReadAllText(saves[i]));
-                SaveButton button = GetButton();
+                var fullSave = JsonUtility.FromJson<FullSave>(File.ReadAllText(saves[i]));
+                var button = GetButton();
                 button.transform.SetSiblingIndex(i);
                 button.Setup(fullSave, saves[i]);
                 activeButtons.Add(button);

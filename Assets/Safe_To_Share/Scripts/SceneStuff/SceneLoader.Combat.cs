@@ -16,7 +16,6 @@ namespace SceneStuff
         AsyncOperationHandle<SceneInstance> battleSceneOperationHandle;
 
         AsyncOperationHandle<SceneInstance> battleUIOperationHandle;
-        bool loadingBattle, loadingBattleUI;
 
         bool subRealmExitOnDefeat;
         bool startedCombat;
@@ -25,18 +24,16 @@ namespace SceneStuff
         {
             if (currentScene == battleScene)
                 return;
-            if (!loadingBattleUI)
+            if (!battleUIOperationHandle.IsValid())
                 battleUIOperationHandle = battleUIScene.SceneReference.LoadSceneAsync(LoadSceneMode.Additive);
-            loadingBattleUI = true;
         }
 
         public void LoadCombatIfNotAlready()
         {
             if (currentScene == battleScene)
                 return;
-            if (!loadingBattle)
+            if (!battleSceneOperationHandle.IsValid())
                 battleSceneOperationHandle = battleScene.SceneReference.LoadSceneAsync(LoadSceneMode.Additive);
-            loadingBattle = true;
         }
 
         void PreloadCombat(GameManager.EnemyClose obj)
@@ -100,8 +97,6 @@ namespace SceneStuff
                 SetNewSceneStuff(battleScene, battleSceneOperationHandle);
             yield return waitAFrame;
             ActionSceneLoaded?.Invoke(player, enemyTeam, allies, false);
-            loadingBattle = false;
-            loadingBattleUI = false;
             startedCombat = false;
             //  BattleManager.Instance.Setup(player.Player, enemyTeam, allies);
             yield return AllDone(true);

@@ -15,13 +15,51 @@ MonoBehaviour:
   icon: {fileID: 0}
   title: Missionary
   data:
-    giver: 0
-    receiver: 0
+    <SexAnimationFilterList>k__BackingField:
+      defaultAnimation:
+        <GiveAnimationHash>k__BackingField: 368362137
+        <GivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+          <SetAsChild>k__BackingField: 0
+          <AfterDelay>k__BackingField: 0
+          <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+          <Offset>k__BackingField: {x: 0, y: 0, z: 0}
+        <ReceiveAnimationHash>k__BackingField: -1089073176
+        <ReceivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+          <SetAsChild>k__BackingField: 0
+          <AfterDelay>k__BackingField: 0
+          <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+          <Offset>k__BackingField: {x: 0, y: 0, z: 0}
+        <StayGrounded>k__BackingField: 1
+        <Delay>k__BackingField: 0
+      filters: []
     text: 
     afterText: []
   errorData:
-    giver: 0
-    receiver: 0
+    <SexAnimationFilterList>k__BackingField:
+      defaultAnimation:
+        <GiveAnimationHash>k__BackingField: 0
+        <GivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+          <SetAsChild>k__BackingField: 0
+          <AfterDelay>k__BackingField: 0
+          <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+          <Offset>k__BackingField: {x: 0, y: 0, z: 0}
+        <ReceiveAnimationHash>k__BackingField: 0
+        <ReceivePos>k__BackingField:
+          <KeyArea>k__BackingField: 0
+          <TowardsPartner>k__BackingField: 0
+          <SetAsChild>k__BackingField: 0
+          <AfterDelay>k__BackingField: 0
+          <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
+          <Offset>k__BackingField: {x: 0, y: 0, z: 0}
+        <StayGrounded>k__BackingField: 0
+        <Delay>k__BackingField: 0
+      filters: []
     text: 
     afterText: []
   arousalGain:
