@@ -334,6 +334,11 @@ MonoBehaviour:
       <MaxHydration>k__BackingField:
         mods:
           tempBaseStatMods: []
+      <Bladder>k__BackingField:
+        current: 0
+        <MaxPressure>k__BackingField:
+          mods:
+            tempBaseStatMods: []
     sleepIn: 0
     workTitle: 
 --- !u!114 &7015019659552944969
@@ -513,6 +518,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  NewAvatarEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7261518492823782124
 MonoBehaviour:
   m_ObjectHideFlags: 0

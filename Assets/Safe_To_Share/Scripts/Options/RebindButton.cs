@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -42,14 +43,14 @@ namespace Options
                 {
                     bind2Text.text = string.Empty;
                     if (action.bindings.Count < 2)
-                        action.AddBinding("<Keyboard>p");
+                        action.AddBinding("temp");
                     break;
                 }
             }
 
             rebindingOperation = action.PerformInteractiveRebinding(i).WithCancelingThrough("<Keyboard>/escape")
                 .WithControlsExcluding("<Mouse>").OnMatchWaitForAnother(0.1f)
-                .OnCancel(operation =>
+                .OnCancel(_ =>
                 {
                     CleanUp();
                     RebindCancelled(i);
@@ -57,7 +58,7 @@ namespace Options
                 })
                 .OnComplete(operation =>
                 {
-                    if (CheckConflict(i))
+                    if (CheckConflict(operation.action.bindings[i].effectivePath))
                         RebindCancelled(i);
                     else
                         RebindCompleted();
@@ -68,6 +69,7 @@ namespace Options
             rebindingOperation.Start();
         }
 
+   
         void RebindCancelled(int i)
         {
             action.RemoveBindingOverride(i);
@@ -76,10 +78,22 @@ namespace Options
             action.Enable();
         }
 
-        bool CheckConflict(int i)
+        bool CheckConflict(string path)
         {
-            int count = action.actionMap.actions.Count(a => a.bindings.Any(ia => ia.path == action.bindings[i].path));
-            return count > 1;
+            foreach (var inputAction in action.actionMap)
+            {
+                if (inputAction == action)
+                    continue;
+                foreach (var binding in inputAction.bindings)
+                {
+                    if (binding.hasOverrides && binding.overridePath == path)
+                        return true;
+                    if (binding.path == path)
+                        return true;
+                }
+            }
+
+            return false;
             // InputAction other = action.actionMap.actions.FirstOrDefault(a =>
             //     a.bindings.Any(ia => ia.path == action.bindings[i].path) && a != action);
         }

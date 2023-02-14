@@ -85,6 +85,28 @@
                 },
                 {
                     "name": "",
+                    "id": "4cc7c1ec-4a37-41a6-b019-af54e797b1df",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cursor Lock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9a86a80-f216-43fc-bbce-7434ae75401e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cursor Lock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1e0d2d7b-d403-4089-bd0d-207a1a8fb519",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -162,11 +184,77 @@
                 },
                 {
                     "name": "",
+                    "id": "ba8ad12b-d26e-4a4f-a419-ff8af3072b36",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RaiseElevation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60b035b8-d409-46c3-9c9a-b9b18d999b2b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RaiseElevation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c17b11a1-4528-42f9-8f10-874659035dc3",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RaiseElevation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "00dfa969-20ba-4ddd-b9f0-19a327991d5d",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
+                    "action": "LowerElevation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "022c9f89-fe1f-401b-a5f5-7136dd768c67",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LowerElevation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "373c287a-76e4-4d52-80bb-f56f4c4c5a2c",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LowerElevation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a296a9a-52db-436a-948b-6a357f4f94a8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "LowerElevation",
                     "isComposite": false,
                     "isPartOfComposite": false

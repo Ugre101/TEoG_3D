@@ -46,10 +46,8 @@ namespace GameUIAndMenus.GameOptions
                 return;
             }
 
-            print($"{action.bindings.Count} <= {index}");
             if (action.bindings.Count <= index)
             {
-                print("Had no bindings");
                 action.AddBinding("<Keyboard>p");
             }
 
@@ -59,15 +57,13 @@ namespace GameUIAndMenus.GameOptions
                 .OnMatchWaitForAnother(0.1f)
                 .OnCancel(operation =>
                 {
-                    print("Canceled");
                     CleanUp();
                     RebindCancelled();
                     UpdateText();
                 })
                 .OnComplete(operation =>
                 {
-                    print($"Completed rebound to {operation.selectedControl}");
-                    if (CheckConflict())
+                    if (CheckConflict(operation.action.bindings[index].effectivePath))
                         RebindCancelled();
                     else
                         RebindCompleted();
@@ -84,11 +80,22 @@ namespace GameUIAndMenus.GameOptions
             reference.action.Enable();
         }
 
-        bool CheckConflict()
+        bool CheckConflict(string path)
         {
-            int count = reference.action.actionMap.actions.Count(a =>
-                a.bindings.Any(ia => ia.path == reference.action.bindings[index].path));
-            return count > 1;
+            foreach (var inputAction in reference.action.actionMap)
+            {
+                if (inputAction == reference.action)
+                    continue;
+                foreach (var binding in inputAction.bindings)
+                {
+                    if (binding.hasOverrides && binding.overridePath == path)
+                        return true;
+                    if (binding.path == path)
+                        return true;
+                }
+            }
+
+            return false;
         }
 
         void RebindCancelled()

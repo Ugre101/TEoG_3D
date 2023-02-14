@@ -11,7 +11,8 @@
                     "id": "d3dede77-1ade-4246-9e28-c81583548759",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Looks Menu",
@@ -19,7 +20,8 @@
                     "id": "5839568a-6cc0-44c0-9adc-b06fd4793a08",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "SaveMenu",
@@ -27,7 +29,8 @@
                     "id": "0cd2b284-b7c6-47d6-8e76-eea5434dbb71",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "LevelMenu",
@@ -35,7 +38,8 @@
                     "id": "33ccb670-945b-42df-82c3-268de318dde0",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "VoreMenu",
@@ -43,7 +47,8 @@
                     "id": "f9ba594f-998b-44d8-87dc-3f033243cbe3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "EventMenu",
@@ -51,7 +56,8 @@
                     "id": "65fed713-bed0-4870-aab0-e714ef55e33a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "WorldMap",
@@ -59,7 +65,8 @@
                     "id": "d1492448-2b1d-4d4f-8dca-7b4ed3c22cfa",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "HideUI",
@@ -67,7 +74,8 @@
                     "id": "559fba1f-04ec-4320-a367-763073b0b7c3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Quest Log",
@@ -75,7 +83,8 @@
                     "id": "e4d3340a-dc3a-4f50-b9e7-55a6bcb43260",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "EssenceLog",
@@ -83,7 +92,8 @@
                     "id": "c7d7cf70-241f-4610-a1f5-d532773868b0",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "GameOptions",
@@ -91,7 +101,8 @@
                     "id": "51ba3b04-c379-454b-a633-b9854975ffdf",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "TimeWait",
@@ -99,7 +110,8 @@
                     "id": "015e9dcf-c7b1-47b6-91d2-b89dcf26d0b3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -110,6 +122,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "072a9b36-84b5-4480-b204-5e10119a6039",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -127,11 +150,33 @@
                 },
                 {
                     "name": "",
+                    "id": "2509210c-9365-4f44-9bb5-81f0e7973bbf",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Looks Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "9e193826-b519-4d1b-8720-a9709e5e7653",
                     "path": "<Keyboard>/g",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard",
+                    "action": "SaveMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b1efca0-3178-4365-b899-4a74ddc453e8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "SaveMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -149,11 +194,33 @@
                 },
                 {
                     "name": "",
+                    "id": "3f208800-2c9d-4961-ac12-79dea87a1e64",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LevelMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4c1ddcc4-d91d-4a2f-9fc1-e865140c95dc",
                     "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard",
+                    "action": "VoreMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "36303fc9-ac9f-4a64-bb7d-b6e199090870",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "VoreMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -171,11 +238,33 @@
                 },
                 {
                     "name": "",
+                    "id": "b3c113ac-9aa9-40cf-a2c4-d1d97431db61",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EventMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "05ad137c-b8d0-4dbb-8238-d500e9a64877",
                     "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard",
+                    "action": "WorldMap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "68dbe614-9edb-468a-88dc-ce2895982c6c",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "WorldMap",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -193,11 +282,33 @@
                 },
                 {
                     "name": "",
+                    "id": "f74cbd07-5ffc-4e1f-9822-735c713854a8",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HideUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "d6f10613-8353-4011-8039-5ca18aca72c7",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard",
+                    "action": "Quest Log",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e13c3d79-9307-4e0f-afba-abd98ab879b2",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Quest Log",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -226,11 +337,33 @@
                 },
                 {
                     "name": "",
+                    "id": "adb24656-8e06-4ddb-b024-7e1e80d1a5cb",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GameOptions",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "101e21ff-5683-4b03-a0f6-96430cef7fcb",
                     "path": "<Keyboard>/t",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard",
+                    "action": "TimeWait",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6d68d6e-345d-4d22-a3e8-17c942c882bb",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "TimeWait",
                     "isComposite": false,
                     "isPartOfComposite": false

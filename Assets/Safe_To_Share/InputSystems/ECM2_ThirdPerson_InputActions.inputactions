@@ -235,6 +235,17 @@
                 },
                 {
                     "name": "",
+                    "id": "93a70b75-2d30-4c9c-bd6f-8ba5fcca6b89",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4e613f51-5611-46d1-958c-1bce7a6f0bc5",
                     "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
@@ -262,6 +273,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bed88c90-ed70-4a59-9649-642b2a2fa535",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -301,6 +323,17 @@
                 },
                 {
                     "name": "",
+                    "id": "91e85631-2d1a-4572-8743-788099c77565",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a0923a73-96a5-4b4e-8277-27ad8f9b27ec",
                     "path": "<Keyboard>/r",
                     "interactions": "",
@@ -317,6 +350,28 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard And Mouse",
+                    "action": "Auto Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e650fb67-1725-4c69-9887-c95ea6892e67",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Auto Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ee0c781-7cb4-4492-b06f-5c475b1b32ca",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Auto Run",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -340,6 +395,116 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "467172cc-2af3-40f2-8d5a-48270224eddc",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f14f5064-2cb3-4fab-9f1f-59643e5dfe2b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3da39810-548c-48da-b01e-6809ac1bfec0",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Piss",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0effaabc-2c02-41d9-99ec-2d98c4a87f72",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Piss",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e998bec8-ac4b-4f4e-8b27-5237c048b249",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Piss",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "edfe2e7c-49d4-4095-ab1e-3b313461812f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Piss",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7eb25c25-f54d-487c-9e0c-d85a7c633911",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d28c679f-95c8-4023-aea2-54c2980b59a9",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ef6ace42-fbd4-438f-aa7c-d93d0e23d73a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1bd3443-8cb8-4af0-8214-d31ebb4ccaf9",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

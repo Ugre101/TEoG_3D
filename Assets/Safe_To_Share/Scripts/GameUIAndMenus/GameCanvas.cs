@@ -38,7 +38,7 @@ namespace GameUIAndMenus
         [SerializeField] InventoryMenu2 inventoryMenu;
         [SerializeField] BirthEventMenu birthEventMenu;
         [SerializeField] SleepCanvas sleepCanvas;
-        IEnumerable<IBlockGameUI> cancelThese;
+        IEnumerable<BlockGameUI> cancelThese;
 
         void Start()
         {

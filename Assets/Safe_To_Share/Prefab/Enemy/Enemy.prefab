@@ -452,7 +452,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7297204200486777659
 GameObject:
@@ -543,6 +543,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  NewAvatarEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7261518492823782124
 MonoBehaviour:
   m_ObjectHideFlags: 0

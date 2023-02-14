@@ -11,7 +11,8 @@
                     "id": "2d2dc341-18e6-4087-9399-c5ec20a28601",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "QuickLoad",
@@ -19,7 +20,8 @@
                     "id": "00ac16f9-a882-4063-bca9-892da4726369",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -36,11 +38,77 @@
                 },
                 {
                     "name": "",
+                    "id": "b60fd951-8efe-4696-9b1f-8b1bde8b0c87",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuickSave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f7d5f14-d8a9-4814-adb0-47c0e6a102a3",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuickSave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "395076b7-22b8-4109-be6f-1ee8a9542920",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuickSave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "107a5642-9fdf-463b-8688-a5285bb8c3e5",
                     "path": "<Keyboard>/f9",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyBoard",
+                    "action": "QuickLoad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6928d2b1-5179-4360-a4a1-49df74b7d8aa",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuickLoad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7dd3fd62-1545-40b4-8990-0f9ae4975e7e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QuickLoad",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9f4485d0-adc8-44b0-8ed0-5642c95cd823",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "QuickLoad",
                     "isComposite": false,
                     "isPartOfComposite": false

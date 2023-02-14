@@ -12,7 +12,6 @@ namespace Safe_To_Share.Scripts.Options
         {
             toggle.isOn = OptionalContent.Scat.Enabled;
             toggle.onValueChanged.AddListener(OnToggle);
-            print(OptionalContent.Scat.Enabled);
         }
 
         public void OnToggle(bool value) => OptionalContent.Scat.Enabled = value;

@@ -153,8 +153,28 @@ namespace GameUIAndMenus.MinimapUI
             center = new Vector2(terrainPos.x + xRadius, terrainPos.z + zRadius);
             FindAllAndInstance();
             FindAndInstanceQuests();
+            SetupTheUnlockable();
         }
 
+        void SetupTheUnlockable()
+        {
+            foreach (var mapObject in MapData.Instance.UnLockable)
+            {
+                mapObject.ShowMe += ShowUnlockable;
+                mapObject.StopShowingMe += StopShowingUnlockable;
+                if (mapObject.UnLocked)
+                    ShowUnlockable(mapObject);
+            }
+        }
+
+        void ShowUnlockable(UnLockableMiniMapObject obj)
+        {
+        }
+
+
+        void StopShowingUnlockable(UnLockableMiniMapObject obj)
+        {
+        }
         void FindAllAndInstance()
         {
             foreach (StaticMiniMapObject staticMiniMapObject in MapData.Instance.Statics)

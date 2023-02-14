@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 {
-    public class IslandStoneMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu, IBlockGameUI
+    public class IslandStoneMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] IslandStoneOption[] options;
         [SerializeField] AssetReference emptyCraftingCrystal;
@@ -21,7 +21,6 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 #endif
         void OnDisable()
         {
-            GameUIManager.BlockList.Remove(this);
             emptyCraftingCrystal.ReleaseAsset();
         }
 
@@ -38,7 +37,6 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 
         public async void Open(Player player)
         {
-            GameUIManager.BlockList.Add(this);
             var op = emptyCraftingCrystal.LoadAssetAsync<Item>();
             await op.Task;
             gameObject.SetActive(true);

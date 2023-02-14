@@ -46,6 +46,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "337fa8b1-b420-445f-aa26-c2525018f9c2",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Place",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "1D Axis",
                     "id": "9505d528-dfdb-458c-9584-8ae0dc95613f",
                     "path": "1DAxis",

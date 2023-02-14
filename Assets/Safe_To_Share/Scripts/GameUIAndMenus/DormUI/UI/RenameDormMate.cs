@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace DormAndHome.Dorm.UI
 {
-    public class RenameDormMate : MonoBehaviour, IBlockGameUI
+    public class RenameDormMate : MonoBehaviour
     {
         [SerializeField] TMP_InputField firstName, lastName;
         [SerializeField] Button accept, close;
@@ -23,11 +23,7 @@ namespace DormAndHome.Dorm.UI
             lastName.onValueChanged.AddListener(LastChange);
         }
 
-        void OnEnable() => GameUIManager.BlockList.Add(this);
 
-        void OnDisable() => GameUIManager.BlockList.Remove(this);
-
-        public bool Block => gameObject.activeInHierarchy;
 
         void FirstChange(string arg0) => tempFirst = arg0;
         void LastChange(string arg0) => tempLast = arg0;

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DormAndHome.Dorm.UI
 {
-    public abstract class DormSleepAreaShared : MonoBehaviour, ICancelMeBeforeOpenPauseMenu, IBlockGameUI
+    public abstract class DormSleepAreaShared : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] protected GameObject dormPanel;
         [SerializeField] protected GameObject upgradePanel;
@@ -13,27 +13,23 @@ namespace DormAndHome.Dorm.UI
 
         public bool BlockIfActive()
         {
-            if (dormPanel.activeInHierarchy || upgradePanel.activeInHierarchy)
-            {
-                Leave();
-                return true;
-            }
+            if (!gameObject.activeSelf) return false;
+            Leave();
+            return true;
 
-            return false;
         }
 
         public virtual void Enter()
         {
             GameManager.Pause();
             gameObject.SetActive(true);
-            GameUIManager.BlockList.Add(this);
         }
 
         public virtual void Leave()
         {
             GameManager.Resume(false);
+            gameObject.SetActive(false);
             transform.SleepChildren();
-            GameUIManager.BlockList.Remove(this);
         }
     }
 }

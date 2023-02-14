@@ -9,6 +9,7 @@ namespace Safe_To_Share.Scripts.Map
         public static MapData Instance { get; private set; }
         [field: SerializeField] public StaticMiniMapObject[] Statics { get; private set; }
         [field: SerializeField] public EnemyZoneMiniMapObject[] enemyZones { get; private set; }
+        [field: SerializeField] public UnLockableMiniMapObject[] UnLockable { get; private set; } = Array.Empty<UnLockableMiniMapObject>();
         [field: SerializeField] public Vector2 MapSize { get; private set; }
         [field: SerializeField] public Vector3 MapPosition { get; private set; }
         void Awake() => Instance = this;
@@ -18,6 +19,7 @@ namespace Safe_To_Share.Scripts.Map
         {
             Statics = FindObjectsOfType<StaticMiniMapObject>(true);
             enemyZones = FindObjectsOfType<EnemyZoneMiniMapObject>(true);
+            UnLockable = FindObjectsOfType<UnLockableMiniMapObject>(true);
             if (gameObject.TryGetComponent(out Terrain terrain))
             {
                 MapSize = new Vector2(terrain.terrainData.size.x, terrain.terrainData.size.z);
