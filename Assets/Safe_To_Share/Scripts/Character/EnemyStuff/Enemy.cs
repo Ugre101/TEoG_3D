@@ -12,7 +12,7 @@ namespace Character.EnemyStuff
     {
         [SerializeField] BattleReward reward;
         [SerializeField] CanTakeEnemyHome canTake;
-
+        
         public Enemy(CreateEnemy character) : base(character.Character)
         {
             reward = character.BattleReward;
@@ -20,6 +20,7 @@ namespace Character.EnemyStuff
             LoseScenarios = character.LoseScenarios;
             CustomLoseScenarios = character.CustomLoseScenarios;
             WantBodyMorph = character.GiveRandomBodyMorphs;
+            EnemyGuid = character.EnemyGuid;
         }
 
         public Enemy(CreateEnemy character, Islands islands) : base(character.Character, islands)
@@ -29,9 +30,11 @@ namespace Character.EnemyStuff
             LoseScenarios = character.LoseScenarios;
             CustomLoseScenarios = character.CustomLoseScenarios;
             WantBodyMorph = character.GiveRandomBodyMorphs;
+            EnemyGuid = character.EnemyGuid;
         }
 
         [field: SerializeField] public bool Defeated { get; private set; }
+        [field: SerializeField]  public string EnemyGuid { get; private set; }
         public void SetDefeated(bool defeated) => Defeated = defeated;
         public BattleReward Reward => reward;
 

@@ -9929,6 +9929,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-6939971810550879453
 MonoBehaviour:
   m_ObjectHideFlags: 0

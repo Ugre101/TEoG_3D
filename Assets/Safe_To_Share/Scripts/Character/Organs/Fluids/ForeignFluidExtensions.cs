@@ -61,8 +61,8 @@ namespace Character.Organs.Fluids
         public static void CleanAll(BaseCharacter character)
         {
             CleanBody(character);
-            foreach (OrgansContainer container in character.SexualOrgans.Containers.Values)
-            foreach (BaseOrgan organ in container.List)
+            foreach (BaseOrgansContainer container in character.SexualOrgans.Containers.Values)
+            foreach (BaseOrgan organ in container.BaseList)
                 organ.Womb.ForeignFluids.ClearFluids();
         }
 
@@ -71,7 +71,7 @@ namespace Character.Organs.Fluids
         public static void CleanOrifices(BaseCharacter character, SexualOrganType toClean)
         {
             if (!character.SexualOrgans.Containers.TryGetValue(toClean, out var container)) return;
-            foreach (BaseOrgan organ in container.List)
+            foreach (BaseOrgan organ in container.BaseList)
                 organ.Womb.ForeignFluids.ClearFluids();
         }
     }

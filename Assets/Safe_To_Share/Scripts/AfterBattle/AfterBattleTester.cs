@@ -31,7 +31,6 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         async void Start()
         {
-            print("Start after battle test");
             if (!GameTester.GetFirstCall() || !Application.isEditor)
                 return;
 

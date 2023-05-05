@@ -15,7 +15,7 @@ namespace AvatarStuff.UI
 
         void Change(float arg0)
         {
-            playerHolder.Changer.CurrentAvatar.SetSkinTone(arg0);
+            playerHolder.Changer.CurrentAvatar.SetSkinTone(arg0,false);
             playerHolder.Player.Body.SkinTone = arg0;
         }
 

@@ -48,25 +48,17 @@ namespace Character.Organs
 
         static float HeightScaleValue(float height) => 0.1f + height / 177f;
 
-        public static int TotalEssenceCost(this OrgansContainer organs)
+        public static int TotalEssenceCost(this BaseOrgansContainer baseOrgans)
         {
             int cost = 0;
-            for (int i = 0; i < organs.List.Count(); i++) 
-                cost += organs.GrowNewCostAt(i);
-            foreach (var baseOrgan in organs.List)
+            for (int i = 0; i < baseOrgans.BaseList.Count(); i++) 
+                cost += baseOrgans.GrowNewCostAt(i);
+            foreach (var baseOrgan in baseOrgans.BaseList)
                 for (var i = 1; i < baseOrgan.BaseValue; i++)
                     cost += baseOrgan.GrowCostAt(i);
             return cost;
         }
 
-        public static string OrganDesc(SexualOrganType type, BaseOrgan organ, bool capitalLeter = true) => type switch
-        {
-            SexualOrganType.Dick => $"{(capitalLeter ? "A" : "a")} {organ.Value.ConvertCm()} long dick",
-            SexualOrganType.Balls => $"{(capitalLeter ? "A" : "a")} pair of {organ.Value.ConvertCm()} wide balls",
-            SexualOrganType.Boobs => $"{(capitalLeter ? "A" : "a")} {organ.Value.ConvertCm()}",
-            SexualOrganType.Vagina => $"{(capitalLeter ? "A" : "a")} {organ.Value.ConvertCm()} ",
-            SexualOrganType.Anal => $"{(capitalLeter ? "A" : "a")} {organ.Value.ConvertCm()} long dick",
-            _ => organ.Value.ConvertCm(),
-        };
+     
     }
 }

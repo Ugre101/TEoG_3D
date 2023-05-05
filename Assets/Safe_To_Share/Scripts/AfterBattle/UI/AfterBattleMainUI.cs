@@ -11,7 +11,6 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         [SerializeField] AfterBattleActorInfo enemyInfo;
         [SerializeField] SexActionButtons buttons;
         [SerializeField] AfterBattleLog log;
-        readonly WaitForSeconds waitForSeconds = new(0.8f);
 
         bool leaving;
         Player player;
@@ -45,9 +44,10 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         {
             if (data.TitleText.Length > 0)
                 log.AddNewText(data.TitleText);
-            if (data.AfterText.Count > 0)
-                foreach (string s in data.AfterText)
-                    log.AddNewText(s);
+            if (data.AfterText.Count <= 0) 
+                return;
+            foreach (var s in data.AfterText)
+                log.AddNewText(s);
         }
 
         public void Leave()

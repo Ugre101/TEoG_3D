@@ -98,19 +98,19 @@ PrefabInstance:
     - target: {fileID: 6234049303443475199, guid: e8c68a606c97cd84cbe26583c56b7f19, type: 3}
       propertyPath: hairMats.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 33965a63449427647b68b17114f3484c, type: 2}
+      objectReference: {fileID: 2100000, guid: 074fee2c9374f9445918947828f60fb0, type: 2}
     - target: {fileID: 6234049303443475199, guid: e8c68a606c97cd84cbe26583c56b7f19, type: 3}
       propertyPath: hairMats.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: d41bf28b8cf4f934384db30462441f50, type: 2}
+      objectReference: {fileID: 2100000, guid: 690a8713e70b75a43bc6f1ea6892fcb1, type: 2}
     - target: {fileID: 6234049303443475199, guid: e8c68a606c97cd84cbe26583c56b7f19, type: 3}
       propertyPath: hairMats.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 26d3f71462d3b1640a55162fd65c54a2, type: 2}
+      objectReference: {fileID: 2100000, guid: f3b063d03dfbb1c489c4a6b4774d83a4, type: 2}
     - target: {fileID: 6234049303443475199, guid: e8c68a606c97cd84cbe26583c56b7f19, type: 3}
       propertyPath: hairMats.Array.data[3]
       value: 
-      objectReference: {fileID: 2100000, guid: fc5d97e1d3c644d41ad0ab6be1f10eb4, type: 2}
+      objectReference: {fileID: 2100000, guid: bca67cea653dca64680a4c634c1a34ac, type: 2}
     - target: {fileID: 6234049303443475199, guid: e8c68a606c97cd84cbe26583c56b7f19, type: 3}
       propertyPath: hairColor.skip.Array.data[0]
       value: 

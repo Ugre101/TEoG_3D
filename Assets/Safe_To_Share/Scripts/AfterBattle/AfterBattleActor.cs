@@ -17,7 +17,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         RuntimeAnimatorController animatorController;
         AvatarInfo currentInfo;
-        bool hasAvatar;
+        public bool HasAvatar { get; private set; }
         AddedAnimations.SexAnimations? lastAnimation;
 
         Vector3 startPos;
@@ -49,7 +49,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         void UpdateArousal(int obj)
         {
-            if (hasAvatar)
+            if (HasAvatar)
                 Avatar.SetArousal(obj);
         }
 
@@ -57,7 +57,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
         {
             Avatar = obj;
 
-            hasAvatar = true;
+            HasAvatar = true;
             currentInfo = avatarDict.GetInfo(Actor);
             Avatar.Setup(Actor);
             UpdateHeight();
@@ -67,20 +67,20 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         public async void ModifyAvatar()
         {
-            if (hasAvatar && currentInfo == avatarDict.GetInfo(Actor))
+            if (HasAvatar && currentInfo == avatarDict.GetInfo(Actor))
             {
                 UpdateCurrentAvatar();
                 return;
             }
 
-            hasAvatar = false;
+            HasAvatar = false;
             var res = await avatarDict.GetAvatarLoaded(Actor, playerAvatar);
             avatarChanger.UpdateAvatar(res);
         }
 
         public void UpdateCurrentAvatar()
         {
-            if (!hasAvatar) return;
+            if (!HasAvatar) return;
             Avatar.Setup(Actor);
             UpdateHeight();
             Avatar.SetArousal(Actor.SexStats.Arousal);

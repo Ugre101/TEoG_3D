@@ -2,12 +2,13 @@
 using Character.EssenceStuff;
 using Character.Organs.Fluids.SexualFluids;
 using Character.StatsStuff.Mods;
+using Safe_To_Share.Scripts.Character.Organs.SexualOrgan;
 using UnityEngine;
 
 namespace Character.Organs.OrgansContainers
 {
     [Serializable]
-    public class BoobsContainer : OrgansContainer
+    public class BoobsContainer : OrgansContainer<Boobs>
     {
         public BoobsContainer() : base(new Milk())
         {

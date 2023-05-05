@@ -16,10 +16,10 @@ namespace Safe_To_Share.Scripts.AfterBattle.Vore
 
         public override float ExtraCapacityNeeded(BaseCharacter pred, BaseCharacter prey)
         {
-            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container) ||
-                !container.List.Any())
+            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer container) ||
+                !container.BaseList.Any())
                 return -1;
-            return container.List.Min(organ => LacksCapacityBy(pred, prey, organ));
+            return container.BaseList.Min(organ => LacksCapacityBy(pred, prey, organ));
         }
 
         float LacksCapacityBy(BaseCharacter pred, BaseCharacter prey, BaseOrgan organ)
@@ -28,14 +28,14 @@ namespace Safe_To_Share.Scripts.AfterBattle.Vore
 
         public override bool CanUse(BaseCharacter giver, BaseCharacter receiver)
         {
-            if (!giver.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container) ||
-                !container.List.Any())
+            if (!giver.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer container) ||
+                !container.BaseList.Any())
                 return false;
             if (needVorePerk.Any(needPerk => giver.Vore.Level.OwnedPerks.Any(p => p.Guid == needPerk.guid) == false))
                 return false;
             return onePreyOnly
-                ? container.List.Any(o => o.Vore.SpecialPreysIds.Count == 0)
-                : container.List.Any(baseOrgan => VoreSystemExtension.CanOrganVore(giver, baseOrgan, receiver, organType));
+                ? container.BaseList.Any(o => o.Vore.SpecialPreysIds.Count == 0)
+                : container.BaseList.Any(baseOrgan => VoreSystemExtension.CanOrganVore(giver, baseOrgan, receiver, organType));
         }
 
         public override SexActData Use(AfterBattleActor caster, AfterBattleActor target) =>

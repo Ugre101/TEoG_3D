@@ -15,8 +15,8 @@ MonoBehaviour:
   defaultAvatar: {fileID: 11400000, guid: ba62fb4ddf2f5b8418715c48540dec2b, type: 2}
   avatars:
   - {fileID: 11400000, guid: 21c48cf42fa315d4c8eef3cbad43f5c7, type: 2}
-  - {fileID: 11400000, guid: ba62fb4ddf2f5b8418715c48540dec2b, type: 2}
   - {fileID: 11400000, guid: d45af1c8fe08a2b4ba685ed9fc51b737, type: 2}
+  - {fileID: 11400000, guid: ba62fb4ddf2f5b8418715c48540dec2b, type: 2}
   - {fileID: 11400000, guid: 1f3c805bddb7f3345ad3e57c5d5d4c6b, type: 2}
   - {fileID: 11400000, guid: 1314e4ea8628d5641bbae6634d981ecc, type: 2}
   - {fileID: 11400000, guid: a634f6ebc6eefb34f8c45d2593307f14, type: 2}

@@ -11,14 +11,14 @@ namespace Character.Organs.Fluids.UI
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI amount;
 
-        public void UpdateFluid(OrgansContainer organsContainer, float bodyHeight)
+        public void UpdateFluid(BaseOrgansContainer baseOrgansContainer, float bodyHeight)
         {
-            gameObject.SetActive(organsContainer.Fluid.Recovery.Value > 0 || organsContainer.Fluid.CurrentValue > 0);
-            slider.maxValue = organsContainer.Fluid.Value;
-            slider.value = organsContainer.Fluid.CurrentValue;
-            string fluidInText = SexualOrgansExtensions.FluidAmountInText(organsContainer.FluidCurrent, bodyHeight);
+            gameObject.SetActive(baseOrgansContainer.Fluid.Recovery.Value > 0 || baseOrgansContainer.Fluid.CurrentValue > 0);
+            slider.maxValue = baseOrgansContainer.Fluid.Value;
+            slider.value = baseOrgansContainer.Fluid.CurrentValue;
+            string fluidInText = SexualOrgansExtensions.FluidAmountInText(baseOrgansContainer.FluidCurrent, bodyHeight);
             amount.text = fluidInText;
-            title.text = organsContainer.FluidType;
+            title.text = baseOrgansContainer.FluidType;
         }
     }
 }

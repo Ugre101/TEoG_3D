@@ -393,10 +393,8 @@ MonoBehaviour:
   _applyStandingDownwardForce: 1
   _pushForceScale: 1
   _standingDownwardForceScale: 1
-  _useRootMotion: 0
   _camera: {fileID: 0}
   _characterMovement: {fileID: 1271632349}
-  _rootMotionController: {fileID: 2126684856959139973}
   _cameraTransform: {fileID: 0}
   _agent: {fileID: 2525530955445585966}
   _autoBraking: 1
@@ -427,7 +425,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 9
   _groundProbingDistance: 1
-  _transform: {fileID: 5012429634684710478}
   _rigidbody: {fileID: 5172481964968123178}
   _capsuleCollider: {fileID: 5290461748724833624}
 --- !u!1 &7297204200486777659
@@ -439,7 +436,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2432568574534396240}
-  - component: {fileID: 2126684856959139973}
   - component: {fileID: 6067295739379692011}
   - component: {fileID: 7261518492823782124}
   - component: {fileID: 5537660859417063438}
@@ -465,19 +461,6 @@ Transform:
   m_Father: {fileID: 5012429634684710478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2126684856959139973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7297204200486777659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83e89aa94a969d64c8d9ecfc68bbdb40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  avatarChangerBase: {fileID: 6067295739379692011}
 --- !u!114 &6067295739379692011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,7 +488,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2126684856959139973}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Movement.ECM2.Source.Characters.UnityCharacterAnimator,
           ECM2
         m_MethodName: SetAnimator

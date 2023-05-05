@@ -87,10 +87,10 @@ namespace Safe_To_Share.Scripts.Special_Items
             public override void Use(BaseCharacter user, string itemGuid)
             {
                 List<BaseOrgan> organs = new();
-                organs.AddRange(user.SexualOrgans.Balls.List);
-                organs.AddRange(user.SexualOrgans.Dicks.List);
-                organs.AddRange(user.SexualOrgans.Boobs.List);
-                organs.AddRange(user.SexualOrgans.Vaginas.List);
+                organs.AddRange(user.SexualOrgans.Balls.BaseList);
+                organs.AddRange(user.SexualOrgans.Dicks.BaseList);
+                organs.AddRange(user.SexualOrgans.Boobs.BaseList);
+                organs.AddRange(user.SexualOrgans.Vaginas.BaseList);
                 if (organs.Count > 0)
                     for (int i = 0; i < UnityEngine.Random.Range(1, 6); i++)
                         organs[rng.Next(organs.Count)].BaseValue++;
@@ -118,10 +118,10 @@ namespace Safe_To_Share.Scripts.Special_Items
             public override void Use(BaseCharacter user, string itemGuid)
             {
                 List<BaseOrgan> organs = new();
-                organs.AddRange(user.SexualOrgans.Balls.List);
-                organs.AddRange(user.SexualOrgans.Dicks.List);
-                organs.AddRange(user.SexualOrgans.Boobs.List);
-                organs.AddRange(user.SexualOrgans.Vaginas.List);
+                organs.AddRange(user.SexualOrgans.Balls.BaseList);
+                organs.AddRange(user.SexualOrgans.Dicks.BaseList);
+                organs.AddRange(user.SexualOrgans.Boobs.BaseList);
+                organs.AddRange(user.SexualOrgans.Vaginas.BaseList);
                 if (organs.Count > 0)
                     for (int i = 0; i < 13; i++)
                     {

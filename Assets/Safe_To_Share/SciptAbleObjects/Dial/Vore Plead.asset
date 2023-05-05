@@ -24,14 +24,6 @@ MonoBehaviour:
   title: 
   text: []
   canEscapeOut: 0
-  actions: []
-  voreActions:
-  - rid: 1105408597981659138
-  references:
-    version: 2
-    RefIds:
-    - rid: 1105408597981659138
-      type: {class: ReleasePrey, ns: Dialogue.DialogueActions.Vore, asm: MyDialogueScripts}
 --- !u!114 &-7320590435482888167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,25 +48,6 @@ MonoBehaviour:
   title: 
   text: []
   canEscapeOut: 0
-  actions: []
-  voreActions:
-  - rid: 1105408597981659136
-  references:
-    version: 2
-    RefIds:
-    - rid: 1105408597981659136
-      type: {class: AddVoreTempMod, ns: Dialogue.DialogueActions.Vore, asm: MyDialogueScripts}
-      data:
-        mods:
-        - modValue: 2
-          from: Plead
-          modType: 0
-          hoursLeft: 23
-        - modValue: 33
-          from: Plead
-          modType: 1
-          hoursLeft: 23
-        pleasure: 1
 --- !u!114 &-4643164036220890225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,11 +75,6 @@ MonoBehaviour:
   text:
   - '{pname} pleads with you to be let out'
   canEscapeOut: 0
-  actions: []
-  voreActions: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &-3227266631649280639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,11 +98,6 @@ MonoBehaviour:
   title: 
   text: []
   canEscapeOut: 0
-  actions: []
-  voreActions: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,22 +141,3 @@ MonoBehaviour:
   title: 
   text: []
   canEscapeOut: 0
-  actions: []
-  voreActions:
-  - rid: 1105408597981659137
-  references:
-    version: 2
-    RefIds:
-    - rid: 1105408597981659137
-      type: {class: AddVoreTempMod, ns: Dialogue.DialogueActions.Vore, asm: MyDialogueScripts}
-      data:
-        mods:
-        - modValue: 3
-          from: Torment
-          modType: 0
-          hoursLeft: 24
-        - modValue: 40
-          from: Torment
-          modType: 1
-          hoursLeft: 24
-        pleasure: 0

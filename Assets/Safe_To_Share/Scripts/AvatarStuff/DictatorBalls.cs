@@ -57,7 +57,7 @@ namespace AvatarStuff
             transform.localScale = new Vector3(finalSize, finalSize, finalSize);
         }
 
-        public void SetupFluidStretch(OrgansContainer container)
+        public void SetupFluidStretch(BaseOrgansContainer container)
         {
             fluidMax = container.Fluid.Value;
             SetFluidStretch(container.Fluid.CurrentValue);

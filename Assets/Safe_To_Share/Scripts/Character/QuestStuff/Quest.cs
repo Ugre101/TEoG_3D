@@ -1,0 +1,14 @@
+﻿using CustomClasses;
+using UnityEngine;
+
+namespace Safe_To_Share.Scripts.QuestStuff
+{
+    [CreateAssetMenu(fileName = "New Quest", menuName = "ScriptableObject/Quest 2", order = 0)]
+    public class Quest : BaseEditorCanvasObject<QuestNode>
+    {
+
+        public void CheckProgress()
+        {
+        }
+    }
+}

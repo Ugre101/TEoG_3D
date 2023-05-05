@@ -14,10 +14,10 @@ namespace Safe_To_Share.Scripts.AfterBattle.Vore
 
         public override float ExtraCapacityNeeded(BaseCharacter pred, BaseCharacter prey)
         {
-            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container) ||
-                !container.List.Any())
+            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer container) ||
+                !container.BaseList.Any())
                 return -1;
-            return container.List.Min(organ => LacksCapacityBy(pred, prey, organ));
+            return container.BaseList.Min(organ => LacksCapacityBy(pred, prey, organ));
         }
 
         float LacksCapacityBy(BaseCharacter pred, BaseCharacter prey, BaseOrgan organ)
@@ -25,9 +25,9 @@ namespace Safe_To_Share.Scripts.AfterBattle.Vore
                                    VoredCharacters.CurrentPreyTotalWeight(organ.Vore.PreysIds));
 
         public override bool CanUse(BaseCharacter giver, BaseCharacter receiver) =>
-            giver.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container) &&
-            container.List.Count() != 0 &&
-            container.List.Any(baseOrgan => VoreSystemExtension.CanOrganVore(giver, baseOrgan, receiver, organType));
+            giver.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer container) &&
+            container.BaseList.Count() != 0 &&
+            container.BaseList.Any(baseOrgan => VoreSystemExtension.CanOrganVore(giver, baseOrgan, receiver, organType));
 
         public override SexActData Use(AfterBattleActor caster, AfterBattleActor target) =>
             caster.Actor.OrganVore(target.Actor, organType) ? data : errorData;

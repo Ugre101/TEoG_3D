@@ -77,8 +77,8 @@ namespace Character.VoreStuff
         {
             stomach.TickHour(ticks);
             foreach ((SexualOrganType type, VoreOrganDigestionMode mode) in VoreOrgans)
-                if (pred.SexualOrgans.Containers.TryGetValue(type, out OrgansContainer container))
-                    foreach (var baseOrgan in container.List)
+                if (pred.SexualOrgans.Containers.TryGetValue(type, out BaseOrgansContainer container))
+                    foreach (var baseOrgan in container.BaseList)
                         baseOrgan.Vore.TickHour(ticks);
         }
 
@@ -154,10 +154,10 @@ namespace Character.VoreStuff
         bool TickOrganContainer(BaseCharacter pred,
             KeyValuePair<SexualOrganType, VoreOrganDigestionMode> organDigestionMode, bool predIsPlayer)
         {
-            if (!pred.SexualOrgans.Containers.TryGetValue(organDigestionMode.Key, out OrgansContainer container))
+            if (!pred.SexualOrgans.Containers.TryGetValue(organDigestionMode.Key, out BaseOrgansContainer container))
                 return false;
             bool change = false;
-            foreach (BaseOrgan baseOrgan in container.List.TakeWhile(OrganHasPreys))
+            foreach (BaseOrgan baseOrgan in container.BaseList.TakeWhile(OrganHasPreys))
                 if (TickOrgan(pred, organDigestionMode, baseOrgan, predIsPlayer))
                     change = true;
             return change;
@@ -171,7 +171,7 @@ namespace Character.VoreStuff
         {
             bool change = false;
             baseOrgan.Vore.SetStretch(VoreSystemExtension.OrganVoreCapacity(pred, baseOrgan, organDigestionMode.Key));
-            if (HandleOrganRegurgitation(pred, organDigestionMode.Key, baseOrgan))
+            if (HandleOrganRegurgitation(pred, nameof(organDigestionMode.Key), baseOrgan))
                 change = true;
             PleasureSexualOrganDigestion(pred, baseOrgan, organDigestionMode.Value.DigestionMethod);
             organDigestionMode.Value.DigestionMethod.Tick(pred, baseOrgan, predIsPlayer);
@@ -223,14 +223,13 @@ namespace Character.VoreStuff
             // Move prey to normal mode?
         }
 
-        bool HandleOrganRegurgitation(BaseCharacter pred, SexualOrganType organDigestionMode, BaseOrgan baseOrgan)
+        bool HandleOrganRegurgitation(BaseCharacter pred, string organName, BaseOrgan baseOrgan)
         {
             if (baseOrgan.Vore.Stretch < 1f)
                 return false;
             Prey toReg = FindLeastDigested(baseOrgan.Vore.PreysIds);
             if (toReg == null || !baseOrgan.Vore.PreysIds.Remove(toReg.Identity.ID))
                 return false;
-            string organName = organDigestionMode.ToString().ToLower();
             EventLog.AddEvent(
                 $"{pred.Identity.FirstName}'s {organName} was to full they had no choice but to release their prey");
             // Notify

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace CustomClasses
@@ -16,11 +15,5 @@ namespace CustomClasses
             guid = AssetDatabase.AssetPathToGUID(path);
         }
 #endif
-    }
-
-    public interface ISavableSerializableScriptableObject
-    {
-        public SerializableScriptableObjectSaves Save();
-        public IEnumerator Load(SerializableScriptableObjectSaves toLoad);
     }
 }

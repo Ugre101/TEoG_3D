@@ -15,14 +15,14 @@ namespace Character.Organs
         [SerializeField] BoobsContainer boobs = new();
         [SerializeField] VaginaContainer vaginas = new();
 
-        Dictionary<SexualOrganType, OrgansContainer> organsContainers;
+        Dictionary<SexualOrganType, BaseOrgansContainer> organsContainers;
         public DicksContainer Dicks => dicks;
         public BallsContainer Balls => balls;
         public BoobsContainer Boobs => boobs;
         public VaginaContainer Vaginas => vaginas;
         public AnalsContainer Anals => anals;
-        public Dictionary<SexualOrganType, OrgansContainer> Containers => organsContainers ??=
-            new Dictionary<SexualOrganType, OrgansContainer>
+        public Dictionary<SexualOrganType, BaseOrgansContainer> Containers => organsContainers ??=
+            new Dictionary<SexualOrganType, BaseOrgansContainer>
             {
                 { SexualOrganType.Anal, anals },
                 { SexualOrganType.Balls, balls },
@@ -31,10 +31,12 @@ namespace Character.Organs
                 { SexualOrganType.Vagina, vaginas },
             };
 
+        public IEnumerable<BaseOrgan> GetAllOrgans() => Containers.Values.SelectMany(baseOrgansContainer => baseOrgansContainer.BaseList);
+
         public bool TickHour(int ticks = 1)
         {
             bool change = false;
-            foreach (OrgansContainer container in Containers.Values)
+            foreach (BaseOrgansContainer container in Containers.Values)
                 if (container.TickHour(ticks))
                     change = true;
             return change;
@@ -43,13 +45,13 @@ namespace Character.Organs
 
         public void TickMin(int ticks = 1)
         {
-            foreach (OrgansContainer container in Containers.Values)
+            foreach (BaseOrgansContainer container in Containers.Values)
                 container.Fluid.TickMin(ticks);
         }
 
         public void Loaded()
         {
-            if (Vaginas.List.Any(v => v.Womb.HasFetus)) Boobs.StartLactating();
+            if (Vaginas.BaseList.Any(v => v.Womb.HasFetus)) Boobs.StartLactating();
         }
     }
 }

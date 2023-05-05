@@ -27,7 +27,7 @@ namespace GameUIAndMenus.Menus.Level
         void ShowStatInfo(CharStatType charStatType, int statCost, Vector3 pos)
         {
             SetPos(pos);
-            title.text = charStatType.ToString();
+            title.text = nameof(charStatType);
             cost.text = $"Cost {{{statCost}}}";
             desc.text = GetDesc();
             needPerk.text = string.Empty;

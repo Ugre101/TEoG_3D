@@ -20,7 +20,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
 
         public override void Click()
         {
-            if (MyAct == null)
+            if (HasAct is false)
                 return;
             PlayerAction?.Invoke(MyAct);
         }

@@ -12,11 +12,10 @@ namespace SceneStuff
     public class FreePlayUILoader
     {
         [SerializeField] SceneUISo gameUI;
-        readonly WaitForEndOfFrame waitAFrame = new();
 
         public IEnumerator LoadGameUI()
         {
-            yield return waitAFrame;
+            yield return null;
             yield return gameUI.SceneReference.LoadSceneAsync(LoadSceneMode.Additive);
         }
 

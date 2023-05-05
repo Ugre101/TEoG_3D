@@ -18,11 +18,11 @@ namespace Options
         IEnumerator Start()
         {
             OverWriteIfNotNull(freePlay, FreePlaySave);
-            yield return new WaitForEndOfFrame();
+            yield return null;
             OverWriteIfNotNull(thirdPersonCamera, ThirdPersonSave);
-            yield return new WaitForEndOfFrame();
+            yield return null;
             OverWriteIfNotNull(gameMenusBinds, GameMenusSave);
-            yield return new WaitForEndOfFrame();
+            yield return null;
             OverWriteIfNotNull(quickSaveBinds, QuickSaveSave);
         }
 

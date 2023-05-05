@@ -98,7 +98,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
         }
 #if UNITY_EDITOR
         [SerializeField] TextMeshProUGUI title;
-        protected void OnValidate() => title.text = bodyType.ToString();
+        protected void OnValidate() => title.text = nameof(bodyType);
 #endif
     }
 }

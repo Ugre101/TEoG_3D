@@ -21,7 +21,7 @@ namespace AvatarStuff
             if (string.IsNullOrWhiteSpace(savedValuesList)) return;
             var parsed = JsonUtility.FromJson<SaveWrapper>(savedValuesList);
             if (parsed.savedValuesList.Count > 0)
-                AvatarDetailsSavesDict = parsed.savedValuesList.ToDictionary(s => s.guid);
+                AvatarDetailsSavesDict = parsed.savedValuesList.ToDictionary(s => s.Guid);
         }
 
         [Serializable]
@@ -34,8 +34,8 @@ namespace AvatarStuff
         [Serializable]
         public struct SavedValues
         {
-            public string guid;
-            public List<ColorSave> colorSaves;
+            [SerializeField] string guid;
+            [SerializeField] List<ColorSave> colorSaves;
 
             public SavedValues(string guid)
             {
@@ -43,11 +43,12 @@ namespace AvatarStuff
                 colorSaves = new List<ColorSave>();
             }
 
+            public string Guid => guid;
             public List<ColorSave> ColorSaves => colorSaves;
 
             public void MatToSave(Material mat)
             {
-                string color = ColorUtility.ToHtmlStringRGBA(mat.color);
+                var color = ColorUtility.ToHtmlStringRGBA(mat.color);
                 ColorSaves.Add(new ColorSave(mat.name, color));
             }
         }
@@ -55,14 +56,18 @@ namespace AvatarStuff
         [Serializable]
         public struct ColorSave
         {
-            public string matName;
-            public string colorName;
+           [SerializeField]  string matName;
+           [SerializeField] string colorName;
 
             public ColorSave(string matName, string colorName)
             {
                 this.matName = matName;
                 this.colorName = colorName;
             }
+
+            public string MatName => matName;
+
+            public string ColorName => colorName;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Character.SexStatsStuff
             // TODO Leakage onto body
         }
 
-        static OrgansContainer GetFluidCon(BaseCharacter character, SexualOrganType organType)
+        static BaseOrgansContainer GetFluidCon(BaseCharacter character, SexualOrganType organType)
         {
             switch (organType)
             {

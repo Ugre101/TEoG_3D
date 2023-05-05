@@ -48,8 +48,8 @@ namespace GameUIAndMenus
         void PrintPregInfo()
         {
             StringBuilder sb = new();
-            if (Player.SexualOrgans.Vaginas.List.Any(v => v.Womb.HasFetus))
-                for (int index = 0; index < Player.SexualOrgans.Vaginas.List.Count(); index++)
+            if (Player.SexualOrgans.Vaginas.BaseList.Any(v => v.Womb.HasFetus))
+                for (int index = 0; index < Player.SexualOrgans.Vaginas.BaseList.Count(); index++)
                     PrintWomb(sb, index);
             sb.AppendLine();
             int timesPregnant = Player.PregnancySystem.TimesPregnant;
@@ -64,7 +64,7 @@ namespace GameUIAndMenus
 
         void PrintWomb(StringBuilder sb, int index)
         {
-            BaseOrgan baseOrgan = Player.SexualOrgans.Vaginas.List.ElementAt(index);
+            BaseOrgan baseOrgan = Player.SexualOrgans.Vaginas.BaseList.ElementAt(index);
             List<Fetus> wombList = baseOrgan.Womb.FetusList;
             if (!wombList.Any())
                 return;

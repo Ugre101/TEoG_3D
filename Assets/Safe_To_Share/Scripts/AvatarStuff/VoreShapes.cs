@@ -65,14 +65,14 @@ namespace AvatarStuff
             HandleOralVore(character);
             HandleUnBirth(character);
             HandleBreastVore(character);
-            var ballsList = character.SexualOrgans.Balls.List.ToArray();
+            var ballsList = character.SexualOrgans.Balls.BaseList.ToArray();
             ballsVore = ballsList.Any(l => l.Vore.PreysIds.Count > 0);
             ballsStretch = ballsVore ? ballsList.Max(b => b.Vore.Stretch) : 0f;
         }
 
         void HandleBreastVore(BaseCharacter character)
         {
-            var boobsList = character.SexualOrgans.Boobs.List.ToArray();
+            var boobsList = character.SexualOrgans.Boobs.BaseList.ToArray();
             bool breastVored = boobsList.Any(b => b.Vore.PreysIds.Any());
             float avatarStretch = 0f;
             if (character.SexualOrgans.Boobs.HaveAny())
@@ -88,7 +88,7 @@ namespace AvatarStuff
 
         void HandleUnBirth(BaseCharacter character)
         {
-            var vaginasList = character.SexualOrgans.Vaginas.List.ToArray();
+            var vaginasList = character.SexualOrgans.Vaginas.BaseList.ToArray();
             bool unBirthVored = vaginasList.Any(v => v.Vore.PreysIds.Any());
             float avatarStretch = 0;
             avatarStretch = GetSexualOrganStretch(character, character.SexualOrgans.Vaginas, 4f);
@@ -97,13 +97,13 @@ namespace AvatarStuff
             unbirthStruggle.Setup(shapes, unBirthVored, avatarStretch);
         }
 
-        static float GetSexualOrganStretch(BaseCharacter character, OrgansContainer organsContainer, float divValue)
+        static float GetSexualOrganStretch(BaseCharacter character, BaseOrgansContainer baseOrgansContainer, float divValue)
         {
             var avatarStretch = 0f;
-            if (organsContainer.HaveAny())
+            if (baseOrgansContainer.HaveAny())
             {
                 List<int> preyIds = new();
-                foreach (BaseOrgan baseOrgan in organsContainer.List)
+                foreach (BaseOrgan baseOrgan in baseOrgansContainer.BaseList)
                     preyIds.AddRange(baseOrgan.Vore.PreysIds);
                 avatarStretch = AvatarStretch(character.Body.Height.Value / divValue, preyIds);
             }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Character.EssenceStuff;
 using Character.Organs.OrgansContainers;
 using Safe_To_Share.Scripts.Static;
@@ -27,14 +28,14 @@ namespace Character.Organs.UI
                 Destroy(child.gameObject);
             growNew.onClick.RemoveAllListeners();
             character = baseCharacter;
-            if (!character.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer organsContainer) ||
-                !character.Essence.GetEssence.TryGetValue(essenceType, out Essence essence))
+            if (!character.SexualOrgans.Containers.TryGetValue(organType, out var organsContainer) ||
+                !character.Essence.GetEssence.TryGetValue(essenceType, out var essence))
                 return;
             shared = new SharedInfo(essence, essenceType, organType, baseCharacter.Body.Height.Value);
             UpdateNewCost(organsContainer);
             SetupGrowNew(organsContainer);
             canRecycle = character.Essence.EssencePerks.OfType<OrganReCyclePerk>().Any();
-            foreach (BaseOrgan organ in organsContainer.List)
+            foreach (var organ in organsContainer.BaseList)
             {
                 var btn = Instantiate(growOrganButton, content);
                 btn.Setup(organ, shared, canRecycle);
@@ -42,9 +43,9 @@ namespace Character.Organs.UI
             }
         }
 
-        void SetupGrowNew(OrgansContainer organsContainer)
+        void SetupGrowNew(BaseOrgansContainer baseOrgansContainer)
         {
-            if (organsContainer.HaveAny() && !OptionalContent.MultiOrgan.Enabled)
+            if (baseOrgansContainer.HaveAny() && !OptionalContent.MultiOrgan.Enabled)
             {
                 growNew.gameObject.SetActive(false);
                 return;
@@ -56,23 +57,40 @@ namespace Character.Organs.UI
 
         void RemoveOrgan(SexualOrganType arg1, BaseOrgan arg2)
         {
-            if (!character.SexualOrgans.Containers.TryGetValue(arg1, out OrgansContainer container) ||
-                !container.RemoveOrgan(arg2) ||
-                !character.Essence.GetEssence.TryGetValue(essenceType, out Essence ess))
+            if (!character.SexualOrgans.Containers.TryGetValue(arg1, out var container))
+                return;
+            switch (arg1)
+            {
+                case SexualOrganType.Dick:
+                    break;
+                case SexualOrganType.Balls:
+                    break;
+                case SexualOrganType.Boobs:
+                    break;
+                case SexualOrganType.Vagina:
+                    break;
+                case SexualOrganType.Anal:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(arg1), arg1, null);
+            }
+            if (!container.RemoveOrgan(arg2))
+                return;
+            if (!character.Essence.GetEssence.TryGetValue(essenceType, out Essence ess))
                 return;
             ess.GainEssence( Mathf.RoundToInt(container.GrowNewCost * 0.7f));
         }
 
-        void UpdateNewCost(OrgansContainer organsContainer) =>
-            growNewTitle.text = $"Grow new {organType} {organsContainer.GrowNewCost}{essenceType}";
+        void UpdateNewCost(BaseOrgansContainer baseOrgansContainer) =>
+            growNewTitle.text = $"Grow new {organType} {baseOrgansContainer.GrowNewCost}{essenceType}";
 
         void GrowNew()
         {
-            if (!character.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer organsContainer) ||
+            if (!character.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer organsContainer) ||
                 !character.Essence.GetEssence.TryGetValue(essenceType, out Essence essence) ||
                 !organsContainer.TryGrowNew(essence))
                 return;
-            BaseOrgan newOrgan = organsContainer.List.LastOrDefault();
+            BaseOrgan newOrgan = organsContainer.BaseList.LastOrDefault();
             var btn = Instantiate(growOrganButton, content);
             btn.Setup(newOrgan, shared, canRecycle);
             btn.RecycleMe += RemoveOrgan;

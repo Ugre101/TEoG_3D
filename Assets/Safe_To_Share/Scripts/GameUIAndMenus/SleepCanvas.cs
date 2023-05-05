@@ -8,8 +8,7 @@ public class SleepCanvas : MonoBehaviour
 {
     [SerializeField] GameCanvas gameCanvas;
     [SerializeField] CanvasGroup canvasGroup;
-    readonly WaitForEndOfFrame waitForEndOfFrame = new WaitForEndOfFrame();
-    readonly WaitForSecondsRealtime waitForSecondsRealtime = new WaitForSecondsRealtime(0.2f);
+    readonly WaitForSecondsRealtime waitForSecondsRealtime = new(0.2f);
     Coroutine coroutine;
 
     public void Sleep()
@@ -30,13 +29,13 @@ public class SleepCanvas : MonoBehaviour
         while (canvasGroup.alpha < 1f)
         {
             canvasGroup.alpha += 0.01f;
-            yield return waitForEndOfFrame;
+            yield return null;
         }
         yield return waitForSecondsRealtime;
         while (canvasGroup.alpha > 0)
         {
             canvasGroup.alpha -= 0.01f;
-            yield return waitForEndOfFrame;
+            yield return null;
         }
         gameObject.SetActive(false);
         gameCanvas.CloseMenus();

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Battle.SkillsAndSpells;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Character;
 using CustomClasses;
 using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
@@ -86,23 +86,24 @@ namespace Battle.UI
             }
 
             EnqueueIcons();
-            Test(baseCharacter.AndSpellBook.Abilities, obj);
+            LoadAbilities(baseCharacter.AndSpellBook.Abilities, obj);
             lastChar = baseCharacter;
         }
 
-        void Test(HashSet<string> guids, AttackBtn attackBtn)
+        void LoadAbilities(HashSet<string> guids, AttackBtn attackBtn)
         {
             abilityIcons = new List<AssignAbilityIcon>();
-            foreach (string guid in guids)
-                Load(guid);
+            foreach (var guid in guids)
+                StartCoroutine(Load(guid));
 
-            async void Load(string guid)
+            IEnumerator Load(string guid)
             {
                 var op = Addressables.LoadAssetAsync<Ability>(guid);
-                await op.Task;
+                yield return op;
                 if (op.Task.IsCompleted)
                 {
-                    if (op.Status != AsyncOperationStatus.Succeeded) return;
+                    if (op.Status != AsyncOperationStatus.Succeeded) 
+                        yield break;
                     var icon = GetAbilityIcon();
                     icon.Setup(op.Result, attackBtn);
                     abilityIcons.Add(icon);
@@ -110,6 +111,7 @@ namespace Battle.UI
                 else if (op.Task.IsFaulted) Debug.LogWarning("ability loading failed");
                 else if (op.Task.IsCanceled) Debug.Log("ability loading canceled");
             }
+
         }
 
         void ChangeAbilityIconsButtonBind(AttackBtn obj)

@@ -9,11 +9,10 @@ public class TriggerMirrorMenu : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && other.TryGetComponent(out PlayerHolder mover))
-        {
-            mirrorUI.Enter(mover);
-            mover.PersonEcm2Character.Stop();
-        }
+        if (!other.CompareTag("Player") || !other.TryGetComponent(out PlayerHolder mover)) 
+            return;
+        mirrorUI.Enter(mover);
+        mover.PersonEcm2Character.Stop();
     }
 
     void OnTriggerExit(Collider other)

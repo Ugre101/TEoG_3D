@@ -15,8 +15,8 @@ namespace Character.PregnancyStuff
         {
             int growth = mother.PregnancySystem.PregnancySpeed.Value * ticks;
             List<Fetus> allBorn = new();
-            foreach (KeyValuePair<SexualOrganType, OrgansContainer> pair in mother.SexualOrgans.Containers)
-            foreach (BaseOrgan baseOrgan in pair.Value.List)
+            foreach (KeyValuePair<SexualOrganType, BaseOrgansContainer> pair in mother.SexualOrgans.Containers)
+            foreach (BaseOrgan baseOrgan in pair.Value.BaseList)
             {
                 foreach (var growFetuse in baseOrgan.Womb.GrowFetuses(growth)) 
                     allBorn.Add(growFetuse);
@@ -49,7 +49,7 @@ namespace Character.PregnancyStuff
         public static bool IsPregnant(this BaseCharacter character)
         {
             foreach (var con in character.SexualOrgans.Containers.Values)
-            foreach (var org in con.List)
+            foreach (var org in con.BaseList)
                 if (org.Womb.HasFetus)
                     return true;
             return false;

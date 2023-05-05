@@ -105,8 +105,8 @@ namespace Character.EssenceStuff
             int amountCollected = loser.Essence.Masculinity.LoseEssence(amountToLose);
             if (amountCollected < amountToLose)
             {
-                int dickSum = loser.SexualOrgans.Dicks.List.Sum(d => d.BaseValue);
-                int ballsSum = loser.SexualOrgans.Balls.List.Sum(b => b.BaseValue);
+                int dickSum = loser.SexualOrgans.Dicks.BaseList.Sum(d => d.BaseValue);
+                int ballsSum = loser.SexualOrgans.Balls.BaseList.Sum(b => b.BaseValue);
                 const float dickDiv = 0.7f;
                 int breakOut = 0;
                 while (amountCollected < amountToLose && (dickSum > 0 || ballsSum > 0))
@@ -116,12 +116,12 @@ namespace Character.EssenceStuff
                     if (dickSum > 0 && dickSum * dickDiv > ballsSum)
                     {
                         amountCollected += loser.SexualOrgans.Dicks.ReCycleOnce(changeLog);
-                        dickSum = loser.SexualOrgans.Dicks.List.Sum(d => d.BaseValue);
+                        dickSum = loser.SexualOrgans.Dicks.BaseList.Sum(d => d.BaseValue);
                     }
                     else if (ballsSum > 0)
                     {
                         amountCollected += loser.SexualOrgans.Balls.ReCycleOnce(changeLog);
-                        ballsSum = loser.SexualOrgans.Balls.List.Sum(b => b.BaseValue);
+                        ballsSum = loser.SexualOrgans.Balls.BaseList.Sum(b => b.BaseValue);
                     }
                 }
                 // Shrink relevant organs
@@ -154,8 +154,8 @@ namespace Character.EssenceStuff
         public static bool CanDrainMasc(this BaseCharacter drainFrom)
         {
             SexualOrgans organs = drainFrom.SexualOrgans;
-            int dickSum = organs.Dicks.List.Sum(d => d.BaseValue);
-            int ballsSum = organs.Balls.List.Sum(b => b.BaseValue);
+            int dickSum = organs.Dicks.BaseList.Sum(d => d.BaseValue);
+            int ballsSum = organs.Balls.BaseList.Sum(b => b.BaseValue);
             return drainFrom.Essence.Masculinity.Amount > 0 || dickSum > 0 || ballsSum > 0;
         }
 
@@ -193,8 +193,8 @@ namespace Character.EssenceStuff
             int amountCollected = loser.Essence.Femininity.LoseEssence(amountToLose);
             if (amountCollected < amountToLose)
             {
-                int boobSum = loser.SexualOrgans.Boobs.List.Sum(d => d.BaseValue);
-                int vaginaSum = loser.SexualOrgans.Vaginas.List.Sum(b => b.BaseValue);
+                int boobSum = loser.SexualOrgans.Boobs.BaseList.Sum(d => d.BaseValue);
+                int vaginaSum = loser.SexualOrgans.Vaginas.BaseList.Sum(b => b.BaseValue);
                 const float boobDiv = 0.7f;
                 int breakOut = 0;
                 while (amountCollected < amountToLose && (boobSum > 0 || vaginaSum > 0))
@@ -204,12 +204,12 @@ namespace Character.EssenceStuff
                     if (boobSum > 0 && boobSum * boobDiv > vaginaSum)
                     {
                         amountCollected += loser.SexualOrgans.Boobs.ReCycleOnce(changeLog);
-                        boobSum = loser.SexualOrgans.Boobs.List.Sum(d => d.BaseValue);
+                        boobSum = loser.SexualOrgans.Boobs.BaseList.Sum(d => d.BaseValue);
                     }
                     else if (vaginaSum > 0)
                     {
                         amountCollected += loser.SexualOrgans.Vaginas.ReCycleOnce(changeLog);
-                        vaginaSum = loser.SexualOrgans.Vaginas.List.Sum(b => b.BaseValue);
+                        vaginaSum = loser.SexualOrgans.Vaginas.BaseList.Sum(b => b.BaseValue);
                     }
                     else // Something went wrong
                         break;
@@ -248,8 +248,8 @@ namespace Character.EssenceStuff
         public static bool CanDrainFemi(this BaseCharacter drainFrom)
         {
             SexualOrgans organs = drainFrom.SexualOrgans;
-            int boobSum = organs.Boobs.List.Sum(d => d.BaseValue);
-            int vaginaSum = organs.Vaginas.List.Sum(b => b.BaseValue);
+            int boobSum = organs.Boobs.BaseList.Sum(d => d.BaseValue);
+            int vaginaSum = organs.Vaginas.BaseList.Sum(b => b.BaseValue);
             return drainFrom.Essence.Femininity.Amount > 0 || boobSum > 0 || vaginaSum > 0;
         }
 

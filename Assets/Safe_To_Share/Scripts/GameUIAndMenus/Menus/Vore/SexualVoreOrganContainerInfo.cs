@@ -20,9 +20,9 @@ namespace GameUIAndMenus.Menus.Vore
             putHere.KillChildren();
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(ShowMe);
-            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer container))
+            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer container))
                 return;
-            foreach (BaseOrgan baseOrgan in container.List)
+            foreach (BaseOrgan baseOrgan in container.BaseList)
                 Instantiate(prefab, putHere).Setup(pred, organType, baseOrgan);
         }
 

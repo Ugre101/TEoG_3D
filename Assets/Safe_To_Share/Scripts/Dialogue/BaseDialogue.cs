@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Character.PlayerStuff;
 using Character.VoreStuff;
 using CustomClasses;
@@ -10,19 +9,8 @@ using UnityEngine;
 namespace Dialogue
 {
     [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue/new Dialogue", order = 0)]
-    public class BaseDialogue : BaseEditorCanvasObject
+    public class BaseDialogue : BaseEditorCanvasObject<DialogueBaseNode>
     {
-        public override void OnBeforeSerialize()
-        {
-#if UNITY_EDITOR
-            if (nodes.Count == 0)
-                nodes.Add(MakeNode<DialogueBaseNode>());
-            if (AssetDatabase.GetAssetPath(this) != string.Empty)
-                foreach (BaseEditorCanvasNode dialogueBaseNode in GetAllNodes().Where(dialogueBaseNode =>
-                             AssetDatabase.GetAssetPath(dialogueBaseNode) == string.Empty))
-                    AssetDatabase.AddObjectToAsset(dialogueBaseNode, this);
-#endif
-        }
 
         public static event Action<BaseDialogue> StartDialogue;
         public static event Action<BaseDialogue, Player, Prey, VoreOrgan> StartVoreEvent;
@@ -34,32 +22,21 @@ namespace Dialogue
 
 #if UNITY_EDITOR
 
-        public void CreateNewNode<TNodeType>(BaseEditorCanvasNode parent) where TNodeType : DialogueBaseNode
+        public override TNode CreateChildNode<TNode>(BaseEditorCanvasNode parentNode)
         {
-            TNodeType newNode = MakeNode<TNodeType>();
-            Undo.RegisterCreatedObjectUndo(newNode, "Created new dialogue node");
-            if (parent != null)
-            {
-                parent.ChildNodeIds.Add(newNode.name);
-                Rect offsetRect = parent.rect;
-                offsetRect.x += parent.rect.width;
-                newNode.rect = offsetRect;
-            }
-
-            Undo.RecordObject(this, "Added Dialogue Node");
-            nodes.Add(newNode);
+            var newNode = base.CreateChildNode<TNode>(parentNode);
             IfPreBattleNodeAddThis(newNode);
-            nodeChildDict = null;
+            return newNode;
         }
 
         void IfPreBattleNodeAddThis(DialogueBaseNode newNode)
         {
             if (newNode is not PreBattleDialogue preBattleDialogue)
                 return;
-            StartBattleDialogue startBattleDialogue = MakeNode<StartBattleDialogue>();
+            var startBattleDialogue = MakeNode<StartBattleDialogue>();
             Undo.RegisterCreatedObjectUndo(startBattleDialogue, "Added start battle option");
             preBattleDialogue.ChildNodeIds.Add(startBattleDialogue.name);
-            Rect extraOffset = preBattleDialogue.rect;
+            var extraOffset = preBattleDialogue.rect;
             extraOffset.height *= 0.9f;
             extraOffset.x += preBattleDialogue.rect.width;
             startBattleDialogue.rect = extraOffset;

@@ -17,13 +17,13 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         public IEnumerable<VoreAction> VoreActions => voreActions;
 
-        public IEnumerable<SexAction> SexActsWeCanDo(BaseCharacter me, BaseCharacter partner)
-            => SexActs.Where(sexAction => sexAction.CanUse(me, partner));
+        public IEnumerable<SexAction> SexActsWeCanDo(BaseCharacter me, BaseCharacter partner) 
+            => sexActs.FindAll(s => s.CanUse(me, partner));
 
-        public IEnumerable<EssenceAction> DrainActionsWeCanDo(BaseCharacter me, BaseCharacter partner)
-            => DrainActions.Where(drainAction => drainAction.CanUse(me, partner));
+        public IEnumerable<EssenceAction> DrainActionsWeCanDo( BaseCharacter me, BaseCharacter partner)
+            => drainActions.FindAll(d => d.CanUse(me, partner));
 
         public IEnumerable<VoreAction> VoreActionsWeCanDo(BaseCharacter pred, BaseCharacter prey)
-            => VoreActions.Where(voreAction => voreAction.CanUse(pred, prey));
+            => VoreActions.Where(v => v.CanUse(pred, prey));
     }
 }

@@ -15,12 +15,12 @@ namespace Battle.EffectStuff.TempEffects
 
         public override void UseEffect(BaseCharacter user, BaseCharacter target)
         {
-            if (target.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer organ))
+            if (target.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer organ))
             {
                 if (!organ.HaveAny())
                     return;
                 if (shrinkAll)
-                    foreach (BaseOrgan baseOrgan in organ.List)
+                    foreach (BaseOrgan baseOrgan in organ.BaseList)
                         baseOrgan.Mods.AddTempStatMod(TempIntMod(user, nameof(GrowSexualOrgan), true));
                 else
                 {

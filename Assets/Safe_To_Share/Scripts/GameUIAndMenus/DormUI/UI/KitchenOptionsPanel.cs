@@ -38,6 +38,6 @@ namespace DormAndHome.Dorm.UI
         static void ChangeDietMode(int arg0) =>
             Kitchen.DietMode = UgreTools.IntToEnum(arg0, DormKitchen.FeedMode.Nothing);
 
-        static TMP_Dropdown.OptionData CreateDietOption(DormKitchen.FeedMode dietMode) => new(dietMode.ToString());
+        static TMP_Dropdown.OptionData CreateDietOption(DormKitchen.FeedMode dietMode) => new(nameof(dietMode));
     }
 }

@@ -1,22 +1,24 @@
 using System;
 using System.Collections;
-using Movement.ECM2.Source.Components;
+using AvatarScripts;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace AvatarStuff
 {
     public class AvatarScaler : MonoBehaviour
     {
-        [SerializeField] CharacterMovement characterMovement;
-        [SerializeField] float minSize = 0.1f, maxSize = 3f;
+       [SerializeField] CharacterCapsule characterCapsule;
+      // [SerializeField] CharacterMovement characterMovement; 
+       [SerializeField] float minSize = 0.1f, maxSize = 3f;
 
 
         bool areaHasHeightLimit;
         bool firstUse = true;
         public float Height { get; private set; }
-        public event Action<float> SizeChange;
+        public UnityEvent<float> SizeChange;
         Coroutine heightChangeRoutine;
-        float orgCapWidth, orgCapHeight;
+       [SerializeField,HideInInspector] float orgCapWidth, orgCapHeight;
         float originalHeight = 160f;
 
         public void AreaHasHeightLimit(float limit)
@@ -42,7 +44,7 @@ namespace AvatarStuff
                 yield return null;
             }
 
-            characterMovement.SetCapsuleDimensions(orgCapWidth * endHeight, orgCapHeight * endHeight);
+            characterCapsule.SetHeight( orgCapHeight * endHeight);
             SetScale(endHeight);
             float TimeStep() => (Time.time - startTime) / duration;
         }
@@ -82,8 +84,6 @@ namespace AvatarStuff
 
         public void ChangeScale(float newHeight)
         {
-            if (firstUse)
-                FirstUseSetup();
             Height = Mathf.Clamp(newHeight / originalHeight, minSize, maxSize);
             if (areaHasHeightLimit)
                 return;
@@ -93,15 +93,20 @@ namespace AvatarStuff
 
         void SetStoredHeight()
         {
-            characterMovement.SetCapsuleDimensions(orgCapWidth * Height, orgCapHeight * Height);
+            characterCapsule.SetHeight(orgCapHeight * Height);
             SetScale(Height);
         }
 
-        void FirstUseSetup()
+        void OnValidate()
         {
-            orgCapWidth = characterMovement.capsuleRadius;
-            orgCapHeight = characterMovement.capsuleHeight;
-            firstUse = false;
+            if (Application.isPlaying)
+                return;
+            if (characterCapsule == null)
+            {
+                throw new MissingComponentException("Char Capsule is missing on " + transform.parent.name);
+            }
+            orgCapWidth = characterCapsule.Radius;
+            orgCapHeight = characterCapsule.Height;
         }
     }
 }

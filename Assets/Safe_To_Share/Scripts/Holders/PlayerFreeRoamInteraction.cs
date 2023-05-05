@@ -35,7 +35,6 @@ namespace AvatarStuff.Holders
         NativeArray<RaycastHit> results;
         float stopHoverDist;
 
-        bool timeToCheck;
 
         void Start()
         {
@@ -51,16 +50,9 @@ namespace AvatarStuff.Holders
         {
             if (Time.frameCount % FrameLimit != 0)
                 return;
-            if (timeToCheck)
-            {
-                if (CheckRayCastResult())
-                    ShowOptionsShowFor(lastHit);
-                timeToCheck = false;
-            }
-            else
-            {
-                ScheduleRaycast();
-            }
+            if (CheckRayCastResult())
+                ShowOptionsShowFor(lastHit);
+            ScheduleRaycast();
 
             if (hasHit && Vector3.Distance(lastHitPos, transform.position) > stopHoverDist)
                 StopShowText();
@@ -117,7 +109,6 @@ namespace AvatarStuff.Holders
             }
 
             handle = RaycastCommand.ScheduleBatch(commands, results, 1);
-            timeToCheck = true;
         }
 
         bool ShouldISkipPointerRay(Ray camRay) =>
@@ -132,7 +123,7 @@ namespace AvatarStuff.Holders
         {
             handle.Complete();
             // Copy the result. If batchedHit.collider is null there was no hit
-            foreach (RaycastHit hit in results)
+            foreach (var hit in results)
             {
                 if (hit.collider == null) continue;
                 if (!hit.transform.TryGetComponent(out IInteractable interactable)) continue;

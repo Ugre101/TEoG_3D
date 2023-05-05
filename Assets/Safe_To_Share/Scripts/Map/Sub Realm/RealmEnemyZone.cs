@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Character.CreateCharacterStuff;
 using Character.EnemyStuff;
 using Safe_To_Share.Scripts.Holders;
@@ -24,7 +22,7 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
         [SerializeField] SubRealmSceneSo subRealmSceneSo;
 
         bool loaded;
-        List<SubRealmEnemy> activeEnemies = new();
+        readonly List<SubRealmEnemy> activeEnemies = new();
         async void Start()
         {
             await enemyPresets.LoadEnemyPresets();

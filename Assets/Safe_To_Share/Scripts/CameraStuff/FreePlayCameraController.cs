@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using Movement.ECM2.Source.Characters;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,7 +11,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
 {
     public class FreePlayCameraController : MonoBehaviour
     {
-        [SerializeField] ThirdPersonEcm2Character mover;
+        // [SerializeField] ThirdPersonEcm2Character mover;
         [SerializeField] FirstPersonCamera firstPerson;
         [SerializeField] CinemachineVirtualCamera virtualCamera;
 
@@ -46,12 +45,6 @@ namespace Safe_To_Share.Scripts.CameraStuff
         static bool InvertVerticalAxis => ThirdPersonCameraSettings.InvertVerticalAxis;
 
         void Start() => followCam = virtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-
-        void OnEnable()
-        {
-            mover.SetRotationMode(RotationMode.OrientToMovement);
-            mover.SetFirstPersonMode(false);
-        }
 
         IEnumerator TargetElevation(float change)
         {
@@ -110,7 +103,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             if (GameManager.Paused) return;
             if (!ctx.performed)
                 return;
-            if (ThirdPersonCameraSettings.AlwaysLook && mover.GetVelocity().magnitude > 0)
+            if (ThirdPersonCameraSettings.AlwaysLook) //&& mover.GetVelocity().magnitude > 0)
                 LockCursor();
             else if (!IsCursorLocked())
                 return;

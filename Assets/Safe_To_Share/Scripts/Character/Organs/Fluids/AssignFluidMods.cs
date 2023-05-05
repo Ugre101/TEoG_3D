@@ -19,12 +19,12 @@ namespace Character.Organs.Fluids
             foreach (FluidCapOfType fluidCapOfType in fluidCapStretch)
                 fluidCapOfType.AssignMods(character);
             foreach (IntMod intMod in fluidCapStretchAll)
-            foreach (OrgansContainer container in character.SexualOrgans.Containers.Values)
+            foreach (BaseOrgansContainer container in character.SexualOrgans.Containers.Values)
                 container.Fluid.Mods.AddStatMod(intMod);
             foreach (FluidRecOfType fluidRecOfType in fluidRecMods)
                 fluidRecOfType.AssignMods(character);
             foreach (IntMod intMod in fluidRecModsAll)
-            foreach (OrgansContainer container in character.SexualOrgans.Containers.Values)
+            foreach (BaseOrgansContainer container in character.SexualOrgans.Containers.Values)
                 container.Fluid.Mods.AddStatMod(intMod);
         }
 

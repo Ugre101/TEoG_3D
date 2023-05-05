@@ -66,30 +66,20 @@ namespace SceneStuff
             if (InSubRealm)
             {
                 if (subRealmExitOnDefeat)
-                {
-                    LoadLastLocation(player);
-                }
+                    LoadNewLocation(lastLocation, player, currentSubRealm.Exit);
                 else
-                {
                     StartCoroutine(LoadSceneOp(currentSubRealm, player, lastPos));
-                }
             }
             else
-            {
                 LoadLastLocation(player);
-            }
         }
 
         public void LeaveAfterBattle(Player player)
         {
             if (InSubRealm)
-            {
-                StartCoroutine(LoadSceneOp(currentSubRealm, player, lastPos ));
-            }
+                StartCoroutine(LoadSceneOp(currentSubRealm, player, lastPos));
             else
-            {
                 LoadLastLocation(player);
-            }
         }
     }
 }

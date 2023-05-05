@@ -32,7 +32,7 @@ namespace AvatarStuff.Holders
 
         void IfPregnant(int obj)
         {
-            if (Mate.SexualOrgans.Vaginas.List.Any(v => v.Womb.HasFetus))
+            if (Mate.SexualOrgans.Vaginas.BaseList.Any(v => v.Womb.HasFetus))
                 ModifyAvatar();
         }
 

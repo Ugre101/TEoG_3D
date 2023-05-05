@@ -8,15 +8,15 @@ using UnityEngine;
 
 namespace CustomClasses
 {
-    public abstract class BaseEditorCanvasObject : ScriptableObject, ISerializationCallbackReceiver
+    public abstract class BaseEditorCanvasObject<N> : ScriptableObject, ISerializationCallbackReceiver where N : BaseEditorCanvasNode
     {
         [SerializeField, HideInInspector,] string guid;
-        [SerializeField] protected List<BaseEditorCanvasNode> nodes = new();
-        protected Dictionary<string, BaseEditorCanvasNode> nodeChildDict;
+        [SerializeField] protected List<N> nodes = new();
+        protected Dictionary<string, N> nodeChildDict;
 
         public string Guid => guid;
 
-        Dictionary<string, BaseEditorCanvasNode> NodeChildDict =>
+        Dictionary<string, N> NodeChildDict =>
             nodeChildDict ??= GetAllNodes().ToDictionary(n => n.name);
 #if UNITY_EDITOR
         public virtual void OnValidate()
@@ -26,38 +26,67 @@ namespace CustomClasses
         }
 #endif
 
-        public abstract void OnBeforeSerialize();
+        public virtual void OnBeforeSerialize()
+        {
+#if UNITY_EDITOR
+            
+            if (nodes.Count == 0)
+                nodes.Add(MakeNode<N>());
+            if (AssetDatabase.GetAssetPath(this) == string.Empty) 
+                return;
+            foreach (var node in nodes.Where(n => AssetDatabase.GetAssetPath(n) == string.Empty))
+                AssetDatabase.AddObjectToAsset(node, this);
+#endif
+        }
 
         public void OnAfterDeserialize()
         {
         }
 
-        public IEnumerable<BaseEditorCanvasNode> GetChildNodes(BaseEditorCanvasNode parentNode)
+        public IEnumerable<N> GetChildNodes(N parentNode)
         {
             foreach (string childID in parentNode.ChildNodeIds)
-                if (NodeChildDict.TryGetValue(childID, out BaseEditorCanvasNode childNode))
+                if (NodeChildDict.TryGetValue(childID, out var childNode))
                     yield return childNode;
         }
 
-        public IEnumerable<BaseEditorCanvasNode> GetAllNodes() => nodes;
-        public BaseEditorCanvasNode GetRootNode() => nodes[0];
+        public IEnumerable<N> GetAllNodes() => nodes;
+        public N GetRootNode() => nodes[0];
 #if UNITY_EDITOR
-        protected static TNodeType MakeNode<TNodeType>() where TNodeType : BaseEditorCanvasNode
+        public virtual TNode CreateChildNode<TNode>(BaseEditorCanvasNode parentNode) where TNode : N
+        {
+            var newNode = MakeNode<TNode>();
+            Undo.RegisterCreatedObjectUndo(newNode, "Created node");
+            if (parentNode != null)
+            {
+                parentNode.ChildNodeIds.Add(newNode.name);
+                Rect offsetRect = parentNode.rect;
+                offsetRect.x += parentNode.rect.width;
+                newNode.rect = offsetRect;
+            }
+
+            Undo.RecordObject(this, "Added Node");
+            nodes.Add(newNode);
+            nodeChildDict = null;
+            return newNode;
+        }
+        
+        protected static TNodeType MakeNode<TNodeType>() where TNodeType : N
         {
             TNodeType newNode = CreateInstance<TNodeType>();
             newNode.name = System.Guid.NewGuid().ToString();
             return newNode;
         }
 
-        public BaseEditorCanvasNode GetNodeAtPoint(Vector2 pos) =>
+        public N GetNodeAtPoint(Vector2 pos) =>
             GetAllNodes().LastOrDefault(dialogueBaseNode => dialogueBaseNode.rect.Contains(pos));
 
-        public void DeleteChildNode(BaseEditorCanvasNode node)
+        public void DeleteChildNode(N node)
         {
             Undo.RecordObject(this, "Deleting a node");
             nodes.Remove(node);
             nodeChildDict = null;
-            foreach (BaseEditorCanvasNode baseNode in GetAllNodes())
+            foreach (var baseNode in GetAllNodes())
                 baseNode.ChildNodeIds.Remove(node.name);
             Undo.DestroyObjectImmediate(node);
         }

@@ -12,8 +12,7 @@ using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
 using Character.Race.Races;
 using DormAndHome.Dorm;
-using Movement.ECM2.Source.Characters;
-using Movement.ECM2.Source.Components;
+using MovementScripts;
 using Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss;
 using Safe_To_Share.Scripts.Character.Scat;
 using Safe_To_Share.Scripts.Static;
@@ -31,7 +30,7 @@ namespace Safe_To_Share.Scripts.Holders
         public static SubRealmCombatParameters LoadSubRealmCombat;
         public static Action<PlayerHolder, DormMate> LoadDormSex;
         [SerializeField] MovementModHandler movementMoveModHandler;
-        [SerializeField] ThirdPersonEcm2Character thirdPersonEcm2Character;
+        [SerializeField] MovementScripts.Movement mover;
         [SerializeField] Player player;
 
         [SerializeField] LayerMask validLayers;
@@ -47,7 +46,7 @@ namespace Safe_To_Share.Scripts.Holders
 
         public MovementModHandler MoveModHandler => movementMoveModHandler;
 
-        public ThirdPersonEcm2Character PersonEcm2Character => thirdPersonEcm2Character;
+        public MovementScripts.Movement PersonEcm2Character => mover;
 
         void Awake()
         {
@@ -93,12 +92,14 @@ namespace Safe_To_Share.Scripts.Holders
             player.Body.Fat.StatDirtyEvent += ModifyCurrentAvatar;
             HeightsChange(player.Body.Height.Value);
             player.Sub();
-            PersonEcm2Character.PhysicsVolumeChanged += IsSwimming;
+            PersonEcm2Character.ChangedMode += IsSwimming;
+            
         }
 
-        void IsSwimming(PhysicsVolume newvolume)
+        void IsSwimming(MoveCharacter.MoveModes moveModes)
         {
-            if (newvolume == null || !newvolume.waterVolume) return;
+            if (moveModes != MoveCharacter.MoveModes.Swimming) 
+                return;
             ForeignFluidExtensions.CleanBody(player);
         }
 
@@ -115,7 +116,7 @@ namespace Safe_To_Share.Scripts.Holders
             player.Body.Height.StatDirtyEvent -= UpdateHeightsChange;
             player.Body.Muscle.StatDirtyEvent -= ModifyCurrentAvatar;
             player.Body.Fat.StatDirtyEvent -= ModifyCurrentAvatar;
-            PersonEcm2Character.PhysicsVolumeChanged -= IsSwimming;
+            PersonEcm2Character.ChangedMode -= IsSwimming;
             player.Unsub();
         }
 
@@ -144,7 +145,7 @@ namespace Safe_To_Share.Scripts.Holders
         {
             UnSub();
             player = JsonUtility.FromJson<Player>(toLoad.ControlledCharacterSave.CharacterSave.RawCharacter);
-            PersonEcm2Character.StopSwimming();
+            //PersonEcm2Character.StopSwimming();
             SetPlayerPosition(toLoad.Posistion);
 
             yield return player.Load(toLoad.ControlledCharacterSave.CharacterSave);
@@ -284,7 +285,7 @@ namespace Safe_To_Share.Scripts.Holders
         [ContextMenu("Give fetus")]
         public void AddDebugFetus()
         {
-            foreach (var baseOrgan in player.SexualOrgans.Vaginas.List)
+            foreach (var baseOrgan in player.SexualOrgans.Vaginas.BaseList)
             {
                 baseOrgan.Womb.AddFetus(player, player);
                 baseOrgan.Womb.GrowFetuses(fetusDaysOld);

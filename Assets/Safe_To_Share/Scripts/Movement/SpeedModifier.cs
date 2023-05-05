@@ -35,7 +35,7 @@ namespace Safe_To_Share.Scripts.Movement
                 return;
             }
 
-            playerChar = holder.PersonEcm2Character;
+           // TODO playerChar = holder.PersonEcm2Character;
             holder.MoveModHandler.AddWalkTempEffect(sprintMod);
             _savedMaxAcceleration = playerChar.maxAcceleration;
             _savedDecelerationWalking = playerChar.brakingDecelerationWalking;

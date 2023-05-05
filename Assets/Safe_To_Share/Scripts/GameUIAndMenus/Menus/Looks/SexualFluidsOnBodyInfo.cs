@@ -17,7 +17,7 @@ namespace GameUIAndMenus.Menus.Looks
             sb.Append(character.FluidOnBodyDesc());
             foreach (var (key, value) in character.SexualOrgans.Containers)
             {
-                foreach (var baseOrgan in value.List)
+                foreach (var baseOrgan in value.BaseList)
                 { 
                     sb.Append(baseOrgan.FluidInWomb(key));
                 }

@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Character;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI
 {
@@ -13,64 +16,65 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         [SerializeField] DrainActionButton[] drainButtons;
         [SerializeField] SexActionButton[] sexActButtons;
         [SerializeField] VoreActionButton[] voreActButtons;
-        List<AfterBattleBaseAction> addedDrainActs = new();
-        List<AfterBattleBaseAction> addedSexActs = new();
-        List<AfterBattleBaseAction> addedVoreActs = new();
+        List<EssenceAction> addedDrainActs = new();
+        List<SexAction> addedSexActs = new();
+        List<VoreAction> addedVoreActs = new();
 
 #if UNITY_EDITOR
         void OnValidate()
         {
-            sexActButtons = GetComponentsInChildren<SexActionButton>();
-            drainButtons = GetComponentsInChildren<DrainActionButton>();
-            voreActButtons = GetComponentsInChildren<VoreActionButton>();
+            sexActButtons = GetComponentsInChildren<SexActionButton>(true);
+            drainButtons = GetComponentsInChildren<DrainActionButton>(true);
+            voreActButtons = GetComponentsInChildren<VoreActionButton>(true);
         }
 #endif
-
+        
         public void FirstSetup(BaseCharacter buttonsOwner, BaseCharacter partner)
         {
-            foreach (SexActionButton actBtn in sexActButtons)
-                actBtn.Clear();
-            foreach (DrainActionButton drainBtn in drainButtons)
+            foreach (var sexActionButton in sexActButtons) 
+                sexActionButton.Clear();
+            foreach (var drainBtn in drainButtons)
                 drainBtn.Clear();
-            foreach (VoreActionButton voreBtn in voreActButtons)
+            foreach (var voreBtn in voreActButtons)
                 voreBtn.Clear();
             Refresh(buttonsOwner, partner);
             if (OptionalContent.Vore.Enabled) return;
-            foreach (VoreActionButton voreActionButton in voreActButtons)
+            foreach (var voreActionButton in voreActButtons)
                 voreActionButton.Clear();
         }
 
         public void Refresh(BaseCharacter buttonOwner, BaseCharacter partner)
         {
-            // Remove actions we can't do anymore
-            addedSexActs = FirstStep(addedSexActs, buttonOwner, partner);
-            addedDrainActs = FirstStep(addedDrainActs, buttonOwner, partner);
-            addedVoreActs = FirstStep(addedVoreActs, buttonOwner, partner);
             // Add new sex actions
-            var toAddAction = dict.SexActsWeCanDo(buttonOwner, partner).Except(addedSexActs).ToArray();
-            var emptyButtons = sexActButtons.Where(b => b.Empty).ToArray();
-            for (int i = 0; i < emptyButtons.Length && i < toAddAction.Length; i++)
-            {
-                emptyButtons[i].Setup(toAddAction[i]);
-                addedSexActs.Add(toAddAction[i]);
-            }
-
+            addedSexActs = FirstStep(addedSexActs, buttonOwner, partner);
+            var sexActions = dict.SexActsWeCanDo(buttonOwner, partner).Except(addedSexActs);
+            SecondStep(sexActions, sexActButtons,ref addedSexActs);
+       
             // Add new drain actions
-            var toAddDrainAct = dict.DrainActionsWeCanDo(buttonOwner, partner).Except(addedDrainActs).ToArray();
-            var emptyDrainButtons = drainButtons.Where(b => b.Empty).ToArray();
-            for (int i = 0; i < emptyDrainButtons.Length && i < toAddDrainAct.Length; i++)
-            {
-                emptyDrainButtons[i].Setup(toAddDrainAct[i]);
-                addedDrainActs.Add(toAddDrainAct[i]);
-            }
+            addedDrainActs = FirstStep(addedDrainActs, buttonOwner, partner);
+            var toAddDrainAct = dict.DrainActionsWeCanDo(buttonOwner, partner).Except(addedDrainActs);
+            SecondStep(toAddDrainAct,drainButtons,ref addedDrainActs);
 
             if (OptionalContent.Vore.Enabled)
                 SetupVoreButtons(buttonOwner, partner);
             takeToDorm.ShowOrgasmsLeft(partner);
         }
 
-        static List<AfterBattleBaseAction> FirstStep(List<AfterBattleBaseAction> list, BaseCharacter buttonOwner,
-            BaseCharacter partner)
+        static void SecondStep<TAct,TBtn>(IEnumerable<TAct> acts, IReadOnlyList<TBtn> emptyButtons,ref List<TAct> addedActs)
+            where TAct: AfterBattleBaseAction where TBtn : AfterBattleBaseButton
+        {
+            var toAddAction = acts.ToArray(); // afterBattleBaseActions.ToArray();
+            var buttons = emptyButtons.Where(b => b.Empty).ToArray();
+
+            for (var i = 0; i < buttons.Length && i < toAddAction.Length; i++)
+            {
+                buttons[i].Setup(toAddAction[i]);
+                addedActs.Add(toAddAction[i]);
+            }
+        }
+
+        static List<T> FirstStep<T>(List<T> list, BaseCharacter buttonOwner,
+                                    BaseCharacter partner) where  T : AfterBattleBaseAction
         {
             var actsWeCantDoAnymore = list.FindAll(a => !a.CanUse(buttonOwner, partner));
             foreach (var afterBattleBaseAction in actsWeCantDoAnymore)
@@ -81,23 +85,18 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
 
         void SetupVoreButtons(BaseCharacter buttonOwner, BaseCharacter partner)
         {
-            // Add new vore actions
-            var toAddVoreAct =
-                dict.VoreActionsWeCanDo(buttonOwner, partner).Except(addedVoreActs).ToList();
-            var emptyVoreButtons = voreActButtons.Where(b => b.Empty).ToArray();
-            for (int i = 0; i < emptyVoreButtons.Length && i < toAddVoreAct.Count; i++)
-            {
-                emptyVoreButtons[i].Setup(toAddVoreAct[i]);
-                addedVoreActs.Add(toAddVoreAct[i]);
-            }
+            addedVoreActs = FirstStep(addedVoreActs, buttonOwner, partner);
 
-            var cantVoreActs = dict.VoreActions.Except(dict.VoreActionsWeCanDo(buttonOwner, partner)).ToList();
-            emptyVoreButtons = voreActButtons.Where(b => b.Empty).ToArray();
-            for (int i = 0; i < cantVoreActs.Count && i < emptyVoreButtons.Length; i++)
+            var voreActions = dict.VoreActionsWeCanDo(buttonOwner, partner).Except(addedVoreActs);
+            SecondStep(voreActions,voreActButtons,ref addedVoreActs);
+
+            var cantVoreActs = dict.VoreActions.Except(dict.VoreActionsWeCanDo(buttonOwner, partner)).ToArray();
+            var emptyVoreButtons = voreActButtons.Where(b => b.Empty).ToArray();
+            for (int i = 0; i < cantVoreActs.Length && i < emptyVoreButtons.Length; i++)
             {
                 if (cantVoreActs[i].NeedPerk)
                     continue;
-                float extraCapacityNeeded = cantVoreActs[i].ExtraCapacityNeeded(buttonOwner, partner);
+                var extraCapacityNeeded = cantVoreActs[i].ExtraCapacityNeeded(buttonOwner, partner);
                 if (extraCapacityNeeded > 0)
                     emptyVoreButtons[i].ShowNeeded(cantVoreActs[i], extraCapacityNeeded);
             }
@@ -105,11 +104,11 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
 
         public void Clear(BaseCharacter buttonOwner)
         {
-            foreach (DrainActionButton drainActionButton in drainButtons)
+            foreach (var drainActionButton in drainButtons)
                 drainActionButton.Clear();
-            foreach (SexActionButton sexActionButton in sexActButtons)
+            foreach (var sexActionButton in sexActButtons)
                 sexActionButton.Clear();
-            foreach (VoreActionButton voreActionButton in voreActButtons)
+            foreach (var voreActionButton in voreActButtons)
                 voreActionButton.Clear();
             takeToDorm.gameObject.SetActive(false);
         }

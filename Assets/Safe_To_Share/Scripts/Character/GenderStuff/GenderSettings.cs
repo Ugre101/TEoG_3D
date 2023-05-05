@@ -6,28 +6,28 @@ namespace Character.GenderStuff
 {
     public static class GenderSettings
     {
-        public const int BoobThreesHold = 3;
+        const int BoobThreesHold = 3;
         static Dictionary<Gender, string> savedGenders;
 
         static Dictionary<Gender, string> SavedGenders => savedGenders ??= new Dictionary<Gender, string>
         {
-            { Gender.Doll, PlayerPrefs.GetString(Gender.Doll.ToString(), "Doll") },
-            { Gender.Male, PlayerPrefs.GetString(Gender.Male.ToString(), "Male") },
-            { Gender.Female, PlayerPrefs.GetString(Gender.Female.ToString(), "Female") },
-            { Gender.CuntBoy, PlayerPrefs.GetString(Gender.CuntBoy.ToString(), "Cunt boy") },
-            { Gender.DickGirl, PlayerPrefs.GetString(Gender.DickGirl.ToString(), "Dick girl") },
-            { Gender.Futanari, PlayerPrefs.GetString(Gender.Futanari.ToString(), "Futanari") },
-            { Gender.MaleFutanari, PlayerPrefs.GetString(Gender.MaleFutanari.ToString(), "Futanari") },
+            { Gender.Doll, PlayerPrefs.GetString(nameof(Gender.Doll), "Doll") },
+            { Gender.Male, PlayerPrefs.GetString(nameof(Gender.Male), "Male") },
+            { Gender.Female, PlayerPrefs.GetString(nameof(Gender.Female), "Female") },
+            { Gender.CuntBoy, PlayerPrefs.GetString(nameof(Gender.CuntBoy), "Cunt boy") },
+            { Gender.DickGirl, PlayerPrefs.GetString(nameof(Gender.DickGirl), "Dick girl") },
+            { Gender.Futanari, PlayerPrefs.GetString(nameof(Gender.Futanari), "Futanari") },
+            { Gender.MaleFutanari, PlayerPrefs.GetString(nameof(Gender.MaleFutanari), "Futanari") },
         };
 
         public static void ReNameGender(Gender gender, string newName)
         {
-            PlayerPrefs.SetString(gender.ToString(), newName);
+            PlayerPrefs.SetString(nameof(gender), newName);
             SavedGenders[gender] = newName;
         }
 
         public static string GenderString(this Gender gender, bool lowerCase = false)
-            => SavedGenders.TryGetValue(gender, out string value) ? lowerCase ? value.ToLower() : value : "Err";
+            => SavedGenders.TryGetValue(gender, out var value) ? lowerCase ? value.ToLower() : value : "Err";
 
         public static Gender GetGender(BaseCharacter baseCharacter)
         {
@@ -49,75 +49,51 @@ namespace Character.GenderStuff
 
         public static string HeShe(this Gender gender, bool capital = false)
         {
-            string returnText;
-            switch (gender)
+            var returnText = gender switch
             {
-                case Gender.Doll:
-                    returnText = "They";
-                    break;
-                case Gender.Male:
-                case Gender.CuntBoy:
-                case Gender.MaleFutanari:
-                    returnText = "He";
-                    break;
-                case Gender.Female:
-                case Gender.DickGirl:
-                case Gender.Futanari:
-                    returnText = "She";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
-            }
+                Gender.Doll => "They",
+                Gender.Male => "He",
+                Gender.CuntBoy => "He",
+                Gender.MaleFutanari => "He",
+                Gender.Female => "She",
+                Gender.DickGirl => "She",
+                Gender.Futanari => "She",
+                _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null),
+            };
 
             return capital ? returnText : returnText.ToLower();
         }
 
         public static string HisHer(this Gender gender, bool capital = false)
         {
-            string returnText;
-            switch (gender)
+            var returnText = gender switch
             {
-                case Gender.Doll:
-                    returnText = "Their";
-                    break;
-                case Gender.Male:
-                case Gender.CuntBoy:
-                case Gender.MaleFutanari:
-                    returnText = "His";
-                    break;
-                case Gender.Female:
-                case Gender.DickGirl:
-                case Gender.Futanari:
-                    returnText = "Her";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
-            }
+                Gender.Doll => "Their",
+                Gender.Male => "His",
+                Gender.CuntBoy => "His",
+                Gender.MaleFutanari => "His",
+                Gender.Female => "Her",
+                Gender.DickGirl => "Her",
+                Gender.Futanari => "Her",
+                _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
+            };
 
             return capital ? returnText : returnText.ToLower();
         }
 
         public static string HimHer(this Gender gender, bool capital = false)
         {
-            string returnText;
-            switch (gender)
+            var returnText = gender switch
             {
-                case Gender.Doll:
-                    returnText = "Them";
-                    break;
-                case Gender.Male:
-                case Gender.CuntBoy:
-                case Gender.MaleFutanari:
-                    returnText = "Him";
-                    break;
-                case Gender.Female:
-                case Gender.DickGirl:
-                case Gender.Futanari:
-                    returnText = "Her";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
-            }
+                Gender.Doll => "Them",
+                Gender.Male => "Him",
+                Gender.CuntBoy => "Him",
+                Gender.MaleFutanari => "Him",
+                Gender.Female => "Her",
+                Gender.DickGirl => "Her",
+                Gender.Futanari => "Her",
+                _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
+            };
 
             return capital ? returnText : returnText.ToLower();
         }

@@ -21,12 +21,13 @@ namespace AvatarStuff
                 return sfwAvatar;
 #endif
             CharacterAvatar bestMatch = null;
-            foreach (CharacterAvatar avatar in avatars.Where(avatar =>
-                         avatar.SupportedRaces.Contains(character.RaceSystem.Race)))
+            foreach (var avatar in avatars)
             {
-                if (avatar.SupportedGenders.Contains(character.Gender))
+                if (!avatar.SupportedRaces.Contains(character.RaceSystem.Race)) 
+                    continue;
+                if (avatar.SupportedGenders.Contains(character.Gender)) 
                     return avatar;
-                if (bestMatch == null)
+                if (bestMatch == null) 
                     bestMatch = avatar;
             }
 

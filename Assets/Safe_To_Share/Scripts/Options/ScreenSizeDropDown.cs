@@ -32,7 +32,7 @@ namespace Options
             dropdown.ClearOptions();
 
             TMP_Dropdown.OptionDataList dataList = new();
-            List<TMP_Dropdown.OptionData> options =
+            var options =
                 resolutions.Select(res => new TMP_Dropdown.OptionData(res.ToString())).ToList();
             dataList.options.AddRange(options);
             dropdown.AddOptions(options);

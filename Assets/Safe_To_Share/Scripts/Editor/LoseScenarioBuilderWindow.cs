@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace Defeated.Editor
 {
-    public class LoseScenarioBuilderWindow : BaseNodeBuilderWindows
+    public class LoseScenarioBuilderWindow : BaseNodeBuilderWindows<LoseScenario,LoseScenarioNode>
     {
         [NonSerialized] readonly string[] options =
         {
@@ -21,30 +21,29 @@ namespace Defeated.Editor
         };
 
         NodeTypes createOfType = NodeTypes.Body;
-        LoseScenario selected;
 
         void OnGUI()
         {
-            if (selected == null)
+            if (Selected == null)
                 EditorGUILayout.LabelField("No selected");
             else
             {
                 ProcessEvents();
                 ScrollPos = EditorGUILayout.BeginScrollView(ScrollPos, true, true);
-                EditorGUILayout.LabelField(selected.name);
+                EditorGUILayout.LabelField(Selected.name);
 
                 Rect canvas = GUILayoutUtility.GetRect(CanvasSize, CanvasSize);
-                foreach (LoseScenarioNode node in selected.GetAllNodes().Cast<LoseScenarioNode>())
+                foreach (LoseScenarioNode node in Selected.GetAllNodes())
                 {
                     DrawNode(node);
-                    DrawNodeConnection(selected, node);
+                    DrawNodeConnection(Selected, node);
                 }
 
                 EditorGUILayout.EndScrollView();
 
                 if (deletingNode != null)
                 {
-                    selected.DeleteChildNode(deletingNode);
+                    Selected.DeleteChildNode(deletingNode);
                     deletingNode = null;
                 }
                 else if (creatingNode != null)
@@ -52,16 +51,16 @@ namespace Defeated.Editor
                     switch (createOfType)
                     {
                         case NodeTypes.Basic:
-                            selected.CreateChildNode<LoseScenarioNode>(creatingNode);
+                            Selected.CreateChildNode<LoseScenarioNode>(creatingNode);
                             break;
                         case NodeTypes.Drain:
-                            selected.CreateChildNode<LoseScenarioDrainEssenceNode>(creatingNode);
+                            Selected.CreateChildNode<LoseScenarioDrainEssenceNode>(creatingNode);
                             break;
                         case NodeTypes.Body:
-                            selected.CreateChildNode<LoseScenarioNodeBodyMorph>(creatingNode);
+                            Selected.CreateChildNode<LoseScenarioNodeBodyMorph>(creatingNode);
                             break;
                         case NodeTypes.Vore:
-                            selected.CreateChildNode<LoseScenarioNodeTriesToVore>(creatingNode);
+                            Selected.CreateChildNode<LoseScenarioNodeTriesToVore>(creatingNode);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -81,16 +80,6 @@ namespace Defeated.Editor
             window.Show();
         }
 
-        protected override void SelectionChanged()
-        {
-            var newObjet = Selection.activeObject;
-            if (newObjet is LoseScenario loseScenario)
-            {
-                selected = loseScenario;
-                Repaint();
-            }
-        }
-
         void DrawNode(LoseScenarioNode node)
         {
             GUILayout.BeginArea(node.rect, NodeStyle);
@@ -103,45 +92,6 @@ namespace Defeated.Editor
             PrintButtons(node);
 
             GUILayout.EndArea();
-        }
-
-        void ProcessEvents()
-        {
-            switch (Event.current.type)
-            {
-                case EventType.MouseDown when draggedNode == null:
-                {
-                    draggedNode = selected.GetNodeAtPoint(Event.current.mousePosition + ScrollPos);
-                    if (draggedNode != null)
-                    {
-                        DraggingOffset = draggedNode.rect.position - Event.current.mousePosition;
-                        Selection.activeObject = draggedNode;
-                    }
-                    else
-                    {
-                        DraggingCanvas = true;
-                        DraggingCanvasOffset = Event.current.mousePosition + ScrollPos;
-                        Selection.activeObject = selected;
-                    }
-
-                    break;
-                }
-                case EventType.MouseDrag when draggedNode != null:
-                    Undo.RecordObject(selected, "Move node");
-                    draggedNode.rect.position = Event.current.mousePosition + DraggingOffset;
-                    GUI.changed = true;
-                    break;
-                case EventType.MouseDrag when DraggingCanvas:
-                    ScrollPos = DraggingCanvasOffset - Event.current.mousePosition;
-                    GUI.changed = true;
-                    break;
-                case EventType.MouseUp when draggedNode != null:
-                    draggedNode = null;
-                    break;
-                case EventType.MouseUp when DraggingCanvas:
-                    DraggingCanvas = false;
-                    break;
-            }
         }
 
         [OnOpenAsset(1)]

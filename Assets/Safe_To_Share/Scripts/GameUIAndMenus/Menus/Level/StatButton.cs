@@ -21,7 +21,7 @@ namespace GameUIAndMenus.Menus.Level
         void OnValidate()
         {
             rune.color = statColor;
-            btnText.text = statType.ToString();
+            btnText.text = nameof(statType);
         }
 #endif
         public void OnPointerEnter(PointerEventData eventData) =>

@@ -53,7 +53,7 @@ namespace SaveStuff
         static void CheckVore(BaseCharacter player)
         {
             int faults = player.Vore.Stomach.PreysIds.RemoveAll(id => !VoredCharacters.PreyDict.ContainsKey(id)) +
-                         player.SexualOrgans.Containers.Values.Sum(organCon => organCon.List.Sum(organ =>
+                         player.SexualOrgans.Containers.Values.Sum(organCon => organCon.BaseList.Sum(organ =>
                              organ.Vore.PreysIds.RemoveAll(preyId => !VoredCharacters.PreyDict.ContainsKey(preyId))));
             if (faults > 0)
                 Debug.LogWarning($"{faults} preys couldn't be found");

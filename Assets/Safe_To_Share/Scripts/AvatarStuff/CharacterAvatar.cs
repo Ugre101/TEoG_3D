@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Character;
 using Character.BodyStuff;
@@ -52,27 +53,26 @@ namespace AvatarStuff
 
         [SerializeField] bool hasDickController;
         [SerializeField] bool hasHideDaz;
-
+        
         float ballSize;
         bool firstUse = true;
-        bool forceSkinUpdate;
         float lastTick;
         SkinnedMeshRenderer[] shapes;
         [field: SerializeField] public Animator Animator { get; private set; }
 
         [field: SerializeField] public AvatarKeyAreas KeyAreas { get; private set; }
 
-        public IEnumerable<SkinnedMeshRenderer> AllShapes
+        bool hasShapes;
+        public SkinnedMeshRenderer[] AllShapes
         {
             get
             {
-                if (shapes == null)
-                {
-                    var temp = bodyMeshRenderers.Concat(hairMeshRenderers);
-                    temp = temp.Concat(detailsMeshRenderers);
-                    shapes = temp.ToArray();
-                }
-
+                if (hasShapes) 
+                    return shapes;
+                var temp = bodyMeshRenderers.Concat(hairMeshRenderers);
+                temp = temp.Concat(detailsMeshRenderers);
+                shapes = temp.ToArray();
+                hasShapes = true;
                 return shapes;
             }
         }
@@ -107,9 +107,8 @@ namespace AvatarStuff
                 bodyFat.ChangeShape(skinnedMeshRenderer, 0f);
             }
 
-            if (Animator == null)
-                if (TryGetComponent(out Animator animator))
-                    Animator = animator;
+            if (Animator == null && TryGetComponent(out Animator animator)) 
+                Animator = animator;
 
             if (KeyAreas == null)
                 KeyAreas = TryGetComponent(out AvatarKeyAreas keyAreas)
@@ -128,11 +127,14 @@ namespace AvatarStuff
 
         public virtual void Setup(BaseCharacter character)
         {
+            var forceSkinUpdate = false;
             if (firstUse)
                 FirstSetup();
             LoadDetails();
             var hasVagina = character.SexualOrgans.Vaginas.HaveAny();
-            HandleDickAndBalls(character.SexualOrgans);
+
+            if (HandleDickAndBalls(character.SexualOrgans))
+                forceSkinUpdate = true;
             vore.Update(character);
             foreach (var shape in AllShapes)
                 SetShapes(character, hasVagina, shape);
@@ -141,19 +143,21 @@ namespace AvatarStuff
                 hairColor.SetHairColor(hairMeshRenderers, character.Hair);
             SetArousal(character.SexStats.Arousal);
             UpdateBodyTypeMorphs(character.Body.Morphs);
-            SetSkinTone(character.Body.SkinTone);
-            forceSkinUpdate = false;
+            SetSkinTone(character.Body.SkinTone, forceSkinUpdate);
         }
 
-        void HandleDickAndBalls(SexualOrgans sexualOrgans)
+     
+
+        bool HandleDickAndBalls(SexualOrgans sexualOrgans)
         {
             var hasDick = sexualOrgans.Dicks.HaveAny();
             var hasBalls = sexualOrgans.Balls.HaveAny();
-            forceSkinUpdate = hasHideDaz
+            var forceSkinUpdate = hasHideDaz
                 ? hideDazDickAndBalls.Handle(bodyMeshRenderers, hasDick, hasBalls)
                 : dictatorBoner.HandleHideDickAndBalls(bodyMeshRenderers, hasDick, hasDick);
             HandleDick(sexualOrgans.Dicks, hasDick);
             HandleBalls(sexualOrgans.Balls, hasBalls);
+            return forceSkinUpdate;
         }
 
         // Athlete 10
@@ -174,8 +178,8 @@ namespace AvatarStuff
 
         static float PregnancyValue(BaseCharacter character, bool hasVagina)
         {
-            if (!hasVagina || !character.SexualOrgans.Vaginas.List.Any(v => v.Womb.HasFetus)) return 0f;
-            var oldestFetus = character.SexualOrgans.Vaginas.List.Aggregate(0,
+            if (!hasVagina || !character.SexualOrgans.Vaginas.BaseList.Any(v => v.Womb.HasFetus)) return 0f;
+            var oldestFetus = character.SexualOrgans.Vaginas.BaseList.Aggregate(0,
                 (current, baseOrgan) => baseOrgan.Womb.FetusList.Select(fetus => fetus.DaysOld).Prepend(current).Max());
             return Mathf.Clamp((float)oldestFetus / PregnancyExtensions.IncubationDays * 100f, 0f, 100f);
         }
@@ -187,7 +191,7 @@ namespace AvatarStuff
                 dickController.SetBoner(arousal);
         }
 
-        void HandleBalls(OrgansContainer balls, bool hasBalls)
+        void HandleBalls(BaseOrgansContainer balls, bool hasBalls)
         {
             if (hasBallsController)
             {
@@ -198,7 +202,7 @@ namespace AvatarStuff
                 balls.Fluid.CurrentValueChange -= UpdateBallsStretch;
                 balls.Fluid.CurrentValueChange += UpdateBallsStretch;
                 ballSize = SetOrganSize(balls.Biggest);
-                if (!balls.List.Any(b => b.Vore.PreysIds.Any())) ballsController.ReSize(ballSize);
+                if (!balls.BaseList.Any(b => b.Vore.PreysIds.Any())) ballsController.ReSize(ballSize);
             }
             else if (dictatorBoner.hasDictatorBalls)
             {
@@ -207,7 +211,7 @@ namespace AvatarStuff
                 dictatorBoner.SetupFluidStretch(balls);
                 balls.Fluid.CurrentValueChange -= UpdateDictatorBallsStretch;
                 balls.Fluid.CurrentValueChange += UpdateDictatorBallsStretch;
-                if (!balls.List.Any(b => b.Vore.PreysIds.Any()))
+                if (!balls.BaseList.Any(b => b.Vore.PreysIds.Any()))
                     dictatorBoner.SetBallsSize(SetOrganSize(balls.Biggest));
             }
         }
@@ -215,33 +219,32 @@ namespace AvatarStuff
         void UpdateBallsStretch(float obj) => ballsController.SetFluidStretch(obj);
         void UpdateDictatorBallsStretch(float obj) => dictatorBoner.SetFluidStretch(obj);
 
-        void HandleDick(OrgansContainer sexualOrgans, bool hasDick)
+        void HandleDick(BaseOrgansContainer sexualBaseOrgans, bool hasDick)
         {
             if (hasDickController)
             {
-                DazDick(sexualOrgans, hasDick);
+                DazDick(sexualBaseOrgans, hasDick);
             }
             else if (dictatorBoner.hasDictatorDick)
             {
                 dictatorBoner.HideOrShowDick(hasDick);
-                dictatorBoner.SetDickSize(SetOrganSize(sexualOrgans.Biggest));
+                dictatorBoner.SetDickSize(SetOrganSize(sexualBaseOrgans.Biggest));
             }
         }
 
-        void DazDick(OrgansContainer sexualOrgans, bool hasDick)
+        void DazDick(BaseOrgansContainer sexualBaseOrgans, bool hasDick)
         {
             dickController.HideOrShow(hasDick);
             if (hasDick)
-                dickController.SetDickSize(SetOrganSize(sexualOrgans.Biggest));
+                dickController.SetDickSize(SetOrganSize(sexualBaseOrgans.Biggest));
         }
 
         static float SetOrganSize(float currentSize) => 0.2f + Mathf.Log(currentSize) * OrganMulti;
 
 
-        public void SetSkinTone(float tone)
+        public void SetSkinTone(float tone, bool forceSkinUpdate)
         {
             skinTone.SetSkinTone(tone, bodyMeshRenderers, forceSkinUpdate);
-            forceSkinUpdate = false;
         }
 
         public void Save()
@@ -260,12 +263,25 @@ namespace AvatarStuff
         {
             if (!AvatarDetails.AvatarDetailsSavesDict.TryGetValue(prefab.AssetGUID, out var saved))
                 return;
-            foreach (var colorSave in saved.colorSaves)
+            foreach (var colorSave in saved.ColorSaves)
             {
-                var firstOrDefault = hairMats.FirstOrDefault(m => m.name == colorSave.matName);
-                if (firstOrDefault != null &&
-                    ColorUtility.TryParseHtmlString($"#{colorSave.colorName}", out var savedColor))
+                if (!TryFindMaterial(colorSave, out var firstOrDefault)) continue;
+                if (ColorUtility.TryParseHtmlString($"#{colorSave.ColorName}", out var savedColor))
                     firstOrDefault.color = savedColor;
+            }
+
+            bool TryFindMaterial(AvatarDetails.ColorSave colorSave, out Material firstOrDefault)
+            {
+                foreach (var m in hairMats)
+                {
+                    if (m.name != colorSave.MatName)
+                        continue;
+                    firstOrDefault = m;
+                    return true;
+                }
+
+                firstOrDefault = default;
+                return false;
             }
         }
 

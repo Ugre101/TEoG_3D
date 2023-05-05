@@ -10,28 +10,15 @@ namespace AvatarStuff
 
         bool hidden;
 
-        void Hide(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers)
+        void HideDick(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hide)
         {
-            hidden = true;
-            foreach (SkinnedMeshRenderer meshRenderer in skinnedMeshRenderers)
+            hidden = hide;
+            foreach (var meshRenderer in skinnedMeshRenderers)
             {
                 var rendererMaterials = meshRenderer.materials;
-                for (int index = 0; index < rendererMaterials.Length; index++)
-                    if (rendererMaterials[index].name.Contains(targetMat.name))
-                        rendererMaterials[index] = invisibleMat;
-                meshRenderer.materials = rendererMaterials;
-            }
-        }
-
-        void Show(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers)
-        {
-            hidden = false;
-            foreach (SkinnedMeshRenderer meshRenderer in skinnedMeshRenderers)
-            {
-                Material[] rendererMaterials = meshRenderer.materials;
-                for (int index = 0; index < rendererMaterials.Length; index++)
-                    if (rendererMaterials[index].name.Contains(invisibleMat.name))
-                        rendererMaterials[index] = targetMat;
+                for (var index = 0; index < rendererMaterials.Length; index++)
+                    if (rendererMaterials[index].name.Contains(hide ? targetMat.name : invisibleMat.name))
+                        rendererMaterials[index] = hide ? invisibleMat : targetMat;
                 meshRenderer.materials = rendererMaterials;
             }
         }
@@ -39,17 +26,18 @@ namespace AvatarStuff
         /// <returns>If skin color need to be updated</returns>
         public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls)
         {
-            if (hidden)
+            switch (hidden)
             {
-                if (hasDick || hasBalls)
-                {
-                    Show(skinnedMeshRenderers);
+                case true when !hasDick && !hasBalls:
+                    return false;
+                case true:
+                    HideDick(skinnedMeshRenderers, false);
                     return true;
-                }
+                case false when hasBalls || hasDick:
+                    return false;
             }
-            else if (!hasDick && !hasBalls)
-                Hide(skinnedMeshRenderers);
 
+            HideDick(skinnedMeshRenderers, true);
             return false;
         }
     }

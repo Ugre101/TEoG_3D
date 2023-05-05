@@ -8,9 +8,12 @@ namespace Safe_To_Share.Scripts.AfterBattle
     {
         public void PosActors(AfterBattleActor playerControlled, AfterBattleActor partner, SexActionAnimation ani)
         {
+            if (!playerControlled.HasAvatar || !partner.HasAvatar)
+                return;
             var t1 = playerControlled.Avatar.KeyAreas.GetArea(ani.GivePos.KeyArea);
             var t2 = partner.Avatar.KeyAreas.GetArea(ani.ReceivePos.KeyArea);
             if (t1 == null || t2 == null) return;
+            
 
             if (ani.ReceivePos.SetAsChild) 
                 SetAsChild(partner, t1, t2, ani.ReceivePos);

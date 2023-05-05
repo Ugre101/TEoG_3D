@@ -1,16 +1,17 @@
 ﻿using System;
 using Character.EssenceStuff;
 using Character.Organs.Fluids.SexualFluids;
+using Safe_To_Share.Scripts.Character.Organs.SexualOrgan;
 using UnityEngine;
 
 namespace Character.Organs.OrgansContainers
 {
     [Serializable]
-    public class AnalsContainer : OrgansContainer
+    public class AnalsContainer : OrgansContainer<Anal>
     {
         public AnalsContainer() : base(new Scat())
         {
-            list.Add(new BaseOrgan());
+            list.Add(new Anal());
         }
 
         public override int GrowNewCostAt(int count) => 19 + Mathf.FloorToInt(Mathf.Pow(52f, count));

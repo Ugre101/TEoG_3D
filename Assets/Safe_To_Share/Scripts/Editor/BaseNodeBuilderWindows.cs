@@ -5,19 +5,21 @@ using UnityEngine;
 
 namespace CustomClasses.Editor
 {
-    public abstract class BaseNodeBuilderWindows : EditorWindow
+    public abstract class BaseNodeBuilderWindows<T,N> : EditorWindow where T : BaseEditorCanvasObject<N> where N : BaseEditorCanvasNode
     {
         protected const int CanvasSize = 4000;
-        [NonSerialized] protected BaseEditorCanvasNode creatingNode;
-        [NonSerialized] protected BaseEditorCanvasNode deletingNode;
-        [NonSerialized] protected BaseEditorCanvasNode draggedNode;
+        [NonSerialized] protected N creatingNode;
+        [NonSerialized] protected N deletingNode;
+        [NonSerialized] protected N draggedNode;
         [NonSerialized] protected bool DraggingCanvas;
         [NonSerialized] protected Vector2 DraggingCanvasOffset;
         [NonSerialized] protected Vector2 DraggingOffset;
-        [NonSerialized] protected BaseEditorCanvasNode linkingNode;
+        [NonSerialized] protected N linkingNode;
         protected GUIStyle NodeStyle;
         protected Vector2 ScrollPos;
 
+        protected T Selected;
+        
         protected virtual void OnEnable()
         {
             Selection.selectionChanged += SelectionChanged;
@@ -33,11 +35,19 @@ namespace CustomClasses.Editor
             };
         }
 
-        protected abstract void SelectionChanged();
-
-        protected static void DrawNodeConnection(BaseEditorCanvasObject canvasObject, BaseEditorCanvasNode node)
+        protected void SelectionChanged()
         {
-            foreach (BaseEditorCanvasNode childNode in canvasObject.GetChildNodes(node))
+            var newObjet = Selection.activeObject;
+            if (newObjet is T match)
+            {
+                Selected = match;
+                Repaint();
+            }
+        }
+
+        protected static void DrawNodeConnection(BaseEditorCanvasObject<N> canvasObject, N node)
+        {
+            foreach (N childNode in canvasObject.GetChildNodes(node))
             {
                 Vector3 startPos = new Vector2(node.rect.xMax, node.rect.center.y);
                 Vector3 endPos = new Vector2(childNode.rect.xMin, childNode.rect.center.y);
@@ -48,7 +58,7 @@ namespace CustomClasses.Editor
             }
         }
 
-        protected void PrintButtons(BaseEditorCanvasNode node)
+        protected void PrintButtons(N node)
         {
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Add"))
@@ -81,6 +91,45 @@ namespace CustomClasses.Editor
             if (GUILayout.Button("Delete"))
                 deletingNode = node;
             GUILayout.EndHorizontal();
+        }
+
+        protected void ProcessEvents()
+        {
+            switch (Event.current.type)
+            {
+                case EventType.MouseDown when draggedNode == null:
+                {
+                    draggedNode = Selected.GetNodeAtPoint(Event.current.mousePosition + ScrollPos);
+                    if (draggedNode != null)
+                    {
+                        DraggingOffset = draggedNode.rect.position - Event.current.mousePosition;
+                        Selection.activeObject = draggedNode;
+                    }
+                    else
+                    {
+                        DraggingCanvas = true;
+                        DraggingCanvasOffset = Event.current.mousePosition + ScrollPos;
+                        Selection.activeObject = Selected;
+                    }
+
+                    break;
+                }
+                case EventType.MouseDrag when draggedNode != null:
+                    Undo.RecordObject(Selected, "Move node");
+                    draggedNode.rect.position = Event.current.mousePosition + DraggingOffset;
+                    GUI.changed = true;
+                    break;
+                case EventType.MouseDrag when DraggingCanvas:
+                    ScrollPos = DraggingCanvasOffset - Event.current.mousePosition;
+                    GUI.changed = true;
+                    break;
+                case EventType.MouseUp when draggedNode != null:
+                    draggedNode = null;
+                    break;
+                case EventType.MouseUp when DraggingCanvas:
+                    DraggingCanvas = false;
+                    break;
+            }
         }
     }
 }

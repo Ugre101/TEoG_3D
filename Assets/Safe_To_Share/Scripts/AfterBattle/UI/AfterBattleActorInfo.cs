@@ -1,4 +1,5 @@
-﻿using Character;
+﻿using System;
+using Character;
 using Character.EssenceStuff.UI;
 using Character.GenderStuff;
 using Character.Organs.Fluids.UI;
@@ -21,9 +22,12 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         [SerializeField] TextMeshProUGUI pregnant;
         [SerializeField] FluidInfos fluidInfos;
         [SerializeField] AfterBattleEssenceSliders afterBattleEssenceSliders;
+        BaseCharacter actor;
+
 
         public void Setup(BaseCharacter character)
         {
+            actor = character;
             title.text = character.Identity.FullName;
             if (character.RaceSystem.Race != null)
                 race.text = character.RaceSystem.Race.Title;
@@ -35,6 +39,11 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             pregnant.text = character.IsPregnant() ? "P" : string.Empty;
             fluidInfos.Setup(character);
             afterBattleEssenceSliders.Setup(character);
+        }
+
+        void OnDestroy()
+        {
+            actor.SexStats.OrgasmChange -= ChangeOrgasmText;
         }
 
         void ChangeOrgasmText(int obj) => orgasmCounter.text = $"Orgasms: {obj}";

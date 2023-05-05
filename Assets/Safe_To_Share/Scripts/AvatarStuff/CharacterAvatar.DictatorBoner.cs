@@ -51,7 +51,7 @@ namespace AvatarStuff
             }
             
 
-            public void SetupFluidStretch(OrgansContainer container) => dictatorBalls.SetupFluidStretch(container);
+            public void SetupFluidStretch(BaseOrgansContainer container) => dictatorBalls.SetupFluidStretch(container);
 
             public void SetFluidStretch(float current) => dictatorBalls.SetFluidStretch(current);
 

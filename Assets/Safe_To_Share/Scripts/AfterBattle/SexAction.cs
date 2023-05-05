@@ -34,7 +34,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         readonly Random rng = new();
 
-        string ImpregnateOrganTitle => organToBeImpregnated.ToString().ToLower();
+        string ImpregnateOrganTitle => nameof(organToBeImpregnated).ToLower();
 
         public override bool CanUse(BaseCharacter giver, BaseCharacter receiver) =>
             giver.SexStats.CanOrgasmMore &&
@@ -53,7 +53,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
         public override SexActData Use(AfterBattleActor caster, AfterBattleActor target)
         {
             data.AfterText.Clear();
-            ArousalGain.GainInfo gain = arousalGain.Gain(caster.Actor, target.Actor);
+            var gain = arousalGain.Gain(caster.Actor, target.Actor);
             for (int i = 0; i < gain.TimesCasterOrgasmed; i++)
                 OnCasterOrgasm(caster, target);
             for (int i = 0; i < gain.TimesPartnerOrgasmed; i++)
@@ -85,7 +85,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             switch (fluidsInto.Into)
             {
                 case CumFluidsFromInto.IntoForeignFluids.Vagina:
-                    foreignFluidsList.AddRange(into.SexualOrgans.Vaginas.List.Select(v => v.Womb.ForeignFluids));
+                    foreignFluidsList.AddRange(into.SexualOrgans.Vaginas.BaseList.Select(v => v.Womb.ForeignFluids));
                     break;
                 case CumFluidsFromInto.IntoForeignFluids.Stomach:
                     foreignFluidsList.Add(into.SexStats.FluidsInStomach);
@@ -94,10 +94,10 @@ namespace Safe_To_Share.Scripts.AfterBattle
                     foreignFluidsList.Add(into.SexStats.FluidsOnBody);
                     break;
                 case CumFluidsFromInto.IntoForeignFluids.Boobs:
-                    foreignFluidsList.AddRange(into.SexualOrgans.Boobs.List.Select(v => v.Womb.ForeignFluids));
+                    foreignFluidsList.AddRange(into.SexualOrgans.Boobs.BaseList.Select(v => v.Womb.ForeignFluids));
                     break;
                 case CumFluidsFromInto.IntoForeignFluids.Balls:
-                    foreignFluidsList.AddRange(into.SexualOrgans.Balls.List.Select(v => v.Womb.ForeignFluids));
+                    foreignFluidsList.AddRange(into.SexualOrgans.Balls.BaseList.Select(v => v.Womb.ForeignFluids));
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -116,10 +116,10 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         bool CanGetImpregnated(BaseCharacter father, BaseCharacter mother)
         {
-            if (!mother.SexualOrgans.Containers.TryGetValue(organToBeImpregnated, out OrgansContainer motherCon) ||
+            if (!mother.SexualOrgans.Containers.TryGetValue(organToBeImpregnated, out var motherCon) ||
                 !motherCon.HaveAny())
                 return false;
-            if (motherCon.List.Any(c => c.Womb.HasFetus))
+            if (motherCon.BaseList.Any(c => c.Womb.HasFetus))
                 return false;
             return father.TryImpregnate(mother, motherCon.GetRandomOrgan());
         }
@@ -162,10 +162,10 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
             public bool MeetReq(BaseCharacter character)
             {
-                OrgansContainer organsContainer = character.SexualOrgans.Containers[OrganType];
-                return (!minSize.Need || !(organsContainer.Biggest < minSize.Size)) &&
-                       (!maxSize.Need || !(maxSize.Size < organsContainer.List.Min(o => o.Value))) &&
-                       (!amount.Need || !(organsContainer.List.Count() < amount.Size));
+                BaseOrgansContainer baseOrgansContainer = character.SexualOrgans.Containers[OrganType];
+                return (!minSize.Need || !(baseOrgansContainer.Biggest < minSize.Size)) &&
+                       (!maxSize.Need || !(maxSize.Size < baseOrgansContainer.BaseList.Min(o => o.Value))) &&
+                       (!amount.Need || !(baseOrgansContainer.BaseList.Count() < amount.Size));
             }
         }
 

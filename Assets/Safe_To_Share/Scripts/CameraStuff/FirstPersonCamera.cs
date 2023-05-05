@@ -1,6 +1,6 @@
 ﻿using AvatarStuff;
 using Cinemachine;
-using Movement.ECM2.Source.Characters;
+using MovementScripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,9 +8,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
 {
     public class FirstPersonCamera : CinemachineInputProvider
     {
-#if Calls_Code_I_Dont_Own
-        [SerializeField] ThirdPersonEcm2Character mover;
-#endif
+        [SerializeField] Movement mover;
         [SerializeField] FreePlayCameraController thirdPerson;
         [SerializeField] CinemachineVirtualCamera brain;
         [SerializeField,Range(1.5f,2.5f)] float crounchFactor;
@@ -43,20 +41,16 @@ namespace Safe_To_Share.Scripts.CameraStuff
             //  print(thirdPerson.transform.localEulerAngles);
             brain.ForceCameraPosition(transform.position, thirdPerson.transform.rotation);
             Cursor.lockState = CursorLockMode.Locked;
-#if Calls_Code_I_Dont_Own
-
-            mover.SetRotationMode(RotationMode.OrientToCameraViewDirection);
-            mover.SetFirstPersonMode(true);
-            mover.Crouched += Crouched;
-            mover.Uncrouched += UnCrouched;
-            mover.MovementModeChanged += IfSwimming;
-#endif
-            avatarScaler.SizeChange += AvatarScalerOnSizeChange;
+           // mover.SetRotationMode(RotationMode.OrientToCameraViewDirection);
+           // mover.SetFirstPersonMode(true);
+            mover.WalkingModule.StartedCrunching += Crouched;
+            mover.WalkingModule.StoppedCrounching += UnCrouched;
+            mover.ChangedMode += IfSwimming;
             UnCrouched();
             AvatarScalerOnSizeChange(avatarScaler.Height);
         }
 
-        void AvatarScalerOnSizeChange(float obj)
+        public void AvatarScalerOnSizeChange(float obj)
         {
             float clip = obj * nearClipping;
             brain.m_Lens.NearClipPlane = clip;
@@ -68,11 +62,10 @@ namespace Safe_To_Share.Scripts.CameraStuff
         {
             base.OnDisable();
 #if Calls_Code_I_Dont_Own
-            mover.Crouched -= Crouched;
-            mover.Uncrouched -= UnCrouched;
-            mover.MovementModeChanged -= IfSwimming;
+            mover.WalkingModule.StartedCrunching -= Crouched;
+            mover.WalkingModule.StoppedCrounching -= UnCrouched;
+            mover.ChangedMode -= IfSwimming;
 #endif
-            avatarScaler.SizeChange -= AvatarScalerOnSizeChange;
         }
 # if UNITY_EDITOR
         void OnValidate()
@@ -84,10 +77,10 @@ namespace Safe_To_Share.Scripts.CameraStuff
         }
 #endif
 
-        void IfSwimming(MovementMode prevmovementmode, int prevcustommode)
+        void IfSwimming(MoveCharacter.MoveModes moveModes)
         {
 #if Calls_Code_I_Dont_Own
-            if (mover.IsSwimming())
+            if (mover.Swimming)
                 ExitFirstPerson();
 #endif
         }

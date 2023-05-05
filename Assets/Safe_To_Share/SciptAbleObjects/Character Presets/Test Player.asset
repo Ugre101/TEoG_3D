@@ -15,7 +15,7 @@ MonoBehaviour:
   startGender:
     allowedGenders:
     - weight: 3
-      gender: 5
+      gender: 0
     startEssence: 2800
   startIdentity:
     customIdentity: 1
@@ -65,7 +65,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e292cb85cff9ed4698217e089677565, type: 2}
   - {fileID: 11400000, guid: d96b6e0901c5424439b19ffc5fd4d11a, type: 2}
   startRaceRef:
-    m_AssetGUID: 7c596fb2be9bc2f4882a620ee187df56
+    m_AssetGUID: 4d8d0eb9b96993249aa87052e588b749
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0

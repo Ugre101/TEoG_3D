@@ -16,7 +16,7 @@ MonoBehaviour:
     allowedGenders:
     - weight: 2
       gender: 5
-    startEssence: 120
+    startEssence: 34
   startIdentity:
     customIdentity: 0
     identity:
@@ -77,6 +77,7 @@ MonoBehaviour:
   loseScenarios: {fileID: 11400000, guid: d547ccf44044b6b41809a119bae15cc3, type: 2}
   desc: 
   giveRandomBodyMorphs: 0
+  <EnemyGuid>k__BackingField: 231ea661-92db-40a4-a1ef-f9de857a4094
   customLoseScenarios:
   - Title: Test All
     introNode:

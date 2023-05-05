@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Animation
 {
@@ -20,7 +22,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Animation
                 if (sexAnimationFilter.MeetsRequirements(caster,partner))
                     return sexAnimationFilter.Animation;
             }
-
+            
             return defaultAnimation;
         }
     }

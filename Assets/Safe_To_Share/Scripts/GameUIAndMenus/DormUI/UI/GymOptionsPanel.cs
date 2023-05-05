@@ -37,6 +37,6 @@ namespace DormAndHome.Dorm.UI
 
         static void ChangeTrainMode(int arg0) => Gym.TrainSchema = UgreTools.IntToEnum(arg0, DormGym.TrainMode.None);
 
-        static TMP_Dropdown.OptionData CreateGymOption(DormGym.TrainMode trainMode) => new(trainMode.ToString());
+        static TMP_Dropdown.OptionData CreateGymOption(DormGym.TrainMode trainMode) => new(nameof(trainMode));
     }
 }

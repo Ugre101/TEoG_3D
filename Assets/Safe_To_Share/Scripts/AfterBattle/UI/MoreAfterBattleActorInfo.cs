@@ -12,7 +12,6 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
 {
     public class MoreAfterBattleActorInfo : MonoBehaviour
     {
-        [SerializeField] Button downBtn, upBtn;
         [SerializeField] TextMeshProUGUI bodyInfo;
         [SerializeField] TextMeshProUGUI sexualOrgansInfo;
         BaseCharacter actor;
@@ -20,10 +19,6 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         void Start()
         {
             gameObject.SetActive(false);
-            downBtn.onClick.AddListener(Down);
-            downBtn.gameObject.SetActive(true);
-            upBtn.onClick.AddListener(Up);
-            upBtn.gameObject.SetActive(false);
         }
 
         void OnEnable()
@@ -34,8 +29,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             foreach (var body in actor.Body.BodyStats)
                 body.Value.StatDirtyEvent += PrintBodyInfo;
             PrintOrganInfo();
-            foreach (var container in actor.SexualOrgans.Containers.Values)
-            foreach (var org in container.List)
+            foreach (var org in actor.SexualOrgans.GetAllOrgans())
                 org.StatDirtyEvent += PrintOrganInfo;
         }
 
@@ -45,19 +39,17 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
                 return;
             foreach (var body in actor.Body.BodyStats)
                 body.Value.StatDirtyEvent -= PrintBodyInfo;
-            foreach (BaseOrgan org in actor.SexualOrgans.Containers.Values.SelectMany(container => container.List))
+            foreach (var org in actor.SexualOrgans.GetAllOrgans())
                 org.StatDirtyEvent -= PrintOrganInfo;
         }
 
-        void Up() => ToggleAll(false);
+        public void Up() => ToggleAll(false);
 
-        void Down() => ToggleAll(true);
+        public void Down() => ToggleAll(true);
 
         void ToggleAll(bool down)
         {
             gameObject.SetActive(down);
-            downBtn.gameObject.SetActive(!down);
-            upBtn.gameObject.SetActive(down);
         }
 
         public void Setup(BaseCharacter actor) => this.actor = actor;
@@ -65,12 +57,11 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         void PrintOrganInfo()
         {
             StringBuilder sb = new();
-            foreach ((SexualOrganType key, OrgansContainer value) in actor.SexualOrgans.Containers)
+            foreach (var (key, value) in actor.SexualOrgans.Containers)
             {
-                foreach (var org in value.List)
-                    sb.Append(SexualOrgansExtensions.OrganDesc(key, org));
-                sb.AppendLine();
-                sb.AppendLine();
+                foreach (var org in value.BaseList)
+                    sb.Append(org.OrganDesc());
+                sb.AppendLine().AppendLine();
             }
 
             sexualOrgansInfo.text = sb.ToString();

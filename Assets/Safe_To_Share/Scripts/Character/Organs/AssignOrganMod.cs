@@ -17,7 +17,7 @@ namespace Character.Organs
         {
             if (!to.SexualOrgans.Containers.TryGetValue(type, out var container)) return;
             if (organMods.Count > 0)
-                foreach (BaseOrgan baseOrgan in container.List)
+                foreach (BaseOrgan baseOrgan in container.BaseList)
                 foreach (IntMod intMod in organMods)
                     baseOrgan.Mods.AddStatMod(intMod);
             if (fluidMods.Count > 0)

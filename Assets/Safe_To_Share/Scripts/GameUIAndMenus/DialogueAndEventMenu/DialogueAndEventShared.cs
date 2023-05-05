@@ -100,10 +100,10 @@ namespace GameUIAndMenus.DialogueAndEventMenu
 
         protected abstract void HandleOption(DialogueBaseNode obj);
 
-        protected void AddOptionButtons(BaseEditorCanvasNode obj)
+        protected void AddOptionButtons(DialogueBaseNode obj)
         {
             content.KillChildren();
-            var dialogueBaseNodes = CurrentDialogue.GetChildNodes(obj).Cast<DialogueBaseNode>().ToArray();
+            var dialogueBaseNodes = CurrentDialogue.GetChildNodes(obj).ToArray();
             for (var i = 0; i < dialogueBaseNodes.Length; i++)
             {
                 var childNode = dialogueBaseNodes[i];

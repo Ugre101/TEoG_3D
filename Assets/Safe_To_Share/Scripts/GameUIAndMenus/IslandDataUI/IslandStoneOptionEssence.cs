@@ -61,15 +61,15 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 
         void UpdateValue(int ess)
         {
-            currentAmount.text = $"{ess}{essenceType}";
-            btnImage.color = CanAfford(out Essence _) ? Color.green : Color.gray;
+            currentAmount.text = $"{ess}{nameof(essenceType)}";
+            btnImage.color = CanAfford(out _) ? Color.green : Color.gray;
         }
 #if UNITY_EDITOR
         [SerializeField] TextMeshProUGUI title;
         protected void OnValidate()
         {
-            title.text = essenceType.ToString();
-            costText.text = $"Increase by donating {DonateAmount} {essenceType.ToString()}";
+            title.text = nameof(essenceType);
+            costText.text = $"Increase by donating {DonateAmount} {nameof(essenceType)}";
             title.color = essenceType == EssenceType.Femi ? Color.magenta : Color.blue;
         }
 #endif

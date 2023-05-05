@@ -49,8 +49,8 @@ namespace Assets.Scripts.Character.EssenceStuff.Perks
                     MorphToDickgirl(partner, changeLog);
                     break;
                 case MorphToGender.Futanari:
-                    int manSum = organs.Balls.List.Sum(b => b.BaseValue) + organs.Dicks.List.Sum(d => d.BaseValue);
-                    int femaleSum = organs.Vaginas.List.Sum(v => v.BaseValue) + organs.Boobs.List.Sum(b => b.BaseValue);
+                    int manSum = organs.Balls.BaseList.Sum(b => b.BaseValue) + organs.Dicks.BaseList.Sum(d => d.BaseValue);
+                    int femaleSum = organs.Vaginas.BaseList.Sum(v => v.BaseValue) + organs.Boobs.BaseList.Sum(b => b.BaseValue);
                     if (manSum < femaleSum)
                         partner.GainMasc(partner.LoseFemi(AmountToLose, changeLog) + bonus);
                     else
@@ -81,7 +81,7 @@ namespace Assets.Scripts.Character.EssenceStuff.Perks
         void MorphToCuntBoy(BaseCharacter partner, SexualOrgans organs, ChangeLog changeLog)
         {
             partner.Essence.StableEssence.BaseValue += stableGain;
-            var toTakeFrom = new OrgansContainer[] { organs.Balls, organs.Dicks, organs.Boobs, };
+            var toTakeFrom = new BaseOrgansContainer[] { organs.Balls, organs.Dicks, organs.Boobs, };
             var withOrgans = toTakeFrom.Where(c => c.HaveAny()).ToArray();
             int toGain = withOrgans[rng.Next(withOrgans.Length)].ReCycleOnce(changeLog);
             partner.Essence.Femininity.GainEssence( toGain);

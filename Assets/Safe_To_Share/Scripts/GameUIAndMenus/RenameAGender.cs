@@ -20,8 +20,10 @@ namespace Options
 #if UNITY_EDITOR
         void OnValidate()
         {
+            if (Application.isPlaying)
+                return;
             if (orgGenderName != null)
-                orgGenderName.text = UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(gender.ToString());
+                orgGenderName.text = UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(nameof(gender));
         }
 #endif
 

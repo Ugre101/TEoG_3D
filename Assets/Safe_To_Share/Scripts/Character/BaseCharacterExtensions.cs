@@ -11,7 +11,7 @@ namespace Character
 
         public static void GrowOrgans(this BaseCharacter character)
         {
-            static bool DidGrowSmallest(Essence essence, OrgansContainer container)
+            static bool DidGrowSmallest(Essence essence, BaseOrgansContainer container)
                 => !container.HaveAny() ? container.TryGrowNew(essence) : container.TryGrowSmallest(essence);
 
             Essence masculinity = character.Essence.Masculinity;
@@ -26,8 +26,8 @@ namespace Character
                 if (MaxLoop < breakOut) break;
                 breakOut++;
 
-                float dickSum = dicks.List.Sum(d => d.BaseValue);
-                float ballsSum = balls.List.Sum(b => b.BaseValue);
+                float dickSum = dicks.BaseList.Sum(d => d.BaseValue);
+                float ballsSum = balls.BaseList.Sum(b => b.BaseValue);
                 didGrowSomething = dickSum == 0 || dickSum * dickDiv <= ballsSum
                     ? DidGrowSmallest(masculinity, dicks)
                     : DidGrowSmallest(masculinity, balls);
@@ -44,8 +44,8 @@ namespace Character
             {
                 if (MaxLoop < breakOut) break;
                 breakOut++;
-                float vagSum = vagina.List.Sum(v => v.BaseValue);
-                float boobsSum = boobs.List.Sum(b => b.BaseValue);
+                float vagSum = vagina.BaseList.Sum(v => v.BaseValue);
+                float boobsSum = boobs.BaseList.Sum(b => b.BaseValue);
                 didGrowSomething = boobsSum == 0 || boobsSum * boobsDiv <= vagSum
                     ? DidGrowSmallest(femininity, boobs)
                     : DidGrowSmallest(femininity, vagina);

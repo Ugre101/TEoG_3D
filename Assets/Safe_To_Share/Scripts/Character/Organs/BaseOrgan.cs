@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Character.Organs
 {
     [Serializable]
-    public class BaseOrgan : BaseIntStat
+    public abstract class BaseOrgan : BaseIntStat
     {
         [SerializeField] VoreOrgan voreOrgan = new();
         [SerializeField] Womb womb = new();
@@ -16,6 +16,8 @@ namespace Character.Organs
         public BaseOrgan() : base(1)
         {
         }
+
+        public abstract string OrganDesc(bool capitalLeter = true);
 
         public virtual int GrowCost => GrowCostAt(BaseValue);
         public virtual int GrowCostAt(int size) => 9 + Mathf.FloorToInt(Mathf.Pow(size, 1.2f));

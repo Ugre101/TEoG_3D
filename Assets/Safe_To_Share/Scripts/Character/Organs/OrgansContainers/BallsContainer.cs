@@ -1,12 +1,13 @@
 ﻿using System;
 using Character.EssenceStuff;
 using Character.Organs.Fluids.SexualFluids;
+using Safe_To_Share.Scripts.Character.Organs.SexualOrgan;
 using UnityEngine;
 
 namespace Character.Organs.OrgansContainers
 {
     [Serializable]
-    public class BallsContainer : OrgansContainer
+    public class BallsContainer : OrgansContainer<Balls>
     {
         public BallsContainer() : base(new Cum(), 0.5f)
         {

@@ -34,7 +34,7 @@ namespace Character.VoreStuff.VorePerks
 
         static void TurnToFetus(BaseCharacter pred, VoreOrgan voreOrgan, int preysId, Prey prey)
         {
-            var baseOrgan = pred.SexualOrgans.Vaginas.List.FirstOrDefault(v => v.Vore.PreysIds.Contains(preysId));
+            var baseOrgan = pred.SexualOrgans.Vaginas.BaseList.FirstOrDefault(v => v.Vore.PreysIds.Contains(preysId));
             baseOrgan?.Womb.AddFetus(pred, prey);
             pred.OnOrganDigestion(SexualOrganType.Vagina, prey, VaginaDigestionModes.Rebirth);
             voreOrgan.RemovePrey(preysId);

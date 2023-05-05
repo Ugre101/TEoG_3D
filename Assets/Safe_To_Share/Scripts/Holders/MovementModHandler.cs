@@ -1,5 +1,7 @@
+using System;
+using System.Collections.Generic;
 using Character.StatsStuff.Mods;
-using Movement.ECM2.Source.Characters;
+using MovementScripts;
 using Safe_to_Share.Scripts.CustomClasses;
 using Safe_To_Share.Scripts.Static;
 using Special_Items;
@@ -7,55 +9,25 @@ using UnityEngine;
 
 namespace AvatarStuff.Holders
 {
-    public class MovementModHandler : MonoBehaviour
+    public class MovementModHandler : MoveStats
     {
-        [SerializeField] ThirdPersonEcm2Character movement;
-
-        [SerializeField, HideInInspector,] float defaultSprint;
-
-
-        [SerializeField, HideInInspector,] int defaultJumpCount;
-        [SerializeField, HideInInspector,] float defaultJumpStrength;
-        [SerializeField, HideInInspector,] float defaultWalkSpeed;
-        [SerializeField, HideInInspector,] float defaultSwimSpeed;
+        [SerializeField] MovementScripts.Movement movement;
 
         bool firstUse = true;
-        BaseFloatStat jumpCount;
-        BaseFloatStat jumpStrength;
-        BaseFloatStat sprintSpeed;
-        BaseFloatStat swimSpeed;
-        BaseFloatStat walkSpeed;
+        [SerializeField] BaseFloatStat jumpCount = new(1);
+        [SerializeField] BaseFloatStat jumpStrength = new(2f);
+        [SerializeField] BaseFloatStat sprintSpeed = new(1.5f);
+        [SerializeField] BaseFloatStat swimSpeed = new(10f);
+        [SerializeField] BaseFloatStat walkSpeed = new(12f);
         public void Reset()
         {
             FirstSetup();
-            movement.jumpMaxCount = defaultJumpCount;
-            movement.sprintSpeedMultiplier = defaultSprint;
-            movement.jumpImpulse = defaultJumpStrength;
-            movement.maxWalkSpeed = defaultWalkSpeed;
-            movement.maxSwimSpeed = defaultSwimSpeed;
             DateSystem.TickHour -= TickHour;
             DateSystem.TickHour += TickHour;
         }
-#if UNITY_EDITOR
-        void OnValidate()
-        {
-            if (movement == null || Application.isPlaying)
-                return;
-            defaultSprint = movement.sprintSpeedMultiplier;
-            defaultJumpCount = movement.jumpMaxCount;
-            defaultJumpStrength = movement.jumpImpulse;
-            defaultWalkSpeed = movement.maxWalkSpeed;
-            defaultSwimSpeed = movement.maxSwimSpeed;
-        }
-#endif
         void FirstSetup()
         {
             firstUse = false;
-            sprintSpeed = new BaseFloatStat(defaultSprint);
-            jumpCount = new BaseFloatStat(defaultJumpCount);
-            jumpStrength = new BaseFloatStat(defaultJumpStrength);
-            walkSpeed = new BaseFloatStat(defaultWalkSpeed);
-            swimSpeed = new BaseFloatStat(defaultSwimSpeed);
         }
 
         public void AddWalkTempEffect(TempIntMod tempMod)
@@ -91,20 +63,15 @@ namespace AvatarStuff.Holders
         {
             if (firstUse)
                 FirstSetup();
-            foreach (TempIntMod intMod in movementItem.SprintMods)
+            foreach (var intMod in movementItem.SprintMods)
                 sprintSpeed.Mods.AddTempStatMod(intMod);
-            foreach (TempIntMod tempIntMod in movementItem.JumpStrength)
+            foreach (var tempIntMod in movementItem.JumpStrength)
                 jumpStrength.Mods.AddTempStatMod(tempIntMod);
             SetValues();
         }
 
         void SetValues()
         {
-            movement.jumpMaxCount = Mathf.RoundToInt(jumpCount.Value);
-            movement.sprintSpeedMultiplier = sprintSpeed.Value;
-            movement.jumpImpulse = jumpStrength.Value;
-            movement.maxWalkSpeed = walkSpeed.Value;
-            movement.maxSwimSpeed = swimSpeed.Value;
         }
 
         public void TickHour(int ticks = 1)
@@ -115,5 +82,92 @@ namespace AvatarStuff.Holders
             walkSpeed.TickHour(ticks);
             swimSpeed.TickHour(ticks);
         }
+
+        class MoveBoost
+        {
+            float value;
+            public float Value
+            {
+                get
+                {
+                    if (clean) 
+                        return value;
+                    CalcValue();
+                    return value;
+
+                }
+            }
+
+            readonly List<FloatMod> mods = new();
+
+            public void AddMod(FloatMod mod)
+            {
+                mods.Add(mod);
+                clean = false;
+            }
+
+            public void RemoveMod(FloatMod mod)
+            {
+                mods.Remove(mod);
+                clean = false;
+            }
+            void CalcValue()
+            {
+                var sum = 0f;
+                foreach (var floatMod in mods)
+                    sum += floatMod.Value;
+                value = sum;
+                clean = true;
+            }
+            
+
+            bool clean;
+        }
+
+        readonly MoveBoost walkBoost = new();
+        readonly MoveBoost swimBoost = new();
+
+        public override void AddMod(MoveCharacter.MoveModes walking, FloatMod speedMod)
+        {
+            switch (walking)
+            {
+                case MoveCharacter.MoveModes.Walking:
+                    walkBoost.AddMod(speedMod);
+                    break;
+                case MoveCharacter.MoveModes.Falling:
+                    break;
+                case MoveCharacter.MoveModes.Hovering:
+                    break;
+                case MoveCharacter.MoveModes.Swimming:
+                    swimBoost.AddMod(speedMod);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(walking), walking, null);
+            }
+        }
+
+        public override void RemoveMod(MoveCharacter.MoveModes walking, FloatMod speedMod)
+        {
+            switch (walking)
+            {
+                case MoveCharacter.MoveModes.Walking:
+                    walkBoost.RemoveMod(speedMod);
+                    break;
+                case MoveCharacter.MoveModes.Falling:
+                    break;
+                case MoveCharacter.MoveModes.Hovering:
+                    break;
+                case MoveCharacter.MoveModes.Swimming:
+                    swimBoost.RemoveMod(speedMod);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(walking), walking, null);
+            }        }
+
+        public override int MaxJumpCount => Mathf.RoundToInt(jumpCount.Value);
+        public override float JumpStrength => jumpStrength.Value;
+        public override float SprintMultiplier => sprintSpeed.Value;
+        public override float SwimSpeed => swimSpeed.Value + swimBoost.Value;
+        public override float WalkSpeed => walkSpeed.Value + walkBoost.Value;
     }
 }

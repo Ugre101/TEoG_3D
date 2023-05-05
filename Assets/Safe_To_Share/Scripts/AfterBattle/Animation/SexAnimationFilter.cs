@@ -15,7 +15,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Animation
             {
                 Requirements.PlayerTaller => caster.AvatarScaler.Height / partner.AvatarScaler.Height > xTimes,
                 Requirements.PlayerShorter => partner.AvatarScaler.Height / caster.AvatarScaler.Height > xTimes,
-                _ => false
+                _ => false,
             };
         } 
         

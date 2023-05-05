@@ -36,7 +36,7 @@ namespace GameUIAndMenus
             sb.Append($"Your name is {Player.Identity.FullName} you an 18 years old {Player.RaceSystem.Race.Title}. ");
             sb.Append(Player.HeightDesc());
 
-            if (Player.SexualOrgans.Vaginas.List.Any(v => v.Womb.HasFetus))
+            if (Player.SexualOrgans.Vaginas.BaseList.Any(v => v.Womb.HasFetus))
                 sb.Append("\n\n\n You are currently pregnant");
             summary.text = sb.ToString();
         }

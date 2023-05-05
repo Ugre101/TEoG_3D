@@ -55,13 +55,11 @@ namespace Character.VoreStuff
         {
             if (bodyStat.BaseValue <= 0)
                 return 0;
-            if (bodyStat.BaseValue > toDigest)
-            {
-                bodyStat.BaseValue -= toDigest;
-                return toDigest;
-            }
+            if (bodyStat.BaseValue < toDigest) 
+                return TakeTheLast(bodyStat);
+            bodyStat.BaseValue -= toDigest;
+            return toDigest;
 
-            return TakeTheLast(bodyStat);
         }
 
         static float TakeTheLast(BaseFloatStat bodyStat)
@@ -80,16 +78,14 @@ namespace Character.VoreStuff
         public bool EndosomaTryImpregnate(BaseCharacter pred)
         {
             ticksImpreg++;
-            if (ticksImpreg > 33)
-            {
-                ticksImpreg = 0;
-                if (!SexualOrgans.Vaginas.HaveAny() || SexualOrgans.Vaginas.List.All(v => v.Womb.HasFetus))
-                    return false;
-                var emptyWomb = SexualOrgans.Vaginas.List.FirstOrDefault(v => v.Womb.HasFetus == false);
-                return emptyWomb != null && pred.TryImpregnate(this, emptyWomb);
-            }
+            if (ticksImpreg <= 33) 
+                return false;
+            ticksImpreg = 0;
+            if (!SexualOrgans.Vaginas.HaveAny() || SexualOrgans.Vaginas.BaseList.All(v => v.Womb.HasFetus))
+                return false;
+            var emptyWomb = SexualOrgans.Vaginas.BaseList.FirstOrDefault(v => v.Womb.HasFetus == false);
+            return emptyWomb != null && pred.TryImpregnate(this, emptyWomb);
 
-            return false;
         }
 
         public override void TickHour(int ticks = 1)

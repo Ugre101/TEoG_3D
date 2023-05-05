@@ -76,7 +76,7 @@ namespace GameUIAndMenus.Menus.Vore
         {
             noSelected.gameObject.SetActive(false);
             selected.gameObject.SetActive(true);
-            title.text = type.ToString();
+            title.text = nameof(type);
             dropdown.ClearOptions();
             if (!player.Vore.VoreOrgans.TryGetValue(type, out var voreOrgan))
                 return;
@@ -89,7 +89,7 @@ namespace GameUIAndMenus.Menus.Vore
             if (!player.SexualOrgans.Containers.TryGetValue(type, out var container))
                 return;
             List<Prey> allPreys = new();
-            foreach (BaseOrgan baseOrgan in container.List)
+            foreach (var baseOrgan in container.BaseList)
             {
                 allPreys.AddRange(VoredCharacters.GetPreys(baseOrgan.Vore.PreysIds));
                 allPreys.AddRange(VoredCharacters.GetPreys(baseOrgan.Vore.SpecialPreysIds));

@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace Dialogue.Editor
 {
-    public class DialogueBuilderWindow : BaseNodeBuilderWindows
+    public class DialogueBuilderWindow : BaseNodeBuilderWindows<BaseDialogue,DialogueBaseNode>
     {
         [NonSerialized] readonly string[] options =
         {
@@ -21,30 +21,29 @@ namespace Dialogue.Editor
         };
 
         [NonSerialized] NodeTypes nodeType;
-        BaseDialogue selected;
 
         void OnGUI()
         {
-            if (selected == null)
+            if (Selected == null)
                 EditorGUILayout.LabelField("No selected");
             else
             {
                 ProcessEvents();
                 ScrollPos = EditorGUILayout.BeginScrollView(ScrollPos, true, true);
-                EditorGUILayout.LabelField(selected.name);
+                EditorGUILayout.LabelField(Selected.name);
 
                 Rect canvas = GUILayoutUtility.GetRect(CanvasSize, CanvasSize);
-                foreach (DialogueBaseNode node in selected.GetAllNodes())
+                foreach (DialogueBaseNode node in Selected.GetAllNodes())
                 {
                     DrawNode(node);
-                    DrawNodeConnection(selected, node);
+                    DrawNodeConnection(Selected, node);
                 }
 
                 EditorGUILayout.EndScrollView();
 
                 if (deletingNode != null)
                 {
-                    selected.DeleteChildNode(deletingNode);
+                    Selected.DeleteChildNode(deletingNode);
                     deletingNode = null;
                 }
                 else if (creatingNode != null)
@@ -57,22 +56,22 @@ namespace Dialogue.Editor
             switch (nodeType)
             {
                 case NodeTypes.Basic:
-                    selected.CreateNewNode<DialogueBaseNode>(creatingNode);
+                    Selected.CreateChildNode<DialogueBaseNode>(creatingNode);
                     break;
                 case NodeTypes.Close:
-                    selected.CreateNewNode<CloseDialogue>(creatingNode);
+                    Selected.CreateChildNode<CloseDialogue>(creatingNode);
                     break;
                 case NodeTypes.Quest:
-                    selected.CreateNewNode<DialogueQuestNode>(creatingNode);
+                    Selected.CreateChildNode<DialogueQuestNode>(creatingNode);
                     break;
                 case NodeTypes.PreBattle:
-                    selected.CreateNewNode<PreBattleDialogue>(creatingNode);
+                    Selected.CreateChildNode<PreBattleDialogue>(creatingNode);
                     break;
                 case NodeTypes.Service:
-                    selected.CreateNewNode<ServiceMenuDialogueNode>(creatingNode);
+                    Selected.CreateChildNode<ServiceMenuDialogueNode>(creatingNode);
                     break;
                 case NodeTypes.Shop:
-                    selected.CreateNewNode<OpenShopDialogueNode>(creatingNode);
+                    Selected.CreateChildNode<OpenShopDialogueNode>(creatingNode);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -81,61 +80,12 @@ namespace Dialogue.Editor
             creatingNode = null;
         }
 
-        protected override void SelectionChanged()
-        {
-            var newObjet = Selection.activeObject;
-            if (newObjet is BaseDialogue dialogue)
-            {
-                selected = dialogue;
-                Repaint();
-            }
-        }
-
         [MenuItem("Dialogue/Builder")]
         static void ShowWindow()
         {
             var window = GetWindow<DialogueBuilderWindow>();
             window.titleContent = new GUIContent("Dialogue Builder");
             window.Show();
-        }
-
-        void ProcessEvents()
-        {
-            switch (Event.current.type)
-            {
-                case EventType.MouseDown when draggedNode == null:
-                {
-                    draggedNode = selected.GetNodeAtPoint(Event.current.mousePosition + ScrollPos);
-                    if (draggedNode != null)
-                    {
-                        DraggingOffset = draggedNode.rect.position - Event.current.mousePosition;
-                        Selection.activeObject = draggedNode;
-                    }
-                    else
-                    {
-                        DraggingCanvas = true;
-                        DraggingCanvasOffset = Event.current.mousePosition + ScrollPos;
-                        Selection.activeObject = selected;
-                    }
-
-                    break;
-                }
-                case EventType.MouseDrag when draggedNode != null:
-                    Undo.RecordObject(selected, "Move node");
-                    draggedNode.rect.position = Event.current.mousePosition + DraggingOffset;
-                    GUI.changed = true;
-                    break;
-                case EventType.MouseDrag when DraggingCanvas:
-                    ScrollPos = DraggingCanvasOffset - Event.current.mousePosition;
-                    GUI.changed = true;
-                    break;
-                case EventType.MouseUp when draggedNode != null:
-                    draggedNode = null;
-                    break;
-                case EventType.MouseUp when DraggingCanvas:
-                    DraggingCanvas = false;
-                    break;
-            }
         }
 
         void DrawNode(DialogueBaseNode node)

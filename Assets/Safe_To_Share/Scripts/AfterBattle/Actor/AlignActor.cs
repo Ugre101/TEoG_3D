@@ -23,22 +23,34 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
         {
             if (!moving) return;
             var delta = maxDelta * Time.deltaTime;
-            bool moved = true;
             var diff = toAlign.position - target.position;
-            moved = MoveAlongYAxis(delta, diff);
+            var moved = MoveAlongYAxis(delta, diff);
 
             MoveXAlongXAxis(delta, diff, moved);
         }
 
+        Vector3 moveYDeltaBy = Vector3.zero;
+        Vector3 moveXDeltaBy = Vector3.zero;
+
+        Vector3 MoveYBy(float delta)
+        {
+            moveYDeltaBy.y = delta;
+            return moveYDeltaBy;
+        }
+        Vector3 MoveXBy(float delta)
+        {
+            moveXDeltaBy.x = delta;
+            return moveXDeltaBy;
+        }
         bool MoveAlongYAxis(float delta, Vector3 diff)
         {
-            float yDelta = Mathf.Min(delta * Mathf.Abs(diff.y), Mathf.Abs(diff.y));
+            var yDelta = Mathf.Min(delta * Mathf.Abs(diff.y), Mathf.Abs(diff.y));
             if (grounded)
                 yDelta = 0;
             if (diff.y < -yTolerance)
-                trans.position += new Vector3(0, yDelta, 0);
+                trans.position += MoveYBy(yDelta);
             else if (diff.y > yTolerance)
-                trans.position -= new Vector3(0, yDelta, 0);
+                trans.position -= MoveYBy(yDelta);
             else
                 return false;
             return true;
@@ -46,26 +58,27 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
 
         void MoveXAlongXAxis(float delta, Vector3 diff, bool moved)
         {
-            float xDelta = Mathf.Min(delta / 2f * Mathf.Abs(diff.x), Mathf.Abs(diff.x));
+            var xDelta = Mathf.Min(delta / 2f * Mathf.Abs(diff.x), Mathf.Abs(diff.x));
             if (xStartedPositive)
             {
                 if (diff.x < 0 + xTolerance / 2)
-                    trans.position += new Vector3(xDelta, 0, 0);
+                    trans.position += MoveXBy(xDelta);
                 else if (diff.x > xTolerance)
-                    trans.position -= new Vector3(xDelta, 0, 0);
+                    trans.position -= MoveXBy(xDelta);
                 else if (moved)
                     TickTimeSpent();
             }
             else
             {
                 if (diff.x < -xTolerance)
-                    trans.position += new Vector3(xDelta, 0, 0);
+                    trans.position += MoveXBy(xDelta);
                 else if (diff.x > 0 - xTolerance / 2)
-                    trans.position -= new Vector3(xDelta, 0, 0);
+                    trans.position -= MoveXBy(xDelta);
                 else if (moved)
                     TickTimeSpent();
             }
         }
+        
 
         void TickTimeSpent()
         {

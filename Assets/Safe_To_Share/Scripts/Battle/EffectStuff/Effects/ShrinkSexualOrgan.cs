@@ -14,11 +14,11 @@ namespace Battle.EffectStuff.Effects
 
         public override void UseEffect(BaseCharacter user, BaseCharacter target)
         {
-            if (!target.SexualOrgans.Containers.TryGetValue(organType, out OrgansContainer organ)) return;
+            if (!target.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer organ)) return;
             if (!organ.HaveAny())
                 return;
             if (shrinkAll)
-                foreach (BaseOrgan baseOrgan in organ.List)
+                foreach (BaseOrgan baseOrgan in organ.BaseList)
                     baseOrgan.BaseValue -= FinalIntValue(user, baseOrgan.BaseValue);
             else
             {
