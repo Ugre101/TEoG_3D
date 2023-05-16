@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 5648396668542994940}
   - component: {fileID: 6098252413859740441}
   - component: {fileID: 2129189652066983429}
-  - component: {fileID: 1261656231235666248}
-  - component: {fileID: 8899876484667300441}
-  - component: {fileID: 3316367402099177938}
+  - component: {fileID: 2544556289303088008}
+  - component: {fileID: 1623128089208261143}
+  - component: {fileID: 7821943698579321471}
+  - component: {fileID: 1008936549818365483}
   m_Layer: 25
   m_Name: PlayerHolder
   m_TagString: Player
@@ -60,7 +61,7 @@ MonoBehaviour:
   avatarScaler: {fileID: 7469535026440258888}
   playerAvatar: 1
   movementMoveModHandler: {fileID: 71678109998498014}
-  mover: {fileID: 3316367402099177938}
+  mover: {fileID: 2544556289303088008}
   player:
     identity:
       id: 376
@@ -330,10 +331,10 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289452861187385655}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
@@ -364,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f549eb9a8b04f5148a53de639678e9c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 3316367402099177938}
+  movement: {fileID: 2544556289303088008}
   jumpCount:
     baseValue: 1
     mods:
@@ -412,9 +413,10 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3316367402099177938}
-        m_TargetAssemblyTypeName: MovementScripts.Movement, UgreScriptsRuntime
-        m_MethodName: Input
+      - m_Target: {fileID: 1008936549818365483}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.HoverMovement.MoveInputs,
+          Movement
+        m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -428,8 +430,9 @@ MonoBehaviour:
     m_ActionName: Player Controls/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3316367402099177938}
-        m_TargetAssemblyTypeName: MovementScripts.Movement, UgreScriptsRuntime
+      - m_Target: {fileID: 1008936549818365483}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.HoverMovement.MoveInputs,
+          Movement
         m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
@@ -444,9 +447,10 @@ MonoBehaviour:
     m_ActionName: Player Controls/Jump[/Keyboard/space,/Mouse/rightButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3316367402099177938}
-        m_TargetAssemblyTypeName: MovementScripts.Movement, UgreScriptsRuntime
-        m_MethodName: OnCrunch
+      - m_Target: {fileID: 1008936549818365483}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.HoverMovement.MoveInputs,
+          Movement
+        m_MethodName: OnCrunching
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -460,9 +464,10 @@ MonoBehaviour:
     m_ActionName: Player Controls/Crouch[/Keyboard/leftCtrl,/Keyboard/c]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3316367402099177938}
-        m_TargetAssemblyTypeName: MovementScripts.Movement, UgreScriptsRuntime
-        m_MethodName: Sprint
+      - m_Target: {fileID: 1008936549818365483}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.HoverMovement.MoveInputs,
+          Movement
+        m_MethodName: OnSprint
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -476,9 +481,9 @@ MonoBehaviour:
     m_ActionName: Player Controls/Sprint[/Keyboard/leftShift,/Mouse/leftButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3316367402099177938}
+      - m_Target: {fileID: 1008936549818365483}
         m_TargetAssemblyTypeName: MovementScripts.Movement, UgreScriptsRuntime
-        m_MethodName: AutoRun
+        m_MethodName: 
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -629,7 +634,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 3c946173b77237d4cb07639bf00bfcdc, type: 3}
   addIconToBigMap: 0
   addedIconText: Player
---- !u!114 &1261656231235666248
+--- !u!114 &2544556289303088008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -638,23 +643,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 289452861187385655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883db5cdda514098a6b79f3d036973c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1db3b3f8e2474a77ba9bbac356f2b4ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprintMultiplier: 1.15
+  currentMode: 0
+  capsule: {fileID: 7821943698579321471}
+  <Rigid>k__BackingField: {fileID: 4535136299084643760}
+  <Stats>k__BackingField: {fileID: 71678109998498014}
+  <WalkingModule>k__BackingField:
+    brakeForce: 0.1
+    hoverHeight: 0.1
+    rideSpringStrength: 55
+    rideSpringDampFactor: 0.5
+    jumpCoolDown: 0.2
+    groundedPadding: 1.4
+    maxSlopeAngle: 45
+    airMultiplier: 0.6
+    updateAvatarOffsetFactor: 0.0107
+  swimmingModule:
+    brakeForce: 0.1
+    rideSpringStrength: 50
+    rideSpringDampFactor: 0.5
+    swimAtPercentSubmerged: 0.5
+  groundChecker: {fileID: 1623128089208261143}
+  inputs: {fileID: 1008936549818365483}
+  ori: {fileID: 4449375253713366490}
+  maxFallSpeed: 20
+  cameraTarget: {fileID: 3156939597315827700}
+  turnWithCharacter: 0
+  mainCamera: {fileID: 0}
+  avatarOffsetTransform: {fileID: 8759715639741286662}
+  directionChangeBoostMultiplier: 5
+--- !u!114 &1623128089208261143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289452861187385655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc51994cad52334884e7009b0d07fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   groundLayer:
     serializedVersion: 2
     m_Bits: 19977
-  capsule: {fileID: 8899876484667300441}
-  rigid: {fileID: 4535136299084643760}
-  maxSlope: 45
-  stairChecker:
-    maxStepHeight: 0.3
-    minStepHeight: 0.3
-    stepSearchOvershoot: 0.2
-    progressiveNarrowStep: 0
-  stuckPushDelta: 0.1
-  coyoteTime: 0.345
---- !u!114 &8899876484667300441
+  capsule: {fileID: 7821943698579321471}
+--- !u!114 &7821943698579321471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -663,14 +700,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 289452861187385655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c992ad409f4625bcb83f98ea837766, type: 3}
+  m_Script: {fileID: 11500000, guid: 455d348f3555d6b47a245b1a3c771075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   capsule: {fileID: 5205167599377470840}
   p1PreCalcMath: {x: 0, y: 0, z: 0}
   p2PreCalcMath: {x: 0, y: 0, z: 0}
   radiusRatio: 0.125
---- !u!114 &3316367402099177938
+--- !u!114 &1008936549818365483
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -679,57 +716,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 289452861187385655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be93acbd178448568758d32a90cdff5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 040b3c9aa0ac4b299a91a86077926513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprintMultiplier: 1.15
-  sprintAcceleration: 2
-  currentMode: 0
-  capsuleCollider: {fileID: 8899876484667300441}
-  <Rigid>k__BackingField: {fileID: 4535136299084643760}
-  <Stats>k__BackingField: {fileID: 71678109998498014}
-  ori: {fileID: 4449375253713366490}
-  groundChecker: {fileID: 1261656231235666248}
-  mainCamera: {fileID: 0}
-  cameraTarget: {fileID: 3156939597315827700}
-  turnOnX: 0
-  groundDrag: 0.5
-  swimModule:
-    swimmingBuoyancy: 1
-    swimmingMaxBuoyancy: 5
-    swimmingSweetZone: 0.5
-    swimmingSweetZoneYDownBraking: 0.1
-    swimmingSweetZoneYUpBraking: 0.1
-    percentSubmerged: 0.7
-    diveForce: 1
-    maxDiveSpeed: 15
-    diveUpForceBreak: 0.25
-    brakeForce: 0.075
-  hoverModule:
-    hoverHeight: 2
-    hoverForce: 2
-    fallSpeed: 2
-    sweetZone: 0.5
-    sweetZoneBraking: 0.25
-    jumpForce: 0.5
-    brakeForce: 0.1
-  absoluteMaxSpeed: 60
-  absoluteMaxFallSpeed: 40
-  percentSubToSwim: 0.5
-  <WalkingModule>k__BackingField:
-    airMultiplier: 0.4
-    groundJumping:
-      jumpCooldown: 0.2
-      jumped:
-        m_PersistentCalls:
-          m_Calls: []
-    groundSnap:
-      minDist: 0.04
-      maxDist: 1
-      maxSnapCapsule: 0.056
-    forceMode: 0
-    brakeForce: 0.2
-    crunchSpeedRatio: 0.7
 --- !u!1 &3485618687629152539
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,8 +863,8 @@ GameObject:
   - component: {fileID: 6265009824166565540}
   - component: {fileID: 7469535026440258888}
   - component: {fileID: 3417229716285459534}
-  - component: {fileID: 3478281038077435658}
-  - component: {fileID: 3050455855011230737}
+  - component: {fileID: 7000841515126313939}
+  - component: {fileID: 6783660681134686731}
   m_Layer: 25
   m_Name: AvatarScaler
   m_TagString: Untagged
@@ -916,9 +905,10 @@ MonoBehaviour:
   newAnimatorEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3050455855011230737}
-        m_TargetAssemblyTypeName: AvatarScripts.MoveAnimator, UgreScriptsRuntime
-        m_MethodName: SetAnimator
+      - m_Target: {fileID: 6783660681134686731}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.HoverMovement.ActorOrientation,
+          Movement
+        m_MethodName: SetActorWithAnimator
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -928,9 +918,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 3478281038077435658}
-        m_TargetAssemblyTypeName: AvatarScripts.ActorOrientation, UgreScriptsRuntime
-        m_MethodName: SetActorWithAnimator
+      - m_Target: {fileID: 7000841515126313939}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.HoverMovement.MoveAnimator,
+          Movement
+        m_MethodName: SetAnimator
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -955,7 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb22ed00a681804b995cbb2a65b214b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCapsule: {fileID: 8899876484667300441}
+  characterCapsule: {fileID: 7821943698579321471}
   minSize: 0.1
   maxSize: 5
   SizeChange:
@@ -991,7 +982,7 @@ MonoBehaviour:
   removeDist: 4
   heightReq: 3
   runInEditor: 0
---- !u!114 &3478281038077435658
+--- !u!114 &7000841515126313939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1000,27 +991,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 4264186504093821022}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 713073f9f81d43d195a0ed4eb3e51061, type: 3}
+  m_Script: {fileID: 11500000, guid: c41c3ff0e8b74074b9dc8bfa5c39d944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 2544556289303088008}
+  animator: {fileID: 0}
+  stopSwimmingDelay: 0.05
+--- !u!114 &6783660681134686731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4264186504093821022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4b0d2915a5e06b42b21bb51f207d21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4535136299084643760}
-  cameraTransform: {fileID: 3156939597315827700}
+  cameraTransform: {fileID: 0}
   actorTransform: {fileID: 0}
---- !u!114 &3050455855011230737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4264186504093821022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 946a522e842e44298c64bec72c9a5d73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 3316367402099177938}
-  animator: {fileID: 0}
-  stopSwimmingDelay: 0.05
 --- !u!1 &5109424214000010065
 GameObject:
   m_ObjectHideFlags: 0

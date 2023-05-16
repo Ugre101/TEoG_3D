@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
-using AvatarScripts;
+using Safe_To_Share.Scripts.Movement.HoverMovement;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace AvatarStuff
 {
-    public class AvatarScaler : MonoBehaviour
+    public sealed class AvatarScaler : MonoBehaviour
     {
        [SerializeField] CharacterCapsule characterCapsule;
       // [SerializeField] CharacterMovement characterMovement; 

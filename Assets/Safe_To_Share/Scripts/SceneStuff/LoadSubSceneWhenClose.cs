@@ -17,15 +17,11 @@ namespace SceneStuff
         [SerializeField] Collider blockingCollider;
         bool hasBlockingObejct;
         float lastTick;
-        Transform player;
 
         protected virtual void Start()
         {
             hasBlockingObejct = blockingCollider != null;
             lastTick = Time.time;
-            var playerHolder = PlayerHolder.Instance;
-            if (playerHolder != null)
-                player = playerHolder.transform;
             subScene.Activated += LoadedMe;
         }
 
@@ -34,7 +30,7 @@ namespace SceneStuff
             if (Time.time < lastTick + 0.5f)
                 return;
             lastTick = Time.time;
-            float dist = Vector3.Distance(player.position, transform.position);
+            float dist = Vector3.Distance(PlayerHolder.Position, transform.position);
             if (dist <= loadDist)
                 IfNotActiveLoadScene();
             else if (loadDist + 5f < dist)

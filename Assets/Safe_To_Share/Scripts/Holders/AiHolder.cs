@@ -1,5 +1,6 @@
 ﻿using Movement.ECM2.Source.Characters;
 using Safe_To_Share.Scripts.Holders;
+using Safe_To_Share.Scripts.Movement.NavAgentMover;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,13 +10,11 @@ namespace AvatarStuff.Holders
     public abstract class AiHolder : Holder
     {
         const int FrameLimit = 4;
-        static PlayerHolder foundPlayer;
         [SerializeField] NavMeshAgent move;
-        [SerializeField] AIAgentEcm2Character aIMover;
+        [SerializeField] NavMover aIMover;
         bool outOfRange;
         protected bool Stopped;
 
-        public PlayerHolder Player { get; private set; }
 
         public NavMeshAgent Move
         {
@@ -23,7 +22,7 @@ namespace AvatarStuff.Holders
             private set => move = value;
         }
 
-        public AIAgentEcm2Character AIMover
+        public NavMover AIMover
         {
             get => aIMover;
             private set => aIMover = value;
@@ -54,12 +53,8 @@ namespace AvatarStuff.Holders
                 gameObject.SetActive(false);
             }
 
-            if (AIMover == null && TryGetComponent(out AIAgentEcm2Character aiAgent))
+            if (AIMover == null && TryGetComponent(out NavMover aiAgent))
                 AIMover = aiAgent;
-            if (foundPlayer != null)
-                Player = foundPlayer;
-            else
-                TryFindPlayer();
         }
 
         protected virtual void Update()
@@ -68,7 +63,7 @@ namespace AvatarStuff.Holders
             if (Time.frameCount % FrameLimit != 0)
                 return;
 
-            DistanceToPlayer = Vector3.Distance(transform.position, Player.transform.position);
+            DistanceToPlayer = Vector3.Distance(transform.position, PlayerHolder.Position);
 
             OutOfRange = OutOfRange switch
             {
@@ -77,26 +72,6 @@ namespace AvatarStuff.Holders
                 _ => OutOfRange,
             };
         }
-
-        void TryFindPlayer()
-        {
-            foundPlayer = PlayerHolder.Instance;
-            if (foundPlayer == null)
-            {
-                GameObject player = GameObject.FindWithTag("Player");
-                if (player != null && player.TryGetComponent(out PlayerHolder playerHolder))
-                    foundPlayer = playerHolder;
-                else
-                {
-                    Debug.LogError("Holder can't find player");
-                    enabled = false;
-                    return;
-                }
-            }
-
-            Player = foundPlayer;
-        }
-
 
         protected virtual void BackInRangeFunction() => transform.AwakeChildren();
 

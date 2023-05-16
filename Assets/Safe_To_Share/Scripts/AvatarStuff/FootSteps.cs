@@ -6,7 +6,7 @@ using Random = System.Random;
 namespace AvatarStuff
 {
     [RequireComponent(typeof(AudioSource))]
-    public class FootSteps : MonoBehaviour
+    public sealed class FootSteps : MonoBehaviour
     {
         [SerializeField] AudioClip[] audioClips;
         [SerializeField] AudioClip[] giantAudioClips;
@@ -55,13 +55,11 @@ namespace AvatarStuff
                 print(asset);
                 string assetPathToGuid = AssetDatabase.GUIDToAssetPath(asset);
                 print(assetPathToGuid);
-                if (AssetDatabase.LoadAssetAtPath(assetPathToGuid, typeof(AudioClip)) is AudioClip clip)
-                {
-                    if (clip.name.ToLower().Contains("giant"))
-                        giantClips.Add(clip);
-                    else
-                        clips.Add(clip);
-                }
+                if (AssetDatabase.LoadAssetAtPath(assetPathToGuid, typeof(AudioClip)) is not AudioClip clip) continue;
+                if (clip.name.ToLower().Contains("giant"))
+                    giantClips.Add(clip);
+                else
+                    clips.Add(clip);
             }
 
             audioClips = clips.ToArray();

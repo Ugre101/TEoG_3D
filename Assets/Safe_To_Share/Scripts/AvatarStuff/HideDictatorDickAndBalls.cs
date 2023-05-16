@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    public class HideDictatorDickAndBalls : MonoBehaviour
+    public sealed class HideDictatorDickAndBalls : MonoBehaviour
     {
         [SerializeField] Material[] targetMats;
         [SerializeField] Material ballsTargetMat;
@@ -69,7 +69,7 @@ namespace AvatarStuff
             {
                 var rendererMaterials = meshRenderer.materials;
                 if (dickMatsDict.TryGetValue(meshRenderer, out var pairs))
-                    foreach ((var key, var value) in pairs)
+                    foreach (var (key, value) in pairs)
                         rendererMaterials[key] = value;
                 meshRenderer.materials = rendererMaterials;
             }
@@ -103,12 +103,12 @@ namespace AvatarStuff
         {
             ballsHidden = false;
             foreach (var meshRenderer in skinnedMeshRenderers)
-                if (ballsIndexDict.TryGetValue(meshRenderer, out var ballsIndex))
-                {
-                    var rendererMaterials = meshRenderer.materials;
-                    rendererMaterials[ballsIndex] = ballsTargetMat;
-                    meshRenderer.materials = rendererMaterials;
-                }
+            {
+                if (!ballsIndexDict.TryGetValue(meshRenderer, out var ballsIndex)) continue;
+                var rendererMaterials = meshRenderer.materials;
+                rendererMaterials[ballsIndex] = ballsTargetMat;
+                meshRenderer.materials = rendererMaterials;
+            }
         }
 
         void HideBalls(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers)
@@ -121,18 +121,17 @@ namespace AvatarStuff
                 {
                     rendererMaterials[ballsIndex] = invisibleMat;
                     meshRenderer.materials = rendererMaterials;
+                    continue;
                 }
-                else
-                {
-                    for (var index = 0; index < rendererMaterials.Length; index++)
-                        if (rendererMaterials[index].name.Contains(ballsTargetMat.name))
-                        {
-                            rendererMaterials[index] = invisibleMat;
-                            ballsIndexDict.TryAdd(meshRenderer, index);
-                        }
 
-                    meshRenderer.materials = rendererMaterials;
+                for (var index = 0; index < rendererMaterials.Length; index++)
+                {
+                    if (!rendererMaterials[index].name.Contains(ballsTargetMat.name)) continue;
+                    rendererMaterials[index] = invisibleMat;
+                    ballsIndexDict.TryAdd(meshRenderer, index);
                 }
+
+                meshRenderer.materials = rendererMaterials;
             }
         }
     }

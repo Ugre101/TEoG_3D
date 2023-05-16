@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 namespace Battle
 {
-    public class AttackButtons : MonoBehaviour
+    public sealed class AttackButtons : MonoBehaviour
     {
-        const int MAXRow = 1, MINRow = 0;
+        const int MaxRow = 1, MinRow = 0;
         [SerializeField] AttackBtn[] buttons;
         [SerializeField] Button up, down;
         [SerializeField] TextMeshProUGUI currentRowText;
@@ -20,7 +20,7 @@ namespace Battle
         int CurrentRow
         {
             get => currentRow;
-            set => currentRow = Mathf.Clamp(value, MINRow, MAXRow);
+            set => currentRow = Mathf.Clamp(value, MinRow, MaxRow);
         }
 
 # if UNITY_EDITOR
@@ -29,7 +29,7 @@ namespace Battle
 
         public void FirstSetup()
         {
-            foreach (AttackBtn t in buttons)
+            foreach (var t in buttons)
                 t.FirstSetup();
 
             up.onClick.AddListener(ScrollUp);
@@ -45,12 +45,12 @@ namespace Battle
 
         void BindAbilities()
         {
-            for (int i = 0; i < buttons.Length; i++)
+            for (var i = 0; i < buttons.Length; i++)
             {
-                AttackBtn btn = buttons[i];
-                int bindIndex = CurrentRow > 0 ? buttons.Length * CurrentRow - 1 + i : i;
+                var btn = buttons[i];
+                var bindIndex = CurrentRow > 0 ? buttons.Length * CurrentRow - 1 + i : i;
                 btn.SetId(bindIndex);
-                string boundAbility = currentBook.BoundAbilities[bindIndex];
+                var boundAbility = currentBook.BoundAbilities[bindIndex];
                 if (!string.IsNullOrEmpty(boundAbility) &&
                     currentBook.Abilities.FirstOrDefault(a => a == boundAbility) is { } ability)
                     btn.BindAbility(ability);
@@ -68,8 +68,8 @@ namespace Battle
 
         void UpdateRowButtonsAndText()
         {
-            up.gameObject.SetActive(CurrentRow != MAXRow);
-            down.gameObject.SetActive(CurrentRow != MINRow);
+            up.gameObject.SetActive(CurrentRow != MaxRow);
+            down.gameObject.SetActive(CurrentRow != MinRow);
             currentRowText.text = CurrentRow.ToString();
         }
 

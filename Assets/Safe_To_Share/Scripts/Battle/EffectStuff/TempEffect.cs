@@ -2,7 +2,7 @@
 using Character;
 using Character.StatsStuff.Mods;
 
-namespace Battle.EffectStuff
+namespace Safe_To_Share.Scripts.Battle.EffectStuff
 {
     [Serializable]
     public abstract class TempEffect : Effect

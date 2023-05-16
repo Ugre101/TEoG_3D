@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI
 {
-    public class AfterBattleActorInfo : MonoBehaviour
+    public sealed class AfterBattleActorInfo : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI race;

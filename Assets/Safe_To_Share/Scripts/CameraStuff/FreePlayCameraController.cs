@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace Safe_To_Share.Scripts.CameraStuff
 {
-    public class FreePlayCameraController : MonoBehaviour
+    public sealed class FreePlayCameraController : MonoBehaviour
     {
         // [SerializeField] ThirdPersonEcm2Character mover;
         [SerializeField] FirstPersonCamera firstPerson;
@@ -85,16 +85,16 @@ namespace Safe_To_Share.Scripts.CameraStuff
                 UnlockCursor();
         }
 
-        static bool IsPointerOverUIObject()
+        readonly List<RaycastResult> results = new();
+        bool IsPointerOverUIObject()
         {
             if (EventSystem.current == null)
                 return false;
-            PointerEventData eventDataCurrentPosition = new(EventSystem.current)
+            PointerEventData pointerEventData = new(EventSystem.current)
             {
                 position = Pointer.current.position.ReadValue(),
             };
-            List<RaycastResult> results = new();
-            EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+            EventSystem.current.RaycastAll(pointerEventData, results);
             return results.Count > 0;
         }
 
@@ -125,14 +125,12 @@ namespace Safe_To_Share.Scripts.CameraStuff
         {
             followCam.CameraDistance = Mathf.Clamp(followCam.CameraDistance - newDistance, minDistance, maxDistance);
             if (FirstPersonCameraSettings.FirstPersonCameraEnabled.Enabled is false) return;
-            if (Math.Abs(followCam.CameraDistance - minDistance) < float.Epsilon)
-            {
-                gameObject.SetActive(false);
-                firstPerson.gameObject.SetActive(true);
-            }
+            if (Math.Abs(followCam.CameraDistance - minDistance) > float.Epsilon) return;
+            gameObject.SetActive(false);
+            firstPerson.gameObject.SetActive(true);
         }
 
-        public virtual void OnCursorUnlock(InputAction.CallbackContext context)
+        public void OnCursorUnlock(InputAction.CallbackContext context)
         {
             if (context.performed)
                 UnlockCursor();
@@ -151,7 +149,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             UpdateCursorLockState();
         }
 
-        protected virtual void UpdateCursorLockState()
+        void UpdateCursorLockState()
         {
             Cursor.visible = !isCursorLocked;
             Cursor.lockState = isCursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
@@ -171,15 +169,18 @@ namespace Safe_To_Share.Scripts.CameraStuff
         void TiltTarget(float value)
         {
             target.rotation *= Quaternion.AngleAxis(value * tiltRate * Sensitivity, Vector3.right);
-            var angles = target.transform.localEulerAngles;
+            var trans = target.transform;
+            var angles = trans.localEulerAngles;
             angles.z = 0;
             var x = angles.x;
-            if (x is > 180 and < 320)
-                angles.x = 320;
-            else if (x is < 180 and > 55)
-                angles.x = 55;
+            angles.x = x switch
+            {
+                > 180 and < 320 => 320,
+                < 180 and > 55 => 55,
+                _ => angles.x,
+            };
 
-            target.transform.localEulerAngles = angles;
+            trans.localEulerAngles = angles;
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Battle.SkillsAndSpells
 {
     [CreateAssetMenu(menuName = "Character/Ability/Surrender", fileName = "Surrender", order = 0)]
-    public class Surrender : Ability
+    public sealed class Surrender : Ability
     {
         public override IEnumerator UseEffect(CombatCharacter user, CombatCharacter target)
         {

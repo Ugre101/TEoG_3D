@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using Battle;
 using UnityEngine;
 
-namespace Battle.UI
+namespace Safe_To_Share.Scripts.Battle.UI
 {
-    public class WhoseTurnIcons : MonoBehaviour
+    public sealed class WhoseTurnIcons : MonoBehaviour
     {
         [SerializeField] WhoseTurnIcon icon;
 
@@ -18,7 +18,7 @@ namespace Battle.UI
 
         public void AddCombatant(CombatCharacter character)
         {
-            WhoseTurnIcon turnIcon = Instantiate(icon, transform);
+            var turnIcon = Instantiate(icon, transform);
             turnIcon.Setup(character.Ally, character.Character.Identity.FirstName);
             pairedList.Add(new Paired(turnIcon, character));
             RefreshList();
@@ -26,9 +26,9 @@ namespace Battle.UI
 
         public void RefreshList()
         {
-            var orderBySpeed = pairedList.OrderByDescending(c => c.Character.SpeedAccumulated).ToArray();
-            for (int i = 0; i < orderBySpeed.Length; i++)
-                orderBySpeed[i].Icon.transform.SetSiblingIndex(i);
+            pairedList.Sort((paired, paired1) => paired1.Character.SpeedAccumulated.CompareTo(paired.Character.SpeedAccumulated));
+            for (var i = 0; i < pairedList.Count; i++)
+                pairedList[i].Icon.transform.SetSiblingIndex(i);
         }
 
         readonly struct Paired

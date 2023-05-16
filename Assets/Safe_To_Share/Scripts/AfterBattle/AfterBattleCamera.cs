@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class AfterBattleCamera : MonoBehaviour
+    public sealed class AfterBattleCamera : MonoBehaviour
     {
         [SerializeField] Transform target;
         [SerializeField, Range(1f, 3f),] float minDistance;

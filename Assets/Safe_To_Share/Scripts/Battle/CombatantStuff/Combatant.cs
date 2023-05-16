@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Threading.Tasks;
 using AvatarStuff;
-using Battle.UI;
+using Battle;
 using Character;
 using Character.StatsStuff.HealthStuff;
+using Safe_To_Share.Scripts.Battle.UI;
 using UnityEngine;
 
-namespace Battle.CombatantStuff
+namespace Safe_To_Share.Scripts.Battle.CombatantStuff
 {
-    public class Combatant : MonoBehaviour
+    public sealed class Combatant : MonoBehaviour
     {
         static readonly int BattleIdle = Animator.StringToHash("Battle");
         static readonly int DeadAnimation = Animator.StringToHash("dead");
@@ -25,8 +26,6 @@ namespace Battle.CombatantStuff
 
         void OnDestroy()
         {
-            if (activeAnimator != null)
-                activeAnimator.SetBool(BattleIdle, false);
             UnSub();
         }
 
@@ -44,7 +43,7 @@ namespace Battle.CombatantStuff
 
         void UnSub()
         {
-            if (Character == null)
+            if (Character is null)
                 return;
             Hp.CurrentValueChange -= Dead;
             Wp.CurrentValueChange -= Dead;
@@ -89,10 +88,8 @@ namespace Battle.CombatantStuff
 
         void Die()
         {
-            if (activeAnimator != null)
-                activeAnimator.SetBool(DeadAnimation, true);
-            if (characterFrame != null)
-                characterFrame.gameObject.SetActive(false);
+            activeAnimator.SetBool(DeadAnimation, true);
+            characterFrame.gameObject.SetActive(false);
         }
 
         public void Revive()
@@ -113,7 +110,7 @@ namespace Battle.CombatantStuff
 
         public void TriggerAnimation(TriggerBattleAnimations battleAnimation)
         {
-            if (activeAnimator == null)
+            if (activeAnimator is null)
             {
 #if UNITY_EDITOR
                 Debug.LogWarning("Combatant has no animator");
@@ -127,17 +124,15 @@ namespace Battle.CombatantStuff
 
         public void FloatAnimations(FloatBattleAnimations animations, float value)
         {
-            if (activeAnimator == null)
+            if (activeAnimator is null)
             {
                 Debug.LogWarning("Combatant has no animator");
                 return;
             }
 
-            if (BattleAnimationDict.FloatAnimations.TryGetValue(animations, out int hast))
-            {
-                activeAnimator.SetFloat(hast, value);
-                StartCoroutine(ResetFloat(hast));
-            }
+            if (!BattleAnimationDict.FloatAnimations.TryGetValue(animations, out int hast)) return;
+            activeAnimator.SetFloat(hast, value);
+            StartCoroutine(ResetFloat(hast));
         }
 
         IEnumerator ResetFloat(int hash)

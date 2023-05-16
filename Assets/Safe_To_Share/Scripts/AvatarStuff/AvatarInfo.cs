@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Character.GenderStuff;
 using Character.Race.Races;
@@ -8,17 +9,15 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace AvatarStuff
 {
     [CreateAssetMenu(fileName = "New avatar Info", menuName = "Character/Avatar/Avatar Info", order = 0)]
-    public class AvatarInfo : ScriptableObject
+    public sealed class AvatarInfo : ScriptableObject
     {
         [SerializeField] AssetReference prefab;
         [SerializeField] AssetReference playerPrefab;
         [SerializeField] Gender[] supportedGenders;
         [SerializeField] BasicRace[] supportedRaces;
-        GameObject loaded;
 
-        bool loading,playerLoading, done,playerDone;
-        GameObject playerLoaded;
         AsyncOperationHandle<GameObject> playerOp;
+        AsyncOperationHandle<GameObject> avatarOp;
 
         public Gender[] SupportedGenders => supportedGenders;
         public BasicRace[] SupportedRaces => supportedRaces;
@@ -30,43 +29,42 @@ namespace AvatarStuff
         public async Task<GameObject> GetLoadedPrefab(bool player)
         {
             if (player)
+                return await PlayerLoaded();
+
+            if (avatarOp.IsValid() && avatarOp is { IsDone: true, Result: { } loadedPrefab })
             {
-                if (playerLoaded != null)
-                    return playerLoaded;
-                if (playerLoading)
-                {
-                    while (!playerDone)
-                    {
-                        await Task.Delay(100);
-                        return loaded;
-                    }
-                }
-                playerLoading = true;
-                playerOp = playerPrefab.LoadAssetAsync<GameObject>();
-                await playerOp.Task;
-                if (playerOp.Task.IsCompletedSuccessfully)
-                {
-                    playerLoaded = playerOp.Task.Result;
-                    playerDone = true;
-                    return playerLoaded;
-                }
+                return loadedPrefab;
+            }
+            if (avatarOp.IsValid())
+            {
+                while (!avatarOp.IsDone) 
+                    await Task.Delay(100);
+                if (avatarOp.Result is { } result)
+                    return result;
             }
 
-            if (loaded != null)
-                return loaded;
-            if (loading)
-            {
-                while (!done) await Task.Delay(100);
+            avatarOp = prefab.LoadAssetAsync<GameObject>();
+            await avatarOp.Task;
+            return avatarOp.Result;
+        }
 
-                return loaded;
+        async Task<GameObject> PlayerLoaded()
+        {
+            if (playerOp.IsValid() && playerOp is {IsDone: true, Result: {} playerLoaded})
+                return playerLoaded;
+            if (playerOp.IsValid())
+            {
+                while (!playerOp.IsDone) 
+                    await Task.Delay(100);
+                if (avatarOp.Result is {} doneLoading)
+                    return doneLoading;
             }
 
-            loading = true;
-            var op = prefab.LoadAssetAsync<GameObject>();
-            await op.Task;
-            loaded = op.Result;
-            done = true;
-            return loaded;
+            playerOp = playerPrefab.LoadAssetAsync<GameObject>();
+            await playerOp.Task;
+            if (!playerOp.Task.IsCompletedSuccessfully)
+                throw new NullReferenceException("Failed to load player");
+            return playerOp.Result;
         }
 
         public void UnLoadPlayer()

@@ -8,7 +8,7 @@ using UnityEngine.AddressableAssets;
 namespace AvatarStuff
 {
     [CreateAssetMenu(fileName = "Avatar info Dictionary", menuName = "Character/Avatar/Info Dictionary", order = 0)]
-    public class AvatarInfoDict : ScriptableObject
+    public sealed class AvatarInfoDict : ScriptableObject
     {
         [SerializeField] AvatarInfo defaultAvatar;
         [SerializeField] List<AvatarInfo> avatars = new();
@@ -38,18 +38,16 @@ namespace AvatarStuff
         public AvatarInfo GetInfo(BaseCharacter character)
         {
 #if UNITY_EDITOR
-            if (sfwMode && sfwAvatar != null)
+            if (sfwMode && sfwAvatar is null)
             {
             }
 #endif
             AvatarInfo bestMatch = null;
-            foreach (AvatarInfo avatar in avatars)
+            foreach (var avatar in avatars)
             {
-                if (avatar.SupportedRaces.Contains(character.RaceSystem.Race))
-                {
-                    if (avatar.SupportedGenders.Contains(character.Gender)) return avatar;
-                    if (bestMatch == null) bestMatch = avatar;
-                }
+                if (!avatar.SupportedRaces.Contains(character.RaceSystem.Race)) continue;
+                if (avatar.SupportedGenders.Contains(character.Gender)) return avatar;
+                bestMatch ??= avatar;
             }
 
             return bestMatch ? bestMatch : defaultAvatar;
@@ -58,7 +56,7 @@ namespace AvatarStuff
         async Task<GameObject> BestMatchGame(BaseCharacter character, bool player)
         {
 #if UNITY_EDITOR
-            if (sfwMode && sfwAvatar != null)
+            if (sfwMode && sfwAvatar is null)
             {
             }
 #endif

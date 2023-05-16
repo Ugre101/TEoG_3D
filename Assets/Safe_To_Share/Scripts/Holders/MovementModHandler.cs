@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Character.StatsStuff.Mods;
-using MovementScripts;
 using Safe_to_Share.Scripts.CustomClasses;
+using Safe_To_Share.Scripts.Movement.HoverMovement;
 using Safe_To_Share.Scripts.Static;
 using Special_Items;
 using UnityEngine;
@@ -11,7 +11,7 @@ namespace AvatarStuff.Holders
 {
     public class MovementModHandler : MoveStats
     {
-        [SerializeField] MovementScripts.Movement movement;
+        [SerializeField] Safe_To_Share.Scripts.Movement.HoverMovement.Movement movement;
 
         bool firstUse = true;
         [SerializeField] BaseFloatStat jumpCount = new(1);
@@ -134,10 +134,6 @@ namespace AvatarStuff.Holders
                 case MoveCharacter.MoveModes.Walking:
                     walkBoost.AddMod(speedMod);
                     break;
-                case MoveCharacter.MoveModes.Falling:
-                    break;
-                case MoveCharacter.MoveModes.Hovering:
-                    break;
                 case MoveCharacter.MoveModes.Swimming:
                     swimBoost.AddMod(speedMod);
                     break;
@@ -152,10 +148,6 @@ namespace AvatarStuff.Holders
             {
                 case MoveCharacter.MoveModes.Walking:
                     walkBoost.RemoveMod(speedMod);
-                    break;
-                case MoveCharacter.MoveModes.Falling:
-                    break;
-                case MoveCharacter.MoveModes.Hovering:
                     break;
                 case MoveCharacter.MoveModes.Swimming:
                     swimBoost.RemoveMod(speedMod);

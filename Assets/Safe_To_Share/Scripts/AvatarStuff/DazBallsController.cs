@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    public class DazBallsController : MonoBehaviour
+    public sealed class DazBallsController : MonoBehaviour
     {
         [SerializeField, Min(0f),] float minSize, maxSize = 4f;
         [SerializeField] Vector3 hideOffset = new(0, -0.1f, -0.05f);

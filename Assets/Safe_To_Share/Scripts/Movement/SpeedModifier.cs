@@ -36,7 +36,7 @@ namespace Safe_To_Share.Scripts.Movement
             }
 
            // TODO playerChar = holder.PersonEcm2Character;
-            holder.MoveModHandler.AddWalkTempEffect(sprintMod);
+           // holder.MoveModHandler.AddWalkTempEffect(sprintMod);
             _savedMaxAcceleration = playerChar.maxAcceleration;
             _savedDecelerationWalking = playerChar.brakingDecelerationWalking;
             _savedGroundFriction = playerChar.groundFriction;
@@ -64,7 +64,7 @@ namespace Safe_To_Share.Scripts.Movement
             // Restore character's saved settings
 
             // character.maxWalkSpeed = _savedMaxWalkSpeed;
-            holder.MoveModHandler.RemoveWalkTempEffect(sprintMod);
+       //    holder.MoveModHandler.RemoveWalkTempEffect(sprintMod);
             character.maxAcceleration = _savedMaxAcceleration;
             character.brakingDecelerationWalking = _savedDecelerationWalking;
             character.groundFriction = _savedGroundFriction;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.AfterBattle
 {
     [CreateAssetMenu(fileName = "Give Masc", menuName = "AfterBattle/Essence/Give masc")]
-    public class GiveMasc : EssenceAction
+    public sealed class GiveMasc : EssenceAction
     {
         public override bool CanUse(BaseCharacter drainer, BaseCharacter victim)
         {

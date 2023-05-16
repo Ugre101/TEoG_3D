@@ -11,6 +11,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
         [SerializeField] protected RuntimeAnimatorController animatorController;
         [SerializeField] protected SexAnimationTransformPositionManager actorPositionManager;
         protected AfterBattleBaseAction LastAct;
+        protected bool HasAct;
         public abstract void Setup(Player player, BaseCharacter[] enemies, params BaseCharacter[] allies);
     }
 }

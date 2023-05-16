@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class AfterBattleAvatarScaler : MonoBehaviour
+    public sealed class AfterBattleAvatarScaler : MonoBehaviour
     {
         static float playerHeight, enemyHeight;
         [SerializeField] float minSize = 0.5f, maxSize = 2f;

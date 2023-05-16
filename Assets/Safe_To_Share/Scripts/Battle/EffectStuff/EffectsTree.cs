@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Battle.EffectStuff.Effects;
+using Safe_To_Share.Scripts.Battle.EffectStuff.Effects;
 using UnityEngine;
 
-namespace Battle.EffectStuff
+namespace Safe_To_Share.Scripts.Battle.EffectStuff
 {
     [Serializable]
     public class EffectsTree
@@ -27,18 +27,16 @@ namespace Battle.EffectStuff
             shrinkBody,
             growBody,
         };
-
+        
         public List<Effect> ActiveEffects
         {
             get
             {
-                if (activeEffects == null)
-                {
-                    activeEffects = new List<Effect>();
-                    foreach (Effect effect in Effects)
-                        if (effect.Active)
-                            activeEffects.Add(effect);
-                }
+                if (activeEffects is not null) return activeEffects;
+                activeEffects = new List<Effect>();
+                foreach (var effect in Effects)
+                    if (effect.Active)
+                        activeEffects.Add(effect);
 
                 return activeEffects;
             }

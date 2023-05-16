@@ -7,7 +7,7 @@ using Character.StatsStuff.Mods;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Battle.EffectStuff
+namespace Safe_To_Share.Scripts.Battle.EffectStuff
 {
     [Serializable]
     public abstract class Effect
@@ -40,7 +40,6 @@ namespace Battle.EffectStuff
         protected int IntPercent(BaseCharacter user, int baseValue) => Mathf.RoundToInt(Percent(user, baseValue));
 
         protected float StatModValue(BaseCharacter user) => 1f + (affectedByStats.Count == 0
-            ? 0
-            : affectedByStats.Sum(v => (float)user.Stats.GetCharStats[v.StatType].Value / v.DivValue));
+            ? 0 : affectedByStats.Sum(v => (float)user.Stats.GetCharStats[v.StatType].Value / v.DivValue));
     }
 }

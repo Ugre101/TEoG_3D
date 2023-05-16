@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Battle;
 using Character;
 using CustomClasses;
 using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
@@ -8,9 +9,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Battle.UI
+namespace Safe_To_Share.Scripts.Battle.UI
 {
-    public class AssignAbilityMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
+    public sealed class AssignAbilityMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         //    [SerializeField] AbilityDict abilityDict;
         [SerializeField] Transform content;
@@ -37,13 +38,10 @@ namespace Battle.UI
 
         public bool BlockIfActive()
         {
-            if (gameObject.activeSelf)
-            {
-                gameObject.SetActive(false);
-                return true;
-            }
+            if (!gameObject.activeSelf) return false;
+            gameObject.SetActive(false);
+            return true;
 
-            return false;
         }
 
         AssignAbilityIcon GetAbilityIcon() => iconQue.Count > 0 ? iconQue.Dequeue() : Instantiate(abilityIcon, content);

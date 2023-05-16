@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Character;
 using Character.BodyStuff;
 using Character.EssenceStuff;
@@ -192,11 +193,10 @@ namespace Safe_To_Share.Scripts.AfterBattle
             {
                 int casterArousal = GainArousal(caster, receiver, casterBaseAmount, out int casterOrgasmed);
                 int partnerArousal = GainArousal(receiver, caster, targetBaseAmount, out int partnerOrgasmed);
-                string returnText =
-                    $"{caster.Identity.FirstName} gained {casterArousal} arousal and {receiver.Identity.FirstName} gained {partnerArousal} arousal.";
+                var returnText = new StringBuilder($"{caster.Identity.FirstName} gained {casterArousal} arousal and {receiver.Identity.FirstName} gained {partnerArousal} arousal.");
                 returnText = ReturnTextOrgasms(caster, casterOrgasmed, returnText);
                 returnText = ReturnTextOrgasms(receiver, partnerOrgasmed, returnText);
-                return new GainInfo(returnText, casterOrgasmed, partnerOrgasmed);
+                return new GainInfo(returnText.ToString(), casterOrgasmed, partnerOrgasmed);
 
                 int GainArousal(BaseCharacter gainer, BaseCharacter giver, float gain, out int orgasms)
                 {
@@ -206,14 +206,13 @@ namespace Safe_To_Share.Scripts.AfterBattle
                     return i;
                 }
 
-                static string ReturnTextOrgasms(BaseCharacter giver, int gOrgasm, string returnText)
+                static StringBuilder ReturnTextOrgasms(BaseCharacter giver, int gOrgasm,StringBuilder builder)
                 {
-                    if (gOrgasm <= 0)
-                        return returnText;
-                    returnText += $"\n{giver.Identity.FirstName} orgasmed";
-                    if (gOrgasm > 1)
-                        returnText += $" {gOrgasm} times!";
-                    return returnText;
+                    if (gOrgasm <= 0) return builder;
+                    builder.Append($"\n{giver.Identity.FirstName} orgasmed");
+                    if (gOrgasm <= 1) return builder;
+                    builder.Append($" {gOrgasm} times!");
+                    return builder;
                 }
             }
 

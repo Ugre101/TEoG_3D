@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    public class DictatorBallsTester : MonoBehaviour
+    public sealed class DictatorBallsTester : MonoBehaviour
     {
         [SerializeField, Range(0, 10f),] float size;
         [SerializeField] BallsContainer fluidsCon = new();

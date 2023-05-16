@@ -7,7 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace AvatarStuff
 {
-    public class AvatarChanger : AvatarChangerBase
+    public sealed class AvatarChanger : AvatarChangerBase
     {
         bool hasAvatar;
         public bool AvatarLoaded { get; private set; }
@@ -37,12 +37,10 @@ namespace AvatarStuff
             AvatarLoaded = true;
             if (obj.Result.TryGetComponent(out Animator ani))
                 InvokeNewAnimator(ani);
-            if (obj.Result.TryGetComponent(out CharacterAvatar avatar))
-            {
-                CurrentAvatar = avatar;
-                hasAvatar = true;
-                NewAvatar?.Invoke(avatar);
-            }
+            if (!obj.Result.TryGetComponent(out CharacterAvatar avatar)) return;
+            CurrentAvatar = avatar;
+            hasAvatar = true;
+            NewAvatar?.Invoke(avatar);
         }
 
         public void UpdateAvatar(GameObject value)

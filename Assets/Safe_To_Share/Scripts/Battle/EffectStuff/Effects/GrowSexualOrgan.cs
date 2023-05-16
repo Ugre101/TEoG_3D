@@ -4,7 +4,7 @@ using Character.Organs;
 using Character.Organs.OrgansContainers;
 using UnityEngine;
 
-namespace Battle.EffectStuff.Effects
+namespace Safe_To_Share.Scripts.Battle.EffectStuff.Effects
 {
     [Serializable]
     public class GrowSexualOrgan : Effect
@@ -14,17 +14,17 @@ namespace Battle.EffectStuff.Effects
 
         public override void UseEffect(BaseCharacter user, BaseCharacter target)
         {
-            if (!target.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer organ)) return;
+            if (!target.SexualOrgans.Containers.TryGetValue(organType, out var organ)) return;
             if (!organ.HaveAny())
                 return;
             if (growAll)
-                foreach (BaseOrgan baseOrgan in organ.BaseList)
+                foreach (var baseOrgan in organ.BaseList)
                     baseOrgan.BaseValue += FinalIntValue(user, baseOrgan.BaseValue);
             else
             {
-                BaseOrgan elementAtOrDefault = organ.GetRandomOrgan();
-                if (elementAtOrDefault != null)
-                    elementAtOrDefault.BaseValue += FinalIntValue(user, elementAtOrDefault.BaseValue);
+                var randomOrgan = organ.GetRandomOrgan();
+                if (randomOrgan != null)
+                    randomOrgan.BaseValue += FinalIntValue(user, randomOrgan.BaseValue);
             }
         }
     }

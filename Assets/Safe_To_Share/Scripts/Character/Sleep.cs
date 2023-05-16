@@ -47,14 +47,21 @@ namespace Character
         {
             int roll = Random.Range(0, 100);
             roll += sleepQuality;
-            if (roll < 100)
-                BadSleep(character);
-            else if (roll <= 200)
-                BasicSleep(character);
-            else if (roll <= 300)
-                GoodSleep(character);
-            else
-                GreatSleep(character);
+            switch (roll)
+            {
+                case < 100:
+                    BadSleep(character);
+                    break;
+                case <= 200:
+                    BasicSleep(character);
+                    break;
+                case <= 300:
+                    GoodSleep(character);
+                    break;
+                default:
+                    GreatSleep(character);
+                    break;
+            }
         }
 
 

@@ -14,7 +14,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class AfterBattleMain : AfterBattleShared
+    public sealed class AfterBattleMain : AfterBattleShared
     {
         static AfterBattleMainUI AfterBattleMainUI => AfterBattleMainUI.Instance;
 
@@ -41,7 +41,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
         {
             var data = obj.Use(activePlayerActor, activeEnemyActor);
             AfterBattleMainUI.LogText(data);
-            if (LastAct != null && LastAct == obj)
+            if (HasAct && LastAct == obj)
                 yield break;
             activePlayerActor.RotateActor.ResetPosAndRot();
             activeEnemyActor.RotateActor.ResetPosAndRot();
@@ -51,6 +51,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             activePlayerActor.SetActAnimation(ani.GiveAnimationHash);
             activeEnemyActor.SetActAnimation(ani.ReceiveAnimationHash);
             LastAct = obj;
+            HasAct = true;
             if (ani.Delay > 0)
                 yield return new WaitForSeconds(ani.Delay);
         }

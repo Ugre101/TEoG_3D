@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI
 {
-    public class TakeToDormButton : MonoBehaviour
+    public sealed class TakeToDormButton : MonoBehaviour
     {
         [SerializeField] Button btn;
         [SerializeField] Image pie;

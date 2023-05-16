@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Battle.CombatantStuff;
-using Battle.UI;
 using Character;
 using Character.EnemyStuff;
 using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
+using Safe_To_Share.Scripts.Battle.CombatantStuff;
 using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
+using Safe_To_Share.Scripts.Battle.UI;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
 
 namespace Battle
 {
-    public class BattleManager : MonoBehaviour
+    public sealed class BattleManager : MonoBehaviour
     {
         public static CombatCharacter CurrentPlayerControlled;
         [SerializeField] CombatantTeam playerTeam, enemyTeam;
@@ -50,6 +50,7 @@ namespace Battle
             AttackBtn.PlayerAction -= HandlePlayerAction;
             AttackBtn.BoundAbility -= BindToActivePlayer;
             SceneLoader.ActionSceneLoaded -= Setup;
+            battleAI.CleanUp();
         }
 
         void HandlePlayerAction(Ability ability)
@@ -87,7 +88,7 @@ namespace Battle
             async Task SetupTeam(CombatantTeam team, IEnumerable<BaseCharacter> charArray, bool ally)
             {
                 team.FirstSetup();
-                foreach (BaseCharacter character in charArray)
+                foreach (var character in charArray)
                 {
                     var setupTeam = await team.SetupTeam(character);
                     whoseTurn.Add(new CombatCharacter(setupTeam, character, ally));
@@ -109,15 +110,17 @@ namespace Battle
 
         void NextTurn()
         {
-            if (HaveATeamWon())
+            var someOneDefeated = whoseTurn.RemoveAll(c => c.Character.Stats.Dead) > 0;
+            if (someOneDefeated && HaveATeamWon())
                 return;
             BuildSpeed();
-            CombatCharacter next = whoseTurn.Where(cc => !cc.Character.Stats.Dead)
-                .OrderByDescending(t => t.SpeedAccumulated).FirstOrDefault();
+
+            whoseTurn.Sort((cc1, cc2) => cc2.SpeedAccumulated.CompareTo(cc1.SpeedAccumulated));
+            var next = whoseTurn[0];
             if (next == null)
             {
                 BattleSceneManager.Leave(player);
-                // TODO Show error message
+                // TODO Show error message or Draw
                 return;
             }
 
@@ -131,8 +134,8 @@ namespace Battle
 
         bool HaveATeamWon()
         {
-            bool alliesLeft = whoseTurn.Where(a => a.Ally).Any(a => !a.Character.Stats.Dead);
-            bool enemiesLeft = whoseTurn.Where(e => !e.Ally).Any(e => !e.Character.Stats.Dead);
+            var alliesLeft = whoseTurn.Any(a => a.Ally);
+            var enemiesLeft = whoseTurn.Any(e => !e.Ally);
             if (alliesLeft && enemiesLeft)
                 return false;
             if (enemiesLeft)
@@ -147,7 +150,7 @@ namespace Battle
         void Victory()
         {
             BattleSceneManager.Victory();
-            foreach (BaseCharacter teamChar in enemyTeamChars)
+            foreach (var teamChar in enemyTeamChars)
                 if (teamChar is Enemy enemy)
                     HandleDefeatedEnemy(player, enemy);
         }
@@ -162,14 +165,17 @@ namespace Battle
 
         public void Leave()
         {
-            battleAI.SetLoadedFalse();
             BattleSceneManager.Leave(player);
         }
 
+        public void Resurrected(CombatCharacter character)
+        {
+            whoseTurn.Add(character);
+        }
 
         void BuildSpeed()
         {
-            foreach (CombatCharacter nextTurn in whoseTurn)
+            foreach (var nextTurn in whoseTurn)
                 nextTurn.NewTurn();
         }
 
@@ -178,8 +184,9 @@ namespace Battle
             CurrentPlayerControlled = myTurn;
             // Linq to get array of most threatening enemies
 
-            var possibleEnemyTargets = whoseTurn.Where(t => !t.Ally && !t.Character.Stats.Dead)
-                .OrderByDescending(t => t.Threat).GroupBy(t => t.Threat).SelectMany(g => g).ToArray();
+            var possibleEnemyTargets = whoseTurn.Where(t => !t.Ally)
+                                                .OrderByDescending(t => t.Threat).GroupBy(t => t.Threat)
+                                                .SelectMany(g => g).ToArray();
 
             battleTarget.SetPossibleTargets(possibleEnemyTargets);
 
@@ -197,17 +204,20 @@ namespace Battle
         {
             BattleUIManager.Instance.EnemyTurn();
             // Attack player tea
-            CombatCharacter target = whoseTurn.Where(c => c.Ally && !c.Character.Stats.Dead).OrderBy(t => t.Threat)
-                .FirstOrDefault();
-            if (target == null)
-                HaveATeamWon();
-            else
+            var tempList = whoseTurn.FindAll(cc => cc.Ally);
+            if (tempList.Count == 0)
             {
-                target.Combatant.Target();
-                yield return battleAI.HandleTurn(myTurn, target);
-                target.Combatant.StopTargeting();
-                NextTurn();
+                HaveATeamWon();
+                yield break;
             }
+            
+            tempList.Sort((cc1, cc2) => cc2.Threat.CompareTo(cc1.Threat));
+            var target = tempList[0];
+
+            target.Combatant.Target();
+            yield return battleAI.HandleTurn(myTurn, target);
+            target.Combatant.StopTargeting();
+            NextTurn();
         }
 
         public void GoToDefeat() => BattleSceneManager.GoToDefeat(player, enemyTeamChars);

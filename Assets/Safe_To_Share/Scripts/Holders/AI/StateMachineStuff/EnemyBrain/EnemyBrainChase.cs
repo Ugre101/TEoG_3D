@@ -1,8 +1,9 @@
-﻿using Safe_To_Share.Scripts.Static;
+﻿using AvatarStuff.Holders;
+using Safe_To_Share.Scripts.Static;
 
-namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
+namespace Safe_To_Share.Scripts.Holders.AI.StateMachineStuff.EnemyBrain
 {
-    public class EnemyBrainChase : State<EnemyAiHolder>
+    public sealed class EnemyBrainChase : State<EnemyAiHolder>
     {
         public EnemyBrainChase(EnemyAiHolder behaviour) : base(behaviour)
         {
@@ -12,15 +13,15 @@ namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
 
         public override void OnUpdate()
         {
-            if (behaviour.DistanceToPlayer <= behaviour.AggroRange)
+            if (Behaviour.DistanceToPlayer <= Behaviour.AggroRange)
             {
-                behaviour.AIMover.MoveToLocation(behaviour.Player.transform.position);
-                behaviour.AIMover.Sprint();
+                Behaviour.AIMover.SampleAndSetPositionNear(PlayerHolder.Position);
+                Behaviour.AIMover.SetSprint(true);
             }
             else
-                behaviour.ChangeState(new EnemyBrainStopChase(behaviour));
+                Behaviour.ChangeState(StateHandler.States.Chase);
         }
 
-        public override void OnExit() => behaviour.AIMover.StopSprinting();
+        public override void OnExit() => Behaviour.AIMover.SetSprint(false);
     }
 }

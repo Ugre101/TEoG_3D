@@ -13,7 +13,7 @@ using UnityEngine.UI;
 namespace Battle
 {
     [RequireComponent(typeof(Button))]
-    public class AttackBtn : MonoBehaviour, IPointerClickHandler
+    public sealed class AttackBtn : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] InputActionReference reference;
         [SerializeField] TextMeshProUGUI numberText;
@@ -71,7 +71,7 @@ namespace Battle
         {
             var obj = Addressables.LoadResourceLocationsAsync(newAbility);
             yield return obj;
-            if (obj.Status != AsyncOperationStatus.Succeeded || obj.Result.Count == 0)
+            if (obj.Status is not AsyncOperationStatus.Succeeded || obj.Result.Count == 0)
             {
                 Addressables.Release(obj);
                 Clear();

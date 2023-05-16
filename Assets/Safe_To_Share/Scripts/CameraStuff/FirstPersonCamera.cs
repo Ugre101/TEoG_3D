@@ -1,14 +1,14 @@
 ﻿using AvatarStuff;
 using Cinemachine;
-using MovementScripts;
+using Safe_To_Share.Scripts.Movement.HoverMovement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Safe_To_Share.Scripts.CameraStuff
 {
-    public class FirstPersonCamera : CinemachineInputProvider
+    public sealed class FirstPersonCamera : CinemachineInputProvider
     {
-        [SerializeField] Movement mover;
+        [SerializeField] Movement.HoverMovement.Movement mover;
         [SerializeField] FreePlayCameraController thirdPerson;
         [SerializeField] CinemachineVirtualCamera brain;
         [SerializeField,Range(1.5f,2.5f)] float crounchFactor;
@@ -44,7 +44,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
            // mover.SetRotationMode(RotationMode.OrientToCameraViewDirection);
            // mover.SetFirstPersonMode(true);
             mover.WalkingModule.StartedCrunching += Crouched;
-            mover.WalkingModule.StoppedCrounching += UnCrouched;
+            mover.WalkingModule.StoppedCrunching += UnCrouched;
             mover.ChangedMode += IfSwimming;
             UnCrouched();
             AvatarScalerOnSizeChange(avatarScaler.Height);
@@ -63,7 +63,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
             base.OnDisable();
 #if Calls_Code_I_Dont_Own
             mover.WalkingModule.StartedCrunching -= Crouched;
-            mover.WalkingModule.StoppedCrounching -= UnCrouched;
+            mover.WalkingModule.StoppedCrunching -= UnCrouched;
             mover.ChangedMode -= IfSwimming;
 #endif
         }

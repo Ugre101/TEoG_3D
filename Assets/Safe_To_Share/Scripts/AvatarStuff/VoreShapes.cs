@@ -100,13 +100,11 @@ namespace AvatarStuff
         static float GetSexualOrganStretch(BaseCharacter character, BaseOrgansContainer baseOrgansContainer, float divValue)
         {
             var avatarStretch = 0f;
-            if (baseOrgansContainer.HaveAny())
-            {
-                List<int> preyIds = new();
-                foreach (BaseOrgan baseOrgan in baseOrgansContainer.BaseList)
-                    preyIds.AddRange(baseOrgan.Vore.PreysIds);
-                avatarStretch = AvatarStretch(character.Body.Height.Value / divValue, preyIds);
-            }
+            if (!baseOrgansContainer.HaveAny()) return avatarStretch;
+            List<int> preyIds = new();
+            foreach (var baseOrgan in baseOrgansContainer.BaseList)
+                preyIds.AddRange(baseOrgan.Vore.PreysIds);
+            avatarStretch = AvatarStretch(character.Body.Height.Value / divValue, preyIds);
 
             return avatarStretch;
         }
@@ -134,12 +132,10 @@ namespace AvatarStuff
                 oralVoreStruggle.Tick(shape);
                 unbirthStruggle.Tick(shape);
                 breastVoreStruggle.Tick(shape);
-                if (hasBallsController && ballsVore)
-                {
-                    float newSize = ballsController.currentSize + ballsController.currentSize / 2 *
-                        Mathf.Max(0, ballsStretch + Random.Range(-0.05f, 0.05f));
-                    ballsController.ReSize(newSize);
-                }
+                if (!hasBallsController || !ballsVore) continue;
+                float newSize = ballsController.currentSize + ballsController.currentSize / 2 *
+                    Mathf.Max(0, ballsStretch + Random.Range(-0.05f, 0.05f));
+                ballsController.ReSize(newSize);
             }
         }
 
@@ -164,10 +160,13 @@ namespace AvatarStuff
             {
                 active = isActive;
                 if (active)
+                {
                     SetStretch(voreStrecht);
-                else
-                    foreach (SkinnedMeshRenderer shape in shapes)
-                        voreShape.ChangeShape(shape, 0);
+                    return;
+                }
+
+                foreach (var shape in shapes)
+                    voreShape.ChangeShape(shape, 0);
             }
         }
     }

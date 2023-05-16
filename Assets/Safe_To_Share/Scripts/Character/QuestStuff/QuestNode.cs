@@ -22,6 +22,7 @@ namespace Safe_To_Share.Scripts.QuestStuff
                          string.IsNullOrWhiteSpace(AssetDatabase.GetAssetPath(questTask))))
                 AssetDatabase.AddObjectToAsset(task, this);
         }
+        
 
         public void OnAfterDeserialize()
         {

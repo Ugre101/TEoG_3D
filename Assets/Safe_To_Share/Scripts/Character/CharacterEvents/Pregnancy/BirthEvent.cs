@@ -8,7 +8,7 @@ namespace Character.CharacterEvents.Pregnancy
     {
         public event Action<BaseCharacter, IEnumerable<Fetus>> TriggerBirthMenu; 
 
-        public new void StartEvent(BaseCharacter character, IEnumerable<Fetus> fetus)
+        public void StartEvent(BaseCharacter character, IEnumerable<Fetus> fetus)
         {
             TriggerBirthMenu?.Invoke(character,fetus);
         }

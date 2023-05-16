@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using AvatarStuff.Holders;
+using UnityEngine;
 
-namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
+namespace Safe_To_Share.Scripts.Holders.AI.StateMachineStuff.EnemyBrain
 {
-    public class EnemyBrainWander : State<EnemyAiHolder>
+    public sealed class EnemyBrainWander : State<EnemyAiHolder>
     {
-        float range;
+        const float Range = 20f;
 
         public EnemyBrainWander(EnemyAiHolder enemyAiHolder) : base(enemyAiHolder)
         {
@@ -12,24 +13,23 @@ namespace AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain
 
         public override void OnEnter()
         {
-            range = 20f;
             for (int i = 0; i < 30; i++)
             {
-                Vector3 randomDest = behaviour.SpawnLocation; // Always wander around start pos
-                randomDest += new Vector3(Random.Range(-range, range), 20, Random.Range(-range, range));
-                if (behaviour.AIMover.AISetDest(randomDest))
+                Vector3 randomDest = Behaviour.SpawnLocation; // Always wander around start pos
+                randomDest += Random.insideUnitSphere * Range; // new Vector3(Random.Range(-range, range), 20, Random.Range(-range, range));
+                if (Behaviour.AIMover.SampleAndSetPositionNear(randomDest))
                     return;
             }
 
-            behaviour.ChangeState(new EnemyBrainIdle(behaviour));
+            Behaviour.ChangeState(StateHandler.States.Idle);
         }
 
         public override void OnUpdate()
         {
-            if (behaviour.DistanceToPlayer <= behaviour.AggroRange)
-                behaviour.ChangeState(new EnemyBrainChase(behaviour));
-            else if (!behaviour.Move.hasPath)
-                behaviour.ChangeState(new EnemyBrainIdle(behaviour));
+            if (Behaviour.DistanceToPlayer <= Behaviour.AggroRange)
+                Behaviour.ChangeState(StateHandler.States.Chase);
+            else if (!Behaviour.Move.hasPath)
+                Behaviour.ChangeState(StateHandler.States.Idle);
         }
     }
 }

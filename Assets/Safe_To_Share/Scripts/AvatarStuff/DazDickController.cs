@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    public class DazDickController : MonoBehaviour
+    public sealed class DazDickController : MonoBehaviour
     {
         [SerializeField] Transform[] genitals;
         [SerializeField, Range(0.1f, 0.5f),] float downBend = 0.1f;

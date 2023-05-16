@@ -1,10 +1,10 @@
 ﻿using System;
-using Battle.EffectStuff.Effects;
 using Character;
 using Character.BodyStuff;
+using Safe_To_Share.Scripts.Battle.EffectStuff.Effects;
 using UnityEngine;
 
-namespace Battle.EffectStuff.TempEffects
+namespace Safe_To_Share.Scripts.Battle.EffectStuff.TempEffects
 {
     [Serializable]
     public class TempGrowBody : TempEffect

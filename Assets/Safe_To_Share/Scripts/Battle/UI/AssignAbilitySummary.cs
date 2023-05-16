@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using Battle.EffectStuff;
-using Battle.SkillsAndSpells;
+using Safe_To_Share.Scripts.Battle.EffectStuff;
 using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
 using TMPro;
 using UnityEngine;
 
-namespace Battle.UI
+namespace Safe_To_Share.Scripts.Battle.UI
 {
-    public class AssignAbilitySummary : MonoBehaviour
+    public sealed class AssignAbilitySummary : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title, summary, useCost, effectAndDamage;
 
@@ -26,7 +24,7 @@ namespace Battle.UI
         {
             title.text = obj.Title;
             summary.text = obj.Desc;
-            IEnumerable<string> useCosts = obj.UseCosts.Select(uc => $"{uc.Type} {uc.Cost}");
+            var useCosts = obj.UseCosts.Select(uc => $"{uc.Type} {uc.Cost}");
             useCost.text = string.Join(Environment.NewLine, useCosts);
         }
 

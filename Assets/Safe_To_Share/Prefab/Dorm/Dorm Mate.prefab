@@ -530,6 +530,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb22ed00a681804b995cbb2a65b214b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterMovement: {fileID: 1271632349}
+  characterCapsule: {fileID: 0}
   minSize: 0.1
   maxSize: 3
+  SizeChange:
+    m_PersistentCalls:
+      m_Calls: []
+  orgCapWidth: 0
+  orgCapHeight: 0

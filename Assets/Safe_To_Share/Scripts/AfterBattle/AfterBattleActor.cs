@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class AfterBattleActor : MonoBehaviour
+    public sealed class AfterBattleActor : MonoBehaviour
     {
         [SerializeField] AvatarInfoDict avatarDict;
         [SerializeField] AvatarChanger avatarChanger;
@@ -53,7 +53,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
                 Avatar.SetArousal(obj);
         }
 
-        public void NewAvatar(CharacterAvatar obj)
+        void NewAvatar(CharacterAvatar obj)
         {
             Avatar = obj;
 
@@ -78,7 +78,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             avatarChanger.UpdateAvatar(res);
         }
 
-        public void UpdateCurrentAvatar()
+        void UpdateCurrentAvatar()
         {
             if (!HasAvatar) return;
             Avatar.Setup(Actor);
@@ -86,7 +86,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             Avatar.SetArousal(Actor.SexStats.Arousal);
         }
 
-        public void UpdateHeight() => AvatarScaler.ChangeScale(Actor.Body.Height.Value,playerAvatar);
+        void UpdateHeight() => AvatarScaler.ChangeScale(Actor.Body.Height.Value,playerAvatar);
 
         public void NewAnimator(Animator obj)
         {

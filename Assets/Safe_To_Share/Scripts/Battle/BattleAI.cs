@@ -1,6 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using Battle.SkillsAndSpells;
-using Character.StatsStuff;
 using Character.StatsStuff.HealthStuff;
 using CustomClasses;
 using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
@@ -11,58 +11,49 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 namespace Battle
 {
     [CreateAssetMenu(menuName = "Create BattleAI", fileName = "BattleAI", order = 0)]
-    public class BattleAI : ScriptableObject
+    public sealed class BattleAI : ScriptableObject
     {
         [SerializeField,] DropSerializableObject<Skill> hitStandardGuid;
-        [SerializeField,] DropSerializableObject<Ability>  teaseStandardGuid;
-        [SerializeField,] DropSerializableObject<Ability>  rareUseGuid;
-        [SerializeField,] DropSerializableObject<Ability>  lowHpGuid;
-        [SerializeField,] DropSerializableObject<Ability>  lowWpGuid;
+        [SerializeField,] DropSerializableObject<Ability> teaseStandardGuid;
+        [SerializeField,] DropSerializableObject<Ability> rareUseGuid;
+        [SerializeField,] DropSerializableObject<Ability> lowHpGuid;
+        [SerializeField,] DropSerializableObject<Ability> lowWpGuid;
         [SerializeField] float rareCastChance = 0.1f;
-        Ability castOnSelfWhenLowHealth;
-        Ability castOnSelfWhenLowWillHealth;
-
-        Ability hitStandardAbility;
-
-/*
-        public IEnumerable<AsyncOperationHandle<Ability>> LoadBattleUI()
-        {
-            yield return Load(new BattleAISave(standardGuid, rareUseGuid, lowHpGuid, lowWpGuid));
-        }
-*/
-        bool loaded;
-        Ability rareUseAbility;
-
-        bool standardIsNotNull, teaseIsNotNull, rareIsNotNull, hpLowIsNotNull, wpLowIsNotNull;
-
-        Ability teaseStandardAbility;
 
 
-        public void SetLoadedFalse() => loaded = false;
+        bool firstUse = true;
+
+        readonly LoadedAbility standard = new(),tease = new(),
+          rare = new(),hpLow = new(), wpLow = new();
+
 
         public IEnumerator HandleTurn(CombatCharacter caster, CombatCharacter target)
         {
-            if (!loaded)
+            if (firstUse)
                 yield return Load();
 
-            Stats casterStats = caster.Character.Stats;
-            if (CastHealthAbility(hpLowIsNotNull, casterStats.Health))
-                yield return castOnSelfWhenLowHealth.UseEffect(caster, caster);
+            var casterStats = caster.Character.Stats;
+            if (CastHealthAbility(hpLow.NotNull, casterStats.Health))
+                yield return hpLow.Ability.UseEffect(caster, caster);
 
-            if (CastHealthAbility(wpLowIsNotNull, casterStats.WillPower))
-                yield return castOnSelfWhenLowWillHealth.UseEffect(caster, caster);
+            if (CastHealthAbility(wpLow.NotNull, casterStats.WillPower))
+                yield return wpLow.Ability.UseEffect(caster, caster);
 
-            if (rareIsNotNull && Random.value <= rareCastChance)
-                yield return rareUseAbility.UseEffect(caster, target);
-            else if (standardIsNotNull && teaseIsNotNull)
+            if (rare.NotNull && Random.value <= rareCastChance)
+            {
+                yield return rare.Ability.UseEffect(caster, target);
+            }
+            else if (standard.NotNull && tease.NotNull)
             {
                 if (caster.Character.Stats.Strength.Value > caster.Character.Stats.Charisma.Value)
-                    yield return hitStandardAbility.UseEffect(caster, target);
+                    yield return standard.Ability.UseEffect(caster, target);
                 else
-                    yield return teaseStandardAbility.UseEffect(caster, target);
+                    yield return tease.Ability.UseEffect(caster, target);
             }
             else
+            {
                 Debug.LogWarning("Battle ai has no attacks");
+            }
 
             yield return null;
 
@@ -72,60 +63,50 @@ namespace Battle
 
         IEnumerator Load()
         {
-            loaded = true;
-            if (!string.IsNullOrEmpty(hitStandardGuid.guid))
+            firstUse = false;
+            var load = new List<IEnumerator>
             {
-                AsyncOperationHandle<Ability> stanOp = Addressables.LoadAssetAsync<Ability>(hitStandardGuid.guid);
-                yield return stanOp;
-                if (stanOp.Status == AsyncOperationStatus.Succeeded)
-                {
-                    hitStandardAbility = stanOp.Result;
-                    standardIsNotNull = true;
-                }
-            }
+                standard.Load(hitStandardGuid.guid),
+                tease.Load(teaseStandardGuid.guid),
+                rare.Load(rareUseGuid.guid),
+                hpLow.Load(lowHpGuid.guid),
+                wpLow.Load(lowWpGuid.guid),
+            };
+            foreach (var enumerator in load)
+                yield return enumerator;
+        }
 
-            if (!string.IsNullOrEmpty(teaseStandardGuid.guid))
-            {
-                AsyncOperationHandle<Ability> stanOp = Addressables.LoadAssetAsync<Ability>(teaseStandardGuid.guid);
-                yield return stanOp;
-                if (stanOp.Status == AsyncOperationStatus.Succeeded)
-                {
-                    teaseStandardAbility = stanOp.Result;
-                    teaseIsNotNull = true;
-                }
-            }
+        public void CleanUp()
+        {
+            firstUse = true;
+            standard.Clean();
+            tease.Clean();
+            rare.Clean();
+            hpLow.Clean();
+            wpLow.Clean();
+        }
 
-            if (!string.IsNullOrEmpty(rareUseGuid.guid))
-            {
-                var rareOp = Addressables.LoadAssetAsync<Ability>(rareUseGuid.guid);
-                yield return rareOp;
-                if (rareOp.Status == AsyncOperationStatus.Succeeded)
-                {
-                    rareUseAbility = rareOp.Result;
-                    rareIsNotNull = true;
-                }
-            }
+        sealed class LoadedAbility
+        {
+            public bool NotNull;
+            public Ability Ability;
 
-            if (!string.IsNullOrEmpty(lowHpGuid.guid))
+            public void Clean()
             {
-                var hpOp = Addressables.LoadAssetAsync<Ability>(lowHpGuid.guid);
-                yield return hpOp;
-                if (hpOp.Status == AsyncOperationStatus.Succeeded)
-                {
-                    castOnSelfWhenLowHealth = hpOp.Result;
-                    hpLowIsNotNull = true;
-                }
+                if (NotNull)
+                    Addressables.Release(Ability);
+                NotNull = false;
             }
-
-            if (!string.IsNullOrEmpty(lowWpGuid.guid))
+            public IEnumerator Load(string guid)
             {
-                var wpOp = Addressables.LoadAssetAsync<Ability>(lowWpGuid.guid);
-                yield return wpOp;
-                if (wpOp.Status == AsyncOperationStatus.Succeeded)
-                {
-                    castOnSelfWhenLowWillHealth = wpOp.Result;
-                    wpLowIsNotNull = true;
-                }
+                if (string.IsNullOrWhiteSpace(guid))
+                    yield break;
+                var op = Addressables.LoadAssetAsync<Ability>(guid);
+                yield return op;
+                if (op.Status is not AsyncOperationStatus.Succeeded) 
+                    yield break;
+                NotNull = true;
+                Ability = op.Result;
             }
         }
     }

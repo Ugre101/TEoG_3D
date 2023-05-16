@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Battle
 {
-    public class WinScreenSfw : MonoBehaviour
+    public sealed class WinScreenSfw : MonoBehaviour
     {
         [SerializeField] Button leave;
 

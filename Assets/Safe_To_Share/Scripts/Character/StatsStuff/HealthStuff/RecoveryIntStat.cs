@@ -56,7 +56,7 @@ namespace Character.StatsStuff.HealthStuff
 
             int want = Mathf.RoundToInt(Value * (percent / 100f));
             if (CurrentValue < want)
-                currentValue = want;
+                CurrentValue = want;
         }
 
         public void Refresh()

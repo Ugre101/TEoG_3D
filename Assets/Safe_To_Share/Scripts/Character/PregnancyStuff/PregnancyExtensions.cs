@@ -15,8 +15,8 @@ namespace Character.PregnancyStuff
         {
             int growth = mother.PregnancySystem.PregnancySpeed.Value * ticks;
             List<Fetus> allBorn = new();
-            foreach (KeyValuePair<SexualOrganType, BaseOrgansContainer> pair in mother.SexualOrgans.Containers)
-            foreach (BaseOrgan baseOrgan in pair.Value.BaseList)
+            foreach (var pair in mother.SexualOrgans.Containers)
+            foreach (var baseOrgan in pair.Value.BaseList)
             {
                 foreach (var growFetuse in baseOrgan.Womb.GrowFetuses(growth)) 
                     allBorn.Add(growFetuse);
@@ -30,20 +30,17 @@ namespace Character.PregnancyStuff
             float chance = father.PregnancySystem.Virility.Value * mother.PregnancySystem.Fertility.Value;
             // 10 * 10 = 100, 100 / 10 000 = 0.01 % chance
             float roll = Random.value * 10000f;
-            if (chance >= roll)
-            {
-                mother.PregnancySystem.GotPregnant();
-                father.PregnancySystem.DidImpregnate();
+            if (!(chance >= roll)) return false;
+            mother.PregnancySystem.GotPregnant();
+            father.PregnancySystem.DidImpregnate();
+            organ.Womb.AddFetus(mother, father);
+            float extra = chance - roll;
+            float twinRoll = Random.value * 10000f;
+            if (extra >= twinRoll)
                 organ.Womb.AddFetus(mother, father);
-                float extra = chance - roll;
-                float twinRoll = Random.value * 10000f;
-                if (extra >= twinRoll)
-                    organ.Womb.AddFetus(mother, father);
-                mother.GotPregnant();
-                return true;
-            }
+            mother.GotPregnant();
+            return true;
 
-            return false;
         }
 
         public static bool IsPregnant(this BaseCharacter character)

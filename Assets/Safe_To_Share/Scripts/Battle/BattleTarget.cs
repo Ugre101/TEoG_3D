@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using Battle.CombatantStuff;
+using Safe_To_Share.Scripts.Battle.CombatantStuff;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Battle
 {
-    public class BattleTarget : MonoBehaviour
+    public sealed class BattleTarget : MonoBehaviour
     {
         [SerializeField] LayerMask enemyIsOnLayer;
 
@@ -39,19 +39,22 @@ namespace Battle
 
         public void ClickTarget(InputAction.CallbackContext ctx)
         {
-            Vector2 mousePos = Pointer.current.position.ReadValue();
+            var mousePos = Pointer.current.position.ReadValue();
             if (Camera.main is not { } cam) return;
-            Ray ray = cam.ScreenPointToRay(mousePos);
-            if (Physics.Raycast(ray, out RaycastHit hit, enemyIsOnLayer) &&
+            var ray = cam.ScreenPointToRay(mousePos);
+            if (Physics.Raycast(ray, out var hit, enemyIsOnLayer) &&
                 hit.transform.gameObject.TryGetComponent(out Combatant combatant))
                 MatchTarget(combatant);
         }
 
-        void MatchTarget(Combatant component)
+        void MatchTarget(Combatant combatant)
         {
-            CombatCharacter target = possibleEnemyTargets?.FirstOrDefault(et => et.Combatant.Equals(component));
-            if (target != null)
-                ShiftTarget(Array.IndexOf(possibleEnemyTargets, target));
+            foreach (var possibleTarget in possibleEnemyTargets)
+                if (possibleTarget.Combatant == combatant)
+                {
+                    ShiftTarget(Array.IndexOf(possibleEnemyTargets,possibleTarget));
+                    return;
+                }
         }
 
         void ShiftTarget(int newIndex)

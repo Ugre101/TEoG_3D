@@ -2,9 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battle;
-using Battle.EffectStuff;
 using Battle.SkillsAndSpells;
 using Character;
+using Safe_To_Share.Scripts.Battle.EffectStuff;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ namespace Safe_To_Share.Scripts.Battle.SkillsAndSpells
         [SerializeField] protected EffectsTree effectsTree = new();
         [SerializeField] BattleAct battleAct;
         public EffectsTree EffectsTree => effectsTree;
-        public IEnumerable<UseCost> UseCosts => useCosts;
+        public List<UseCost> UseCosts => useCosts;
 
         protected bool CanTargetEnemies => canTargetEnemies;
 
@@ -26,7 +26,7 @@ namespace Safe_To_Share.Scripts.Battle.SkillsAndSpells
         public virtual IEnumerator UseEffect(CombatCharacter user, CombatCharacter[] targets)
         {
             HandleUseCost(user.Character);
-            foreach (CombatCharacter target in targets)
+            foreach (var target in targets)
             {
                 foreach (Effect effectsTreeActiveEffect in EffectsTree.ActiveEffects)
                     effectsTreeActiveEffect.UseEffect(user.Character, target.Character);

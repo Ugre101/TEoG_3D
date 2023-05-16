@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts.AfterBattle.Actor
 {
-    public class AlignActor : MonoBehaviour
+    public sealed class AlignActor : MonoBehaviour
     {
         [SerializeField, HideInInspector,] Transform trans; // not sure if worth it but I did it to shut up rider.
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class AfterBattleEffects : MonoBehaviour
+    public sealed class AfterBattleEffects : MonoBehaviour
     {
         [SerializeField] ParticleSystem drainedMasc;
         readonly WaitForSeconds waitForSeconds = new(2f);

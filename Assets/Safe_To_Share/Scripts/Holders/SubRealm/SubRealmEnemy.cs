@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using AvatarStuff;
 using AvatarStuff.Holders;
-using AvatarStuff.Holders.AI.StateMachineStuff;
 using Character;
 using Character.EnemyStuff;
+using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Holders

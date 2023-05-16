@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    public class DictatorBalls : MonoBehaviour
+    public sealed class DictatorBalls : MonoBehaviour
     {
         [SerializeField, Min(0f),] float minSize, maxSize = 4f;
 

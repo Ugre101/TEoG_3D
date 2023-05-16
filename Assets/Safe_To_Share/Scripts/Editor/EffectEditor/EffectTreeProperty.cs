@@ -1,4 +1,4 @@
-﻿using Battle.EffectStuff;
+﻿using Safe_To_Share.Scripts.Battle.EffectStuff;
 using UnityEditor;
 using UnityEngine;
 

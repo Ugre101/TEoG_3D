@@ -21,16 +21,6 @@
         "com.jbooth.microsplat.core": "3.9.0"
       }
     },
-    "com.ugre.ugre-tools": {
-      "version": "https://github.com/Ugre101/CollisionBasedMovement.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.unity.cinemachine": "2.8.9",
-        "com.unity.inputsystem": "1.5.1"
-      },
-      "hash": "483126b45619fb567997d744ab273d8ba003a7fe"
-    },
     "com.unity.addressables": {
       "version": "1.19.19",
       "depth": 0,
@@ -144,7 +134,7 @@
     },
     "com.unity.inputsystem": {
       "version": "1.5.1",
-      "depth": 1,
+      "depth": 0,
       "source": "registry",
       "dependencies": {
         "com.unity.modules.uielements": "1.0.0"

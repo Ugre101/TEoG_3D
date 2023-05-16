@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class AfterBattleLog : MonoBehaviour
+    public sealed class AfterBattleLog : MonoBehaviour
     {
         [SerializeField] Button clearBtn;
         [SerializeField] TextMeshProUGUI textLog;
@@ -39,15 +39,14 @@ namespace Safe_To_Share.Scripts.AfterBattle
             {
                 clearBtn.gameObject.SetActive(false);
                 Clear();
+                return;
             }
-            else
-            {
-                StringBuilder sb = new();
-                foreach (string s in log)
-                    sb.AppendLine(s);
 
-                textLog.text = sb.ToString();
-            }
+            StringBuilder sb = new();
+            foreach (string s in log)
+                sb.AppendLine(s);
+
+            textLog.text = sb.ToString();
         }
 
         IEnumerator DelayedErasure(string length)

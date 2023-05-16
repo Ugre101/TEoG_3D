@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff;
+using UnityEngine;
 
 namespace AvatarStuff.Holders.AI.StateMachineStuff.DormMateBrain
 {
@@ -13,7 +14,7 @@ namespace AvatarStuff.Holders.AI.StateMachineStuff.DormMateBrain
         public override void OnEnter()
         {
             waitUntil = Time.time + Random.Range(3f, 10f);
-            behaviour.Move.ResetPath();
+            Behaviour.Move.ResetPath();
         }
 
         public override void OnUpdate()

@@ -2,9 +2,9 @@
 using Character;
 using UnityEngine;
 
-namespace Battle.CombatantStuff
+namespace Safe_To_Share.Scripts.Battle.CombatantStuff
 {
-    public class CombatantSlot : MonoBehaviour
+    public sealed class CombatantSlot : MonoBehaviour
     {
         [SerializeField] Combatant myCombatant;
         public bool Empty { get; private set; } = true;

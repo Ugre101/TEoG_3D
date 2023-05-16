@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Battle.UI
+namespace Safe_To_Share.Scripts.Battle.UI
 {
-    public class WhoseTurnIcon : MonoBehaviour
+    public sealed class WhoseTurnIcon : MonoBehaviour
     {
         [SerializeField] Image background;
         [SerializeField] TextMeshProUGUI title;

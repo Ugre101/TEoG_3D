@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Battle.UI
+namespace Safe_To_Share.Scripts.Battle.UI
 {
-    public class BattleMainCanvas : MonoBehaviour
+    public sealed class BattleMainCanvas : MonoBehaviour
     {
         [SerializeField] AssignAbilityMenu abilityMenu;
     }

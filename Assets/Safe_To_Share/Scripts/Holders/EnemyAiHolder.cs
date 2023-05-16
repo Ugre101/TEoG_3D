@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using AvatarStuff.Holders.AI.StateMachineStuff;
-using AvatarStuff.Holders.AI.StateMachineStuff.EnemyBrain;
 using Character;
 using Character.EnemyStuff;
 using Safe_To_Share.Scripts.Holders;
+using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff;
+using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff.EnemyBrain;
 using UnityEngine;
 
 namespace AvatarStuff.Holders
@@ -15,8 +15,6 @@ namespace AvatarStuff.Holders
         [SerializeField] float aggroRange = 10f;
         [Range(0f, 5f), SerializeField,] float initCombatRange = 1.5f;
 
-        State<EnemyAiHolder> currentState;
-
         bool waitingToReturn;
         public float AggroRange => aggroRange;
         public Vector3 SpawnLocation { get; private set; }
@@ -25,12 +23,14 @@ namespace AvatarStuff.Holders
 
         public bool InterActedWith { get; private set; }
 
+        StateHandler stateHandler;
         protected override void Start()
         {
             base.Start();
             SpawnLocation = transform.position;
             Changer.NewAvatar += ModifyAvatar;
             Changer.NewAvatar += NewAvatar;
+            stateHandler = new StateHandler(this);
             // Player.RaceSystem.RaceChangedEvent += RaceChange;
         }
 
@@ -39,11 +39,9 @@ namespace AvatarStuff.Holders
             if (Stopped) return;
             if (OutOfRange || Time.frameCount % 3 != 0)
                 return;
-            if (DistanceToPlayer < initCombatRange) StartCombat();
-            if (currentState == null)
-                ChangeState(new EnemyBrainIdle(this));
-            else
-                currentState.OnUpdate();
+            if (DistanceToPlayer < initCombatRange) 
+                StartCombat();
+            stateHandler.CurrentState.OnUpdate();
         }
 
         void OnDestroy()
@@ -65,12 +63,7 @@ namespace AvatarStuff.Holders
 
         //Stopped = true;
         //Player.TriggerCombat(enemy);
-        public void ChangeState(State<EnemyAiHolder> newState)
-        {
-            currentState?.OnExit();
-            currentState = newState;
-            currentState.OnEnter();
-        }
+        public void ChangeState(StateHandler.States newState) => stateHandler.ChangeState(newState);
 
         public void AddEnemy(Enemy newEnemy)
         {
@@ -82,12 +75,10 @@ namespace AvatarStuff.Holders
 
         public override void NewAvatar(CharacterAvatar obj)
         {
-            if (enemy.WantBodyMorph)
-            {
-                obj.GetRandomBodyMorphs(enemy);
-                ModifyAvatar(obj);
-                enemy.WantBodyMorph = false;
-            }
+            if (!enemy.WantBodyMorph) return;
+            obj.GetRandomBodyMorphs(enemy);
+            ModifyAvatar(obj);
+            enemy.WantBodyMorph = false;
         }
 
         protected override void OutOfRangeFunction()

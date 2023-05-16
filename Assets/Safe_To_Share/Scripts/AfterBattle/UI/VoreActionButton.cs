@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI
 {
-    public class VoreActionButton : AfterBattleBaseButton
+    public sealed class VoreActionButton : AfterBattleBaseButton
     {
         [SerializeField] TextMeshProUGUI needed;
         public static event Action<AfterBattleBaseAction> PlayerAction;

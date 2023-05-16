@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI
 {
-    public class MoreAfterBattleActorInfo : MonoBehaviour
+    public sealed class MoreAfterBattleActorInfo : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI bodyInfo;
         [SerializeField] TextMeshProUGUI sexualOrgansInfo;

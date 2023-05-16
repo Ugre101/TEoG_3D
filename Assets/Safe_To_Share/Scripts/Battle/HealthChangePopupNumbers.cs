@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Character.StatsStuff.HealthStuff;
 using TMPro;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace Battle
 {
-    public class HealthChangePopupNumbers : MonoBehaviour
+    public sealed class HealthChangePopupNumbers : MonoBehaviour
     {
         [SerializeField] Color lightDmg = Color.yellow, mediumDmg = new(255, 165, 0), highDmg = Color.red;
 

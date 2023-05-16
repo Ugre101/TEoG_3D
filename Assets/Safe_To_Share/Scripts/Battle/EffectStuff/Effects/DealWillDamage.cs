@@ -2,7 +2,7 @@
 using Character;
 using Character.StatsStuff.HealthStuff;
 
-namespace Battle.EffectStuff.Effects
+namespace Safe_To_Share.Scripts.Battle.EffectStuff.Effects
 {
     [Serializable]
     public class DealWillDamage : Effect

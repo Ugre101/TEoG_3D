@@ -1,13 +1,13 @@
 ﻿using System;
-using Battle.SkillsAndSpells;
+using Battle;
 using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Battle.UI
+namespace Safe_To_Share.Scripts.Battle.UI
 {
-    public class AssignAbilityIcon : MonoBehaviour, IPointerEnterHandler
+    public sealed class AssignAbilityIcon : MonoBehaviour, IPointerEnterHandler
     {
         [SerializeField] Image icon;
         [SerializeField] Button btn;
@@ -18,7 +18,7 @@ namespace Battle.UI
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (ability == null) return;
+            if (ability is null) return;
             AbilityLastHovered?.Invoke(ability);
             // Display ability info
         }
@@ -36,7 +36,7 @@ namespace Battle.UI
 
         void BindAbility()
         {
-            if (ability == null)
+            if (ability is null)
                 return;
             bindTo.BindNewAbility(ability);
             AbilityBound?.Invoke();

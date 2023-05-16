@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-namespace AvatarStuff.Holders.AI.StateMachineStuff
+namespace Safe_To_Share.Scripts.Holders.AI.StateMachineStuff
 {
     public abstract class State<TMonoBehavior> where TMonoBehavior : MonoBehaviour
     {
-        protected TMonoBehavior behaviour;
+        protected readonly TMonoBehavior Behaviour;
 
-        public State(TMonoBehavior behaviour) => this.behaviour = behaviour;
+        protected State(TMonoBehavior behaviour) => Behaviour = behaviour;
 
         public virtual void OnEnter()
         {

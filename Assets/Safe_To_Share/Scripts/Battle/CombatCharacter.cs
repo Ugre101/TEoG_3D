@@ -1,9 +1,9 @@
-﻿using Battle.CombatantStuff;
-using Character;
+﻿using Character;
+using Safe_To_Share.Scripts.Battle.CombatantStuff;
 
 namespace Battle
 {
-    public class CombatCharacter
+    public sealed class CombatCharacter
     {
         public CombatCharacter(Combatant combatant, BaseCharacter character, bool ally, int optionalStartThreat = 0)
         {

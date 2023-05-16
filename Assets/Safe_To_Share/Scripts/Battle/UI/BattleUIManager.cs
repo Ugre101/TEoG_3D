@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Battle.SkillsAndSpells;
+using Battle;
 using Character;
 using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Battle.UI
+namespace Safe_To_Share.Scripts.Battle.UI
 {
-    public class BattleUIManager : MonoBehaviour
+    public sealed class BattleUIManager : MonoBehaviour
     {
         [SerializeField] AttackButtons attackButtons;
         [SerializeField] GameObject winPanel, defeatPanel;
@@ -40,7 +40,7 @@ namespace Battle.UI
             abilityMenu.FirstSetup();
             turnIcons.FirstSetup();
             transform.AwakeChildren();
-            foreach (CombatCharacter combatCharacter in combatCharacters)
+            foreach (var combatCharacter in combatCharacters)
                 turnIcons.AddCombatant(combatCharacter);
         }
 

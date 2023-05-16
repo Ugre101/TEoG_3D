@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class RotateActor : MonoBehaviour
+    public sealed class RotateActor : MonoBehaviour
     {
         ActorDirection facing;
         bool rotating;

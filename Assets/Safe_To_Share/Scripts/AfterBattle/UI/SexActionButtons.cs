@@ -9,7 +9,7 @@ using UnityEngine.Pool;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI
 {
-    public class SexActionButtons : MonoBehaviour
+    public sealed class SexActionButtons : MonoBehaviour
     {
         [SerializeField] SexActionsDict dict;
         [SerializeField] TakeToDormButton takeToDorm;

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Character
 {
-    public class BodyInfo : MonoBehaviour
+    public sealed class BodyInfo : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI text;
 

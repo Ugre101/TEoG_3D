@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.UI
 {
-    public class AfterBattleMainUI : MonoBehaviour
+    public sealed class AfterBattleMainUI : MonoBehaviour
     {
         [SerializeField] AfterBattleActorInfo playerInfo;
         [SerializeField] AfterBattleActorInfo enemyInfo;

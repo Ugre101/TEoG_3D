@@ -1,11 +1,12 @@
-﻿using Character;
+﻿using Battle;
+using Character;
 using Character.StatsStuff.HealthStuff.UI;
 using TMPro;
 using UnityEngine;
 
-namespace Battle.UI
+namespace Safe_To_Share.Scripts.Battle.UI
 {
-    public class CharacterFrame : MonoBehaviour
+    public sealed class CharacterFrame : MonoBehaviour
     {
         [SerializeField] HealthSlider healthSlider, willPowerSlider;
         [SerializeField] TextMeshProUGUI title;

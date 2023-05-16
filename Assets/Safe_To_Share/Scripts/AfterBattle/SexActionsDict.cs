@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.AfterBattle
 {
     [CreateAssetMenu(fileName = "SexActsDict", menuName = "AfterBattle/SexActsDict")]
-    public class SexActionsDict : ScriptableObject
+    public sealed class SexActionsDict : ScriptableObject
     {
         [SerializeField] List<SexAction> sexActs = new();
         [SerializeField] List<EssenceAction> drainActions = new();

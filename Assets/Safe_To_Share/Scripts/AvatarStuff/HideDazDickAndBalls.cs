@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    public class HideDazDickAndBalls : MonoBehaviour
+    public sealed class HideDazDickAndBalls : MonoBehaviour
     {
         [SerializeField] Material targetMat;
         [SerializeField] Material invisibleMat;

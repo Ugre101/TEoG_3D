@@ -12,7 +12,7 @@ namespace CustomClasses
         public SerializableScriptableObjectSaves(IEnumerable<SerializableScriptableObject> objects)
         {
             savedGuids = new List<string>();
-            foreach (SerializableScriptableObject guid in objects)
+            foreach (var guid in objects)
                 savedGuids.Add(guid.Guid);
         }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    public class AvatarKeyAreas : MonoBehaviour
+    public sealed class AvatarKeyAreas : MonoBehaviour
     {
         public enum Area
         {

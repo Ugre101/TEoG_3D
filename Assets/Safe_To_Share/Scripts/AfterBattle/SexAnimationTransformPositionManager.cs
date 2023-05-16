@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class SexAnimationTransformPositionManager : MonoBehaviour
+    public sealed class SexAnimationTransformPositionManager : MonoBehaviour
     {
         public void PosActors(AfterBattleActor playerControlled, AfterBattleActor partner, SexActionAnimation ani)
         {
@@ -41,13 +41,12 @@ namespace Safe_To_Share.Scripts.AfterBattle
             }
         }
 
-        IEnumerator WaitAndSetAsChild(float receivePosAfterDelay, Transform area, Transform ownArea,
-                                      AfterBattleActor actor, Vector3 rot, Vector3 offset)
+        static IEnumerator WaitAndSetAsChild(float receivePosAfterDelay, Transform area, Transform ownArea,
+                                             AfterBattleActor actor, Vector3 rot, Vector3 offset)
         {
             yield return new WaitForSeconds(receivePosAfterDelay);
             actor.transform.SetParent(area);
-            actor.transform.localPosition = Vector3.zero;
-            actor.transform.localEulerAngles = rot;
+            actor.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.Euler(rot));
             var diff = ownArea.position - area.position;
             actor.transform.position -= diff;
             actor.transform.position += offset;

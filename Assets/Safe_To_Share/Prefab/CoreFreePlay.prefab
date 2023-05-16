@@ -1198,7 +1198,7 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: -8038731883616195449, guid: 4529ff9c11cc64e41a172cb447261863, type: 3}
   ZAxis: {fileID: 0}
-  mover: {fileID: 6055980819783593654}
+  mover: {fileID: 6439343287360576748}
   thirdPerson: {fileID: 4686597199439684709}
   brain: {fileID: 7004627993087508327}
   crounchFactor: 2
@@ -1382,6 +1382,10 @@ PrefabInstance:
       propertyPath: _capsuleRadius
       value: 156.25
       objectReference: {fileID: 0}
+    - target: {fileID: 2544556289303088008, guid: 816804747de79194f8ef39be257e57b6, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 6574000090198073429}
     - target: {fileID: 3278331065733202694, guid: 816804747de79194f8ef39be257e57b6, type: 3}
       propertyPath: _camera
       value: 
@@ -1466,6 +1470,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6783660681134686731, guid: 816804747de79194f8ef39be257e57b6, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 6574000090198073429}
     - target: {fileID: 7469535026440258888, guid: 816804747de79194f8ef39be257e57b6, type: 3}
       propertyPath: orgCapHeight
       value: 2
@@ -1536,15 +1544,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3156939597315827700, guid: 816804747de79194f8ef39be257e57b6, type: 3}
   m_PrefabInstance: {fileID: 8794739441438152548}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6055980819783593654 stripped
+--- !u!114 &6439343287360576748 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3316367402099177938, guid: 816804747de79194f8ef39be257e57b6, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2544556289303088008, guid: 816804747de79194f8ef39be257e57b6, type: 3}
   m_PrefabInstance: {fileID: 8794739441438152548}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9081903626959634003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be93acbd178448568758d32a90cdff5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1db3b3f8e2474a77ba9bbac356f2b4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9081903626959634003 stripped

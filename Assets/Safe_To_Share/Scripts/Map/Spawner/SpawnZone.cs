@@ -31,7 +31,6 @@ namespace Map.Spawner
 
         bool inRange;
 
-        Transform player;
         Queue<Enemy> returnEnemies;
 
         async void Start()
@@ -44,7 +43,6 @@ namespace Map.Spawner
                 return;
             }
 
-            player = playerObject.transform;
 
             if (prefabRef != null && !prefabRef.RuntimeKeyIsValid())
                 Debug.LogError("prefabRef error");
@@ -72,11 +70,9 @@ namespace Map.Spawner
             if (Time.frameCount % 30 != 0)
                 return;
             inRange = WithinRange();
-            if (inRange && !alreadyPreloading)
-            {
-                SceneLoader.Instance.LoadCombatIfNotAlready();
-                alreadyPreloading = true;
-            }
+            if (!inRange || alreadyPreloading) return;
+            SceneLoader.Instance.LoadCombatIfNotAlready();
+            alreadyPreloading = true;
         }
 
         void OnDestroy()
@@ -106,7 +102,7 @@ namespace Map.Spawner
         static bool FrameLimit() => Time.frameCount % 150 == 0;
 
         bool WithinRange() =>
-            Vector3.Distance(transform.position, player.position) <
+            Vector3.Distance(transform.position, PlayerHolder.Position) <
             SpawnSettings.SpawnWhenPlayerAreWithinDistance;
 
         async Task PreLoadChars()
@@ -127,9 +123,9 @@ namespace Map.Spawner
             Vector3 pos = Vector3.zero;
             bool hit = false;
             var tempList = spawnPoints;
-            for (int i = 0; i < spawnPoints.Count; i++)
+            foreach (var t in spawnPoints)
             {
-                Vector3 spawnPoint = tempList[Random.Range(0, spawnPoints.Count)];
+                var spawnPoint = tempList[Random.Range(0, spawnPoints.Count)];
                 if (NotToClose(spawnPoint) && NotToFarAway(spawnPoint))
                 {
                     pos = spawnPoint;
@@ -150,7 +146,7 @@ namespace Map.Spawner
         public bool ValidPosition(Ray ray, out NavMeshHit navHit)
         {
             navHit = new NavMeshHit();
-            return Physics.Raycast(ray, out RaycastHit hit) &&
+            return Physics.Raycast(ray, out var hit) &&
                    NavMesh.SamplePosition(hit.point, out navHit, 2f, spawnOn);
             //&& NotToClose(navHit) && NotToFarAway(navHit);
         }
@@ -166,11 +162,11 @@ namespace Map.Spawner
             //&& NotToClose(navHit) && NotToFarAway(navHit);
         }
 
-        bool NotToFarAway(Vector3 navHit) => Vector3.Distance(navHit, player.position) <
-                                             SpawnSettings.SpawnWhenPlayerAreWithinDistance;
+        static bool NotToFarAway(Vector3 navHit) => Vector3.Distance(navHit, PlayerHolder.Position) <
+                                                    SpawnSettings.SpawnWhenPlayerAreWithinDistance;
 
-        bool NotToClose(Vector3 navHit) =>
-            Vector3.Distance(player.position, navHit) > DontSpawnWithinRangeOfPlayer;
+        static bool NotToClose(Vector3 navHit) =>
+            Vector3.Distance(PlayerHolder.Position, navHit) > DontSpawnWithinRangeOfPlayer;
 
         void NewPrefab(AsyncOperationHandle<GameObject> obj, Enemy enemy)
         {

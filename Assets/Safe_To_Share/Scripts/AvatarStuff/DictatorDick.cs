@@ -2,7 +2,7 @@
 
 namespace AvatarStuff
 {
-    public class DictatorDick : MonoBehaviour
+    public sealed class DictatorDick : MonoBehaviour
     {
         [SerializeField] Transform[] genitals;
         [SerializeField, Min(0.01f),] float dickMin, dickMax = 2.5f;

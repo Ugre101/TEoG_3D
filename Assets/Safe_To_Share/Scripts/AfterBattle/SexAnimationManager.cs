@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class SexAnimationManager
+    public sealed class SexAnimationManager
     {
         readonly HashSet<int> validHashes = new();
         int? lastHash;
@@ -11,22 +11,21 @@ namespace Safe_To_Share.Scripts.AfterBattle
         {
             if (animator == null) return;
             if (validHashes.Contains(hash))
-                SetAnimatorBool(animator, hash);
-            else
             {
-                foreach (var parameter in animator.parameters)
-                {
-                    if (parameter.nameHash == hash) // Check controller have parameter
-                    {
-                        validHashes.Add(hash);
-                        SetAnimatorBool(animator, hash);
-                        return;
-                    }
-                }
-
-                if (lastHash.HasValue) // No hit
-                    animator.SetBool(lastHash.Value, false);
+                SetAnimatorBool(animator, hash);
+                return;
             }
+
+            foreach (var parameter in animator.parameters)
+            {
+                if (parameter.nameHash != hash) continue; // Check controller have parameter
+                validHashes.Add(hash);
+                SetAnimatorBool(animator, hash);
+                return;
+            }
+
+            if (lastHash.HasValue) // No hit
+                animator.SetBool(lastHash.Value, false);
         }
 
         public void Clear() => validHashes.Clear();

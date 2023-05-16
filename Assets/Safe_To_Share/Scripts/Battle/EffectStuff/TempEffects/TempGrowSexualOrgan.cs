@@ -1,11 +1,10 @@
 ﻿using System;
-using Battle.EffectStuff.Effects;
 using Character;
 using Character.Organs;
-using Character.Organs.OrgansContainers;
+using Safe_To_Share.Scripts.Battle.EffectStuff.Effects;
 using UnityEngine;
 
-namespace Battle.EffectStuff.TempEffects
+namespace Safe_To_Share.Scripts.Battle.EffectStuff.TempEffects
 {
     [Serializable]
     public class TempGrowSexualOrgan : TempEffect
@@ -15,18 +14,16 @@ namespace Battle.EffectStuff.TempEffects
 
         public override void UseEffect(BaseCharacter user, BaseCharacter target)
         {
-            if (target.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer organ))
+            if (!target.SexualOrgans.Containers.TryGetValue(organType, out var organ)) return;
+            if (!organ.HaveAny())
+                return;
+            if (growAll)
+                foreach (var baseOrgan in organ.BaseList)
+                    baseOrgan.Mods.AddTempStatMod(TempIntMod(user, nameof(GrowSexualOrgan)));
+            else
             {
-                if (!organ.HaveAny())
-                    return;
-                if (growAll)
-                    foreach (BaseOrgan baseOrgan in organ.BaseList)
-                        baseOrgan.Mods.AddTempStatMod(TempIntMod(user, nameof(GrowSexualOrgan)));
-                else
-                {
-                    BaseOrgan elementAtOrDefault = organ.GetRandomOrgan();
-                    elementAtOrDefault?.Mods.AddTempStatMod(TempIntMod(user, nameof(GrowSexualOrgan)));
-                }
+                var randomOrgan = organ.GetRandomOrgan();
+                randomOrgan?.Mods.AddTempStatMod(TempIntMod(user, nameof(GrowSexualOrgan)));
             }
         }
     }

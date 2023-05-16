@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using Character;
 using UnityEngine;
 
-namespace Battle.CombatantStuff
+namespace Safe_To_Share.Scripts.Battle.CombatantStuff
 {
-    public class CombatantTeam : MonoBehaviour
+    public sealed class CombatantTeam : MonoBehaviour
     {
         [SerializeField] CombatantSlot[] slots;
 
@@ -15,14 +15,14 @@ namespace Battle.CombatantStuff
 
         public void FirstSetup()
         {
-            foreach (CombatantSlot slot in slots)
+            foreach (var slot in slots)
                 slot.EmptySlot();
         }
 
         public async Task<Combatant> SetupTeam(BaseCharacter obj)
         {
-            CombatantSlot emptySlot = slots.FirstOrDefault(cs => cs.Empty);
-            return emptySlot != null ? await emptySlot.AddCombatant(obj) : null;
+            var emptySlot = slots.FirstOrDefault(cs => cs.Empty);
+            return emptySlot is not null ? await emptySlot.AddCombatant(obj) : null;
         }
     }
 }

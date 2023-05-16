@@ -1,11 +1,12 @@
 ﻿using System.Collections;
+using Battle;
 using Options;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Battle.UI
+namespace Safe_To_Share.Scripts.Battle.UI
 {
-    public class WinScreen : MonoBehaviour
+    public sealed class WinScreen : MonoBehaviour
     {
         [SerializeField] Button leave, fuck;
 
@@ -14,7 +15,7 @@ namespace Battle.UI
 
         void Start()
         {
-            bool skip = PlayerPrefs.GetInt(ToggleGoDirectlyToAfterBattle.SkipVictoryScreen) == 1;
+            var skip = PlayerPrefs.GetInt(ToggleGoDirectlyToAfterBattle.SkipVictoryScreen) == 1;
             if (skip)
                 StartCoroutine(SmallDelay());
 

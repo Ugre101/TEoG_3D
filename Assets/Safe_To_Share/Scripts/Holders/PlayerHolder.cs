@@ -12,9 +12,9 @@ using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
 using Character.Race.Races;
 using DormAndHome.Dorm;
-using MovementScripts;
 using Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss;
 using Safe_To_Share.Scripts.Character.Scat;
+using Safe_To_Share.Scripts.Movement.HoverMovement;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
@@ -30,7 +30,7 @@ namespace Safe_To_Share.Scripts.Holders
         public static SubRealmCombatParameters LoadSubRealmCombat;
         public static Action<PlayerHolder, DormMate> LoadDormSex;
         [SerializeField] MovementModHandler movementMoveModHandler;
-        [SerializeField] MovementScripts.Movement mover;
+        [SerializeField] Movement.HoverMovement.Movement mover;
         [SerializeField] Player player;
 
         [SerializeField] LayerMask validLayers;
@@ -46,7 +46,7 @@ namespace Safe_To_Share.Scripts.Holders
 
         public MovementModHandler MoveModHandler => movementMoveModHandler;
 
-        public MovementScripts.Movement PersonEcm2Character => mover;
+        public Movement.HoverMovement.Movement PersonEcm2Character => mover;
 
         void Awake()
         {
@@ -59,6 +59,11 @@ namespace Safe_To_Share.Scripts.Holders
                 Debug.LogError("Duplicate player holders");
                 Destroy(gameObject);
             }
+        }
+
+        void Start()
+        {
+            transform.SetParent(null);
         }
 
         void OnDisable() => UnSub();

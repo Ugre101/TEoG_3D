@@ -7,6 +7,19 @@ namespace Safe_To_Share.Scripts.QuestStuff
     public class Quest : BaseEditorCanvasObject<QuestNode>
     {
 
+        public void Save()
+        {
+            foreach (var questNode in nodes)
+            {
+                
+            } 
+        }
+
+        public void Load()
+        {
+            
+        }
+
         public void CheckProgress()
         {
         }

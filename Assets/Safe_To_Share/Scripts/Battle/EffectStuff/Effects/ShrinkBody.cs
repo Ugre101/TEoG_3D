@@ -3,7 +3,7 @@ using Character;
 using Character.BodyStuff;
 using UnityEngine;
 
-namespace Battle.EffectStuff.Effects
+namespace Safe_To_Share.Scripts.Battle.EffectStuff.Effects
 {
     [Serializable]
     public class ShrinkBody : Effect
@@ -12,7 +12,7 @@ namespace Battle.EffectStuff.Effects
 
         public override void UseEffect(BaseCharacter user, BaseCharacter target)
         {
-            if (target.Body.BodyStats.TryGetValue(bodyType, out BodyStat body))
+            if (target.Body.BodyStats.TryGetValue(bodyType, out var body))
                 body.BaseValue -= FinalValue(user, body.BaseValue);
         }
     }

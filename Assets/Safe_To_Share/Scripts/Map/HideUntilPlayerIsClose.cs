@@ -18,12 +18,12 @@ namespace Map
 
         void CheckIfPlayerIsClose()
         {
-            if (!showing && Vector3.Distance(PlayerHolder.Instance.transform.position, transform.position) < showDist)
+            if (!showing && Vector3.Distance(PlayerHolder.Position, transform.position) < showDist)
             {
                 transform.AwakeChildren();
                 showing = true;
             }
-            else if (Vector3.Distance(PlayerHolder.Instance.transform.position, transform.position) > showDist)
+            else if (Vector3.Distance(PlayerHolder.Position, transform.position) > showDist)
             {
                 transform.SleepChildren();
                 showing = false;
