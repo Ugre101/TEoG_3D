@@ -1,7 +1,7 @@
 ﻿using Character.Family;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Family
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Family
 {
     public class ChildTreePrefab : MonoBehaviour
     {

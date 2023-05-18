@@ -1,8 +1,7 @@
 ﻿using Character.LevelStuff;
-using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
-namespace AvatarStuff.Holders
+namespace Safe_To_Share.Scripts.Holders
 {
     public static class PerkExtension
     {

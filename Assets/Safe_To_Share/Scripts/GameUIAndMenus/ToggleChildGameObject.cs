@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class ToggleChildGameObject : MonoBehaviour
+    public sealed class ToggleChildGameObject : MonoBehaviour
     {
         [SerializeField] GameObject[] childObjects = Array.Empty<GameObject>();
 
@@ -17,13 +17,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 #if UNITY_EDITOR
         void OnValidate()
         {
-            if (transform.childCount != childObjects.Length)
+            if (transform.childCount == childObjects.Length) return;
+            childObjects = new GameObject[transform.childCount];
+            for (var i = 0; i < transform.childCount; i++)
             {
-                childObjects = new GameObject[transform.childCount];
-                for (var i = 0; i < transform.childCount; i++)
-                {
-                    childObjects[i] = transform.GetChild(i).gameObject;
-                }
+                childObjects[i] = transform.GetChild(i).gameObject;
             }
         }
 #endif

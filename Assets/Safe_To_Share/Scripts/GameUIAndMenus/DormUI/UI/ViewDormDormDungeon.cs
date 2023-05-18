@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using AvatarStuff.Holders;
+using DormAndHome.Dorm;
 using Safe_To_Share.Scripts.Holders;
 using SaveStuff;
 using SceneStuff;
 using UnityEngine;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public class ViewDormDormDungeon : MonoBehaviour
     {

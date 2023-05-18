@@ -32,7 +32,7 @@ namespace Safe_To_Share.Scripts.Battle.EffectStuff
         {
             get
             {
-                if (activeEffects is not null) return activeEffects;
+                if (activeEffects != null) return activeEffects;
                 activeEffects = new List<Effect>();
                 foreach (var effect in Effects)
                     if (effect.Active)

@@ -22,7 +22,7 @@ namespace Safe_To_Share.Scripts.Battle.CombatantStuff
         public async Task<Combatant> SetupTeam(BaseCharacter obj)
         {
             var emptySlot = slots.FirstOrDefault(cs => cs.Empty);
-            return emptySlot is not null ? await emptySlot.AddCombatant(obj) : null;
+            return emptySlot != null ? await emptySlot.AddCombatant(obj) : null;
         }
     }
 }

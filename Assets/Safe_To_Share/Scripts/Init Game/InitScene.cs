@@ -8,7 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.Init_Game
 {
-    public class InitScene : MonoBehaviour
+    public sealed class InitScene : MonoBehaviour
     {
         static bool init;
 

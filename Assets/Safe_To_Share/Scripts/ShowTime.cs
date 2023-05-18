@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class ShowTime : MonoBehaviour
+    public sealed class ShowTime : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI text;
 

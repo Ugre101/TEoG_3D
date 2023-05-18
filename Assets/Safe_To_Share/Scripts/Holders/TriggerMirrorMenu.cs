@@ -1,23 +1,23 @@
-using AvatarStuff;
-using AvatarStuff.Holders;
-using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
-public class TriggerMirrorMenu : MonoBehaviour
+namespace Safe_To_Share.Scripts.Holders
 {
-    [SerializeField] ChangeAvatarDetails mirrorUI;
-
-    void OnTriggerEnter(Collider other)
+    public sealed class TriggerMirrorMenu : MonoBehaviour
     {
-        if (!other.CompareTag("Player") || !other.TryGetComponent(out PlayerHolder mover)) 
-            return;
-        mirrorUI.Enter(mover);
-        mover.PersonEcm2Character.Stop();
-    }
+        [SerializeField] ChangeAvatarDetails mirrorUI;
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-            mirrorUI.gameObject.SetActive(false);
+        void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("Player") || !other.TryGetComponent(out PlayerHolder mover)) 
+                return;
+            mirrorUI.Enter(mover);
+            mover.PersonEcm2Character.Stop();
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+                mirrorUI.gameObject.SetActive(false);
+        }
     }
 }

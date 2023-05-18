@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class OpenCheatMenu : MonoBehaviour
+    public sealed class OpenCheatMenu : MonoBehaviour
     {
         [SerializeField] GameObject gameCanvas;
 

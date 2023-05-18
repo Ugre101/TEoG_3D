@@ -2,9 +2,9 @@ using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class ToggleVore : MonoBehaviour
+    public sealed class ToggleVore : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

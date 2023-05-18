@@ -1,12 +1,11 @@
 ﻿using System;
 using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
-using DormAndHome.Dorm.Buildings;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public class DormUpgradeButton : MonoBehaviour
     {
@@ -14,18 +13,18 @@ namespace DormAndHome.Dorm.UI
         [SerializeField] Button btn;
         [SerializeField] TextMeshProUGUI btnText;
 
-        Building building;
+        DormAndHome.Dorm.Buildings.Building building;
         Player player;
         public static event Action UpdateDormBuildings;
 
-        public void SubSetup(Player buyer, Building toUpgrade, string titleText, string descText)
+        public void SubSetup(Player buyer, DormAndHome.Dorm.Buildings.Building toUpgrade, string titleText, string descText)
         {
             title.text = titleText;
             desc.text = descText;
             Setup(buyer, toUpgrade);
         }
 
-        public void Setup(Player buyer, Building toUpgrade)
+        public void Setup(Player buyer, DormAndHome.Dorm.Buildings.Building toUpgrade)
         {
             player = buyer;
             building = toUpgrade;

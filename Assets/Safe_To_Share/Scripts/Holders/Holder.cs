@@ -1,8 +1,9 @@
 ﻿using System.Threading.Tasks;
+using AvatarStuff;
 using Character;
 using UnityEngine;
 
-namespace AvatarStuff.Holders
+namespace Safe_To_Share.Scripts.Holders
 {
     public abstract class Holder : MonoBehaviour
     {

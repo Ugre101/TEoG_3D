@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using Character.PlayerStuff.Currency;
 using Currency;
 using Currency.UI;
-using GameUIAndMenus;
 using Items;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Shop.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 {
     public class ShopMenu : GameMenu
     {

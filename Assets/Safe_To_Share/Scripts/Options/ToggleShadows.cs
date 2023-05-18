@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class ToggleShadows : MonoBehaviour
+    public sealed class ToggleShadows : MonoBehaviour
     {
         [SerializeField] RenderPipelineAsset noShadow;
         [SerializeField] RenderPipelineAsset withShadow;

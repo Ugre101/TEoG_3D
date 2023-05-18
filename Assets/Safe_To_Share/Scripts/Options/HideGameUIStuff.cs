@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class HideGameUIStuff : MonoBehaviour
+    public sealed class HideGameUIStuff : MonoBehaviour
     {
         public static bool LowerBarsHidden;
         public static bool MiniMapHidden;

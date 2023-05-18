@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using AvatarStuff.Holders;
 using Character.CreateCharacterStuff;
 using Character.EnemyStuff;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Map.Spawner
 {
-    public class SubRealmEnemySpawner : MonoBehaviour
+    public sealed class SubRealmEnemySpawner : MonoBehaviour
     {
         [SerializeField] EnemyPreset[] enemyPresets;
         [SerializeField] AssetReference enemyPrefab;

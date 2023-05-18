@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 namespace SceneStuff
 {
-    public partial class SceneLoader
+    public sealed partial class SceneLoader
     {
         AsyncOperationHandle<SceneInstance> battleSceneOperationHandle;
 

@@ -3,7 +3,7 @@ using Gaia;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-public class SyncDateSystemWithLighting : MonoBehaviour
+public sealed class SyncDateSystemWithLighting : MonoBehaviour
 {
     static readonly WaitForEndOfFrame WaitForEndOfFrame = new();
     static GaiaTimeOfDay TimeOfDay => GaiaGlobal.Instance.GaiaTimeOfDayValue;

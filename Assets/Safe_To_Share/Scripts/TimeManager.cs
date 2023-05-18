@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class TimeManager : MonoBehaviour
+    public sealed class TimeManager : MonoBehaviour
     {
         const int TickMinuteEveryXSecond = 2;
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace SaveStuff
 {
-    public class AreYouSure : MonoBehaviour
+    public sealed class AreYouSure : MonoBehaviour
     {
         [SerializeField] Button acceptBtn, declineBtn;
         Action action;

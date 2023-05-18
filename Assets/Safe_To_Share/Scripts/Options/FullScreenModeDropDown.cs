@@ -2,9 +2,9 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class FullScreenModeDropDown : MonoBehaviour
+    public sealed class FullScreenModeDropDown : MonoBehaviour
     {
         void Start()
         {

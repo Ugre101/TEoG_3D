@@ -14,7 +14,6 @@ namespace AvatarStuff
 
 
         bool areaHasHeightLimit;
-        bool firstUse = true;
         public float Height { get; private set; }
         public UnityEvent<float> SizeChange;
         Coroutine heightChangeRoutine;

@@ -1,11 +1,10 @@
-﻿using AvatarStuff.Holders;
-using Safe_To_Share.Scripts.Holders;
+﻿using Safe_To_Share.Scripts.Holders;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Map
 {
-    public class HideUntilPlayerIsClose : MonoBehaviour
+    public sealed class HideUntilPlayerIsClose : MonoBehaviour
     {
         [SerializeField] float showDist = 100f;
         bool showing;

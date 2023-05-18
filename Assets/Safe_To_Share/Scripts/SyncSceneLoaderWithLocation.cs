@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class SyncSceneLoaderWithLocation : MonoBehaviour
+    public sealed class SyncSceneLoaderWithLocation : MonoBehaviour
     {
         [SerializeField] GameSceneSo locationSceneSo;
         readonly WaitForSeconds coldStartAfterDelay = new(1f);

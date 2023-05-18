@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Safe_To_Share.Scripts
 {
-    public class InvokeEventWhenPlayerIsClose : MonoBehaviour
+    public sealed class InvokeEventWhenPlayerIsClose : MonoBehaviour
     {
         [SerializeField] List<InRangeOf> inRangeOfs = new();
 

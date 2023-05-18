@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts
 {
-    public class PressButtonWithKeyboard : MonoBehaviour
+    public sealed class PressButtonWithKeyboard : MonoBehaviour
     {
         [SerializeField] Button btn;
 

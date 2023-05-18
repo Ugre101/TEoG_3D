@@ -1,9 +1,9 @@
 ﻿using System;
 using Character.StatsStuff;
-using GameUIAndMenus.Menus.EssenceMenu;
+using Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Level
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
     public class PerkHoverInfo : BaseHoverInfo
     {

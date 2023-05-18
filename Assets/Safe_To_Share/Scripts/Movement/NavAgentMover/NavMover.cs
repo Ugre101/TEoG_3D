@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Safe_To_Share.Scripts.Movement.NavAgentMover
 {
-    public class NavMover : MoveCharacter
+    public sealed class NavMover : MoveCharacter
     {
         [SerializeField] NavMeshAgent agent;
 
@@ -72,6 +72,8 @@ namespace Safe_To_Share.Scripts.Movement.NavAgentMover
         public override bool IsSprinting() => sprinting;
 
         public override bool WasGrounded() => true;
+
+        public override float GetCurrentSpeed() => base.GetCurrentSpeed();
 
         public override Vector3 GetLocalMoveDirection()
         {

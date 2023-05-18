@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-namespace GameUIAndMenus.MinimapUI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.MinimapUI
 {
     public abstract class MapShared : GameMenu
     {

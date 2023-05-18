@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AvatarStuff.Holders;
 using Character.CreateCharacterStuff;
 using Character.EnemyStuff;
 using Character.IslandData;
@@ -14,7 +13,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Map.Spawner
 {
-    public class SpawnZone : MonoBehaviour
+    public sealed class SpawnZone : MonoBehaviour
     {
         const float DontSpawnWithinRangeOfPlayer = 25f;
         static bool alreadyPreloading;
@@ -123,9 +122,9 @@ namespace Map.Spawner
             Vector3 pos = Vector3.zero;
             bool hit = false;
             var tempList = spawnPoints;
-            foreach (var t in spawnPoints)
+            for (var index = 0; index < tempList.Count; index++)
             {
-                var spawnPoint = tempList[Random.Range(0, spawnPoints.Count)];
+                var spawnPoint = tempList[Random.Range(0, tempList.Count)];
                 if (NotToClose(spawnPoint) && NotToFarAway(spawnPoint))
                 {
                     pos = spawnPoint;
@@ -151,6 +150,8 @@ namespace Map.Spawner
             //&& NotToClose(navHit) && NotToFarAway(navHit);
         }
 
+#if UNITY_EDITOR
+        
         public bool AddSpawnPosition(Ray ray)
         {
             NavMeshHit navHit = new();
@@ -161,6 +162,7 @@ namespace Map.Spawner
             return valid;
             //&& NotToClose(navHit) && NotToFarAway(navHit);
         }
+#endif
 
         static bool NotToFarAway(Vector3 navHit) => Vector3.Distance(navHit, PlayerHolder.Position) <
                                                     SpawnSettings.SpawnWhenPlayerAreWithinDistance;

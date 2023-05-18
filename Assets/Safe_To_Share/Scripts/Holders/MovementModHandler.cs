@@ -4,12 +4,11 @@ using Character.StatsStuff.Mods;
 using Safe_to_Share.Scripts.CustomClasses;
 using Safe_To_Share.Scripts.Movement.HoverMovement;
 using Safe_To_Share.Scripts.Static;
-using Special_Items;
 using UnityEngine;
 
-namespace AvatarStuff.Holders
+namespace Safe_To_Share.Scripts.Holders
 {
-    public class MovementModHandler : MoveStats
+    public sealed class MovementModHandler : MoveStats
     {
         [SerializeField] Safe_To_Share.Scripts.Movement.HoverMovement.Movement movement;
 

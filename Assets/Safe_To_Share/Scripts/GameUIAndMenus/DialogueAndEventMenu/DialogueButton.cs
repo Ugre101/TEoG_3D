@@ -1,10 +1,11 @@
 ﻿using System;
+using Dialogue;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Dialogue.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 {
     public class DialogueButton : MonoBehaviour
     {

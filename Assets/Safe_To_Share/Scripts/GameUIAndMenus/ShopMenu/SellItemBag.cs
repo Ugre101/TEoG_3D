@@ -2,7 +2,7 @@
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Shop.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 {
     public class SellItemBag : MonoBehaviour
     {

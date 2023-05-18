@@ -8,7 +8,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.SceneUI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.SceneUI
 {
     public class ShoreOptionButton : MonoBehaviour
     {

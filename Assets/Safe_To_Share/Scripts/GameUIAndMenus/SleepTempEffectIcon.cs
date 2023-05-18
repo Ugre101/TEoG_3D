@@ -3,14 +3,14 @@ using System.Linq;
 using System.Text;
 using Character;
 using Character.StatsStuff.Mods;
-using GameUIAndMenus.EffectUI;
+using Safe_To_Share.Scripts.GameUIAndMenus.EffectUI;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class SleepTempEffectIcon : EffectIcon
+    public sealed class SleepTempEffectIcon : EffectIcon
     {
         [SerializeField] TextMeshProUGUI timeLeft;
 

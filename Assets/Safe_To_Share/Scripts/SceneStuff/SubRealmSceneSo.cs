@@ -7,7 +7,7 @@ using UnityEngine;
 namespace SaveStuff
 {
     [CreateAssetMenu(menuName = "Scene Data/Sub Realm ref", fileName = "New Sub Realm SceneSo", order = 0)]
-    public class SubRealmSceneSo : GameSceneSo
+    public sealed class SubRealmSceneSo : GameSceneSo
     {
         [Serializable]
         public struct SavedEnemy

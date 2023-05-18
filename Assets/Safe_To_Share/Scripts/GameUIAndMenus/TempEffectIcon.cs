@@ -2,16 +2,16 @@
 using System.Linq;
 using System.Text;
 using Character.StatsStuff.Mods;
-using GameUIAndMenus.EffectUI;
 using Items;
+using Safe_To_Share.Scripts.GameUIAndMenus.EffectUI;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class TempEffectIcon : EffectIcon
+    public sealed class TempEffectIcon : EffectIcon
     {
         [SerializeField] TextMeshProUGUI timeLeft;
         Item item;

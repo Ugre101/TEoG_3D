@@ -4,12 +4,12 @@ using Character;
 using Character.BodyStuff;
 using Character.Organs.Fluids.UI;
 using Character.Race.UI;
-using GameUIAndMenus.Menus.Looks;
+using Safe_To_Share.Scripts.GameUIAndMenus.Menus.Looks;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
     public class LooksMenu : GameMenu
     {

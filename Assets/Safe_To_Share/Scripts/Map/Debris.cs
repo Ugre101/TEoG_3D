@@ -2,7 +2,7 @@
 
 namespace Map
 {
-    public class Debris : MonoBehaviour
+    public sealed class Debris : MonoBehaviour
     {
         float spawnTime;
 

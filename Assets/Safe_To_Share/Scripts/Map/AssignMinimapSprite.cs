@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Map
 {
-    public class AssignMinimapSprite : MonoBehaviour
+    public sealed class AssignMinimapSprite : MonoBehaviour
     {
         [SerializeField] Sprite miniMapSprite;
         [SerializeField] Image miniMapImage, bigMapImage;

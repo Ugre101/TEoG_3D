@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Map.Spawner
 {
-    public class SpawnZones : MonoBehaviour
+    public sealed class SpawnZones : MonoBehaviour
     {
         [SerializeField] SpawnZone zone;
         [SerializeField] SpawnZone[] zones = { };

@@ -2,7 +2,7 @@
 using Character.PlayerStuff;
 using UnityEngine;
 
-namespace AvatarStuff.Holders.Npc
+namespace Safe_To_Share.Scripts.Holders.Npc
 {
     public abstract class NpcHolder : MonoBehaviour, IInteractable
     {

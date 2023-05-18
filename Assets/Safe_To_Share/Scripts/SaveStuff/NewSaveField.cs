@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace SaveStuff
 {
-    public class NewSaveField : MonoBehaviour
+    public sealed class NewSaveField : MonoBehaviour
     {
         [SerializeField] TMP_InputField saveName;
         [SerializeField] Button saveBtn;

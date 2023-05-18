@@ -1,43 +1,43 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using GameUIAndMenus;
 using UnityEngine;
 
-public class SleepCanvas : MonoBehaviour
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    [SerializeField] GameCanvas gameCanvas;
-    [SerializeField] CanvasGroup canvasGroup;
-    readonly WaitForSecondsRealtime waitForSecondsRealtime = new(0.2f);
-    Coroutine coroutine;
-
-    public void Sleep()
+    public class SleepCanvas : MonoBehaviour
     {
-        gameObject.SetActive(true);
-        coroutine = StartCoroutine(FadeInAndOut());
-    }
+        [SerializeField] GameCanvas gameCanvas;
+        [SerializeField] CanvasGroup canvasGroup;
+        readonly WaitForSecondsRealtime waitForSecondsRealtime = new(0.2f);
+        Coroutine coroutine;
 
-    void OnDisable()
-    {
-        if (coroutine != null)
-            StopCoroutine(coroutine);
-    }
-
-
-    IEnumerator FadeInAndOut()
-    {
-        while (canvasGroup.alpha < 1f)
+        public void Sleep()
         {
-            canvasGroup.alpha += 0.01f;
-            yield return null;
+            gameObject.SetActive(true);
+            coroutine = StartCoroutine(FadeInAndOut());
         }
-        yield return waitForSecondsRealtime;
-        while (canvasGroup.alpha > 0)
+
+        void OnDisable()
         {
-            canvasGroup.alpha -= 0.01f;
-            yield return null;
+            if (coroutine != null)
+                StopCoroutine(coroutine);
         }
-        gameObject.SetActive(false);
-        gameCanvas.CloseMenus();
+
+
+        IEnumerator FadeInAndOut()
+        {
+            while (canvasGroup.alpha < 1f)
+            {
+                canvasGroup.alpha += 0.01f;
+                yield return null;
+            }
+            yield return waitForSecondsRealtime;
+            while (canvasGroup.alpha > 0)
+            {
+                canvasGroup.alpha -= 0.01f;
+                yield return null;
+            }
+            gameObject.SetActive(false);
+            gameCanvas.CloseMenus();
+        }
     }
 }

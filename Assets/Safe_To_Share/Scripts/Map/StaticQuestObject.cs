@@ -6,7 +6,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace QuestStuff
 {
-    public class StaticQuestObject : MiniMapBaseObject
+    public sealed class StaticQuestObject : MiniMapBaseObject
     {
         [SerializeField] bool triggerComplete, triggerProgress;
         [SerializeField, HideInInspector,] string guid;

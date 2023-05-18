@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.Movement.Settings.UI
 {
-    public class ToggleInvertThirdPersonVerticalAxis : MonoBehaviour
+    public sealed class ToggleInvertThirdPersonVerticalAxis : MonoBehaviour
     {
         [SerializeField] Toggle toggle;
 

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class TriggerMenus : MonoBehaviour
+    public sealed class TriggerMenus : MonoBehaviour
     {
         [SerializeField] GameCanvas gameCanvas;
         [SerializeField] GameObject looksMenu;

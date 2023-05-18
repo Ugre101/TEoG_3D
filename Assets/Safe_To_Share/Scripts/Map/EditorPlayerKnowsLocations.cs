@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Map
 {
-    public class EditorPlayerKnowsLocations : MonoBehaviour
+    public sealed class EditorPlayerKnowsLocations : MonoBehaviour
     {
         [SerializeField] List<LocationSceneSo> knowLocations = new();
         [SerializeField] List<SceneTeleportExit> exits = new();

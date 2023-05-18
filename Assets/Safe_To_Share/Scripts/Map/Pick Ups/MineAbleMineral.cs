@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace Safe_To_Share.Scripts.Map.Pick_Ups
 {
-    public class MineAbleMineral : MonoBehaviour, IInteractable
+    public sealed class MineAbleMineral : MonoBehaviour, IInteractable
     {
         [SerializeField, Range(0f, 1f),] float spawnChance = 1f;
         [SerializeField, Range(1, 3),] int minAmount = 1;

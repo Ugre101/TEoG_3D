@@ -1,12 +1,11 @@
-﻿using AvatarStuff.Holders;
+﻿using AvatarStuff;
 using Character;
-using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace AvatarStuff.UI
+namespace Safe_To_Share.Scripts.Holders.UI
 {
-    public class BodyMorphPanel : MonoBehaviour
+    public sealed class BodyMorphPanel : MonoBehaviour
     {
         [SerializeField] BodyMorphSliders sliders;
         [Header("Sorting"), SerializeField,] Button all;

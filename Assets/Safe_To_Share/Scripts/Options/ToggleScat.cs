@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.Options
 {
-    public class ToggleScat : MonoBehaviour
+    public sealed class ToggleScat : MonoBehaviour
     {
         [SerializeField] Toggle toggle;
 

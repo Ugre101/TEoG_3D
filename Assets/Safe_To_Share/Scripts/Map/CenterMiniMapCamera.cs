@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Map
 {
-    public class CenterMiniMapCamera : MonoBehaviour
+    public sealed class CenterMiniMapCamera : MonoBehaviour
     {
         [SerializeField] float yOffset;
 

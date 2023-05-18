@@ -2,7 +2,7 @@
 using Character.VoreStuff;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Vore
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
     public class VoreMenu : GameMenu
     {

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace SaveStuff
 {
-    public class SaveManager : MonoBehaviour
+    public sealed class SaveManager : MonoBehaviour
     {
         public static bool SavesDirty = true;
         public static Save? LastSave;

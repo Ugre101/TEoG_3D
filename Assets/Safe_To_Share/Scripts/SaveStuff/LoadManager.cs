@@ -21,7 +21,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace SaveStuff
 {
-    public class LoadManager : MonoBehaviour
+    public sealed class LoadManager : MonoBehaviour
     {
         static readonly WaitForEndOfFrame WaitForEndOfFrame = new();
         public static LoadManager Instance { get; private set; }

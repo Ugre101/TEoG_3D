@@ -13,9 +13,6 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             Swimming,
         }
 
-        [Header("Sprint Variables"), SerializeField, Range(1.15f, 2f),]
-        float sprintMultiplier = 1.15f;
-
         [SerializeField] MoveModes currentMode;
 
         [FormerlySerializedAs("capsuleCollider"), SerializeField,]
@@ -69,7 +66,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         public abstract bool IsSprinting();
         public abstract bool WasGrounded();
         public Vector3 GetVelocity() => Rigid.velocity;
-        public float GetCurrentSpeed() => GetVelocity().magnitude;
+        public virtual float GetCurrentSpeed() => GetVelocity().magnitude;
         public float GetMaxSpeed() => MaxSpeed;
         public abstract Vector3 GetLocalMoveDirection();
         public abstract Vector3 GetUpVector();

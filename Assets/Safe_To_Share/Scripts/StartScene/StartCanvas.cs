@@ -10,7 +10,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.StartScene
 {
-    public class StartCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
+    public sealed class StartCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] GameObject startMenu;
         [SerializeField] SetupPlayer setupPlayer;
@@ -40,7 +40,7 @@ namespace Safe_To_Share.Scripts.StartScene
 
         void LoadLastGame()
         {
-            IOrderedEnumerable<string> saves
+            var saves
                 = Directory.GetFiles(SaveManager.SavePath).OrderByDescending(Directory.GetLastWriteTime);
             string savePath = saves.FirstOrDefault();
             if (string.IsNullOrEmpty(savePath))

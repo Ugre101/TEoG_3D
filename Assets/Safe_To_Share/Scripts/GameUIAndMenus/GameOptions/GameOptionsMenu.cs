@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameUIAndMenus.GameOptions
+namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
 {
     public class GameOptionsMenu : MonoBehaviour
     {

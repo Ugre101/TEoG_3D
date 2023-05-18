@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace SaveStuff
 {
-    public class StartSaveMenu : MonoBehaviour
+    public sealed class StartSaveMenu : MonoBehaviour
     {
         [SerializeField] Transform content;
         [SerializeField] SaveButton saveBtn;

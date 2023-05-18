@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AvatarStuff;
-using AvatarStuff.Holders;
 using Character;
 using Character.EnemyStuff;
 using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Holders
+namespace Safe_To_Share.Scripts.Holders.SubRealm
 {
     public class SubRealmEnemy : AiHolder
     {
-        [Range(0f, 5f), SerializeField,] float initCombatRange = 1.5f;
         [field: SerializeField] public Enemy Enemy { get; private set; }
         [field: SerializeField] public float AggroRange { get; private set; } = 10f;
 
         State<EnemyAiHolder> currentState;
 
         public Vector3 SpawnLocation { get; private set; }
-
-        public bool InterActedWith { get; private set; }
 
         static readonly HashSet<SubRealmEnemy> ActiveEnemies = new();
         [SerializeField] float joinCombatRange = 4f;
@@ -31,6 +26,7 @@ namespace Safe_To_Share.Scripts.Holders
             SpawnLocation = transform.position;
             ActiveEnemies.Add(this);
         }
+
         void OnDestroy()
         {
             Enemy.Unsub();

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.ServiceMenu
+namespace Safe_To_Share.Scripts.GameUIAndMenus.ServiceMenu
 {
     public class ServiceMenuButton : MonoBehaviour
     {

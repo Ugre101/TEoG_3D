@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class OpenAndCloserGate : MonoBehaviour
+    public sealed class OpenAndCloserGate : MonoBehaviour
     {
         [SerializeField] Animation openGate;
         [SerializeField] OcclusionPortal occlusionPortal;

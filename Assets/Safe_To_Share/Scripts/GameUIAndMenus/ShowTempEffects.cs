@@ -4,15 +4,15 @@ using System.Linq;
 using Character;
 using Character.Ailments;
 using Character.StatsStuff.Mods;
-using GameUIAndMenus.EffectUI;
 using Items;
+using Safe_To_Share.Scripts.GameUIAndMenus.EffectUI;
 using SaveStuff;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Pool;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
     public class ShowTempEffects : GameMenu
     {

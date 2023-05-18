@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Map
 {
-    public class MapData : MonoBehaviour
+    public sealed class MapData : MonoBehaviour
     {
         public static MapData Instance { get; private set; }
         [field: SerializeField] public StaticMiniMapObject[] Statics { get; private set; }

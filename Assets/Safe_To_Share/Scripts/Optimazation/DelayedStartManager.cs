@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Optimazation
 {
-    public class DelayedStartManager : MonoBehaviour
+    public sealed class DelayedStartManager : MonoBehaviour
     {
         [SerializeField] List<GameObject> startLates;
 #if UNITY_EDITOR

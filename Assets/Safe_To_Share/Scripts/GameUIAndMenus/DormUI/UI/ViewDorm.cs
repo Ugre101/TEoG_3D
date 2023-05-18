@@ -1,5 +1,5 @@
-﻿using AvatarStuff.Holders;
-using Character.EssenceStuff;
+﻿using Character.EssenceStuff;
+using DormAndHome.Dorm;
 using DormAndHome.Dorm.Buildings;
 using Safe_To_Share.Scripts.Holders;
 using Safe_To_Share.Scripts.Static;
@@ -8,7 +8,7 @@ using SceneStuff;
 using TMPro;
 using UnityEngine;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public class ViewDorm : MonoBehaviour
     {

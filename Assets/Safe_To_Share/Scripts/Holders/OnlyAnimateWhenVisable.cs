@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Holders
+namespace Safe_To_Share.Scripts.Holders
 {
-    public class OnlyAnimateWhenVisable : MonoBehaviour
+    public sealed class OnlyAnimateWhenVisable : MonoBehaviour
     {
         const float CheckEvery = 2f;
         [SerializeField] Renderer[] renderers;

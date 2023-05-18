@@ -2,9 +2,9 @@
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace AvatarStuff.Holders
+namespace Safe_To_Share.Scripts.Holders
 {
-    public class EnemyObjectPool : MonoBehaviour
+    public sealed class EnemyObjectPool : MonoBehaviour
     {
         [SerializeField] EnemyAiHolder prefab;
         Queue<EnemyAiHolder> enemyHolders;

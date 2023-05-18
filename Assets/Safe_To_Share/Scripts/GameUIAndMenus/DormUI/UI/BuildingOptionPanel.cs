@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public abstract class BuildingOptionPanel : MonoBehaviour
     {

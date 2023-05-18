@@ -3,7 +3,7 @@ using Map;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.MinimapUI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.MinimapUI
 {
     public class MiniMap : MapShared
     {

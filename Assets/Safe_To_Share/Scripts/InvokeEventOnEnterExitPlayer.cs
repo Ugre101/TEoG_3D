@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Safe_To_Share.Scripts
 {
-    public class InvokeEventOnEnterExitPlayer : MonoBehaviour
+    public sealed class InvokeEventOnEnterExitPlayer : MonoBehaviour
     {
         [SerializeField] PlayerEvent enterEvent;
         [SerializeField] UnityEvent exitEvent;
@@ -15,12 +15,10 @@ namespace Safe_To_Share.Scripts
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player") && other.TryGetComponent(out PlayerHolder holder))
-            {
-                enterEvent.Invoke(holder.Player);
-                if (stopMoverOnEnter)
-                    holder.PersonEcm2Character.Stop();
-            }
+            if (!other.CompareTag("Player") || !other.TryGetComponent(out PlayerHolder holder)) return;
+            enterEvent.Invoke(holder.Player);
+            if (stopMoverOnEnter)
+                holder.PersonEcm2Character.Stop();
         }
 
         void OnTriggerExit(Collider other)

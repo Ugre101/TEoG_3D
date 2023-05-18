@@ -1,10 +1,9 @@
-﻿using AvatarStuff.Holders;
-using Safe_To_Share.Scripts.Holders;
+﻿using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Map
 {
-    public class PrefabTree : MonoBehaviour
+    public sealed class PrefabTree : MonoBehaviour
     {
         void OnCollisionEnter(Collision collision)
         {

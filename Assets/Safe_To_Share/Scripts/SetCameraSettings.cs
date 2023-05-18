@@ -1,11 +1,11 @@
-using Options;
+using Safe_To_Share.Scripts.Options;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts
 {
-    public class SetCameraSettings : MonoBehaviour
+    public sealed class SetCameraSettings : MonoBehaviour
     {
         [SerializeField] Slider slider;
 

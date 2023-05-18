@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Safe_To_Share.Scripts
 {
-    public class InvokeEventOnEnterExit : MonoBehaviour
+    public sealed class InvokeEventOnEnterExit : MonoBehaviour
     {
         // [SerializeField] DormSleepAreaShared dorm;
         [SerializeField] UnityEvent enterEvent;

@@ -15,7 +15,7 @@ namespace Safe_To_Share.Scripts.Special_Items
 {
     [CreateAssetMenu(menuName = "Items/Special Items/Create Experimental Tonic", fileName = "ExperimentalTonic",
         order = 0)]
-    public class ExperimentalTonic : Item
+    public sealed class ExperimentalTonic : Item
     {
         readonly RandomEffect[] randomEffects =
         {
@@ -58,7 +58,7 @@ namespace Safe_To_Share.Scripts.Special_Items
             public abstract void Use(BaseCharacter user, string itemGuid);
         }
 
-        class Shrink : RandomEffect
+        sealed class Shrink : RandomEffect
         {
             public Shrink(int weight) : base(weight)
             {
@@ -67,7 +67,7 @@ namespace Safe_To_Share.Scripts.Special_Items
             public override void Use(BaseCharacter user, string itemGuid) => user.Body.ShrinkBodyByPercent(10);
         }
 
-        class Grow : RandomEffect
+        sealed class Grow : RandomEffect
         {
             public Grow(int weight) : base(weight)
             {
@@ -76,7 +76,7 @@ namespace Safe_To_Share.Scripts.Special_Items
             public override void Use(BaseCharacter user, string itemGuid) => user.Body.GrowBodyByPercent(5);
         }
 
-        class GrowOrgan : RandomEffect
+        sealed class GrowOrgan : RandomEffect
         {
             readonly Random rng = new();
 
@@ -91,13 +91,13 @@ namespace Safe_To_Share.Scripts.Special_Items
                 organs.AddRange(user.SexualOrgans.Dicks.BaseList);
                 organs.AddRange(user.SexualOrgans.Boobs.BaseList);
                 organs.AddRange(user.SexualOrgans.Vaginas.BaseList);
-                if (organs.Count > 0)
-                    for (int i = 0; i < UnityEngine.Random.Range(1, 6); i++)
-                        organs[rng.Next(organs.Count)].BaseValue++;
+                if (organs.Count <= 0) return;
+                for (int i = 0; i < UnityEngine.Random.Range(1, 6); i++)
+                    organs[rng.Next(organs.Count)].BaseValue++;
             }
         }
 
-        class TempMini : RandomEffect
+        sealed class TempMini : RandomEffect
         {
             public TempMini(int weight) : base(weight)
             {
@@ -107,7 +107,7 @@ namespace Safe_To_Share.Scripts.Special_Items
                 user.Body.Height.Mods.AddTempStatMod(1, -80, itemGuid, ModType.Percent);
         }
 
-        class TempShrinkOrgans : RandomEffect
+        sealed class TempShrinkOrgans : RandomEffect
         {
             readonly Random rng = new();
 
@@ -122,19 +122,19 @@ namespace Safe_To_Share.Scripts.Special_Items
                 organs.AddRange(user.SexualOrgans.Dicks.BaseList);
                 organs.AddRange(user.SexualOrgans.Boobs.BaseList);
                 organs.AddRange(user.SexualOrgans.Vaginas.BaseList);
-                if (organs.Count > 0)
-                    for (int i = 0; i < 13; i++)
-                    {
-                        BaseOrgan baseOrgan = organs[rng.Next(organs.Count)];
-                        baseOrgan.Mods.AddTempStatMod(2, -50, itemGuid, ModType.Percent);
-                        organs.Remove(baseOrgan);
-                        if (organs.Count == 0)
-                            break;
-                    }
+                if (organs.Count <= 0) return;
+                for (int i = 0; i < 13; i++)
+                {
+                    BaseOrgan baseOrgan = organs[rng.Next(organs.Count)];
+                    baseOrgan.Mods.AddTempStatMod(2, -50, itemGuid, ModType.Percent);
+                    organs.Remove(baseOrgan);
+                    if (organs.Count == 0)
+                        break;
+                }
             }
         }
 
-        class TempSwole : RandomEffect
+        sealed class TempSwole : RandomEffect
         {
             public TempSwole(int weight) : base(weight)
             {
@@ -144,7 +144,7 @@ namespace Safe_To_Share.Scripts.Special_Items
                 user.Body.Muscle.Mods.AddTempStatMod(12, 30, itemGuid, ModType.Percent);
         }
 
-        class TempFat : RandomEffect
+        sealed class TempFat : RandomEffect
         {
             public TempFat(int weight) : base(weight)
             {
@@ -166,7 +166,7 @@ namespace Safe_To_Share.Scripts.Special_Items
             }
         }
 
-        class GainStat : RandomEffect
+        sealed class GainStat : RandomEffect
         {
             public GainStat(int weight) : base(weight)
             {

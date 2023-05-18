@@ -1,8 +1,8 @@
-﻿using AvatarStuff.Holders;
-using Character.RelationShipStuff;
+﻿using Character.RelationShipStuff;
+using DormAndHome.Dorm;
 using Safe_To_Share.Scripts.Holders;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public class ViewSelectedDungeonDormMate : ViewSelectedDormMate
     {

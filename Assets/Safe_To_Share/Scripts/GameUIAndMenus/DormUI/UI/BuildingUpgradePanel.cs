@@ -1,8 +1,7 @@
-﻿using AvatarStuff.Holders;
-using Safe_To_Share.Scripts.Holders;
+﻿using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public abstract class BuildingUpgradePanel : MonoBehaviour
     {

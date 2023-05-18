@@ -1,10 +1,9 @@
-﻿using AvatarStuff.Holders;
-using Character.PlayerStuff;
+﻿using Character.PlayerStuff;
 using CustomClasses;
 using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
     public abstract class GameMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {

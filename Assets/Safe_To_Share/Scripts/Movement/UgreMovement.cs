@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Movement
 {
-    public class UgreMovement : MonoBehaviour
+    public sealed class UgreMovement : MonoBehaviour
     {
         [SerializeField] float baseSpeed;
         [SerializeField] float sprintMultiplier;
@@ -22,7 +22,7 @@ namespace Safe_To_Share.Scripts.Movement
         }
     }
 
-    public class JumpManager : MonoBehaviour
+    public sealed class JumpManager : MonoBehaviour
     {
         [SerializeField] GroundChecker groundChecker;
 

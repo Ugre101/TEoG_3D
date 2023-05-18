@@ -76,7 +76,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
 
         bool DidIHitOtherRigidBody(out Rigidbody hitBody)
         {
-            if (checker.LastHit.collider is not null)
+            if (checker.LastHit.collider != null)
                 return checker.LastHit.collider.TryGetComponent(out hitBody);
             hitBody = default;
             return false;

@@ -1,12 +1,10 @@
-﻿using System.Linq;
-using System.Text;
+﻿using System.Text;
 using Character;
 using Character.Organs.Fluids;
-using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Looks
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Looks
 {
     public class SexualFluidsOnBodyInfo : MonoBehaviour
     {

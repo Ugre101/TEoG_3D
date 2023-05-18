@@ -43,7 +43,7 @@ namespace Safe_To_Share.Scripts.Battle.CombatantStuff
 
         void UnSub()
         {
-            if (Character is null)
+            if (Character == null)
                 return;
             Hp.CurrentValueChange -= Dead;
             Wp.CurrentValueChange -= Dead;
@@ -110,7 +110,7 @@ namespace Safe_To_Share.Scripts.Battle.CombatantStuff
 
         public void TriggerAnimation(TriggerBattleAnimations battleAnimation)
         {
-            if (activeAnimator is null)
+            if (activeAnimator == null)
             {
 #if UNITY_EDITOR
                 Debug.LogWarning("Combatant has no animator");
@@ -124,7 +124,7 @@ namespace Safe_To_Share.Scripts.Battle.CombatantStuff
 
         public void FloatAnimations(FloatBattleAnimations animations, float value)
         {
-            if (activeAnimator is null)
+            if (activeAnimator == null)
             {
                 Debug.LogWarning("Combatant has no animator");
                 return;

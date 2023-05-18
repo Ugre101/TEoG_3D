@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using Character.LevelStuff;
 using Character.StatsStuff.Mods;
-using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
-namespace AvatarStuff.Holders
+namespace Safe_To_Share.Scripts.Holders
 {
     [CreateAssetMenu(menuName = "Character/Movement/Perk", fileName = "MovementPerk", order = 0)]
-    public class MovementPerk : BasicPerk
+    public sealed class MovementPerk : BasicPerk
     {
         [SerializeField] int extraJumps;
         [SerializeField] float extraJumpStrength;

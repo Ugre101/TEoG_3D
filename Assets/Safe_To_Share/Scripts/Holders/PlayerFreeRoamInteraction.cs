@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Character.PlayerStuff;
-using Safe_To_Share.Scripts.Holders;
 using TMPro;
 using Unity.Collections;
 using Unity.Jobs;
@@ -9,9 +7,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace AvatarStuff.Holders
+namespace Safe_To_Share.Scripts.Holders
 {
-    public class PlayerFreeRoamInteraction : MonoBehaviour
+    public sealed class PlayerFreeRoamInteraction : MonoBehaviour
     {
         const int FrameLimit = 10;
         [SerializeField] Button optionButton;

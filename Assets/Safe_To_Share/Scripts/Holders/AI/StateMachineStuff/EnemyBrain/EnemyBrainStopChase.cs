@@ -1,5 +1,4 @@
-﻿using AvatarStuff.Holders;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Holders.AI.StateMachineStuff.EnemyBrain
 {
@@ -14,7 +13,7 @@ namespace Safe_To_Share.Scripts.Holders.AI.StateMachineStuff.EnemyBrain
         public override void OnEnter()
         {
             waitUntil = Time.time + Random.Range(2f, 5f);
-            Behaviour.Move.ResetPath();
+            Behaviour.Agent.ResetPath();
         }
 
         public override void OnUpdate()

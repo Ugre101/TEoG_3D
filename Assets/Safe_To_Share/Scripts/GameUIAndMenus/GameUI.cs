@@ -2,7 +2,7 @@ using Character.StatsStuff;
 using Character.StatsStuff.HealthStuff.UI;
 using UnityEngine;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
     public class GameUI : GameMenu
     {

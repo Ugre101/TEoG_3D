@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SceneStuff
 {
-    public class SceneChangeTeleport : MonoBehaviour
+    public sealed class SceneChangeTeleport : MonoBehaviour
     {
         [SerializeField] SceneTeleportExit exit;
         [SerializeField] LocationSceneSo sceneToLoad;
@@ -18,11 +18,9 @@ namespace SceneStuff
         {
             if (!other.gameObject.CompareTag("Player") || alreadyLoading || sceneToLoad == null)
                 return;
-            if (other.TryGetComponent(out PlayerHolder player))
-            {
-                alreadyLoading = true;
-                SceneLoader.Instance.LoadNewLocation(sceneToLoad, player.Player, exit);
-            }
+            if (!other.TryGetComponent(out PlayerHolder player)) return;
+            alreadyLoading = true;
+            SceneLoader.Instance.LoadNewLocation(sceneToLoad, player.Player, exit);
         }
     }
 }

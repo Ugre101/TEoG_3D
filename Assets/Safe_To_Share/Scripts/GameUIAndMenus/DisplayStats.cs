@@ -4,7 +4,7 @@ using Character.StatsStuff;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
     public class DisplayStats : MonoBehaviour
     {

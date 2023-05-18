@@ -1,20 +1,16 @@
-﻿using AvatarStuff.Holders;
-using Safe_To_Share.Scripts.Holders;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace AvatarStuff.UI
+namespace Safe_To_Share.Scripts.Holders.UI
 {
-    public class EnterBodyMorphPanel : MonoBehaviour
+    public sealed class EnterBodyMorphPanel : MonoBehaviour
     {
         [SerializeField] BodyMorphPanel panel;
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player") && other.TryGetComponent(out PlayerHolder mover))
-            {
-                panel.Enter(mover);
-                mover.PersonEcm2Character.Stop();
-            }
+            if (!other.CompareTag("Player") || !other.TryGetComponent(out PlayerHolder mover)) return;
+            panel.Enter(mover);
+            mover.PersonEcm2Character.Stop();
         }
 
         void OnTriggerExit(Collider other)

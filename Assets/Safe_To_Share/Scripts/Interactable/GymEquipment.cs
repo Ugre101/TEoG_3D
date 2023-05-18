@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Interactable
 {
-    public class GymEquipment : MonoBehaviour, IInteractable
+    public sealed class GymEquipment : MonoBehaviour, IInteractable
     {
         [SerializeField] Item[] needItem;
         [SerializeField] string title;
@@ -20,11 +20,9 @@ namespace Safe_To_Share.Scripts.Interactable
 
         void Start()
         {
-            if (needItem == null)
-            {
-                gameObject.SetActive(false);
-                Debug.LogError("Gym equipment is missing it's needed item");
-            }
+            if (needItem != null) return;
+            gameObject.SetActive(false);
+            Debug.LogError("Gym equipment is missing it's needed item");
         }
 
         public string HoverText(Player player) =>

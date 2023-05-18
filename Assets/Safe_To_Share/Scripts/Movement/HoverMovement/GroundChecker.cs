@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Movement.HoverMovement
@@ -13,7 +14,6 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         public bool DidHitGround { get; private set; } = false;
         public RaycastHit LastHit { get; private set; }
         // Start is called before the first frame update
-
 
         public void CheckGround()
         {

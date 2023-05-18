@@ -19,7 +19,7 @@ using UnityEngine.SceneManagement;
 
 namespace SceneStuff
 {
-    public partial class SceneLoader : MonoBehaviour
+    public sealed partial class SceneLoader : MonoBehaviour
     {
         static GameSceneSo currentScene;
         static LocationSceneSo lastLocation;

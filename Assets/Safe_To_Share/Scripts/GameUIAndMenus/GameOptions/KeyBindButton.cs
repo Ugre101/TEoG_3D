@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.GameOptions
+namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
 {
     public class KeyBindButton : MonoBehaviour
     {

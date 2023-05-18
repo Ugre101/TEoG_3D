@@ -1,10 +1,11 @@
-﻿using Character;
+﻿using AvatarStuff;
+using Character;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace AvatarStuff.UI
+namespace Safe_To_Share.Scripts.Holders.UI
 {
-    public class BodyMorphSliders : MonoBehaviour
+    public sealed class BodyMorphSliders : MonoBehaviour
     {
         [SerializeField] BodyMorphSlider prefab;
         [SerializeField] Transform content;

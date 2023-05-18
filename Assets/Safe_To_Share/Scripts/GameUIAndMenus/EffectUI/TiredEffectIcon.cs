@@ -3,7 +3,7 @@ using Character.PlayerStuff;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus.EffectUI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.EffectUI
 {
     public class TiredEffectIcon : EffectIcon
     {

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.Movement
 {
-    public class ThirdPersonSensitivitySlider : MonoBehaviour
+    public sealed class ThirdPersonSensitivitySlider : MonoBehaviour
     {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI amount;

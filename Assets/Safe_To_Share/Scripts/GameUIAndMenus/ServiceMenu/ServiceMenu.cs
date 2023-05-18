@@ -6,7 +6,7 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus.ServiceMenu
+namespace Safe_To_Share.Scripts.GameUIAndMenus.ServiceMenu
 {
     public class ServiceMenu : GameMenu
     {

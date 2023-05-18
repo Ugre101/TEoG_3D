@@ -5,7 +5,7 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus.DialogueAndEventMenu
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 {
     public class SetFullName : MonoBehaviour
     {

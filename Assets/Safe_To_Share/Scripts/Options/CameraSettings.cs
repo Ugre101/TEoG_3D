@@ -1,9 +1,9 @@
 using Cinemachine;
 using UnityEngine;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class CameraSettings : MonoBehaviour
+    public sealed class CameraSettings : MonoBehaviour
     {
         const string SaveName = "CameraRenderDistance";
         static float? renderDistance;

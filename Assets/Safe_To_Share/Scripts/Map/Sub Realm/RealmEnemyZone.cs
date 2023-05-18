@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Character.CreateCharacterStuff;
 using Character.EnemyStuff;
 using Safe_To_Share.Scripts.Holders;
+using Safe_To_Share.Scripts.Holders.SubRealm;
 using SaveStuff;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -11,7 +12,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.Map.Sub_Realm
 {
-    public class RealmEnemyZone : MonoBehaviour
+    public sealed class RealmEnemyZone : MonoBehaviour
     {
         [SerializeField] AssetReference enemyPrefab;
         [SerializeField] EnemyPreset[] enemyPresets;   
@@ -152,14 +153,19 @@ namespace Safe_To_Share.Scripts.Map.Sub_Realm
             NavMeshHit navHit = new();
             bool valid = Physics.Raycast(ray, out RaycastHit hit) &&
                          NavMesh.SamplePosition(hit.point, out navHit, 2f, spawnOn);
-            if (!valid) return valid;
-            GameObject go = new("BossSpawnPoint");
-            go.transform.position = navHit.position;
+            if (!valid) return false;
+            GameObject go = new("BossSpawnPoint")
+            {
+                transform =
+                {
+                    position = navHit.position,
+                },
+            };
             go.transform.SetParent(transform);
             if (bossSpawnPoint != null)
                 DestroyImmediate(bossSpawnPoint.gameObject);
             bossSpawnPoint = go.transform;
-            return valid;
+            return true;
         }
 #endif
     }

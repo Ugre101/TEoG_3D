@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Movement.HoverMovement.PhysicsLayer
 {
-    public class RoadLayer : BaseLayer
+    public sealed class RoadLayer : BaseLayer
     {
         [SerializeField, Range(0.5f, 3f),] float removeDelay = 1f;
         [SerializeField] FloatMod speedMod;
@@ -15,7 +15,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.PhysicsLayer
 
         public override void OnEnter(Movement mover)
         {
-            if (removeRoutine is not null)
+            if (removeRoutine != null)
                 StopCoroutine(removeRoutine);
             else
                 mover.Stats.AddMod(MoveCharacter.MoveModes.Walking, speedMod);

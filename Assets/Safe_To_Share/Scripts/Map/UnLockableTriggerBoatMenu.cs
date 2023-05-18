@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Map
 {
-    public class UnLockableTriggerBoatMenu : TriggerBoatMenu
+    public sealed class UnLockableTriggerBoatMenu : TriggerBoatMenu
     {
         [SerializeField] LocationSceneSo altLocationSceneSo;
         [SerializeField] UnLockAble lockAble;

@@ -1,11 +1,10 @@
 ﻿using System;
-using AvatarStuff.Holders;
 using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff.EnemyBrain;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Holders.AI.StateMachineStuff
 {
-    public class StateHandler
+    public sealed class StateHandler
     {
         readonly EnemyBrainIdle idle;
         readonly EnemyBrainWander wander;

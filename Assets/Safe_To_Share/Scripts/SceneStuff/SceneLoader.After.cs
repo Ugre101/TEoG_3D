@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using AvatarStuff.Holders;
 using Character;
 using Character.PlayerStuff;
 using Safe_To_Share.Scripts.Holders;
@@ -9,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace SceneStuff
 {
-    public partial class SceneLoader
+    public sealed partial class SceneLoader
     {
         public void PreLoadAfterBattle() =>
             scenePreload = afterBattleScene.SceneReference.LoadSceneAsync(LoadSceneMode.Additive);

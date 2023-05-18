@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts
 {
-    public class SkipTime : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
+    public sealed class SkipTime : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         static int waitTime = 1;
         [SerializeField] Slider slider;
@@ -35,13 +35,10 @@ namespace Safe_To_Share.Scripts
 
         public bool BlockIfActive()
         {
-            if (gameObject.activeInHierarchy)
-            {
-                gameObject.SetActive(false);
-                return true;
-            }
+            if (!gameObject.activeInHierarchy) return false;
+            gameObject.SetActive(false);
+            return true;
 
-            return false;
         }
 
         void IncreaseTime(InputAction.CallbackContext obj) => slider.value++;

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Map
 {
-    public class ScreenShootMiniMapBackGround : MonoBehaviour
+    public sealed class ScreenShootMiniMapBackGround : MonoBehaviour
     {
         [ContextMenu("Take Picture")]
         void TakePicture()

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Character;
@@ -10,26 +9,21 @@ using Character.Service;
 using Character.VoreStuff;
 using CustomClasses;
 using Dialogue;
-using GameUIAndMenus.DialogueAndEventMenu;
 using Items;
 using Map;
-using Safe_To_Share.Scripts.Building;
-using Safe_To_Share.Scripts.GameUIAndMenus;
 using Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu;
 using Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory;
 using Safe_To_Share.Scripts.Static;
 using SaveStuff;
-using SceneStuff;
-using Shop.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class GameCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
+    public sealed class GameCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] GameObject gameUI, gameMenus, boatMenu;
-        [SerializeField] ShopMenu shopMenu;
+        [SerializeField] ShopMenu.ShopMenu shopMenu;
         [SerializeField] DialogueMenu dialogueMenu;
         [SerializeField] VoreEventMenu voreEventMenu;
         [SerializeField] ServiceMenu.ServiceMenu serviceMenu;

@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts
 {
-    public class Spin : MonoBehaviour
+    public sealed class Spin : MonoBehaviour
     {
         [SerializeField, Range(5f, 15f),] float spinRate = 1f;
         [SerializeField] new Transform transform;

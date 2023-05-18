@@ -1,16 +1,16 @@
 ﻿using System.Text;
-using AvatarStuff.Holders;
 using Character;
 using Character.BodyStuff;
 using Character.GenderStuff;
 using Character.Race;
 using Character.RelationShipStuff;
+using DormAndHome.Dorm;
 using Safe_To_Share.Scripts.Holders;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public class ViewSelectedDormMate : MonoBehaviour
     {

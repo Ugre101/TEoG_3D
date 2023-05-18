@@ -18,7 +18,7 @@ namespace Safe_To_Share.Scripts.Battle.UI
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (ability is null) return;
+            if (ability == null) return;
             AbilityLastHovered?.Invoke(ability);
             // Display ability info
         }
@@ -36,7 +36,7 @@ namespace Safe_To_Share.Scripts.Battle.UI
 
         void BindAbility()
         {
-            if (ability is null)
+            if (ability == null)
                 return;
             bindTo.BindNewAbility(ability);
             AbilityBound?.Invoke();

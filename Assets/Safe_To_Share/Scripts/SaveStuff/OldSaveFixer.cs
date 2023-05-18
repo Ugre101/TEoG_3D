@@ -9,7 +9,7 @@ using UnityEngine.AddressableAssets;
 
 namespace SaveStuff
 {
-    public class OldSaveFixer : MonoBehaviour
+    public sealed class OldSaveFixer : MonoBehaviour
     {
         [SerializeField] List<AssetReference> standardAbilities = new();
         public static OldSaveFixer Instance { get; private set; }
@@ -29,7 +29,7 @@ namespace SaveStuff
             CheckButt(player);
         }
 
-        void CheckButt(Player player)
+        static void CheckButt(BaseCharacter player)
         {
             if (player.SexualOrgans.Anals.HaveAny()) 
                 return;

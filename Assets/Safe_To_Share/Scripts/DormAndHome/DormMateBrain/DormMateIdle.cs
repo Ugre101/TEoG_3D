@@ -14,7 +14,7 @@ namespace AvatarStuff.Holders.AI.StateMachineStuff.DormMateBrain
         public override void OnEnter()
         {
             waitUntil = Time.time + Random.Range(3f, 10f);
-            Behaviour.Move.ResetPath();
+            Behaviour.Agent.ResetPath();
         }
 
         public override void OnUpdate()

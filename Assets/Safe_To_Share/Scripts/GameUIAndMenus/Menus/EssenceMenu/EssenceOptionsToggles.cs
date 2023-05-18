@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.Menus.EssenceMenu
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
 {
     public class EssenceOptionsToggles : MonoBehaviour
     {

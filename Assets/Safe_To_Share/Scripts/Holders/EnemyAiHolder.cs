@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using Character;
+using AvatarStuff;
 using Character.EnemyStuff;
-using Safe_To_Share.Scripts.Holders;
 using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff;
-using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff.EnemyBrain;
 using UnityEngine;
 
-namespace AvatarStuff.Holders
+namespace Safe_To_Share.Scripts.Holders
 {
-    public class EnemyAiHolder : AiHolder
+    public sealed class EnemyAiHolder : AiHolder
     {
         [SerializeField] Enemy enemy;
         [SerializeField] float aggroRange = 10f;

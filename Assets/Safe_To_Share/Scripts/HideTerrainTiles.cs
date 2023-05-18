@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class HideTerrainTiles : MonoBehaviour
+    public sealed class HideTerrainTiles : MonoBehaviour
     {
         [SerializeField, Range(1, 5),] int cullingRange = 1;
 
@@ -14,11 +14,9 @@ namespace Safe_To_Share.Scripts
         void Start()
         {
             terrainTiles = GameObject.FindGameObjectsWithTag("Terrain Tile");
-            if (terrainTiles[0].TryGetComponent(out Terrain terrain))
-            {
-                var terrainData = terrain.terrainData;
-                offset = terrainData.size / 2;
-            }
+            if (!terrainTiles[0].TryGetComponent(out Terrain terrain)) return;
+            var terrainData = terrain.terrainData;
+            offset = terrainData.size / 2;
         }
 
         // Update is called once per frame

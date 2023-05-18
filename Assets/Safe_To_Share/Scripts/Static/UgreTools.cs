@@ -65,7 +65,7 @@ namespace Safe_To_Share.Scripts.Static
         }
 
         public static TEum IntToEnum<TEum>(int value, TEum defaultTo, params TEum[] altExcludeOptions) where TEum : Enum
-            => EnumToArray(altExcludeOptions).ElementAt(value) is { } match ? match : defaultTo;
+            => EnumToArray(altExcludeOptions).ElementAt(value) ?? defaultTo;
 
         static List<TMP_Dropdown.OptionData> EnumToDataList<TEum>(params TEum[] altExcludeOptions) where TEum : Enum =>
             EnumToArray(altExcludeOptions).Select(EnumToData).ToList();
@@ -168,7 +168,11 @@ namespace Safe_To_Share.Scripts.Static
             {
                 int n = s.Length;
                 int m = t.Length;
-                int[,] d = new int[n + 1, m + 1];
+                int[][] d = new int[n + 1][];
+                for (int index = 0; index < n + 1; index++)
+                {
+                    d[index] = new int[m + 1];
+                }
 
                 // Verify arguments.
                 if (n == 0)
@@ -178,11 +182,11 @@ namespace Safe_To_Share.Scripts.Static
                     return n;
 
                 // Initialize arrays.
-                for (int i = 0; i <= n; d[i, 0] = i++)
+                for (int i = 0; i <= n; d[i][0] = i++)
                 {
                 }
 
-                for (int j = 0; j <= m; d[0, j] = j++)
+                for (int j = 0; j <= m; d[0][j] = j++)
                 {
                 }
 
@@ -192,12 +196,12 @@ namespace Safe_To_Share.Scripts.Static
                 {
                     // Compute cost.
                     int cost = t[j - 1] == s[i - 1] ? 0 : 1;
-                    d[i, j] = Math.Min(Math.Min(d[i - 1, j] + 1, d[i, j - 1] + 1),
-                        d[i - 1, j - 1] + cost);
+                    d[i][j] = Math.Min(Math.Min(d[i - 1][j] + 1, d[i][j - 1] + 1),
+                        d[i - 1][j - 1] + cost);
                 }
 
                 // Return cost.
-                return d[n, m];
+                return d[n][m];
             }
         }
     }

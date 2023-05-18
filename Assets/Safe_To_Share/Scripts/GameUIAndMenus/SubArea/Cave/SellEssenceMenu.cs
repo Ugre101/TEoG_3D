@@ -1,10 +1,9 @@
 ﻿using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
 using CustomClasses;
-using GameUIAndMenus;
 using UnityEngine;
 
-namespace SubArea.Cave
+namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
 {
     public class SellEssenceMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {

@@ -1,7 +1,8 @@
-﻿using TMPro;
+﻿using QuestStuff;
+using TMPro;
 using UnityEngine;
 
-namespace QuestStuff.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Quest
 {
     public class LargeQuestPage : MonoBehaviour
     {

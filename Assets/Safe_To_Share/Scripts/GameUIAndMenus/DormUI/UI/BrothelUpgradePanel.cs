@@ -1,4 +1,6 @@
-﻿namespace DormAndHome.Dorm.UI
+﻿using DormAndHome.Dorm;
+
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public class BrothelUpgradePanel : BuildingUpgradePanel
     {

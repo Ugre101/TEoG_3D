@@ -2,7 +2,7 @@
 using SceneStuff;
 using UnityEngine;
 
-namespace GameUIAndMenus.SceneUI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.SceneUI
 {
     public class BoatTeleportMenu : GameMenu
     {

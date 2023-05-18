@@ -6,7 +6,7 @@ using Random = System.Random;
 
 namespace Map
 {
-    public class HiddenLoot : MonoBehaviour, IInteractable
+    public sealed class HiddenLoot : MonoBehaviour, IInteractable
     {
         const float GoldRngRange = 0.15f;
         static readonly int OpenLid = Animator.StringToHash("openLid");

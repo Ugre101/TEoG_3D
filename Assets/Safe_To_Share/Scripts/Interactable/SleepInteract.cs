@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Interactable
 {
-    public class SleepInteract : MonoBehaviour, IInteractable
+    public sealed class SleepInteract : MonoBehaviour, IInteractable
     {
         [SerializeField] bool hasCost;
         [SerializeField] int cost;

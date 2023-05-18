@@ -9,7 +9,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.Menus.Vore
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
     public class PreyShowCase : MonoBehaviour
     {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace SaveStuff
 {
-    public class ShowSavesAmountSlider : MonoBehaviour
+    public sealed class ShowSavesAmountSlider : MonoBehaviour
     {
         const string ShowAmountSave = "SaveThisAmountOfSaves";
         public static int ShowAmount = 10;

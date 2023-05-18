@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
-namespace Safe_To_Share.Scripts.Holders
+﻿namespace Safe_To_Share.Scripts.Holders.SubRealm
 {
-    public class SubRealmBoss : SubRealmEnemy
+    public sealed class SubRealmBoss : SubRealmEnemy
     {
         
     }

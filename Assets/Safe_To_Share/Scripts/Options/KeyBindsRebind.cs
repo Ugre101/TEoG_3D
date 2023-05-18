@@ -2,9 +2,9 @@ using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class KeyBindsRebind : MonoBehaviour
+    public sealed class KeyBindsRebind : MonoBehaviour
     {
         [SerializeField] PlayerInput playerInput;
         [SerializeField] RebindButton rebindButton;

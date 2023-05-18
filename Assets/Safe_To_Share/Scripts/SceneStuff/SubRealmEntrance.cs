@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.SceneStuff
 {
-    public class SubRealmEntrance : MonoBehaviour
+    public sealed class SubRealmEntrance : MonoBehaviour
     {
         [SerializeField] SceneTeleportExit exit;
         [SerializeField] SubRealmSceneSo sceneToLoad;

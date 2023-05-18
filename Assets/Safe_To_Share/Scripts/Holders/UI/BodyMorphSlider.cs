@@ -1,12 +1,13 @@
-﻿using Character;
+﻿using AvatarStuff;
+using Character;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 
-namespace AvatarStuff.UI
+namespace Safe_To_Share.Scripts.Holders.UI
 {
-    public class BodyMorphSlider : MonoBehaviour
+    public sealed class BodyMorphSlider : MonoBehaviour
     {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI title;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Map
 {
-    public class DisableWhenOutOfRange : MonoBehaviour
+    public sealed class DisableWhenOutOfRange : MonoBehaviour
     {
         [SerializeField, Range(100f, 500f),] float cullingRange;
 

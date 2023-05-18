@@ -1,11 +1,10 @@
-﻿using AvatarStuff.Holders;
-using Character.LevelStuff;
+﻿using Character.LevelStuff;
 using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace GameUIAndMenus.Menus.Level
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
     public abstract class BasePerkButton : BaseLevelButton
     {

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Map
 {
-    public class BigMapNamedIcon : MonoBehaviour
+    public sealed class BigMapNamedIcon : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] Image image;

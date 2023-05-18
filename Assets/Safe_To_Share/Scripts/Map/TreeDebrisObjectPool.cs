@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Map
 {
-    public class TreeDebrisObjectPool : MonoBehaviour
+    public sealed class TreeDebrisObjectPool : MonoBehaviour
     {
         [SerializeField] List<DebrisMatch> debrisMatches = new();
 

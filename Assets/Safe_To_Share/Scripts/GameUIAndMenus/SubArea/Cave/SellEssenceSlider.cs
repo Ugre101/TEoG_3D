@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SubArea.Cave
+namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
 {
     public class SellEssenceSlider : MonoBehaviour
     {

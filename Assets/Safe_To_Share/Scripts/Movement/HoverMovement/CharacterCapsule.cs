@@ -102,6 +102,14 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         public bool SphereCast(Vector3 dir, float distance, LayerMask layerMask, out RaycastHit hit) =>
             Physics.SphereCast(Center, Radius, dir, out hit, distance, layerMask,QueryTriggerInteraction.Ignore);
 
+        readonly RaycastHit[] sphereCastHits = new RaycastHit[16];
+        public bool SphereCastAllNonAlloc(Vector3 dir, float distance, LayerMask layerMask, out RaycastHit[] results)
+        {
+            var  hits = Physics.SphereCastNonAlloc(Center, Radius, dir, sphereCastHits, distance, layerMask, QueryTriggerInteraction.Ignore);
+            results = sphereCastHits;
+            return hits > 0;
+        }
+
         public SpherecastCommand SphereCheck(Vector3 direction, float distance, LayerMask layerMask) =>
             new(Center, Radius, direction, distance, layerMask);
 

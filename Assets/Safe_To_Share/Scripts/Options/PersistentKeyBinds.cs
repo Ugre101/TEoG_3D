@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class PersistentKeyBinds : MonoBehaviour
+    public sealed class PersistentKeyBinds : MonoBehaviour
     {
         const string FreePlaySave = "FreePlayKeyBindsSave";
         const string ThirdPersonSave = "ThirdPersonKeyBindsSave";

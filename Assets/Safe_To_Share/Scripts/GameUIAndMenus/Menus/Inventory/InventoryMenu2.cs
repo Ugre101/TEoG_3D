@@ -5,7 +5,6 @@ using Character.PlayerStuff.Currency;
 using Character.Race.Races;
 using Character.StatsStuff;
 using Currency.UI;
-using GameUIAndMenus;
 using Items;
 using Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI;
 using TMPro;

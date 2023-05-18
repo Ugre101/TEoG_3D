@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace AvatarStuff.Holders.AI
+namespace Safe_To_Share.Scripts.Holders.AI
 {
-    public class LocomotionSimpleAgent : MonoBehaviour
+    public sealed class LocomotionSimpleAgent : MonoBehaviour
     {
         static readonly int Move = Animator.StringToHash("move");
         static readonly int Velx = Animator.StringToHash("Turn");

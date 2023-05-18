@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Safe_To_Share.Scripts.StartScene
 {
-    public class LoadStartScene : MonoBehaviour
+    public sealed class LoadStartScene : MonoBehaviour
     {
         [SerializeField] AssetReference startMenu;
 

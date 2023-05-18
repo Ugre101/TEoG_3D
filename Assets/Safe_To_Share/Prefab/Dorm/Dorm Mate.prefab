@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5290461748724833624}
   - component: {fileID: 5172481964968123178}
   - component: {fileID: 3009485336775115344}
-  - component: {fileID: 7015019659552944969}
-  - component: {fileID: 1271632349}
+  - component: {fileID: 3980753841124434877}
+  - component: {fileID: 6135198963566622032}
+  - component: {fileID: 4904083953963673859}
   m_Layer: 23
   m_Name: Dorm Mate
   m_TagString: Untagged
@@ -107,7 +108,7 @@ MonoBehaviour:
   avatarScaler: {fileID: 5537660859417063438}
   playerAvatar: 0
   move: {fileID: 2525530955445585966}
-  aIMover: {fileID: 7015019659552944969}
+  aIMover: {fileID: 6135198963566622032}
   mate:
     identity:
       id: 0
@@ -341,7 +342,7 @@ MonoBehaviour:
             tempBaseStatMods: []
     sleepIn: 0
     workTitle: 
---- !u!114 &7015019659552944969
+--- !u!114 &3980753841124434877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -350,57 +351,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1912623750545861898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39b2cbc7a11263a4fb441a993eb94e6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 455d348f3555d6b47a245b1a3c771075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationRate: 540
-  _rotationMode: 1
-  _maxWalkSpeed: 6
-  _minAnalogWalkSpeed: 0
-  _maxAcceleration: 20
-  _brakingDecelerationWalking: 20
-  _groundFriction: 8
-  _sprintSpeedMultiplier: 1.5
-  _sprintAccelerationMultiplier: 1
-  _maxWalkSpeedCrouched: 3
-  _crouchedHeight: 1
-  _crouchedJump: 0
-  _maxFallSpeed: 40
-  _brakingDecelerationFalling: 0
-  _fallingLateralFriction: 0.3
-  _airControl: 0.8
-  _jumpMaxCount: 1
-  _jumpImpulse: 6
-  _jumpMaxHoldTime: 0.35
-  _jumpPreGroundedTime: 0.15
-  _jumpPostGroundedTime: 0.15
-  _gravity: {x: 0, y: -30, z: 0}
-  _canSwim: 1
-  _maxSwimSpeed: 3
-  _brakingDecelerationSwimming: 0
-  _swimmingFriction: 0.5
-  _buoyancy: 1
-  _maxFlySpeed: 6
-  _brakingDecelerationFlying: 0
-  _flyingFriction: 0.3
-  _mass: 1
-  _impartExternalVelocity: 1
-  _impartPlatformVelocity: 1
-  _impartPlatformMovement: 1
-  _impartPlatformRotation: 1
-  _applyPushForce: 1
-  _pushForceAffectCharacters: 1
-  _applyStandingDownwardForce: 1
-  _pushForceScale: 1
-  _standingDownwardForceScale: 1
-  _camera: {fileID: 0}
-  _characterMovement: {fileID: 1271632349}
-  _cameraTransform: {fileID: 0}
-  _agent: {fileID: 2525530955445585966}
-  _autoBraking: 1
-  _brakingDistance: 0.0001
-  _stoppingDistance: 1
---- !u!114 &1271632349
+  capsule: {fileID: 5290461748724833624}
+  p1PreCalcMath: {x: 0, y: 0, z: 0}
+  p2PreCalcMath: {x: 0, y: 0, z: 0}
+  radiusRatio: 0.1388889
+--- !u!114 &6135198963566622032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -409,24 +367,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 1912623750545861898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3432e116e26fb884fbb184061f22784c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0087d0c4eabbd854fbb5a68ef5f61704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _constrainToPlane: 0
-  _capsuleRadius: 0.25
-  _capsuleHeight: 1.8
-  _slopeLimit: 50
-  _stepOffset: 0.5
-  _perchOffset: 0
-  _unperchOffset: 0
-  _perchAdditionalHeight: 0
-  _collideWithTriggers: 0
-  _groundMask:
+  sprintMultiplier: 1.15
+  currentMode: 0
+  capsule: {fileID: 3980753841124434877}
+  <Rigid>k__BackingField: {fileID: 5172481964968123178}
+  <Stats>k__BackingField: {fileID: 4904083953963673859}
+  agent: {fileID: 2525530955445585966}
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 9
-  _groundProbingDistance: 1
-  _rigidbody: {fileID: 5172481964968123178}
-  _capsuleCollider: {fileID: 5290461748724833624}
+    m_Bits: 19465
+--- !u!114 &4904083953963673859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912623750545861898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c21be87b1fd24374b979cf99791c3469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprintMultiplier: 1.2
+  swimSpeed: 8
+  walkSpeed: 10
 --- !u!1 &7297204200486777659
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,8 +404,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2432568574534396240}
   - component: {fileID: 6067295739379692011}
-  - component: {fileID: 7261518492823782124}
   - component: {fileID: 5537660859417063438}
+  - component: {fileID: 4200862669329470291}
   m_Layer: 25
   m_Name: AvatarHolder
   m_TagString: Untagged
@@ -476,21 +443,9 @@ MonoBehaviour:
   newAnimatorEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7261518492823782124}
-        m_TargetAssemblyTypeName: ECM2.Source.Helpers.RootMotionController, ECM2
-        m_MethodName: SetAnimator
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Movement.ECM2.Source.Characters.UnityCharacterAnimator,
-          ECM2
+      - m_Target: {fileID: 4200862669329470291}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.Movement.HoverMovement.MoveAnimator,
+          Movement
         m_MethodName: SetAnimator
         m_Mode: 0
         m_Arguments:
@@ -504,20 +459,6 @@ MonoBehaviour:
   NewAvatarEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7261518492823782124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7297204200486777659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c481b890df0f64bb79aae0443ee756, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 7015019659552944969}
-  avatarChangerBase: {fileID: 6067295739379692011}
 --- !u!114 &5537660859417063438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,11 +471,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb22ed00a681804b995cbb2a65b214b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCapsule: {fileID: 0}
+  characterCapsule: {fileID: 3980753841124434877}
   minSize: 0.1
   maxSize: 3
   SizeChange:
     m_PersistentCalls:
-      m_Calls: []
-  orgCapWidth: 0
-  orgCapHeight: 0
+      m_Calls:
+      - m_Target: {fileID: 3009485336775115344}
+        m_TargetAssemblyTypeName: AvatarStuff.Holders.Holder, MyHolderScripts
+        m_MethodName: HeightsChange
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  orgCapWidth: 0.25
+  orgCapHeight: 1.8
+--- !u!114 &4200862669329470291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7297204200486777659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c41c3ff0e8b74074b9dc8bfa5c39d944, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 6135198963566622032}
+  animator: {fileID: 0}
+  stopSwimmingDelay: 0.05

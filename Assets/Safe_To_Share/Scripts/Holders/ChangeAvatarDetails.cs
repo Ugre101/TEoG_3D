@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
-using AvatarStuff.Holders;
-using AvatarStuff.UI;
-using Safe_To_Share.Scripts.Holders;
+using AvatarStuff;
+using Safe_To_Share.Scripts.Holders.UI;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace AvatarStuff
+namespace Safe_To_Share.Scripts.Holders
 {
-    public class ChangeAvatarDetails : MonoBehaviour
+    public sealed class ChangeAvatarDetails : MonoBehaviour
     {
         [SerializeField] GetColor colorPicker;
         [SerializeField] MatsOptionBtn btnPrefab;

@@ -1,7 +1,8 @@
-﻿using Safe_To_Share.Scripts.Static;
+﻿using DormAndHome.Dorm;
+using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public abstract class DormBuildingCanvas : MonoBehaviour
     {

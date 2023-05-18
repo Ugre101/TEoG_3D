@@ -5,7 +5,7 @@ using System.Linq;
 using SaveStuff;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus
 {
     public class SaveMenu : GameMenu
     {

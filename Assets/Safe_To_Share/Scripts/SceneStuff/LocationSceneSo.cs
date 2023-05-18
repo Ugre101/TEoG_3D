@@ -6,7 +6,7 @@ using UnityEngine;
 namespace SceneStuff
 {
     [CreateAssetMenu(fileName = "New Scene location ref", menuName = "Scene Data/Scene location ref")]
-    public class LocationSceneSo : GameSceneSo
+    public sealed class LocationSceneSo : GameSceneSo
     {
         [SerializeField] List<SubLocationSceneSo> subLocations = new();
         [SerializeField] Sprite worldMap;

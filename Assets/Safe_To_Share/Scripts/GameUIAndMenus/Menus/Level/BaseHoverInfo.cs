@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace GameUIAndMenus.Menus.Level
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
     public abstract class BaseHoverInfo : MonoBehaviour
     {

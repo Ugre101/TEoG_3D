@@ -4,13 +4,13 @@ using Character.Ailments;
 using Character.PlayerStuff;
 using Character.RelationShipStuff;
 using Dialogue;
-using GameUIAndMenus;
+using Safe_To_Share.Scripts.GameUIAndMenus;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class TestStuff : MonoBehaviour
+    public sealed class TestStuff : MonoBehaviour
     {
         [SerializeField] RelationsShips relationsShips = new();
         [SerializeField] BaseDialogue testDial;

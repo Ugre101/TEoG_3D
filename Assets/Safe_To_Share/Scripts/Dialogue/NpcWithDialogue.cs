@@ -1,5 +1,5 @@
-﻿using AvatarStuff.Holders.Npc;
-using Character.PlayerStuff;
+﻿using Character.PlayerStuff;
+using Safe_To_Share.Scripts.Holders.Npc;
 using UnityEngine;
 
 namespace Dialogue

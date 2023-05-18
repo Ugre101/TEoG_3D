@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Movement
 {
-    public class SpeedModifier : MonoBehaviour
+    public sealed class SpeedModifier : MonoBehaviour
     {
         public float speedMultiplier = 2.0f;
 

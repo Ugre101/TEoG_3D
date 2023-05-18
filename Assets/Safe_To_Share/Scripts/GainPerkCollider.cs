@@ -7,7 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts
 {
-    public class GainPerkCollider : MonoBehaviour
+    public sealed class GainPerkCollider : MonoBehaviour
     {
         [SerializeField] AssetReference perkGuid;
 

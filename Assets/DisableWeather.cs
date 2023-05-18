@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DisableWeather : MonoBehaviour
+public sealed class DisableWeather : MonoBehaviour
 {
     const string SaveName = "GaiaWeatherActive";
     [SerializeField] Toggle toggle;

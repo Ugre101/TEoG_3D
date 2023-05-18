@@ -2,7 +2,7 @@
 using Map;
 using UnityEngine;
 
-namespace GameUIAndMenus.MinimapUI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.MinimapUI
 {
     public class BigMiniMap : MapShared
     {
@@ -19,7 +19,6 @@ namespace GameUIAndMenus.MinimapUI
         {
             AddNamedIcons(PairedStaticObjects);
             AddNamedIcons(PairedObjects);
-            //var enemyZone = FindObjectsOfType<EnemyZoneMiniMapObject>();
             //AddNamedIcons(enemyZone);
         }
 

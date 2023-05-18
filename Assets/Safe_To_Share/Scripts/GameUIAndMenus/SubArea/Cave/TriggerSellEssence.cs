@@ -2,7 +2,7 @@
 using Character.PlayerStuff;
 using UnityEngine;
 
-namespace SubArea.Cave
+namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
 {
     public class TriggerSellEssence : MonoBehaviour, IInteractable
     {

@@ -1,5 +1,4 @@
 ﻿using System;
-using AvatarStuff.Holders;
 using Character.PlayerStuff;
 using Safe_To_Share.Scripts.Holders;
 using TMPro;
@@ -7,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.Menus.Level
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
     public abstract class BaseLevelButton : MonoBehaviour, IPointerExitHandler
     {

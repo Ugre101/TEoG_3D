@@ -2,7 +2,7 @@
 using Character.LevelStuff;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Level
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
     public class LevelMenu : BaseLevelMenu
     {

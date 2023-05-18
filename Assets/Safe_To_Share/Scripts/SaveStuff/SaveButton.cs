@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace SaveStuff
 {
-    public class SaveButton : MonoBehaviour
+    public sealed class SaveButton : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title;
 

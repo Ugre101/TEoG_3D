@@ -14,7 +14,7 @@ namespace Safe_To_Share.Scripts.Character.Items
         public static void Load(WorldInventoriesSave toLoad)
         {
             Inventories = new Dictionary<string, Inventory>();
-            if (toLoad.Saves is null || toLoad.Saves.Count == 0) return;
+            if (toLoad.Saves == null || toLoad.Saves.Count == 0) return;
             foreach (var save in toLoad.Saves)
             {
                 var inv = new Inventory();

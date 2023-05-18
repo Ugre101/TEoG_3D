@@ -4,7 +4,7 @@ using Safe_To_Share.Scripts.CustomClasses.UI;
 
 namespace Safe_To_Share.Scripts.Movement.Settings.UI
 {
-    public class ToggleFirstPerson : SavedBoolToggle
+    public sealed class ToggleFirstPerson : SavedBoolToggle
     {
         protected override SavedBoolSetting SavedBool => FirstPersonCameraSettings.FirstPersonCameraEnabled;
     }

@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class ToggleMultiOrgan : MonoBehaviour
+    public sealed class ToggleMultiOrgan : MonoBehaviour
     {
         // Start is called before the first frame update
         void Start()

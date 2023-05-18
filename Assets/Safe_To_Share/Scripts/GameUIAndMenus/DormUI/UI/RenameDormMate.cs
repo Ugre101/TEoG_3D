@@ -1,11 +1,9 @@
-﻿using System;
-using GameUIAndMenus;
-using Safe_To_Share.Scripts.Static;
+﻿using DormAndHome.Dorm;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public class RenameDormMate : MonoBehaviour
     {

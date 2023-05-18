@@ -3,7 +3,7 @@ using Items;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Shop.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 {
     public class ItemForSale : MonoBehaviour
     {

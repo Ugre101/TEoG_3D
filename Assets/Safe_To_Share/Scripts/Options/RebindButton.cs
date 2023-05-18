@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class RebindButton : MonoBehaviour
+    public sealed class RebindButton : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title, bind1Text, bind2Text;
         [SerializeField] Button bind1, bind2;

@@ -1,5 +1,4 @@
-﻿using AvatarStuff.Holders;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Holders.AI.StateMachineStuff.EnemyBrain
 {
@@ -28,7 +27,7 @@ namespace Safe_To_Share.Scripts.Holders.AI.StateMachineStuff.EnemyBrain
         {
             if (Behaviour.DistanceToPlayer <= Behaviour.AggroRange)
                 Behaviour.ChangeState(StateHandler.States.Chase);
-            else if (!Behaviour.Move.hasPath)
+            else if (!Behaviour.Agent.hasPath)
                 Behaviour.ChangeState(StateHandler.States.Idle);
         }
     }

@@ -1,5 +1,4 @@
-﻿using AvatarStuff.Holders;
-using Character.Family;
+﻿using Character.Family;
 using Character.IdentityStuff;
 using Character.PlayerStuff;
 using Character.PregnancyStuff;

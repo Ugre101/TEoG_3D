@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus.Menus.Looks
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Looks
 {
     public class BowelBladderPressure : MonoBehaviour
     {

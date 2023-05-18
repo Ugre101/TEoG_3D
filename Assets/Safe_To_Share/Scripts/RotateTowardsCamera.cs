@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class RotateTowardsCamera : MonoBehaviour
+    public sealed class RotateTowardsCamera : MonoBehaviour
     {
         void Start()
         {

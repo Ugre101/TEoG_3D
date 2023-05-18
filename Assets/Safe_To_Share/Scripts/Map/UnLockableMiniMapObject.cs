@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Map
 {
-    public class UnLockableMiniMapObject : MiniMapBaseObject
+    public sealed class UnLockableMiniMapObject : MiniMapBaseObject
     {
         [SerializeField] Collider coll;
         [SerializeField] string guid;

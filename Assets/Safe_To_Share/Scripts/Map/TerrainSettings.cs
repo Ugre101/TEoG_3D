@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Map
 {
-    public class TerrainSettings : MonoBehaviour
+    public sealed class TerrainSettings : MonoBehaviour
     {
         const string TerrainDetailSave = "TerrainDetailDensity";
         public static readonly SavedFloatSetting TerrainDetail = new(TerrainDetailSave, 0.5f);

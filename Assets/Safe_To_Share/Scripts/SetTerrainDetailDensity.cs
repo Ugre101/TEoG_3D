@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts
 {
-    public class SetTerrainDetailDensity : MonoBehaviour
+    public sealed class SetTerrainDetailDensity : MonoBehaviour
     {
         [SerializeField] Slider slider;
 

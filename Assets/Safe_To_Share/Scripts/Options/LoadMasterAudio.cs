@@ -3,9 +3,9 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Audio;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class LoadMasterAudio : MonoBehaviour
+    public sealed class LoadMasterAudio : MonoBehaviour
     {
         [SerializeField] AssetReference audioMixer;
         [SerializeField] AudioControlSlider master, weather, music, footSteps;

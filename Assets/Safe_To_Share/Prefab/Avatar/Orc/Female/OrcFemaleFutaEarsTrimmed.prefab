@@ -4826,7 +4826,6 @@ MonoBehaviour:
   hideDazDickAndBalls: {fileID: 3301752504201519179}
   dickController: {fileID: 8806877727341789060}
   ballsController: {fileID: 7207362504654279782}
-  turnAvatarDoll: {fileID: 0}
   bodyMeshRenderers:
   - {fileID: 7768452105637309798}
   - {fileID: 3381673082730646856}
@@ -4891,7 +4890,6 @@ MonoBehaviour:
   hasBallsController: 1
   hasDickController: 1
   hasHideDaz: 1
-  hasTurnDoll: 0
   <Animator>k__BackingField: {fileID: 4378859519238130154}
   <KeyAreas>k__BackingField: {fileID: 939289851907485735}
 --- !u!114 &8821809685661590915

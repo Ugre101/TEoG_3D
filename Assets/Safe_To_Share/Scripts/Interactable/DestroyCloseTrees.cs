@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using AvatarStuff.Holders;
+﻿using System.Collections.Generic;
 using Map;
 using Safe_To_Share.Scripts.Helpers;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Interactable
 {
-    public class DestroyCloseTrees : MonoBehaviour
+    public sealed class DestroyCloseTrees : MonoBehaviour
     {
         const int FrameLimit = 8;
 
@@ -45,7 +43,14 @@ namespace Safe_To_Share.Scripts.Interactable
 #endif
         }
 
-        void OnDestroy() => PlayerPosition.PlayerMoved -= Tick;
+        void OnDestroy()
+        {
+            PlayerPosition.PlayerMoved -= Tick;
+#if UNITY_EDITOR
+            if (runInEditor)
+                RestoreTrees();
+#endif
+        }
 
         void Tick(Vector3 vector3)
         {

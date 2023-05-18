@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Movement.HoverMovement.PhysicsLayer
 {
-    public class WaterLayer : BaseLayer
+    public sealed class WaterLayer : BaseLayer
     {
         [SerializeField] Vector3 currentDirection;
         [SerializeField] float currentForce;

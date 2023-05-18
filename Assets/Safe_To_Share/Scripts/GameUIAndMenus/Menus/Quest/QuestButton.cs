@@ -1,9 +1,10 @@
 ﻿using System;
+using QuestStuff;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace QuestStuff.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Quest
 {
     public class QuestButton : MonoBehaviour
     {

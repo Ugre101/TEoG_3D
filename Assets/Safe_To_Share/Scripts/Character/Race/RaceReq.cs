@@ -12,7 +12,7 @@ namespace Character.Race
         [SerializeField] List<AssetReference> races;
         public bool IsRace(RaceSystem raceSystem)
         {
-            if (hasRaceReq is false || races is null || races.Count == 0) return true;
+            if (hasRaceReq is false || races == null || races.Count == 0) return true;
             return races.Exists(r => r.AssetGUID == raceSystem.Race.Guid);
         }
     }

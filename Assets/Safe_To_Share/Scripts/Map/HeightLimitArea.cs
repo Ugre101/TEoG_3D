@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
-using AvatarStuff.Holders;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Map
 {
     [RequireComponent(typeof(Collider))]
-    public class HeightLimitArea : MonoBehaviour
+    public sealed class HeightLimitArea : MonoBehaviour
     {
         [SerializeField] float heightLimit = 1f;
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class OpenDoorWhenClose : MonoBehaviour
+    public sealed class OpenDoorWhenClose : MonoBehaviour
     {
         [SerializeField] Animation openDoor;
         [SerializeField] OcclusionPortal occlusionPortal;

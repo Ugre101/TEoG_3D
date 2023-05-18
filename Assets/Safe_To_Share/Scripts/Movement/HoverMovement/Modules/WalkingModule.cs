@@ -85,9 +85,6 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             var x = OffFromTargetBy();
             if (x < 0)
                 x *= 2f;
-            if (HoveringOnObject(out var terrainHeight))
-            {
-            }
 
             var springForce = x * rideSpringStrength - relVel * RideSpringDamper;
 
@@ -107,7 +104,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
 
             bool DidIHitOtherRigidBody(out Rigidbody hitBody)
             {
-                if (checker.LastHit.collider is not null)
+                if (checker.LastHit.collider != null)
                     return checker.LastHit.collider.TryGetComponent(out hitBody);
                 hitBody = default;
                 return false;
@@ -121,27 +118,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
 
         public override bool IsJumping() => jumps > 0;
 
-        bool HoveringOnObject(out float terrainHeight)
-        {
-            if (isActiveTerrainNull)
-            {
-                terrainHeight = default;
-                return false;
-            }
-
-            terrainHeight = Terrain.activeTerrain.SampleHeight(rigid.position);
-            var posY = rigid.position.y - Terrain.activeTerrain.GetPosition().y;
-            if (posY < terrainHeight)
-                return false;
-            //                Debug.Log("In hole?");
-
-            var hh = posY - terrainHeight;
-            //          Debug.Log(hh);
-            if (terrainHeight + targetHeight * 1.5f < posY)
-                return false;
-            //        Debug.Log("Hovering on object?");
-            return true;
-        }
+        
 
         public override void OnMove(Vector3 force)
         {

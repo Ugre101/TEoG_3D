@@ -4,7 +4,7 @@ using Character.Organs.UI;
 using TMPro;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.EssenceMenu
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
 {
     public class EssenceMenu : GameMenu
     {

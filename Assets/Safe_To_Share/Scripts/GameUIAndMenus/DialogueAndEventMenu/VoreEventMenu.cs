@@ -6,7 +6,7 @@ using Dialogue.DialogueActions;
 using QuestStuff;
 using SceneStuff;
 
-namespace GameUIAndMenus.DialogueAndEventMenu
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 {
     public class VoreEventMenu : DialogueAndEventShared
     {

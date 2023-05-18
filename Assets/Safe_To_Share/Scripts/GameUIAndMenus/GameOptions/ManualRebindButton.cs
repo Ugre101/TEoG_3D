@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace GameUIAndMenus.GameOptions
+namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
 {
     public class ManualRebindButton : MonoBehaviour
     {

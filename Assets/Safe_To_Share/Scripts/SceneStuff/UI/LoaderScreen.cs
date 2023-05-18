@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SceneStuff
 {
-    public class LoaderScreen : MonoBehaviour
+    public sealed class LoaderScreen : MonoBehaviour
     {
         const float Interval = 0.192f;
         [SerializeField] TextMeshProUGUI progressText;

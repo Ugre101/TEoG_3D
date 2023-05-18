@@ -1,6 +1,6 @@
-﻿using GameUIAndMenus.Menus.Level;
+﻿using Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level;
 
-namespace GameUIAndMenus.Menus.Vore
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
     public class VoreLevelMenu : BaseLevelMenu
     {

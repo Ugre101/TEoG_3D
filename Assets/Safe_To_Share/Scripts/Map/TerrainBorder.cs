@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Map
 {
-    public class TerrainBorder : MonoBehaviour
+    public sealed class TerrainBorder : MonoBehaviour
     {
 #if UNITY_EDITOR
         [SerializeField] float borderHeight = 50f;

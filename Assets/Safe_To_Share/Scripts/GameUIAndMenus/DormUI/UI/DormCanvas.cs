@@ -1,6 +1,6 @@
 ﻿using Safe_To_Share.Scripts.Static;
 
-namespace DormAndHome.Dorm.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public class DormCanvas : DormSleepAreaShared
     {

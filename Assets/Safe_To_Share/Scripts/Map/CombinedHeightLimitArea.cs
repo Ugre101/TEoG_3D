@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using AvatarStuff.Holders;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Map
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class CombinedHeightLimitArea : MonoBehaviour
+    public sealed class CombinedHeightLimitArea : MonoBehaviour
     {
         static readonly Dictionary<int, HashSet<CombinedHeightLimitArea>> InsideArea = new();
         [SerializeField] int sharedId;

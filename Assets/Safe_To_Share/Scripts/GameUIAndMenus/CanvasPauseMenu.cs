@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using CustomClasses;
-using Options;
+using Safe_To_Share.Scripts.Options;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
     public class CanvasPauseMenu : MonoBehaviour
     {

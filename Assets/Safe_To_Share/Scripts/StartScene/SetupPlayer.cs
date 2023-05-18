@@ -17,7 +17,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.StartScene
 {
-    public class SetupPlayer : MonoBehaviour
+    public sealed class SetupPlayer : MonoBehaviour
     {
         [SerializeField] CharacterPreset characterPreset;
         [SerializeField] TMP_InputField firstName, lastName;

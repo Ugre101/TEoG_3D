@@ -3,7 +3,7 @@ using Character.Family;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace GameUIAndMenus.Menus.Family
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Family
 {
     public class FamilyTreePanel : GameMenu
     {

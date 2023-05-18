@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Helpers
 {
-    public class PlayerPosition : MonoBehaviour
+    public sealed class PlayerPosition : MonoBehaviour
     {
         public static event Action<Vector3> PlayerMoved; 
         public static Vector3 Pos { get; private set; } = new();

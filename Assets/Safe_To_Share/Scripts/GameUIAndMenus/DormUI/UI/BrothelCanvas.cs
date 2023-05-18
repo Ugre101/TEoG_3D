@@ -1,4 +1,4 @@
-﻿namespace DormAndHome.Dorm.UI
+﻿namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
     public class BrothelCanvas : DormBuildingCanvas
     {

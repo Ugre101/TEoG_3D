@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class ScreenSizeDropDown : MonoBehaviour
+    public sealed class ScreenSizeDropDown : MonoBehaviour
     {
         [SerializeField] TMP_Dropdown dropdown;
 

@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Safe_To_Share.Scripts
 {
-    public class HoverOverHelp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public sealed class HoverOverHelp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] GameObject texT;
 

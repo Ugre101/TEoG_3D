@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class GlobalVolumeControll : MonoBehaviour
+    public sealed class GlobalVolumeControll : MonoBehaviour
     {
         const string GlobalAudioSave = "GlobalVolumeSave";
         [SerializeField] Slider slider;

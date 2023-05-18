@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts
 {
-    public class FirstStartHelper : MonoBehaviour
+    public sealed class FirstStartHelper : MonoBehaviour
     {
         public static bool ShowHelp;
         [SerializeField] List<HelpText> helpTexts = new();

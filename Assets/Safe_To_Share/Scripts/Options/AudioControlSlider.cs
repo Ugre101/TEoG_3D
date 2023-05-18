@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class AudioControlSlider : MonoBehaviour
+    public sealed class AudioControlSlider : MonoBehaviour
     {
         [SerializeField] Slider slider;
 

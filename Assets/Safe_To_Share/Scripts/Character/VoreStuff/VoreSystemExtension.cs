@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Character.Organs;
 using Character.Organs.OrgansContainers;
@@ -11,6 +12,13 @@ namespace Character.VoreStuff
 {
     public static class VoreSystemExtension
     {
+        public static bool HasPrey(this IEnumerable<BaseOrgan> list)
+        {
+            return list.Any(baseOrgan => baseOrgan.Vore.PreysIds.Any());
+        }public static bool HasPrey(this BaseOrgansContainer list)
+        {
+            return list.BaseList.Any(baseOrgan => baseOrgan.Vore.PreysIds.Any());
+        }
         public static float OrganVoreCapacity(BaseCharacter pred, BaseOrgan organ,SexualOrganType organType)
         {
             if (organType == SexualOrganType.Anal)

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace AvatarStuff.Holders.AI
+namespace Safe_To_Share.Scripts.Holders.AI
 {
     [RequireComponent(typeof(Animator))]
-    public class LookAt : MonoBehaviour
+    public sealed class LookAt : MonoBehaviour
     {
         public Transform head;
         public Vector3 lookAtTargetPosition;

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class VSyncToggle : MonoBehaviour
+    public sealed class VSyncToggle : MonoBehaviour
     {
         const string VsyncIsOnSaveName = "Vsynced";
         static bool? vsync;

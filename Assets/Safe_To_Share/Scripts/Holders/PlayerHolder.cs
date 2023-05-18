@@ -3,7 +3,6 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using AvatarStuff;
-using AvatarStuff.Holders;
 using Character;
 using Character.CreateCharacterStuff;
 using Character.LevelStuff;
@@ -21,7 +20,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.Holders
 {
     [SelectionBase]
-    public class PlayerHolder : Holder
+    public sealed class PlayerHolder : Holder
     {
         public delegate void CombatParameters(Player player, params BaseCharacter[] enemies);
         public delegate void SubRealmCombatParameters(Player player,bool exitToLastLocationOnDefeat, params BaseCharacter[] enemies);

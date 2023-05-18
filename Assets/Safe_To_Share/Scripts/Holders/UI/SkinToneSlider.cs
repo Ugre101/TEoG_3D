@@ -1,11 +1,9 @@
-﻿using AvatarStuff.Holders;
-using Safe_To_Share.Scripts.Holders;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace AvatarStuff.UI
+namespace Safe_To_Share.Scripts.Holders.UI
 {
-    public class SkinToneSlider : MonoBehaviour
+    public sealed class SkinToneSlider : MonoBehaviour
     {
         [SerializeField] Slider slider;
 

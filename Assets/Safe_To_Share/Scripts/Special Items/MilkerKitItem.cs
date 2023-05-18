@@ -8,7 +8,7 @@ using UnityEngine.AddressableAssets;
 namespace Safe_To_Share.Scripts.Special_Items
 {
     [CreateAssetMenu(menuName = "Items/Special Items/Create Milker", fileName = "Breast Milker Kit", order = 0)]
-    public class MilkerKitItem : Item
+    public sealed class MilkerKitItem : Item
     {
         [SerializeField] AssetReference smallFlask;
         [SerializeField] AssetReference flask;

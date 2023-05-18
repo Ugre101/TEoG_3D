@@ -1,10 +1,10 @@
 ﻿using System;
-using AvatarStuff.Holders;
 using Character.LevelStuff;
+using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace GameUIAndMenus.Menus.Level
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
     public class PerkButton : BasePerkButton, IPointerEnterHandler
     {

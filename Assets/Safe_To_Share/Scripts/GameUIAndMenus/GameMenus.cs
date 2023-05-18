@@ -1,10 +1,9 @@
-using AvatarStuff.Holders;
 using Safe_To_Share.Scripts.Holders;
 using SceneStuff;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameUIAndMenus
+namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
     public class GameMenus : MonoBehaviour
     {

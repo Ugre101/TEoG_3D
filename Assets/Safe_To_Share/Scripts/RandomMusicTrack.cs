@@ -5,7 +5,7 @@ using Random = System.Random;
 namespace Safe_To_Share.Scripts
 {
     [RequireComponent(typeof(AudioSource))]
-    public class RandomMusicTrack : MonoBehaviour
+    public sealed class RandomMusicTrack : MonoBehaviour
     {
         static readonly Random Rnd = new();
 

@@ -3,7 +3,7 @@ using SceneStuff;
 
 namespace Safe_To_Share.Scripts
 {
-    public class LoadDungeonIfOwned : LoadSubSceneWhenClose
+    public sealed class LoadDungeonIfOwned : LoadSubSceneWhenClose
     {
         static bool ownsDungeon;
 

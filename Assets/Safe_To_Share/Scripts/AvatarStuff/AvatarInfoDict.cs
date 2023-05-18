@@ -38,7 +38,7 @@ namespace AvatarStuff
         public AvatarInfo GetInfo(BaseCharacter character)
         {
 #if UNITY_EDITOR
-            if (sfwMode && sfwAvatar is null)
+            if (sfwMode && sfwAvatar == null)
             {
             }
 #endif
@@ -56,7 +56,7 @@ namespace AvatarStuff
         async Task<GameObject> BestMatchGame(BaseCharacter character, bool player)
         {
 #if UNITY_EDITOR
-            if (sfwMode && sfwAvatar is null)
+            if (sfwMode && sfwAvatar == null)
             {
             }
 #endif

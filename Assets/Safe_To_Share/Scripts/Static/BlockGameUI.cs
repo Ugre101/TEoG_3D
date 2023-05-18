@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Static
 {
-    public class BlockGameUI : MonoBehaviour
+    public sealed class BlockGameUI : MonoBehaviour
     {
         void OnEnable()
         {

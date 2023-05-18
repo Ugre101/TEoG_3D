@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.Movement.Settings.UI
 {
-    public class ToggleThirdPersonStrafe : MonoBehaviour
+    public sealed class ToggleThirdPersonStrafe : MonoBehaviour
     {
         [SerializeField] Toggle toggle;
 

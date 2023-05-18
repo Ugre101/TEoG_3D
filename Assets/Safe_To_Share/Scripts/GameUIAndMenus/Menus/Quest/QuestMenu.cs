@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GameUIAndMenus;
+using QuestStuff;
 using UnityEngine;
 
-namespace QuestStuff.UI
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Quest
 {
     public class QuestMenu : GameMenu
     {

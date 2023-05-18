@@ -1,12 +1,11 @@
-﻿using Movement.ECM2.Source.Characters;
-using Safe_To_Share.Scripts.Holders;
-using Safe_To_Share.Scripts.Movement.NavAgentMover;
+﻿using Safe_To_Share.Scripts.Movement.NavAgentMover;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace AvatarStuff.Holders
+namespace Safe_To_Share.Scripts.Holders
 {
+    [RequireComponent(typeof(NavMeshAgent))]
     public abstract class AiHolder : Holder
     {
         const int FrameLimit = 4;
@@ -16,7 +15,7 @@ namespace AvatarStuff.Holders
         protected bool Stopped;
 
 
-        public NavMeshAgent Move
+        public NavMeshAgent Agent
         {
             get => move;
             private set => move = value;
@@ -42,12 +41,31 @@ namespace AvatarStuff.Holders
                     BackInRangeFunction();
             }
         }
+#if UNITY_EDITOR
+        
+       protected  virtual void OnValidate()
+       {
+           if (aIMover == null && TryGetComponent(out aIMover) is false)
+               throw new MissingComponentException($"Missing {nameof(NavMover)}");
+           if (move == null && TryGetComponent(out move) is false)
+               throw new MissingComponentException($"Missing {nameof(NavMeshAgent)}");
+       }
+#endif
 
         protected virtual void Start()
         {
-            if (Move == null && TryGetComponent(out NavMeshAgent agent))
-                Move = agent;
-            if (!Move.isOnNavMesh)
+            if (Agent == null)
+            {
+                if (TryGetComponent(out NavMeshAgent agent))
+                    Agent = agent;
+                else
+                {
+                    Debug.LogWarning($"{gameObject.name} is missing a {nameof(NavMeshAgent)}");
+                    enabled = false;
+                    return;
+                }
+            }
+            if (!Agent.isOnNavMesh)
             {
                 Debug.LogWarning("Holder spawned off navmesh", this);
                 gameObject.SetActive(false);

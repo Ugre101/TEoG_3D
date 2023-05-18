@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Map
 {
-    public class RunTimeReSizeRectTransform : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public sealed class RunTimeReSizeRectTransform : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         static Vector2 newSize;
         [SerializeField] float minSize = 100f, maxSize = 600f;

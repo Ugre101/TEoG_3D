@@ -1,9 +1,9 @@
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Options
+namespace Safe_To_Share.Scripts.Options
 {
-    public class VoreContentHider : MonoBehaviour
+    public sealed class VoreContentHider : MonoBehaviour
     {
         void OnEnable()
         {
