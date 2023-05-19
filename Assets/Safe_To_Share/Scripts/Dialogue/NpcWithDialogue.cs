@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Dialogue
 {
-    public class NpcWithDialogue : NpcHolder
+    public sealed class NpcWithDialogue : NpcHolder
     {
         [SerializeField] BaseDialogue dialogue;
         public override string HoverText(Player player) => "Talk";

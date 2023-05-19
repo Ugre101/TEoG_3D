@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Currency.UI
 {
-    public class HaveGold : MonoBehaviour
+    public sealed class HaveGold : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI goldAmount;
 

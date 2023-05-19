@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.ServiceMenu
 {
-    public class ServiceMenuButton : MonoBehaviour
+    public sealed class ServiceMenuButton : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title, desc, cost;
         [SerializeField] Button btn;

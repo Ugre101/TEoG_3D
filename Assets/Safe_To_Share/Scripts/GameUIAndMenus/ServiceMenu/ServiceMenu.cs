@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.ServiceMenu
 {
-    public class ServiceMenu : GameMenu
+    public sealed class ServiceMenu : GameMenu
     {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] ServiceMenuButton prefab;

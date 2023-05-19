@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.CustomContent
 {
-    public class LoadCustomContent : MonoBehaviour
+    public sealed class LoadCustomContent : MonoBehaviour
     {
         [SerializeField] List<EnemyPreset> enemyPresets = new();
 

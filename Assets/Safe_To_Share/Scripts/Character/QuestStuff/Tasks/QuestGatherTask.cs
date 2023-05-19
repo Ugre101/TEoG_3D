@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.QuestStuff.Tasks
 {
-    public class QuestGatherTask : QuestBaseTask
+    public sealed class QuestGatherTask : QuestBaseTask
     {
         public new const string Name = "GatherTask";
         [field: SerializeField] public List<NeedToGather> Needed { get; private set; } = new();

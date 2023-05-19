@@ -17,7 +17,7 @@ using Random = System.Random;
 namespace Safe_To_Share.Scripts.AfterBattle
 {
     [CreateAssetMenu(fileName = "Sex Act", menuName = "AfterBattle/Sex Act")]
-    public class SexAction : AfterBattleBaseAction
+    public sealed class SexAction : AfterBattleBaseAction
     {
         [SerializeField] ArousalGain arousalGain;
         [SerializeField] List<NeededOrgans> casterNeedsSexualOrgan = new();

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Character.VoreStuff.VorePerks
 {
     [CreateAssetMenu(fileName = "Absorb perk", menuName = "Character/Vore/Vore Absorb perk", order = 0)]
-    public class Absorption : VorePerkNewDigestionMode
+    public sealed class Absorption : VorePerkNewDigestionMode
     {
         const float percentAbsorbed = 13f;
         static float? inPercent;

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
 {
-    public class EssenceOptionsToggles : MonoBehaviour
+    public sealed class EssenceOptionsToggles : MonoBehaviour
     {
         [SerializeField] Toggle selfDrain;
         [SerializeField] Toggle giveHeight;

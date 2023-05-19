@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameEvents.UI
 {
-    public class GameEventPopup : MonoBehaviour
+    public sealed class GameEventPopup : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title, desc;
 

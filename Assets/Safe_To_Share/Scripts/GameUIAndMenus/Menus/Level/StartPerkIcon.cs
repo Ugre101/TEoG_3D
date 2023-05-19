@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
-    public class StartPerkIcon : MonoBehaviour
+    public sealed class StartPerkIcon : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] Image icon;

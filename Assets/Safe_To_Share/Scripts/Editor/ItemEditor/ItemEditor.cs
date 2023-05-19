@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Items.Editor
 {
     [CustomEditor(typeof(Item))]
-    public class ItemEditor : UnityEditor.Editor
+    public sealed class ItemEditor : UnityEditor.Editor
     {
         const int Rows = 2;
         readonly string[] options = { "Heal", };

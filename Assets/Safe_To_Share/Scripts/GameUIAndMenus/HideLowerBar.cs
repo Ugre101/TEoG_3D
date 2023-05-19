@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class HideLowerBar : MonoBehaviour
+    public sealed class HideLowerBar : MonoBehaviour
     {
         void OnEnable()
         {

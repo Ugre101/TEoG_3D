@@ -12,7 +12,7 @@ namespace Character.Organs.Fluids.SexualFluids
         // Warning after build do not change fluid class Names
     }
 
-    public class ErrorFluid : FluidType
+    public sealed class ErrorFluid : FluidType
     {
         public override string Title => "ErrorFluid101";
 

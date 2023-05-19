@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace AvatarStuff.Holders
 {
-    public class DormMateAiHolder : AiHolder, IInteractable
+    public sealed class DormMateAiHolder : AiHolder, IInteractable
     {
         [SerializeField] DormMate mate;
 

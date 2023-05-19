@@ -2,7 +2,7 @@
 
 namespace QuestStuff
 {
-    public class QuestDynamicMarkerObject : MonoBehaviour
+    public sealed class QuestDynamicMarkerObject : MonoBehaviour
     {
         [SerializeField] QuestInfo questInfo;
 

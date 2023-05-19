@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
 {
-    public class BodyNodeOptions : MonoBehaviour
+    public sealed class BodyNodeOptions : MonoBehaviour
     {
         [SerializeField] TMP_Dropdown bodyType;
         [SerializeField] Slider permChange;

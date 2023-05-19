@@ -6,7 +6,7 @@ using SceneStuff;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 {
-    public class DialogueMenu : DialogueAndEventShared
+    public sealed class DialogueMenu : DialogueAndEventShared
     {
         public void Setup(BaseDialogue dialogue)
         

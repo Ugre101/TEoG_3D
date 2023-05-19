@@ -2,7 +2,7 @@
 
 namespace Character.Ailments
 {
-    public class FluidStretch : Ailment
+    public sealed class FluidStretch : Ailment
     {
         const string Cause = "FluidStretch";
 

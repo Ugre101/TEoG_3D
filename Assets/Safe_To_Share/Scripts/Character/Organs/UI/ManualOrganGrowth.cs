@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Character.Organs.UI
 {
-    public class ManualOrganGrowth : MonoBehaviour
+    public sealed class ManualOrganGrowth : MonoBehaviour
     {
         public static bool Change;
         [SerializeField] Button growNew;

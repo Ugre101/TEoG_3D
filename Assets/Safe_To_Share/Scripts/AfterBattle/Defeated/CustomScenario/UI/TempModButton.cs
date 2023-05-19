@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
 {
-    public class TempModButton : MonoBehaviour
+    public sealed class TempModButton : MonoBehaviour
     {
         [SerializeField] Button percentOrFlat;
         [SerializeField] TextMeshProUGUI buttonText;

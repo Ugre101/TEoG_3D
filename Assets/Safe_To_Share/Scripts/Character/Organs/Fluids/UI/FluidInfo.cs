@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Character.Organs.Fluids.UI
 {
-    public class FluidInfo : MonoBehaviour
+    public sealed class FluidInfo : MonoBehaviour
     {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI title;

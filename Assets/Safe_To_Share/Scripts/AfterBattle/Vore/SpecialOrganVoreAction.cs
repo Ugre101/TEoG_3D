@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.AfterBattle.Vore
 {
     [CreateAssetMenu(fileName = "New SpecialOrganVoreAction", menuName = "Character/Vore/Special Organ Vore Act")]
-    public class SpecialOrganVoreAction : VoreAction
+    public sealed class SpecialOrganVoreAction : VoreAction
     {
         [SerializeField] SexualOrganType organType;
         [SerializeField] SpecialVoreOptions specialDigestion;

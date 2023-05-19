@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 {
-    public class BuyItemBag : MonoBehaviour
+    public sealed class BuyItemBag : MonoBehaviour
     {
         [SerializeField] ItemForSale prefab;
         [SerializeField] Transform content;

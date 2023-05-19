@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle
 {
-    public class AfterBattleTester : MonoBehaviour
+    public sealed class AfterBattleTester : MonoBehaviour
     {
 #if UNITY_EDITOR
 

@@ -7,9 +7,9 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.QuestStuff
 {
-    public class QuestNode : BaseEditorCanvasNode
+    public sealed class QuestNode : BaseEditorCanvasNode
 #if UNITY_EDITOR
-                             , ISerializationCallbackReceiver
+                                    , ISerializationCallbackReceiver
 #endif
     {
         [field: SerializeField] public List<QuestBaseTask> Tasks { get; private set; } = new();

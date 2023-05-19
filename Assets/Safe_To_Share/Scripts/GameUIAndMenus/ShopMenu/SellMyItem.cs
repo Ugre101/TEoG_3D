@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 {
-    public class SellMyItem : MonoBehaviour
+    public sealed class SellMyItem : MonoBehaviour
     {
         [SerializeField] Image icon;
         [SerializeField] Button btn;

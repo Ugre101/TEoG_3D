@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
 {
-    public class ResistanceSlider : MonoBehaviour
+    public sealed class ResistanceSlider : MonoBehaviour
     {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI text;

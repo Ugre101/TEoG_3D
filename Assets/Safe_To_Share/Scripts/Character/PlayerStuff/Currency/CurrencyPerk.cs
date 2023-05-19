@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Currency
 {
     [CreateAssetMenu(fileName = "Create CurrencyPerk", menuName = "Character/CurrencyPerk", order = 0)]
-    public class CurrencyPerk : BasicPerk
+    public sealed class CurrencyPerk : BasicPerk
     {
         [SerializeField, Range(0, 100),] int discount;
 

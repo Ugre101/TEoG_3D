@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class GameUI : GameMenu
+    public sealed class GameUI : GameMenu
     {
         [SerializeField] HealthSlider hp, wp;
 

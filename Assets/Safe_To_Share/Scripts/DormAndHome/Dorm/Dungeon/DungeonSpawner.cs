@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DormAndHome.Dorm.Dungeon
 {
-    public class DungeonSpawner : MonoBehaviour
+    public sealed class DungeonSpawner : MonoBehaviour
     {
         [SerializeField] List<DungeonSpawnSpot> spawnSpots = new();
 

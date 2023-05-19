@@ -14971,6 +14971,10 @@ MonoBehaviour:
       hasShape: 0
       ids: 
       offSet: 0
+    cockVore:
+      hasShape: 1
+      ids: 21000000
+      offSet: 0
   changeHairColor: 1
   hairColor:
     skip:

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class SleepCanvas : MonoBehaviour
+    public sealed class SleepCanvas : MonoBehaviour
     {
         [SerializeField] GameCanvas gameCanvas;
         [SerializeField] CanvasGroup canvasGroup;

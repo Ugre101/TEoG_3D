@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
 {
-    public class DrainNodeOptions : MonoBehaviour
+    public sealed class DrainNodeOptions : MonoBehaviour
     {
         [SerializeField] TMP_Dropdown drain, give;
         [SerializeField] Slider drainAmount, giveAmount;

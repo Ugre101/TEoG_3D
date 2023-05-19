@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Character.EssenceStuff.UI
 {
-    public class AfterBattleEssenceSlider : MonoBehaviour
+    public sealed class AfterBattleEssenceSlider : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI sessionChange;
 

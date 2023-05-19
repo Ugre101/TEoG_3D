@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.Editor.Quest
 {
     [CustomEditor(typeof(QuestNode))]
-    public class QuestNodeEditor : UnityEditor.Editor
+    public sealed class QuestNodeEditor : UnityEditor.Editor
     {
         const string Gather = "Gather", Hunt = "Hunt";
 

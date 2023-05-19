@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_to_Share.Scripts.CustomClasses
 {
-    public class RunCoroutineThenDie : MonoBehaviour
+    public sealed class RunCoroutineThenDie : MonoBehaviour
     {
         public void Run(IEnumerator routine)
         {

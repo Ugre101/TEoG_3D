@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes
 {
-    public class DigestionOral : DigestionMethod
+    public sealed class DigestionOral : DigestionMethod
     {
         public override bool Tick(BaseCharacter pred, VoreOrgan voreOrgan, bool predIsPlayer)
         {

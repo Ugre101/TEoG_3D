@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class GameMenus : MonoBehaviour
+    public sealed class GameMenus : MonoBehaviour
     {
         [SerializeField] GameCanvas gameCanvas;
         [SerializeField] Image minimap, bigMap;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Character.Ailments
 {
     [CreateAssetMenu(menuName = "Create AilmentSObjDict", fileName = "AilmentSObjDict", order = 0)]
-    public class AilmentSObjDict : ScriptableObject
+    public sealed class AilmentSObjDict : ScriptableObject
     {
         [SerializeField] List<AilmentSObj> hunger = new List<AilmentSObj>();
         [SerializeField] List<AilmentSObj> piss = new List<AilmentSObj>();

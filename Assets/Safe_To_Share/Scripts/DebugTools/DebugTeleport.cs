@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.DebugTools
 {
-    public class DebugTeleport : MonoBehaviour
+    public sealed class DebugTeleport : MonoBehaviour
     {
         [SerializeField] List<ButtonToPoint> teleportBtns = new();
 

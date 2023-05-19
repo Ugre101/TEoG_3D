@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.BirthMenu
 {
-    public class BabyNameInput : MonoBehaviour
+    public sealed class BabyNameInput : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI preText;
         [SerializeField] TMP_InputField inputField;

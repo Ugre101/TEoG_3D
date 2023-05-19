@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Spawner.Editor
 {
     [CustomEditor(typeof(SpawnZones))]
-    public class SpawnZonesEditor : UnityEditor.Editor
+    public sealed class SpawnZonesEditor : UnityEditor.Editor
     {
         SpawnZones myTarget;
 

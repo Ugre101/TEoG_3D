@@ -4,7 +4,7 @@ using Character.StatsStuff.Mods;
 
 namespace Safe_To_Share.Scripts.Character.Scat
 {
-    public class NeedToShit : Ailment
+    public sealed class NeedToShit : Ailment
     {
         const string Cause = "NeedToShit";
 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
-    public class ScatPrefab : MonoBehaviour
+    public sealed class ScatPrefab : MonoBehaviour
     {
         [SerializeField] Animation animator;
         [SerializeField] Rigidbody rigid;

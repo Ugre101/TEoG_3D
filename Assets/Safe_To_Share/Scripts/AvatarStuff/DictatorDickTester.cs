@@ -2,7 +2,7 @@
 
 namespace AvatarStuff
 {
-    public class DictatorDickTester : MonoBehaviour
+    public sealed class DictatorDickTester : MonoBehaviour
     {
         [SerializeField] DictatorDick dick;
         [SerializeField, Range(0, 10f),] float size;

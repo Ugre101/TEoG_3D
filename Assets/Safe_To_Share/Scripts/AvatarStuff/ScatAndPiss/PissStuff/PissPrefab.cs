@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
-    public class PissPrefab : MonoBehaviour
+    public sealed class PissPrefab : MonoBehaviour
     {
         const float MaxFlyTime = 10f;
         [SerializeField] Rigidbody rigid;

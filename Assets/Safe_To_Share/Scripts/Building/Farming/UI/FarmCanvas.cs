@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Farming.UI
 {
-    public class FarmCanvas : MonoBehaviour
+    public sealed class FarmCanvas : MonoBehaviour
     {
         [SerializeField] ShowPlantOptions showPlantOptions;
 

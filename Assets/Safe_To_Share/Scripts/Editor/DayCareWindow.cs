@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace EditorFolder
 {
-    public class DayCareWindow : EditorWindow
+    public sealed class DayCareWindow : EditorWindow
     {
         void OnGUI()
         {

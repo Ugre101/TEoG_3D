@@ -5,7 +5,7 @@ using Random = System.Random;
 
 namespace Safe_To_Share.Scripts.Audio
 {
-    public class GetAndPlayRandomAudioReference : MonoBehaviour
+    public sealed class GetAndPlayRandomAudioReference : MonoBehaviour
     {
         [SerializeField] AudioSource audioSource;
         [SerializeField] AssetReference[] audioClipRefs;

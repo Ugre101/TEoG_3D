@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
 {
-    public class LoseScenarioLoadMenuButton : MonoBehaviour
+    public sealed class LoseScenarioLoadMenuButton : MonoBehaviour
     {
         [SerializeField] Button btn;
         [SerializeField] TextMeshProUGUI btnTitle;

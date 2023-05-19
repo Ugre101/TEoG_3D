@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DormAndHome.Dorm
 {
-    public class DormTester : MonoBehaviour
+    public sealed class DormTester : MonoBehaviour
     {
         [SerializeField] EnemyPreset dormMate;
         DormManager dormManager;

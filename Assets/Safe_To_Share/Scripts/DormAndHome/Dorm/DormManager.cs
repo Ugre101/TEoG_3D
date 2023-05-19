@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace DormAndHome.Dorm
 {
-    public class DormManager : MonoBehaviour
+    public sealed class DormManager : MonoBehaviour
     {
         [SerializeField] List<DormMate> dormMates = new();
         [SerializeField] DormBuildings buildings;

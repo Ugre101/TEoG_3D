@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
-    public class DormCanvas : DormSleepAreaShared
+    public sealed class DormCanvas : DormSleepAreaShared
     {
         public override void Enter()
         {

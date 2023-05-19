@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Editors
 {
     [CustomEditor(typeof(QuestInfo))]
-    public class QuestInfoEditor : Editor
+    public sealed class QuestInfoEditor : Editor
     {
         SerializedProperty id;
         QuestInfo myTarget;

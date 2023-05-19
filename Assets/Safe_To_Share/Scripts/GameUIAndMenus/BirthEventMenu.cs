@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class BirthEventMenu : MonoBehaviour
+    public sealed class BirthEventMenu : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title;
 

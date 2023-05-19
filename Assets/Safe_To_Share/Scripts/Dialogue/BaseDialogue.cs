@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Dialogue
 {
     [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue/new Dialogue", order = 0)]
-    public class BaseDialogue : BaseEditorCanvasObject<DialogueBaseNode>
+    public sealed class BaseDialogue : BaseEditorCanvasObject<DialogueBaseNode>
     {
 
         public static event Action<BaseDialogue> StartDialogue;

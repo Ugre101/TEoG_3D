@@ -2,7 +2,7 @@
 
 namespace CustomClasses
 {
-    public class SavedBoolSetting
+    public sealed class SavedBoolSetting
     {
         readonly string saveName;
 

@@ -4,7 +4,7 @@ using Character.VoreStuff;
 
 namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes
 {
-    public class Endosoma : DigestionMethod
+    public sealed class Endosoma : DigestionMethod
     {
         public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer)
         {

@@ -3,7 +3,7 @@ using Items;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI
 {
-    public class CraftingInventorySlot : InventorySlot
+    public sealed class CraftingInventorySlot : InventorySlot
     {
         public event Action<InventoryItem> ReceivedItem;
         public event Action ClearedItem;

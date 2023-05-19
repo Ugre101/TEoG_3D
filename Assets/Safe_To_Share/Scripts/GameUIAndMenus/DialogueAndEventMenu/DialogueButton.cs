@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 {
-    public class DialogueButton : MonoBehaviour
+    public sealed class DialogueButton : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI buttonText;
         [SerializeField] Button btn;

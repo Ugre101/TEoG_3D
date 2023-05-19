@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Character.DefeatScenarios.Nodes
 {
-    public class LoseScenarioNodeBodyMorph : LoseScenarioNode
+    public sealed class LoseScenarioNodeBodyMorph : LoseScenarioNode
     {
         [SerializeField] bool transferToSelf;
         [SerializeField] BodyStatType bodyType;

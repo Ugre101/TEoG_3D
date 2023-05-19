@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 
 namespace Safe_To_Share.Scripts.Farming
 {
-    public class ShowPlantPlacement : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
+    public sealed class ShowPlantPlacement : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] Camera cam;
         [SerializeField] LayerMask searchLayers;

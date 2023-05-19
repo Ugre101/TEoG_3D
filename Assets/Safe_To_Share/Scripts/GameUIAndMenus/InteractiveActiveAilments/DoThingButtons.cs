@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments
 {
-    public class DoThingButtons : GameMenu
+    public sealed class DoThingButtons : GameMenu
     {
         [SerializeField] NeedToShitButton shitButton;
         [SerializeField] NeedToPissButton pissButton;

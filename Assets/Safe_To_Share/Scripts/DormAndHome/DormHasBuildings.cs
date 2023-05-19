@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DormAndHome
 {
-    public class DormHasBuildings : MonoBehaviour
+    public sealed class DormHasBuildings : MonoBehaviour
     {
         [SerializeField] GameObject[] dormLodges;
         [SerializeField] GameObject[] kitchen;

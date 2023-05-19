@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.Farming
 {
     [CreateAssetMenu(fileName = "Plant", menuName = "Plants/NewPlant", order = 0)]
-    public class Plant : SerializableScriptableObject
+    public sealed class Plant : SerializableScriptableObject
     {
         [field: SerializeField] public List<PlantDropItem> Drops { get; private set; } = new();
         [field: SerializeField] public Sprite Icon { get; private set; }

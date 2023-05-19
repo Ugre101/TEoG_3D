@@ -4,7 +4,7 @@ using Safe_To_Share.Scripts.Static;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
-    public class BrothelOptionPanel : BuildingOptionPanel
+    public sealed class BrothelOptionPanel : BuildingOptionPanel
     {
         static DormBrothel Brothel => DormManager.Instance.Buildings.VillageBuildings.Brothel;
 

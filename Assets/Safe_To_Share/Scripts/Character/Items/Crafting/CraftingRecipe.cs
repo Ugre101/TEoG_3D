@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.Character.Items.Crafting
 {
     [CreateAssetMenu(fileName = "Crafting recipe", menuName = "Items/Crafting/New Crafting Recipe", order = 0)]
-    public class CraftingRecipe : ScriptableObject
+    public sealed class CraftingRecipe : ScriptableObject
     {
 
         [field: SerializeField] public DropSerializableObject<Item> FirstItem { get; private set; }

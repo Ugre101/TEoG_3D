@@ -2,7 +2,7 @@
 
 namespace Character.Organs.Fluids.SexualFluids
 {
-    public class Femcum : FluidType
+    public sealed class Femcum : FluidType
     {
         public override string Title => "Femcum";
         public override string Taste => "Sweet";

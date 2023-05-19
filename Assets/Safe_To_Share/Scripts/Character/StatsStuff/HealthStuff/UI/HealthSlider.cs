@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Character.StatsStuff.HealthStuff.UI
 {
-    public class HealthSlider : MonoBehaviour
+    public sealed class HealthSlider : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI text;
         [SerializeField] Slider slider;

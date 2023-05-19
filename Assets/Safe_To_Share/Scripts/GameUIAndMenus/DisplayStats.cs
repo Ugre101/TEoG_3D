@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class DisplayStats : MonoBehaviour
+    public sealed class DisplayStats : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI statText;
 

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
     [RequireComponent(typeof(Button))]
-    public class StatButton : BaseLevelButton, IPointerEnterHandler
+    public sealed class StatButton : BaseLevelButton, IPointerEnterHandler
     {
         [SerializeField] Color statColor = Color.white;
         [SerializeField] CharStatType statType;

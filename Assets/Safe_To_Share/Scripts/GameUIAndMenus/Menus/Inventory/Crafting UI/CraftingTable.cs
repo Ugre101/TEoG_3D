@@ -11,7 +11,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI
 {
-    public class CraftingTable : MonoBehaviour
+    public sealed class CraftingTable : MonoBehaviour
     {
         [SerializeField] CraftingRecipesDict craftingDictionary;
         [SerializeField] CraftingInventorySlot slot1, slot2;

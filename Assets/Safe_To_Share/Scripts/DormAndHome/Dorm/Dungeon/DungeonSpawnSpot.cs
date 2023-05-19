@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DormAndHome.Dorm.Dungeon
 {
-    public class DungeonSpawnSpot : MonoBehaviour
+    public sealed class DungeonSpawnSpot : MonoBehaviour
     {
         [SerializeField] DormMateAiHolder mate;
         public bool Empty { get; set; } = true;

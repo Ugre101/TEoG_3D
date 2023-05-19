@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Dialogue
 {
-    public class DialogueQuestNode : DialogueBaseNode
+    public sealed class DialogueQuestNode : DialogueBaseNode
     {
         [SerializeField] QuestInfo questQuest;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DormAndHome
 {
-    public class EnterDormBuilding : MonoBehaviour
+    public sealed class EnterDormBuilding : MonoBehaviour
     {
         //  [SerializeField] DormBuildingCanvas dormBuildingCanvas;
 

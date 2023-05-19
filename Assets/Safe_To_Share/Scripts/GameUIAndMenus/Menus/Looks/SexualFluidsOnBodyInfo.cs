@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Looks
 {
-    public class SexualFluidsOnBodyInfo : MonoBehaviour
+    public sealed class SexualFluidsOnBodyInfo : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI infoText;
         public void Setup(BaseCharacter character)

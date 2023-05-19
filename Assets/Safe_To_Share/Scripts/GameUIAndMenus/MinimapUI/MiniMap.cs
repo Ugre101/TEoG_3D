@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.MinimapUI
 {
-    public class MiniMap : MapShared
+    public sealed class MiniMap : MapShared
     {
         [SerializeField] RunTimeReSizeRectTransform sizeChanger;
 

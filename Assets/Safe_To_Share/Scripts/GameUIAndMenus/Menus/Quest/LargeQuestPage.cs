@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Quest
 {
-    public class LargeQuestPage : MonoBehaviour
+    public sealed class LargeQuestPage : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI defaultText;
         [SerializeField] TextMeshProUGUI title, desc, world, progress;

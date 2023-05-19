@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
-    public class InventoryMenu2 : GameMenu
+    public sealed class InventoryMenu2 : GameMenu
     {
         [SerializeField] InventoryBah playerInventory;
         [SerializeField] InventoryBah secondaryInventory;

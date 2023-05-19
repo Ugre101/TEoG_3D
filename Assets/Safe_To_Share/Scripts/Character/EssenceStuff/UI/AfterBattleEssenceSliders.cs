@@ -2,7 +2,7 @@
 
 namespace Character.EssenceStuff.UI
 {
-    public class AfterBattleEssenceSliders : MonoBehaviour
+    public sealed class AfterBattleEssenceSliders : MonoBehaviour
     {
         [SerializeField] AfterBattleEssenceSlider masc, femi;
 

@@ -7,7 +7,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 {
-    public class IslandStoneMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
+    public sealed class IslandStoneMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] IslandStoneOption[] options;
         [SerializeField] AssetReference emptyCraftingCrystal;

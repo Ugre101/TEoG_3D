@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Character.VoreStuff.VorePerks
 {
     [CreateAssetMenu(fileName = "Rebirth perk", menuName = "Character/Vore/Vore Rebirth", order = 0)]
-    public class ReBirth : VorePerkNewDigestionMode
+    public sealed class ReBirth : VorePerkNewDigestionMode
     {
         public override string DigestionMode => VaginaDigestionModes.Rebirth;
 

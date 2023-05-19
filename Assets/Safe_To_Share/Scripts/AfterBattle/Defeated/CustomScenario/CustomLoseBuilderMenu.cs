@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
 {
-    public class CustomLoseBuilderMenu : MonoBehaviour
+    public sealed class CustomLoseBuilderMenu : MonoBehaviour
     {
         [SerializeField] Button newScenario, saveScenario;
         [SerializeField] SelectedNode showSelected;

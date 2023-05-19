@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
-    public class PreyShowCase : MonoBehaviour
+    public sealed class PreyShowCase : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI digestionModeInfo;

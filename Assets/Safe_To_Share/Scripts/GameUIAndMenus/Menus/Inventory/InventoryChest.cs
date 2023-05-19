@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
-    public class InventoryChest : MonoBehaviour,IInteractable
+    public sealed class InventoryChest : MonoBehaviour,IInteractable
     {
 
         [SerializeField] ChestItems[] items;

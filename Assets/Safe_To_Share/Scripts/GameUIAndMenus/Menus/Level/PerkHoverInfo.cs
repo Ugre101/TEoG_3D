@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
-    public class PerkHoverInfo : BaseHoverInfo
+    public sealed class PerkHoverInfo : BaseHoverInfo
     {
         protected override void Start()
         {

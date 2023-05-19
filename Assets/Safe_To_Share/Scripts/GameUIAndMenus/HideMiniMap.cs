@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class HideMiniMap : MonoBehaviour
+    public sealed class HideMiniMap : MonoBehaviour
     {
         void OnEnable()
         {

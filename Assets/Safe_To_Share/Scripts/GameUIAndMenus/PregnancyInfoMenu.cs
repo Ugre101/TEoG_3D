@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class PregnancyInfoMenu : GameMenu
+    public sealed class PregnancyInfoMenu : GameMenu
     {
         [SerializeField] TextMeshProUGUI fert, baseFert, veri, baseViri;
         [SerializeField] TextMeshProUGUI pregSpeed;

@@ -4,7 +4,7 @@ using Character.VoreStuff;
 
 namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Boobs
 {
-    public class BoobsAbsorption : DigestionMethod
+    public sealed class BoobsAbsorption : DigestionMethod
     {
         public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer)
         {

@@ -33,17 +33,17 @@ namespace Character.SkillsAndSpells.Editor
     }
 
     [CustomEditor(typeof(Skill))]
-    public class SkillEditor : AbilityBaseEditor
+    public sealed class SkillEditor : AbilityBaseEditor
     {
     }
 
     [CustomEditor(typeof(Spell))]
-    public class SpellEditor : AbilityBaseEditor
+    public sealed class SpellEditor : AbilityBaseEditor
     {
     }
 
     [CustomEditor(typeof(Surrender))]
-    public class SurrenderEditor : AbilityBaseEditor
+    public sealed class SurrenderEditor : AbilityBaseEditor
     {
     }
 }

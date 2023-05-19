@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Character.EssenceStuff
 {
     [CreateAssetMenu(fileName = "Create Height Change", menuName = "Character/Essence/Essence Height Perk")]
-    public class HeightEssencePerk : EssencePerk
+    public sealed class HeightEssencePerk : EssencePerk
     {
         [SerializeField] List<IntMod> heightDrain = new();
         [SerializeField] List<IntMod> heightGive = new();

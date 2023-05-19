@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
-    public class ScatHandler : MonoBehaviour
+    public sealed class ScatHandler : MonoBehaviour
     {
         [SerializeField] ScatPrefab prefab;
         [SerializeField] float zSpawnOffset = 0.01f;

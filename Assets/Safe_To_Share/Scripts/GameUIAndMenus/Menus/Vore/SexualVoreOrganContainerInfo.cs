@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
-    public class SexualVoreOrganContainerInfo : VoreOrganContainerInfo
+    public sealed class SexualVoreOrganContainerInfo : VoreOrganContainerInfo
     {
         [SerializeField] SexualVoreOrganCapacityInfo prefab;
 

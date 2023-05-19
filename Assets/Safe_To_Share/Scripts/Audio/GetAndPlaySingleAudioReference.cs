@@ -4,7 +4,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.Audio
 {
-    public class GetAndPlaySingleAudioReference : MonoBehaviour
+    public sealed class GetAndPlaySingleAudioReference : MonoBehaviour
     {
         [SerializeField] AudioSource audioSource;
         [SerializeField] AssetReference audioClip;

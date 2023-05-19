@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
 {
-    public class ManualRebindButton : MonoBehaviour
+    public sealed class ManualRebindButton : MonoBehaviour
     {
         [SerializeField] InputActionReference actionRef;
         [SerializeField] TextMeshProUGUI title;

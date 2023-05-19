@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.SceneUI
 {
-    public class BoatTeleportMenu : GameMenu
+    public sealed class BoatTeleportMenu : GameMenu
     {
         [SerializeField] Transform content;
         [SerializeField] ShoreOptionButton btn;

@@ -5,7 +5,7 @@ using Safe_To_Share.Scripts.Static;
 
 namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Balls
 {
-    public class EndosomaBalls : DigestionMethod
+    public sealed class EndosomaBalls : DigestionMethod
     {
         public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer)
         {

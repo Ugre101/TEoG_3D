@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.Character.Items.Crafting
 {
     [CreateAssetMenu(fileName = "Crafting recipe dict", menuName = "Items/Crafting/New Crafting Dict", order = 0)]
-    public class CraftingRecipesDict : ScriptableObject
+    public sealed class CraftingRecipesDict : ScriptableObject
     {
         [SerializeField] List<CraftingRecipe> craftingRecipes = new();
         Dictionary<string, Dictionary<string, CraftingRecipe>> dict;

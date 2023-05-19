@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
-    public class VoreLevelMenu : BaseLevelMenu
+    public sealed class VoreLevelMenu : BaseLevelMenu
     {
         int VorePoints => Player.Vore.Level.Points;
 

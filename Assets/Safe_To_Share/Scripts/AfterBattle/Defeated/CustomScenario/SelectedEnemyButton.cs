@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
 {
-    public class SelectedEnemyButton : MonoBehaviour
+    public sealed class SelectedEnemyButton : MonoBehaviour
     {
         public Button btn;
         [SerializeField] TextMeshProUGUI buttonText, enemyDesc;

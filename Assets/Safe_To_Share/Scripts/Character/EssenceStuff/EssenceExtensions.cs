@@ -268,7 +268,7 @@ namespace Character.EssenceStuff
         #endregion
     }
 
-    public class ChangeLog
+    public sealed class ChangeLog
     {
         public List<string> DrainLogs { get; } = new();
         public List<string> GainLogs { get; } = new();

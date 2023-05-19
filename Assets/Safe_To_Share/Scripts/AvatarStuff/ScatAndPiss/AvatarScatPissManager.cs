@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
-    public class AvatarScatPissManager : MonoBehaviour
+    public sealed class AvatarScatPissManager : MonoBehaviour
     {
         [SerializeField] Animator animator;
         [SerializeField] int shitHash;

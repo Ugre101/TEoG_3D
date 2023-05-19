@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Character.Organs.UI
 {
-    public class GrowOrganButton : MonoBehaviour
+    public sealed class GrowOrganButton : MonoBehaviour
     {
         public static bool Change;
         [SerializeField] Button btn;

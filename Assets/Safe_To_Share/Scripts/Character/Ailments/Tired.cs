@@ -4,7 +4,7 @@ using Character.StatsStuff.Mods;
 
 namespace Character.Ailments
 {
-    public class Tired : Ailment
+    public sealed class Tired : Ailment
     {
         const string Cause = "Tired";
 

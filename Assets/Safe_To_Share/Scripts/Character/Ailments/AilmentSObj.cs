@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Character.Ailments
 {
     [CreateAssetMenu(menuName = "Create AilmentSObj", fileName = "AilmentSObj", order = 0)]
-    public class AilmentSObj : ScriptableObject, IComparable<AilmentSObj>
+    public sealed class AilmentSObj : ScriptableObject, IComparable<AilmentSObj>
     {
         [field: SerializeField]   public string GUID { get; private set; }
         [field: SerializeField, Range(0f, 1f)] public float ThreesHold { get; private set; } = 0.5f;

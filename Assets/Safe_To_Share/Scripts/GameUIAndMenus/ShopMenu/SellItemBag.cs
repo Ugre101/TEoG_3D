@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 {
-    public class SellItemBag : MonoBehaviour
+    public sealed class SellItemBag : MonoBehaviour
     {
         [SerializeField] SellMyItem sellMyItem;
         [SerializeField] Transform content;

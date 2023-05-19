@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
-    public class ViewDormDormDungeon : MonoBehaviour
+    public sealed class ViewDormDormDungeon : MonoBehaviour
     {
         [SerializeField] PlayerHolder playerHolder;
         [SerializeField] DormDungeonMateButton dormMateButton;

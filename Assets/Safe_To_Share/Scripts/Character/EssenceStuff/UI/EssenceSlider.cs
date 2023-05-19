@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Character.EssenceStuff.UI
 {
-    public class EssenceSlider : MonoBehaviour
+    public sealed class EssenceSlider : MonoBehaviour
     {
         [SerializeField] Slider slider;
         [SerializeField] string afterValueTexT = "Masc";

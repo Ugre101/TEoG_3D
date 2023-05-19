@@ -11,9 +11,9 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class CanvasPauseMenu : MonoBehaviour
+    public sealed class CanvasPauseMenu : MonoBehaviour
     {
-        public static List<ICancelMeBeforeOpenPauseMenu> CancelMe = new();
+        public static readonly List<ICancelMeBeforeOpenPauseMenu> CancelMe = new();
         static bool sceneDirty = true;
         [SerializeField] InputAction bindings;
         [SerializeField] GameObject mainMenu, settingMenu;

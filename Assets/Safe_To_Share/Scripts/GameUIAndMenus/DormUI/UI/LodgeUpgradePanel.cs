@@ -3,7 +3,7 @@ using Safe_To_Share.Scripts.Static;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
-    public class LodgeUpgradePanel : BuildingUpgradePanel
+    public sealed class LodgeUpgradePanel : BuildingUpgradePanel
     {
         void OnEnable()
         {

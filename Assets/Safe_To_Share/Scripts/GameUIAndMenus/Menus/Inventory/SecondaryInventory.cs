@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
-    public class SecondaryInventory : MonoBehaviour
+    public sealed class SecondaryInventory : MonoBehaviour
     {
         
     }

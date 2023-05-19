@@ -6,7 +6,7 @@ using TMPro;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
-    public class GymOptionsPanel : BuildingOptionPanel
+    public sealed class GymOptionsPanel : BuildingOptionPanel
     {
         static DormGym Gym => DormManager.Instance.Buildings.Gym;
 

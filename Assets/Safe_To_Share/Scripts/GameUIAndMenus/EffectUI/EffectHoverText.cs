@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.EffectUI
 {
-    public class EffectHoverText : MonoBehaviour
+    public sealed class EffectHoverText : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI hoverText;
         [SerializeField] RectTransform rectTransform;

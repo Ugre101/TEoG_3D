@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI
 {
-    public class CraftingSlotItem : InventorySlotItem
+    public sealed class CraftingSlotItem : InventorySlotItem
     {
         public override void OnBeginDrag(PointerEventData eventData)
         {

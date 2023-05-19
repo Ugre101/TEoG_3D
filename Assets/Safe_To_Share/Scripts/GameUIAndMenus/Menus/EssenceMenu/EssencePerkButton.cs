@@ -10,7 +10,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
 {
-    public class EssencePerkButton : BasePerkButton, IPointerEnterHandler
+    public sealed class EssencePerkButton : BasePerkButton, IPointerEnterHandler
     {
         public void OnPointerEnter(PointerEventData eventData) => ShowPerkInfo?.Invoke(transform.position, loaded);
         public static event Action<Vector3, BasicPerk> ShowPerkInfo;
@@ -29,7 +29,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
             HasPerk(obj.Result);
         }
 
-        protected void HasPerk(EssencePerk result)
+        void HasPerk(EssencePerk result)
         {
             bool hasPerk = Player.Essence.EssencePerks.Contains(result);
             HaveFade(hasPerk);

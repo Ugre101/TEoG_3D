@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class BigEventLog : GameMenu
+    public sealed class BigEventLog : GameMenu
     {
         [SerializeField] TextMeshProUGUI eventLog;
 

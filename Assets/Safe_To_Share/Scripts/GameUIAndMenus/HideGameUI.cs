@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class HideGameUI : MonoBehaviour
+    public sealed class HideGameUI : MonoBehaviour
     {
         static bool hidden;
         [SerializeField] GameObject[] expect;

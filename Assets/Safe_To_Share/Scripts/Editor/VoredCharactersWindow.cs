@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace EditorVore
 {
-    public class VoredCharactersWindow : EditorWindow
+    public sealed class VoredCharactersWindow : EditorWindow
     {
         void OnGUI()
         {

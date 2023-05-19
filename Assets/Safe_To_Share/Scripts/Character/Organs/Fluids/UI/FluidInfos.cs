@@ -2,7 +2,7 @@
 
 namespace Character.Organs.Fluids.UI
 {
-    public class FluidInfos : MonoBehaviour
+    public sealed class FluidInfos : MonoBehaviour
     {
         [SerializeField] FluidInfo cumInfo;
         [SerializeField] FluidInfo milkInfo;

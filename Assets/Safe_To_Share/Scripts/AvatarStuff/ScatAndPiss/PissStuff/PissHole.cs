@@ -3,7 +3,7 @@ using UnityEngine.Pool;
 
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
-    public class PissHole : MonoBehaviour
+    public sealed class PissHole : MonoBehaviour
     {
         [SerializeField] PissPrefab prefab;
         const float Force = 90f;

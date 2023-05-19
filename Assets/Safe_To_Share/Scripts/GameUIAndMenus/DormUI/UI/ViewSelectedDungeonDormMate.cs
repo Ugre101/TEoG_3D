@@ -4,7 +4,7 @@ using Safe_To_Share.Scripts.Holders;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
-    public class ViewSelectedDungeonDormMate : ViewSelectedDormMate
+    public sealed class ViewSelectedDungeonDormMate : ViewSelectedDormMate
     {
         protected override void ChangeSleepArea()
         {

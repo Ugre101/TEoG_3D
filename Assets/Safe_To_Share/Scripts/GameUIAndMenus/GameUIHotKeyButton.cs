@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class GameUIHotKeyButton : MonoBehaviour
+    public sealed class GameUIHotKeyButton : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI keyText;
 

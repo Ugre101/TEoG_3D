@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
 {
-    public class VoreNodeOptions : MonoBehaviour
+    public sealed class VoreNodeOptions : MonoBehaviour
     {
         [SerializeField] Button oral, cock, unbirth, boobs;
         [SerializeField] Image oralImage, cockImage, unbirthImage, boobsImage;

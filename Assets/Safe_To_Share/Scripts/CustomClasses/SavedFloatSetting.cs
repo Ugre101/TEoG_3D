@@ -2,7 +2,7 @@
 
 namespace CustomClasses
 {
-    public class SavedFloatSetting
+    public sealed class SavedFloatSetting
     {
         readonly float defaultValue;
         readonly string saveName;

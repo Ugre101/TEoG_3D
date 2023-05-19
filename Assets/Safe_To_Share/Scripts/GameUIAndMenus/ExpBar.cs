@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class ExpBar : GameMenu
+    public sealed class ExpBar : GameMenu
     {
         [SerializeField] Slider bar;
 

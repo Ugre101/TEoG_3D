@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Character.DefeatScenarios.Nodes
 {
-    public class LoseScenarioDrainEssenceNode : LoseScenarioNode
+    public sealed class LoseScenarioDrainEssenceNode : LoseScenarioNode
     {
         [SerializeField] DrainEssenceType drainEssenceType = DrainEssenceType.Both;
 

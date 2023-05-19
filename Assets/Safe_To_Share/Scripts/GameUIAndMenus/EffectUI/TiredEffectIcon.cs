@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.EffectUI
 {
-    public class TiredEffectIcon : EffectIcon
+    public sealed class TiredEffectIcon : EffectIcon
     {
         [SerializeField] TextMeshProUGUI sleepText;
         protected override string HoverText => "Sleepy";

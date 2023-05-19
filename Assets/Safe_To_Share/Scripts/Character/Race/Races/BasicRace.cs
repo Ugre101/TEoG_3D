@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Character.Race.Races
 {
     [CreateAssetMenu(fileName = "Basic race", menuName = "Character/Races/New basic race")]
-    public class BasicRace : SObjSavableTitleDescIcon
+    public sealed class BasicRace : SObjSavableTitleDescIcon
     {
         [SerializeField] RaceMods primaryRaceMods;
         [SerializeField] RaceMods secondaryRaceMods;

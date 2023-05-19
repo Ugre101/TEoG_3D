@@ -3,7 +3,7 @@ using Character.IslandData;
 
 namespace Character.EnemyStuff
 {
-    public class Boss : Enemy
+    public sealed class Boss : Enemy
     {
         public Boss(CreateBoss character) : base(character.CreateEnemy)
         {

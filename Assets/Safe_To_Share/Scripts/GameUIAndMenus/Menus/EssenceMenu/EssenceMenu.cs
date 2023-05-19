@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
 {
-    public class EssenceMenu : GameMenu
+    public sealed class EssenceMenu : GameMenu
     {
         [SerializeField] EssenceBars essenceBars;
         [SerializeField] TextMeshProUGUI stableAmount, giveAmount, drainAmount;

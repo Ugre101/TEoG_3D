@@ -6,7 +6,7 @@ using TMPro;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
-    public class KitchenOptionsPanel : BuildingOptionPanel
+    public sealed class KitchenOptionsPanel : BuildingOptionPanel
     {
         static DormKitchen Kitchen => DormManager.Instance.Buildings.Kitchen;
 

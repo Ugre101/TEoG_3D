@@ -13,14 +13,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 
         public virtual bool BlockIfActive()
         {
-            if (gameObject != null && gameObject.activeInHierarchy)
-            {
-                gameObject.SetActive(false);
-                gameCanvas.CloseMenus();
-                return true;
-            }
+            if (gameObject == null || !gameObject.activeInHierarchy) return false;
+            gameObject.SetActive(false);
+            gameCanvas.CloseMenus();
+            return true;
 
-            return false;
         }
 
         public virtual void SetPlayer(PlayerHolder value, GameCanvas canvas)

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 {
-    public class ShopMenu : GameMenu
+    public sealed class ShopMenu : GameMenu
     {
         [SerializeField] TextMeshProUGUI shopTitleText;
         [SerializeField] BuyItemBag buyItemBag;

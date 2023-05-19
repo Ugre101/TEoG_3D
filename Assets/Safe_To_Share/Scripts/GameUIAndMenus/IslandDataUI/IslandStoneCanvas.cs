@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 {
-    public class IslandStoneCanvas : MonoBehaviour
+    public sealed class IslandStoneCanvas : MonoBehaviour
     {
         [SerializeField] IslandStone islandStone;
         [SerializeField] IslandStoneMenu menu;

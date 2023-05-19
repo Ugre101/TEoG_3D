@@ -6,7 +6,7 @@ using Character.PlayerStuff;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated
 {
-    public class CustomDefeatedMain : DefeatShared
+    public sealed class CustomDefeatedMain : DefeatShared
     {
         CustomLoseScenarioNode currentNode;
 

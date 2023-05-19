@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
-    public class InventoryBah : MonoBehaviour
+    public sealed class InventoryBah : MonoBehaviour
     {
         [SerializeField] Transform content;
         [SerializeField] InventorySlot[] preInstancedSlots;

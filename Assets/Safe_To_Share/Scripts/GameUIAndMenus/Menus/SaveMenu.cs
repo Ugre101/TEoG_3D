@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus
 {
-    public class SaveMenu : GameMenu
+    public sealed class SaveMenu : GameMenu
     {
         static string[] saves;
         [SerializeField] Transform content;

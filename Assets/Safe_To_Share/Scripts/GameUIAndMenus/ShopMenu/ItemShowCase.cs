@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 {
-    public class ItemShowCase : MonoBehaviour
+    public sealed class ItemShowCase : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title, desc, value;
         [SerializeField] TextMeshProUGUI amountText, totalValue;

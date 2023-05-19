@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Character.DefeatScenarios.Nodes
 {
-    public class LoseScenarioNodeTriesToVore : LoseScenarioNode
+    public sealed class LoseScenarioNodeTriesToVore : LoseScenarioNode
     {
         [SerializeField] VoreType[] voreTypes;
 

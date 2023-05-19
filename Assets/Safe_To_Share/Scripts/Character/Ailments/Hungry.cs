@@ -2,7 +2,7 @@
 
 namespace Character.Ailments
 {
-    public class Hungry : Ailment
+    public sealed class Hungry : Ailment
     {
         const string Cause = "Hungry";
 

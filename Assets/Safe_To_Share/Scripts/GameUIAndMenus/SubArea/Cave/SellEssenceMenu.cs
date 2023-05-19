@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
 {
-    public class SellEssenceMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
+    public sealed class SellEssenceMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] SellEssenceSlider sellFemi, sellMasc;
 
@@ -17,13 +17,10 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
 
         public bool BlockIfActive()
         {
-            if (gameObject.activeInHierarchy)
-            {
-                gameObject.SetActive(false);
-                return true;
-            }
+            if (!gameObject.activeInHierarchy) return false;
+            gameObject.SetActive(false);
+            return true;
 
-            return false;
         }
 
         public void Setup(Player player)

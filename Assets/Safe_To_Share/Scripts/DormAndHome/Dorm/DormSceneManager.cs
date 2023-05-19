@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 namespace DormAndHome.Dorm
 {
-    public class DormSceneManager : MonoBehaviour
+    public sealed class DormSceneManager : MonoBehaviour
     {
         [SerializeField] float spawnRange;
         [SerializeField] AssetReference prefab;

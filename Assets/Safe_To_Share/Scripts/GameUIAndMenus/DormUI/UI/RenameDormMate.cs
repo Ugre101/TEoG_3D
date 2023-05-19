@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
-    public class RenameDormMate : MonoBehaviour
+    public sealed class RenameDormMate : MonoBehaviour
     {
         [SerializeField] TMP_InputField firstName, lastName;
         [SerializeField] Button accept, close;

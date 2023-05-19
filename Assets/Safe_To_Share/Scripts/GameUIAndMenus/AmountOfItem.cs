@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class AmountOfItem : MonoBehaviour
+    public sealed class AmountOfItem : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI amountText;
         [SerializeField] Image itemImage;

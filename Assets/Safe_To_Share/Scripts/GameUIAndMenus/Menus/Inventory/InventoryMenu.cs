@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
-    public class InventoryMenu : GameMenu
+    public sealed class InventoryMenu : GameMenu
     {
         [SerializeField] Transform content;
         [SerializeField] HaveGold haveGold;
@@ -18,7 +18,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         [SerializeField] InventorySlot slot;
         [SerializeField] TextMeshProUGUI stats;
         bool firstUse = true;
-        protected Dictionary<Vector2, InventorySlot> Slots = new();
+        Dictionary<Vector2, InventorySlot> Slots = new();
         Queue<InventorySlot> slotsPool;
 
 

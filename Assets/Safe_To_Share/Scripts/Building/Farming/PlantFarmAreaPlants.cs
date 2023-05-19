@@ -7,7 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.Farming
 {
-    public class PlantFarmAreaPlants : MonoBehaviour
+    public sealed class PlantFarmAreaPlants : MonoBehaviour
     {
         FarmArea currentArea;
         readonly List<PlantedPlant> plantedPlants = new();

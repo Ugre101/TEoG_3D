@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
-    public class VorePerkHoverInfo : BaseHoverInfo
+    public sealed class VorePerkHoverInfo : BaseHoverInfo
     {
         protected override void Start()
         {

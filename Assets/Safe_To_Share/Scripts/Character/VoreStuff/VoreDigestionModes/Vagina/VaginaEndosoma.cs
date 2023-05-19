@@ -5,7 +5,7 @@ using Character.VoreStuff;
 
 namespace Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes.Vagina
 {
-    public class VaginaEndosoma : DigestionMethod
+    public sealed class VaginaEndosoma : DigestionMethod
     {
         public override bool Tick(BaseCharacter pred, BaseOrgan baseOrgan, bool predIsPlayer)
         {

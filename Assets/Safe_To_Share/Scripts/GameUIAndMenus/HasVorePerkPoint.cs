@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class HasVorePerkPoint : GameMenu
+    public sealed class HasVorePerkPoint : GameMenu
     {
         [SerializeField] Color no = Color.white, yes = Color.magenta;
         [SerializeField] Image image;

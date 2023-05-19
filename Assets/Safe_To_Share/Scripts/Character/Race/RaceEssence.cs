@@ -2,7 +2,7 @@
 
 namespace Character.Race
 {
-    public class RaceEssence
+    public sealed class RaceEssence
     {
         public RaceEssence(BasicRace race, int amount = 100)
         {

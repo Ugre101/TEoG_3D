@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
 {
-    public class GameOptionsMenu : MonoBehaviour
+    public sealed class GameOptionsMenu : MonoBehaviour
     {
         [SerializeField] GameObject renameGenders;
 

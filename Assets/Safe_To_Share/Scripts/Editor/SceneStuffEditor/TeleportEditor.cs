@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 namespace SceneStuff.Editor
 {
     [CustomEditor(typeof(SceneChangeTeleport))]
-    public class TeleportEditor : UnityEditor.Editor
+    public sealed class TeleportEditor : UnityEditor.Editor
     {
         int index;
 

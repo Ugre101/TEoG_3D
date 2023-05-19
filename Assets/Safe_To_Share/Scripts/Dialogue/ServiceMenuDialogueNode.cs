@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Dialogue
 {
-    public class ServiceMenuDialogueNode : DialogueBaseNode
+    public sealed class ServiceMenuDialogueNode : DialogueBaseNode
     {
         [SerializeField] OfferServices offerServices;
         [SerializeField] string shopTitle;

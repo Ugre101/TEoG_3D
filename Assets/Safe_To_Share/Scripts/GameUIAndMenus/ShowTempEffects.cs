@@ -14,7 +14,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class ShowTempEffects : GameMenu
+    public sealed class ShowTempEffects : GameMenu
     {
         [SerializeField] TempEffectIcon prefab;
         [SerializeField] SleepTempEffectIcon sleepPrefab;

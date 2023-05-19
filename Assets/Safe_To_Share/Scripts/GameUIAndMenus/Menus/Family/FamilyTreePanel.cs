@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Family
 {
-    public class FamilyTreePanel : GameMenu
+    public sealed class FamilyTreePanel : GameMenu
     {
         [SerializeField] ChildTreePrefab prefab;
         [SerializeField] Transform birthed, fathered;

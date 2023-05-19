@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
 {
-    public class LoseScenarioLoadMenu : MonoBehaviour
+    public sealed class LoseScenarioLoadMenu : MonoBehaviour
     {
         [SerializeField] LoseScenarioLoadMenuButton prefab;
         [SerializeField] Transform container;

@@ -2,7 +2,7 @@
 
 namespace AvatarStuff
 {
-    public class DazBallsControllerTester : MonoBehaviour
+    public sealed class DazBallsControllerTester : MonoBehaviour
     {
         [SerializeField, Range(0, 10f),] float size;
         [SerializeField] bool hidden;

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DormAndHome
 {
-    public class DormVillageExpansionHaveBuildings : MonoBehaviour
+    public sealed class DormVillageExpansionHaveBuildings : MonoBehaviour
     {
         [SerializeField] List<GameObject> brothels = new();
 

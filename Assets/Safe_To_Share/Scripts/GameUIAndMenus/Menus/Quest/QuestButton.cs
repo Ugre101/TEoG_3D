@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Quest
 {
-    public class QuestButton : MonoBehaviour
+    public sealed class QuestButton : MonoBehaviour
     {
         [SerializeField] Button btn;
         [SerializeField] TextMeshProUGUI title, desc, world, progress;

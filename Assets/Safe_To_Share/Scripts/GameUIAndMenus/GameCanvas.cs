@@ -90,13 +90,10 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
         }
         public bool BlockIfActive()
         {
-            if (gameMenus.activeInHierarchy || boatMenu.activeInHierarchy)
-            {
-                CloseMenus();
-                return true;
-            }
+            if (!gameMenus.activeInHierarchy && !boatMenu.activeInHierarchy) return false;
+            CloseMenus();
+            return true;
 
-            return false;
         }
 
 

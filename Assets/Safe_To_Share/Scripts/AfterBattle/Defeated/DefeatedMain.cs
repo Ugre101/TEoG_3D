@@ -12,7 +12,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated
 {
-    public class DefeatedMain : DefeatShared
+    public sealed class DefeatedMain : DefeatShared
     {
         LoseScenarioNode currentNode;
 

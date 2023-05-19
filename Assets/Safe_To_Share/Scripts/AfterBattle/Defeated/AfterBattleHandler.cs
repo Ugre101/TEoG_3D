@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated
 {
-    public class AfterBattleHandler : MonoBehaviour
+    public sealed class AfterBattleHandler : MonoBehaviour
     {
         [SerializeField] AfterBattleMain afterBattle;
         [SerializeField] DefeatedMain defeatedMain;

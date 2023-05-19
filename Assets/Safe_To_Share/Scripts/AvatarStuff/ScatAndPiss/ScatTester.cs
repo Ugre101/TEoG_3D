@@ -2,7 +2,7 @@
 
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
-    public class ScatTester : MonoBehaviour
+    public sealed class ScatTester : MonoBehaviour
     {
         [SerializeField] ScatPrefab scatPrefab;
 

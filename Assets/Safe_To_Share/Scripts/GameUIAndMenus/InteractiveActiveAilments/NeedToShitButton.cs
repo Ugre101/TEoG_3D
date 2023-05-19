@@ -3,7 +3,7 @@ using Safe_To_Share.Scripts.Static;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments
 {
-    public class NeedToShitButton : DoThingButton
+    public sealed class NeedToShitButton : DoThingButton
     {
         protected override float ThreesHold => ScatExtensions.NeedToShitThreesHold;
         protected override bool Enabled => OptionalContent.Scat.Enabled;

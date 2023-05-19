@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 {
-    public class SetFullName : MonoBehaviour
+    public sealed class SetFullName : MonoBehaviour
     {
         public enum LastNameOptions
         {

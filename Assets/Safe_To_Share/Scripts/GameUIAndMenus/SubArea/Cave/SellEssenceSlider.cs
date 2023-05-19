@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
 {
-    public class SellEssenceSlider : MonoBehaviour
+    public sealed class SellEssenceSlider : MonoBehaviour
     {
         const float SellEssenceFor = 0.361436f; // Need to test around for best value 
         [SerializeField] Slider slider;

@@ -8,7 +8,7 @@ using SceneStuff;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 {
-    public class VoreEventMenu : DialogueAndEventShared
+    public sealed class VoreEventMenu : DialogueAndEventShared
     {
         VoreOrgan organ;
         BaseCharacter pred;

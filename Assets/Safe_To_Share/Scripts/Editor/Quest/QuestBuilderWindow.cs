@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Editor.Quest
 {
-    public class QuestBuilderWindow : BaseNodeBuilderWindows<QuestStuff.Quest,QuestNode>
+    public sealed class QuestBuilderWindow : BaseNodeBuilderWindows<QuestStuff.Quest,QuestNode>
     {
         string createType;
 

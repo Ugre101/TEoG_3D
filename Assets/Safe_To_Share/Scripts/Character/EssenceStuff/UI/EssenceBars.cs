@@ -2,7 +2,7 @@
 
 namespace Character.EssenceStuff.UI
 {
-    public class EssenceBars : MonoBehaviour
+    public sealed class EssenceBars : MonoBehaviour
     {
         [SerializeField] EssenceSlider masc, femi;
 

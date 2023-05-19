@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Character.Service
 {
     [CreateAssetMenu(fileName = "Create SleepService", menuName = "Services/Sleep Service", order = 0)]
-    public class SleepService : BaseService
+    public sealed class SleepService : BaseService
     {
         [SerializeField] int sleepQuality;
 

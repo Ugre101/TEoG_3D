@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 {
-    public class LevelMenu : BaseLevelMenu
+    public sealed class LevelMenu : BaseLevelMenu
     {
         [SerializeField] StartPerkIcon startPerkIcon;
 

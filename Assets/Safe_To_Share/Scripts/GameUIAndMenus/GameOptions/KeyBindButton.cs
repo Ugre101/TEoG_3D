@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
 {
-    public class KeyBindButton : MonoBehaviour
+    public sealed class KeyBindButton : MonoBehaviour
     {
         [SerializeField] Button btn;
         [SerializeField] TextMeshProUGUI btnTitle;

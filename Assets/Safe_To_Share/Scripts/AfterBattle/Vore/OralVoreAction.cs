@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.AfterBattle.Vore
 {
     [CreateAssetMenu(menuName = "Create OralVoreAction", fileName = "Character/Vore/Vore Act", order = 0)]
-    public class OralVoreAction : VoreAction
+    public sealed class OralVoreAction : VoreAction
     {
         public override bool CanUse(BaseCharacter giver, BaseCharacter receiver) =>
             VoreSystemExtension.CanOralVore(giver, receiver);

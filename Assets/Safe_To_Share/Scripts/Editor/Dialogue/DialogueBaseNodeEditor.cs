@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Editors.Dialogue
 {
     [CustomEditor(typeof(DialogueBaseNode))]
-    public class DialogueBaseNodeEditor : Editor
+    public sealed class DialogueBaseNodeEditor : Editor
     {
         public string[] actionsTypes = { "Add To Dorm", "Release Prey", "Add vore temp mods", };
         SerializedProperty actions;

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class LooksMenu : GameMenu
+    public sealed class LooksMenu : GameMenu
     {
         [SerializeField] TextMeshProUGUI summary;
         [SerializeField] RaceInfo raceInfo;

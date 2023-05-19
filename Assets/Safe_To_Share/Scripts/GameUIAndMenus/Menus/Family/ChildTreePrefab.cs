@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Family
 {
-    public class ChildTreePrefab : MonoBehaviour
+    public sealed class ChildTreePrefab : MonoBehaviour
     {
         Child child;
 

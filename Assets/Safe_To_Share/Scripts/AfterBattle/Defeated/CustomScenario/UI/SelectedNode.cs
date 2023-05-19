@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
 {
-    public class SelectedNode : MonoBehaviour
+    public sealed class SelectedNode : MonoBehaviour
     {
         public static bool hasSelectedNode;
         [SerializeField] Button introText, resistText, submitText;

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class CheatMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
+    public sealed class CheatMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] Button expBtn, goldBtn, mascBtn, femiBtn;
         Player player;
@@ -20,13 +20,10 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
         }
         public bool BlockIfActive()
         {
-            if (gameObject.activeInHierarchy)
-            {
-                gameObject.SetActive(false);
-                return true;
-            }
+            if (!gameObject.activeInHierarchy) return false;
+            gameObject.SetActive(false);
+            return true;
 
-            return false;
         }
 
         public void Enter(Player parPlayer)

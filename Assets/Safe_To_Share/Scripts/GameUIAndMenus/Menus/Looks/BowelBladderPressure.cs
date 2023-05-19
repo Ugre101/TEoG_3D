@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Looks
 {
-    public class BowelBladderPressure : MonoBehaviour
+    public sealed class BowelBladderPressure : MonoBehaviour
     {
         [SerializeField] Slider bowel, bladder, hydration;
         public void Setup(Player player)

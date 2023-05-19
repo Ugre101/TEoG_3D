@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace DormAndHome
 {
-    public class HomeCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
+    public sealed class HomeCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
     {
         [SerializeField] GameObject panel;
         [SerializeField] Button sleepBtn;

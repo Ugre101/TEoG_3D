@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
 {
-    public class TriggerSellEssence : MonoBehaviour, IInteractable
+    public sealed class TriggerSellEssence : MonoBehaviour, IInteractable
     {
         [SerializeField] SellEssenceMenu menu;
 

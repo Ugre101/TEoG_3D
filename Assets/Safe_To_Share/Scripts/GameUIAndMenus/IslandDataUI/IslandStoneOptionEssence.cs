@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 {
-    public class IslandStoneOptionEssence : IslandStoneOption
+    public sealed class IslandStoneOptionEssence : IslandStoneOption
     {
         const int DonateAmount = 100;
         [SerializeField] EssenceType essenceType;
@@ -66,7 +66,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
         }
 #if UNITY_EDITOR
         [SerializeField] TextMeshProUGUI title;
-        protected void OnValidate()
+        void OnValidate()
         {
             title.text = nameof(essenceType);
             costText.text = $"Increase by donating {DonateAmount} {nameof(essenceType)}";

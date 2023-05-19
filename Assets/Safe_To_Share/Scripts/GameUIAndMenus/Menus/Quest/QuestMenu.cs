@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Quest
 {
-    public class QuestMenu : GameMenu
+    public sealed class QuestMenu : GameMenu
     {
         [SerializeField] QuestButton questButton;
 

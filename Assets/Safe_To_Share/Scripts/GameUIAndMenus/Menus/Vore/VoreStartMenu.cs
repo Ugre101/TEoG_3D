@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
-    public class VoreStartMenu : GameMenu
+    public sealed class VoreStartMenu : GameMenu
     {
         [SerializeField] GameObject drainChooseContainer;
         [SerializeField] TMP_Dropdown drainChoose;

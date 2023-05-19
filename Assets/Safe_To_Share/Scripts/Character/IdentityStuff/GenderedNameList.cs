@@ -6,7 +6,7 @@ using Random = System.Random;
 namespace Character.IdentityStuff
 {
     [CreateAssetMenu(fileName = "Gender name list", menuName = "Character/Name list", order = 0)]
-    public class GenderedNameList : ScriptableObject
+    public sealed class GenderedNameList : ScriptableObject
     {
         [SerializeField] string[] neutralNames;
         [SerializeField] string[] femaleNames;

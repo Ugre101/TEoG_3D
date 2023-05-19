@@ -2,7 +2,7 @@
 
 namespace DormAndHome
 {
-    public class HomeManager : MonoBehaviour
+    public sealed class HomeManager : MonoBehaviour
     {
     }
 }

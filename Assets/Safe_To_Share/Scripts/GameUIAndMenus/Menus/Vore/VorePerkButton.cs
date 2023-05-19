@@ -10,7 +10,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
-    public class VorePerkButton : BasePerkButton, IPointerEnterHandler
+    public sealed class VorePerkButton : BasePerkButton, IPointerEnterHandler
     {
         public void OnPointerEnter(PointerEventData eventData) => ShowPerkInfo?.Invoke(transform.position, loaded);
 

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 {
-    public class VoreOrganSettings : MonoBehaviour
+    public sealed class VoreOrganSettings : MonoBehaviour
     {
         [SerializeField] GameObject noSelected, selected;
         [SerializeField] TextMeshProUGUI title;

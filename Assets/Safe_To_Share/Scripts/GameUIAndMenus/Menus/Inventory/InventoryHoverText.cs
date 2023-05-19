@@ -1,6 +1,6 @@
 ﻿namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 {
-    public class InventoryHoverText : ItemBaseHoverText
+    public sealed class InventoryHoverText : ItemBaseHoverText
     {
         bool started;
 

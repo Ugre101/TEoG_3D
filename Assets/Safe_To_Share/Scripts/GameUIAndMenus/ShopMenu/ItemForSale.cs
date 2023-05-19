@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 {
-    public class ItemForSale : MonoBehaviour
+    public sealed class ItemForSale : MonoBehaviour
     {
         [SerializeField] Image icon;
         [SerializeField] Color afford, cantAfford;

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI
 {
-    public class CraftingResult : MonoBehaviour
+    public sealed class CraftingResult : MonoBehaviour
     {
         [SerializeField] Sprite questionMark;
         [SerializeField] Image image;

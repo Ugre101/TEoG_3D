@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
 {
-    public class SelectedEnemies : MonoBehaviour
+    public sealed class SelectedEnemies : MonoBehaviour
     {
         [SerializeField] CustomLoseBuilderMenu builderMenu;
         [SerializeField] SelectedEnemyButton prefab;

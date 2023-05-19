@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class GameUiEventLog : MonoBehaviour
+    public sealed class GameUiEventLog : MonoBehaviour
     {
         const float CheckInterval = 0.5f;
         [SerializeField] TextMeshProUGUI eventLog;

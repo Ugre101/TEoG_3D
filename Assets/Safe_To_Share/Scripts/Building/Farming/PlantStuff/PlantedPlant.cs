@@ -9,7 +9,7 @@ using Random = UnityEngine.Random;
 
 namespace Safe_To_Share.Scripts.Farming
 {
-    public class PlantedPlant : MonoBehaviour,IInteractable
+    public sealed class PlantedPlant : MonoBehaviour,IInteractable
     {
         [SerializeField] GameObject plant;
         [SerializeField, Range(float.Epsilon, 10f)] float minSize = 0.1f;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    public class TurnAvatarDoll : MonoBehaviour
+    public sealed class TurnAvatarDoll : MonoBehaviour
     {
         [SerializeField] Material vaginaTarget;
         [SerializeField] Material dollMat;

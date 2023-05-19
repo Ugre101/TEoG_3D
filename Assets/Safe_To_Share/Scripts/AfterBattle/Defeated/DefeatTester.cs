@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated
 {
-    public class DefeatTester : MonoBehaviour
+    public sealed class DefeatTester : MonoBehaviour
     {
         [SerializeField] CharacterPreset playerSheet;
         [SerializeField] EnemyPreset enemySheet;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.MinimapUI
 {
-    public class BigMiniMap : MapShared
+    public sealed class BigMiniMap : MapShared
     {
         [SerializeField] Transform leftContainer, rightContainer;
         [SerializeField] BigMapNamedIcon prefab;

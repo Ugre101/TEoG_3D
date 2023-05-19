@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Character.Race.UI
 {
-    public class RaceInfo : MonoBehaviour
+    public sealed class RaceInfo : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI raceText;
         [SerializeField] TextMeshProUGUI moreInfo;

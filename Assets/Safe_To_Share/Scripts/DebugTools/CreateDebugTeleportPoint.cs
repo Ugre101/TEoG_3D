@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.DebugTools
 {
-    public class CreateDebugTeleportPoint : MonoBehaviour
+    public sealed class CreateDebugTeleportPoint : MonoBehaviour
     {
         [SerializeField] DebugTeleportPoint prefab;
         public LayerMask validRaycastTargets;

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class MiscTempEffectIcon : MonoBehaviour
+    public sealed class MiscTempEffectIcon : MonoBehaviour
     {
         [SerializeField] Image icon;
         [SerializeField] TextMeshProUGUI timeLeft;

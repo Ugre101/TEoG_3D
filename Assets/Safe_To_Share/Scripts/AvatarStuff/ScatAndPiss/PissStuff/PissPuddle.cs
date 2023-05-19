@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
 {
 
-    public class PissPuddle : MonoBehaviour
+    public sealed class PissPuddle : MonoBehaviour
     {
         public static List<PissPuddle> ExistingPuddles { get; } = new();
 

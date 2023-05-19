@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace Dialogue.Editor
 {
-    public class DialogueBuilderWindow : BaseNodeBuilderWindows<BaseDialogue,DialogueBaseNode>
+    public sealed class DialogueBuilderWindow : BaseNodeBuilderWindows<BaseDialogue,DialogueBaseNode>
     {
         [NonSerialized] readonly string[] options =
         {

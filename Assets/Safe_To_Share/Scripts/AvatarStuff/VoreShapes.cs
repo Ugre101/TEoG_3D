@@ -43,6 +43,12 @@ namespace AvatarStuff
                 return true;
             }
 
+            if (shapeName.Contains("cock"))
+            {
+                cockVore.EditorQuickAdd(id);
+                return true;
+            }
+
             voreBelly.EditorQuickAdd(id);
             return true;
 

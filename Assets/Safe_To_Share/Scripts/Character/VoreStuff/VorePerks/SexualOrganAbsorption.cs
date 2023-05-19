@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Character.VoreStuff.VorePerks
 {
     [CreateAssetMenu(fileName = "SexualOrganAbsorption", menuName = "Character/Vore/SexualOrganAbsorption", order = 0)]
-    public class SexualOrganAbsorption : VorePerkNewPredationMode
+    public sealed class SexualOrganAbsorption : VorePerkNewPredationMode
     {
         const float AbsorbSpeedMod = 1f;
 

@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace Defeated.Editor
 {
-    public class LoseScenarioBuilderWindow : BaseNodeBuilderWindows<LoseScenario,LoseScenarioNode>
+    public sealed class LoseScenarioBuilderWindow : BaseNodeBuilderWindows<LoseScenario,LoseScenarioNode>
     {
         [NonSerialized] readonly string[] options =
         {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace AvatarStuff
 {
-    public class DazDickControllerTester : MonoBehaviour
+    public sealed class DazDickControllerTester : MonoBehaviour
     {
         [SerializeField, Range(0f, 100f),] float boner;
         [SerializeField, Range(0.1f, 20f),] float size = 1f;

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Spawner.Editor
 {
     [CustomEditor(typeof(CreateDebugTeleportPoint))]
-    public class CreateDebugTeleportPointEditor : UnityEditor.Editor
+    public sealed class CreateDebugTeleportPointEditor : UnityEditor.Editor
     {
         CreateDebugTeleportPoint myTarget;
 

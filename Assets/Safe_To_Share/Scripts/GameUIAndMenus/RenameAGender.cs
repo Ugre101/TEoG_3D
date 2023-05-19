@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus
 {
-    public class RenameAGender : MonoBehaviour
+    public sealed class RenameAGender : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI orgGenderName;
         [SerializeField] TMP_InputField currentGenderName;

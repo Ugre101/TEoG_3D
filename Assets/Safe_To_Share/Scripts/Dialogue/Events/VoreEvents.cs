@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Dialogue.Events
 {
-    public class VoreEvents : MonoBehaviour
+    public sealed class VoreEvents : MonoBehaviour
     {
         [SerializeField] PlayerHolder playerHolder;
         [SerializeField] BaseDialogue pleadDialogue;

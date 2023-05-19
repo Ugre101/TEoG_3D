@@ -9,7 +9,7 @@ using Random = System.Random;
 namespace Assets.Scripts.Character.EssenceStuff.Perks
 {
     [CreateAssetMenu(menuName = "Character/Essence/Create GenderMoprh Perk", fileName = "Gender morph perk", order = 0)]
-    public class GenderMorph : EssencePerk
+    public sealed class GenderMorph : EssencePerk
     {
         public enum MorphToGender
         {

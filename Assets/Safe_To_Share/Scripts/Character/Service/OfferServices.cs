@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Character.Service
 {
     [CreateAssetMenu(fileName = "Offered services", menuName = "Services/Offered Services", order = 0)]
-    public class OfferServices : ScriptableObject
+    public sealed class OfferServices : ScriptableObject
     {
         [SerializeField] List<BaseService> offeredServices = new();
 

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace QuestStuff
 {
     [CreateAssetMenu(fileName = "Quest info", menuName = "ScriptableObject/Quest")]
-    public class QuestInfo : SObjSavableTitleDescIcon
+    public sealed class QuestInfo : SObjSavableTitleDescIcon
     {
         [SerializeField] string world;
         [SerializeField] int progressGoal;

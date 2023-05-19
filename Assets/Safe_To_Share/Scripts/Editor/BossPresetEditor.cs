@@ -3,7 +3,7 @@
 namespace Character.CreateCharacterStuff.EditorPresets
 {
     [CustomEditor(typeof(BossPreset))]
-    public class BossPresetEditor : EnemyPresetEditor
+    public sealed class BossPresetEditor : EnemyPresetEditor
     {
         void OnEnable()
         {

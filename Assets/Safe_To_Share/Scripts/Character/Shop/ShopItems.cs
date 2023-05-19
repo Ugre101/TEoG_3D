@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Character.Shop
 {
     [CreateAssetMenu(fileName = "Shop Items", menuName = "Items/Shop items", order = 0)]
-    public class ShopItems : ScriptableObject
+    public sealed class ShopItems : ScriptableObject
     {
         [SerializeField] List<Item> sellingItems = new();
 

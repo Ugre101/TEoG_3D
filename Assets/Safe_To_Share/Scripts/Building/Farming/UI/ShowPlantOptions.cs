@@ -9,7 +9,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Safe_To_Share.Scripts.Farming.UI
 {
-    public class ShowPlantOptions : MonoBehaviour
+    public sealed class ShowPlantOptions : MonoBehaviour
     {
         [SerializeField] Transform content;
         [SerializeField] PlantOptionButton prefab;

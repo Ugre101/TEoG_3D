@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
 {
-    public class DefeatMainUI : MonoBehaviour
+    public sealed class DefeatMainUI : MonoBehaviour
     {
         [SerializeField] AfterBattleActorInfo playerInfo;
         [SerializeField] AfterBattleActorInfo enemyInfo;
@@ -34,7 +34,9 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
             }
         }
 
-        public static event Action Resist, GiveIn, Continue;
+        public static event Action Resist;
+        public static event Action GiveIn;
+        public static event Action Continue;
 
         public void Setup(Player parPlayer)
         {

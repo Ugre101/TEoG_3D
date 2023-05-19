@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Battle
 {
-    public class BattleTester : MonoBehaviour
+    public sealed class BattleTester : MonoBehaviour
     {
         [SerializeField] EnemyPreset enemyPreset;
         [SerializeField] CharacterPreset playerPreset;

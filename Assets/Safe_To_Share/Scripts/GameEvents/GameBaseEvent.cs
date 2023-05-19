@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Safe_To_Share.Scripts.GameEvents
 {
     [CreateAssetMenu(fileName = "Base Event", menuName = "Events/Base event", order = 0)]
-    public class GameBaseEvent : ScriptableObject
+    public sealed class GameBaseEvent : ScriptableObject
     {
         [SerializeField] string title;
         [SerializeField, TextArea,] string desc;

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Spawner.Editor
 {
     [CustomEditor(typeof(RealmEnemyZone))]
-    public class RealmSpawnZoneEditor : UnityEditor.Editor
+    public sealed class RealmSpawnZoneEditor : UnityEditor.Editor
     {
         RealmEnemyZone myTarget;
         bool addingEnemy = true;

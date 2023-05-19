@@ -7,7 +7,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Character.Race
 {
-    public class RaceSystem
+    public sealed class RaceSystem
     {
         public delegate void RaceChanged(BasicRace oldRace, BasicRace newRace);
 

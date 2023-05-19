@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.SceneUI
 {
-    public class ShoreOptionButton : MonoBehaviour
+    public sealed class ShoreOptionButton : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI titleText;
         [SerializeField] TextMeshProUGUI descText;

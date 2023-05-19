@@ -5,7 +5,7 @@ namespace Character.EssenceStuff
 {
     [CreateAssetMenu(menuName = "Character/Create AutoTransMuteEssencePerk", fileName = "AutoTransMuteEssencePerk",
         order = 0)]
-    public class AutoTransMuteEssencePerk : EssencePerk
+    public sealed class AutoTransMuteEssencePerk : EssencePerk
     {
         [SerializeField, Range(0, 1000f),] int essenceToChange = 25;
         [SerializeField, Range(0, 100f),] int bonus;

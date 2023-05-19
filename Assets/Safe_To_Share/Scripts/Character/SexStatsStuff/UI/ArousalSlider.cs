@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Character.SexStatsStuff.UI
 {
-    public class ArousalSlider : MonoBehaviour
+    public sealed class ArousalSlider : MonoBehaviour
     {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI arousalText;

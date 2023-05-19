@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 {
-    public class DormUpgradeButton : MonoBehaviour
+    public sealed class DormUpgradeButton : MonoBehaviour
     {
         [SerializeField] TextMeshProUGUI title, desc, cost;
         [SerializeField] Button btn;
