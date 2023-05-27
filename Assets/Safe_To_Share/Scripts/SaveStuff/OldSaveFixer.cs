@@ -42,11 +42,11 @@ namespace SaveStuff
         void CheckAbilities(ControlledCharacter player)
         {
             foreach (var standardAbility in standardAbilities)
-                if (!player.AndSpellBook.Abilities.Contains(standardAbility.AssetGUID))
-                {
-                    player.AndSpellBook.LearnAbility(standardAbility.AssetGUID);
-                    Debug.LogWarning("Didn't have " + standardAbility.SubObjectName);
-                }
+            {
+                if (player.AndSpellBook.Abilities.Contains(standardAbility.AssetGUID)) continue;
+                player.AndSpellBook.LearnAbility(standardAbility.AssetGUID);
+                Debug.LogWarning("Didn't have " + standardAbility.SubObjectName);
+            }
         }
 
 

@@ -346,7 +346,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289452861187385655}
-  m_Material: {fileID: 13400000, guid: 870559f761eb90243ba09333475b5046, type: 2}
+  m_Material: {fileID: 13400000, guid: 4841cdc9294e20f46b731b86e6ee370e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.25
@@ -482,8 +482,9 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1008936549818365483}
-        m_TargetAssemblyTypeName: MovementScripts.Movement, UgreScriptsRuntime
-        m_MethodName: 
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.Movement.HoverMovement.MoveInputs,
+          Movement
+        m_MethodName: OnAutoRun
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -497,8 +498,9 @@ MonoBehaviour:
     m_ActionName: Player Controls/Auto Run[/Keyboard/r,/Mouse/middleButton]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlayerFreeRoamInteraction, MyScripts
+      - m_Target: {fileID: 6098252413859740441}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.Holders.PlayerFreeRoamInteraction,
+          MyHolderScripts
         m_MethodName: OnInterAction
         m_Mode: 0
         m_Arguments:
@@ -646,7 +648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db3b3f8e2474a77ba9bbac356f2b4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprintMultiplier: 1.15
   currentMode: 0
   capsule: {fileID: 7821943698579321471}
   <Rigid>k__BackingField: {fileID: 4535136299084643760}
@@ -665,16 +666,16 @@ MonoBehaviour:
     brakeForce: 0.1
     rideSpringStrength: 50
     rideSpringDampFactor: 0.5
-    swimAtPercentSubmerged: 0.5
+    swimAtPercentSubmerged: 0.6
+    swimDepthMargin: 0.1
   groundChecker: {fileID: 1623128089208261143}
   inputs: {fileID: 1008936549818365483}
   ori: {fileID: 4449375253713366490}
   maxFallSpeed: 20
   cameraTarget: {fileID: 3156939597315827700}
-  turnWithCharacter: 0
   mainCamera: {fileID: 0}
   avatarOffsetTransform: {fileID: 8759715639741286662}
-  directionChangeBoostMultiplier: 5
+  directionChangeBoostMultiplier: 10
 --- !u!114 &1623128089208261143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,6 +708,7 @@ MonoBehaviour:
   p1PreCalcMath: {x: 0, y: 0, z: 0}
   p2PreCalcMath: {x: 0, y: 0, z: 0}
   radiusRatio: 0.125
+  capsuleHeightModifier: 1.75
 --- !u!114 &1008936549818365483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -946,7 +948,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb22ed00a681804b995cbb2a65b214b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCapsule: {fileID: 7821943698579321471}
   minSize: 0.1
   maxSize: 5
   SizeChange:
@@ -965,8 +966,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  orgCapWidth: 0.25
-  orgCapHeight: 2
 --- !u!114 &3417229716285459534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,6 +996,7 @@ MonoBehaviour:
   character: {fileID: 2544556289303088008}
   animator: {fileID: 0}
   stopSwimmingDelay: 0.05
+  logMe: 0
 --- !u!114 &6783660681134686731
 MonoBehaviour:
   m_ObjectHideFlags: 0

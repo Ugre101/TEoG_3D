@@ -14,10 +14,22 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         public bool Jumping { get; private set; }
         public bool Moving => Move.magnitude > 0;
 
+        bool autoRunning;
+        public void OnAutoRun(InputAction.CallbackContext ctx)
+        {
+            if (!ctx.performed) return;
+            Move = autoRunning ? Vector2.zero : Vector2.up;
+            autoRunning = !autoRunning;
+
+        }
         public void OnMove(InputAction.CallbackContext ctx)
         {
             if (ctx.performed)
+            {
                 Move = ctx.ReadValue<Vector2>().normalized;
+                if (autoRunning)
+                    autoRunning = false;
+            }
             else if (ctx.canceled)
                 Move = Vector2.zero;
         }

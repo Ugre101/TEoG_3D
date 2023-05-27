@@ -12,6 +12,10 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
 
         [SerializeField, HideInInspector,] float radiusRatio = 0.25f;
 
+        [SerializeField, Range(1f, 2f),] float capsuleHeightModifier = 1.75f;
+
+        readonly RaycastHit[] sphereCastHits = new RaycastHit[16];
+
         bool crunching;
 
         float currentHeight;
@@ -64,10 +68,9 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             p2PreCalcMath = Vector3.up * (capsule.height - capsule.radius + Physics.defaultContactOffset);
         }
 
-
         public void SetHeight(float height)
         {
-            currentHeight = height;
+            currentHeight = height * capsuleHeightModifier;
             capsule.height = currentHeight;
             capsule.radius = currentHeight * radiusRatio;
             if (crunching)
@@ -100,12 +103,12 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         }
 
         public bool SphereCast(Vector3 dir, float distance, LayerMask layerMask, out RaycastHit hit) =>
-            Physics.SphereCast(Center, Radius, dir, out hit, distance, layerMask,QueryTriggerInteraction.Ignore);
+            Physics.SphereCast(Center, Radius, dir, out hit, distance, layerMask, QueryTriggerInteraction.Ignore);
 
-        readonly RaycastHit[] sphereCastHits = new RaycastHit[16];
         public bool SphereCastAllNonAlloc(Vector3 dir, float distance, LayerMask layerMask, out RaycastHit[] results)
         {
-            var  hits = Physics.SphereCastNonAlloc(Center, Radius, dir, sphereCastHits, distance, layerMask, QueryTriggerInteraction.Ignore);
+            var hits = Physics.SphereCastNonAlloc(Center, Radius, dir, sphereCastHits, distance, layerMask,
+                QueryTriggerInteraction.Ignore);
             results = sphereCastHits;
             return hits > 0;
         }

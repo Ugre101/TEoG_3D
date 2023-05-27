@@ -49,7 +49,7 @@ namespace Safe_To_Share.Scripts.Holders.SubRealm
             playerHolder.TriggerSubRealmCombat(enemies.ToArray(), true);
         }
 
-        public override void NewAvatar(CharacterAvatar obj)
+        protected override void NewAvatar(CharacterAvatar obj)
         {
             if (Enemy.WantBodyMorph)
             {

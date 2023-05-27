@@ -108,10 +108,11 @@ namespace AvatarStuff
                 return;
             foreach (var shape in shapes)
             {
-                oralVoreStruggle.Tick(shape);
-                unbirthStruggle.Tick(shape);
-                breastVoreStruggle.Tick(shape);
-                cockVoreStruggle.Tick(shape);
+                var struggleValue = 0.5f;
+                oralVoreStruggle.Tick(shape,struggleValue);
+                unbirthStruggle.Tick(shape,struggleValue);
+                breastVoreStruggle.Tick(shape,struggleValue);
+                cockVoreStruggle.Tick(shape,struggleValue);
                 if (!hasBallsController || !ballsVore) continue;
                 float newSize = ballsController.currentSize + ballsController.currentSize / 2 *
                     Mathf.Max(0, ballsStretch + Random.Range(-0.05f, 0.05f));
@@ -127,13 +128,13 @@ namespace AvatarStuff
 
             public VoreStruggle(CharacterAvatar.BlendShape voreShape) => this.voreShape = voreShape;
 
-            float Value => Mathf.Clamp(stretch + Random.Range(-3f, 3f), 0f, 200f);
+            float GetValue(float struggleValue) => Mathf.Clamp(stretch * (1f + Random.Range(-struggleValue, struggleValue)), 0f, 200f);
             void SetStretch(float value) => stretch = value * 100f;
 
-            public void Tick(SkinnedMeshRenderer shape)
+            public void Tick(SkinnedMeshRenderer shape,float struggleValue)
             {
                 if (active)
-                    voreShape.ChangeShape(shape, Value);
+                    voreShape.ChangeShape(shape, GetValue(struggleValue));
             }
 
             public void HandleOrgan(SkinnedMeshRenderer[] shapes, BaseCharacter character, BaseOrgansContainer container,float divValue)

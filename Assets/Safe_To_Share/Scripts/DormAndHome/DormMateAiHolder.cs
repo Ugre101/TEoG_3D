@@ -50,13 +50,13 @@ namespace AvatarStuff.Holders
         {
             base.UnSub();
             Mate.UpdateAvatar -= ModifyAvatar;
-            foreach (BodyStat bodyStat in Mate.Body.BodyStats.Values)
+            foreach (var bodyStat in Mate.Body.BodyStats.Values)
                 bodyStat.StatDirtyEvent -= ModifyAvatar;
             DateSystem.NewDay -= IfPregnant;
             Mate.Unsub();
         }
 
-        public override void NewAvatar(CharacterAvatar obj)
+        protected override void NewAvatar(CharacterAvatar obj)
         {
             Mate.UpdateAvatar -= ModifyAvatar;
             Changer.CurrentAvatar.Setup(Mate);

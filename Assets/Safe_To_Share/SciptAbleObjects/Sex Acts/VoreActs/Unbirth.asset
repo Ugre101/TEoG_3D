@@ -34,7 +34,7 @@ MonoBehaviour:
           <Rotation>k__BackingField: {x: 0, y: 0, z: 0}
           <Offset>k__BackingField: {x: 0, y: 0, z: 0}
         <StayGrounded>k__BackingField: 1
-        <Delay>k__BackingField: 10.2
+        <Delay>k__BackingField: 8.4
       filters:
       - <Animation>k__BackingField:
           <GiveAnimationHash>k__BackingField: -91778318
@@ -50,11 +50,11 @@ MonoBehaviour:
             <KeyArea>k__BackingField: 6
             <TowardsPartner>k__BackingField: 0
             <SetAsChild>k__BackingField: 1
-            <AfterDelay>k__BackingField: 2.98
+            <AfterDelay>k__BackingField: 2.35
             <Rotation>k__BackingField: {x: 75, y: 0, z: 0}
             <Offset>k__BackingField: {x: 0, y: -0.05, z: 0}
           <StayGrounded>k__BackingField: 1
-          <Delay>k__BackingField: 6.98
+          <Delay>k__BackingField: 4.9
         <Requirement>k__BackingField: 0
         xTimes: 3.12
     text: 

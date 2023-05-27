@@ -13,7 +13,6 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         [SerializeField] float maxFallSpeed = 20f;
         [SerializeField] Transform cameraTarget;
 
-        [SerializeField] bool turnWithCharacter;
         [SerializeField] Transform mainCamera;
 
         [SerializeField] Transform avatarOffsetTransform;
@@ -33,23 +32,29 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             currentModule = WalkingModule;
             currentModule.OnEnter(null);
         }
-
+        
         void FixedUpdate()
         {
             AlignWithCamera();
             groundChecker.CheckGround();
             layerHandler.OnFixedUpdate(this,IsGrounded(), groundChecker.LastHit.collider);
             currentModule.OnGravity();
-            moveDir = turnWithCharacter ? ThirdPersonTurn() : ori.forward * inputs.Move.y + ori.right * inputs.Move.x;
-            if (currentModule == WalkingModule) 
-                moveDir = IsGrounded() ? groundChecker.SlopeDir(moveDir) : moveDir.normalized;
-
-            var force = DirectionChangeBoost(moveDir);
-            currentModule.OnMove(force);
+           
+            Move();
             SpeedLimit();
             if (inputs.Moving is false)
                 currentModule.ApplyBraking();
             currentModule.OnUpdateAvatarOffset();
+        }
+
+        void Move()
+        {
+            moveDir = MovementSettings.Strafe ? ThirdPersonTurn() : ori.forward * inputs.Move.y + ori.right * inputs.Move.x;
+            if (currentModule == WalkingModule)
+                moveDir = IsGrounded() ? groundChecker.SlopeDir(moveDir) : moveDir.normalized;
+
+            var force = DirectionChangeBoost(moveDir);
+            currentModule.OnMove(force);
         }
 
         void OnTriggerEnter(Collider other)

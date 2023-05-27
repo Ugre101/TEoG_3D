@@ -11,6 +11,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         [SerializeField, Range(float.Epsilon, 1f),] float rideSpringDampFactor = 0.5f;
 
         [SerializeField, Range(float.Epsilon, 1f),] float swimAtPercentSubmerged = 0.5f;
+        [SerializeField, Range(float.Epsilon, 0.2f),] float swimDepthMargin = 0.1f;
 
         float diveDepth;
 
@@ -26,7 +27,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             if (yMax < waterLine)
                 return true;
             
-            var yMin = bounds.min.y;
+            var yMin = SeaBottom();
             if (waterLine < yMin) 
                 return false;
             
@@ -38,6 +39,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         {
             base.OnEnter(collider);
             water = collider;
+            diveDepth = 0;
             waterLine = water.bounds.max.y;
             offsetTransform.localPosition = Vector3.zero;
         }
@@ -53,8 +55,16 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             var rayDirVel = Vector3.Dot(rayDir, rigid.velocity);
             var relVel = rayDirVel - otherDirVel;
 
+            
             var offBy = OffFromTargetBy();
-
+            if (StandingOnSeaBottom(out var diff))
+            {
+                // Debug.Log(diff);
+                // TODO account for capsule height
+                float test = capsule.Height;
+                if (diff < 0)
+                    offBy -= diff;   
+            }
             var springForce = offBy * rideSpringStrength - relVel * RideSpringDamper;
 
             var force = rayDir * (springForce * rigid.mass);
@@ -64,12 +74,20 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
                 hitBody.AddForceAtPosition(rayDir * -springForce, checker.LastHit.point);
         }
 
+        bool StandingOnSeaBottom(out float diff)
+        {
+            diff = capsule.BottomCenter.y - SeaBottom();
+            if (capsule.YMax < waterLine)
+                return false;
+            return Mathf.Abs(diff) < 0.1f;
+        }
+
         float OffFromTargetBy()
         {
-            var target = waterLine - (waterLine - capsule.Capsule.bounds.min.y) / capsule.Height;
+            float test = capsule.Height * (swimAtPercentSubmerged + swimDepthMargin);
+            var target = waterLine - test;  //(waterLine - capsule.Center.y) / capsule.Height;
             target = Mathf.Max(target - diveDepth, SeaBottom() + 0.1f);
-
-            return capsule.Center.y - target;
+            return capsule.YMin - target;
         }
 
         float SeaBottom() => checker.LastHit.point.y;
@@ -89,6 +107,11 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
                 swimSpeed *= stats.SprintMultiplier;
             rigid.AddForce(swimSpeed, ForceMode.Force);
             HandleDiving();
+        }
+
+        public override void OnUpdateAvatarOffset()
+        {
+            
         }
 
         void HandleDiving()

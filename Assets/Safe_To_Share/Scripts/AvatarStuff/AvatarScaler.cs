@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Safe_To_Share.Scripts.Movement.HoverMovement;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,24 +6,25 @@ namespace AvatarStuff
 {
     public sealed class AvatarScaler : MonoBehaviour
     {
-       [SerializeField] CharacterCapsule characterCapsule;
-      // [SerializeField] CharacterMovement characterMovement; 
-       [SerializeField] float minSize = 0.1f, maxSize = 3f;
+        // [SerializeField] CharacterMovement characterMovement; 
+        [SerializeField] float minSize = 0.1f, maxSize = 3f;
+        public UnityEvent<float> SizeChange;
 
 
         bool areaHasHeightLimit;
-        public float Height { get; private set; }
-        public UnityEvent<float> SizeChange;
         Coroutine heightChangeRoutine;
-       [SerializeField,HideInInspector] float orgCapWidth, orgCapHeight;
+
+        float heightLimit;
         float originalHeight = 160f;
+        public float Height { get; private set; }
 
         public void AreaHasHeightLimit(float limit)
         {
             areaHasHeightLimit = true;
+            heightLimit = limit;
             if (transform.localScale.x <= limit)
                 return;
-            float tempHeight = Mathf.Clamp(limit, minSize, maxSize);
+            var tempHeight = Mathf.Clamp(limit, minSize, maxSize);
             if (heightChangeRoutine != null)
                 StopCoroutine(heightChangeRoutine);
             heightChangeRoutine = StartCoroutine(ShrinkTo(tempHeight));
@@ -33,17 +32,16 @@ namespace AvatarStuff
 
         IEnumerator ShrinkTo(float endHeight)
         {
-            float startSize = transform.localScale.x;
+            var startSize = transform.localScale.x;
             const float duration = 0.8f;
-            float startTime = Time.time;
+            var startTime = Time.time;
             while (endHeight < transform.localScale.x)
             {
-                float stepSize = Mathf.SmoothStep(startSize, endHeight, TimeStep());
+                var stepSize = Mathf.SmoothStep(startSize, endHeight, TimeStep());
                 SetScale(stepSize);
                 yield return null;
             }
 
-            characterCapsule.SetHeight( orgCapHeight * endHeight);
             SetScale(endHeight);
             float TimeStep() => (Time.time - startTime) / duration;
         }
@@ -65,12 +63,12 @@ namespace AvatarStuff
 
         IEnumerator GrowTo()
         {
-            float startSize = transform.localScale.x;
+            var startSize = transform.localScale.x;
             const float duration = 1.2f;
-            float startTime = Time.time;
+            var startTime = Time.time;
             while (transform.localScale.x < Height)
             {
-                float stepSize = Mathf.SmoothStep(startSize, Height, TimeStep());
+                var stepSize = Mathf.SmoothStep(startSize, Height, TimeStep());
                 SetScale(stepSize);
                 yield return null;
             }
@@ -83,8 +81,9 @@ namespace AvatarStuff
 
         public void ChangeScale(float newHeight)
         {
+            var limited = areaHasHeightLimit && heightLimit < newHeight;
             Height = Mathf.Clamp(newHeight / originalHeight, minSize, maxSize);
-            if (areaHasHeightLimit)
+            if (limited)
                 return;
             SetStoredHeight();
             //            characterMovement.groundProbingDistance = orgProbHeight * f;
@@ -92,20 +91,7 @@ namespace AvatarStuff
 
         void SetStoredHeight()
         {
-            characterCapsule.SetHeight(orgCapHeight * Height);
             SetScale(Height);
-        }
-
-        void OnValidate()
-        {
-            if (Application.isPlaying)
-                return;
-            if (characterCapsule == null)
-            {
-                throw new MissingComponentException("Char Capsule is missing on " + transform.parent.name);
-            }
-            orgCapWidth = characterCapsule.Radius;
-            orgCapHeight = characterCapsule.Height;
         }
     }
 }

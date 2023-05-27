@@ -127,13 +127,14 @@ namespace Safe_To_Share.Scripts.Holders
         void UpdateHeightsChange() => HeightsChange(player.Body.Height.Value);
 
 
-        public override void NewAvatar(CharacterAvatar obj)
+        protected override void NewAvatar(CharacterAvatar obj)
         {
             player.UpdateAvatar -= ModifyCurrentAvatar;
             Changer.CurrentAvatar.Setup(player);
             player.UpdateAvatar += ModifyCurrentAvatar;
             if (obj.TryGetComponent(out AvatarScatPissManager pissManager))
                 avatarScatPissHandler = pissManager;
+            ModifyCurrentAvatar();
         }
 
         public void ModifyCurrentAvatar()

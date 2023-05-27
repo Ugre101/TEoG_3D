@@ -23,12 +23,12 @@ namespace Safe_To_Share.Scripts.Holders
             Changer.UpdateAvatar(res);
         }
 
-        public virtual void HeightsChange(float newHeight) => Scaler.ChangeScale(newHeight);
+        protected virtual void HeightsChange(float newHeight) => Scaler.ChangeScale(newHeight);
 
         protected virtual void Sub() => Changer.NewAvatar += NewAvatar;
 
         protected virtual void UnSub() => Changer.NewAvatar -= NewAvatar;
 
-        public abstract void NewAvatar(CharacterAvatar obj);
+        protected abstract void NewAvatar(CharacterAvatar obj);
     }
 }

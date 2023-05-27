@@ -13,6 +13,7 @@ namespace AvatarStuff
         public bool AvatarLoaded { get; private set; }
         public CharacterAvatar CurrentAvatar { get; private set; }
         public event Action<CharacterAvatar> NewAvatar;
+        // Probably dumb to use both but I don't want to mess with it.
         public UnityEvent<CharacterAvatar> NewAvatarEvent;
 
         public void UpdateAvatar(AssetReference avatar)

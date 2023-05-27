@@ -62,9 +62,9 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
 
         public override void OnGravity()
         {
-            if (IsGrounded() && checker.SlopeAngle() > maxSlopeAngle)
+            if (StandingInSlope())
             {
-                rigid.AddForce(Vector3.ProjectOnPlane(Physics.gravity, checker.LastHit.normal));
+                rigid.AddForce(checker.SlopeDir(Physics.gravity));
                 return;
             }
 
@@ -125,15 +125,19 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             var walkSpeed = force * (stats.WalkSpeed * rigid.mass);
             if (IsGrounded() && inputs.Sprinting)
                 walkSpeed *= stats.SprintMultiplier;
-            else if (!IsGrounded()) walkSpeed *= airMultiplier;
+            else if (!IsGrounded()) 
+                walkSpeed *= airMultiplier;
 
             if (StandingInSlope())
-                rigid.AddForce(Vector3.ProjectOnPlane(walkSpeed, Vector3.down));
-            else
-                rigid.AddForce(walkSpeed, ForceMode.Force);
+                 walkSpeed = checker.SlopeDir(Physics.gravity);
+            else if (!IsGrounded() && checker.IsColliding) 
+                walkSpeed = checker.HandleHittingWall(walkSpeed);
+            rigid.AddForce(walkSpeed, ForceMode.Force);
             HandleJumping();
             HandleCrunching();
         }
+
+      
 
         void HandleCrunching()
         {
@@ -151,17 +155,21 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
 
         public override void OnUpdateAvatarOffset()
         {
-            if (checker.DidHitGround is false)
-                return;
-            if (IsJumping() || IsGrounded() is false)
-                return;
-            if (Math.Abs(checker.LastHit.point.y - lastY) < updateAvatarOffsetTolerance)
-                return;
+            if (ShouldNotUpdateAvatarOffset()) return;
             var newPos = offsetTransform.position;
             newPos.y = checker.LastHit.point.y;
             offsetTransform.position = newPos;
-            lastY = checker.LastHit.point.y;
+            lastY = newPos.y;
         }
+        bool ShouldNotUpdateAvatarOffset()
+        {
+            if (checker.DidHitGround is false)
+                return true;
+            if (IsJumping() || IsGrounded() is false)
+                return true;
+            return Math.Abs(checker.LastHit.point.y - lastY) < updateAvatarOffsetTolerance;
+        }
+
 
         void StopCrunching()
         {

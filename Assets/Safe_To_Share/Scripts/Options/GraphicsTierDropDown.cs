@@ -26,8 +26,7 @@ namespace Safe_To_Share.Scripts.Options
         void Setup()
         {
             dropdown.ClearOptions();
-            List<TMP_Dropdown.OptionData> qualities =
-                QualitySettings.names.Select(q => new TMP_Dropdown.OptionData(q)).ToList();
+            var qualities = QualitySettings.names.Select(q => new TMP_Dropdown.OptionData(q)).ToList();
             dropdown.AddOptions(qualities);
             dropdown.value = QualitySettings.GetQualityLevel();
         }

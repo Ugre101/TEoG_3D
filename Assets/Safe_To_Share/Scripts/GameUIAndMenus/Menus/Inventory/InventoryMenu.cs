@@ -137,7 +137,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             if (loaded.UpdateInventoryAfterUse)
                 AddItems();
             holder.UpdateAvatar();
-            holder.HeightsChange(Player.Body.Height.Value);
+           // holder.HeightsChange(Player.Body.Height.Value);
         }
     }
 }

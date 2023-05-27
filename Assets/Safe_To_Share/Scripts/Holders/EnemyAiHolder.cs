@@ -70,7 +70,7 @@ namespace Safe_To_Share.Scripts.Holders
             HeightsChange(Enemy.Body.Height.Value);
         }
 
-        public override void NewAvatar(CharacterAvatar obj)
+        protected override void NewAvatar(CharacterAvatar obj)
         {
             if (!enemy.WantBodyMorph) return;
             obj.GetRandomBodyMorphs(enemy);

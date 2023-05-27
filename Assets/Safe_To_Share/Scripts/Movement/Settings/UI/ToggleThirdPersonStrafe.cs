@@ -1,4 +1,4 @@
-﻿using Movement.ECM2.Source;
+﻿using Safe_To_Share.Scripts.Movement.HoverMovement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +10,12 @@ namespace Safe_To_Share.Scripts.Movement.Settings.UI
 
         void Start()
         {
-            toggle.SetIsOnWithoutNotify(ThirdPersonMovementSettings.Strafe);
+            toggle.SetIsOnWithoutNotify(MovementSettings.Strafe);
             toggle.onValueChanged.AddListener(ChangeStrafe);
         }
 
         void OnDestroy() => toggle.onValueChanged.RemoveAllListeners();
 
-        static void ChangeStrafe(bool arg0) => ThirdPersonMovementSettings.Strafe = arg0;
+        static void ChangeStrafe(bool arg0) => MovementSettings.Strafe = arg0;
     }
 }

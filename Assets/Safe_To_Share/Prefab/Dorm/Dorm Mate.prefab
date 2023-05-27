@@ -370,7 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0087d0c4eabbd854fbb5a68ef5f61704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprintMultiplier: 1.15
   currentMode: 0
   capsule: {fileID: 3980753841124434877}
   <Rigid>k__BackingField: {fileID: 5172481964968123178}
@@ -471,15 +470,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb22ed00a681804b995cbb2a65b214b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCapsule: {fileID: 3980753841124434877}
   minSize: 0.1
   maxSize: 3
   SizeChange:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3009485336775115344}
-        m_TargetAssemblyTypeName: AvatarStuff.Holders.Holder, MyHolderScripts
-        m_MethodName: HeightsChange
+      - m_Target: {fileID: 3980753841124434877}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.Movement.HoverMovement.CharacterCapsule,
+          MovementShared
+        m_MethodName: SetHeight
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -489,8 +488,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  orgCapWidth: 0.25
-  orgCapHeight: 1.8
 --- !u!114 &4200862669329470291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,3 +503,4 @@ MonoBehaviour:
   character: {fileID: 6135198963566622032}
   animator: {fileID: 0}
   stopSwimmingDelay: 0.05
+  logMe: 0

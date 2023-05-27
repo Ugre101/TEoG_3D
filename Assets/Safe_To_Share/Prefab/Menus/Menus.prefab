@@ -459,7 +459,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Male Futanari
+  m_text: gender
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
   m_sharedMaterial: {fileID: 5044788166237315566, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
@@ -3733,7 +3733,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dick Girl
+  m_text: gender
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
   m_sharedMaterial: {fileID: 5044788166237315566, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
@@ -15349,7 +15349,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Doll
+  m_text: gender
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
   m_sharedMaterial: {fileID: 5044788166237315566, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
@@ -16721,7 +16721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Futanari
+  m_text: gender
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
   m_sharedMaterial: {fileID: 5044788166237315566, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
@@ -18683,7 +18683,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Cunt Boy
+  m_text: gender
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
   m_sharedMaterial: {fileID: 5044788166237315566, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
@@ -33054,7 +33054,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Male
+  m_text: gender
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
   m_sharedMaterial: {fileID: 5044788166237315566, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
@@ -36676,7 +36676,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Female
+  m_text: gender
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
   m_sharedMaterial: {fileID: 5044788166237315566, guid: b54dd5510c383b446a197b9be0608b6e, type: 2}
@@ -44446,7 +44446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1705084087737918203, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_text
-      value: Agility
+      value: statType
       objectReference: {fileID: 0}
     - target: {fileID: 2013685201831625467, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_Name
@@ -51299,7 +51299,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1705084087737918203, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_text
-      value: Strength
+      value: statType
       objectReference: {fileID: 0}
     - target: {fileID: 2013685201831625467, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_Name
@@ -51440,7 +51440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1705084087737918203, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_text
-      value: Intelligence
+      value: statType
       objectReference: {fileID: 0}
     - target: {fileID: 2013685201831625467, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_Name
@@ -51702,7 +51702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1705084087737918203, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_text
-      value: Constitution
+      value: statType
       objectReference: {fileID: 0}
     - target: {fileID: 2013685201831625467, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_Name
@@ -52559,7 +52559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1705084087737918203, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_text
-      value: Charisma
+      value: statType
       objectReference: {fileID: 0}
     - target: {fileID: 2013685201831625467, guid: 8ea48ef9f77b3054ea4708d71330d3ba, type: 3}
       propertyPath: m_Name

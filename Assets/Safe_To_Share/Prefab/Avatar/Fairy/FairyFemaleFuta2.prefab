@@ -9018,6 +9018,18 @@ PrefabInstance:
       propertyPath: m_LocalReferencePoint.z
       value: 0.005200565
       objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.30030558
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.10415452
+      objectReference: {fileID: 0}
+    - target: {fileID: 4742473837712756890, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.047847413
+      objectReference: {fileID: 0}
     - target: {fileID: 4789196012826680495, guid: 93c17f559128ca5499a9f742b3f36e99, type: 3}
       propertyPath: m_Layer
       value: 25
