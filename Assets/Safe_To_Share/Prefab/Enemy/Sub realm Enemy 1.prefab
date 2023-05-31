@@ -58,7 +58,6 @@ MonoBehaviour:
   playerAvatar: 0
   move: {fileID: 8944889634089466199}
   aIMover: {fileID: 5137189077473178157}
-  initCombatRange: 1.5
   <Enemy>k__BackingField:
     identity:
       id: 34
@@ -395,6 +394,7 @@ MonoBehaviour:
   p1PreCalcMath: {x: 0, y: 0, z: 0}
   p2PreCalcMath: {x: 0, y: 0, z: 0}
   radiusRatio: 0.1388889
+  capsuleHeightModifier: 1.75
 --- !u!114 &5137189077473178157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +407,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0087d0c4eabbd854fbb5a68ef5f61704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprintMultiplier: 1.15
   currentMode: 0
   capsule: {fileID: 8001263657064992736}
   <Rigid>k__BackingField: {fileID: 7145013890565019600}
@@ -509,7 +508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb22ed00a681804b995cbb2a65b214b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterCapsule: {fileID: 8001263657064992736}
   minSize: 0.1
   maxSize: 5
   SizeChange:
@@ -528,8 +526,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  orgCapWidth: 0.25
-  orgCapHeight: 1.8
 --- !u!114 &2621653128024043792
 MonoBehaviour:
   m_ObjectHideFlags: 0

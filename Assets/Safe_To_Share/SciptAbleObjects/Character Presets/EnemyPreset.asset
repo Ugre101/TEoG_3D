@@ -15,8 +15,8 @@ MonoBehaviour:
   startGender:
     allowedGenders:
     - weight: 2
-      gender: 5
-    startEssence: 34
+      gender: 2
+    startEssence: 124
   startIdentity:
     customIdentity: 0
     identity:

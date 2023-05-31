@@ -21,6 +21,10 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
         bool grounded;
         void Update()
         {
+            if (bothStopped && moving)
+            {
+                Stop();
+            }
             if (!moving) return;
             var delta = maxDelta * Time.deltaTime;
             var diff = toAlign.position - target.position;
@@ -111,5 +115,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.Actor
             xStartedPositive = diff.x > 0;
             grounded = stayGrounded;
         }
+
+        static bool bothStopped;
+        public static void NewAvatar(bool pause) => bothStopped = pause;
     }
 }

@@ -27,15 +27,14 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         float updateAvatarOffsetFactor = float.Epsilon;
 
 
-        bool isActiveTerrainNull;
         int jumps;
 
         float lastY;
         Vector3 startCenter;
 
-        float targetHeight;
         float timeSinceLastJump;
-        float updateAvatarOffsetTolerance = float.Epsilon;
+        float TargetHeight => capsule.Height * hoverHeight;
+        float UpdateAvatarOffsetTolerance => updateAvatarOffsetFactor * capsule.Height;
 
         float RideSpringDamper => rideSpringStrength * rideSpringDampFactor;
 
@@ -45,20 +44,8 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         {
             base.OnEnter(collider);
             startCenter = offsetTransform.localPosition;
-            SetVariables();
-            isActiveTerrainNull = Terrain.activeTerrain == null;
         }
 
-        void SetVariables()
-        {
-            targetHeight = capsule.Height * hoverHeight;
-            updateAvatarOffsetTolerance = updateAvatarOffsetFactor * capsule.Height;
-        }
-
-        public override void OnCapsuleSizeChange(float newHeight)
-        {
-            SetVariables();
-        }
 
         public override void OnGravity()
         {
@@ -111,37 +98,37 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             }
         }
 
-        float OffFromTargetBy() => checker.DistanceToGround - targetHeight;
+        float OffFromTargetBy() => checker.DistanceToGround - TargetHeight;
 
-        public override bool IsGrounded() => checker.DistanceToGround < targetHeight * groundedPadding;
+        public override bool IsGrounded() => checker.DistanceToGround < TargetHeight * groundedPadding;
 
 
         public override bool IsJumping() => jumps > 0;
 
-        
 
         public override void OnMove(Vector3 force)
         {
             var walkSpeed = force * (stats.WalkSpeed * rigid.mass);
             if (IsGrounded() && inputs.Sprinting)
                 walkSpeed *= stats.SprintMultiplier;
-            else if (!IsGrounded()) 
+            else if (!IsGrounded())
                 walkSpeed *= airMultiplier;
 
             if (StandingInSlope())
-                 walkSpeed = checker.SlopeDir(Physics.gravity);
-            else if (!IsGrounded() && checker.IsColliding) 
+                walkSpeed = checker.SlopeDir(Physics.gravity);
+            else if (!IsGrounded() && checker.IsColliding)
                 walkSpeed = checker.HandleHittingWall(walkSpeed);
             rigid.AddForce(walkSpeed, ForceMode.Force);
             HandleJumping();
             HandleCrunching();
         }
 
-      
 
         void HandleCrunching()
         {
-            var shouldCrunch = inputs.Crunching && IsGrounded();
+            var shouldCrunch = inputs.Crunching && WasGrounded();
+            if (IsJumping())
+                shouldCrunch = false;
             switch (shouldCrunch)
             {
                 case true when IsCrouching is false:
@@ -161,13 +148,14 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             offsetTransform.position = newPos;
             lastY = newPos.y;
         }
+
         bool ShouldNotUpdateAvatarOffset()
         {
             if (checker.DidHitGround is false)
                 return true;
             if (IsJumping() || IsGrounded() is false)
                 return true;
-            return Math.Abs(checker.LastHit.point.y - lastY) < updateAvatarOffsetTolerance;
+            return Math.Abs(checker.LastHit.point.y - lastY) < UpdateAvatarOffsetTolerance;
         }
 
 
@@ -202,10 +190,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         void StartCrunching()
         {
             IsCrouching = true;
-            var c1 = capsule.YMin;
             capsule.HalfHeight();
-            var c2 = capsule.YMin;
-            //  rigid.position += Vector3.down * (c2 - c1);
             StartedCrunching?.Invoke();
         }
 

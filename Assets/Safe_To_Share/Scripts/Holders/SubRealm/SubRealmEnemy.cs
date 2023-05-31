@@ -23,8 +23,12 @@ namespace Safe_To_Share.Scripts.Holders.SubRealm
         protected override void Start()
         {
             base.Start();
+            Changer.NewAvatar += ModifyAvatar;
+            Changer.NewAvatar += NewAvatar;
             SpawnLocation = transform.position;
             ActiveEnemies.Add(this);
+            if (Changer.AvatarLoaded)
+                ShouldSit(Changer.CurrentAvatar);
         }
 
         void OnDestroy()
@@ -58,12 +62,16 @@ namespace Safe_To_Share.Scripts.Holders.SubRealm
                 Enemy.WantBodyMorph = false;
             }
 
+            ShouldSit(obj);
+        }
+
+        void ShouldSit(CharacterAvatar obj)
+        {
             if (Enemy.Defeated)
             {
-                obj.Animator.SetBool(SittingOnGround,true);
+                obj.Animator.SetBool(SittingOnGround, true);
                 // Set defeated state
             }
-            
         }
 
         public void Setup(Enemy enemy)

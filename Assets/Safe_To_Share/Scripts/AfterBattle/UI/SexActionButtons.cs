@@ -49,7 +49,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             addedSexActs = FirstStep(addedSexActs, buttonOwner, partner);
             var sexActions = dict.SexActsWeCanDo(buttonOwner, partner).Except(addedSexActs);
             SecondStep(sexActions, sexActButtons,ref addedSexActs);
-       
+
             // Add new drain actions
             addedDrainActs = FirstStep(addedDrainActs, buttonOwner, partner);
             var toAddDrainAct = dict.DrainActionsWeCanDo(buttonOwner, partner).Except(addedDrainActs);

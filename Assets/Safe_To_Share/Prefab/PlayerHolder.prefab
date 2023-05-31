@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avatarDict: {fileID: 11400000, guid: 5870e7a7f1445be4f98a75dd78d0169e, type: 2}
-  avatarChanger: {fileID: 6265009824166565540}
+  avatarChanger: {fileID: 7094667312742398122}
   avatarScaler: {fileID: 7469535026440258888}
   playerAvatar: 1
   movementMoveModHandler: {fileID: 71678109998498014}
@@ -371,11 +371,11 @@ MonoBehaviour:
     mods:
       tempBaseStatMods: []
   jumpStrength:
-    baseValue: 9
+    baseValue: 7
     mods:
       tempBaseStatMods: []
   sprintSpeed:
-    baseValue: 1.5
+    baseValue: 1.7
     mods:
       tempBaseStatMods: []
   swimSpeed:
@@ -383,7 +383,7 @@ MonoBehaviour:
     mods:
       tempBaseStatMods: []
   walkSpeed:
-    baseValue: 10
+    baseValue: 9
     mods:
       tempBaseStatMods: []
 --- !u!114 &5648396668542994940
@@ -654,7 +654,8 @@ MonoBehaviour:
   <Stats>k__BackingField: {fileID: 71678109998498014}
   <WalkingModule>k__BackingField:
     brakeForce: 0.1
-    hoverHeight: 0.1
+    groundedCoyoteTime: 0.5
+    hoverHeight: 0.125
     rideSpringStrength: 55
     rideSpringDampFactor: 0.5
     jumpCoolDown: 0.2
@@ -664,6 +665,7 @@ MonoBehaviour:
     updateAvatarOffsetFactor: 0.0107
   swimmingModule:
     brakeForce: 0.1
+    groundedCoyoteTime: 0.5
     rideSpringStrength: 50
     rideSpringDampFactor: 0.5
     swimAtPercentSubmerged: 0.6
@@ -676,6 +678,7 @@ MonoBehaviour:
   mainCamera: {fileID: 0}
   avatarOffsetTransform: {fileID: 8759715639741286662}
   directionChangeBoostMultiplier: 10
+  maxDePenetration: 1e-45
 --- !u!114 &1623128089208261143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,7 +711,7 @@ MonoBehaviour:
   p1PreCalcMath: {x: 0, y: 0, z: 0}
   p2PreCalcMath: {x: 0, y: 0, z: 0}
   radiusRatio: 0.125
-  capsuleHeightModifier: 1.75
+  capsuleHeightModifier: 1.4
 --- !u!114 &1008936549818365483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,12 +748,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3485618687629152539}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7000008, z: 0.3}
+  m_LocalPosition: {x: 0, y: 1.7000008, z: 0.30000305}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8759715639741286662}
-  m_RootOrder: 1
+  m_Father: {fileID: 370221112188656778}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4064802967555444623
 GameObject:
@@ -862,7 +865,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8759715639741286662}
-  - component: {fileID: 6265009824166565540}
   - component: {fileID: 7469535026440258888}
   - component: {fileID: 3417229716285459534}
   - component: {fileID: 7000841515126313939}
@@ -887,55 +889,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3156939597315827700}
-  - {fileID: 5187238688196176393}
   - {fileID: 4449375253713366490}
+  - {fileID: 370221112188656778}
   m_Father: {fileID: 6156461748408585082}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6265009824166565540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4264186504093821022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8724109875216e4448f887a56b24f63c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newAnimatorEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6783660681134686731}
-        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.HoverMovement.ActorOrientation,
-          Movement
-        m_MethodName: SetActorWithAnimator
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 7000841515126313939}
-        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.HoverMovement.MoveAnimator,
-          Movement
-        m_MethodName: SetAnimator
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  NewAvatarEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &7469535026440258888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,7 +954,6 @@ MonoBehaviour:
   character: {fileID: 2544556289303088008}
   animator: {fileID: 0}
   stopSwimmingDelay: 0.05
-  logMe: 0
 --- !u!114 &6783660681134686731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,7 +968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4535136299084643760}
   cameraTransform: {fileID: 0}
-  actorTransform: {fileID: 0}
+  actorTransform: {fileID: 370221112188656778}
 --- !u!1 &5109424214000010065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1104,70 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &6458957549015099538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 370221112188656778}
+  - component: {fileID: 7094667312742398122}
+  m_Layer: 25
+  m_Name: Avatar Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &370221112188656778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458957549015099538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5187238688196176393}
+  m_Father: {fileID: 8759715639741286662}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7094667312742398122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6458957549015099538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8724109875216e4448f887a56b24f63c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newAnimatorEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7000841515126313939}
+        m_TargetAssemblyTypeName: Safe_To_Share.Scripts.HoverMovement.MoveAnimator,
+          Movement
+        m_MethodName: SetAnimator
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  NewAvatarEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6735734090001585526
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1319,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8759715639741286662}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8978663307443977702
 GameObject:

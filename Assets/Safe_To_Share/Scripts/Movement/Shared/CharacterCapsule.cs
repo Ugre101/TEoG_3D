@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Safe_To_Share.Scripts.Movement.HoverMovement
 {
@@ -10,7 +12,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         [SerializeField, HideInInspector,] Vector3 p1PreCalcMath;
         [SerializeField, HideInInspector,] Vector3 p2PreCalcMath;
 
-        [SerializeField, HideInInspector,] float radiusRatio = 0.25f;
+        [SerializeField] float radiusRatio = 0.25f;
 
         [SerializeField, Range(1f, 2f),] float capsuleHeightModifier = 1.75f;
 
@@ -58,10 +60,8 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
                 return;
             if (capsule == null && TryGetComponent(out capsule) is false)
                 throw new MissingComponentException("Missing capsule");
-            radiusRatio = capsule.radius / capsule.height;
         }
 #endif
-
         void CalcCapsulePosition()
         {
             p1PreCalcMath = Vector3.up * (capsule.radius + Physics.defaultContactOffset);
@@ -79,38 +79,41 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             }
             else
             {
-                CalcCapsuleCenter();
-                CalcCapsulePosition();
+                UpdateCapsule();
             }
         }
 
-        void CalcCapsuleCenter() => capsule.center = currentHeight * 0.5f * Vector3.up;
+        void CalcCapsuleCenter() => capsule.center = capsule.height * 0.5f * Vector3.up;
 
         public void HalfHeight()
         {
             capsule.height /= 2f;
+            UpdateCapsule();
+            crunching = true;
+        }
+
+        void UpdateCapsule()
+        {
             CalcCapsuleCenter();
             CalcCapsulePosition();
-            crunching = true;
         }
 
         public void RestoreHeight()
         {
             capsule.height = currentHeight;
-            CalcCapsuleCenter();
-            CalcCapsulePosition();
+            UpdateCapsule();
             crunching = false;
         }
 
         public bool SphereCast(Vector3 dir, float distance, LayerMask layerMask, out RaycastHit hit) =>
             Physics.SphereCast(Center, Radius, dir, out hit, distance, layerMask, QueryTriggerInteraction.Ignore);
 
-        public bool SphereCastAllNonAlloc(Vector3 dir, float distance, LayerMask layerMask, out RaycastHit[] results)
+        public int SphereCastAllNonAlloc(Vector3 dir, float distance, LayerMask layerMask, out RaycastHit[] results,float radiusMod = 1f)
         {
-            var hits = Physics.SphereCastNonAlloc(Center, Radius, dir, sphereCastHits, distance, layerMask,
+            var hits = Physics.SphereCastNonAlloc(Center, Radius * radiusMod, dir, sphereCastHits, distance, layerMask,
                 QueryTriggerInteraction.Ignore);
             results = sphereCastHits;
-            return hits > 0;
+            return hits;
         }
 
         public SpherecastCommand SphereCheck(Vector3 direction, float distance, LayerMask layerMask) =>
@@ -119,5 +122,15 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         public int OverlapCapsuleNonAlloc(Vector3 capsuleBottom, Collider[] results, LayerMask groundLayer)
             => Physics.OverlapCapsuleNonAlloc(capsuleBottom + P1PreCalcMath, capsuleBottom + P2PreCalcMath,
                 Radius, results, groundLayer);
+
+        readonly Collider[] overLapHits = new Collider[32];
+        public IEnumerable<Collider> GetOverLapping(Vector3 capsuleBottom, LayerMask groundLayer)
+        {
+            int overLaps = OverlapCapsuleNonAlloc(capsuleBottom, overLapHits, groundLayer);
+            for (int i = 0; i < overLaps; i++)
+            {
+                yield return overLapHits[i];
+            }
+        }
     }
 }

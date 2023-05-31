@@ -1,3 +1,4 @@
+using System;
 using Safe_To_Share.Scripts.Movement.HoverMovement.Modules;
 using UnityEngine;
 
@@ -32,24 +33,36 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             currentModule = WalkingModule;
             currentModule.OnEnter(null);
         }
-        
+
+
+        [SerializeField, Range(float.Epsilon, 2f)] float maxDePenetration = 10f;
+
         void FixedUpdate()
         {
             AlignWithCamera();
+            if (groundChecker.CheckStuck(out var dir, maxDePenetration))
+            { 
+                Rigid.MovePosition(Rigid.position + dir);
+            }
             groundChecker.CheckGround();
             layerHandler.OnFixedUpdate(this,IsGrounded(), groundChecker.LastHit.collider);
             currentModule.OnGravity();
-           
+            currentModule.UpdateWasGrounded();
             Move();
             SpeedLimit();
-            if (inputs.Moving is false)
-                currentModule.ApplyBraking();
+            BrakeVelocity();
             currentModule.OnUpdateAvatarOffset();
+        }
+
+        void BrakeVelocity()
+        {
+            if (inputs.Moving && (MovementSettings.Strafe || inputs.Move.y != 0)) return;
+            currentModule.ApplyBraking();
         }
 
         void Move()
         {
-            moveDir = MovementSettings.Strafe ? ThirdPersonTurn() : ori.forward * inputs.Move.y + ori.right * inputs.Move.x;
+            moveDir = MovementSettings.Strafe ? ori.forward * inputs.Move.y + ori.right * inputs.Move.x : ThirdPersonTurn();
             if (currentModule == WalkingModule)
                 moveDir = IsGrounded() ? groundChecker.SlopeDir(moveDir) : moveDir.normalized;
 
@@ -103,7 +116,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
 
         void AlignWithCamera()
         {
-            if (inputs.Move.y == 0) return;
+            if (inputs.Move.y == 0 && (MovementSettings.Strafe is false || inputs.Move.x == 0)) return;
             var cameraRot = ori.eulerAngles;
             cameraRot.y = mainCamera.eulerAngles.y;
             ori.rotation = Quaternion.Euler(cameraRot);
@@ -146,7 +159,6 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             currentModule.OnEnter(other);
         }
 
-
         Vector3 DirectionChangeBoost(Vector3 force)
         {
             var dot = Vector3.Dot(MovementTools.FlatVel(force.normalized),
@@ -163,7 +175,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
 
         public override bool IsGrounded() => currentModule.IsGrounded();
 
-        public override bool WasGrounded() => currentModule.WarGrounded();
+        public override bool WasGrounded() => currentModule.WasGrounded();
 
         public override Vector3 GetLocalMoveDirection() => ori.InverseTransformDirection(moveDir);
 

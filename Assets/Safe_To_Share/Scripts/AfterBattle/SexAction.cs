@@ -164,9 +164,13 @@ namespace Safe_To_Share.Scripts.AfterBattle
             public bool MeetReq(BaseCharacter character)
             {
                 BaseOrgansContainer baseOrgansContainer = character.SexualOrgans.Containers[OrganType];
-                return (!minSize.Need || !(baseOrgansContainer.Biggest < minSize.Size)) &&
-                       (!maxSize.Need || !(maxSize.Size < baseOrgansContainer.BaseList.Min(o => o.Value))) &&
-                       (!amount.Need || !(baseOrgansContainer.BaseList.Count() < amount.Size));
+                if (baseOrgansContainer.BaseList.Any() is false)
+                    return false;
+                if (minSize.Need && baseOrgansContainer.Biggest < minSize.Size)
+                    return false;
+                if (maxSize.Need && maxSize.Size < baseOrgansContainer.BaseList.Min(o => o.Value)) 
+                    return false;
+                return !amount.Need || !(baseOrgansContainer.BaseList.Count() < amount.Size);
             }
         }
 

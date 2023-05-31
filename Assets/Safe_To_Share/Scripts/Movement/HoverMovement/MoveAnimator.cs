@@ -25,7 +25,6 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         bool isCharacterNull;
         bool isSwimming;
 
-        [SerializeField] bool logMe;
 
         float LocalScaleX => transform.localScale.x;
 
@@ -41,8 +40,6 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
                 return;
 
             var move = character.GetLocalMoveDirection();
-            if (logMe)
-                print($"Local direction {move}");
             animator.SetBool(Crouch, character.IsCrouching());
             animator.SetBool(Ground, CheckGrounded());
             switch (character.CurrentMode)
@@ -114,8 +111,6 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         {
             var forward = move.z;
             forward *= character.GetCurrentSpeed() / Mathf.Max(HeightSpeed(), float.Epsilon);
-            if (logMe)
-                print($"Forward {forward}");
             animator.SetFloat(Forward, forward, 0.1f, Time.deltaTime);
             animator.SetFloat(Turn, move.x, 0.1f, Time.deltaTime);
             if (isSwimming)

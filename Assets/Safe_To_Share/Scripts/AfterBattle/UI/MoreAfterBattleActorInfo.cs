@@ -65,7 +65,6 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             }
 
             sexualOrgansInfo.text = sb.ToString();
-            print(sb.ToString());
         }
 
 

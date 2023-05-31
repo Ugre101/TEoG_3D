@@ -63,6 +63,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             UpdateHeight();
             Avatar.SetArousal(Actor.SexStats.Arousal);
             obj.Animator.runtimeAnimatorController = animatorController;
+            AlignActor.NewAvatar(false);
         }
 
         public async void ModifyAvatar()
@@ -73,6 +74,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
                 return;
             }
 
+            AlignActor.NewAvatar(true);
             HasAvatar = false;
             var res = await avatarDict.GetAvatarLoaded(Actor, playerAvatar);
             avatarChanger.UpdateAvatar(res);

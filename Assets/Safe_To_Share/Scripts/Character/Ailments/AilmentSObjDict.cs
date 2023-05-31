@@ -20,7 +20,6 @@ namespace Character.Ailments
         public void CheckAilments(BaseCharacter character)
         {
             var hungerValue = 1f -  character.Body.GetFatRatio();
-            Debug.Log($"Hunger value {hungerValue}");
             GainAndCure(character, hungerValue, hunger);
             GainAndCure(character,character.BodyFunctions.Bladder.Pressure(),piss);
         }

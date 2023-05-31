@@ -73,13 +73,15 @@ namespace Safe_To_Share.Scripts.Movement.NavAgentMover
 
         public override bool WasGrounded() => true;
 
+        public override Vector3 GetVelocity() => agent.velocity;
+
         public override float GetCurrentSpeed() => base.GetCurrentSpeed();
 
         public override Vector3 GetLocalMoveDirection()
         {
-            var dir = agent.nextPosition - agent.transform.position;
-            dir.Normalize();
-            return agent.transform.InverseTransformDirection(dir);
+            var test = agent.desiredVelocity;
+            test = Vector3.ProjectOnPlane(test, GetUpVector());
+            return agent.transform.InverseTransformDirection(test);
         }
 
         public override Vector3 GetUpVector() => agent.transform.rotation * Vector3.up;

@@ -1,9 +1,18 @@
 ﻿using Character;
+using Character.GenderStuff;
+using UnityEngine;
 
 namespace AvatarStuff
 {
     public sealed class FemaleAvatar : CharacterAvatar
     {
-        public override void Setup(BaseCharacter character) => base.Setup(character);
+        [SerializeField] BlendShape turnMale;
+        public override void Setup(BaseCharacter character)
+        {
+            base.Setup(character);
+            float maleValue = GenderSettings.FemaleTurningMaleValue(character);
+            foreach (var meshRenderer in bodyMeshRenderers) 
+                turnMale.ChangeShape(meshRenderer,maleValue);
+        }
     }
 }

@@ -65,7 +65,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         public abstract bool IsGrounded();
         public abstract bool IsSprinting();
         public abstract bool WasGrounded();
-        public Vector3 GetVelocity() => Rigid.velocity;
+        public virtual Vector3 GetVelocity() => Rigid.velocity;
         public virtual float GetCurrentSpeed() => GetVelocity().magnitude;
         public float GetMaxSpeed() => MaxSpeed;
         public abstract Vector3 GetLocalMoveDirection();

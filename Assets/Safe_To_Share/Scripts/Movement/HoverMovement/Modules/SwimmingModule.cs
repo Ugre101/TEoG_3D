@@ -61,9 +61,8 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             {
                 // Debug.Log(diff);
                 // TODO account for capsule height
-                float test = capsule.Height;
                 if (diff < 0)
-                    offBy -= diff;   
+                    offBy -= diff * 2f;   
             }
             var springForce = offBy * rideSpringStrength - relVel * RideSpringDamper;
 
@@ -86,7 +85,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         {
             float test = capsule.Height * (swimAtPercentSubmerged + swimDepthMargin);
             var target = waterLine - test;  //(waterLine - capsule.Center.y) / capsule.Height;
-            target = Mathf.Max(target - diveDepth, SeaBottom() + 0.1f);
+            target = Mathf.Max(target - diveDepth, SeaBottom() + 0.2f);
             return capsule.YMin - target;
         }
 
@@ -105,6 +104,12 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             var swimSpeed = force * (stats.SwimSpeed * rigid.mass);
             if (inputs.Sprinting)
                 swimSpeed *= stats.SprintMultiplier;
+            float diff = capsule.YMin - SeaBottom();
+            if (Mathf.Abs(diff) < 0.2f)
+            {
+                swimSpeed = Vector3.ProjectOnPlane(swimSpeed, checker.LastHit.normal);
+                diveDepth -= 0.1f;
+            }
             rigid.AddForce(swimSpeed, ForceMode.Force);
             HandleDiving();
         }

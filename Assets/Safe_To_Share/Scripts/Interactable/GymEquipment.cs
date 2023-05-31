@@ -38,6 +38,11 @@ namespace Safe_To_Share.Scripts.Interactable
                 }
         }
 
+        void OnDestroy()
+        {
+            RemoveIInteractableHit?.Invoke();
+        }
+
         public event Action<IInteractable> UpdateHoverText;
         public event Action RemoveIInteractableHit;
 

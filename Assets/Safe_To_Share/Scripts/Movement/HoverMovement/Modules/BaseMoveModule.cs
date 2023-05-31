@@ -13,6 +13,8 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         protected Transform offsetTransform;
         protected Rigidbody rigid;
         protected MoveStats stats;
+        float lastGrounded;
+       [SerializeField] float groundedCoyoteTime = 0.5f;
         public abstract float MaxSpeed { get; }
 
         public bool IsCrouching { get; protected set; } = false;
@@ -39,9 +41,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
 
         public abstract void OnGravity();
 
-        public virtual void OnCapsuleSizeChange(float newHeight)
-        {
-        }
+       
 
         public virtual void OnUpdateAvatarOffset()
         {
@@ -59,8 +59,20 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
 
         public virtual bool IsGrounded() => true;
 
-        public virtual bool WarGrounded() => true;
 
         public virtual bool IsJumping() => false;
+
+        public virtual bool WasGrounded()
+        {
+            if (IsGrounded())
+                return true;
+            return Time.time < lastGrounded + groundedCoyoteTime;
+        }
+
+        public virtual void UpdateWasGrounded()
+        {
+            if (IsGrounded())
+                lastGrounded = Time.time;
+        }
     }
 }

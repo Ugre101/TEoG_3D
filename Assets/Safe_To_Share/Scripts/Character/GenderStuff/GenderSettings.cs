@@ -29,6 +29,17 @@ namespace Character.GenderStuff
         public static string GenderString(this Gender gender, bool lowerCase = false)
             => SavedGenders.TryGetValue(gender, out var value) ? lowerCase ? value.ToLower() : value : "Err";
 
+        public static float MaleTurningFemaleValue(BaseCharacter character)
+        {
+            float boobValue = character.SexualOrgans.Boobs.Biggest;
+            return boobValue > 0 ? Mathf.Clamp(boobValue / BoobThreesHold * 100f, 0f, 100f) : 0f;
+        }
+        
+        public static float FemaleTurningMaleValue(BaseCharacter character)
+        {
+            float boobValue = character.SexualOrgans.Boobs.Biggest;
+            return boobValue > BoobThreesHold ? Mathf.Clamp( (BoobThreesHold * 3 -boobValue) * 15f , 0f, 100f) : 100f;
+        }
         public static Gender GetGender(BaseCharacter baseCharacter)
         {
             bool hasBalls = baseCharacter.SexualOrgans.Balls.HaveAny();
@@ -97,5 +108,7 @@ namespace Character.GenderStuff
 
             return capital ? returnText : returnText.ToLower();
         }
+
+       
     }
 }

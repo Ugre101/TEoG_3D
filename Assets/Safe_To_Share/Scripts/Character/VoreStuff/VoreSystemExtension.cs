@@ -143,7 +143,6 @@ namespace Character.VoreStuff
         {
             if (specialVoreOptions != SpecialVoreOptions.Ctf && specialVoreOptions != SpecialVoreOptions.BoobsTf ||
                 !SexualOrganAbsorption.CanInstaMorph(prey, baseOrgan)) return false;
-            Debug.Log("Insta morph");
             SexualOrganAbsorption.AddToOrgan(pred, baseOrgan, prey, organType);
             // Insta morph and skip the rest
             return true;

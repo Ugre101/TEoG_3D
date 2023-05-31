@@ -167,7 +167,6 @@ namespace SceneStuff
                 case SubRealmSceneSo subRealmSceneSo:
                     currentSubRealm = subRealmSceneSo;
                     InSubRealm = true;
-                    Debug.Log("Sub realm loaded");
                     break;
                 case LocationSceneSo locationSceneSo:
                     InSubRealm = false;
