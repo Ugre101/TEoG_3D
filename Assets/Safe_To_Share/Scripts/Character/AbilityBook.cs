@@ -18,11 +18,12 @@ namespace Character.SkillsAndSpells
 
         public HashSet<string> Abilities { get; private set; } = new();
 
-        public void Load(IEnumerable<string> guids)
+        public void Load(List<string> guids)
         {
             Abilities = new HashSet<string>();
-            foreach (string loadSavedGuid in guids.Where(loadSavedGuid => !string.IsNullOrEmpty(loadSavedGuid)))
-                Abilities.Add(loadSavedGuid);
+            foreach (string loadSavedGuid in guids)
+                if (!string.IsNullOrEmpty(loadSavedGuid))
+                    Abilities.Add(loadSavedGuid);
         }
 
         public bool KnowAbility(string ability) => Abilities.Contains(ability);

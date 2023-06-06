@@ -111,7 +111,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             serviceMenu.Setup(title, offers.OfferedServices);
         }
 
-        void OpenBoatMenu() => SwitchPanels(boatMenu);
+        void OpenBoatMenu()
+        {
+            GameManager.Pause();
+            SwitchPanels(boatMenu);
+        }
 
         public void CloseMenus()
         {

@@ -16,7 +16,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
 
         void Update()
         {
-            if (rb.velocity.magnitude == 0)
+            if (rb.velocity.FlatVel().magnitude <= 0.2f) 
                 return;
             UpdateRotation();
         }

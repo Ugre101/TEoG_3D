@@ -123,7 +123,6 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             HandleCrunching();
         }
 
-
         void HandleCrunching()
         {
             var shouldCrunch = inputs.Crunching && WasGrounded();
@@ -148,14 +147,13 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             offsetTransform.position = newPos;
             lastY = newPos.y;
         }
-
         bool ShouldNotUpdateAvatarOffset()
         {
             if (checker.DidHitGround is false)
                 return true;
             if (IsJumping() || IsGrounded() is false)
                 return true;
-            return Math.Abs(checker.LastHit.point.y - lastY) < UpdateAvatarOffsetTolerance;
+            return false; 
         }
 
 

@@ -17,7 +17,7 @@ namespace Safe_To_Share.Scripts.Movement.NavAgentMover
 
         public bool SampleAndSetPositionNear(Vector3 dest) => NavMesh.SamplePosition(dest, out var meshHit, 2f, groundLayer) && SetDestination(meshHit.position);
 
-            NavMeshPath path;
+        NavMeshPath path;
         bool SetDestination(Vector3 dest)
         {
             if (!agent.CalculatePath(dest,path)) 
@@ -54,6 +54,7 @@ namespace Safe_To_Share.Scripts.Movement.NavAgentMover
 
         }
 #endif
+        
 
         public void SyncVariables()
         {

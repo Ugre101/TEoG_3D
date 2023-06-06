@@ -76,8 +76,8 @@ namespace Character.VoreStuff
         void TickPreyHour(BaseCharacter pred, int ticks = 1)
         {
             stomach.TickHour(ticks);
-            foreach ((SexualOrganType type, VoreOrganDigestionMode mode) in VoreOrgans)
-                if (pred.SexualOrgans.Containers.TryGetValue(type, out BaseOrgansContainer container))
+            foreach (var (type, mode) in VoreOrgans)
+                if (pred.SexualOrgans.Containers.TryGetValue(type, out var container))
                     foreach (var baseOrgan in container.BaseList)
                         baseOrgan.Vore.TickHour(ticks);
         }

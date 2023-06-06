@@ -46,6 +46,10 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         public virtual void OnUpdateAvatarOffset()
         {
         }
+        
+        public virtual void OnUpdateAvatarScale(float newHeight)
+        {
+        }
 
 
         public abstract void OnMove(Vector3 force);

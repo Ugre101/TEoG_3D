@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Safe_To_Share.Scripts.Movement.HoverMovement;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,7 +15,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
         // [SerializeField] ThirdPersonEcm2Character mover;
         [SerializeField] FirstPersonCamera firstPerson;
         [SerializeField] CinemachineVirtualCamera virtualCamera;
-
+        [SerializeField] Rigidbody player;
         [Header("Settings"), SerializeField, Range(float.Epsilon, 3f),]
         
         float minDistance = 3;
@@ -76,13 +77,20 @@ namespace Safe_To_Share.Scripts.CameraStuff
                 StopCoroutine(elevationRoutine);
         }
 
+        bool holding;
         public void OnCursorLock(InputAction.CallbackContext context)
         {
             if (GameManager.Paused) return;
             if (!IsPointerOverUIObject() && context.performed)
+            {
+                holding = true;
                 LockCursor();
+            }
             else if (context.canceled)
+            {
+                holding = false;
                 UnlockCursor();
+            }
         }
 
         readonly List<RaycastResult> results = new();
@@ -103,8 +111,13 @@ namespace Safe_To_Share.Scripts.CameraStuff
             if (GameManager.Paused) return;
             if (!ctx.performed)
                 return;
-            if (ThirdPersonCameraSettings.AlwaysLook) //&& mover.GetVelocity().magnitude > 0)
-                LockCursor();
+            if (ThirdPersonCameraSettings.AlwaysLook)
+            {
+                if (player.velocity.FlatVel().magnitude >= 0.1f)
+                    LockCursor();
+                else if (player.velocity.FlatVel().magnitude < 0.1f && !holding)
+                    UnlockCursor();
+            }
             else if (!IsCursorLocked())
                 return;
             mouseLookInput = ctx.performed ? ctx.ReadValue<Vector2>() : Vector2.zero;
@@ -132,8 +145,9 @@ namespace Safe_To_Share.Scripts.CameraStuff
 
         public void OnCursorUnlock(InputAction.CallbackContext context)
         {
-            if (context.performed)
-                UnlockCursor();
+            if (!context.performed) return;
+            UnlockCursor();
+            holding = false;
         }
 
         public void LockCursor()

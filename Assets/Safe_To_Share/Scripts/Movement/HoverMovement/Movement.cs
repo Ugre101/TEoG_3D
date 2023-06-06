@@ -62,7 +62,12 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
 
         void Move()
         {
-            moveDir = MovementSettings.Strafe ? ori.forward * inputs.Move.y + ori.right * inputs.Move.x : ThirdPersonTurn();
+            if (inputs.Moving)
+                moveDir = MovementSettings.Strafe
+                    ? ori.forward * inputs.Move.y + ori.right * inputs.Move.x
+                    : ThirdPersonTurn();
+            else 
+                moveDir = Vector3.zero;
             if (currentModule == WalkingModule)
                 moveDir = IsGrounded() ? groundChecker.SlopeDir(moveDir) : moveDir.normalized;
 
@@ -89,7 +94,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
 
         void SpeedLimit()
         {
-            var flatVel = MovementTools.FlatVel(Rigid.velocity);
+            var flatVel = Rigid.velocity.FlatVel();
             if (flatVel.magnitude > MaxSpeed)
             {
                 var temp = flatVel.normalized * MaxSpeed;
@@ -168,6 +173,10 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             return force;
         }
 
+        public void OnUpdateAvatarScale(float newHeight)
+        {
+            currentModule.OnUpdateAvatarScale(newHeight);
+        }
         public override bool IsCrouching() => currentModule.IsCrouching;
 
 

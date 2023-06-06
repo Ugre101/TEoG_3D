@@ -3,6 +3,7 @@ using AvatarStuff;
 using Character.EnemyStuff;
 using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Safe_To_Share.Scripts.Holders
 {
@@ -39,6 +40,7 @@ namespace Safe_To_Share.Scripts.Holders
             if (DistanceToPlayer < initCombatRange) 
                 StartCombat();
             stateHandler.CurrentState.OnUpdate();
+           
         }
 
         void OnDestroy()
@@ -87,11 +89,34 @@ namespace Safe_To_Share.Scripts.Holders
         }
         void OnTriggerEnter(Collider other)
         {
+            DidIHitPlayer(other);
+            
+        }
+
+        void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+            {
+                print("Start swim");
+            }
+        }
+
+        void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+            {
+                print("Stop swim");
+            }
+        }
+
+        void DidIHitPlayer(Collider other)
+        {
             if (Enemy.Defeated) return;
             if (!other.gameObject.CompareTag("Player")) return;
             if (!other.TryGetComponent(out PlayerHolder playerHolder)) return;
             playerHolder.TriggerCombat(enemy);
         }
+
         public event Action<EnemyAiHolder> ReturnMe;
     }
 }
