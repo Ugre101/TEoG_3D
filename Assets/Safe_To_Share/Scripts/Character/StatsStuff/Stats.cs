@@ -3,19 +3,16 @@ using System.Collections.Generic;
 using Character.StatsStuff.HealthStuff;
 using UnityEngine;
 
-namespace Character.StatsStuff
-{
+namespace Character.StatsStuff {
     [Serializable]
-    public class Stats : ITickMinute, ITickHour
-    {
+    public class Stats : ITickMinute, ITickHour {
         [SerializeField] CharStat strength, intelligence, constitution, charisma, agility;
 
         [SerializeField] Health health, willPower;
         Dictionary<CharStatType, CharStat> getCharStats;
 
 
-        public Stats(int strength, int intelligence, int constitution, int charisma, int agility)
-        {
+        public Stats(int strength, int intelligence, int constitution, int charisma, int agility) {
             this.strength = new CharStat(strength);
             this.intelligence = new CharStat(intelligence);
             this.constitution = new CharStat(constitution);
@@ -25,9 +22,7 @@ namespace Character.StatsStuff
             willPower = new Health(50, new IntRecovery(1), new AffectByStat(Intelligence, 5));
         }
 
-        public Stats() : this(10, 10, 10, 10, 10)
-        {
-        }
+        public Stats() : this(10, 10, 10, 10, 10) { }
 
         public CharStat Strength => strength;
 
@@ -44,8 +39,7 @@ namespace Character.StatsStuff
         public bool Dead => WillPower.Dead || Health.Dead;
 
         public Dictionary<CharStatType, CharStat> GetCharStats =>
-            getCharStats ??= new Dictionary<CharStatType, CharStat>
-            {
+            getCharStats ??= new Dictionary<CharStatType, CharStat> {
                 { CharStatType.Strength, Strength },
                 { CharStatType.Intelligence, Intelligence },
                 { CharStatType.Constitution, Constitution },
@@ -64,10 +58,9 @@ namespace Character.StatsStuff
         //         {HealthTypes.WillPowerRecovery, WillPower.IntRecovery},
         //     };
 
-        public bool TickHour(int ticks = 1)
-        {
-            bool change = false;
-            foreach (CharStat stat in GetCharStats.Values)
+        public bool TickHour(int ticks = 1) {
+            var change = false;
+            foreach (var stat in GetCharStats.Values)
                 if (stat.Mods.TickHour(ticks))
                     change = true;
             if (Health.TickHour(ticks))
@@ -77,20 +70,17 @@ namespace Character.StatsStuff
             return change;
         }
 
-        public void TickMin(int ticks = 1)
-        {
+        public void TickMin(int ticks = 1) {
             Health.TickMin(ticks);
             WillPower.TickMin(ticks);
         }
 
-        public void FullRecovery(int percent = 100)
-        {
+        public void FullRecovery(int percent = 100) {
             Health.FullRecovery(percent);
             WillPower.FullRecovery(percent);
         }
 
-        public void Loaded()
-        {
+        public void Loaded() {
             // ItemMods
             //  health = new Health(50, new IntRecovery(1), new AffectByStat(Constitution, 5));
             //   willPower = new Health(50, new IntRecovery(1), new AffectByStat(Intelligence, 5));

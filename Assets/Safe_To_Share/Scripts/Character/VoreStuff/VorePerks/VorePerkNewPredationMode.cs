@@ -1,6 +1,3 @@
-﻿namespace Character.VoreStuff.VorePerks
-{
-    public abstract class VorePerkNewPredationMode : VorePerkNewDigestionMode
-    {
-    }
+﻿namespace Character.VoreStuff.VorePerks {
+    public abstract class VorePerkNewPredationMode : VorePerkNewDigestionMode { }
 }

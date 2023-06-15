@@ -2,11 +2,9 @@
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Character.CreateCharacterStuff
-{
+namespace Character.CreateCharacterStuff {
     [Serializable]
-    public struct BattleReward
-    {
+    public struct BattleReward {
         [SerializeField] int goldReward;
         [SerializeField] int expReward;
         [SerializeField] RngValue rngValue;

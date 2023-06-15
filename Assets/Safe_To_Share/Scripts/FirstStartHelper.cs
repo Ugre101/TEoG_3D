@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts
-{
-    public sealed class FirstStartHelper : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts {
+    public sealed class FirstStartHelper : MonoBehaviour {
         public static bool ShowHelp;
         [SerializeField] List<HelpText> helpTexts = new();
         [SerializeField, Range(0.5f, 5f),] float showFirstAfter;
@@ -19,25 +17,22 @@ namespace Safe_To_Share.Scripts
 
         static HashSet<string> Seen { get; } = new();
 
-        void Start()
-        {
+        void Start() {
 #if UNITY_EDITOR
             ShowHelp = true;
 #endif
-            if (ShowHelp && Seen.Add(guid))
-            {
+            if (ShowHelp && Seen.Add(guid)) {
                 waitForSecondsBeforeFirst = new WaitForSeconds(showFirstAfter);
                 showForSeconds = new WaitForSeconds(showTime);
                 waitBetweenForSeconds = new WaitForSeconds(inBetweenTime);
                 StartCoroutine(ShowMessages());
-            }
-            else
+            } else {
                 RemoveHelpText();
+            }
         }
 
 # if UNITY_EDITOR
-        void OnValidate()
-        {
+        void OnValidate() {
             if (string.IsNullOrEmpty(guid))
                 guid = Guid.NewGuid().ToString();
         }
@@ -45,17 +40,14 @@ namespace Safe_To_Share.Scripts
 
         void RemoveHelpText() => Destroy(gameObject);
 
-        IEnumerator ShowMessages()
-        {
+        IEnumerator ShowMessages() {
             yield return waitForSecondsBeforeFirst;
-            foreach (var message in helpTexts)
-            {
+            foreach (var message in helpTexts) {
                 message.onText.text = message.message;
                 yield return showForSeconds;
                 float timeFaded = 0;
-                Color orgColor = message.onText.color;
-                while (fadeTime > timeFaded)
-                {
+                var orgColor = message.onText.color;
+                while (fadeTime > timeFaded) {
                     timeFaded += Time.deltaTime;
                     var color = message.onText.color;
                     color.a = 1f * (1 - timeFaded / fadeTime);
@@ -73,8 +65,7 @@ namespace Safe_To_Share.Scripts
         }
 
         [Serializable]
-        struct HelpText
-        {
+        struct HelpText {
             [TextArea] public string message;
 
             public TextMeshProUGUI onText;

@@ -1,10 +1,8 @@
 ﻿using Character.PlayerStuff;
 using UnityEngine;
 
-namespace Character.Service
-{
-    public abstract class BaseService : ScriptableObject
-    {
+namespace Character.Service {
+    public abstract class BaseService : ScriptableObject {
         [SerializeField] string title;
         [SerializeField, TextArea,] string desc;
         [SerializeField] int cost;
@@ -15,8 +13,6 @@ namespace Character.Service
 
         public int Cost => cost;
 
-        public virtual void OnUse(Player player)
-        {
-        }
+        public virtual void OnUse(Player player) { }
     }
 }

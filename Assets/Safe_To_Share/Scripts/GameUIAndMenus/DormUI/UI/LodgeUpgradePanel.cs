@@ -1,12 +1,9 @@
 ﻿using DormAndHome.Dorm;
 using Safe_To_Share.Scripts.Static;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
-{
-    public sealed class LodgeUpgradePanel : BuildingUpgradePanel
-    {
-        void OnEnable()
-        {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI {
+    public sealed class LodgeUpgradePanel : BuildingUpgradePanel {
+        void OnEnable() {
             mainBuilding.Setup(playerHolder.Player, DormManager.Instance.Buildings.DormLodge);
             ShowSubOptions();
             DormUpgradeButton.UpdateDormBuildings += ShowSubOptions;
@@ -14,8 +11,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 
         void OnDisable() => DormUpgradeButton.UpdateDormBuildings -= ShowSubOptions;
 
-        void ShowSubOptions()
-        {
+        void ShowSubOptions() {
             content.KillChildren();
             if (DormManager.Instance.Buildings.DormLodge.Level <= 1)
                 return;

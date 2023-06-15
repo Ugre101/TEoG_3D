@@ -2,10 +2,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class GameUIHotKeyButton : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class GameUIHotKeyButton : MonoBehaviour {
         [SerializeField] TextMeshProUGUI keyText;
 
         [SerializeField] InputActionReference hotKey;

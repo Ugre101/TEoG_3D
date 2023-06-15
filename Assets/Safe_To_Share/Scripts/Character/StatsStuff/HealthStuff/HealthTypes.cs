@@ -1,7 +1,5 @@
-﻿namespace Character.StatsStuff.HealthStuff
-{
-    public enum HealthTypes
-    {
+﻿namespace Character.StatsStuff.HealthStuff {
+    public enum HealthTypes {
         Health,
         WillPower,
         HealthRecovery,

@@ -2,10 +2,8 @@
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Options
-{
-    public sealed class ShadowQuality : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Options {
+    public sealed class ShadowQuality : MonoBehaviour {
         [SerializeField] TMP_Dropdown dropdown;
         void Start() => dropdown.SetupTmpDropDown(QualitySettings.shadowResolution, ChangeTier);
 

@@ -6,15 +6,12 @@ using Character.DefeatScenarios.Custom;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
-{
-    public sealed class LoseScenarioLoadMenu : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario {
+    public sealed class LoseScenarioLoadMenu : MonoBehaviour {
         [SerializeField] LoseScenarioLoadMenuButton prefab;
         [SerializeField] Transform container;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             Setup();
             LoseScenarioLoadMenuButton.LoadScenario += CloseMenu;
         }
@@ -23,29 +20,26 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
 
         void CloseMenu(CustomLoseScenario obj) => gameObject.SetActive(false);
 
-        public void Setup()
-        {
+        public void Setup() {
             if (!Directory.Exists(CustomLoseBuilderMenu.CustomScenarioFolder))
                 return;
             var saves = Directory
-                .GetFiles(CustomLoseBuilderMenu.CustomScenarioFolder, "*.*", SearchOption.AllDirectories)
-                .Where(f => f.EndsWith(".json", StringComparison.OrdinalIgnoreCase));
+                       .GetFiles(CustomLoseBuilderMenu.CustomScenarioFolder, "*.*", SearchOption.AllDirectories)
+                       .Where(f => f.EndsWith(".json", StringComparison.OrdinalIgnoreCase));
             SetupSaves(saves);
         }
 
-        void SetupSaves(IEnumerable<string> saves)
-        {
+        void SetupSaves(IEnumerable<string> saves) {
             container.KillChildren();
-            foreach (string save in saves)
+            foreach (var save in saves)
                 SetupSaveBtn(save);
         }
 
-        void SetupSaveBtn(string save)
-        {
+        void SetupSaveBtn(string save) {
             var loadBtn = Instantiate(prefab, container);
-            string fileName = save.Replace(CustomLoseBuilderMenu.CustomScenarioFolder, string.Empty)
-                .Replace(".json", string.Empty).Replace("\\", string.Empty);
-            CustomLoseScenario toLoad = JsonUtility.FromJson<CustomLoseScenario>(File.ReadAllText(save));
+            var fileName = save.Replace(CustomLoseBuilderMenu.CustomScenarioFolder, string.Empty)
+                               .Replace(".json", string.Empty).Replace("\\", string.Empty);
+            var toLoad = JsonUtility.FromJson<CustomLoseScenario>(File.ReadAllText(save));
             loadBtn.Setup(fileName, toLoad);
         }
     }

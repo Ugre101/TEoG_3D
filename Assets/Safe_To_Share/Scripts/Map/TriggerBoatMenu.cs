@@ -2,10 +2,8 @@ using System;
 using SceneStuff;
 using UnityEngine;
 
-namespace Map
-{
-    public class TriggerBoatMenu : MonoBehaviour
-    {
+namespace Map {
+    public class TriggerBoatMenu : MonoBehaviour {
         [SerializeField] protected SceneTeleportExit exit;
         [SerializeField] Transform exitLocation;
         public Vector3 ExitLocation => exitLocation.position;
@@ -14,8 +12,7 @@ namespace Map
 
         void OnDrawGizmosSelected() => Gizmos.DrawSphere(ExitLocation, 0.2f);
 
-        void OnTriggerEnter(Collider other)
-        {
+        void OnTriggerEnter(Collider other) {
             if (!other.CompareTag("Player"))
                 return;
             OnPlayerEnter();

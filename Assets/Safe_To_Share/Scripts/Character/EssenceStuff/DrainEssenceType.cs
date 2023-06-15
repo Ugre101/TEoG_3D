@@ -1,7 +1,5 @@
-﻿namespace Character.EssenceStuff
-{
-    public enum DrainEssenceType
-    {
+﻿namespace Character.EssenceStuff {
+    public enum DrainEssenceType {
         None,
         Masc,
         Femi,

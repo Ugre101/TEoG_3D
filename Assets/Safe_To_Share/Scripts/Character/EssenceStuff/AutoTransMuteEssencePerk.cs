@@ -1,20 +1,16 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Character.EssenceStuff
-{
+namespace Character.EssenceStuff {
     [CreateAssetMenu(menuName = "Character/Create AutoTransMuteEssencePerk", fileName = "AutoTransMuteEssencePerk",
         order = 0)]
-    public sealed class AutoTransMuteEssencePerk : EssencePerk
-    {
+    public sealed class AutoTransMuteEssencePerk : EssencePerk {
         [SerializeField, Range(0, 1000f),] int essenceToChange = 25;
         [SerializeField, Range(0, 100f),] int bonus;
 
-        public override void OnPartnerOrgasmPerkEffect(BaseCharacter perkOwner, BaseCharacter partner)
-        {
+        public override void OnPartnerOrgasmPerkEffect(BaseCharacter perkOwner, BaseCharacter partner) {
             ChangeLog changeLog = new();
-            switch (perkOwner.Essence.EssenceOptions.TransmuteTo)
-            {
+            switch (perkOwner.Essence.EssenceOptions.TransmuteTo) {
                 case DrainEssenceType.None:
                     break;
                 case DrainEssenceType.Masc:

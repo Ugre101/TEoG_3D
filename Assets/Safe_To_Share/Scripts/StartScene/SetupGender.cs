@@ -10,11 +10,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.StartScene
-{
+namespace Safe_To_Share.Scripts.StartScene {
     [Serializable]
-    public class SetupGender
-    {
+    public class SetupGender {
         [SerializeField] TMP_Dropdown genderDropdown;
         [SerializeField] TextMeshProUGUI genderInfo;
         [SerializeField] AssetReference doll;
@@ -28,21 +26,18 @@ namespace Safe_To_Share.Scripts.StartScene
         AsyncOperationHandle<StartGenderPerk> loadingOp;
         Gender startGender = Gender.Doll;
 
-        public void SetupGenderDropDown()
-        {
+        public void SetupGenderDropDown() {
             genderDropdown.SetupTmpDropDown(startGender, ChangeStartGender);
             ChangeStartGender(startGender.IndexOfEnum());
         }
 
-        public IEnumerator SetStartGender(Player tempPlayer)
-        {
+        public IEnumerator SetStartGender(Player tempPlayer) {
             if (!loadingOp.IsDone)
                 yield return loadingOp;
             const int startEssence = 160;
-            EssenceSystem essence = tempPlayer.Essence;
+            var essence = tempPlayer.Essence;
             loaded.GainPerk(tempPlayer);
-            switch (startGender)
-            {
+            switch (startGender) {
                 case Gender.Doll:
                     break;
                 case Gender.Male:
@@ -69,7 +64,7 @@ namespace Safe_To_Share.Scripts.StartScene
                     break;
                 case Gender.Futanari:
                     essence.Femininity.GainEssence(Mathf.RoundToInt(startEssence * 0.6f));
-                    essence.Masculinity.GainEssence( Mathf.RoundToInt(startEssence * 0.4f));
+                    essence.Masculinity.GainEssence(Mathf.RoundToInt(startEssence * 0.4f));
                     break;
                 case Gender.MaleFutanari:
                     essence.Masculinity.GainEssence(startEssence / 2);
@@ -88,14 +83,12 @@ namespace Safe_To_Share.Scripts.StartScene
             essence.Masculinity.Clear();
         }
 
-        void ChangeStartGender(int arg0)
-        {
+        void ChangeStartGender(int arg0) {
             genderInfo.text = "Loading..";
             startGender = UgreTools.IntToEnum(arg0, Gender.Doll);
             if (loadingOp.IsValid())
                 Addressables.Release(loadingOp);
-            loadingOp = startGender switch
-            {
+            loadingOp = startGender switch {
                 Gender.Doll => doll.LoadAssetAsync<StartGenderPerk>(),
                 Gender.Male => male.LoadAssetAsync<StartGenderPerk>(),
                 Gender.Female => female.LoadAssetAsync<StartGenderPerk>(),
@@ -108,20 +101,17 @@ namespace Safe_To_Share.Scripts.StartScene
             loadingOp.Completed += LoadedGender;
         }
 
-        void LoadedGender(AsyncOperationHandle<StartGenderPerk> obj)
-        {
+        void LoadedGender(AsyncOperationHandle<StartGenderPerk> obj) {
             loaded = obj.Result;
             PrintGenderInfo();
         }
 
-        void PrintGenderInfo()
-        {
+        void PrintGenderInfo() {
             genderInfo.text = $"{UgreTools.StringFormatting.AddSpaceAfterCapitalLetter(loaded.ToString())}\n" +
                               $"{Info()}\n\n(In future builds there will more effects of your start gender)";
 
             string Info() =>
-                startGender switch
-                {
+                startGender switch {
                     Gender.Doll => "You are an empty canvas making it easier for you to be transformed.",
                     Gender.Male => "Start with an average sized dick & balls.",
                     Gender.Female => "Start with an average sized vagina & boobs.",

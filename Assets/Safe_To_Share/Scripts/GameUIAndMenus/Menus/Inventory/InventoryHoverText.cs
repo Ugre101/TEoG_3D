@@ -1,11 +1,8 @@
-﻿namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
-{
-    public sealed class InventoryHoverText : ItemBaseHoverText
-    {
+﻿namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory {
+    public sealed class InventoryHoverText : ItemBaseHoverText {
         bool started;
 
-        void Start()
-        {
+        void Start() {
             InventorySlotItem.ShowItem += ShowItem;
             InventorySlotItem.StopShowing += StopShowing;
             InventoryMenu.StopHoverInfo += StopShowing;
@@ -14,14 +11,12 @@
             started = true;
         }
 
-        void OnDisable()
-        {
+        void OnDisable() {
             if (started)
                 gameObject.SetActive(false);
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             InventorySlotItem.ShowItem -= ShowItem;
             InventorySlotItem.StopShowing -= StopShowing;
             InventoryMenu.StopHoverInfo -= StopShowing;

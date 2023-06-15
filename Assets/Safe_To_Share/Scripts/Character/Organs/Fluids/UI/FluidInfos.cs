@@ -1,32 +1,27 @@
 ﻿using UnityEngine;
 
-namespace Character.Organs.Fluids.UI
-{
-    public sealed class FluidInfos : MonoBehaviour
-    {
+namespace Character.Organs.Fluids.UI {
+    public sealed class FluidInfos : MonoBehaviour {
         [SerializeField] FluidInfo cumInfo;
         [SerializeField] FluidInfo milkInfo;
 
         BaseCharacter character;
 
-        void OnDisable()
-        {
+        void OnDisable() {
             if (character == null)
                 return;
             character.SexualOrgans.Balls.Fluid.CurrentValueChange -= UpdateCum;
             character.SexualOrgans.Boobs.Fluid.CurrentValueChange -= UpdateMilk;
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             if (character == null)
                 return;
             character.SexualOrgans.Balls.Fluid.CurrentValueChange -= UpdateCum;
             character.SexualOrgans.Boobs.Fluid.CurrentValueChange -= UpdateMilk;
         }
 
-        public void Setup(BaseCharacter myCharacter)
-        {
+        public void Setup(BaseCharacter myCharacter) {
             character = myCharacter;
             UpdateCum(0f);
             UpdateMilk(0f);

@@ -1,37 +1,31 @@
 ﻿using UnityEditor;
 
-namespace Character.CreateCharacterStuff.EditorPresets
-{
+namespace Character.CreateCharacterStuff.EditorPresets {
     [CustomEditor(typeof(EnemyPreset))]
-    public class EnemyPresetEditor : CharacterPresetEditor
-    {
+    public class EnemyPresetEditor : CharacterPresetEditor {
         static bool rewardFold, canTakeFold, loseFold;
         SerializedProperty canTake;
         SerializedProperty loseScenario;
         SerializedProperty reward;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             BaseOnEnable();
             EnemyOnEnable();
         }
 
-        protected void EnemyOnEnable()
-        {
+        protected void EnemyOnEnable() {
             reward = serializedObject.FindProperty("battleReward");
             canTake = serializedObject.FindProperty("canTakeEnemyHome");
             loseScenario = serializedObject.FindProperty("loseScenarios");
         }
 
-        protected override void CloseFolds()
-        {
+        protected override void CloseFolds() {
             base.CloseFolds();
             rewardFold = false;
             canTakeFold = false;
         }
 
-        public override void OnInspectorGUI()
-        {
+        public override void OnInspectorGUI() {
             Buttons();
 
             EditorGUILayout.BeginHorizontal();
@@ -47,8 +41,7 @@ namespace Character.CreateCharacterStuff.EditorPresets
             BottomStuff();
         }
 
-        void BasicPropertyFold(bool fold, SerializedProperty property)
-        {
+        void BasicPropertyFold(bool fold, SerializedProperty property) {
             if (!fold) return;
             EditorGUILayout.BeginVertical("box");
             serializedObject.Update();

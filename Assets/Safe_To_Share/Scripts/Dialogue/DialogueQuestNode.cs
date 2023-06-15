@@ -1,10 +1,8 @@
 ﻿using QuestStuff;
 using UnityEngine;
 
-namespace Dialogue
-{
-    public sealed class DialogueQuestNode : DialogueBaseNode
-    {
+namespace Dialogue {
+    public sealed class DialogueQuestNode : DialogueBaseNode {
         [SerializeField] QuestInfo questQuest;
 
         public QuestInfo Quest => questQuest;

@@ -1,12 +1,10 @@
 using System;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Movement.HoverMovement
-{
+namespace Safe_To_Share.Scripts.Movement.HoverMovement {
     [Serializable]
-    public struct FloatMod
-    {
-        public FloatMod(float value) => Value = value;
+    public struct FloatMod {
         [field: SerializeField] public float Value { get; private set; }
+        public FloatMod(float value) => Value = value;
     }
 }

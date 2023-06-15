@@ -1,9 +1,7 @@
 ﻿using System;
 
-namespace Character.Organs.Fluids.SexualFluids
-{
-    public sealed class Cum : FluidType
-    {
+namespace Character.Organs.Fluids.SexualFluids {
+    public sealed class Cum : FluidType {
         public override string Title => "Cum";
 
         public override string Taste => "Salty";

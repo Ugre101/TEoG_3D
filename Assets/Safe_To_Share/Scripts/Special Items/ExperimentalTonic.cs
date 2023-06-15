@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using AvatarStuff.Holders;
 using Character;
 using Character.BodyStuff;
 using Character.EssenceStuff;
@@ -11,14 +10,11 @@ using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Safe_To_Share.Scripts.Special_Items
-{
+namespace Safe_To_Share.Scripts.Special_Items {
     [CreateAssetMenu(menuName = "Items/Special Items/Create Experimental Tonic", fileName = "ExperimentalTonic",
         order = 0)]
-    public sealed class ExperimentalTonic : Item
-    {
-        readonly RandomEffect[] randomEffects =
-        {
+    public sealed class ExperimentalTonic : Item {
+        readonly RandomEffect[] randomEffects = {
             new Shrink(1),
             new Grow(2),
             new GrowOrgan(2),
@@ -29,19 +25,16 @@ namespace Safe_To_Share.Scripts.Special_Items
             new GainStat(1),
         };
 
-        public override void Use(BaseCharacter user)
-        {
+        public override void Use(BaseCharacter user) {
             float tot = randomEffects.Sum(re => re.Weight);
-            float rng = UnityEngine.Random.Range(0, tot + 1);
-            RandomEffect chosen = GetARandomEffect(rng);
+            var rng = UnityEngine.Random.Range(0, tot + 1);
+            var chosen = GetARandomEffect(rng);
             chosen?.Use(user, Guid);
         }
 
-        RandomEffect GetARandomEffect(float rng)
-        {
-            int weight = 0;
-            foreach (RandomEffect randomEffect in randomEffects)
-            {
+        RandomEffect GetARandomEffect(float rng) {
+            var weight = 0;
+            foreach (var randomEffect in randomEffects) {
                 weight += randomEffect.Weight;
                 if (rng <= weight)
                     return randomEffect;
@@ -50,82 +43,63 @@ namespace Safe_To_Share.Scripts.Special_Items
             return null;
         }
 
-        abstract class RandomEffect
-        {
+        abstract class RandomEffect {
             protected RandomEffect(int weight) => Weight = weight;
 
             public int Weight { get; }
             public abstract void Use(BaseCharacter user, string itemGuid);
         }
 
-        sealed class Shrink : RandomEffect
-        {
-            public Shrink(int weight) : base(weight)
-            {
-            }
+        sealed class Shrink : RandomEffect {
+            public Shrink(int weight) : base(weight) { }
 
             public override void Use(BaseCharacter user, string itemGuid) => user.Body.ShrinkBodyByPercent(10);
         }
 
-        sealed class Grow : RandomEffect
-        {
-            public Grow(int weight) : base(weight)
-            {
-            }
+        sealed class Grow : RandomEffect {
+            public Grow(int weight) : base(weight) { }
 
             public override void Use(BaseCharacter user, string itemGuid) => user.Body.GrowBodyByPercent(5);
         }
 
-        sealed class GrowOrgan : RandomEffect
-        {
+        sealed class GrowOrgan : RandomEffect {
             readonly Random rng = new();
 
-            public GrowOrgan(int weight) : base(weight)
-            {
-            }
+            public GrowOrgan(int weight) : base(weight) { }
 
-            public override void Use(BaseCharacter user, string itemGuid)
-            {
+            public override void Use(BaseCharacter user, string itemGuid) {
                 List<BaseOrgan> organs = new();
                 organs.AddRange(user.SexualOrgans.Balls.BaseList);
                 organs.AddRange(user.SexualOrgans.Dicks.BaseList);
                 organs.AddRange(user.SexualOrgans.Boobs.BaseList);
                 organs.AddRange(user.SexualOrgans.Vaginas.BaseList);
                 if (organs.Count <= 0) return;
-                for (int i = 0; i < UnityEngine.Random.Range(1, 6); i++)
+                for (var i = 0; i < UnityEngine.Random.Range(1, 6); i++)
                     organs[rng.Next(organs.Count)].BaseValue++;
             }
         }
 
-        sealed class TempMini : RandomEffect
-        {
-            public TempMini(int weight) : base(weight)
-            {
-            }
+        sealed class TempMini : RandomEffect {
+            public TempMini(int weight) : base(weight) { }
 
             public override void Use(BaseCharacter user, string itemGuid) =>
                 user.Body.Height.Mods.AddTempStatMod(1, -80, itemGuid, ModType.Percent);
         }
 
-        sealed class TempShrinkOrgans : RandomEffect
-        {
+        sealed class TempShrinkOrgans : RandomEffect {
             readonly Random rng = new();
 
-            public TempShrinkOrgans(int weight) : base(weight)
-            {
-            }
+            public TempShrinkOrgans(int weight) : base(weight) { }
 
-            public override void Use(BaseCharacter user, string itemGuid)
-            {
+            public override void Use(BaseCharacter user, string itemGuid) {
                 List<BaseOrgan> organs = new();
                 organs.AddRange(user.SexualOrgans.Balls.BaseList);
                 organs.AddRange(user.SexualOrgans.Dicks.BaseList);
                 organs.AddRange(user.SexualOrgans.Boobs.BaseList);
                 organs.AddRange(user.SexualOrgans.Vaginas.BaseList);
                 if (organs.Count <= 0) return;
-                for (int i = 0; i < 13; i++)
-                {
-                    BaseOrgan baseOrgan = organs[rng.Next(organs.Count)];
+                for (var i = 0; i < 13; i++) {
+                    var baseOrgan = organs[rng.Next(organs.Count)];
                     baseOrgan.Mods.AddTempStatMod(2, -50, itemGuid, ModType.Percent);
                     organs.Remove(baseOrgan);
                     if (organs.Count == 0)
@@ -134,49 +108,33 @@ namespace Safe_To_Share.Scripts.Special_Items
             }
         }
 
-        sealed class TempSwole : RandomEffect
-        {
-            public TempSwole(int weight) : base(weight)
-            {
-            }
+        sealed class TempSwole : RandomEffect {
+            public TempSwole(int weight) : base(weight) { }
 
             public override void Use(BaseCharacter user, string itemGuid) =>
                 user.Body.Muscle.Mods.AddTempStatMod(12, 30, itemGuid, ModType.Percent);
         }
 
-        sealed class TempFat : RandomEffect
-        {
-            public TempFat(int weight) : base(weight)
-            {
-            }
+        sealed class TempFat : RandomEffect {
+            public TempFat(int weight) : base(weight) { }
 
             public override void Use(BaseCharacter user, string itemGuid) =>
                 user.Body.Fat.Mods.AddTempStatMod(8, 22, itemGuid, ModType.Flat);
         }
 
-        class SecretIsland : RandomEffect
-        {
+        class SecretIsland : RandomEffect {
             // Small hidden island  
-            public SecretIsland(int weight) : base(weight)
-            {
-            }
+            public SecretIsland(int weight) : base(weight) { }
 
-            public override void Use(BaseCharacter user, string itemGuid)
-            {
-            }
+            public override void Use(BaseCharacter user, string itemGuid) { }
         }
 
-        sealed class GainStat : RandomEffect
-        {
-            public GainStat(int weight) : base(weight)
-            {
-            }
+        sealed class GainStat : RandomEffect {
+            public GainStat(int weight) : base(weight) { }
 
-            public override void Use(BaseCharacter user, string itemGuid)
-            {
-                int rng = UnityEngine.Random.Range(0, 5);
-                switch (rng)
-                {
+            public override void Use(BaseCharacter user, string itemGuid) {
+                var rng = UnityEngine.Random.Range(0, 5);
+                switch (rng) {
                     case 0:
                         user.Stats.Agility.BaseValue++;
                         break;
@@ -196,14 +154,10 @@ namespace Safe_To_Share.Scripts.Special_Items
             }
         }
 
-        class SelfDrain : RandomEffect
-        {
-            public SelfDrain(int weight) : base(weight)
-            {
-            }
+        class SelfDrain : RandomEffect {
+            public SelfDrain(int weight) : base(weight) { }
 
-            public override void Use(BaseCharacter user, string itemGuid)
-            {
+            public override void Use(BaseCharacter user, string itemGuid) {
                 ChangeLog log = new();
                 if (UnityEngine.Random.value > 0.5f)
                     user.GainFemi(user.LoseMasc(user.DrainAmount(user), log));
@@ -212,14 +166,10 @@ namespace Safe_To_Share.Scripts.Special_Items
             }
         }
 
-        class BadGas : RandomEffect
-        {
-            public BadGas(int weight) : base(weight)
-            {
-            }
+        class BadGas : RandomEffect {
+            public BadGas(int weight) : base(weight) { }
 
-            public override void Use(BaseCharacter user, string itemGuid)
-            {
+            public override void Use(BaseCharacter user, string itemGuid) {
                 var holder = PlayerHolder.Instance;
                 if (holder != null && holder.TryGetComponent(out Rigidbody rigidbody))
                     rigidbody.AddForce(Vector3.up * 12f, ForceMode.Impulse);

@@ -4,16 +4,13 @@ using UnityEngine;
 
 //using Character;
 
-namespace Safe_To_Share.Scripts.Static
-{
-    public static class DateSystem
-    {
+namespace Safe_To_Share.Scripts.Static {
+    public static class DateSystem {
         static int day;
         static int hour = 12;
         static int minute;
 
-        static readonly Dictionary<int, string> Months = new()
-        {
+        static readonly Dictionary<int, string> Months = new() {
             { 1, "January" }, { 2, "February" }, { 3, "March" }, { 4, "April" }, { 5, "May" }, { 6, "June" },
             { 7, "July" }, { 8, "August" }, { 9, "September" }, { 10, "October" }, { 11, "November" },
             { 12, "December" },
@@ -21,16 +18,13 @@ namespace Safe_To_Share.Scripts.Static
 
         public static int Year { get; private set; }
 
-        public static int Day
-        {
+        public static int Day {
             get => day;
-            private set
-            {
+            private set {
                 if (day < value)
                     TickDay?.Invoke(value - day);
                 day = value;
-                while (day > 365)
-                {
+                while (day > 365) {
                     day -= 365;
                     Year++;
                 }
@@ -39,17 +33,14 @@ namespace Safe_To_Share.Scripts.Static
             }
         }
 
-        public static int Hour
-        {
+        public static int Hour {
             get => hour;
-            private set
-            {
+            private set {
                 if (hour < value)
                     TickHour?.Invoke(value - hour);
                 hour = value;
                 // 24
-                while (hour >= 24)
-                {
+                while (hour >= 24) {
                     hour -= 24;
                     Day++;
                 }
@@ -58,16 +49,13 @@ namespace Safe_To_Share.Scripts.Static
             }
         }
 
-        public static int Minute
-        {
+        public static int Minute {
             get => minute;
-            private set
-            {
+            private set {
                 if (minute < value)
                     TickMinute?.Invoke(value - minute);
                 minute = value;
-                while (minute >= 60)
-                {
+                while (minute >= 60) {
                     minute -= 60;
                     Hour++;
                 }
@@ -88,8 +76,7 @@ namespace Safe_To_Share.Scripts.Static
         public static event Action<int> TickDay;
         public static event Action<int> NewDay;
 
-        public static int GetMonthInt()
-        {
+        public static int GetMonthInt() {
             if (Day <= 31) return 1;
             if (Day <= 59) return 2;
             if (Day <= 90) return 3;
@@ -105,13 +92,12 @@ namespace Safe_To_Share.Scripts.Static
         }
 
         public static string GetMonth(bool shorten = false) =>
-            Months.TryGetValue(GetMonthInt(), out string value)
+            Months.TryGetValue(GetMonthInt(), out var value)
                 ? shorten ? value.Substring(0, 3) : value
                 : "Err";
 
         public static string GetDayName(bool shorten = false) =>
-            (Day % 7) switch
-            {
+            (Day % 7) switch {
                 0 => shorten ? "Mo" : "Monday",
                 1 => shorten ? "Tu" : "Tuesday",
                 2 => shorten ? "We" : "Wednesday",
@@ -124,16 +110,14 @@ namespace Safe_To_Share.Scripts.Static
 
         public static void PassMinute(int ticks = 1) => Minute += Mathf.Max(0, ticks);
 
-        public static void PassHour(int ticks = 1)
-        {
+        public static void PassHour(int ticks = 1) {
             TickMinute?.Invoke(ticks * 60);
             Hour += ticks;
         }
 
         public static DateSave Save() => new(Minute, Hour, Day, Year);
 
-        public static void Load(DateSave save)
-        {
+        public static void Load(DateSave save) {
             minute = save.Min;
             hour = save.Hour;
             day = save.Day;
@@ -145,23 +129,20 @@ namespace Safe_To_Share.Scripts.Static
 
         public static int DateSaveYearsAgo(DateSave date) => Year - date.Year;
 
-        public static int DateSaveDaysAgo(DateSave date)
-        {
-            int days = DateSaveYearsAgo(date) * 365;
+        public static int DateSaveDaysAgo(DateSave date) {
+            var days = DateSaveYearsAgo(date) * 365;
             days += Day - date.Day;
             return days;
         }
 
-        public static int DateSaveHoursAgo(DateSave date)
-        {
-            int hours = DateSaveDaysAgo(date) * 24;
+        public static int DateSaveHoursAgo(DateSave date) {
+            var hours = DateSaveDaysAgo(date) * 24;
             hours += Hour - date.Hour;
             return hours;
         }
 
-        public static int DateSaveMinutesAgo(DateSave date)
-        {
-            int minutes = DateSaveHoursAgo(date) * 60;
+        public static int DateSaveMinutesAgo(DateSave date) {
+            var minutes = DateSaveHoursAgo(date) * 60;
             minutes += Minute - date.Min;
             return minutes;
         }
@@ -170,12 +151,10 @@ namespace Safe_To_Share.Scripts.Static
     }
 
     [Serializable]
-    public struct DateSave
-    {
+    public struct DateSave {
         [SerializeField] int min, year, day, hour;
 
-        public DateSave(int min, int hour, int day, int year)
-        {
+        public DateSave(int min, int hour, int day, int year) {
             this.min = min;
             this.hour = hour;
             this.day = day;

@@ -1,11 +1,8 @@
 ﻿using Character.Race.Races;
 
-namespace Character.Race
-{
-    public sealed class RaceEssence
-    {
-        public RaceEssence(BasicRace race, int amount = 100)
-        {
+namespace Character.Race {
+    public sealed class RaceEssence {
+        public RaceEssence(BasicRace race, int amount = 100) {
             Race = race;
             Amount = amount;
         }
@@ -18,8 +15,7 @@ namespace Character.Race
 
         public void IncreaseAmount(int value) => Amount += value;
 
-        public bool DecreaseAmount(int value)
-        {
+        public bool DecreaseAmount(int value) {
             Amount -= value;
             return Amount <= 0;
         }

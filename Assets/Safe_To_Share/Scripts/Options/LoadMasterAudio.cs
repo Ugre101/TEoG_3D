@@ -3,17 +3,14 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Audio;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.Options
-{
-    public sealed class LoadMasterAudio : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Options {
+    public sealed class LoadMasterAudio : MonoBehaviour {
         [SerializeField] AssetReference audioMixer;
         [SerializeField] AudioControlSlider master, weather, music, footSteps;
 
         public void Setup() => audioMixer.LoadAssetAsync<AudioMixer>().Completed += Loaded;
 
-        void Loaded(AsyncOperationHandle<AudioMixer> obj)
-        {
+        void Loaded(AsyncOperationHandle<AudioMixer> obj) {
             master.SetupMixer(obj.Result);
             weather.SetupMixer(obj.Result);
             music.SetupMixer(obj.Result);

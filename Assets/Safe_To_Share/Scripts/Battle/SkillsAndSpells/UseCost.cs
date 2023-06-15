@@ -1,13 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Battle.SkillsAndSpells
-{
+namespace Battle.SkillsAndSpells {
     [Serializable]
-    public struct UseCost
-    {
-        public enum CostType
-        {
+    public struct UseCost {
+        public enum CostType {
             Stamina,
             Mana,
             Health,

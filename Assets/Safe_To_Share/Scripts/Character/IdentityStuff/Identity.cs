@@ -2,17 +2,14 @@
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Character.IdentityStuff
-{
+namespace Character.IdentityStuff {
     [Serializable]
-    public class Identity
-    {
+    public class Identity {
         [SerializeField] int id;
         [SerializeField] string firstName, lastName;
         [SerializeField] BirthDay birthDay;
 
-        public Identity()
-        {
+        public Identity() {
             id = IDGiver.NewID();
             birthDay = BirthDay.BirthedToday(21);
         }
@@ -40,12 +37,10 @@ namespace Character.IdentityStuff
         public void ChangeFirstName(string newName) => firstName = newName;
     }
 
-    public static class IdentityExtensions
-    {
-        public static int DaysOld(this BirthDay birthDay)
-        {
-            int yearDays = (DateSystem.Year - birthDay.Year) * 365;
-            int days = DateSystem.Day - birthDay.Day;
+    public static class IdentityExtensions {
+        public static int DaysOld(this BirthDay birthDay) {
+            var yearDays = (DateSystem.Year - birthDay.Year) * 365;
+            var days = DateSystem.Day - birthDay.Day;
             return yearDays + days;
         }
     }

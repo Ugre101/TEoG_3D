@@ -2,33 +2,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SaveStuff
-{
-    public sealed class AreYouSure : MonoBehaviour
-    {
+namespace SaveStuff {
+    public sealed class AreYouSure : MonoBehaviour {
         [SerializeField] Button acceptBtn, declineBtn;
         Action action;
 
-        void Start()
-        {
+        void Start() {
             acceptBtn.onClick.AddListener(Accept);
             declineBtn.onClick.AddListener(Decline);
         }
 
-        public void Setup(Action acceptAction)
-        {
+        public void Setup(Action acceptAction) {
             gameObject.SetActive(true);
             action = acceptAction;
         }
 
-        void Accept()
-        {
+        void Accept() {
             action?.Invoke();
             gameObject.SetActive(false);
         }
 
-        void Decline()
-        {
+        void Decline() {
             action = null;
             gameObject.SetActive(false);
         }

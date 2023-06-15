@@ -1,9 +1,6 @@
 ﻿using System;
 
-namespace Map
-{
+namespace Map {
     [Serializable]
-    public class DynamicMiniMapObject : MiniMapBaseObject
-    {
-    }
+    public class DynamicMiniMapObject : MiniMapBaseObject { }
 }

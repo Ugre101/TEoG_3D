@@ -1,6 +1,3 @@
-﻿namespace Dialogue
-{
-    public sealed class PreBattleDialogue : DialogueBaseNode
-    {
-    }
+﻿namespace Dialogue {
+    public sealed class PreBattleDialogue : DialogueBaseNode { }
 }

@@ -1,10 +1,8 @@
 ﻿using Character.Shop;
 using UnityEngine;
 
-namespace Dialogue
-{
-    public sealed class OpenShopDialogueNode : DialogueBaseNode
-    {
+namespace Dialogue {
+    public sealed class OpenShopDialogueNode : DialogueBaseNode {
         [SerializeField] ShopItems shopItems;
         [SerializeField] string shopTitle;
 

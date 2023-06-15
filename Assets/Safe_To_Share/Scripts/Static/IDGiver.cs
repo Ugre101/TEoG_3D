@@ -1,7 +1,5 @@
-﻿namespace Safe_To_Share.Scripts.Static
-{
-    public static class IDGiver
-    {
+﻿namespace Safe_To_Share.Scripts.Static {
+    public static class IDGiver {
         static int lastId = 1;
 
         public static int NewID() => lastId++;

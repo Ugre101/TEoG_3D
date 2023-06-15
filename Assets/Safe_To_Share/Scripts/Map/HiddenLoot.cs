@@ -4,10 +4,8 @@ using Character.PlayerStuff.Currency;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Map
-{
-    public sealed class HiddenLoot : MonoBehaviour, IInteractable
-    {
+namespace Map {
+    public sealed class HiddenLoot : MonoBehaviour, IInteractable {
         const float GoldRngRange = 0.15f;
         static readonly int OpenLid = Animator.StringToHash("openLid");
         static readonly int CloseLid = Animator.StringToHash("closeLid");
@@ -19,8 +17,7 @@ namespace Map
         [SerializeField] Animator chestController;
         bool looted;
 
-        void Start()
-        {
+        void Start() {
             if (chanceToShow >= Rng.Next(100))
                 chestController.SetTrigger(OpenLid);
             else
@@ -29,8 +26,7 @@ namespace Map
 
         public string HoverText(Player player) => looted ? "Empty" : "Loot";
 
-        public void DoInteraction(Player player)
-        {
+        public void DoInteraction(Player player) {
             if (looted)
                 return;
             PlayerGold.GoldBag.GainGold(GetGoldGain());

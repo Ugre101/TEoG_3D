@@ -9,18 +9,15 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class LooksMenu : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class LooksMenu : GameMenu {
         [SerializeField] TextMeshProUGUI summary;
         [SerializeField] RaceInfo raceInfo;
         [SerializeField] BodyInfo bodyInfo;
         [SerializeField] FluidInfo cumInfo, milkInfo;
         [SerializeField] BowelBladderPressure bowelBladderPressure;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             raceInfo.PrintRaceInfo(Player);
             bodyInfo.PrintBodyInfo(Player);
             cumInfo.UpdateFluid(Player.SexualOrgans.Balls, Player.Body.Height.Value);
@@ -30,8 +27,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             transform.SleepChildren(transform.GetChild(0).gameObject);
         }
 
-        void PrintSummary()
-        {
+        void PrintSummary() {
             StringBuilder sb = new();
             sb.Append($"Your name is {Player.Identity.FullName} you an 18 years old {Player.RaceSystem.Race.Title}. ");
             sb.Append(Player.HeightDesc());

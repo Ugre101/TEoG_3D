@@ -3,28 +3,25 @@ using System.Collections.Generic;
 using Character.StatsStuff.Mods;
 using UnityEngine;
 
-namespace Character.Organs
-{
+namespace Character.Organs {
     [Serializable]
-    public class AssignModsToOrganContainer
-    {
+    public class AssignModsToOrganContainer {
         [SerializeField] SexualOrganType type;
         [SerializeField] List<IntMod> organMods = new();
         [SerializeField] List<IntMod> fluidMods = new();
         [SerializeField] List<IntMod> fluidRecMods = new();
 
-        public void Assign(BaseCharacter to)
-        {
+        public void Assign(BaseCharacter to) {
             if (!to.SexualOrgans.Containers.TryGetValue(type, out var container)) return;
             if (organMods.Count > 0)
-                foreach (BaseOrgan baseOrgan in container.BaseList)
-                foreach (IntMod intMod in organMods)
+                foreach (var baseOrgan in container.BaseList)
+                foreach (var intMod in organMods)
                     baseOrgan.Mods.AddStatMod(intMod);
             if (fluidMods.Count > 0)
-                foreach (IntMod intMod in fluidMods)
+                foreach (var intMod in fluidMods)
                     container.Fluid.Mods.AddStatMod(intMod);
             if (fluidRecMods.Count > 0)
-                foreach (IntMod recMod in fluidRecMods)
+                foreach (var recMod in fluidRecMods)
                     container.Fluid.Recovery.Mods.AddStatMod(recMod);
         }
     }

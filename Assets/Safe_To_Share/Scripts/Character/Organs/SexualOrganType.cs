@@ -1,7 +1,5 @@
-﻿namespace Character.Organs
-{
-    public enum SexualOrganType
-    {
+﻿namespace Character.Organs {
+    public enum SexualOrganType {
         Dick,
         Balls,
         Boobs,

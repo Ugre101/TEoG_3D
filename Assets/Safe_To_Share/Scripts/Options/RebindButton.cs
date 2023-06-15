@@ -3,23 +3,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Options
-{
-    public sealed class RebindButton : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Options {
+    public sealed class RebindButton : MonoBehaviour {
         [SerializeField] TextMeshProUGUI title, bind1Text, bind2Text;
         [SerializeField] Button bind1, bind2;
         InputAction action;
         InputActionRebindingExtensions.RebindingOperation rebindingOperation;
 
-        void OnDisable()
-        {
+        void OnDisable() {
             rebindingOperation?.Cancel();
             CleanUp();
         }
 
-        public void Setup(InputAction inputAction)
-        {
+        public void Setup(InputAction inputAction) {
             action = inputAction;
             title.text = inputAction.name;
             bind1.onClick.AddListener(() => StartRebind(0));
@@ -28,17 +24,14 @@ namespace Safe_To_Share.Scripts.Options
             UpdateBindingDisplay(1);
         }
 
-        void StartRebind(int i)
-        {
+        void StartRebind(int i) {
             rebindingOperation?.Dispose();
             action.Disable();
-            switch (i)
-            {
+            switch (i) {
                 case 0:
                     bind1Text.text = string.Empty;
                     break;
-                case 1:
-                {
+                case 1: {
                     bind2Text.text = string.Empty;
                     if (action.bindings.Count < 2)
                         action.AddBinding("temp");
@@ -47,43 +40,37 @@ namespace Safe_To_Share.Scripts.Options
             }
 
             rebindingOperation = action.PerformInteractiveRebinding(i).WithCancelingThrough("<Keyboard>/escape")
-                .WithControlsExcluding("<Mouse>").OnMatchWaitForAnother(0.1f)
-                .OnCancel(_ =>
-                {
-                    CleanUp();
-                    RebindCancelled(i);
-                    UpdateBindingDisplay(i);
-                })
-                .OnComplete(operation =>
-                {
-                    if (CheckConflict(operation.action.bindings[i].effectivePath))
-                        RebindCancelled(i);
-                    else
-                        RebindCompleted();
+                                       .WithControlsExcluding("<Mouse>").OnMatchWaitForAnother(0.1f)
+                                       .OnCancel(_ => {
+                                            CleanUp();
+                                            RebindCancelled(i);
+                                            UpdateBindingDisplay(i);
+                                        })
+                                       .OnComplete(operation => {
+                                            if (CheckConflict(operation.action.bindings[i].effectivePath))
+                                                RebindCancelled(i);
+                                            else
+                                                RebindCompleted();
 
-                    UpdateBindingDisplay(i);
-                    CleanUp();
-                });
+                                            UpdateBindingDisplay(i);
+                                            CleanUp();
+                                        });
             rebindingOperation.Start();
         }
 
-   
-        void RebindCancelled(int i)
-        {
+
+        void RebindCancelled(int i) {
             action.RemoveBindingOverride(i);
             if (i > 0)
                 action.ChangeBinding(i).Erase();
             action.Enable();
         }
 
-        bool CheckConflict(string path)
-        {
-            foreach (var inputAction in action.actionMap)
-            {
+        bool CheckConflict(string path) {
+            foreach (var inputAction in action.actionMap) {
                 if (inputAction == action)
                     continue;
-                foreach (var binding in inputAction.bindings)
-                {
+                foreach (var binding in inputAction.bindings) {
                     if (binding.hasOverrides && binding.overridePath == path)
                         return true;
                     if (binding.path == path)
@@ -96,16 +83,13 @@ namespace Safe_To_Share.Scripts.Options
             //     a.bindings.Any(ia => ia.path == action.bindings[i].path) && a != action);
         }
 
-        void CleanUp()
-        {
+        void CleanUp() {
             rebindingOperation?.Dispose();
             rebindingOperation = null;
         }
 
-        void UpdateBindingDisplay(int i)
-        {
-            switch (i)
-            {
+        void UpdateBindingDisplay(int i) {
+            switch (i) {
                 case 0:
                     bind1Text.text = action.bindings.Count > 0
                         ? InputControlPath.ToHumanReadableString(action.bindings[0].effectivePath,
@@ -121,8 +105,7 @@ namespace Safe_To_Share.Scripts.Options
             }
         }
 
-        void RebindCompleted()
-        {
+        void RebindCompleted() {
             rebindingOperation.Dispose();
             action.Enable();
         }

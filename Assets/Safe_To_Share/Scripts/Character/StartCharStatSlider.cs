@@ -3,16 +3,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public sealed class StartCharStatSlider : MonoBehaviour
-{
+public sealed class StartCharStatSlider : MonoBehaviour {
     [SerializeField] Slider slider;
     [SerializeField] TextMeshProUGUI title;
 
     CharStat charStat;
     CharStatType charStatType;
 
-    public void Setup(CharStat stat, CharStatType statType)
-    {
+    public void Setup(CharStat stat, CharStatType statType) {
         charStat = stat;
         charStatType = statType;
         UpdateText();
@@ -20,8 +18,7 @@ public sealed class StartCharStatSlider : MonoBehaviour
         slider.onValueChanged.AddListener(Change);
     }
 
-    void Change(float arg0)
-    {
+    void Change(float arg0) {
         charStat.BaseValue = (int)arg0;
         UpdateText();
     }

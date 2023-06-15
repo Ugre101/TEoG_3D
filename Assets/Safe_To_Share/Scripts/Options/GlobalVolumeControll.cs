@@ -1,21 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Options
-{
-    public sealed class GlobalVolumeControll : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Options {
+    public sealed class GlobalVolumeControll : MonoBehaviour {
         const string GlobalAudioSave = "GlobalVolumeSave";
         [SerializeField] Slider slider;
 
-        void Start()
-        {
+        void Start() {
             slider.value = PlayerPrefs.GetFloat(GlobalAudioSave, 1f);
             slider.onValueChanged.AddListener(ChangeGlobalVolume);
         }
 
-        static void ChangeGlobalVolume(float arg0)
-        {
+        static void ChangeGlobalVolume(float arg0) {
             AudioListener.volume = Mathf.Clamp(arg0, 0f, 1f);
             PlayerPrefs.SetFloat(GlobalAudioSave, AudioListener.volume);
         }

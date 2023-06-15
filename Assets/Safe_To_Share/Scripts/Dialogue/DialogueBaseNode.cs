@@ -7,10 +7,8 @@ using UnityEngine;
 #if UNITY_EDITOR
 #endif
 
-namespace Dialogue
-{
-    public class DialogueBaseNode : BaseEditorCanvasNode
-    {
+namespace Dialogue {
+    public class DialogueBaseNode : BaseEditorCanvasNode {
         [SerializeField] string playerText;
         [SerializeField] string title;
         [SerializeField, TextArea,] string[] text;
@@ -29,10 +27,8 @@ namespace Dialogue
 
         public bool MeetsActionsConditions() => Actions.All(dialogueBaseAction => dialogueBaseAction.MeetsCondition());
 #if UNITY_EDITOR
-        public void AddAction(int i)
-        {
-            switch (i)
-            {
+        public void AddAction(int i) {
+            switch (i) {
                 case 0:
                     Actions.Add(new AddToDorm());
                     break;

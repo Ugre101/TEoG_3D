@@ -2,15 +2,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Map
-{
-    public sealed class BigMapNamedIcon : MonoBehaviour
-    {
+namespace Map {
+    public sealed class BigMapNamedIcon : MonoBehaviour {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] Image image;
 
-        public void Setup(string text, Sprite sprite)
-        {
+        public void Setup(string text, Sprite sprite) {
             title.text = text;
             image.sprite = sprite;
         }

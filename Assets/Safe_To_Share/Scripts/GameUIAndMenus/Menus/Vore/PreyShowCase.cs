@@ -9,10 +9,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
-{
-    public sealed class PreyShowCase : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore {
+    public sealed class PreyShowCase : MonoBehaviour {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI digestionModeInfo;
         [SerializeField] Button regurgitateBtn;
@@ -24,40 +22,36 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 
         public event Action<int, VoreType> RegurgitateMe;
 
-        void Regurgitate()
-        {
+        void Regurgitate() {
             RegurgitateMe?.Invoke(myPrey, type);
             Destroy(gameObject);
         }
 
-        public void Setup(Prey prey, VoreType voreType, string mode)
-        {
+        public void Setup(Prey prey, VoreType voreType, string mode) {
             myPrey = prey.Identity.ID;
             type = voreType;
             title.text = prey.Identity.FullName;
             digestionModeInfo.text = DigestionModeProgress(prey, voreType, mode);
         }
 
-        static string DigestionModeProgress(Prey prey, VoreType voreType, string mode)
-        {
+        static string DigestionModeProgress(Prey prey, VoreType voreType, string mode) {
             if (!string.IsNullOrEmpty(prey.SpecialDigestion))
                 mode = prey.SpecialDigestion;
             StringBuilder sb = new();
-            switch (mode)
-            {
+            switch (mode) {
                 case VoreOrganDigestionMode.Endo:
                     sb.Append($"Is resting inside your {Inside()}");
 
-                    string Inside() => voreType switch
-                    {
-                        VoreType.Oral => "stomach",
-                        VoreType.Balls => "balls",
-                        VoreType.UnBirth => "womb",
-                        VoreType.Anal => "",
-                        VoreType.Breast => "boobs",
-                        VoreType.Cock => "cock",
-                        _ => throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null),
-                    };
+                    string Inside() =>
+                        voreType switch {
+                            VoreType.Oral => "stomach",
+                            VoreType.Balls => "balls",
+                            VoreType.UnBirth => "womb",
+                            VoreType.Anal => "",
+                            VoreType.Breast => "boobs",
+                            VoreType.Cock => "cock",
+                            _ => throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null),
+                        };
 
                     return sb.ToString();
                 case VoreOrganDigestionMode.Digestion:
@@ -67,21 +61,20 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
                 case VoreOrganDigestionMode.Absorption:
                     sb.Append($"{prey.Gender.HeShe()} is {prey.AltProgress:#0.##}% merged into your {Into()}");
 
-                    string Into() => voreType switch
-                    {
-                        VoreType.Oral => "body",
-                        VoreType.Balls => "balls",
-                        VoreType.UnBirth => "vagina",
-                        VoreType.Anal => "body",
-                        VoreType.Breast => "boobs",
-                        VoreType.Cock => "cock",
-                        _ => throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null),
-                    };
+                    string Into() =>
+                        voreType switch {
+                            VoreType.Oral => "body",
+                            VoreType.Balls => "balls",
+                            VoreType.UnBirth => "vagina",
+                            VoreType.Anal => "body",
+                            VoreType.Breast => "boobs",
+                            VoreType.Cock => "cock",
+                            _ => throw new ArgumentOutOfRangeException(nameof(voreType), voreType, null),
+                        };
 
                     return sb.ToString();
                 default:
-                    switch (voreType)
-                    {
+                    switch (voreType) {
                         case VoreType.Oral:
                             break;
                         case VoreType.Balls:

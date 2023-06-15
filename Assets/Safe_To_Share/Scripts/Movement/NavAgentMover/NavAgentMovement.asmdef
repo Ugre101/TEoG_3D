@@ -1,16 +1,16 @@
 {
-    "name": "NavAgentMovement",
-    "rootNamespace": "",
-    "references": [
-        "GUID:98dc3c7cbe1ae424f848ad89643d0e3c"
-    ],
-    "includePlatforms": [],
-    "excludePlatforms": [],
-    "allowUnsafeCode": false,
-    "overrideReferences": false,
-    "precompiledReferences": [],
-    "autoReferenced": true,
-    "defineConstraints": [],
-    "versionDefines": [],
-    "noEngineReferences": false
+  "name": "NavAgentMovement",
+  "rootNamespace": "",
+  "references": [
+    "GUID:98dc3c7cbe1ae424f848ad89643d0e3c"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
 }

@@ -1,10 +1,8 @@
 ﻿using System;
 
-namespace Character.StatsStuff
-{
+namespace Character.StatsStuff {
     [Serializable]
-    public struct RequireCharStat
-    {
+    public struct RequireCharStat {
         public CharStatType StatType;
         public int Amount;
     }

@@ -5,30 +5,24 @@ using Character.SkillsAndSpells;
 using SaveStuff;
 using UnityEngine;
 
-namespace Character
-{
+namespace Character {
     [Serializable]
-    public class ControlledCharacter : BaseCharacter
-    {
+    public class ControlledCharacter : BaseCharacter {
         [SerializeField] AbilityBook abilityBook = new();
 
         public ControlledCharacter(ControlledCharacter character) : base(character) =>
             abilityBook = character.AndSpellBook;
 
-        protected ControlledCharacter()
-        {
-        }
+        protected ControlledCharacter() { }
 
-        public ControlledCharacter(CreateCharacter character) : base(character)
-        {
-            foreach (string startAbility in character.StartAbilities)
+        public ControlledCharacter(CreateCharacter character) : base(character) {
+            foreach (var startAbility in character.StartAbilities)
                 AndSpellBook.LearnAbility(startAbility);
         }
 
         public AbilityBook AndSpellBook => abilityBook;
 
-        public IEnumerator Load(ControlledCharacterSave toLoad)
-        {
+        public IEnumerator Load(ControlledCharacterSave toLoad) {
             yield return base.Load(toLoad.CharacterSave);
             AndSpellBook.Load(toLoad.AbilitySave);
         }

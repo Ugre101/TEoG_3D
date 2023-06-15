@@ -3,10 +3,8 @@ using SaveStuff;
 using SceneStuff;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.SceneStuff
-{
-    public sealed class SubRealmEntrance : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.SceneStuff {
+    public sealed class SubRealmEntrance : MonoBehaviour {
         [SerializeField] SceneTeleportExit exit;
         [SerializeField] SubRealmSceneSo sceneToLoad;
         [SerializeField] Transform exitLocation;
@@ -16,8 +14,7 @@ namespace Safe_To_Share.Scripts.SceneStuff
 
         void Start() => exit.SetExit(ExitLocation);
 
-        void OnTriggerEnter(Collider other)
-        {
+        void OnTriggerEnter(Collider other) {
             if (!other.gameObject.CompareTag("Player") || alreadyLoading || sceneToLoad == null)
                 return;
             if (!other.TryGetComponent(out PlayerHolder player)) return;

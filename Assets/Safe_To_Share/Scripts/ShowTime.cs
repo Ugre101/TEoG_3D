@@ -2,14 +2,11 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts
-{
-    public sealed class ShowTime : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts {
+    public sealed class ShowTime : MonoBehaviour {
         [SerializeField] TextMeshProUGUI text;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             UpdateText(101);
             DateSystem.NewHour += UpdateText;
             DateSystem.NewMinute += UpdateText;
@@ -18,8 +15,7 @@ namespace Safe_To_Share.Scripts
         void OnDisable() => UnSub();
         void OnDestroy() => UnSub();
 
-        void UnSub()
-        {
+        void UnSub() {
             DateSystem.NewHour -= UpdateText;
             DateSystem.NewMinute -= UpdateText;
         }

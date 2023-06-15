@@ -8,10 +8,8 @@ using Safe_To_Share.Scripts.GameUIAndMenus;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts
-{
-    public sealed class TestStuff : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts {
+    public sealed class TestStuff : MonoBehaviour {
         [SerializeField] RelationsShips relationsShips = new();
         [SerializeField] BaseDialogue testDial;
         [SerializeField] GameCanvas gameCanvas;
@@ -27,15 +25,12 @@ namespace Safe_To_Share.Scripts
         void Test() => StartCoroutine(AddEvents());
 
         [ContextMenu("Sleep")]
-        void Sleep()
-        {
+        void Sleep() {
             //  PlayerHolder.Instance.Sleep(sleepQuality);
         }
-        
-        IEnumerator AddEvents()
-        {
-            for (int i = 0; i < 12; i++)
-            {
+
+        IEnumerator AddEvents() {
+            for (var i = 0; i < 12; i++) {
                 EventLog.AddEvent($"Event {i}");
                 yield return new WaitForSeconds(2.5f);
             }
@@ -44,16 +39,12 @@ namespace Safe_To_Share.Scripts
         [ContextMenu("Test Dialogue")]
         void TestDialogue() => gameCanvas.OpenDialogueMenu(testDial);
 
-        enum textNum
-        {
-            test1 = 0,
-            test2 = 4,
-            test3 = 8,
+        enum textNum {
+            test1 = 0, test2 = 4, test3 = 8,
         }
 
         [Serializable]
-        struct SaveNewLine
-        {
+        struct SaveNewLine {
             public string Wow;
         }
     }

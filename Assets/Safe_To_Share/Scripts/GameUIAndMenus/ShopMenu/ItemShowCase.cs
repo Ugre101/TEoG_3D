@@ -5,10 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
-{
-    public sealed class ItemShowCase : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu {
+    public sealed class ItemShowCase : MonoBehaviour {
         [SerializeField] TextMeshProUGUI title, desc, value;
         [SerializeField] TextMeshProUGUI amountText, totalValue;
         [SerializeField] Slider amountSlider;
@@ -20,8 +18,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 
         Item item;
 
-        public void Reset()
-        {
+        public void Reset() {
             title.text = string.Empty;
             desc.text = "Click on a item";
             value.text = string.Empty;
@@ -32,18 +29,16 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 
         void ChangeAmount(float arg0) => SetQuantity(Mathf.RoundToInt(arg0));
 
-        void SetQuantity(int quantity)
-        {
+        void SetQuantity(int quantity) {
             amount = quantity;
             amountText.text = $"Quantity\n{amount}";
-            int finalCost = Mathf.CeilToInt(amount * item.Value * discountMulti);
+            var finalCost = Mathf.CeilToInt(amount * item.Value * discountMulti);
             totalValue.text = $"Final cost is {finalCost}g";
             afford = buyerGold.CanAfford(finalCost);
             totalValue.color = afford ? Color.green : Color.red;
         }
 
-        public void Setup(Item newItem, GoldBag haveGold, float discount = 0)
-        {
+        public void Setup(Item newItem, GoldBag haveGold, float discount = 0) {
             Reset();
             buyerGold = haveGold;
             discountMulti = discount;
@@ -52,7 +47,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
             desc.text = item.Desc;
             value.text = $"{item.Value}g";
             SetQuantity(1);
-            int maxAfford = Mathf.FloorToInt(haveGold.Gold / (newItem.Value * discountMulti));
+            var maxAfford = Mathf.FloorToInt(haveGold.Gold / (newItem.Value * discountMulti));
             amountSlider.maxValue = maxAfford;
             amountSlider.value = 1;
             amountSlider.onValueChanged.AddListener(ChangeAmount);
@@ -62,16 +57,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
 
         public static event Action<Item, int> BuyItemInAmount;
 
-        void BuyItem()
-        {
+        void BuyItem() {
             if (afford)
                 BuyItemInAmount?.Invoke(item, amount);
             else
                 ShowPopUpCantAfford();
         }
 
-        void ShowPopUpCantAfford()
-        {
-        }
+        void ShowPopUpCantAfford() { }
     }
 }

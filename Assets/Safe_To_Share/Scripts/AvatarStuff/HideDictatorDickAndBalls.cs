@@ -2,50 +2,42 @@
 using System.Linq;
 using UnityEngine;
 
-namespace AvatarStuff
-{
-    public sealed class HideDictatorDickAndBalls : MonoBehaviour
-    {
+namespace AvatarStuff {
+    public sealed class HideDictatorDickAndBalls : MonoBehaviour {
         [SerializeField] Material[] targetMats;
         [SerializeField] Material ballsTargetMat;
         [SerializeField] Material invisibleMat;
 
+        readonly Dictionary<SkinnedMeshRenderer, int> ballsIndexDict = new();
+
         readonly Dictionary<SkinnedMeshRenderer, List<KeyValuePair<int, Material>>> dickMatsDict = new();
         bool ballsHidden;
-
-        readonly Dictionary<SkinnedMeshRenderer, int> ballsIndexDict = new();
         bool dickHidden;
 
         bool hasMatches;
 
-        void HideDick(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers)
-        {
+        void HideDick(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers) {
             dickHidden = true;
             var meshRenderers = skinnedMeshRenderers.ToList();
             if (!hasMatches)
                 FindMats(meshRenderers);
 
-            foreach (var meshRenderer in meshRenderers)
-            {
+            foreach (var meshRenderer in meshRenderers) {
                 var rendererMaterials = meshRenderer.materials;
                 if (dickMatsDict.TryGetValue(meshRenderer, out var valuePairs))
-                    foreach ((var key, var value) in valuePairs)
+                    foreach (var (key, value) in valuePairs)
                         rendererMaterials[key] = invisibleMat;
                 meshRenderer.materials = rendererMaterials;
             }
         }
 
-        void FindMats(List<SkinnedMeshRenderer> meshRenderers)
-        {
-            foreach (var meshRenderer in meshRenderers)
-            {
+        void FindMats(List<SkinnedMeshRenderer> meshRenderers) {
+            foreach (var meshRenderer in meshRenderers) {
                 dickMatsDict.Add(meshRenderer, new List<KeyValuePair<int, Material>>());
                 var mats = meshRenderer.materials;
-                foreach (var targetMat in targetMats)
-                {
+                foreach (var targetMat in targetMats) {
                     var index = -1;
-                    for (var i = 0; i < mats.Length; i++)
-                    {
+                    for (var i = 0; i < mats.Length; i++) {
                         var material = mats[i];
                         if (material.name.Contains(targetMat.name))
                             index = i;
@@ -60,13 +52,11 @@ namespace AvatarStuff
             hasMatches = true;
         }
 
-        void ShowDick(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers)
-        {
+        void ShowDick(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers) {
             dickHidden = false;
             if (hasMatches is false) return;
 
-            foreach (var meshRenderer in skinnedMeshRenderers)
-            {
+            foreach (var meshRenderer in skinnedMeshRenderers) {
                 var rendererMaterials = meshRenderer.materials;
                 if (dickMatsDict.TryGetValue(meshRenderer, out var pairs))
                     foreach (var (key, value) in pairs)
@@ -76,18 +66,15 @@ namespace AvatarStuff
         }
 
         /// <returns>If skin color need to be updated</returns>
-        public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls)
-        {
+        public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls) {
             var update = false;
             var meshRenderers = skinnedMeshRenderers.ToList();
-            if (dickHidden && hasDick)
-            {
+            if (dickHidden && hasDick) {
                 ShowDick(meshRenderers);
                 update = true;
             }
 
-            if (ballsHidden && hasBalls)
-            {
+            if (ballsHidden && hasBalls) {
                 ShowBalls(meshRenderers);
                 update = true;
             }
@@ -99,11 +86,9 @@ namespace AvatarStuff
             return update;
         }
 
-        void ShowBalls(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers)
-        {
+        void ShowBalls(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers) {
             ballsHidden = false;
-            foreach (var meshRenderer in skinnedMeshRenderers)
-            {
+            foreach (var meshRenderer in skinnedMeshRenderers) {
                 if (!ballsIndexDict.TryGetValue(meshRenderer, out var ballsIndex)) continue;
                 var rendererMaterials = meshRenderer.materials;
                 rendererMaterials[ballsIndex] = ballsTargetMat;
@@ -111,21 +96,17 @@ namespace AvatarStuff
             }
         }
 
-        void HideBalls(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers)
-        {
+        void HideBalls(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers) {
             ballsHidden = true;
-            foreach (var meshRenderer in skinnedMeshRenderers)
-            {
+            foreach (var meshRenderer in skinnedMeshRenderers) {
                 var rendererMaterials = meshRenderer.materials;
-                if (ballsIndexDict.TryGetValue(meshRenderer, out var ballsIndex))
-                {
+                if (ballsIndexDict.TryGetValue(meshRenderer, out var ballsIndex)) {
                     rendererMaterials[ballsIndex] = invisibleMat;
                     meshRenderer.materials = rendererMaterials;
                     continue;
                 }
 
-                for (var index = 0; index < rendererMaterials.Length; index++)
-                {
+                for (var index = 0; index < rendererMaterials.Length; index++) {
                     if (!rendererMaterials[index].name.Contains(ballsTargetMat.name)) continue;
                     rendererMaterials[index] = invisibleMat;
                     ballsIndexDict.TryAdd(meshRenderer, index);

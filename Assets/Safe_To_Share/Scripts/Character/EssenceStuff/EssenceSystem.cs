@@ -8,11 +8,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Character.EssenceStuff
-{
+namespace Character.EssenceStuff {
     [Serializable]
-    public class EssenceSystem : ITickHour
-    {
+    public class EssenceSystem : ITickHour {
         [SerializeField] Essence femi = new(), masculinity = new();
         [SerializeField] StableEssence stableEssence = new(0);
         [SerializeField] EssenceOptions essenceOptions = new();
@@ -21,11 +19,11 @@ namespace Character.EssenceStuff
         public Essence Femininity => femi;
         public Essence Masculinity => masculinity;
 
-        public Dictionary<EssenceType, Essence> GetEssence => allEssence ??= new Dictionary<EssenceType, Essence>
-        {
-            { EssenceType.Femi, femi },
-            { EssenceType.Masc, masculinity },
-        };
+        public Dictionary<EssenceType, Essence> GetEssence =>
+            allEssence ??= new Dictionary<EssenceType, Essence> {
+                { EssenceType.Femi, femi },
+                { EssenceType.Masc, masculinity },
+            };
 
         public StableEssence StableEssence => stableEssence;
 
@@ -34,9 +32,8 @@ namespace Character.EssenceStuff
 
         public EssenceOptions EssenceOptions => essenceOptions;
 
-        public bool TickHour(int ticks = 1)
-        {
-            bool change = StableEssence.Mods.TickHour(ticks);
+        public bool TickHour(int ticks = 1) {
+            var change = StableEssence.Mods.TickHour(ticks);
             if (DrainAmount.Mods.TickHour(ticks))
                 change = true;
             if (GiveAmount.Mods.TickHour(ticks))
@@ -44,16 +41,14 @@ namespace Character.EssenceStuff
             return change;
         }
 
-        public IEnumerator Load(SerializableScriptableObjectSaves toLoad)
-        {
+        public IEnumerator Load(SerializableScriptableObjectSaves toLoad) {
             EssencePerks = new List<EssencePerk>();
             DrainAmount = new BaseConstIntStat(20);
             GiveAmount = new BaseConstIntStat(0);
             if (toLoad.SavedGuids == null)
                 yield break;
-            foreach (AsyncOperationHandle<EssencePerk> op in toLoad.SavedGuids.Select(Addressables
-                         .LoadAssetAsync<EssencePerk>))
-            {
+            foreach (var op in toLoad.SavedGuids.Select(Addressables
+                        .LoadAssetAsync<EssencePerk>)) {
                 yield return op;
                 if (op.Status == AsyncOperationStatus.Succeeded)
                     EssencePerks.Add(op.Result);
@@ -62,8 +57,7 @@ namespace Character.EssenceStuff
 
         public SerializableScriptableObjectSaves Save() => new(EssencePerks);
 
-        public void LoadMyPerkAssets()
-        {
+        public void LoadMyPerkAssets() {
             foreach (var perk in EssencePerks)
                 Addressables.LoadAssetAsync<EssencePerk>(perk.Guid);
         }

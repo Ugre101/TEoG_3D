@@ -2,11 +2,9 @@
 using Character.StatsStuff;
 using UnityEngine;
 
-namespace Battle.SkillsAndSpells
-{
+namespace Battle.SkillsAndSpells {
     [Serializable]
-    public struct AffectedByStat
-    {
+    public struct AffectedByStat {
         [SerializeField] CharStatType statType;
 
         [SerializeField] int divValue;

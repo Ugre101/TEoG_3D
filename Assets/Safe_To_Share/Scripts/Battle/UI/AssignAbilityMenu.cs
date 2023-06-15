@@ -9,10 +9,8 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.Battle.UI
-{
-    public sealed class AssignAbilityMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
-    {
+namespace Safe_To_Share.Scripts.Battle.UI {
+    public sealed class AssignAbilityMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu {
         //    [SerializeField] AbilityDict abilityDict;
         [SerializeField] Transform content;
         [SerializeField] AssignAbilityIcon abilityIcon;
@@ -25,8 +23,7 @@ namespace Safe_To_Share.Scripts.Battle.UI
 
         ControlledCharacter lastChar;
 
-        public void OnDestroy()
-        {
+        public void OnDestroy() {
             StopAllCoroutines();
             AttackBtn.BindActionToMe -= BindButton;
             AssignAbilityIcon.AbilityBound -= Done;
@@ -36,29 +33,24 @@ namespace Safe_To_Share.Scripts.Battle.UI
         void OnValidate() => preInstancedAbilityIcons = content.GetComponentsInChildren<AssignAbilityIcon>(true);
 #endif
 
-        public bool BlockIfActive()
-        {
+        public bool BlockIfActive() {
             if (!gameObject.activeSelf) return false;
             gameObject.SetActive(false);
             return true;
-
         }
 
         AssignAbilityIcon GetAbilityIcon() => iconQue.Count > 0 ? iconQue.Dequeue() : Instantiate(abilityIcon, content);
 
-        public void FirstSetup()
-        {
+        public void FirstSetup() {
             AttackBtn.BindActionToMe += BindButton;
             AssignAbilityIcon.AbilityBound += Done;
             iconQue = new Queue<AssignAbilityIcon>(preInstancedAbilityIcons);
             content.SleepChildren();
         }
 
-        void EnqueueIcons()
-        {
+        void EnqueueIcons() {
             foreach (Transform child in content)
-                if (child.TryGetComponent(out AssignAbilityIcon icon) && icon.gameObject.activeSelf)
-                {
+                if (child.TryGetComponent(out AssignAbilityIcon icon) && icon.gameObject.activeSelf) {
                     iconQue.Enqueue(icon);
                     icon.gameObject.SetActive(false);
                 }
@@ -66,10 +58,8 @@ namespace Safe_To_Share.Scripts.Battle.UI
 
         public void Done() => gameObject.SetActive(false);
 
-        void BindButton(AttackBtn obj)
-        {
-            if (gameObject.activeSelf || BattleManager.CurrentPlayerControlled == null)
-            {
+        void BindButton(AttackBtn obj) {
+            if (gameObject.activeSelf || BattleManager.CurrentPlayerControlled == null) {
                 Done();
                 return;
             }
@@ -77,8 +67,7 @@ namespace Safe_To_Share.Scripts.Battle.UI
             gameObject.SetActive(true);
             if (BattleManager.CurrentPlayerControlled.Character is not ControlledCharacter baseCharacter)
                 return;
-            if (lastChar != null && lastChar.Identity.ID == baseCharacter.Identity.ID)
-            {
+            if (lastChar != null && lastChar.Identity.ID == baseCharacter.Identity.ID) {
                 ChangeAbilityIconsButtonBind(obj);
                 return;
             }
@@ -88,32 +77,29 @@ namespace Safe_To_Share.Scripts.Battle.UI
             lastChar = baseCharacter;
         }
 
-        void LoadAbilities(HashSet<string> guids, AttackBtn attackBtn)
-        {
+        void LoadAbilities(HashSet<string> guids, AttackBtn attackBtn) {
             abilityIcons = new List<AssignAbilityIcon>();
             foreach (var guid in guids)
                 StartCoroutine(Load(guid));
 
-            IEnumerator Load(string guid)
-            {
+            IEnumerator Load(string guid) {
                 var op = Addressables.LoadAssetAsync<Ability>(guid);
                 yield return op;
-                if (op.Task.IsCompleted)
-                {
-                    if (op.Status != AsyncOperationStatus.Succeeded) 
+                if (op.Task.IsCompleted) {
+                    if (op.Status != AsyncOperationStatus.Succeeded)
                         yield break;
                     var icon = GetAbilityIcon();
                     icon.Setup(op.Result, attackBtn);
                     abilityIcons.Add(icon);
+                } else if (op.Task.IsFaulted) {
+                    Debug.LogWarning("ability loading failed");
+                } else if (op.Task.IsCanceled) {
+                    Debug.Log("ability loading canceled");
                 }
-                else if (op.Task.IsFaulted) Debug.LogWarning("ability loading failed");
-                else if (op.Task.IsCanceled) Debug.Log("ability loading canceled");
             }
-
         }
 
-        void ChangeAbilityIconsButtonBind(AttackBtn obj)
-        {
+        void ChangeAbilityIconsButtonBind(AttackBtn obj) {
             foreach (var icon in abilityIcons) icon.ChangeButton(obj);
         }
     }

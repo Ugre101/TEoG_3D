@@ -4,10 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
-{
-    public sealed class SelectedNode : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI {
+    public sealed class SelectedNode : MonoBehaviour {
         public static bool hasSelectedNode;
         [SerializeField] Button introText, resistText, submitText;
         [SerializeField] Image introBtnImage, resistBtnImage, submitBtnImage;
@@ -19,8 +17,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
         CustomLoseScenarioNode selectedNode;
         textType writeType = textType.Intro;
 
-        void Start()
-        {
+        void Start() {
             introText.onClick.AddListener(WriteIntroText);
             resistText.onClick.AddListener(WriteResistText);
             submitText.onClick.AddListener(WriteSubmitText);
@@ -28,12 +25,10 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
         }
 
 
-        void WriteText(string arg0)
-        {
+        void WriteText(string arg0) {
             if (!hasSelectedNode)
                 return;
-            switch (writeType)
-            {
+            switch (writeType) {
                 case textType.Intro:
                     selectedNode.introText = arg0;
                     break;
@@ -46,8 +41,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
             }
         }
 
-        void WriteSubmitText()
-        {
+        void WriteSubmitText() {
             writeType = textType.Submit;
             introBtnImage.color = Color.white;
             resistBtnImage.color = Color.white;
@@ -55,8 +49,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
             inputField.text = selectedNode.giveInText;
         }
 
-        void WriteResistText()
-        {
+        void WriteResistText() {
             writeType = textType.Resist;
             introBtnImage.color = Color.white;
             resistBtnImage.color = Color.green;
@@ -64,8 +57,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
             inputField.text = selectedNode.resistText;
         }
 
-        void WriteIntroText()
-        {
+        void WriteIntroText() {
             writeType = textType.Intro;
             introBtnImage.color = Color.green;
             resistBtnImage.color = Color.white;
@@ -73,15 +65,13 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
             inputField.text = selectedNode.introText;
         }
 
-        public void Setup(CustomLoseScenarioNode node)
-        {
+        public void Setup(CustomLoseScenarioNode node) {
             if (node == selectedNode)
                 return;
             hasSelectedNode = true;
             selectedNode = node;
             WriteIntroText();
-            switch (node)
-            {
+            switch (node) {
                 case CustomIntroNode introNode:
                     optionsContainer.SleepChildren();
                     break;
@@ -100,11 +90,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
             }
         }
 
-        enum textType
-        {
-            Intro,
-            Resist,
-            Submit,
+        enum textType {
+            Intro, Resist, Submit,
         }
     }
 }

@@ -6,11 +6,9 @@ using Character.StatsStuff.Mods;
 using Items;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Character.Items.Item_Effects
-{
+namespace Safe_To_Share.Scripts.Character.Items.Item_Effects {
     [Serializable]
-    public class BodyStatItemEffect : ItemEffect
-    {
+    public class BodyStatItemEffect : ItemEffect {
         [SerializeField] List<AssignBodyTempMod> bodyTempMods = new();
         [SerializeField] List<BodyChange> bodyChanges = new();
 
@@ -19,30 +17,27 @@ namespace Safe_To_Share.Scripts.Character.Items.Item_Effects
 
         [SerializeField] List<TempIntMod> tempThickMods = new();
 
-        public override void OnUse(BaseCharacter user, string itemGuid)
-        {
-            foreach (AssignBodyTempMod assignBodyTempMod in bodyTempMods)
-                if (user.Body.BodyStats.TryGetValue(assignBodyTempMod.bodyStatType, out BodyStat bodyStat))
+        public override void OnUse(BaseCharacter user, string itemGuid) {
+            foreach (var assignBodyTempMod in bodyTempMods)
+                if (user.Body.BodyStats.TryGetValue(assignBodyTempMod.bodyStatType, out var bodyStat))
                     assignBodyTempMod.assignTempMod.AddMods(bodyStat.Mods, itemGuid);
-            foreach (BodyChange bodyChange in bodyChanges)
-                if (user.Body.BodyStats.TryGetValue(bodyChange.bodyStatType, out BodyStat bodyStat))
+            foreach (var bodyChange in bodyChanges)
+                if (user.Body.BodyStats.TryGetValue(bodyChange.bodyStatType, out var bodyStat))
                     bodyStat.BaseValue += bodyChange.permChange;
             if (thickSetChange != 0)
                 user.Body.Thickset.BaseValue += thickSetChange;
-            foreach (TempIntMod tempThickMod in tempThickMods)
+            foreach (var tempThickMod in tempThickMods)
                 user.Body.Thickset.Mods.AddTempStatMod(tempThickMod);
         }
 
         [Serializable]
-        struct AssignBodyTempMod
-        {
+        struct AssignBodyTempMod {
             public BodyStatType bodyStatType;
             public AssignTempMod assignTempMod;
         }
 
         [Serializable]
-        struct BodyChange
-        {
+        struct BodyChange {
             public BodyStatType bodyStatType;
             public float permChange;
         }

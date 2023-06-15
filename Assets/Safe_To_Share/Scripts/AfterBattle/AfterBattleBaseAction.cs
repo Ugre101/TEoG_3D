@@ -2,10 +2,8 @@
 using Character;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.AfterBattle
-{
-    public abstract class AfterBattleBaseAction : ScriptableObject
-    {
+namespace Safe_To_Share.Scripts.AfterBattle {
+    public abstract class AfterBattleBaseAction : ScriptableObject {
         [SerializeField] Sprite icon;
         [SerializeField] string title;
         [SerializeField] protected SexActData data;

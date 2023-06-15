@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Linq;
 
-namespace Character.StatsStuff.HealthStuff
-{
+namespace Character.StatsStuff.HealthStuff {
     [Serializable]
-    public class Health : RecoveryIntStat
-    {
+    public class Health : RecoveryIntStat {
         readonly AffectByStat[] affectByStat;
 
         public Health(int baseValue, IntRecovery intRecovery, params AffectByStat[] affectByStat) : base(baseValue,
-            intRecovery)
-        {
+            intRecovery) {
             this.affectByStat = affectByStat;
-            foreach (AffectByStat stat in affectByStat)
+            foreach (var stat in affectByStat)
                 stat.affectedBy.StatDirtyEvent += SetDirty;
         }
 
-        void SetDirty()
-        {
+        void SetDirty() {
             Dirty = true;
             InvokeMaxChange();
         }

@@ -1,31 +1,24 @@
 ﻿using System;
 using Dialogue;
-using Dialogue.DialogueActions;
 using QuestStuff;
 using SceneStuff;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
-{
-    public sealed class DialogueMenu : DialogueAndEventShared
-    {
-        public void Setup(BaseDialogue dialogue)
-        
-        {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu {
+    public sealed class DialogueMenu : DialogueAndEventShared {
+        public void Setup(BaseDialogue dialogue) {
             CurrentDialogue = dialogue;
-            CurrentNode = dialogue.GetRootNode() as DialogueBaseNode;
+            CurrentNode = dialogue.GetRootNode();
             AddOptionButtons(CurrentNode);
             ShowNodeText(CurrentNode);
         }
 
-        protected override void HandleOption(DialogueBaseNode obj)
-        {
+        protected override void HandleOption(DialogueBaseNode obj) {
             CurrentNode = obj;
-            foreach (DialogueBaseAction dialogueBaseAction in CurrentNode.Actions)
+            foreach (var dialogueBaseAction in CurrentNode.Actions)
                 dialogueBaseAction.Invoke(Player);
             AddOptionButtons(CurrentNode);
             ShowNodeText(CurrentNode);
-            switch (CurrentNode)
-            {
+            switch (CurrentNode) {
                 case DialogueQuestNode dialogueQuestNode:
                     PlayerQuests.AddQuest(dialogueQuestNode.Quest);
                     break;

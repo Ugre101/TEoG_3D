@@ -2,10 +2,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Safe_To_Share.Scripts.Options
-{
-    public sealed class PersistentKeyBinds : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Options {
+    public sealed class PersistentKeyBinds : MonoBehaviour {
         const string FreePlaySave = "FreePlayKeyBindsSave";
         const string ThirdPersonSave = "ThirdPersonKeyBindsSave";
         const string GameMenusSave = "GameMenuKeyBindsSave";
@@ -15,8 +13,7 @@ namespace Safe_To_Share.Scripts.Options
         [SerializeField] InputActionAsset gameMenusBinds;
         [SerializeField] InputActionAsset quickSaveBinds;
 
-        IEnumerator Start()
-        {
+        IEnumerator Start() {
             OverWriteIfNotNull(freePlay, FreePlaySave);
             yield return null;
             OverWriteIfNotNull(thirdPersonCamera, ThirdPersonSave);
@@ -26,24 +23,18 @@ namespace Safe_To_Share.Scripts.Options
             OverWriteIfNotNull(quickSaveBinds, QuickSaveSave);
         }
 
-        void OnApplicationQuit()
-        {
+        void OnApplicationQuit() {
             PlayerPrefs.SetString(FreePlaySave, freePlay.SaveBindingOverridesAsJson());
             PlayerPrefs.SetString(ThirdPersonSave, thirdPersonCamera.SaveBindingOverridesAsJson());
             PlayerPrefs.SetString(GameMenusSave, gameMenusBinds.SaveBindingOverridesAsJson());
             PlayerPrefs.SetString(QuickSaveSave, quickSaveBinds.SaveBindingOverridesAsJson());
         }
 
-        static void OverWriteIfNotNull(InputActionAsset toRebind, string playerPrefPath)
-        {
+        static void OverWriteIfNotNull(InputActionAsset toRebind, string playerPrefPath) {
             if (!PlayerPrefs.HasKey(playerPrefPath)) return;
-            string save = PlayerPrefs.GetString(playerPrefPath, string.Empty);
+            var save = PlayerPrefs.GetString(playerPrefPath, string.Empty);
             if (!string.IsNullOrWhiteSpace(save))
-            {
                 toRebind.LoadBindingOverridesFromJson(save);
-            }
         }
-        
-        
     }
 }

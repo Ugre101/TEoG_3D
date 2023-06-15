@@ -4,27 +4,21 @@ using DormAndHome.Dorm.Buildings;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
-{
-    public sealed class KitchenOptionsPanel : BuildingOptionPanel
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI {
+    public sealed class KitchenOptionsPanel : BuildingOptionPanel {
         static DormKitchen Kitchen => DormManager.Instance.Buildings.Kitchen;
 
-        public override void Setup()
-        {
-            List<TMP_Dropdown.OptionData> options = new()
-            {
+        public override void Setup() {
+            List<TMP_Dropdown.OptionData> options = new() {
                 CreateDietOption(DormKitchen.FeedMode.Nothing),
             };
-            int kitchenLevel = Kitchen.Level;
-            if (kitchenLevel > 0)
-            {
+            var kitchenLevel = Kitchen.Level;
+            if (kitchenLevel > 0) {
                 options.Add(CreateDietOption(DormKitchen.FeedMode.Diet));
                 options.Add(CreateDietOption(DormKitchen.FeedMode.Normal));
             }
 
-            if (kitchenLevel > 1)
-            {
+            if (kitchenLevel > 1) {
                 options.Add(CreateDietOption(DormKitchen.FeedMode.Bulk));
                 options.Add(CreateDietOption(DormKitchen.FeedMode.Fatten));
             }

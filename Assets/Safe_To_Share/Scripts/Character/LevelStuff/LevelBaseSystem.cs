@@ -1,11 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Character.LevelStuff
-{
+namespace Character.LevelStuff {
     [Serializable]
-    public abstract class LevelBaseSystem
-    {
+    public abstract class LevelBaseSystem {
         [SerializeField] int exp, level = 1, points;
         protected abstract int PointsGainedPerLevel { get; }
 
@@ -15,11 +13,9 @@ namespace Character.LevelStuff
 
         public int Level => level;
 
-        public int Points
-        {
+        public int Points {
             get => points;
-            private set
-            {
+            private set {
                 points = Mathf.Max(0, value);
                 PerkPointsChanged?.Invoke(Points);
             }
@@ -28,19 +24,16 @@ namespace Character.LevelStuff
         public event Action<int> ExpGained, LevelGained, PerkPointsChanged;
         public bool CanAffordWithPoints(int cost) => Points >= cost;
 
-        public bool TryUsePoints(int cost = 1)
-        {
+        public bool TryUsePoints(int cost = 1) {
             if (!CanAffordWithPoints(cost))
                 return false;
             Points -= cost;
             return true;
         }
 
-        public void GainExp(int expGain)
-        {
+        public void GainExp(int expGain) {
             exp += expGain;
-            while (exp >= ExpNeeded)
-            {
+            while (exp >= ExpNeeded) {
                 exp -= ExpNeeded;
 
                 level++;

@@ -6,24 +6,20 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.ServiceMenu
-{
-    public sealed class ServiceMenu : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.ServiceMenu {
+    public sealed class ServiceMenu : GameMenu {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] ServiceMenuButton prefab;
         [SerializeField] Transform content;
         [SerializeField] HaveGold haveGold;
 
-        void OnDisable()
-        {
+        void OnDisable() {
             PlayerGold.GoldBag.GoldAmountChanged -= haveGold.GoldChanged;
             ServiceMenuButton.PayAndUse -= BuyThisService;
         }
 
 
-        public void Setup(string titleText, List<BaseService> services)
-        {
+        public void Setup(string titleText, List<BaseService> services) {
             title.text = titleText;
             ShowServices(services);
             haveGold.GoldChanged(PlayerGold.GoldBag.Gold);
@@ -31,15 +27,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.ServiceMenu
             ServiceMenuButton.PayAndUse += BuyThisService;
         }
 
-        void ShowServices(List<BaseService> services)
-        {
+        void ShowServices(List<BaseService> services) {
             content.KillChildren();
-            foreach (BaseService service in services)
+            foreach (var service in services)
                 Instantiate(prefab, content).Setup(service, Player);
         }
 
-        void BuyThisService(BaseService obj)
-        {
+        void BuyThisService(BaseService obj) {
             if (PlayerGold.GoldBag.TryToBuy(obj.Cost))
                 obj.OnUse(Player);
         }

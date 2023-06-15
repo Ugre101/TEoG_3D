@@ -7,10 +7,8 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
-{
-    public sealed class IslandStoneOptionHeight : IslandStoneOption
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI {
+    public sealed class IslandStoneOptionHeight : IslandStoneOption {
         const int DonateAmount = 10;
         [SerializeField] BodyStatType bodyType;
         [SerializeField] TextMeshProUGUI amountText;
@@ -19,8 +17,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
         [SerializeField] AssetReference givesItem;
         [SerializeField] Button decreaseButton;
 
-        public override void Setup(Player parPlayer, string opResult)
-        {
+        public override void Setup(Player parPlayer, string opResult) {
             base.Setup(parPlayer, opResult);
             if (!IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))
                 return;
@@ -31,8 +28,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 
         void UpdateDecreaseButton() => decreaseButton.interactable = CanSteal();
 
-        public void SetCurrentValue(float arg0)
-        {
+        public void SetCurrentValue(float arg0) {
             if (!IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))
                 return;
             var toInt = Mathf.RoundToInt(arg0);
@@ -48,8 +44,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
 
         bool CanSteal() => player.Inventory.HasItemOfGuid(EmptyGuid);
 
-        public override void IncreaseClick()
-        {
+        public override void IncreaseClick() {
             if (!CanAfford(out var playerBody) ||
                 !IslandStonesDatas.IslandDataDict.TryGetValue(island, out var data))
                 return;
@@ -57,8 +52,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             var isMax = data.bodyData.GetValueOfType(bodyType) == data.bodyData.GetMaxValueOfType(bodyType);
             var maxValue = data.bodyData.IncreaseMaxValueOfType(bodyType);
             slider.maxValue = maxValue;
-            if (isMax)
-            {
+            if (isMax) {
                 data.bodyData.SetValueOfType(bodyType, maxValue);
                 slider.SetValueWithoutNotify(maxValue);
             }
@@ -66,10 +60,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             UpdateValue(data.bodyData.GetValueOfType(bodyType));
         }
 
-        public override void DecreaseClick()
-        {
-            if (!CanSteal())
-            {
+        public override void DecreaseClick() {
+            if (!CanSteal()) {
                 UpdateDecreaseButton();
 
                 return;
@@ -81,8 +73,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             var isMin = data.bodyData.GetValueOfType(bodyType) == data.bodyData.GetMinValueOfType(bodyType);
             var minValue = data.bodyData.DecreaseMinValueOfType(bodyType);
             slider.minValue = minValue;
-            if (isMin)
-            {
+            if (isMin) {
                 data.bodyData.SetValueOfType(bodyType, minValue);
                 slider.SetValueWithoutNotify(minValue);
                 currentAmount.text = bodyType == BodyStatType.Height ? minValue.ConvertCm() : minValue.ConvertKg();
@@ -91,8 +82,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.IslandDataUI
             UpdateDecreaseButton();
         }
 
-        void UpdateValue(int body)
-        {
+        void UpdateValue(int body) {
             currentAmount.text = bodyType == BodyStatType.Height ? body.ConvertCm() : body.ConvertKg();
             btnImage.color = CanAfford(out var _) ? Color.green : Color.gray;
         }

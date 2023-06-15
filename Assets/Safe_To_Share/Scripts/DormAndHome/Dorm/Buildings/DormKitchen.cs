@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using Character.BodyStuff;
 using UnityEngine;
 
-namespace DormAndHome.Dorm.Buildings
-{
+namespace DormAndHome.Dorm.Buildings {
     [Serializable]
-    public class DormKitchen : Building
-    {
-        public enum FeedMode
-        {
+    public class DormKitchen : Building {
+        public enum FeedMode {
             Nothing,
             Diet,
             Normal,
@@ -21,20 +18,17 @@ namespace DormAndHome.Dorm.Buildings
 
         protected override int[] UpgradeCosts { get; } = { 100, 300, };
 
-        public FeedMode DietMode
-        {
+        public FeedMode DietMode {
             get => feedMode;
             set => feedMode = value;
         }
 
 
-        public override void TickBuildingEffect(List<DormMate> dormMates)
-        {
+        public override void TickBuildingEffect(List<DormMate> dormMates) {
             if (Level < 1)
                 return;
-            foreach (DormMate mate in dormMates)
-                switch (DietMode)
-                {
+            foreach (var mate in dormMates)
+                switch (DietMode) {
                     case FeedMode.Nothing:
                         break;
                     case FeedMode.Diet:

@@ -5,52 +5,42 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.Farming
-{
-    public sealed class PlantFarmAreaPlants : MonoBehaviour
-    {
-        FarmArea currentArea;
+namespace Safe_To_Share.Scripts.Farming {
+    public sealed class PlantFarmAreaPlants : MonoBehaviour {
         readonly List<PlantedPlant> plantedPlants = new();
+        FarmArea currentArea;
         Coroutine routine;
 
-        void Start()
-        {
+        void Start() {
             if (!FarmAreas.TryGetCurrentArea(out var area)) return;
             currentArea = area;
             currentArea.Loaded += StartRefresh;
             StartCoroutine(RefreshArea());
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             if (currentArea != null)
                 currentArea.Loaded -= StartRefresh;
         }
 
-        void StartRefresh()
-        {
+        void StartRefresh() {
             routine = StartCoroutine(RefreshArea());
         }
 
 
-        IEnumerator RefreshArea()
-        {
+        IEnumerator RefreshArea() {
             if (!FarmAreas.TryGetCurrentArea(out var area)) yield break;
             Dictionary<string, List<PlantStats>> loadDict = new();
             List<AsyncOperationHandle<Plant>> ops = new();
             foreach (var valuePlant in area.Plants)
-                if (loadDict.TryAdd(valuePlant.PlantGuid, new List<PlantStats> { valuePlant }))
-                {
+                if (loadDict.TryAdd(valuePlant.PlantGuid, new List<PlantStats> { valuePlant, })) {
                     var op = Addressables.LoadAssetAsync<Plant>(valuePlant.PlantGuid);
                     ops.Add(op);
-                }
-                else
-                {
+                } else {
                     loadDict[valuePlant.PlantGuid].Add(valuePlant);
                 }
 
-            foreach (var handle in ops)
-            {
+            foreach (var handle in ops) {
                 yield return handle;
                 if (!loadDict.TryGetValue(handle.Result.Guid, out var values)) continue;
                 var tempList = values;
@@ -58,8 +48,7 @@ namespace Safe_To_Share.Scripts.Farming
                     (var plantedPlant in plantedPlants)
                     if (plantedPlant.HasMatch(values, out var match))
                         tempList.Remove(match);
-                foreach (var plantStats in tempList)
-                {
+                foreach (var plantStats in tempList) {
                     var temp = Instantiate(handle.Result.Prefab, plantStats.Pos, quaternion.identity);
                     temp.Load(plantStats);
                     plantedPlants.Add(temp);

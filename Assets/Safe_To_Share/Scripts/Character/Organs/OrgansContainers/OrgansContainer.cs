@@ -6,36 +6,30 @@ using Character.Organs.Fluids.SexualFluids;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Character.Organs.OrgansContainers
-{
+namespace Character.Organs.OrgansContainers {
     [Serializable]
-    public abstract class OrgansContainer<TOrgan> : BaseOrgansContainer where TOrgan : BaseOrgan, new()
-    {
-        protected OrgansContainer(FluidType fluidType, float startRec = 0) : base(fluidType, startRec)
-        {
-        }
+    public abstract class OrgansContainer<TOrgan> : BaseOrgansContainer where TOrgan : BaseOrgan, new() {
         [SerializeField] protected List<TOrgan> list = new();
+
+        protected OrgansContainer(FluidType fluidType, float startRec = 0) : base(fluidType, startRec) { }
+
         public override IEnumerable<BaseOrgan> BaseList => list;
 
         public override int OrgansCount => list.Count;
 
-        public override BaseOrgan GetRandomOrgan()
-        {
+        public override BaseOrgan GetRandomOrgan() {
             Random rng = new();
             return list[rng.Next(list.Count)];
         }
-        public void GrowFirstAsMuchAsPossible(Essence essence)
-        {
+
+        public void GrowFirstAsMuchAsPossible(Essence essence) {
             var boobsOne = list.FirstOrDefault();
             if (boobsOne == null)
                 return;
-            while (boobsOne.Grow(essence))
-            {
-            }
+            while (boobsOne.Grow(essence)) { }
         }
 
-        public override bool TryGrowNew(Essence essence)
-        {
+        public override bool TryGrowNew(Essence essence) {
             if (essence.Amount < GrowNewCost)
                 return false;
             essence.LoseEssence(GrowNewCost);
@@ -46,18 +40,17 @@ namespace Character.Organs.OrgansContainers
             list.Add(newOrgan);
             return true;
         }
-        public override bool RemoveOrgan(BaseOrgan organ)
-        {
-            if (organ is TOrgan removeMe) 
+
+        public override bool RemoveOrgan(BaseOrgan organ) {
+            if (organ is TOrgan removeMe)
                 return list.Remove(removeMe);
             return false;
         }
 
-        public override bool TickHour(int ticks = 1)
-        {
+        public override bool TickHour(int ticks = 1) {
             {
                 Fluid.TickHour(ticks);
-                bool change = false;
+                var change = false;
                 foreach (var baseOrgan in list)
                     if (baseOrgan.Mods.TickHour(ticks))
                         change = true;

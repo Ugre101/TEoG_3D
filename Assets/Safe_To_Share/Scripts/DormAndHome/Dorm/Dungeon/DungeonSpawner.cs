@@ -3,16 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace DormAndHome.Dorm.Dungeon
-{
-    public sealed class DungeonSpawner : MonoBehaviour
-    {
+namespace DormAndHome.Dorm.Dungeon {
+    public sealed class DungeonSpawner : MonoBehaviour {
         [SerializeField] List<DungeonSpawnSpot> spawnSpots = new();
 
         readonly WaitForSeconds waitForSeconds = new(2f);
 
-        IEnumerator Start()
-        {
+        IEnumerator Start() {
             yield return waitForSeconds;
             DormManager.Loaded += Loaded;
             SpawnDungeonMates();
@@ -22,33 +19,28 @@ namespace DormAndHome.Dorm.Dungeon
         void OnDestroy() => DormManager.Loaded -= Loaded;
 #if UNITY_EDITOR
 
-        void OnValidate()
-        {
+        void OnValidate() {
             if (Application.isPlaying)
                 return;
             spawnSpots = new List<DungeonSpawnSpot>(GetComponentsInChildren<DungeonSpawnSpot>());
         }
 #endif
 
-        void SpawnDungeonMates()
-        {
-            for (int i = 0; i < DormManager.Instance.DormMates.Count && i < spawnSpots.Count; i++)
+        void SpawnDungeonMates() {
+            for (var i = 0; i < DormManager.Instance.DormMates.Count && i < spawnSpots.Count; i++)
                 if (DormManager.Instance.DormMates[i].SleepIn == DormMateSleepIn.Dungeon)
                     SpawnDungeonMate(DormManager.Instance.DormMates[i]);
         }
 
-        void SpawnDungeonMate(DormMate instanceDormMate)
-        {
-            foreach (DungeonSpawnSpot spawnSpot in spawnSpots.Where(spawnSpot => spawnSpot.Empty))
-            {
+        void SpawnDungeonMate(DormMate instanceDormMate) {
+            foreach (var spawnSpot in spawnSpots.Where(spawnSpot => spawnSpot.Empty)) {
                 spawnSpot.Setup(instanceDormMate);
                 break;
             }
         }
 
-        void Loaded()
-        {
-            foreach (DungeonSpawnSpot spawnSpot in spawnSpots)
+        void Loaded() {
+            foreach (var spawnSpot in spawnSpots)
                 spawnSpot.Clear();
             SpawnDungeonMates();
         }

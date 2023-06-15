@@ -1,15 +1,11 @@
-using Character.StatsStuff;
 using Character.StatsStuff.HealthStuff.UI;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class GameUI : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class GameUI : GameMenu {
         [SerializeField] HealthSlider hp, wp;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             Refresh();
             holder.RePlaced += Refresh;
         }
@@ -19,9 +15,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
         public override bool BlockIfActive() => false;
 
 
-        void Refresh()
-        {
-            Stats stats = Player.Stats;
+        void Refresh() {
+            var stats = Player.Stats;
             wp.Setup(stats.WillPower);
             hp.Setup(stats.Health);
         }

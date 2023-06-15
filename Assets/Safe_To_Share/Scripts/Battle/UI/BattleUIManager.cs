@@ -6,10 +6,8 @@ using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Battle.UI
-{
-    public sealed class BattleUIManager : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Battle.UI {
+    public sealed class BattleUIManager : MonoBehaviour {
         [SerializeField] AttackButtons attackButtons;
         [SerializeField] GameObject winPanel, defeatPanel;
         [SerializeField] WhoseTurnIcons turnIcons;
@@ -18,8 +16,7 @@ namespace Safe_To_Share.Scripts.Battle.UI
         [SerializeField] AssignAbilityMenu abilityMenu;
         public static BattleUIManager Instance { get; private set; }
 
-        void Awake()
-        {
+        void Awake() {
             if (Instance == null)
                 Instance = this;
             else
@@ -28,14 +25,12 @@ namespace Safe_To_Share.Scripts.Battle.UI
 
         void Start() => AttackBtn.PlayerAction += HandlePlayerAction;
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             AttackBtn.PlayerAction -= HandlePlayerAction;
             abilityMenu.OnDestroy();
         }
 
-        public void Setup(List<CombatCharacter> combatCharacters)
-        {
+        public void Setup(List<CombatCharacter> combatCharacters) {
             attackButtons.FirstSetup();
             abilityMenu.FirstSetup();
             turnIcons.FirstSetup();
@@ -45,8 +40,7 @@ namespace Safe_To_Share.Scripts.Battle.UI
         }
 
 
-        public void Victory()
-        {
+        public void Victory() {
             if (sfw)
                 sfwWinPanel.SetActive(true);
             else
@@ -61,14 +55,12 @@ namespace Safe_To_Share.Scripts.Battle.UI
 
         public void EnemyTurn() => attackButtons.gameObject.SetActive(false);
 
-        public void HandleTurnAlly(CombatCharacter myTurn)
-        {
+        public void HandleTurnAlly(CombatCharacter myTurn) {
             attackButtons.gameObject.SetActive(true);
             attackButtons.Setup(myTurn.Character as ControlledCharacter);
         }
 
-        public async Task Hide()
-        {
+        public async Task Hide() {
             gameObject.SetActive(false);
             await Task.Yield();
         }

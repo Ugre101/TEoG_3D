@@ -2,10 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments
-{
-    public abstract class DoThingButton : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments {
+    public abstract class DoThingButton : MonoBehaviour {
         [SerializeField] Color start, end;
         [SerializeField] protected PlayerHolder holder;
         [SerializeField] Image backGround;
@@ -13,22 +11,19 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.InteractiveActiveAilments
         protected abstract bool Enabled { get; }
 #if UNITY_EDITOR
 
-        void OnValidate()
-        {
+        void OnValidate() {
             if (backGround != null)
                 backGround.color = start;
         }
 #endif
         public void Setup(PlayerHolder playerHolder) => holder = playerHolder;
 
-        public void ValueChange(float pressure)
-        {
-            if (Enabled is false)
+        public void ValueChange(float pressure) {
+            if (Enabled is false) {
                 gameObject.SetActive(false);
-            else if (pressure < ThreesHold)
+            } else if (pressure < ThreesHold) {
                 gameObject.SetActive(false);
-            else
-            {
+            } else {
                 gameObject.SetActive(true);
                 var percent = (pressure - ThreesHold) / (1f - ThreesHold);
                 var newColor = Color.Lerp(start, end, percent);

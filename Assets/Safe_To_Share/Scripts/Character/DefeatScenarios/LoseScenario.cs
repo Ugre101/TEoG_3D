@@ -2,11 +2,9 @@
 using CustomClasses;
 using UnityEngine;
 
-namespace Defeated
-{
+namespace Defeated {
     [CreateAssetMenu(fileName = "New Lose Scenario", menuName = "Defeat/Lose Scenario", order = 0)]
-    public sealed class LoseScenario : BaseEditorCanvasObject<LoseScenarioNode>
-    {
+    public sealed class LoseScenario : BaseEditorCanvasObject<LoseScenarioNode> {
         [SerializeField] string title;
     }
 }

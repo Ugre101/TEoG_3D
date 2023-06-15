@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Text;
 using Character.LevelStuff;
-using Character.StatsStuff;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
-{
-    public abstract class BaseHoverInfo : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level {
+    public abstract class BaseHoverInfo : MonoBehaviour {
         [SerializeField] protected TextMeshProUGUI title;
         [SerializeField] protected TextMeshProUGUI cost;
         [SerializeField] protected TextMeshProUGUI desc;
@@ -25,13 +22,12 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 
         protected void StopShow() => gameObject.SetActive(false);
 
-        protected void ShowPerkInfo(Vector3 pos, BasicPerk perk)
-        {
-            if (perk == null)
-            {
+        protected void ShowPerkInfo(Vector3 pos, BasicPerk perk) {
+            if (perk == null) {
                 StopShow();
                 return;
             }
+
             SetPos(pos);
             title.text = perk.Title;
             cost.text = $"Cost {{{perk.Cost}}}";
@@ -42,55 +38,48 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
             gameObject.SetActive(true);
         }
 
-        void PrintAltExclusivePerks(BasicPerk perk)
-        {
-            if (perk.ExclusiveWithPerkGuids.Count <= 0)
-            {
+        void PrintAltExclusivePerks(BasicPerk perk) {
+            if (perk.ExclusiveWithPerkGuids.Count <= 0) {
                 exclusivePerk.text = string.Empty;
                 return;
             }
 
             exclusivePerk.text = "Exclusive perks";
-            foreach (string exclusiveWithPerkGuid in perk.ExclusiveWithPerkGuids)
+            foreach (var exclusiveWithPerkGuid in perk.ExclusiveWithPerkGuids)
                 Addressables.LoadAssetAsync<BasicPerk>(exclusiveWithPerkGuid).Completed += AddExclusive;
         }
 
-        void PrintAltReqPerks(BasicPerk perk)
-        {
-            if (perk.NeedPerkGuids.Count <= 0)
-            {
+        void PrintAltReqPerks(BasicPerk perk) {
+            if (perk.NeedPerkGuids.Count <= 0) {
                 needPerk.text = string.Empty;
                 return;
             }
 
             needPerk.text = "Needed perks";
-            foreach (string perkNeedPerkGuid in perk.NeedPerkGuids)
+            foreach (var perkNeedPerkGuid in perk.NeedPerkGuids)
                 Addressables.LoadAssetAsync<BasicPerk>(perkNeedPerkGuid).Completed += AddNeed;
         }
 
-        void PrintAltReqStats(BasicPerk perk)
-        {
-            if (perk.RequireCharStats.Count <= 0)
-            {
+        void PrintAltReqStats(BasicPerk perk) {
+            if (perk.RequireCharStats.Count <= 0) {
                 needCharStat.text = string.Empty;
                 return;
             }
 
             StringBuilder sb = new("Need stat");
-            foreach (RequireCharStat perkRequireCharStat in perk.RequireCharStats)
+            foreach (var perkRequireCharStat in perk.RequireCharStats)
                 sb.Append($" {perkRequireCharStat.StatType} {perkRequireCharStat.Amount}");
             needCharStat.text = sb.ToString();
         }
 
-        protected void SetPos(Vector2 pos)
-        {
+        protected void SetPos(Vector2 pos) {
             // Vector2 pointerPos = pos;
             // pointerPos.x += rectTransform.rect.width / 2;
             // transform.position = pointerPos + offset;
-            if (!RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, pos, null, out Vector3 point))
+            if (!RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, pos, null, out var point))
                 return;
-            float xPercentOfScreen = point.x / Screen.width;
-            Rect rect = rectTransform.rect;
+            var xPercentOfScreen = point.x / Screen.width;
+            var rect = rectTransform.rect;
             if (xPercentOfScreen < flipOffsetThreshold)
                 point.x += offset.x * (Screen.width / rect.width);
             else

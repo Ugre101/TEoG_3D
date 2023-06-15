@@ -4,30 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Character.VoreStuff
-{
-    public static class VoredCharacters
-    {
+namespace Character.VoreStuff {
+    public static class VoredCharacters {
         static List<Prey> preys = new();
         public static IReadOnlyDictionary<int, Prey> PreyDict = new Dictionary<int, Prey>();
 
-        public static IEnumerable<Prey> GetPreys(IEnumerable<int> preyIds)
-        {
-            foreach (int id in preyIds)
-                if (PreyDict.TryGetValue(id, out Prey prey))
+        public static IEnumerable<Prey> GetPreys(IEnumerable<int> preyIds) {
+            foreach (var id in preyIds)
+                if (PreyDict.TryGetValue(id, out var prey))
                     yield return prey;
         }
 
-        public static void AddPrey(Prey newPrey)
-        {
+        public static void AddPrey(Prey newPrey) {
             if (PreyDict.ContainsKey(newPrey.Identity.ID))
                 return;
             preys.Add(newPrey);
             PreyDict = preys.ToDictionary(p => p.Identity.ID);
         }
 
-        public static void RemovePrey(Prey prey)
-        {
+        public static void RemovePrey(Prey prey) {
             preys.Remove(prey);
             PreyDict = preys.ToDictionary(p => p.Identity.ID);
         }
@@ -36,12 +31,10 @@ namespace Character.VoreStuff
 
         public static VoredCharactersSave Save() => new(preys);
 
-        public static IEnumerator Load(VoredCharactersSave toLoad)
-        {
+        public static IEnumerator Load(VoredCharactersSave toLoad) {
             preys = new List<Prey>();
-            foreach (CharacterSave characterSave in toLoad.Preys)
-            {
-                Prey loaded = JsonUtility.FromJson<Prey>(characterSave.RawCharacter);
+            foreach (var characterSave in toLoad.Preys) {
+                var loaded = JsonUtility.FromJson<Prey>(characterSave.RawCharacter);
                 yield return loaded.Load(characterSave);
                 preys.Add(loaded);
             }
@@ -51,14 +44,12 @@ namespace Character.VoreStuff
     }
 
     [Serializable]
-    public struct VoredCharactersSave
-    {
+    public struct VoredCharactersSave {
         [SerializeField] List<CharacterSave> preySaves;
 
-        public VoredCharactersSave(IEnumerable<Prey> preys)
-        {
+        public VoredCharactersSave(IEnumerable<Prey> preys) {
             preySaves = new List<CharacterSave>();
-            foreach (Prey prey in preys)
+            foreach (var prey in preys)
                 preySaves.Add(new CharacterSave(prey));
         }
 

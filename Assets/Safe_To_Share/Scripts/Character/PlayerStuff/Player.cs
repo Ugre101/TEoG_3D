@@ -14,90 +14,75 @@ using QuestStuff;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Character.PlayerStuff
-{
+namespace Character.PlayerStuff {
     [Serializable]
-    public class Player : ControlledCharacter, ITickDay
-    {
+    public class Player : ControlledCharacter, ITickDay {
         [SerializeField] DateSave lastTimeSlept;
 
-        public Player()
-        {
-        }
+        public Player() { }
 
-        public Player(CreateCharacter character) : base(character)
-        {
+        public Player(CreateCharacter character) : base(character) {
             if (character.StartItems != null && character.StartItems.Any())
                 foreach (var startItem in character.StartItems)
-                    Inventory.AddItem(startItem.Value,startItem.Amount);
+                    Inventory.AddItem(startItem.Value, startItem.Amount);
         }
 
         public Inventory Inventory { get; } = new();
 
-        public DateSave LastTimeSlept
-        {
+        public DateSave LastTimeSlept {
             get => lastTimeSlept;
             set => lastTimeSlept = value;
         }
 
         public void TickDay(int ticks = 1) => this.TickPregnancy(ticks);
 
-        public override void Sub()
-        {
+        public override void Sub() {
             base.Sub();
             DateSystem.TickDay += TickDay;
             PlayerIsTheFather += MyChild;
             PlayerQuests.QuestReward += CollectQuestReward;
         }
 
-        void CollectQuestReward(QuestReward obj)
-        {
+        void CollectQuestReward(QuestReward obj) {
             LevelSystem.GainExp(obj.ExpGain);
             PlayerGold.GoldBag.GainGold(obj.GoldGain);
         }
 
-        void MyChild(Child obj)
-        {
+        void MyChild(Child obj) {
             if (obj.FamilyTree.Father.ID == Identity.ID)
                 FamilyTree.Children.Add(obj.Identity.ID);
         }
 
-        public override void Unsub()
-        {
+        public override void Unsub() {
             base.Unsub();
             DateSystem.TickDay -= TickDay;
             PlayerIsTheFather -= MyChild;
             PlayerQuests.QuestReward -= CollectQuestReward;
         }
 
-        public override void OnBirth(IEnumerable<Fetus> obj)
-        {
-            CharacterEvents.CharacterEvents.PlayerEvents.PlayerBirthEvent.StartEvent(this,obj);
+        public override void OnBirth(IEnumerable<Fetus> obj) {
+            CharacterEvents.CharacterEvents.PlayerEvents.PlayerBirthEvent.StartEvent(this, obj);
             InvokeUpdateAvatar();
         }
 
 
-        public override void TickMin(int ticks = 1)
-        {
+        public override void TickMin(int ticks = 1) {
             base.TickMin(ticks);
             if (OptionalContent.Vore.Enabled && Vore.VoreTick(this, true, ticks))
                 InvokeUpdateAvatar();
         }
 
-        public override void TickHour(int ticks = 1)
-        {
+        public override void TickHour(int ticks = 1) {
             base.TickHour(ticks);
             CheckAilments();
         }
 
-        public override IEnumerator Load(CharacterSave toLoad)
-        {
+        public override IEnumerator Load(CharacterSave toLoad) {
             yield return base.Load(toLoad);
             CheckAilments();
         }
 
-        public void CheckAilments()
-        {
+        public void CheckAilments() {
             if (this.CheckHungry()) UpdateAilments?.Invoke();
 
             if (this.CheckTired()) UpdateAilments?.Invoke();
@@ -105,8 +90,7 @@ namespace Character.PlayerStuff
 
         public event Action UpdateAilments;
 
-        public override void OnStomachDigestion(Prey prey, string digestionMode)
-        {
+        public override void OnStomachDigestion(Prey prey, string digestionMode) {
             base.OnStomachDigestion(prey, digestionMode);
             if (CharacterEvents.CharacterEvents.PlayerEvents.VoreEvents.VoreStomachEvents.TryGetValue(digestionMode,
                     out var duoEvent))
@@ -117,8 +101,7 @@ namespace Character.PlayerStuff
 #endif
         }
 
-        public override void OnOrganDigestion(SexualOrganType organType, Prey prey, string mode)
-        {
+        public override void OnOrganDigestion(SexualOrganType organType, Prey prey, string mode) {
             if (CharacterEvents.CharacterEvents.PlayerEvents.VoreEvents.VoreOrganEvents.TryGetValue(organType,
                     out var events))
                 if (events.TryGetValue(mode, out var duoEvent))
@@ -132,8 +115,8 @@ namespace Character.PlayerStuff
 #endif
         }
 
-        public override void OnOrganDigestionProgress(SexualOrganType organType, Prey prey, string mode, float progress)
-        {
+        public override void
+            OnOrganDigestionProgress(SexualOrganType organType, Prey prey, string mode, float progress) {
             if (CharacterEvents.CharacterEvents.PlayerEvents.VoreEvents.VoreOrganProgressEvents.TryGetValue(organType,
                     out var events))
                 if (events.TryGetValue(mode, out var duoEvent))

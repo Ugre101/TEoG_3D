@@ -1,8 +1,5 @@
-﻿namespace Character.StatsStuff.Mods
-{
-    public enum ModType
-    {
-        Flat,
-        Percent,
+﻿namespace Character.StatsStuff.Mods {
+    public enum ModType {
+        Flat, Percent,
     }
 }

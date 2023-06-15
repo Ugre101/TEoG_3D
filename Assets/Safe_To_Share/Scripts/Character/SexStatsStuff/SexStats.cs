@@ -3,11 +3,9 @@ using Character.Organs.Fluids;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Character.SexStatsStuff
-{
+namespace Character.SexStatsStuff {
     [Serializable]
-    public class SexStats : ITickHour
-    {
+    public class SexStats : ITickHour {
         [SerializeField] int totalOrgasms;
         [SerializeField] int currentArousal;
         [SerializeField] ForeignFluids fluidsOnBody = new();
@@ -19,22 +17,18 @@ namespace Character.SexStatsStuff
 
         public bool CanOrgasmMore => SessionOrgasms < MaxCasterOrgasms.Value;
 
-        public int Arousal
-        {
+        public int Arousal {
             get => currentArousal;
-            private set
-            {
+            private set {
                 currentArousal = value;
                 ArousalChange?.Invoke(currentArousal);
                 ArousalSliderChange?.Invoke((float)currentArousal / MaxArousal);
             }
         }
 
-        public int TotalOrgasms
-        {
+        public int TotalOrgasms {
             get => totalOrgasms;
-            private set
-            {
+            private set {
                 totalOrgasms = value;
                 OrgasmChange?.Invoke(totalOrgasms);
             }
@@ -65,26 +59,22 @@ namespace Character.SexStatsStuff
 
         int SessionOrgasmMultiplier() => SessionOrgasms > 0 ? Mathf.FloorToInt(Mathf.Pow(2.05f, SessionOrgasms)) : 0;
 
-        public void NewSession()
-        {
+        public void NewSession() {
             SessionOrgasms = 0;
             UsedSessionOrgasms = 0;
         }
 
-        public bool UseSessionOrgasms(int uses)
-        {
+        public bool UseSessionOrgasms(int uses) {
             if (uses > SessionOrgasms - UsedSessionOrgasms)
                 return false;
             UsedSessionOrgasms += uses;
             return true;
         }
 
-        public int GainArousal(float gain)
-        {
-            int timesOrgasmed = 0;
+        public int GainArousal(float gain) {
+            var timesOrgasmed = 0;
             Arousal += Mathf.RoundToInt(gain * GainArousalFactor.Value);
-            while (MaxArousal <= Arousal)
-            {
+            while (MaxArousal <= Arousal) {
                 Arousal -= MaxArousal;
                 TotalOrgasms++;
                 SessionOrgasms++;

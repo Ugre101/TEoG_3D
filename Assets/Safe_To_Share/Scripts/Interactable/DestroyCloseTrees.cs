@@ -3,10 +3,8 @@ using Map;
 using Safe_To_Share.Scripts.Helpers;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Interactable
-{
-    public sealed class DestroyCloseTrees : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Interactable {
+    public sealed class DestroyCloseTrees : MonoBehaviour {
         const int FrameLimit = 8;
 
         [SerializeField, Range(float.Epsilon, 5f),]
@@ -20,15 +18,13 @@ namespace Safe_To_Share.Scripts.Interactable
         Vector3 pvecTerrainSize;
         TerrainCollider terrainCollider;
 
-        void Start()
-        {
-            if (Terrain.activeTerrain == null)
-            {
+        void Start() {
+            if (Terrain.activeTerrain == null) {
                 enabled = false;
                 return;
             }
 
-            PlayerPosition.PlayerMoved += Tick; 
+            PlayerPosition.PlayerMoved += Tick;
             var activeTerrain = Terrain.activeTerrain;
             pvecTerrainPosition = activeTerrain.transform.position;
             var terrainData = activeTerrain.terrainData;
@@ -43,8 +39,7 @@ namespace Safe_To_Share.Scripts.Interactable
 #endif
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             PlayerPosition.PlayerMoved -= Tick;
 #if UNITY_EDITOR
             if (runInEditor)
@@ -52,8 +47,7 @@ namespace Safe_To_Share.Scripts.Interactable
 #endif
         }
 
-        void Tick(Vector3 vector3)
-        {
+        void Tick(Vector3 vector3) {
 #if UNITY_EDITOR
             if (!runInEditor)
                 return;
@@ -62,16 +56,16 @@ namespace Safe_To_Share.Scripts.Interactable
             if (transform.localScale.x < heightReq)
                 return;
 
-            bool removedTree = false;
+            var removedTree = false;
             List<int> checkRemove = new();
 
-            for (int l = 0; l < paryTrees.Length; l++) // counts up
+            for (var l = 0; l < paryTrees.Length; l++) // counts up
             {
                 var triTree = paryTrees[l];
-                Vector3 vecTree = triTree.position;
+                var vecTree = triTree.position;
                 // Get the world coordinates of the tree position
-                Vector3 vec3 = Vector3.Scale(pvecTerrainSize, vecTree) + pvecTerrainPosition;
-                float fltProximity = Vector3.Distance(vector3, vec3);
+                var vec3 = Vector3.Scale(pvecTerrainSize, vecTree) + pvecTerrainPosition;
+                var fltProximity = Vector3.Distance(vector3, vec3);
                 if (fltProximity < removeDist)
                     checkRemove.Add(l);
             }
@@ -81,10 +75,9 @@ namespace Safe_To_Share.Scripts.Interactable
             for (var index = checkRemove.Count - 1; index >= 0; index--) // counts down to avoid conflict
             {
                 var i = checkRemove[index];
-                int protoIndex = trees[i].prototypeIndex;
+                var protoIndex = trees[i].prototypeIndex;
                 var treeName = Terrain.activeTerrain.terrainData.treePrototypes[protoIndex].prefab.name;
-                if (treeName.Contains("Tree") && !treeName.Contains("Small"))
-                {
+                if (treeName.Contains("Tree") && !treeName.Contains("Small")) {
                     if (hasDebrisPool)
                         TreeDebrisObjectPool.Instance.IfHasDebrisAddFor(treeName, vector3);
                     trees.RemoveAt(i);
@@ -110,8 +103,7 @@ namespace Safe_To_Share.Scripts.Interactable
         TreeInstance[] orgTrees;
 
         [ContextMenu("Restore trees")]
-        public void RestoreTrees()
-        {
+        public void RestoreTrees() {
             Terrain.activeTerrain.terrainData.treeInstances = orgTrees;
             RefreshTerrainColliders();
         }

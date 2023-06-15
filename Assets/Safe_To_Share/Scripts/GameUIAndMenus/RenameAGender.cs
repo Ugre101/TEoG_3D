@@ -3,23 +3,19 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class RenameAGender : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class RenameAGender : MonoBehaviour {
         [SerializeField] TextMeshProUGUI orgGenderName;
         [SerializeField] TMP_InputField currentGenderName;
         [SerializeField] Gender gender;
 
-        void Start()
-        {
+        void Start() {
             currentGenderName.SetTextWithoutNotify(gender.GenderString());
             currentGenderName.onSubmit.AddListener(ChangeName);
         }
 
 #if UNITY_EDITOR
-        void OnValidate()
-        {
+        void OnValidate() {
             if (Application.isPlaying)
                 return;
             if (orgGenderName != null)

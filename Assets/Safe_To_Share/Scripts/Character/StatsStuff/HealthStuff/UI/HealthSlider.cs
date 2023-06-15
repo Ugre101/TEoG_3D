@@ -2,10 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Character.StatsStuff.HealthStuff.UI
-{
-    public sealed class HealthSlider : MonoBehaviour
-    {
+namespace Character.StatsStuff.HealthStuff.UI {
+    public sealed class HealthSlider : MonoBehaviour {
         [SerializeField] TextMeshProUGUI text;
         [SerializeField] Slider slider;
         Health health;
@@ -14,8 +12,7 @@ namespace Character.StatsStuff.HealthStuff.UI
         void OnDestroy() => UnBindValueChange();
 
 #if UNITY_EDITOR
-        void OnValidate()
-        {
+        void OnValidate() {
             if (slider != null) return;
             if (TryGetComponent(out Slider healthSlider))
                 slider = healthSlider;
@@ -24,22 +21,19 @@ namespace Character.StatsStuff.HealthStuff.UI
         }
 #endif
 
-        void BindValueChange()
-        {
+        void BindValueChange() {
             health.CurrentValueChange += ChangeValue;
             health.MaxValueChange += MaxChange;
         }
 
-        public void UnBindValueChange()
-        {
+        public void UnBindValueChange() {
             if (health == null)
                 return;
             health.CurrentValueChange -= ChangeValue;
             health.MaxValueChange -= MaxChange;
         }
 
-        public void Setup(Health parHealth)
-        {
+        public void Setup(Health parHealth) {
             health = parHealth;
             UpdateText();
             slider.maxValue = health.Value;
@@ -49,14 +43,12 @@ namespace Character.StatsStuff.HealthStuff.UI
 
         void UpdateText() => text.text = $"{health.CurrentValue}/{health.Value}";
 
-        void MaxChange(int obj)
-        {
+        void MaxChange(int obj) {
             slider.maxValue = obj;
             UpdateText();
         }
 
-        void ChangeValue(int obj)
-        {
+        void ChangeValue(int obj) {
             slider.value = obj;
             UpdateText();
         }

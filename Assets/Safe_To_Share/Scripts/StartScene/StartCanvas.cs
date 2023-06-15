@@ -8,18 +8,15 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.AddressableAssets.ResourceLocators;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.StartScene
-{
-    public sealed class StartCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
-    {
+namespace Safe_To_Share.Scripts.StartScene {
+    public sealed class StartCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu {
         [SerializeField] GameObject startMenu;
         [SerializeField] SetupPlayer setupPlayer;
 
         [SerializeField] SaveButton continueLastGame;
 
         // Start is called before the first frame update
-        void Start()
-        {
+        void Start() {
             startMenu.SetActive(false);
             Addressables.InitializeAsync().Completed += AssetsLoaded;
             setupPlayer.LoadAssets();
@@ -28,8 +25,7 @@ namespace Safe_To_Share.Scripts.StartScene
         public bool BlockIfActive() => true; // Always block
 
 
-        void AssetsLoaded(AsyncOperationHandle<IResourceLocator> obj)
-        {
+        void AssetsLoaded(AsyncOperationHandle<IResourceLocator> obj) {
             startMenu.SetActive(true);
             LoadLastGame();
         }
@@ -38,22 +34,18 @@ namespace Safe_To_Share.Scripts.StartScene
 
         public void QuitGame() => Application.Quit();
 
-        void LoadLastGame()
-        {
+        void LoadLastGame() {
             var saves
                 = Directory.GetFiles(SaveManager.SavePath).OrderByDescending(Directory.GetLastWriteTime);
-            string savePath = saves.FirstOrDefault();
+            var savePath = saves.FirstOrDefault();
             if (string.IsNullOrEmpty(savePath))
                 continueLastGame.gameObject.SetActive(false);
             else
-                try
-                {
-                    FullSave fullSave = JsonUtility.FromJson<FullSave>(File.ReadAllText(savePath));
+                try {
+                    var fullSave = JsonUtility.FromJson<FullSave>(File.ReadAllText(savePath));
                     continueLastGame.Setup(fullSave, savePath);
                     continueLastGame.gameObject.SetActive(true);
-                }
-                catch
-                {
+                } catch {
                     continueLastGame.gameObject.SetActive(false);
                 }
         }

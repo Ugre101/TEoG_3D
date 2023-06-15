@@ -1,22 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Static
-{
-    public sealed class BlockGameUI : MonoBehaviour
-    {
-        void OnEnable()
-        {
+namespace Safe_To_Share.Scripts.Static {
+    public sealed class BlockGameUI : MonoBehaviour {
+        void OnEnable() {
             GameUIManager.BlockList.Add(this);
         }
 
-        void OnDisable()
-        {
+        void OnDisable() {
             GameUIManager.BlockList.Remove(this);
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             GameUIManager.BlockList.Remove(this);
         }
     }

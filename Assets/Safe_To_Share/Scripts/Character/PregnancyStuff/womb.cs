@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Character.Organs.Fluids;
 using UnityEngine;
 
-namespace Character.PregnancyStuff
-{
+namespace Character.PregnancyStuff {
     [Serializable]
-    public class Womb
-    {
+    public class Womb {
         [SerializeField] List<Fetus> fetusList = new();
         [SerializeField] ForeignFluids foreignForeignFluids = new();
         public List<Fetus> FetusList => fetusList;
@@ -18,22 +15,17 @@ namespace Character.PregnancyStuff
         public bool HasFetus => FetusList.Any();
 
 
-        public IEnumerable<Fetus> GrowFetuses(int days = 1)
-        {
-            for (int i = FetusList.Count; i-- > 0;)
-            {
+        public IEnumerable<Fetus> GrowFetuses(int days = 1) {
+            for (var i = FetusList.Count; i-- > 0;) {
                 var fetus = FetusList[i];
                 if (GrowAFetus(days, fetus))
-                {
                     yield return fetus;
-                }
             }
         }
 
-        
-        bool GrowAFetus(int days, Fetus fetus)
-        {
-            if (!fetus.GrowChild(days)) return  false;
+
+        bool GrowAFetus(int days, Fetus fetus) {
+            if (!fetus.GrowChild(days)) return false;
             FetusList.Remove(fetus);
             return true;
         }

@@ -3,20 +3,15 @@ using Character;
 using Character.PregnancyStuff;
 using UnityEngine;
 
-namespace DormAndHome.Dorm
-{
+namespace DormAndHome.Dorm {
     [Serializable]
-    public class DormMate : BaseCharacter, ITickDay
-    {
+    public class DormMate : BaseCharacter, ITickDay {
         [SerializeField] DormMateSleepIn sleepIn = DormMateSleepIn.Lodge;
         [SerializeField] string workTitle;
 
-        public DormMate(BaseCharacter character) : base(character)
-        {
-        }
+        public DormMate(BaseCharacter character) : base(character) { }
 
-        public DormMateSleepIn SleepIn
-        {
+        public DormMateSleepIn SleepIn {
             get => sleepIn;
             set => sleepIn = value;
         }
@@ -29,9 +24,7 @@ namespace DormAndHome.Dorm
     }
 
     [Serializable]
-    public enum DormMateSleepIn
-    {
-        Lodge,
-        Dungeon,
+    public enum DormMateSleepIn {
+        Lodge, Dungeon,
     }
 }

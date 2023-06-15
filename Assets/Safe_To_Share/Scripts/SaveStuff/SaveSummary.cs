@@ -3,19 +3,16 @@ using System.Globalization;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SaveStuff
-{
+namespace SaveStuff {
     [Serializable]
-    public struct SaveSummary
-    {
+    public struct SaveSummary {
         [SerializeField] string playerName;
         [SerializeField] int level;
         [SerializeField] string sceneName;
         [SerializeField] string date;
         [SerializeField] string playerAddedText;
 
-        public SaveSummary(string playerName, int level, string addedText)
-        {
+        public SaveSummary(string playerName, int level, string addedText) {
             this.playerName = playerName;
             this.level = level;
             playerAddedText = addedText;

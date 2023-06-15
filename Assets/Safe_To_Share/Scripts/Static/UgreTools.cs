@@ -9,39 +9,31 @@ using UnityEngine;
 using UnityEngine.Events;
 using Object = UnityEngine.Object;
 
-namespace Safe_To_Share.Scripts.Static
-{
-    public static class UgreTools
-    {
-        public static void AwakeChildren(this Transform transform)
-        {
+namespace Safe_To_Share.Scripts.Static {
+    public static class UgreTools {
+        public static void AwakeChildren(this Transform transform) {
             foreach (Transform child in transform)
                 child.gameObject.SetActive(true);
         }
 
-        public static void AwakeChildren(this Transform transform, params GameObject[] excepts)
-        {
-            foreach (Transform child in transform)
-            {
-                bool isException = excepts.Any(gameObject => ReferenceEquals(child.gameObject, gameObject));
+        public static void AwakeChildren(this Transform transform, params GameObject[] excepts) {
+            foreach (Transform child in transform) {
+                var isException = excepts.Any(gameObject => ReferenceEquals(child.gameObject, gameObject));
                 child.gameObject.SetActive(!isException);
             }
         }
 
-        public static void SleepChildren(this Transform transform)
-        {
+        public static void SleepChildren(this Transform transform) {
             foreach (Transform child in transform)
                 child.gameObject.SetActive(false);
         }
 
-        public static void SleepChildren(this Transform transform, GameObject except)
-        {
+        public static void SleepChildren(this Transform transform, GameObject except) {
             foreach (Transform child in transform)
                 child.gameObject.SetActive(ReferenceEquals(child.gameObject, except));
         }
 
-        public static void KillChildren(this Transform transform)
-        {
+        public static void KillChildren(this Transform transform) {
             foreach (Transform child in transform)
                 Object.Destroy(child.gameObject);
         }
@@ -57,15 +49,15 @@ namespace Safe_To_Share.Scripts.Static
 
         public static bool GreaterThanZero(this int value) => value > 0;
 
-        public static IEnumerable<TEum> EnumToArray<TEum>(params TEum[] altExcludeOptions) where TEum : Enum
-        {
+        public static IEnumerable<TEum> EnumToArray<TEum>(params TEum[] altExcludeOptions) where TEum : Enum {
             foreach (var e in Enum.GetValues(typeof(TEum)))
                 if (e is TEum te && (altExcludeOptions == null || !altExcludeOptions.Contains(te)))
                     yield return te;
         }
 
-        public static TEum IntToEnum<TEum>(int value, TEum defaultTo, params TEum[] altExcludeOptions) where TEum : Enum
-            => EnumToArray(altExcludeOptions).ElementAt(value) ?? defaultTo;
+        public static TEum IntToEnum<TEum>(int value, TEum defaultTo, params TEum[] altExcludeOptions)
+            where TEum : Enum =>
+            EnumToArray(altExcludeOptions).ElementAt(value) ?? defaultTo;
 
         static List<TMP_Dropdown.OptionData> EnumToDataList<TEum>(params TEum[] altExcludeOptions) where TEum : Enum =>
             EnumToArray(altExcludeOptions).Select(EnumToData).ToList();
@@ -74,9 +66,8 @@ namespace Safe_To_Share.Scripts.Static
             new(StringFormatting.AddSpaceAfterCapitalLetter(o.ToString()));
 
         public static void SetupTmpDropDown<TEum>(this TMP_Dropdown dropdown, TEum currentValue,
-            UnityAction<int> onChange,
-            params TEum[] altExcludeOptions) where TEum : Enum
-        {
+                                                  UnityAction<int> onChange,
+                                                  params TEum[] altExcludeOptions) where TEum : Enum {
             dropdown.ClearOptions();
             dropdown.AddOptions(EnumToDataList(altExcludeOptions));
             dropdown.onValueChanged.RemoveAllListeners();
@@ -84,24 +75,21 @@ namespace Safe_To_Share.Scripts.Static
             dropdown.onValueChanged.AddListener(onChange);
         }
 
-        public static bool ToggleSetActive(this GameObject gameObject)
-        {
-            bool newState = !gameObject.activeSelf;
+        public static bool ToggleSetActive(this GameObject gameObject) {
+            var newState = !gameObject.activeSelf;
             gameObject.SetActive(newState);
             return newState;
         }
 
 
-        public static int IndexOfEnum<TEum>(this TEum value, params TEum[] altExcludeOptions) where TEum : Enum
-            => EnumToArray(altExcludeOptions).ToList().IndexOf(value);
+        public static int IndexOfEnum<TEum>(this TEum value, params TEum[] altExcludeOptions) where TEum : Enum =>
+            EnumToArray(altExcludeOptions).ToList().IndexOf(value);
 
-        public static string IntToFirstSecondEtc(this int value)
-        {
+        public static string IntToFirstSecondEtc(this int value) {
             if (value <= 0)
                 return value.ToString();
 
-            return value switch
-            {
+            return value switch {
                 1 => "first",
                 2 => "second",
                 3 => "third",
@@ -114,18 +102,15 @@ namespace Safe_To_Share.Scripts.Static
                 _ => AboveTeen(value),
             };
 
-            static string AboveTeen(int value)
-            {
-                switch (value % 100)
-                {
+            static string AboveTeen(int value) {
+                switch (value % 100) {
                     case 11:
                     case 12:
                     case 13:
                         return $"{value}th";
                 }
 
-                return (value % 10) switch
-                {
+                return (value % 10) switch {
                     1 => $"{value}st",
                     2 => $"{value}nd",
                     3 => $"{value}rd",
@@ -134,19 +119,16 @@ namespace Safe_To_Share.Scripts.Static
             }
         }
 
-        public static class StringFormatting
-        {
-            public static string AddSpaceAfterCapitalLetter(string text, bool preserveAcronyms = true)
-            {
+        public static class StringFormatting {
+            public static string AddSpaceAfterCapitalLetter(string text, bool preserveAcronyms = true) {
                 if (string.IsNullOrWhiteSpace(text)) return string.Empty;
                 StringBuilder sb = new(text.Length * 2);
                 sb.Append(text[0]);
-                for (int i = 1; i < text.Length; i++)
-                {
-                    bool shouldAddWhiteSpace = char.IsUpper(text[i]) &&
-                                               ((text[i - 1] != ' ' && !char.IsUpper(text[i - 1])) ||
-                                                (preserveAcronyms && char.IsUpper(text[i - 1]) &&
-                                                 i < text.Length - 1 && !char.IsUpper(text[i + 1])));
+                for (var i = 1; i < text.Length; i++) {
+                    var shouldAddWhiteSpace = char.IsUpper(text[i]) &&
+                                              ((text[i - 1] != ' ' && !char.IsUpper(text[i - 1])) ||
+                                               (preserveAcronyms && char.IsUpper(text[i - 1]) &&
+                                                i < text.Length - 1 && !char.IsUpper(text[i + 1])));
                     if (shouldAddWhiteSpace)
                         sb.Append(' ');
                     sb.Append(text[i]);
@@ -155,24 +137,19 @@ namespace Safe_To_Share.Scripts.Static
                 return sb.ToString();
             }
 
-            public static string CleanFilePath(string path)
-            {
-                char[] invalids = Path.GetInvalidFileNameChars();
+            public static string CleanFilePath(string path) {
+                var invalids = Path.GetInvalidFileNameChars();
                 return string.Join("_", path.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd('.');
             }
         }
 
-        public static class Levenshtein
-        {
-            public static int Compute(string s, string t)
-            {
-                int n = s.Length;
-                int m = t.Length;
-                int[][] d = new int[n + 1][];
-                for (int index = 0; index < n + 1; index++)
-                {
+        public static class Levenshtein {
+            public static int Compute(string s, string t) {
+                var n = s.Length;
+                var m = t.Length;
+                var d = new int[n + 1][];
+                for (var index = 0; index < n + 1; index++)
                     d[index] = new int[m + 1];
-                }
 
                 // Verify arguments.
                 if (n == 0)
@@ -182,20 +159,15 @@ namespace Safe_To_Share.Scripts.Static
                     return n;
 
                 // Initialize arrays.
-                for (int i = 0; i <= n; d[i][0] = i++)
-                {
-                }
+                for (var i = 0; i <= n; d[i][0] = i++) { }
 
-                for (int j = 0; j <= m; d[0][j] = j++)
-                {
-                }
+                for (var j = 0; j <= m; d[0][j] = j++) { }
 
                 // Begin looping.
-                for (int i = 1; i <= n; i++)
-                for (int j = 1; j <= m; j++)
-                {
+                for (var i = 1; i <= n; i++)
+                for (var j = 1; j <= m; j++) {
                     // Compute cost.
-                    int cost = t[j - 1] == s[i - 1] ? 0 : 1;
+                    var cost = t[j - 1] == s[i - 1] ? 0 : 1;
                     d[i][j] = Math.Min(Math.Min(d[i - 1][j] + 1, d[i][j - 1] + 1),
                         d[i - 1][j - 1] + cost);
                 }

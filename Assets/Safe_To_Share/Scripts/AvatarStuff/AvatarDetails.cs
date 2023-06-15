@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace AvatarStuff
-{
-    public static class AvatarDetails
-    {
+namespace AvatarStuff {
+    public static class AvatarDetails {
         public static Dictionary<string, SavedValues> AvatarDetailsSavesDict = new();
 
-        public static string Save()
-        {
-            List<SavedValues> returnList = AvatarDetailsSavesDict.Values.ToList();
+        public static string Save() {
+            var returnList = AvatarDetailsSavesDict.Values.ToList();
             SaveWrapper final = new(returnList);
             return JsonUtility.ToJson(final);
         }
 
-        public static void Load(string savedValuesList)
-        {
+        public static void Load(string savedValuesList) {
             if (string.IsNullOrWhiteSpace(savedValuesList)) return;
             var parsed = JsonUtility.FromJson<SaveWrapper>(savedValuesList);
             if (parsed.savedValuesList.Count > 0)
@@ -25,20 +21,17 @@ namespace AvatarStuff
         }
 
         [Serializable]
-        public struct SaveWrapper
-        {
+        public struct SaveWrapper {
             public List<SavedValues> savedValuesList;
             public SaveWrapper(List<SavedValues> savedValuesList) => this.savedValuesList = savedValuesList;
         }
 
         [Serializable]
-        public struct SavedValues
-        {
+        public struct SavedValues {
             [SerializeField] string guid;
             [SerializeField] List<ColorSave> colorSaves;
 
-            public SavedValues(string guid)
-            {
+            public SavedValues(string guid) {
                 this.guid = guid;
                 colorSaves = new List<ColorSave>();
             }
@@ -46,21 +39,18 @@ namespace AvatarStuff
             public string Guid => guid;
             public List<ColorSave> ColorSaves => colorSaves;
 
-            public void MatToSave(Material mat)
-            {
+            public void MatToSave(Material mat) {
                 var color = ColorUtility.ToHtmlStringRGBA(mat.color);
                 ColorSaves.Add(new ColorSave(mat.name, color));
             }
         }
 
         [Serializable]
-        public struct ColorSave
-        {
-           [SerializeField]  string matName;
-           [SerializeField] string colorName;
+        public struct ColorSave {
+            [SerializeField] string matName;
+            [SerializeField] string colorName;
 
-            public ColorSave(string matName, string colorName)
-            {
+            public ColorSave(string matName, string colorName) {
                 this.matName = matName;
                 this.colorName = colorName;
             }

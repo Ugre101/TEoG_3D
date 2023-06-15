@@ -6,19 +6,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
-{
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level {
     [RequireComponent(typeof(Button))]
-    public sealed class StatButton : BaseLevelButton, IPointerEnterHandler
-    {
+    public sealed class StatButton : BaseLevelButton, IPointerEnterHandler {
         [SerializeField] Color statColor = Color.white;
         [SerializeField] CharStatType statType;
         [SerializeField] int cost = 1;
         [SerializeField] TextMeshProUGUI currentAmount;
 
 # if UNITY_EDITOR
-        void OnValidate()
-        {
+        void OnValidate() {
             rune.color = statColor;
             btnText.text = nameof(statType);
         }
@@ -26,25 +23,22 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
         public void OnPointerEnter(PointerEventData eventData) =>
             ShowStatInfo?.Invoke(statType, cost, transform.position);
 
-        public override void Setup(PlayerHolder player)
-        {
-            this.PlayerHolder = player;
+        public override void Setup(PlayerHolder player) {
+            PlayerHolder = player;
             UpdateValue();
         }
 
 
         public static event Action<CharStatType, int, Vector3> ShowStatInfo;
 
-        void UpdateValue()
-        {
-            if (PlayerHolder.Player.Stats.GetCharStats.TryGetValue(statType, out CharStat stat))
+        void UpdateValue() {
+            if (PlayerHolder.Player.Stats.GetCharStats.TryGetValue(statType, out var stat))
                 currentAmount.text = stat.BaseValue.ToString();
         }
 
         protected override void CanAfford(int obj) => Afford = cost <= obj;
 
-        protected override void OnClick()
-        {
+        protected override void OnClick() {
             if (!PlayerHolder.Player.LevelSystem.TryUsePoints(cost))
                 return;
             PlayerHolder.Player.Stats.GetCharStats[statType].BaseValue++;

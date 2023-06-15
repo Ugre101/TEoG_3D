@@ -21,11 +21,9 @@ using Safe_To_Share.Scripts.Character.Scat;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Character
-{
+namespace Character {
     [Serializable]
-    public abstract class BaseCharacter : ITickMinute
-    {
+    public abstract class BaseCharacter : ITickMinute {
         [SerializeField] Identity identity;
         [SerializeField] FamilyTree familyTree;
         [SerializeField] Stats stats = new();
@@ -38,11 +36,10 @@ namespace Character
         [SerializeField] PregnancySystem pregnancySystem = new();
         [SerializeField] RelationsShips relationsShips = new();
         [SerializeField] Hair hair = new(false, Color.white);
-        [field: SerializeField] public BodyFunctions BodyFunctions { get; private set; } = new BodyFunctions();
+        [field: SerializeField] public BodyFunctions BodyFunctions { get; private set; } = new();
         Gender lastGender;
 
-        protected BaseCharacter(BaseCharacter oldCharacter)
-        {
+        protected BaseCharacter(BaseCharacter oldCharacter) {
             identity = oldCharacter.Identity;
             stats = oldCharacter.Stats;
             body = oldCharacter.Body;
@@ -57,8 +54,7 @@ namespace Character
             hair = oldCharacter.Hair;
         }
 
-        protected BaseCharacter(CreateCharacter character)
-        {
+        protected BaseCharacter(CreateCharacter character) {
             identity = character.Identity.GetIdentity(Gender.GetGenderType());
             stats = character.Stats;
             body = character.StartBody.NewBody();
@@ -70,8 +66,7 @@ namespace Character
             RaceChange(null, character.StartRace);
             familyTree = new FamilyTree();
             if (character.StartPerks != null)
-                foreach (BasicPerk startPerk in character.StartPerks)
-                {
+                foreach (var startPerk in character.StartPerks) {
                     LevelSystem.OwnedPerks.Add(startPerk);
                     startPerk.PerkGainedEffect(this);
                 }
@@ -81,8 +76,7 @@ namespace Character
             body.SkinTone = character.Skin.GetSkinDarkness();
         }
 
-        protected BaseCharacter(CreateCharacter character, Islands islands)
-        {
+        protected BaseCharacter(CreateCharacter character, Islands islands) {
             identity = character.Identity.GetIdentity(Gender.GetGenderType());
             stats = character.Stats;
             body = character.StartBody.NewBody(islands);
@@ -94,8 +88,7 @@ namespace Character
             RaceChange(null, character.StartRace);
             familyTree = new FamilyTree();
             if (character.StartPerks != null)
-                foreach (BasicPerk startPerk in character.StartPerks)
-                {
+                foreach (var startPerk in character.StartPerks) {
                     LevelSystem.OwnedPerks.Add(startPerk);
                     startPerk.PerkGainedEffect(this);
                 }
@@ -105,8 +98,7 @@ namespace Character
             body.SkinTone = character.Skin.GetSkinDarkness();
         }
 
-        protected BaseCharacter()
-        {
+        protected BaseCharacter() {
             identity = new Identity();
             familyTree = new FamilyTree();
         }
@@ -132,21 +124,19 @@ namespace Character
 
         public Hair Hair => hair;
 
-        public virtual void TickMin(int ticks = 1)
-        {
+        public virtual void TickMin(int ticks = 1) {
             Stats.TickMin(ticks);
             SexualOrgans.TickMin(ticks);
         }
 
-        public virtual void TickHour(int ticks = 1)
-        {
+        public virtual void TickHour(int ticks = 1) {
             Stats.TickHour(ticks);
             PregnancySystem.TickHour(ticks);
             Vore.TickHour(this, ticks);
             essenceSystem.TickHour(ticks);
             BodyFunctions.TickHour(ticks);
             SexualOrgans.TickHour(ticks);
-            bool modifyAvatar = TickHourIfChangeModifyAvatar(ticks);
+            var modifyAvatar = TickHourIfChangeModifyAvatar(ticks);
             SexStats.TickHour(ticks);
             var burned = Body.BurnFatHour(ticks);
             if (modifyAvatar)
@@ -159,39 +149,34 @@ namespace Character
         public event Action UpdateAvatar;
         public event Action RemoveAvatar;
 
-        public bool HasGenderChanged()
-        {
-            bool didChange = lastGender != Gender;
+        public bool HasGenderChanged() {
+            var didChange = lastGender != Gender;
             lastGender = Gender;
             return didChange;
         }
 
-        public virtual void Sub()
-        {
+        public virtual void Sub() {
             RaceSystem.RaceChangedEvent += RaceChange;
             RaceSystem.SecRaceChangedEvent += SecRaceChange;
             DateSystem.TickMinute += TickMin;
             DateSystem.TickHour += TickHour;
         }
 
-        public virtual void Unsub()
-        {
+        public virtual void Unsub() {
             RaceSystem.RaceChangedEvent -= RaceChange;
             RaceSystem.SecRaceChangedEvent -= SecRaceChange;
             DateSystem.TickMinute -= TickMin;
             DateSystem.TickHour -= TickHour;
         }
 
-        void RaceChange(BasicRace oldRace, BasicRace newRace)
-        {
+        void RaceChange(BasicRace oldRace, BasicRace newRace) {
             if (oldRace != null)
                 oldRace.RemovePrimaryRaceMods(this);
             if (newRace != null)
                 newRace.AddPrimaryRaceMods(this);
         }
 
-        void SecRaceChange(BasicRace oldRace, BasicRace newRace)
-        {
+        void SecRaceChange(BasicRace oldRace, BasicRace newRace) {
             if (oldRace != null)
                 oldRace.RemoveSecondaryRaceMod(this);
             if (newRace != null)
@@ -199,15 +184,13 @@ namespace Character
         }
 
 
-        public void Loaded()
-        {
+        public void Loaded() {
             Stats.Loaded();
             SexualOrgans.Loaded();
             Body.Loaded();
         }
 
-        public virtual IEnumerator Load(CharacterSave toLoad)
-        {
+        public virtual IEnumerator Load(CharacterSave toLoad) {
             RaceSystem = new RaceSystem();
             yield return RaceSystem.Load(toLoad.RacesSave);
             RaceChange(null, RaceSystem.Race);
@@ -222,9 +205,8 @@ namespace Character
             yield return vore.Load(toLoad.VorePerkSave);
             ReGainPerks(vore.Level.OwnedPerks);
 
-            void ReGainPerks(IEnumerable<BasicPerk> perks)
-            {
-                foreach (BasicPerk perk in perks)
+            void ReGainPerks(IEnumerable<BasicPerk> perks) {
+                foreach (var perk in perks)
                     perk.PerkGainedEffect(this);
             }
         }
@@ -233,20 +215,18 @@ namespace Character
 
         public static event Action<Child> PlayerIsTheFather;
 
-        public virtual void OnBirth(IEnumerable<Fetus> obj)
-        {
-            foreach (var f in obj)
-            {
-                Child newBorn = BaseOnBirth(f);
+        public virtual void OnBirth(IEnumerable<Fetus> obj) {
+            foreach (var f in obj) {
+                var newBorn = BaseOnBirth(f);
                 PlayerIsTheFather?.Invoke(newBorn);
             }
+
             CharacterEvents.CharacterEvents.BirthEvent.StartEvent(this);
             InvokeUpdateAvatar();
         }
 
-        public Child BaseOnBirth(Fetus obj,string firstName = "Child")
-        {
-            Child newBorn = obj.GetBorn(firstName);
+        public Child BaseOnBirth(Fetus obj, string firstName = "Child") {
+            var newBorn = obj.GetBorn(firstName);
             FamilyTree.Children.Add(newBorn.Identity.ID);
             DayCare.AddChild(newBorn);
             InvokeUpdateAvatar();
@@ -257,18 +237,13 @@ namespace Character
             //TODO Need balancing
             Body.Thickset.BaseValue += prey.StartWeight / 1000f;
 
-        public virtual void OnOrganDigestionProgress(SexualOrganType organType, Prey prey, string mode, float progress)
-        {
-        }
+        public virtual void
+            OnOrganDigestionProgress(SexualOrganType organType, Prey prey, string mode, float progress) { }
 
-        public virtual void OnOrganDigestion(SexualOrganType organType, Prey prey, string mode)
-        {
-        }
+        public virtual void OnOrganDigestion(SexualOrganType organType, Prey prey, string mode) { }
 
         public virtual void InvokeUpdateAvatar() => UpdateAvatar?.Invoke();
 
         public void InvokeRemoveAvatar() => RemoveAvatar?.Invoke();
-
-
     }
 }

@@ -1,16 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SaveStuff
-{
+namespace SaveStuff {
     [Serializable]
-    public struct FullSave
-    {
+    public struct FullSave {
         [SerializeField] SaveSummary summary;
         [SerializeField] Save save;
 
-        public FullSave(SaveSummary summary, Save save)
-        {
+        public FullSave(SaveSummary summary, Save save) {
             this.summary = summary;
             this.save = save;
         }

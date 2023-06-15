@@ -1,13 +1,10 @@
 ﻿using Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
-{
-    public sealed class VoreLevelMenu : BaseLevelMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore {
+    public sealed class VoreLevelMenu : BaseLevelMenu {
         int VorePoints => Player.Vore.Level.Points;
 
-        protected override void OnEnable()
-        {
+        protected override void OnEnable() {
             base.OnEnable();
             Player.Vore.Level.PerkPointsChanged += UpdatePerkPoints;
             UpdatePerkPoints(Player.Vore.Level.Points);

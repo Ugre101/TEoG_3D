@@ -1,11 +1,9 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Character.CreateCharacterStuff.EditorPresets
-{
+namespace Character.CreateCharacterStuff.EditorPresets {
     [CustomEditor(typeof(CharacterPreset))]
-    public class CharacterPresetEditor : Editor
-    {
+    public class CharacterPresetEditor : Editor {
         static bool genderFold, identityFold, statsFold, raceFold, bodyFold;
 
         static bool baseEditorFold;
@@ -17,8 +15,7 @@ namespace Character.CreateCharacterStuff.EditorPresets
 
         void OnEnable() => BaseOnEnable();
 
-        protected void BaseOnEnable()
-        {
+        protected void BaseOnEnable() {
             startGender = serializedObject.FindProperty("startGender");
             startIdentity = serializedObject.FindProperty("startIdentity");
             startStats = serializedObject.FindProperty("startStats");
@@ -26,8 +23,7 @@ namespace Character.CreateCharacterStuff.EditorPresets
             startBody = serializedObject.FindProperty("startBody");
         }
 
-        protected virtual void CloseFolds()
-        {
+        protected virtual void CloseFolds() {
             genderFold = false;
             identityFold = false;
             statsFold = false;
@@ -35,8 +31,7 @@ namespace Character.CreateCharacterStuff.EditorPresets
             bodyFold = false;
         }
 
-        public override void OnInspectorGUI()
-        {
+        public override void OnInspectorGUI() {
             Buttons();
 
             PropertyFolds();
@@ -44,8 +39,7 @@ namespace Character.CreateCharacterStuff.EditorPresets
             BottomStuff();
         }
 
-        protected void Buttons()
-        {
+        protected void Buttons() {
             EditorGUILayout.BeginHorizontal();
             FoldButton("Gender", ref genderFold);
             FoldButton("Identity", ref identityFold);
@@ -58,35 +52,30 @@ namespace Character.CreateCharacterStuff.EditorPresets
             EditorGUILayout.EndHorizontal();
         }
 
-        protected void FoldButton(string title, ref bool fold)
-        {
-            if (GUILayout.Button(title))
-            {
+        protected void FoldButton(string title, ref bool fold) {
+            if (GUILayout.Button(title)) {
                 CloseFolds();
                 fold = true;
             }
         }
 
-        protected void PropertyFolds()
-        {
-            if (genderFold)
-            {
+        protected void PropertyFolds() {
+            if (genderFold) {
                 EditorGUILayout.BeginVertical("box");
                 serializedObject.Update();
-                SerializedProperty essenceAmount = startGender.FindPropertyRelative("startEssence");
-                SerializedProperty allowedGenders = startGender.FindPropertyRelative("allowedGenders");
+                var essenceAmount = startGender.FindPropertyRelative("startEssence");
+                var allowedGenders = startGender.FindPropertyRelative("allowedGenders");
                 essenceAmount.intValue = EditorGUILayout.IntSlider("Essence", essenceAmount.intValue, 0, 9999);
                 if (GUILayout.Button("Add gender option"))
                     allowedGenders.arraySize++;
 
-                for (int i = 0; i < allowedGenders.arraySize; i++)
-                {
+                for (var i = 0; i < allowedGenders.arraySize; i++) {
                     EditorGUILayout.BeginHorizontal("box");
-                    SerializedProperty arrayElementAtIndex = allowedGenders.GetArrayElementAtIndex(i);
+                    var arrayElementAtIndex = allowedGenders.GetArrayElementAtIndex(i);
                     EditorGUILayout.BeginVertical();
-                    SerializedProperty odds = arrayElementAtIndex.FindPropertyRelative("weight");
+                    var odds = arrayElementAtIndex.FindPropertyRelative("weight");
                     EditorGUILayout.IntSlider(odds, 1, 5);
-                    SerializedProperty gender = arrayElementAtIndex.FindPropertyRelative("gender");
+                    var gender = arrayElementAtIndex.FindPropertyRelative("gender");
                     EditorGUILayout.PropertyField(gender);
                     EditorGUILayout.EndVertical();
                     if (GUILayout.Button("Delete"))
@@ -98,8 +87,7 @@ namespace Character.CreateCharacterStuff.EditorPresets
                 EditorGUILayout.EndVertical();
             }
 
-            if (raceFold)
-            {
+            if (raceFold) {
                 EditorGUILayout.BeginVertical("box");
                 serializedObject.Update();
                 EditorGUILayout.PropertyField(startRace);
@@ -108,54 +96,50 @@ namespace Character.CreateCharacterStuff.EditorPresets
             }
 
             BasicPropertyFold(identityFold, startIdentity);
-            if (statsFold)
-            {
+            if (statsFold) {
                 EditorGUILayout.BeginVertical("box");
                 serializedObject.Update();
-                int statSum = 0;
-                SerializedProperty strength = startStats.FindPropertyRelative("strength");
+                var statSum = 0;
+                var strength = startStats.FindPropertyRelative("strength");
                 statSum += strength.intValue;
-                SerializedProperty charm = startStats.FindPropertyRelative("charm");
+                var charm = startStats.FindPropertyRelative("charm");
                 statSum += charm.intValue;
-                SerializedProperty constitution = startStats.FindPropertyRelative("constitution");
+                var constitution = startStats.FindPropertyRelative("constitution");
                 statSum += constitution.intValue;
-                SerializedProperty intelligence = startStats.FindPropertyRelative("intelligence");
+                var intelligence = startStats.FindPropertyRelative("intelligence");
                 statSum += intelligence.intValue;
-                SerializedProperty agility = startStats.FindPropertyRelative("agility");
+                var agility = startStats.FindPropertyRelative("agility");
                 statSum += agility.intValue;
                 EditorGUILayout.LabelField($"Stat sum: {statSum}");
                 serializedObject.ApplyModifiedProperties();
                 EditorGUILayout.EndVertical();
             }
+
             BasicPropertyFold(statsFold, startStats);
-            if (bodyFold)
-            {
+            if (bodyFold) {
                 EditorGUILayout.BeginVertical("box");
                 serializedObject.Update();
-                SerializedProperty height = startBody.FindPropertyRelative("height");
+                var height = startBody.FindPropertyRelative("height");
                 height.intValue = EditorGUILayout.IntSlider("Height", height.intValue, 1, 999);
                 EditorGUILayout.HelpBox("Remember that race will modify height, 160 is average for race",
                     MessageType.Info);
-                SerializedProperty muscle = startBody.FindPropertyRelative("muscle");
+                var muscle = startBody.FindPropertyRelative("muscle");
                 muscle.intValue = EditorGUILayout.IntSlider("Muscle", muscle.intValue, 1, 99);
-                SerializedProperty fat = startBody.FindPropertyRelative("fat");
+                var fat = startBody.FindPropertyRelative("fat");
                 fat.intValue = EditorGUILayout.IntSlider("Fat", fat.intValue, 1, 99);
-                float weight = muscle.intValue + fat.intValue + height.intValue / 2f * 0.40f;
+                var weight = muscle.intValue + fat.intValue + height.intValue / 2f * 0.40f;
                 EditorGUILayout.LabelField($"Weight: {weight}");
                 EditorGUILayout.LabelField($"Muscle {muscle.intValue / weight:0.##}% avg 28%");
                 EditorGUILayout.LabelField($"Fat {fat.intValue / weight:0.##}% avg 25%");
-                SerializedProperty rng = startBody.FindPropertyRelative("rng");
+                var rng = startBody.FindPropertyRelative("rng");
                 EditorGUILayout.PropertyField(rng);
                 serializedObject.ApplyModifiedProperties();
                 EditorGUILayout.EndVertical();
             }
-
         }
 
-        void BasicPropertyFold(bool fold, SerializedProperty property)
-        {
-            if (fold)
-            {
+        void BasicPropertyFold(bool fold, SerializedProperty property) {
+            if (fold) {
                 EditorGUILayout.BeginVertical("box");
                 serializedObject.Update();
                 EditorGUILayout.PropertyField(property);
@@ -164,8 +148,7 @@ namespace Character.CreateCharacterStuff.EditorPresets
             }
         }
 
-        protected void BottomStuff()
-        {
+        protected void BottomStuff() {
             baseEditorFold = EditorGUILayout.Foldout(baseEditorFold, "Base Editor");
             if (baseEditorFold)
                 base.OnInspectorGUI();

@@ -3,73 +3,61 @@ using Safe_To_Share.Scripts.QuestStuff;
 using UnityEditor;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Editor.Quest
-{
-    public sealed class QuestBuilderWindow : BaseNodeBuilderWindows<QuestStuff.Quest,QuestNode>
-    {
-        string createType;
-
+namespace Safe_To_Share.Scripts.Editor.Quest {
+    public sealed class QuestBuilderWindow : BaseNodeBuilderWindows<QuestStuff.Quest, QuestNode> {
         const string BaseOption = "Base";
+
         static readonly string[] Options = {
-            BaseOption
+            BaseOption,
         };
 
-        void OnGUI()
-        {
-            if (Selected == null)
-            {
+        string createType;
+
+        int i;
+
+        void OnGUI() {
+            if (Selected == null) {
                 EditorGUILayout.LabelField("No selected");
-            }
-            else
-            {
+            } else {
                 ProcessEvents();
                 ScrollPos = EditorGUILayout.BeginScrollView(ScrollPos, true, true);
                 EditorGUILayout.LabelField(Selected.name);
 
                 var canvas = GUILayoutUtility.GetRect(CanvasSize, CanvasSize);
-                foreach (QuestNode node in Selected.GetAllNodes())
-                {
+                foreach (var node in Selected.GetAllNodes()) {
                     DrawNode(node);
                     DrawNodeConnection(Selected, node);
                 }
 
                 EditorGUILayout.EndScrollView();
 
-                if (deletingNode != null)
-                {
+                if (deletingNode != null) {
                     Selected.DeleteChildNode(deletingNode);
                     deletingNode = null;
-                }
-                else if (creatingNode != null)
-                {
+                } else if (creatingNode != null) {
                     AddNewNode();
                 }
             }
         }
 
         [MenuItem("MENUITEM/Quest Builder")]
-        static void ShowWindow()
-        {
+        static void ShowWindow() {
             var window = GetWindow<QuestBuilderWindow>();
             window.titleContent = new GUIContent("TITLE");
             window.Show();
         }
 
-        void AddNewNode()
-        {
-          
-            switch (createType)
-            {
+        void AddNewNode() {
+            switch (createType) {
                 case BaseOption:
-                Selected.CreateChildNode<QuestNode>(creatingNode);
-                break;
+                    Selected.CreateChildNode<QuestNode>(creatingNode);
+                    break;
             }
+
             creatingNode = null;
         }
 
-        int i;
-        void DrawNode(QuestNode node)
-        {
+        void DrawNode(QuestNode node) {
             GUILayout.BeginArea(node.rect, NodeStyle);
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.LabelField(node.GetType().Name, EditorStyles.whiteLabel);

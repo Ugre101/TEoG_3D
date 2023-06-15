@@ -2,23 +2,19 @@ using SaveStuff;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class HasVorePerkPoint : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class HasVorePerkPoint : GameMenu {
         [SerializeField] Color no = Color.white, yes = Color.magenta;
         [SerializeField] Image image;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             Refresh();
             Player.Vore.Level.PerkPointsChanged += CheckGained;
             LoadManager.LoadedSave += Refresh;
         }
 
 
-        void OnDisable()
-        {
+        void OnDisable() {
             Player.Vore.Level.PerkPointsChanged -= CheckGained;
             LoadManager.LoadedSave -= Refresh;
         }

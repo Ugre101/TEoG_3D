@@ -9,11 +9,9 @@ using Character.StatsStuff.Mods;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Character.LevelStuff
-{
+namespace Character.LevelStuff {
     [CreateAssetMenu(fileName = "Create PerkInfo", menuName = "Character/PerkInfo", order = 0)]
-    public class BasicPerk : SObjSavableTitleDescIcon
-    {
+    public class BasicPerk : SObjSavableTitleDescIcon {
         [SerializeField, Range(1, 10),] int cost = 1;
         [SerializeField] PerkType perkType = PerkType.Basic;
         [SerializeField, HideInInspector,] List<string> needPerkGuids = new();
@@ -34,8 +32,7 @@ namespace Character.LevelStuff
         public List<RequireCharStat> RequireCharStats => requireCharStats;
 
         // Stat req
-        public bool MeetsRequirements(BaseCharacter character)
-        {
+        public bool MeetsRequirements(BaseCharacter character) {
             if (NeedPerkGuids.Any(perkGuid =>
                     character.LevelSystem.OwnedPerks.FirstOrDefault(p => p.Guid == perkGuid) == null) &&
                 NeedPerkGuids.Any(perkGuid =>
@@ -59,21 +56,19 @@ namespace Character.LevelStuff
         /// <summary>
         ///     Called when gained and after load. Stuff like stat mods are added here
         /// </summary>
-        public virtual void PerkGainedEffect(BaseCharacter character)
-        {
-            foreach (AssignCharStatMod charStatMod in statMods)
-                if (character.Stats.GetCharStats.TryGetValue(charStatMod.Stat, out CharStat stat))
+        public virtual void PerkGainedEffect(BaseCharacter character) {
+            foreach (var charStatMod in statMods)
+                if (character.Stats.GetCharStats.TryGetValue(charStatMod.Stat, out var stat))
                     stat.Mods.AddStatMod(charStatMod.Mod);
-            foreach (AssignBodyMod bodyMod in bodyMods)
-                if (character.Body.BodyStats.TryGetValue(bodyMod.Type, out BodyStat body))
+            foreach (var bodyMod in bodyMods)
+                if (character.Body.BodyStats.TryGetValue(bodyMod.Type, out var body))
                     body.Mods.AddStatMod(bodyMod.Mod);
-            foreach (IntMod recoveryMod in recoveryMods)
-            {
+            foreach (var recoveryMod in recoveryMods) {
                 character.Stats.Health.Mods.AddStatMod(recoveryMod);
                 character.Stats.WillPower.Mods.AddStatMod(recoveryMod);
             }
 
-            foreach (AssignModsToOrganContainer modsToOrganContainer in assignModsToOrganContainer)
+            foreach (var modsToOrganContainer in assignModsToOrganContainer)
                 modsToOrganContainer.Assign(character);
             assignPregnancyMods.AssignMods(character);
             assignFluidMods.AssignMods(character);
@@ -82,14 +77,13 @@ namespace Character.LevelStuff
 #if UNITY_EDITOR
         [SerializeField] List<BasicPerk> needPerk = new();
         [SerializeField] List<BasicPerk> exclusiveWithPerk = new();
-        public override void OnValidate()
-        {
+        public override void OnValidate() {
             base.OnValidate();
             needPerkGuids = new List<string>();
-            foreach (BasicPerk basicPerk in needPerk)
+            foreach (var basicPerk in needPerk)
                 NeedPerkGuids.Add(basicPerk.Guid);
             exclusiveWithPerkGuids = new List<string>();
-            foreach (BasicPerk basicPerk in exclusiveWithPerk)
+            foreach (var basicPerk in exclusiveWithPerk)
                 ExclusiveWithPerkGuids.Add(basicPerk.Guid);
         }
 #endif

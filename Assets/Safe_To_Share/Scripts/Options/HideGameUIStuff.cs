@@ -1,17 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Options
-{
-    public sealed class HideGameUIStuff : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Options {
+    public sealed class HideGameUIStuff : MonoBehaviour {
         public static bool LowerBarsHidden;
         public static bool MiniMapHidden;
         [SerializeField] Toggle hideLowerBars;
         [SerializeField] Toggle hideMap;
 
-        void Start()
-        {
+        void Start() {
             hideLowerBars.SetIsOnWithoutNotify(LowerBarsHidden);
             hideLowerBars.onValueChanged.AddListener(ToggleHealthBars);
 

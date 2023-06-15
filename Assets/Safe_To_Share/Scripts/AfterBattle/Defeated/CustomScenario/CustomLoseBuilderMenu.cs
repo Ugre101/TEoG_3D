@@ -6,10 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
-{
-    public sealed class CustomLoseBuilderMenu : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario {
+    public sealed class CustomLoseBuilderMenu : MonoBehaviour {
         [SerializeField] Button newScenario, saveScenario;
         [SerializeField] SelectedNode showSelected;
         [SerializeField] NodeUI prefab;
@@ -20,8 +18,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
         static string ModsFolderPath => Path.Combine(Application.dataPath, "Mods");
         public static string CustomScenarioFolder => Path.Combine(ModsFolderPath, "CustomLoseScenarios");
 
-        public void Start()
-        {
+        public void Start() {
             modsFolder = Directory.CreateDirectory(ModsFolderPath);
             newScenario.onClick.AddListener(NewScenario);
             saveScenario.onClick.AddListener(SaveScenarioToModsFolder);
@@ -33,18 +30,16 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
 
         void LoadScenario(CustomLoseScenario obj) => AddScenario(obj);
 
-        void NewTitle(string arg0)
-        {
+        void NewTitle(string arg0) {
             if (loseScenario == null)
                 return;
             loseScenario.Title = arg0;
         }
 
-        void SaveScenarioToModsFolder()
-        {
+        void SaveScenarioToModsFolder() {
             if (loseScenario == null)
                 return;
-            string savePath = CustomScenarioFolder;
+            var savePath = CustomScenarioFolder;
             if (!Directory.Exists(savePath))
                 Directory.CreateDirectory(savePath);
             savePath = Path.Combine(savePath, loseScenario.Title);
@@ -55,10 +50,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
 
         void NewScenario() => AddScenario(new CustomLoseScenario());
 
-        void AddScenario(CustomLoseScenario scenario)
-        {
-            if (loseScenario != null)
-            {
+        void AddScenario(CustomLoseScenario scenario) {
+            if (loseScenario != null) {
                 loseScenario.NewNode -= PrintNode;
                 loseScenario.RemovedNode -= RemovedNode;
                 loseScenario.RemovedNode -= PrintLinks;
@@ -76,19 +69,15 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario
 
         void PrintLinks(CustomLoseScenarioNode throwAway) => PrintLinks();
 
-        void PrintLinks()
-        {
+        void PrintLinks() {
             var nodes = container.GetComponentsInChildren<NodeUI>();
             foreach (var addedNode in nodes)
                 addedNode.ShowLinks();
         }
 
-        void RemovedNode()
-        {
-        }
+        void RemovedNode() { }
 
-        void PrintNode(CustomLoseScenarioNode node)
-        {
+        void PrintNode(CustomLoseScenarioNode node) {
             var newNode = Instantiate(prefab, container);
             newNode.transform.localPosition = node.canvasPos;
             newNode.SetupNode(loseScenario, node);

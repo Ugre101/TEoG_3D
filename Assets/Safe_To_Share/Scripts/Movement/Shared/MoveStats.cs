@@ -1,11 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Movement.HoverMovement
-{
+namespace Safe_To_Share.Scripts.Movement.HoverMovement {
     [Serializable]
-    public abstract class MoveStats : MonoBehaviour
-    {
+    public abstract class MoveStats : MonoBehaviour {
         public abstract int MaxJumpCount { get; }
         public abstract float JumpStrength { get; }
         public abstract float SprintMultiplier { get; }

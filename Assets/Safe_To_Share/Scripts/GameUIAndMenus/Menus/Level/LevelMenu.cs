@@ -2,14 +2,11 @@
 using Character.LevelStuff;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
-{
-    public sealed class LevelMenu : BaseLevelMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level {
+    public sealed class LevelMenu : BaseLevelMenu {
         [SerializeField] StartPerkIcon startPerkIcon;
 
-        protected override void OnEnable()
-        {
+        protected override void OnEnable() {
             base.OnEnable();
             Player.LevelSystem.PerkPointsChanged += UpdatePerkPoints;
             Setup();
@@ -17,15 +14,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 
         void OnDisable() => Player.LevelSystem.PerkPointsChanged -= UpdatePerkPoints;
 
-        void Setup()
-        {
+        void Setup() {
             UpdatePerkPoints(Player.LevelSystem.Points);
             ShowStartPerk();
         }
 
-        void ShowStartPerk()
-        {
-            BasicPerk startPerk = Player.LevelSystem.OwnedPerks.FirstOrDefault(p => p.PerkType == PerkType.StartPerk);
+        void ShowStartPerk() {
+            var startPerk = Player.LevelSystem.OwnedPerks.FirstOrDefault(p => p.PerkType == PerkType.StartPerk);
             if (startPerk != null)
                 startPerkIcon.Setup(startPerk);
         }

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Linq;
-using Character.BodyStuff;
 using Character.PlayerStuff;
 using DormAndHome.Dorm;
 using Safe_To_Share.Scripts.Holders;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace AvatarStuff.Holders
-{
-    public sealed class DormMateAiHolder : AiHolder, IInteractable
-    {
+namespace AvatarStuff.Holders {
+    public sealed class DormMateAiHolder : AiHolder, IInteractable {
         [SerializeField] DormMate mate;
 
         public DormMate Mate => mate;
@@ -22,32 +19,28 @@ namespace AvatarStuff.Holders
         public event Action<IInteractable> UpdateHoverText;
         public event Action RemoveIInteractableHit;
 
-        public void AddMate(DormMate dormMate)
-        {
+        public void AddMate(DormMate dormMate) {
             mate = dormMate;
             Sub();
             UpdateAvatar(Mate);
             HeightsChange(Mate.Body.Height.Value);
         }
 
-        void IfPregnant(int obj)
-        {
+        void IfPregnant(int obj) {
             if (Mate.SexualOrgans.Vaginas.BaseList.Any(v => v.Womb.HasFetus))
                 ModifyAvatar();
         }
 
-        protected override void Sub()
-        {
+        protected override void Sub() {
             base.Sub();
             Mate.UpdateAvatar += ModifyAvatar;
-            foreach (BodyStat bodyStat in Mate.Body.BodyStats.Values)
+            foreach (var bodyStat in Mate.Body.BodyStats.Values)
                 bodyStat.StatDirtyEvent += ModifyAvatar;
             DateSystem.NewDay += IfPregnant;
             Mate.Sub();
         }
 
-        protected override void UnSub()
-        {
+        protected override void UnSub() {
             base.UnSub();
             Mate.UpdateAvatar -= ModifyAvatar;
             foreach (var bodyStat in Mate.Body.BodyStats.Values)
@@ -56,8 +49,7 @@ namespace AvatarStuff.Holders
             Mate.Unsub();
         }
 
-        protected override void NewAvatar(CharacterAvatar obj)
-        {
+        protected override void NewAvatar(CharacterAvatar obj) {
             Mate.UpdateAvatar -= ModifyAvatar;
             Changer.CurrentAvatar.Setup(Mate);
             Mate.UpdateAvatar += ModifyAvatar;

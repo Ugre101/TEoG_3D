@@ -1,12 +1,9 @@
-﻿using AvatarStuff.Holders;
-using Character.VoreStuff;
+﻿using Character.VoreStuff;
 using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
-namespace Dialogue.Events
-{
-    public sealed class VoreEvents : MonoBehaviour
-    {
+namespace Dialogue.Events {
+    public sealed class VoreEvents : MonoBehaviour {
         [SerializeField] PlayerHolder playerHolder;
         [SerializeField] BaseDialogue pleadDialogue;
 

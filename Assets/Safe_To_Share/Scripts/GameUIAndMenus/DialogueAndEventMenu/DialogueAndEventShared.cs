@@ -8,10 +8,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
-{
-    public abstract class DialogueAndEventShared : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu {
+    public abstract class DialogueAndEventShared : GameMenu {
         protected static float textSpeed = 0.004f;
         static WaitForSecondsRealtime betweenCharsDelay = new(TextSpeed);
         static readonly WaitForSecondsRealtime NewLineDelay = new(0.5f);
@@ -26,18 +24,15 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
         protected DialogueBaseNode CurrentNode;
         Coroutine printDialogue;
 
-        static float TextSpeed
-        {
+        static float TextSpeed {
             get => textSpeed;
-            set
-            {
+            set {
                 textSpeed = value;
                 betweenCharsDelay = new WaitForSecondsRealtime(textSpeed);
             }
         }
 
-        protected virtual void Start()
-        {
+        protected virtual void Start() {
             DialogueButton.ChoosesOption += HandleOption;
             slider.maxValue = 0.1f;
             slider.minValue = 0.00001f;
@@ -50,15 +45,12 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 
         protected static void ChangeTextSpeed(float arg0) => TextSpeed = arg0;
 
-        protected IEnumerator PrintText(IEnumerable<string> nodeText)
-        {
+        protected IEnumerator PrintText(IEnumerable<string> nodeText) {
             text.text = string.Empty;
 
             StringBuilder sb = new();
-            foreach (string s in nodeText)
-            {
-                foreach (char c in s)
-                {
+            foreach (var s in nodeText) {
+                foreach (var c in s) {
                     sb.Append(c);
                     text.text = sb.ToString();
                     scrollRect.verticalNormalizedPosition = 0;
@@ -74,21 +66,18 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 
         public override bool BlockIfActive() => false;
 
-        protected void ShowNodeText(DialogueBaseNode node)
-        {
+        protected void ShowNodeText(DialogueBaseNode node) {
             title.text = node.Title;
             printDialogue = StartCoroutine(PrintText(node.Text));
 
             // text.text = node.Text;
         }
 
-        protected void Skip()
-        {
+        protected void Skip() {
             if (printDialogue != null)
                 StopCoroutine(printDialogue);
             StringBuilder sb = new();
-            foreach (string s in CurrentNode.Text)
-            {
+            foreach (var s in CurrentNode.Text) {
                 sb.AppendLine(s);
                 sb.AppendLine();
             }
@@ -98,17 +87,15 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
 
         protected abstract void HandleOption(DialogueBaseNode obj);
 
-        protected void AddOptionButtons(DialogueBaseNode obj)
-        {
+        protected void AddOptionButtons(DialogueBaseNode obj) {
             content.KillChildren();
             var dialogueBaseNodes = CurrentDialogue.GetChildNodes(obj).ToArray();
-            for (var i = 0; i < dialogueBaseNodes.Length; i++)
-            {
+            for (var i = 0; i < dialogueBaseNodes.Length; i++) {
                 var childNode = dialogueBaseNodes[i];
                 if (childNode.ShowNode)
-                    Instantiate(prefab, content).Setup(childNode,i);
+                    Instantiate(prefab, content).Setup(childNode, i);
                 else
-                    Instantiate(prefab, content).SetupBlocked(childNode,i);
+                    Instantiate(prefab, content).SetupBlocked(childNode, i);
             }
         }
     }

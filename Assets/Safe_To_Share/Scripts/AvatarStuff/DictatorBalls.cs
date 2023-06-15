@@ -1,10 +1,8 @@
 ﻿using Character.Organs.OrgansContainers;
 using UnityEngine;
 
-namespace AvatarStuff
-{
-    public sealed class DictatorBalls : MonoBehaviour
-    {
+namespace AvatarStuff {
+    public sealed class DictatorBalls : MonoBehaviour {
         [SerializeField, Min(0f),] float minSize, maxSize = 4f;
 
         [SerializeField] Vector3 hideOffset;
@@ -18,8 +16,7 @@ namespace AvatarStuff
         float fluidMax = 100;
         bool hidden;
 
-        void HideBalls()
-        {
+        void HideBalls() {
             if (hidden)
                 return;
             transform.localScale = new Vector3(hideSize, hideSize, hideSize);
@@ -27,16 +24,14 @@ namespace AvatarStuff
             hidden = true;
         }
 
-        public void ShowOrHide(bool show)
-        {
+        public void ShowOrHide(bool show) {
             if (show)
                 ShowBalls();
             else
                 HideBalls();
         }
 
-        void ShowBalls()
-        {
+        void ShowBalls() {
             if (!hidden)
                 return;
             hidden = false;
@@ -44,21 +39,18 @@ namespace AvatarStuff
             ReSize(currentSize);
         }
 
-        public void ReSize(float newSize)
-        {
-            float size = Mathf.Clamp(newSize, minSize, maxSize);
+        public void ReSize(float newSize) {
+            var size = Mathf.Clamp(newSize, minSize, maxSize);
             currentSize = size;
             SetBallSize();
         }
 
-        void SetBallSize()
-        {
-            float finalSize = currentSize * fluidFactor * sizeMulti;
+        void SetBallSize() {
+            var finalSize = currentSize * fluidFactor * sizeMulti;
             transform.localScale = new Vector3(finalSize, finalSize, finalSize);
         }
 
-        public void SetupFluidStretch(BaseOrgansContainer container)
-        {
+        public void SetupFluidStretch(BaseOrgansContainer container) {
             fluidMax = container.Fluid.Value;
             SetFluidStretch(container.Fluid.CurrentValue);
         }

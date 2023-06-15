@@ -1,13 +1,9 @@
 ﻿using System;
 using CustomClasses;
 
-namespace Character.EssenceStuff
-{
+namespace Character.EssenceStuff {
     [Serializable]
-    public class StableEssence : BaseIntStat
-    {
-        public StableEssence(int baseValue) : base(baseValue)
-        {
-        }
+    public class StableEssence : BaseIntStat {
+        public StableEssence(int baseValue) : base(baseValue) { }
     }
 }

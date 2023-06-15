@@ -2,14 +2,10 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Safe_To_Share.Scripts.Farming
-{
+namespace Safe_To_Share.Scripts.Farming {
     [Serializable]
-    public class PlantStats
-    {
-        public event Action<float> Grown; 
-        public PlantStats(Save save,int maxHours)
-        {
+    public class PlantStats {
+        public PlantStats(Save save, int maxHours) {
             Quality = save.Quality;
             Hours = save.Hours;
             Pos = save.Pos;
@@ -17,8 +13,7 @@ namespace Safe_To_Share.Scripts.Farming
             MaxHours = maxHours;
         }
 
-        public PlantStats(Plant plant,Vector3 pos)
-        {
+        public PlantStats(Plant plant, Vector3 pos) {
             PlantGuid = plant.Guid;
             MaxHours = plant.GrowTime;
             Pos = pos;
@@ -32,28 +27,25 @@ namespace Safe_To_Share.Scripts.Farming
         public float PercentDone => (float)Hours / MaxHours;
 
         public bool Done => MaxHours <= Hours;
+        public event Action<float> Grown;
 
-        public void TickHour(int hours, float qualityMod = 0f)
-        {
+        public void TickHour(int hours, float qualityMod = 0f) {
             Hours += hours;
-            for (int i = 0; i < hours; i++)
-            {
+            for (var i = 0; i < hours; i++)
                 Quality += Random.value * qualityMod / MaxHours;
-            }
             Grown?.Invoke(PercentDone);
         }
 
-        public Save SaveStats() => new Save(Quality, Hours, Pos, PlantGuid);
+        public Save SaveStats() => new(Quality, Hours, Pos, PlantGuid);
+
         [Serializable]
-        public struct  Save
-        {
+        public struct Save {
             public float Quality;
             public int Hours;
             public Vector3 Pos;
             public string PlantGuid;
 
-            public Save(float quality, int hours, Vector3 pos, string plantGuid)
-            {
+            public Save(float quality, int hours, Vector3 pos, string plantGuid) {
                 Quality = quality;
                 Hours = hours;
                 Pos = pos;

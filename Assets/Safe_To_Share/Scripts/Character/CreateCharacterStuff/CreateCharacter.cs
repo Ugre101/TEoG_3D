@@ -4,14 +4,13 @@ using Character.StatsStuff;
 using Items;
 using Safe_To_Share.Scripts.CustomClasses;
 
-namespace Character.CreateCharacterStuff
-{
-    public readonly struct CreateCharacter
-    {
-        public CreateCharacter(StartIdentity identity, Stats stats, string[] startAbilities, AddAmountOf<Item>[] startItems,
-            BasicRace startRace, StartGender startGender, StartBody startBody, BasicPerk[] startPerks, StartHair hair,
-            StartSkinColor skin)
-        {
+namespace Character.CreateCharacterStuff {
+    public readonly struct CreateCharacter {
+        public CreateCharacter(StartIdentity identity, Stats stats, string[] startAbilities,
+                               AddAmountOf<Item>[] startItems,
+                               BasicRace startRace, StartGender startGender, StartBody startBody,
+                               BasicPerk[] startPerks, StartHair hair,
+                               StartSkinColor skin) {
             Identity = identity;
             Stats = stats;
             StartAbilities = startAbilities;

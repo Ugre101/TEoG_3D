@@ -2,11 +2,9 @@
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Character.StatsStuff.HealthStuff
-{
+namespace Character.StatsStuff.HealthStuff {
     [Serializable]
-    public class RecoveryFloatStat : BaseConstFloatStat, ITickMinute
-    {
+    public class RecoveryFloatStat : BaseConstFloatStat, ITickMinute {
         [SerializeField] float currentValue;
         [SerializeField] BaseFloatStat recovery;
 
@@ -16,11 +14,9 @@ namespace Character.StatsStuff.HealthStuff
 
         public bool Dead { get; private set; }
 
-        public float CurrentValue
-        {
+        public float CurrentValue {
             get => currentValue;
-            protected set
-            {
+            protected set {
                 Dead = value <= 0;
                 if (value < currentValue)
                     ValueDecrease?.Invoke(currentValue - value);
@@ -31,19 +27,16 @@ namespace Character.StatsStuff.HealthStuff
             }
         }
 
-        public override bool Dirty
-        {
+        public override bool Dirty {
             get => base.Dirty;
-            protected set
-            {
+            protected set {
                 base.Dirty = value;
                 if (value)
                     MaxValueChange?.Invoke(Value);
             }
         }
 
-        public void TickMin(int ticks = 1)
-        {
+        public void TickMin(int ticks = 1) {
             if (CurrentValue >= Value)
                 return;
             // % of max health heal per tick
@@ -59,8 +52,7 @@ namespace Character.StatsStuff.HealthStuff
 
         public void FullRecovery() => CurrentValue = Value;
 
-        public void Refresh()
-        {
+        public void Refresh() {
             MaxValueChange?.Invoke(Value);
             CurrentValueChange?.Invoke(CurrentValue);
         }

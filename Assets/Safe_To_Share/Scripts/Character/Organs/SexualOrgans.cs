@@ -4,11 +4,9 @@ using System.Linq;
 using Character.Organs.OrgansContainers;
 using UnityEngine;
 
-namespace Character.Organs
-{
+namespace Character.Organs {
     [Serializable]
-    public class SexualOrgans : ITickMinute, ITickHour
-    {
+    public class SexualOrgans : ITickMinute, ITickHour {
         [SerializeField] AnalsContainer anals = new();
         [SerializeField] DicksContainer dicks = new();
         [SerializeField] BallsContainer balls = new();
@@ -21,36 +19,35 @@ namespace Character.Organs
         public BoobsContainer Boobs => boobs;
         public VaginaContainer Vaginas => vaginas;
         public AnalsContainer Anals => anals;
-        public Dictionary<SexualOrganType, BaseOrgansContainer> Containers => organsContainers ??=
-            new Dictionary<SexualOrganType, BaseOrgansContainer>
-            {
-                { SexualOrganType.Anal, anals },
-                { SexualOrganType.Balls, balls },
-                { SexualOrganType.Boobs, boobs },
-                { SexualOrganType.Dick, dicks },
-                { SexualOrganType.Vagina, vaginas },
-            };
 
-        public IEnumerable<BaseOrgan> GetAllOrgans() => Containers.Values.SelectMany(baseOrgansContainer => baseOrgansContainer.BaseList);
+        public Dictionary<SexualOrganType, BaseOrgansContainer> Containers =>
+            organsContainers ??=
+                new Dictionary<SexualOrganType, BaseOrgansContainer> {
+                    { SexualOrganType.Anal, anals },
+                    { SexualOrganType.Balls, balls },
+                    { SexualOrganType.Boobs, boobs },
+                    { SexualOrganType.Dick, dicks },
+                    { SexualOrganType.Vagina, vaginas },
+                };
 
-        public bool TickHour(int ticks = 1)
-        {
-            bool change = false;
-            foreach (BaseOrgansContainer container in Containers.Values)
+        public bool TickHour(int ticks = 1) {
+            var change = false;
+            foreach (var container in Containers.Values)
                 if (container.TickHour(ticks))
                     change = true;
             return change;
         }
 
 
-        public void TickMin(int ticks = 1)
-        {
-            foreach (BaseOrgansContainer container in Containers.Values)
+        public void TickMin(int ticks = 1) {
+            foreach (var container in Containers.Values)
                 container.Fluid.TickMin(ticks);
         }
 
-        public void Loaded()
-        {
+        public IEnumerable<BaseOrgan> GetAllOrgans() =>
+            Containers.Values.SelectMany(baseOrgansContainer => baseOrgansContainer.BaseList);
+
+        public void Loaded() {
             if (Vaginas.BaseList.Any(v => v.Womb.HasFetus)) Boobs.StartLactating();
         }
     }

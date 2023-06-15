@@ -8,10 +8,8 @@ using Safe_To_Share.Scripts.Battle.EffectStuff;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Battle.SkillsAndSpells
-{
-    public abstract class Ability : SObjSavableTitleDescIcon
-    {
+namespace Safe_To_Share.Scripts.Battle.SkillsAndSpells {
+    public abstract class Ability : SObjSavableTitleDescIcon {
         [SerializeField] protected bool canTargetEnemies = true, canTargetAllies;
         [SerializeField] protected List<UseCost> useCosts = new();
         [SerializeField] protected EffectsTree effectsTree = new();
@@ -23,31 +21,26 @@ namespace Safe_To_Share.Scripts.Battle.SkillsAndSpells
 
         protected bool CanTargetAllies => canTargetAllies;
 
-        public virtual IEnumerator UseEffect(CombatCharacter user, CombatCharacter[] targets)
-        {
+        public virtual IEnumerator UseEffect(CombatCharacter user, CombatCharacter[] targets) {
             HandleUseCost(user.Character);
-            foreach (var target in targets)
-            {
-                foreach (Effect effectsTreeActiveEffect in EffectsTree.ActiveEffects)
+            foreach (var target in targets) {
+                foreach (var effectsTreeActiveEffect in EffectsTree.ActiveEffects)
                     effectsTreeActiveEffect.UseEffect(user.Character, target.Character);
                 yield return battleAct.InstanceEffects(user.Combatant, target.Combatant);
             }
         }
 
 
-        public virtual IEnumerator UseEffect(CombatCharacter user, CombatCharacter target)
-        {
-            foreach (Effect effectsTreeActiveEffect in EffectsTree.ActiveEffects)
+        public virtual IEnumerator UseEffect(CombatCharacter user, CombatCharacter target) {
+            foreach (var effectsTreeActiveEffect in EffectsTree.ActiveEffects)
                 effectsTreeActiveEffect.UseEffect(user.Character, target.Character);
             HandleUseCost(user.Character);
             yield return battleAct.InstanceEffects(user.Combatant, target.Combatant);
         }
 
-        void HandleUseCost(BaseCharacter user)
-        {
-            foreach (UseCost cost in UseCosts)
-                switch (cost.Type)
-                {
+        void HandleUseCost(BaseCharacter user) {
+            foreach (var cost in UseCosts)
+                switch (cost.Type) {
                     case UseCost.CostType.Stamina: break;
                     case UseCost.CostType.Mana: break;
                     case UseCost.CostType.Health:
@@ -61,11 +54,9 @@ namespace Safe_To_Share.Scripts.Battle.SkillsAndSpells
                 }
         }
 
-        public virtual bool CanUse(BaseCharacter user, BaseCharacter target)
-        {
-            foreach (UseCost cost in UseCosts)
-                switch (cost.Type)
-                {
+        public virtual bool CanUse(BaseCharacter user, BaseCharacter target) {
+            foreach (var cost in UseCosts)
+                switch (cost.Type) {
                     case UseCost.CostType.Stamina:
                         break;
                     case UseCost.CostType.Mana:

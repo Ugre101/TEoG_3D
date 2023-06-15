@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 
-namespace Safe_To_Share.Scripts
-{
-    public sealed class Spin : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts {
+    public sealed class Spin : MonoBehaviour {
         [SerializeField, Range(5f, 15f),] float spinRate = 1f;
         [SerializeField] new Transform transform;
         [SerializeField] Renderer rend;
 
-        void Update()
-        {
+        void Update() {
             if (rend.isVisible)
                 transform.RotateAround(transform.position, Vector3.up, spinRate * Time.deltaTime);
         }

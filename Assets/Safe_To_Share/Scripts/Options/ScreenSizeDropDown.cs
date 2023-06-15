@@ -3,31 +3,26 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Options
-{
-    public sealed class ScreenSizeDropDown : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Options {
+    public sealed class ScreenSizeDropDown : MonoBehaviour {
         [SerializeField] TMP_Dropdown dropdown;
 
         Resolution[] resolutions;
 
-        void Start()
-        {
+        void Start() {
             resolutions = Screen.resolutions;
             Setup();
         }
 
-        public void ChangeScreenRes(int arg0)
-        {
+        public void ChangeScreenRes(int arg0) {
             if (arg0 < 0 || resolutions.Length < arg0) return;
 
-            Resolution newRes = resolutions[arg0];
+            var newRes = resolutions[arg0];
             Screen.SetResolution(newRes.width, newRes.height, Screen.fullScreenMode);
         }
 
 
-        void Setup()
-        {
+        void Setup() {
             dropdown.ClearOptions();
 
             TMP_Dropdown.OptionDataList dataList = new();
@@ -37,7 +32,7 @@ namespace Safe_To_Share.Scripts.Options
             dropdown.AddOptions(options);
 
 
-            int current = Array.IndexOf(resolutions, Screen.currentResolution);
+            var current = Array.IndexOf(resolutions, Screen.currentResolution);
             if (current > -1)
                 dropdown.value = current;
         }

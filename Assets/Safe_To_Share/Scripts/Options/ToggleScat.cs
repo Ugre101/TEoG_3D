@@ -2,14 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Options
-{
-    public sealed class ToggleScat : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Options {
+    public sealed class ToggleScat : MonoBehaviour {
         [SerializeField] Toggle toggle;
 
-        void Start()
-        {
+        void Start() {
             toggle.isOn = OptionalContent.Scat.Enabled;
             toggle.onValueChanged.AddListener(OnToggle);
         }

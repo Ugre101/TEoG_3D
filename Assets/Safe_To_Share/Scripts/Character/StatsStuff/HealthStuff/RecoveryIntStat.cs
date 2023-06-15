@@ -2,11 +2,9 @@
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Character.StatsStuff.HealthStuff
-{
+namespace Character.StatsStuff.HealthStuff {
     [Serializable]
-    public class RecoveryIntStat : BaseConstIntStat, ITickMinute, ITickHour
-    {
+    public class RecoveryIntStat : BaseConstIntStat, ITickMinute, ITickHour {
         [SerializeField] int currentValue;
         public RecoveryIntStat(int baseValue, IntRecovery intRecovery) : base(baseValue) => IntRecovery = intRecovery;
 
@@ -14,11 +12,9 @@ namespace Character.StatsStuff.HealthStuff
 
         public bool Dead { get; private set; }
 
-        public int CurrentValue
-        {
+        public int CurrentValue {
             get => currentValue;
-            private set
-            {
+            private set {
                 Dead = value <= 0;
                 if (value < currentValue)
                     ValueDecrease?.Invoke(currentValue - value);
@@ -31,8 +27,7 @@ namespace Character.StatsStuff.HealthStuff
 
         public bool TickHour(int ticks = 1) => Mods.TickHour(ticks) | IntRecovery.Mods.TickHour(ticks);
 
-        public void TickMin(int ticks = 1)
-        {
+        public void TickMin(int ticks = 1) {
             if (CurrentValue >= Value && IntRecovery.Value >= 0)
                 return;
             // % of max health heal per tick
@@ -46,21 +41,18 @@ namespace Character.StatsStuff.HealthStuff
 
         public void IncreaseCurrentValue(int heal) => CurrentValue += heal;
 
-        public void FullRecovery(int percent = 100)
-        {
-            if (percent == 100)
-            {
+        public void FullRecovery(int percent = 100) {
+            if (percent == 100) {
                 CurrentValue = Value;
                 return;
             }
 
-            int want = Mathf.RoundToInt(Value * (percent / 100f));
+            var want = Mathf.RoundToInt(Value * (percent / 100f));
             if (CurrentValue < want)
                 CurrentValue = want;
         }
 
-        public void Refresh()
-        {
+        public void Refresh() {
             MaxValueChange?.Invoke(Value);
             CurrentValueChange?.Invoke(CurrentValue);
         }

@@ -89,6 +89,8 @@ crashlytics-build.properties
 /[Aa]ssets/Navigation
 /[Aa]ssets/ToLargePrefabs/
 /[Aa]ssets/SO_UserData/
+/[Aa]ssets/Spark/
+#/[Aa]ssets/
 #/[Aa]ssets/
 *com.jbooth*
 

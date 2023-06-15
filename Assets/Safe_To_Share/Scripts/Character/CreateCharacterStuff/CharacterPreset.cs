@@ -12,11 +12,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Character.CreateCharacterStuff
-{
+namespace Character.CreateCharacterStuff {
     [CreateAssetMenu(menuName = "Character/Presets/Create CharacterPreset", fileName = "CharacterPreset")]
-    public class CharacterPreset : ScriptableObject
-    {
+    public class CharacterPreset : ScriptableObject {
         [SerializeField] StartGender startGender;
         [SerializeField] StartIdentity startIdentity;
         [SerializeField] StartStats startStats;
@@ -37,12 +35,10 @@ namespace Character.CreateCharacterStuff
         //private IEnumerable<AsyncOperationHandle<Ability>> ai;
         public void DefaultValues() => startBody.Default();
 
-        public async Task LoadAssets()
-        {
+        public async Task LoadAssets() {
             if (startRace != null)
                 return;
-            if (loading)
-            {
+            if (loading) {
                 while (!done) await Task.Delay(100);
                 return;
             }
@@ -50,16 +46,14 @@ namespace Character.CreateCharacterStuff
             loading = true;
             raceOp = startRaceRef.LoadAssetAsync<BasicRace>();
             await raceOp.Task;
-            if (raceOp.Status == AsyncOperationStatus.Succeeded)
-            {
+            if (raceOp.Status == AsyncOperationStatus.Succeeded) {
                 startRace = raceOp.Result;
                 done = true;
             }
         }
 
 
-        public void UnLoad()
-        {
+        public void UnLoad() {
             startRace = null;
             loading = false;
             done = false;
@@ -67,13 +61,13 @@ namespace Character.CreateCharacterStuff
                 Addressables.Release(raceOp);
         }
 
-        public CreateCharacter NewCharacter()
-        {
+        public CreateCharacter NewCharacter() {
             var longWay = Array.Empty<string>();
             if (startAbilitiesGuids is { Length: > 0, })
                 longWay = startAbilitiesGuids.Select(dropSerializableObject => dropSerializableObject.guid).ToArray();
             return new CreateCharacter(startIdentity, startStats.GetStats(),
-                longWay, startItemsWithAmountOf, startRace, startGender, startBody, startPerks, startHair, startSkinColor);
+                longWay, startItemsWithAmountOf, startRace, startGender, startBody, startPerks, startHair,
+                startSkinColor);
         }
     }
 }

@@ -15,10 +15,8 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.StartScene
-{
-    public sealed class SetupPlayer : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.StartScene {
+    public sealed class SetupPlayer : MonoBehaviour {
         [SerializeField] CharacterPreset characterPreset;
         [SerializeField] TMP_InputField firstName, lastName;
         [SerializeField] Button startBtn;
@@ -34,8 +32,7 @@ namespace Safe_To_Share.Scripts.StartScene
         Player tempPlayer;
 
         // Start is called before the first frame update
-        async void Start()
-        {
+        async void Start() {
             await LoadPlayer();
 
             startBtn.onClick.AddListener(LaunchGame);
@@ -43,24 +40,21 @@ namespace Safe_To_Share.Scripts.StartScene
             //  LoadAssets();
         }
 
-        void OnEnable()
-        {
+        void OnEnable() {
             page1.SetActive(true);
             page2.SetActive(false);
         }
 
         void LaunchGame() => StartCoroutine(StartGame());
 
-        public void LoadAssets()
-        {
+        public void LoadAssets() {
             startBtn.gameObject.SetActive(false);
             mainQuest.LoadAssetAsync<QuestInfo>().Completed += QuestLoaded;
             background.LoadStartPerk();
             setupGender.SetupGenderDropDown();
         }
 
-        async Task LoadPlayer()
-        {
+        async Task LoadPlayer() {
             await characterPreset.LoadAssets();
             tempPlayer = new Player(characterPreset.NewCharacter());
             firstName.onValueChanged.AddListener(tempPlayer.Identity.ChangeFirstName);
@@ -71,19 +65,17 @@ namespace Safe_To_Share.Scripts.StartScene
 
         void UpdateUnits() => heightAndWeight.text = tempPlayer.Body.HeightAndWeight();
 
-        void QuestLoaded(AsyncOperationHandle<QuestInfo> obj)
-        {
+        void QuestLoaded(AsyncOperationHandle<QuestInfo> obj) {
             loaded = obj.Result;
             startBtn.gameObject.SetActive(true);
         }
 
-        IEnumerator StartGame()
-        {
+        IEnumerator StartGame() {
             startBtn.gameObject.SetActive(false);
             PlayerQuests.AddQuest(loaded);
             FirstStartHelper.ShowHelp = true;
 
-            foreach (LearnStartLocation startMap in startMaps)
+            foreach (var startMap in startMaps)
                 KnowLocationsManager.LearnLocation(startMap.Guid, startMap.ExitGuids);
             yield return setupGender.SetStartGender(tempPlayer);
             yield return background.GainPerk(tempPlayer);
@@ -91,13 +83,11 @@ namespace Safe_To_Share.Scripts.StartScene
         }
 
         [Serializable]
-        struct LearnStartLocation
-        {
+        struct LearnStartLocation {
             [SerializeField] string guid;
             [SerializeField] string[] exitGuids;
 
-            public LearnStartLocation(string guid, string[] exitGuids)
-            {
+            public LearnStartLocation(string guid, string[] exitGuids) {
                 this.guid = guid;
                 this.exitGuids = exitGuids;
             }
@@ -109,18 +99,16 @@ namespace Safe_To_Share.Scripts.StartScene
 
 # if UNITY_EDITOR
 
-        void OnValidate()
-        {
+        void OnValidate() {
             startMaps = new List<LearnStartLocation>();
-            foreach (StartLocation startLocation in startLocations)
+            foreach (var startLocation in startLocations)
                 startMaps.Add(new LearnStartLocation(startLocation.StartLoc.Guid, startLocation.Exits));
         }
 
         [SerializeField] List<StartLocation> startLocations = new();
 
         [Serializable]
-        struct StartLocation
-        {
+        struct StartLocation {
             [SerializeField] LocationSceneSo startLoc;
             [SerializeField] SceneTeleportExit[] exits;
 

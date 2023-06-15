@@ -2,14 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Movement.Settings.UI
-{
-    public sealed class ToggleInvertThirdPersonAlwaysLook : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Movement.Settings.UI {
+    public sealed class ToggleInvertThirdPersonAlwaysLook : MonoBehaviour {
         [SerializeField] Toggle toggle;
 
-        void Start()
-        {
+        void Start() {
             toggle.SetIsOnWithoutNotify(ThirdPersonCameraSettings.AlwaysLook);
             toggle.onValueChanged.AddListener(ChangeLook);
         }

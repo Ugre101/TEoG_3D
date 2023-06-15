@@ -2,40 +2,34 @@
 using Character;
 using Character.VoreStuff;
 using Dialogue;
-using Dialogue.DialogueActions;
 using QuestStuff;
 using SceneStuff;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
-{
-    public sealed class VoreEventMenu : DialogueAndEventShared
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu {
+    public sealed class VoreEventMenu : DialogueAndEventShared {
         VoreOrgan organ;
         BaseCharacter pred;
         Prey prey;
 
-        public void Setup(BaseDialogue dialogue, BaseCharacter pred, Prey prey, VoreOrgan organ)
-        {
+        public void Setup(BaseDialogue dialogue, BaseCharacter pred, Prey prey, VoreOrgan organ) {
             CurrentDialogue = dialogue;
             this.pred = pred;
             this.prey = prey;
             this.organ = organ;
-            CurrentNode = dialogue.GetRootNode() as DialogueBaseNode;
+            CurrentNode = dialogue.GetRootNode();
             AddOptionButtons(CurrentNode);
             ShowNodeText(CurrentNode);
         }
 
-        protected override void HandleOption(DialogueBaseNode obj)
-        {
+        protected override void HandleOption(DialogueBaseNode obj) {
             CurrentNode = obj;
-            foreach (DialogueBaseAction dialogueBaseAction in CurrentNode.Actions)
+            foreach (var dialogueBaseAction in CurrentNode.Actions)
                 dialogueBaseAction.Invoke(pred);
-            foreach (DialogueVoreAction currentNodeVoreAction in obj.VoreActions)
+            foreach (var currentNodeVoreAction in obj.VoreActions)
                 currentNodeVoreAction.Invoke(pred, prey, organ);
             AddOptionButtons(CurrentNode);
             ShowNodeText(CurrentNode);
-            switch (CurrentNode)
-            {
+            switch (CurrentNode) {
                 case DialogueQuestNode dialogueQuestNode:
                     PlayerQuests.AddQuest(dialogueQuestNode.Quest);
                     break;

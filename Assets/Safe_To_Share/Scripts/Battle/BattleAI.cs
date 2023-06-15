@@ -8,11 +8,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Battle
-{
+namespace Battle {
     [CreateAssetMenu(menuName = "Create BattleAI", fileName = "BattleAI", order = 0)]
-    public sealed class BattleAI : ScriptableObject
-    {
+    public sealed class BattleAI : ScriptableObject {
         [SerializeField,] DropSerializableObject<Skill> hitStandardGuid;
         [SerializeField,] DropSerializableObject<Ability> teaseStandardGuid;
         [SerializeField,] DropSerializableObject<Ability> rareUseGuid;
@@ -20,15 +18,17 @@ namespace Battle
         [SerializeField,] DropSerializableObject<Ability> lowWpGuid;
         [SerializeField] float rareCastChance = 0.1f;
 
+        readonly LoadedAbility standard = new(),
+                               tease = new(),
+                               rare = new(),
+                               hpLow = new(),
+                               wpLow = new();
+
 
         bool firstUse = true;
 
-        readonly LoadedAbility standard = new(),tease = new(),
-          rare = new(),hpLow = new(), wpLow = new();
 
-
-        public IEnumerator HandleTurn(CombatCharacter caster, CombatCharacter target)
-        {
+        public IEnumerator HandleTurn(CombatCharacter caster, CombatCharacter target) {
             if (firstUse)
                 yield return Load();
 
@@ -39,19 +39,14 @@ namespace Battle
             if (CastHealthAbility(wpLow.NotNull, casterStats.WillPower))
                 yield return wpLow.Ability.UseEffect(caster, caster);
 
-            if (rare.NotNull && Random.value <= rareCastChance)
-            {
+            if (rare.NotNull && Random.value <= rareCastChance) {
                 yield return rare.Ability.UseEffect(caster, target);
-            }
-            else if (standard.NotNull && tease.NotNull)
-            {
+            } else if (standard.NotNull && tease.NotNull) {
                 if (caster.Character.Stats.Strength.Value > caster.Character.Stats.Charisma.Value)
                     yield return standard.Ability.UseEffect(caster, target);
                 else
                     yield return tease.Ability.UseEffect(caster, target);
-            }
-            else
-            {
+            } else {
                 Debug.LogWarning("Battle ai has no attacks");
             }
 
@@ -61,11 +56,9 @@ namespace Battle
                 notNull && (float)health.CurrentValue / health.Value <= 0.33f;
         }
 
-        IEnumerator Load()
-        {
+        IEnumerator Load() {
             firstUse = false;
-            var load = new List<IEnumerator>
-            {
+            var load = new List<IEnumerator> {
                 standard.Load(hitStandardGuid.guid),
                 tease.Load(teaseStandardGuid.guid),
                 rare.Load(rareUseGuid.guid),
@@ -76,8 +69,7 @@ namespace Battle
                 yield return enumerator;
         }
 
-        public void CleanUp()
-        {
+        public void CleanUp() {
             firstUse = true;
             standard.Clean();
             tease.Clean();
@@ -86,24 +78,22 @@ namespace Battle
             wpLow.Clean();
         }
 
-        sealed class LoadedAbility
-        {
-            public bool NotNull;
+        sealed class LoadedAbility {
             public Ability Ability;
+            public bool NotNull;
 
-            public void Clean()
-            {
+            public void Clean() {
                 if (NotNull)
                     Addressables.Release(Ability);
                 NotNull = false;
             }
-            public IEnumerator Load(string guid)
-            {
+
+            public IEnumerator Load(string guid) {
                 if (string.IsNullOrWhiteSpace(guid))
                     yield break;
                 var op = Addressables.LoadAssetAsync<Ability>(guid);
                 yield return op;
-                if (op.Status is not AsyncOperationStatus.Succeeded) 
+                if (op.Status is not AsyncOperationStatus.Succeeded)
                     yield break;
                 NotNull = true;
                 Ability = op.Result;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Character;
 using Character.CreateCharacterStuff;
@@ -11,10 +10,8 @@ using Safe_To_Share.Scripts.AfterBattle.Defeated;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.AfterBattle
-{
-    public sealed class AfterBattleTester : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle {
+    public sealed class AfterBattleTester : MonoBehaviour {
 #if UNITY_EDITOR
 
         [SerializeField] CharacterPreset playerSheet;
@@ -29,18 +26,16 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         [SerializeField] Enemy[] enemies;
 
-        async void Start()
-        {
+        async void Start() {
             if (!GameTester.GetFirstCall() || !Application.isEditor)
                 return;
 
             await playerSheet.LoadAssets();
             player = new Player(playerSheet.NewCharacter());
             player.SexualOrgans.TickMin(120);
-            foreach (EssencePerk perk in essencePerks)
+            foreach (var perk in essencePerks)
                 perk.GainPerk(player);
-            foreach (BasicPerk basicPerk in perks)
-            {
+            foreach (var basicPerk in perks) {
                 player.LevelSystem.OwnedPerks.Add(basicPerk);
                 basicPerk.PerkGainedEffect(player);
             }

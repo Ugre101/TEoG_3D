@@ -1,16 +1,13 @@
 ﻿using System;
 
-namespace Character.StatsStuff
-{
+namespace Character.StatsStuff {
     [Serializable]
-    public class AffectByStat
-    {
+    public class AffectByStat {
         public CharStat affectedBy;
 
         public int effectAmount;
 
-        public AffectByStat(CharStat affectedBy, int effectAmount)
-        {
+        public AffectByStat(CharStat affectedBy, int effectAmount) {
             this.affectedBy = affectedBy;
             this.effectAmount = effectAmount;
         }

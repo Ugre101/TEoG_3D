@@ -3,10 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
-{
-    public sealed class RenameDormMate : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI {
+    public sealed class RenameDormMate : MonoBehaviour {
         [SerializeField] TMP_InputField firstName, lastName;
         [SerializeField] Button accept, close;
         [SerializeField] ViewSelectedDormMate selectedDormMate;
@@ -14,13 +12,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
         DormMate mate;
         string tempFirst, tempLast;
 
-        void Start()
-        {
+        void Start() {
             close.onClick.AddListener(Close);
             firstName.onValueChanged.AddListener(FirstChange);
             lastName.onValueChanged.AddListener(LastChange);
         }
-
 
 
         void FirstChange(string arg0) => tempFirst = arg0;
@@ -29,8 +25,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
         void Close() => gameObject.SetActive(false);
 
 
-        void ChangeName()
-        {
+        void ChangeName() {
             mate.Identity.ChangeFirstName(tempFirst);
             mate.Identity.ChangeLastName(tempLast);
             selectedDormMate.PrintName();
@@ -38,8 +33,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
             gameObject.SetActive(false);
         }
 
-        public void Setup(DormMate selectedMate)
-        {
+        public void Setup(DormMate selectedMate) {
             gameObject.SetActive(true);
             mate = selectedMate;
             accept.onClick.RemoveAllListeners();

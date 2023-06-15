@@ -10,30 +10,23 @@ using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated
-{
-    public sealed class DefeatedMain : DefeatShared
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated {
+    public sealed class DefeatedMain : DefeatShared {
         LoseScenarioNode currentNode;
 
         LoseScenario currentScenario;
 
-        protected override void HandleGiveIn()
-        {
+        protected override void HandleGiveIn() {
             currentNode.HandleEffects(activeEnemyActor.Actor, activePlayerActor.Actor);
             UI.PrintNodeEffect(currentNode.GiveInText);
         }
 
-        protected override void HandleResist()
-        {
-            if (Resistance >= currentNode.ResistCost)
-            {
+        protected override void HandleResist() {
+            if (Resistance >= currentNode.ResistCost) {
                 Resistance -= currentNode.ResistCost;
                 UI.Resisted();
                 NextNode();
-            }
-            else
-            {
+            } else {
                 UI.FailedResist();
                 HandleGiveIn();
             }
@@ -41,8 +34,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated
 
         protected override void HandleContinue() => NextNode();
 
-        public override void Setup(Player player, BaseCharacter[] enemies, params BaseCharacter[] allies)
-        {
+        public override void Setup(Player player, BaseCharacter[] enemies, params BaseCharacter[] allies) {
             SharedSetup(player, enemies, allies);
             if (activeEnemyActor.Actor is Enemy enemy)
                 SetupScenario(enemy.LoseScenarios);
@@ -50,10 +42,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated
                 Leave();
         }
 
-        void SetupScenario(string enemyLoseScenarios)
-        {
-            if (string.IsNullOrWhiteSpace(enemyLoseScenarios))
-            {
+        void SetupScenario(string enemyLoseScenarios) {
+            if (string.IsNullOrWhiteSpace(enemyLoseScenarios)) {
                 Leave();
                 return;
             }
@@ -61,8 +51,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated
             StartCoroutine(LoadScenario(enemyLoseScenarios));
         }
 
-        IEnumerator LoadScenario(string enemyLoseScenarios)
-        {
+        IEnumerator LoadScenario(string enemyLoseScenarios) {
             var op = Addressables.LoadAssetAsync<LoseScenario>(enemyLoseScenarios);
             yield return op;
             if (op.Status == AsyncOperationStatus.Succeeded && op.Result.GetRootNode() is LoseScenarioNode startNode &&
@@ -72,24 +61,20 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated
                 Leave();
         }
 
-        void StartNode(LoseScenario scenario, LoseScenarioNode startNode)
-        {
+        void StartNode(LoseScenario scenario, LoseScenarioNode startNode) {
             currentScenario = scenario;
             currentNode = startNode;
             UI.StartNode(startNode.IntroText);
         }
 
-        void ShowNode(LoseScenarioNode node)
-        {
+        void ShowNode(LoseScenarioNode node) {
             currentNode = node;
             UI.SetupNode(node.IntroText);
         }
 
-        void NextNode()
-        {
+        void NextNode() {
             var nodes = currentScenario.GetChildNodes(currentNode).ToArray();
-            if (nodes.Length <= 0)
-            {
+            if (nodes.Length <= 0) {
                 UI.ShowLeaveBtn(true);
                 return;
             }
@@ -99,21 +84,18 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated
                 if (node is LoseScenarioNode loseNode)
                     converted.Add(loseNode);
             converted = converted.FindAll(c => c.CanDo(activeEnemyActor.Actor, activePlayerActor.Actor));
-            if (converted.Count <= 0)
-            {
+            if (converted.Count <= 0) {
                 UI.ShowLeaveBtn(true);
                 return;
             }
 
             currentNode = converted[Rng.Next(nodes.Length)];
-            if (currentNode == null)
-            {
+            if (currentNode == null) {
                 UI.ShowLeaveBtn(true);
                 return;
             }
 
-            switch (currentNode)
-            {
+            switch (currentNode) {
                 case LoseScenarioDrainEssenceNode loseScenarioDrainEssenceNode:
                     ShowNode(loseScenarioDrainEssenceNode);
                     break;

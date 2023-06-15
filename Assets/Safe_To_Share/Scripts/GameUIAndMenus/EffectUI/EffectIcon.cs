@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.EffectUI
-{
-    public abstract class EffectIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.EffectUI {
+    public abstract class EffectIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
         [SerializeField] protected Image icon;
         protected abstract string HoverText { get; }
         public void OnPointerEnter(PointerEventData eventData) => HoverInfo?.Invoke(HoverText, transform.position.x);

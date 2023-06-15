@@ -4,28 +4,21 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Battle
-{
+namespace Battle {
     [Serializable]
-    public class HitChance
-    {
+    public class HitChance {
         [Serializable]
-        public enum HitType
-        {
-            Miss,
-            Hit,
-            CriticalHit,
+        public enum HitType {
+            Miss, Hit, CriticalHit,
         }
 
         [SerializeField] List<AttackChance> attackChances = new();
 
-        public HitType Attack()
-        {
+        public HitType Attack() {
             if (attackChances.Count <= 0) return HitType.Hit;
-            float sum = attackChances.Sum(a => a.weight);
+            var sum = attackChances.Sum(a => a.weight);
             var value = Random.Range(0, sum);
-            foreach (AttackChance chance in attackChances)
-            {
+            foreach (var chance in attackChances) {
                 if (value <= chance.weight)
                     return chance.HitType;
                 value -= chance.weight;
@@ -35,8 +28,7 @@ namespace Battle
         }
 
         [Serializable]
-        struct AttackChance
-        {
+        struct AttackChance {
             public HitType HitType;
 
             [Range(0f, 1f)] public float weight;

@@ -5,10 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Character.Organs.UI
-{
-    public sealed class GrowOrganButton : MonoBehaviour
-    {
+namespace Character.Organs.UI {
+    public sealed class GrowOrganButton : MonoBehaviour {
         public static bool Change;
         [SerializeField] Button btn;
         [SerializeField] Button altShrinkBtn;
@@ -20,8 +18,7 @@ namespace Character.Organs.UI
 
         ManualOrganGrowth.SharedInfo shared;
 
-        public void Setup(BaseOrgan org, ManualOrganGrowth.SharedInfo shared, bool canShrink = false)
-        {
+        public void Setup(BaseOrgan org, ManualOrganGrowth.SharedInfo shared, bool canShrink = false) {
             organ = org;
             this.shared = shared;
             essence = shared.essence;
@@ -35,13 +32,11 @@ namespace Character.Organs.UI
 
         public event Action<SexualOrganType, BaseOrgan> RecycleMe;
 
-        void Shrink()
-        {
-            essence.GainEssence( Mathf.RoundToInt(organ.Shrink() * 0.7f));
+        void Shrink() {
+            essence.GainEssence(Mathf.RoundToInt(organ.Shrink() * 0.7f));
             UpdateText();
             Change = true;
-            if (organ.BaseValue <= 0)
-            {
+            if (organ.BaseValue <= 0) {
                 RecycleMe?.Invoke(organType, organ);
                 Destroy(gameObject);
             }
@@ -51,8 +46,7 @@ namespace Character.Organs.UI
             text.text =
                 $"{organType} {organ.ScaledWithHeight(shared.height).ConvertCm()} {organ.GrowCost}{essenceType}";
 
-        void Grow()
-        {
+        void Grow() {
             if (!organ.Grow(essence))
                 return;
             UpdateText();

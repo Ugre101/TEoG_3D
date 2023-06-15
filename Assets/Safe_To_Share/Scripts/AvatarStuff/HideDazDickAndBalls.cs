@@ -1,20 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace AvatarStuff
-{
-    public sealed class HideDazDickAndBalls : MonoBehaviour
-    {
+namespace AvatarStuff {
+    public sealed class HideDazDickAndBalls : MonoBehaviour {
         [SerializeField] Material targetMat;
         [SerializeField] Material invisibleMat;
 
         bool hidden;
 
-        void HideDick(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hide)
-        {
+        void HideDick(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hide) {
             hidden = hide;
-            foreach (var meshRenderer in skinnedMeshRenderers)
-            {
+            foreach (var meshRenderer in skinnedMeshRenderers) {
                 var rendererMaterials = meshRenderer.materials;
                 for (var index = 0; index < rendererMaterials.Length; index++)
                     if (rendererMaterials[index].name.Contains(hide ? targetMat.name : invisibleMat.name))
@@ -24,10 +20,8 @@ namespace AvatarStuff
         }
 
         /// <returns>If skin color need to be updated</returns>
-        public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls)
-        {
-            switch (hidden)
-            {
+        public bool Handle(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool hasDick, bool hasBalls) {
+            switch (hidden) {
                 case true when !hasDick && !hasBalls:
                     return false;
                 case true:

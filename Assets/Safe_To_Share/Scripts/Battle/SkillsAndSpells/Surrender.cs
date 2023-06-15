@@ -2,13 +2,10 @@
 using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
 using UnityEngine;
 
-namespace Battle.SkillsAndSpells
-{
+namespace Battle.SkillsAndSpells {
     [CreateAssetMenu(menuName = "Character/Ability/Surrender", fileName = "Surrender", order = 0)]
-    public sealed class Surrender : Ability
-    {
-        public override IEnumerator UseEffect(CombatCharacter user, CombatCharacter target)
-        {
+    public sealed class Surrender : Ability {
+        public override IEnumerator UseEffect(CombatCharacter user, CombatCharacter target) {
             BattleManager.Instance.GoToDefeat();
             return base.UseEffect(user, target);
         }

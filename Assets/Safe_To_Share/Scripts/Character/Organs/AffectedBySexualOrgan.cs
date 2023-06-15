@@ -1,11 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Character.Organs
-{
+namespace Character.Organs {
     [Serializable]
-    public struct AffectedBySexualOrgan
-    {
+    public struct AffectedBySexualOrgan {
         [SerializeField] SexualOrganType sexualOrgan;
         [SerializeField] float modifer;
 

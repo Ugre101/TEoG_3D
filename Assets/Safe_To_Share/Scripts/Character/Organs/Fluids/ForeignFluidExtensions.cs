@@ -1,36 +1,30 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-using Character.Organs.OrgansContainers;
 
-namespace Character.Organs.Fluids
-{
-    public static class ForeignFluidExtensions
-    {
+namespace Character.Organs.Fluids {
+    public static class ForeignFluidExtensions {
         public static string FluidOnBodyDesc(this BaseCharacter character) => "";
 
-        public static string FluidInWomb(this BaseOrgan organ, SexualOrganType type)
-        {
+        public static string FluidInWomb(this BaseOrgan organ, SexualOrganType type) {
             if (organ.Womb.ForeignFluids.GetFluids == null || !organ.Womb.ForeignFluids.GetFluids.Any())
                 return string.Empty;
 
             StringBuilder desc = new();
-            float tot = organ.Womb.ForeignFluids.GetFluids.Sum(f => f.Amount);
+            var tot = organ.Womb.ForeignFluids.GetFluids.Sum(f => f.Amount);
             var sorted = organ.Womb.ForeignFluids.GetFluids.OrderByDescending(f => f.Amount).ToArray();
             if (sorted.Length == 0)
                 return string.Empty;
-            float biggestPer = organ.Womb.ForeignFluids.GetFluids.Max(f => f.Amount) / tot;
-            if (sorted.Length == 1 || biggestPer > 0.9f)
+            var biggestPer = organ.Womb.ForeignFluids.GetFluids.Max(f => f.Amount) / tot;
+            if (sorted.Length == 1 || biggestPer > 0.9f) {
                 desc.Append(sorted[0].FluidType);
-            else if (sorted.Length > 1 && biggestPer > 0.5f)
+            } else if (sorted.Length > 1 && biggestPer > 0.5f) {
                 desc.Append($"{sorted[0].FluidType} with traces of  {sorted[1].FluidType}");
-            else
-            {
+            } else {
                 desc.Append(" a mix of ");
                 if (sorted.Length > 0)
                     desc.Append(sorted[0].FluidType);
-                if (sorted.Length > 1)
-                {
+                if (sorted.Length > 1) {
                     desc.Append(sorted.Length < 3 ? " and " : ", ");
                     desc.Append(sorted[1].FluidType);
                 }
@@ -39,8 +33,7 @@ namespace Character.Organs.Fluids
                     desc.Append($" and {sorted[2].FluidType}");
             }
 
-            switch (type)
-            {
+            switch (type) {
                 case SexualOrganType.Dick:
                     break;
                 case SexualOrganType.Balls:
@@ -58,20 +51,18 @@ namespace Character.Organs.Fluids
             return "";
         }
 
-        public static void CleanAll(BaseCharacter character)
-        {
+        public static void CleanAll(BaseCharacter character) {
             CleanBody(character);
-            foreach (BaseOrgansContainer container in character.SexualOrgans.Containers.Values)
-            foreach (BaseOrgan organ in container.BaseList)
+            foreach (var container in character.SexualOrgans.Containers.Values)
+            foreach (var organ in container.BaseList)
                 organ.Womb.ForeignFluids.ClearFluids();
         }
 
         public static void CleanBody(BaseCharacter character) => character.SexStats.FluidsOnBody.ClearFluids();
 
-        public static void CleanOrifices(BaseCharacter character, SexualOrganType toClean)
-        {
+        public static void CleanOrifices(BaseCharacter character, SexualOrganType toClean) {
             if (!character.SexualOrgans.Containers.TryGetValue(toClean, out var container)) return;
-            foreach (BaseOrgan organ in container.BaseList)
+            foreach (var organ in container.BaseList)
                 organ.Womb.ForeignFluids.ClearFluids();
         }
     }

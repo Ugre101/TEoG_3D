@@ -2,20 +2,16 @@ using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Options
-{
-    public sealed class ToggleVore : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Options {
+    public sealed class ToggleVore : MonoBehaviour {
         // Start is called before the first frame update
-        void Start()
-        {
-            if (TryGetComponent(out Toggle toggle))
-            {
+        void Start() {
+            if (TryGetComponent(out Toggle toggle)) {
                 toggle.isOn = OptionalContent.Vore.Enabled;
                 toggle.onValueChanged.AddListener(VoreToggle);
-            }
-            else
+            } else {
                 Debug.LogError("No toggle component");
+            }
         }
 
         static void VoreToggle(bool arg0) => OptionalContent.Vore.Enabled = arg0;

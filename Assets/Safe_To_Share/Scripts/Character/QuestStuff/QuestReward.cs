@@ -1,11 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace QuestStuff
-{
+namespace QuestStuff {
     [Serializable]
-    public struct QuestReward
-    {
+    public struct QuestReward {
         [SerializeField, Range(0, 10000),] int expGain;
         [SerializeField, Range(0, 10000),] int goldGain;
 

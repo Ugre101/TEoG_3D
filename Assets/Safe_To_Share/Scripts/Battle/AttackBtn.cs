@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Battle.SkillsAndSpells;
 using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
 using TMPro;
 using UnityEngine;
@@ -10,11 +9,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
-namespace Battle
-{
+namespace Battle {
     [RequireComponent(typeof(Button))]
-    public sealed class AttackBtn : MonoBehaviour, IPointerClickHandler
-    {
+    public sealed class AttackBtn : MonoBehaviour, IPointerClickHandler {
         [SerializeField] InputActionReference reference;
         [SerializeField] TextMeshProUGUI numberText;
         [SerializeField] Image icon;
@@ -22,15 +19,13 @@ namespace Battle
         Ability ability;
         int id;
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             reference.action.performed -= ClickButton;
             reference.action.Disable();
             StopAllCoroutines();
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
+        public void OnPointerClick(PointerEventData eventData) {
             if (eventData.button == PointerEventData.InputButton.Right)
                 BindNewAbility();
         }
@@ -41,20 +36,17 @@ namespace Battle
 
         public void ChangedDevice(PlayerInput inputs) => UpdateRefText();
 
-        public void ClickButton(InputAction.CallbackContext ctx)
-        {
+        public void ClickButton(InputAction.CallbackContext ctx) {
             if (ctx.performed)
                 UseAbility();
         }
 
-        public void AltClickButton(InputAction.CallbackContext ctx)
-        {
+        public void AltClickButton(InputAction.CallbackContext ctx) {
             if (ctx.performed)
                 BindNewAbility();
         }
 
-        public void FirstSetup()
-        {
+        public void FirstSetup() {
             icon.gameObject.SetActive(false);
             btn.onClick.AddListener(UseAbility);
             reference.action.performed += ClickButton;
@@ -67,12 +59,10 @@ namespace Battle
 
         public void BindAbility(string newAbility) => StartCoroutine(DoesThisWork(newAbility));
 
-        IEnumerator DoesThisWork(string newAbility)
-        {
+        IEnumerator DoesThisWork(string newAbility) {
             var obj = Addressables.LoadResourceLocationsAsync(newAbility);
             yield return obj;
-            if (obj.Status is not AsyncOperationStatus.Succeeded || obj.Result.Count == 0)
-            {
+            if (obj.Status is not AsyncOperationStatus.Succeeded || obj.Result.Count == 0) {
                 Addressables.Release(obj);
                 Clear();
                 yield break;
@@ -85,16 +75,14 @@ namespace Battle
             icon.sprite = ability.Icon;
         }
 
-        public void BindNewAbility(Ability newAbility)
-        {
+        public void BindNewAbility(Ability newAbility) {
             ability = newAbility;
             icon.gameObject.SetActive(true);
             icon.sprite = ability.Icon;
             BoundAbility?.Invoke(id, newAbility);
         }
 
-        public void Clear()
-        {
+        public void Clear() {
             ability = null;
             icon.sprite = null;
             icon.gameObject.SetActive(false);
@@ -102,8 +90,7 @@ namespace Battle
 
         void BindNewAbility() => BindActionToMe?.Invoke(this);
 
-        void UseAbility()
-        {
+        void UseAbility() {
             if (ability == null)
                 BindNewAbility();
             else

@@ -7,10 +7,8 @@ using DormAndHome.Dorm.Buildings;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace DormAndHome.Dorm
-{
-    public sealed class DormManager : MonoBehaviour
-    {
+namespace DormAndHome.Dorm {
+    public sealed class DormManager : MonoBehaviour {
         [SerializeField] List<DormMate> dormMates = new();
         [SerializeField] DormBuildings buildings;
         public DormBuildings Buildings => buildings;
@@ -25,16 +23,14 @@ namespace DormAndHome.Dorm
         public List<DormMate> DormMates => dormMates;
 
 
-        void Awake()
-        {
+        void Awake() {
             if (Instance == null)
                 Instance = this;
             else
                 Debug.LogError("Dorm manager tried to spawn twice");
         }
 
-        void Start()
-        {
+        void Start() {
             DateSystem.TickMinute += TickDormMin;
             DateSystem.TickHour += TickDormHour;
             DateSystem.TickDay += TickDormDay;
@@ -42,8 +38,7 @@ namespace DormAndHome.Dorm
         }
 
 
-        void WasMateDigested(int obj)
-        {
+        void WasMateDigested(int obj) {
             if (dormMates.Exists(m => m.Identity.ID == obj))
                 dormMates.Remove(dormMates.Find(gone => gone.Identity.ID == obj));
         }
@@ -52,32 +47,27 @@ namespace DormAndHome.Dorm
 
         public void RemoveDormMate(DormMate character) => DormMates.Remove(character);
 
-        void TickDormMin(int ticks)
-        {
-            foreach (DormMate mate in DormMates)
+        void TickDormMin(int ticks) {
+            foreach (var mate in DormMates)
                 mate.TickMin(ticks);
         }
 
 
-        IEnumerable<Building> WorkPlaces()
-        {
+        IEnumerable<Building> WorkPlaces() {
             yield return Buildings.VillageBuildings.Brothel;
         }
 
 
-        void TickDormHour(int ticks)
-        {
-            foreach (DormMate mate in DormMates)
+        void TickDormHour(int ticks) {
+            foreach (var mate in DormMates)
                 mate.TickHour(ticks);
 
-            for (int i = 0; i < ticks; i++)
-            {
+            for (var i = 0; i < ticks; i++) {
                 buildings.DormLodge.TickBuildingEffect(DormMates);
-                int hour = DateSystem.Hour + 1 - i;
+                var hour = DateSystem.Hour + 1 - i;
                 if (hour < 0)
                     hour += 24;
-                switch (hour)
-                {
+                switch (hour) {
                     case 0:
                         Buildings.Dungeon.TickBuildingEffect(DormMates);
                         break;
@@ -127,15 +117,13 @@ namespace DormAndHome.Dorm
             }
         }
 
-        void TickWork()
-        {
-            foreach (Building workBuilding in WorkPlaces())
+        void TickWork() {
+            foreach (var workBuilding in WorkPlaces())
                 workBuilding.TickBuildingEffect(DormMates);
         }
 
-        void TickDormDay(int ticks)
-        {
-            foreach (DormMate mate in DormMates)
+        void TickDormDay(int ticks) {
+            foreach (var mate in DormMates)
                 mate.TickDay(ticks);
         }
 
@@ -143,13 +131,11 @@ namespace DormAndHome.Dorm
 
         public static event Action Loaded;
 
-        public IEnumerator Load(DormSave toLoad)
-        {
+        public IEnumerator Load(DormSave toLoad) {
             JsonUtility.FromJsonOverwrite(toLoad.BuildingsSave, buildings);
             dormMates = new List<DormMate>();
-            foreach (CharacterSave save in toLoad.Mates)
-            {
-                DormMate loaded = JsonUtility.FromJson<DormMate>(save.RawCharacter);
+            foreach (var save in toLoad.Mates) {
+                var loaded = JsonUtility.FromJson<DormMate>(save.RawCharacter);
                 yield return loaded.Load(save);
                 loaded.Loaded();
                 dormMates.Add(loaded);

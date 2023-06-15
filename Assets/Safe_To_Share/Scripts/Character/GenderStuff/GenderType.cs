@@ -1,20 +1,13 @@
 ﻿using System;
 
-namespace Character.GenderStuff
-{
-    public enum GenderType
-    {
-        Neutral,
-        Feminine,
-        Masculine,
+namespace Character.GenderStuff {
+    public enum GenderType {
+        Neutral, Feminine, Masculine,
     }
 
-    public static class GenderTypeExtensions
-    {
-        public static GenderType GetGenderType(this Gender gender)
-        {
-            switch (gender)
-            {
+    public static class GenderTypeExtensions {
+        public static GenderType GetGenderType(this Gender gender) {
+            switch (gender) {
                 case Gender.Doll: return GenderType.Neutral;
                 case Gender.Male:
                 case Gender.MaleFutanari:

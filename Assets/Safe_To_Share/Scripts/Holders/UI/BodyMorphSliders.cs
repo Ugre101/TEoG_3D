@@ -3,10 +3,8 @@ using Character;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Safe_To_Share.Scripts.Holders.UI
-{
-    public sealed class BodyMorphSliders : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Holders.UI {
+    public sealed class BodyMorphSliders : MonoBehaviour {
         [SerializeField] BodyMorphSlider prefab;
         [SerializeField] Transform content;
 
@@ -14,8 +12,7 @@ namespace Safe_To_Share.Scripts.Holders.UI
 
         ObjectPool<BodyMorphSlider> sliderPool;
 
-        public void Setup(BodyMorphs.AvatarBodyMorphs morphs, CharacterAvatar avatar)
-        {
+        public void Setup(BodyMorphs.AvatarBodyMorphs morphs, CharacterAvatar avatar) {
             if (firstSetup)
                 SetupSliderPool();
             foreach (var subStruct in morphs.bodyAvatarMorphs)
@@ -24,27 +21,23 @@ namespace Safe_To_Share.Scripts.Holders.UI
 
 
         public void SetupOfType(BodyMorphs.AvatarBodyMorphs morphs, CharacterAvatar avatar,
-            CharacterAvatar.BodyShapes.BodyShapeTypes type)
-        {
+                                CharacterAvatar.BodyShapes.BodyShapeTypes type) {
             SetupSliderPool();
-            foreach (var bodyShape in avatar.AvatarBodyShapes.GetBodyShapesOfType(type))
-            {
+            foreach (var bodyShape in avatar.AvatarBodyShapes.GetBodyShapesOfType(type)) {
                 var found = morphs.bodyAvatarMorphs.Find(b => b.title == bodyShape.Title);
                 if (found != null)
                     sliderPool.Get().Setup(found, avatar, sliderPool);
             }
         }
 
-        void SetupSliderPool()
-        {
+        void SetupSliderPool() {
             firstSetup = false;
             sliderPool = new ObjectPool<BodyMorphSlider>(CreateFunc, ActionOnGet, ActionOnRelease);
             foreach (var slider in GetComponentsInChildren<BodyMorphSlider>())
                 sliderPool.Release(slider);
         }
 
-        static void ActionOnRelease(BodyMorphSlider obj)
-        {
+        static void ActionOnRelease(BodyMorphSlider obj) {
             obj.Clear();
             obj.gameObject.SetActive(false);
         }

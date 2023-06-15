@@ -3,10 +3,8 @@ using AvatarStuff;
 using Character;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Holders
-{
-    public abstract class Holder : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Holders {
+    public abstract class Holder : MonoBehaviour {
         [SerializeField] protected AvatarInfoDict avatarDict;
         [SerializeField] protected AvatarChanger avatarChanger;
         [SerializeField] protected AvatarScaler avatarScaler;
@@ -17,8 +15,7 @@ namespace Safe_To_Share.Scripts.Holders
 
         public AvatarChanger Changer => avatarChanger;
 
-        protected virtual async Task UpdateAvatar(BaseCharacter whom)
-        {
+        protected virtual async Task UpdateAvatar(BaseCharacter whom) {
             var res = await avatarDict.GetAvatarLoaded(whom, playerAvatar);
             Changer.UpdateAvatar(res);
         }

@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Character.RelationShipStuff
-{
+namespace Character.RelationShipStuff {
     [Serializable]
-    public class RelationsShips
-    {
+    public class RelationsShips {
         [SerializeField] List<RelationShip> relationShips = new();
 
         Dictionary<int, RelationShip> relationShipsDict;
@@ -19,9 +17,8 @@ namespace Character.RelationShipStuff
 
         public RelationShip GetRelationShipWith(BaseCharacter character) => GetRelationShipWith(character.Identity.ID);
 
-        public RelationShip GetRelationShipWith(int id)
-        {
-            if (RelationShipsDict.TryGetValue(id, out RelationShip relation))
+        public RelationShip GetRelationShipWith(int id) {
+            if (RelationShipsDict.TryGetValue(id, out var relation))
                 return relation;
             RelationShip newRelation = new(id);
             relationShips.Add(newRelation);

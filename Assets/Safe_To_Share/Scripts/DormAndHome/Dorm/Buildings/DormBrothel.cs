@@ -5,14 +5,11 @@ using Character.PlayerStuff.Currency;
 using UnityEngine;
 using Random = System.Random;
 
-namespace DormAndHome.Dorm.Buildings
-{
+namespace DormAndHome.Dorm.Buildings {
     [Serializable]
-    public class DormBrothel : Building
-    {
+    public class DormBrothel : Building {
         [Serializable]
-        public enum BrothelSettings
-        {
+        public enum BrothelSettings {
             Closed,
             ServiceAll, // More gold and essence
             ServiceMasculine, // Less gold, more masc and no femi
@@ -26,24 +23,20 @@ namespace DormAndHome.Dorm.Buildings
 
         protected override int[] UpgradeCosts => new[] { 250, 500, 1000, };
 
-        public BrothelSettings Setting
-        {
+        public BrothelSettings Setting {
             get => setting;
             set => setting = value;
         }
 
-        public override void TickBuildingEffect(List<DormMate> dormMates)
-        {
+        public override void TickBuildingEffect(List<DormMate> dormMates) {
             if (Level <= 0)
                 return;
-            foreach (DormMate dormMate in dormMates)
+            foreach (var dormMate in dormMates)
                 TickBrothel(dormMate);
         }
 
-        void TickBrothel(DormMate dormMate)
-        {
-            switch (Setting)
-            {
+        void TickBrothel(DormMate dormMate) {
+            switch (Setting) {
                 case BrothelSettings.Closed:
                     break;
                 case BrothelSettings.ServiceAll:

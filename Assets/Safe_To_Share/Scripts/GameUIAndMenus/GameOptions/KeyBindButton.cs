@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
-{
-    public sealed class KeyBindButton : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions {
+    public sealed class KeyBindButton : MonoBehaviour {
         [SerializeField] Button btn;
         [SerializeField] TextMeshProUGUI btnTitle;
         int index;
@@ -15,14 +13,12 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
 
         public Button Btn => btn;
 
-        void OnDisable()
-        {
+        void OnDisable() {
             rebindingOperation?.Cancel();
             CleanUp();
         }
 
-        internal void Setup(InputActionReference reference, int i)
-        {
+        internal void Setup(InputActionReference reference, int i) {
             this.reference = reference;
             index = i;
             UpdateText();
@@ -35,58 +31,48 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
                     InputControlPath.HumanReadableStringOptions.UseShortNames)
                 : string.Empty;
 
-        void StartRebind()
-        {
+        void StartRebind() {
             rebindingOperation?.Dispose();
-            InputAction action = reference.action;
-            if (action.bindings.Count + 1 <= index)
-            {
+            var action = reference.action;
+            if (action.bindings.Count + 1 <= index) {
                 btnTitle.text = "Wrong button";
                 return;
             }
 
             if (action.bindings.Count <= index)
-            {
                 action.AddBinding("<Keyboard>p");
-            }
 
             action.Disable();
             btnTitle.text = "Press Key";
             rebindingOperation = action.PerformInteractiveRebinding(index).WithCancelingThrough("<Keyboard>/escape")
-                .OnMatchWaitForAnother(0.1f)
-                .OnCancel(operation =>
-                {
-                    CleanUp();
-                    RebindCancelled();
-                    UpdateText();
-                })
-                .OnComplete(operation =>
-                {
-                    if (CheckConflict(operation.action.bindings[index].effectivePath))
-                        RebindCancelled();
-                    else
-                        RebindCompleted();
+                                       .OnMatchWaitForAnother(0.1f)
+                                       .OnCancel(operation => {
+                                            CleanUp();
+                                            RebindCancelled();
+                                            UpdateText();
+                                        })
+                                       .OnComplete(operation => {
+                                            if (CheckConflict(operation.action.bindings[index].effectivePath))
+                                                RebindCancelled();
+                                            else
+                                                RebindCompleted();
 
-                    UpdateText();
-                    CleanUp();
-                });
+                                            UpdateText();
+                                            CleanUp();
+                                        });
             rebindingOperation.Start();
         }
 
-        void RebindCompleted()
-        {
+        void RebindCompleted() {
             rebindingOperation.Dispose();
             reference.action.Enable();
         }
 
-        bool CheckConflict(string path)
-        {
-            foreach (var inputAction in reference.action.actionMap)
-            {
+        bool CheckConflict(string path) {
+            foreach (var inputAction in reference.action.actionMap) {
                 if (inputAction == reference.action)
                     continue;
-                foreach (var binding in inputAction.bindings)
-                {
+                foreach (var binding in inputAction.bindings) {
                     if (binding.hasOverrides && binding.overridePath == path)
                         return true;
                     if (binding.path == path)
@@ -97,16 +83,14 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.GameOptions
             return false;
         }
 
-        void RebindCancelled()
-        {
+        void RebindCancelled() {
             reference.action.RemoveBindingOverride(index);
             if (index > 0)
                 reference.action.ChangeBinding(index).Erase();
             reference.action.Enable();
         }
 
-        void CleanUp()
-        {
+        void CleanUp() {
             rebindingOperation?.Dispose();
             rebindingOperation = null;
         }

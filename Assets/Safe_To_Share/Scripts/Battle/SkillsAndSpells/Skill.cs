@@ -1,10 +1,7 @@
 ﻿using Safe_To_Share.Scripts.Battle.SkillsAndSpells;
 using UnityEngine;
 
-namespace Battle.SkillsAndSpells
-{
+namespace Battle.SkillsAndSpells {
     [CreateAssetMenu(fileName = "Skill", menuName = "Character/Skill")]
-    public sealed class Skill : Ability
-    {
-    }
+    public sealed class Skill : Ability { }
 }

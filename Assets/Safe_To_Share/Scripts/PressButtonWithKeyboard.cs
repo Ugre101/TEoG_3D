@@ -2,10 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts
-{
-    public sealed class PressButtonWithKeyboard : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts {
+    public sealed class PressButtonWithKeyboard : MonoBehaviour {
         [SerializeField] Button btn;
 
         [SerializeField] InputAction action = new();

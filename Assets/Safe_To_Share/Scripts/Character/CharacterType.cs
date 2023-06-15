@@ -1,8 +1,5 @@
-﻿namespace Character.Family
-{
-    public enum CharacterType
-    {
-        Player,
-        DormMate,
+﻿namespace Character.Family {
+    public enum CharacterType {
+        Player, DormMate,
     }
 }

@@ -9,10 +9,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class CanvasPauseMenu : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class CanvasPauseMenu : MonoBehaviour {
         public static readonly List<ICancelMeBeforeOpenPauseMenu> CancelMe = new();
         static bool sceneDirty = true;
         [SerializeField] InputAction bindings;
@@ -22,8 +20,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
         readonly WaitForEndOfFrame waitForEndOfFrame = new();
         IEnumerable<ICancelMeBeforeOpenPauseMenu> cancelThese;
 
-        void Start()
-        {
+        void Start() {
             bindings.performed += ctx => TogglePause();
             SceneLoader.NewScene += SetDirty;
             LoadSubSceneWhenClose.SubSceneChange += SetDirty;
@@ -35,34 +32,28 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 
         void OnDisable() => bindings.Disable();
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             bindings.Dispose();
             SceneLoader.NewScene -= SetDirty;
             LoadSubSceneWhenClose.SubSceneChange -= SetDirty;
         }
 
-        void LoadSettings()
-        {
+        void LoadSettings() {
             VSyncToggle.LoadSetting();
             StartCoroutine(DelayedLoadAudio());
         }
 
-        IEnumerator DelayedLoadAudio()
-        {
+        IEnumerator DelayedLoadAudio() {
             yield return waitForEndOfFrame;
             masterAudio.Setup();
             GlobalVolumeControll.LoadGlobalVolume();
         }
 
-        void TogglePause()
-        {
-            if (mainMenu.activeSelf || settingMenu.activeSelf)
+        void TogglePause() {
+            if (mainMenu.activeSelf || settingMenu.activeSelf) {
                 Resume();
-            else
-            {
-                if (sceneDirty)
-                {
+            } else {
+                if (sceneDirty) {
                     cancelThese = FindObjectsOfType<MonoBehaviour>(true).OfType<ICancelMeBeforeOpenPauseMenu>();
                     sceneDirty = false;
                 }
@@ -78,21 +69,17 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 
         public static void SetDirty() => sceneDirty = true;
 
-        public void Pause()
-        {
+        public void Pause() {
             SetActive(true);
             GameManager.Pause();
         }
 
-        public void Resume()
-        {
+        public void Resume() {
             SetActive(false);
-            GameManager.
-                Resume(false);
+            GameManager.Resume(false);
         }
 
-        void SetActive(bool paused)
-        {
+        void SetActive(bool paused) {
             mainMenu.SetActive(paused);
             pauseBtn.gameObject.SetActive(!paused);
             settingMenu.SetActive(false);

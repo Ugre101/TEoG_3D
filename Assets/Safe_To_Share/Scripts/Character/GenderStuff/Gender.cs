@@ -1,7 +1,5 @@
-﻿namespace Character.GenderStuff
-{
-    public enum Gender
-    {
+﻿namespace Character.GenderStuff {
+    public enum Gender {
         Doll,
         Male,
         Female,

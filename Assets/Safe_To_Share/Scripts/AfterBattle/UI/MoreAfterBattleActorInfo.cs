@@ -1,28 +1,20 @@
-﻿using System.Linq;
-using System.Text;
+﻿using System.Text;
 using Character;
-using Character.Organs;
-using Character.Organs.OrgansContainers;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle.UI
-{
-    public sealed class MoreAfterBattleActorInfo : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.UI {
+    public sealed class MoreAfterBattleActorInfo : MonoBehaviour {
         [SerializeField] TextMeshProUGUI bodyInfo;
         [SerializeField] TextMeshProUGUI sexualOrgansInfo;
         BaseCharacter actor;
 
-        void Start()
-        {
+        void Start() {
             gameObject.SetActive(false);
         }
 
-        void OnEnable()
-        {
+        void OnEnable() {
             if (actor == null)
                 return;
             PrintBodyInfo();
@@ -33,8 +25,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
                 org.StatDirtyEvent += PrintOrganInfo;
         }
 
-        void OnDisable()
-        {
+        void OnDisable() {
             if (actor == null)
                 return;
             foreach (var body in actor.Body.BodyStats)
@@ -47,18 +38,15 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
 
         public void Down() => ToggleAll(true);
 
-        void ToggleAll(bool down)
-        {
+        void ToggleAll(bool down) {
             gameObject.SetActive(down);
         }
 
         public void Setup(BaseCharacter actor) => this.actor = actor;
 
-        void PrintOrganInfo()
-        {
+        void PrintOrganInfo() {
             StringBuilder sb = new();
-            foreach (var (key, value) in actor.SexualOrgans.Containers)
-            {
+            foreach (var (key, value) in actor.SexualOrgans.Containers) {
                 foreach (var org in value.BaseList)
                     sb.Append(org.OrganDesc());
                 sb.AppendLine().AppendLine();
@@ -68,7 +56,8 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         }
 
 
-        void PrintBodyInfo() => bodyInfo.text =
-            $"{actor.Body.Height.Value.ConvertCm()} tall and weighing {actor.Body.Weight.ConvertKg()}";
+        void PrintBodyInfo() =>
+            bodyInfo.text =
+                $"{actor.Body.Height.Value.ConvertCm()} tall and weighing {actor.Body.Weight.ConvertKg()}";
     }
 }

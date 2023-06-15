@@ -4,27 +4,21 @@ using DormAndHome.Dorm.Buildings;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
-{
-    public sealed class GymOptionsPanel : BuildingOptionPanel
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI {
+    public sealed class GymOptionsPanel : BuildingOptionPanel {
         static DormGym Gym => DormManager.Instance.Buildings.Gym;
 
-        public override void Setup()
-        {
-            List<TMP_Dropdown.OptionData> options = new()
-            {
+        public override void Setup() {
+            List<TMP_Dropdown.OptionData> options = new() {
                 CreateGymOption(DormGym.TrainMode.None),
             };
-            int gymLevel = Gym.Level;
-            if (gymLevel > 0)
-            {
+            var gymLevel = Gym.Level;
+            if (gymLevel > 0) {
                 options.Add(CreateGymOption(DormGym.TrainMode.Cardio));
                 options.Add(CreateGymOption(DormGym.TrainMode.LightBodyBuilding));
             }
 
-            if (gymLevel > 1)
-            {
+            if (gymLevel > 1) {
                 options.Add(CreateGymOption(DormGym.TrainMode.Mixed));
                 options.Add(CreateGymOption(DormGym.TrainMode.BodyBuilding));
             }

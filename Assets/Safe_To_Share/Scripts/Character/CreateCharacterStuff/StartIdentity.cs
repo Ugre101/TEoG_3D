@@ -5,11 +5,9 @@ using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Character.CreateCharacterStuff
-{
+namespace Character.CreateCharacterStuff {
     [Serializable]
-    public class StartIdentity
-    {
+    public class StartIdentity {
         [SerializeField] bool customIdentity;
         [SerializeField] Identity identity;
         [SerializeField] GenderedNameList nameList;
@@ -18,17 +16,17 @@ namespace Character.CreateCharacterStuff
 
         BirthDay RandomBirthDay => new(DateSystem.Year - Random.Range(minAge, maxAge), Random.Range(1, 365));
 
-        public Identity GetIdentity(GenderType genderType) => customIdentity
-            ? new Identity(identity.FirstName, identity.LastName, identity.BirthDay)
-            : new Identity(GetName(genderType), GetRandomLastName(), RandomBirthDay);
+        public Identity GetIdentity(GenderType genderType) =>
+            customIdentity
+                ? new Identity(identity.FirstName, identity.LastName, identity.BirthDay)
+                : new Identity(GetName(genderType), GetRandomLastName(), RandomBirthDay);
 
         string GetRandomLastName() => nameList != null ? nameList.GetRandomLastName : "NoNameListSon";
 
         string GetName(GenderType type) =>
             nameList == null
                 ? "NoNameList"
-                : type switch
-                {
+                : type switch {
                     GenderType.Neutral => nameList.GetRandomNeutralName,
                     GenderType.Feminine => nameList.GetRandomFemaleName,
                     GenderType.Masculine => nameList.GetRandomMaleName,

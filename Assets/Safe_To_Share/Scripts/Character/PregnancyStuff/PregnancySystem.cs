@@ -3,11 +3,9 @@ using CustomClasses;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Character.PregnancyStuff
-{
+namespace Character.PregnancyStuff {
     [Serializable]
-    public class PregnancySystem : ITickHour
-    {
+    public class PregnancySystem : ITickHour {
         [SerializeField] BaseIntStat fertility = new(35);
         [SerializeField] BaseIntStat virility = new(35);
         [SerializeField] BaseConstIntStat pregnancySpeed = new(1);
@@ -23,9 +21,8 @@ namespace Character.PregnancyStuff
 
         public int TimesImpregnated => timesImpregnated;
 
-        public bool TickHour(int ticks = 1)
-        {
-            bool change = Fertility.Mods.TickHour(ticks);
+        public bool TickHour(int ticks = 1) {
+            var change = Fertility.Mods.TickHour(ticks);
             if (Virility.Mods.TickHour(ticks))
                 change = true;
             if (PregnancySpeed.Mods.TickHour(ticks))

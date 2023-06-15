@@ -1,12 +1,9 @@
 ﻿using Character;
 using Safe_To_Share.Scripts.Battle.CombatantStuff;
 
-namespace Battle
-{
-    public sealed class CombatCharacter
-    {
-        public CombatCharacter(Combatant combatant, BaseCharacter character, bool ally, int optionalStartThreat = 0)
-        {
+namespace Battle {
+    public sealed class CombatCharacter {
+        public CombatCharacter(Combatant combatant, BaseCharacter character, bool ally, int optionalStartThreat = 0) {
             Combatant = combatant;
             Character = character;
             Ally = ally;
@@ -22,8 +19,7 @@ namespace Battle
         public void IncreaseThreat(int by) => Threat += by;
         public void DecreaseThreat(int by) => Threat -= by;
 
-        public CombatCharacter MyTurn()
-        {
+        public CombatCharacter MyTurn() {
             SpeedAccumulated = 0;
             return this;
         }

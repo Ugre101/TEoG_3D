@@ -1,7 +1,5 @@
-﻿namespace Character.LevelStuff
-{
-    public enum PerkType
-    {
+﻿namespace Character.LevelStuff {
+    public enum PerkType {
         Basic,
         Essence,
         Vore,

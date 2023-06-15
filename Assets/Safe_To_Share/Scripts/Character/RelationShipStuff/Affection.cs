@@ -1,30 +1,25 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Character.RelationShipStuff
-{
+namespace Character.RelationShipStuff {
     [Serializable]
-    public class RelationShip
-    {
+    public class RelationShip {
         [SerializeField] int withID;
         [SerializeField] float affection;
         [SerializeField] float subDom;
 
-        public RelationShip(int withID, float affection = 0, float subDom = 0)
-        {
+        public RelationShip(int withID, float affection = 0, float subDom = 0) {
             this.withID = withID;
             this.affection = affection;
             this.subDom = subDom;
         }
 
-        public float Submission
-        {
+        public float Submission {
             get => Mathf.RoundToInt(subDom);
             set => subDom = value;
         }
 
-        public float Affection
-        {
+        public float Affection {
             get => Mathf.RoundToInt(affection);
             set => affection = value;
         }

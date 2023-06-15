@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using AvatarStuff.Holders;
 using Safe_To_Share.Scripts.Holders;
 
-namespace DormAndHome.Dorm.Buildings
-{
+namespace DormAndHome.Dorm.Buildings {
     [Serializable]
-    public class DormDungeon : Building
-    {
+    public class DormDungeon : Building {
         protected override int[] UpgradeCosts => new[] { 250, 500, 1000, };
 
-        public override void TickBuildingEffect(List<DormMate> dormMates)
-        {
+        public override void TickBuildingEffect(List<DormMate> dormMates) {
             if (Level <= 0)
                 return;
             foreach (var mate in dormMates)
@@ -19,21 +15,15 @@ namespace DormAndHome.Dorm.Buildings
                     DungeonTick(mate);
         }
 
-        void DungeonTick(DormMate mate)
-        {
-            float oldValue = mate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID).Submission;
+        void DungeonTick(DormMate mate) {
+            var oldValue = mate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID).Submission;
             mate.RelationsShips.IncreaseSubmissivenessTowards(PlayerHolder.PlayerID, 1f);
-            float newValue = mate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID).Submission;
-            if (oldValue < 10 && newValue >= 10)
-            {
+            var newValue = mate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID).Submission;
+            if (oldValue < 10 && newValue >= 10) {
                 // Reached thressHold
-            }
-            else if (oldValue < 25 && newValue >= 25)
-            {
+            } else if (oldValue < 25 && newValue >= 25) {
                 // Same
-            }
-            else if (oldValue < 50 && newValue >= 50)
-            {
+            } else if (oldValue < 50 && newValue >= 50) {
                 // Same
             }
         }

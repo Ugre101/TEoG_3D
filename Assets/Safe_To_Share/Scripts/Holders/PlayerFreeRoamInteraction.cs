@@ -7,10 +7,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Holders
-{
-    public sealed class PlayerFreeRoamInteraction : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Holders {
+    public sealed class PlayerFreeRoamInteraction : MonoBehaviour {
         const int FrameLimit = 10;
         [SerializeField] Button optionButton;
         [SerializeField] TextMeshProUGUI btnText;
@@ -18,7 +16,6 @@ namespace Safe_To_Share.Scripts.Holders
         [SerializeField] Camera cam;
 
         [Header("Settings"), SerializeField,]
-        
         List<Vector3> rays = new();
 
         [SerializeField, Range(0.1f, 3f),] float rayDist = 1f;
@@ -28,14 +25,17 @@ namespace Safe_To_Share.Scripts.Holders
         NativeArray<RaycastCommand> commands;
         JobHandle handle;
         bool hasHit;
+
+        Ray? lastCamRay;
+        Vector3? lastDir;
         IInteractable lastHit;
         Vector3 lastHitPos;
+        Vector3? lastPos;
         NativeArray<RaycastHit> results;
         float stopHoverDist;
 
 
-        void Start()
-        {
+        void Start() {
             results = new NativeArray<RaycastHit>(rays.Count + 1, Allocator.Persistent);
             commands = new NativeArray<RaycastCommand>(rays.Count + 1, Allocator.Persistent);
 
@@ -43,9 +43,8 @@ namespace Safe_To_Share.Scripts.Holders
             stopHoverDist = rayDist * 3f;
         }
 
-      
-        void Update()
-        {
+
+        void Update() {
             if (Time.frameCount % FrameLimit != 0)
                 return;
             if (CheckRayCastResult())
@@ -56,52 +55,43 @@ namespace Safe_To_Share.Scripts.Holders
                 StopShowText();
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             results.Dispose();
             commands.Dispose();
         }
 
         void DoInteraction() => lastHit?.DoInteraction(playerHolder.Player);
 
-        void StopShowText()
-        {
+        void StopShowText() {
             optionButton.gameObject.SetActive(false);
             ClearLastHit();
             hasHit = false;
         }
 
-    
 
-        void ShowOptionsShowFor(IInteractable interactable)
-        {
+        void ShowOptionsShowFor(IInteractable interactable) {
             btnText.text = $"{interactable.HoverText(playerHolder.Player)} [{HotkeyHumanReadableString()}]";
             optionButton.gameObject.SetActive(true);
             hasHit = true;
         }
 
-        string HotkeyHumanReadableString() => InputControlPath.ToHumanReadableString(hotKey.action.bindings[0].path,
-            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        string HotkeyHumanReadableString() =>
+            InputControlPath.ToHumanReadableString(hotKey.action.bindings[0].path,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
 
-        Ray? lastCamRay;
-        Vector3? lastPos;
-        Vector3? lastDir;
-        void ScheduleRaycast()
-        {
-            Vector3 transformDirection = transform.TransformDirection(Vector3.forward);
-            Ray camRay = cam.ScreenPointToRay(Pointer.current.position.ReadValue());
+        void ScheduleRaycast() {
+            var transformDirection = transform.TransformDirection(Vector3.forward);
+            var camRay = cam.ScreenPointToRay(Pointer.current.position.ReadValue());
 
-            if (ShouldISkipBodyRay(transformDirection))
-            {
-                for (int i = 0; i < rays.Count; i++)
+            if (ShouldISkipBodyRay(transformDirection)) {
+                for (var i = 0; i < rays.Count; i++)
                     commands[i] = new RaycastCommand(transform.position + rays[i], transformDirection, rayDist,
                         searchLayers);
                 lastPos = transform.position;
                 lastDir = transformDirection;
             }
 
-            if (ShouldISkipPointerRay(camRay))
-            {
+            if (ShouldISkipPointerRay(camRay)) {
                 commands[rays.Count] = new RaycastCommand(camRay.origin, camRay.direction, cameraRayDist, searchLayers);
                 lastCamRay = camRay;
             }
@@ -117,12 +107,10 @@ namespace Safe_To_Share.Scripts.Holders
             !lastPos.HasValue || !lastDir.HasValue || lastPos.Value != transform.position ||
             lastDir.Value != transformDirection;
 
-        bool CheckRayCastResult()
-        {
+        bool CheckRayCastResult() {
             handle.Complete();
             // Copy the result. If batchedHit.collider is null there was no hit
-            foreach (var hit in results)
-            {
+            foreach (var hit in results) {
                 if (hit.collider == null) continue;
                 if (!hit.transform.TryGetComponent(out IInteractable interactable)) continue;
                 lastHitPos = hit.transform.position;
@@ -133,21 +121,20 @@ namespace Safe_To_Share.Scripts.Holders
             return false;
         }
 
-        void SetLastHit(IInteractable interactable)
-        {
+        void SetLastHit(IInteractable interactable) {
             lastHit = interactable;
             lastHit.UpdateHoverText += ShowOptionsShowFor;
             lastHit.RemoveIInteractableHit += StopShowText;
         }
-        void ClearLastHit()
-        {
-            if (lastHit == null) return; 
+
+        void ClearLastHit() {
+            if (lastHit == null) return;
             lastHit.UpdateHoverText -= ShowOptionsShowFor;
             lastHit.RemoveIInteractableHit -= ClearLastHit;
             lastHit = null;
         }
-        public void OnInterAction(InputAction.CallbackContext ctx)
-        {
+
+        public void OnInterAction(InputAction.CallbackContext ctx) {
             if (ctx.performed)
                 lastHit?.DoInteraction(playerHolder.Player);
         }

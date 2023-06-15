@@ -3,11 +3,9 @@ using Dialogue;
 using UnityEditor;
 using UnityEngine;
 
-namespace Editors.Dialogue
-{
+namespace Editors.Dialogue {
     [CustomEditor(typeof(DialogueBaseNode))]
-    public sealed class DialogueBaseNodeEditor : Editor
-    {
+    public sealed class DialogueBaseNodeEditor : Editor {
         public string[] actionsTypes = { "Add To Dorm", "Release Prey", "Add vore temp mods", };
         SerializedProperty actions;
         DialogueBaseNode myTarget;
@@ -16,31 +14,27 @@ namespace Editors.Dialogue
 
         bool showActions;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             myTarget = (DialogueBaseNode)target;
             actions = serializedObject.FindProperty("actions");
         }
 
-        public override void OnInspectorGUI()
-        {
+        public override void OnInspectorGUI() {
             base.OnInspectorGUI();
             showActions = EditorGUILayout.Foldout(showActions, "Actions");
-            if (showActions) 
+            if (showActions)
                 PrintActions();
 
             selected = EditorGUILayout.Popup("Action type", selected, actionsTypes);
             if (GUILayout.Button("Add takeHome")) myTarget.AddAction(selected);
         }
 
-        void PrintActions()
-        {
+        void PrintActions() {
             EditorGUI.indentLevel++;
-            for (int i = 0; i < actions.arraySize; i++)
-            {
-                string typeName = actions.GetArrayElementAtIndex(i).type;
-                int startIndex = typeName.IndexOf("<", StringComparison.Ordinal) + 1;
-                int lenght = typeName.IndexOf(">", StringComparison.Ordinal) - startIndex;
+            for (var i = 0; i < actions.arraySize; i++) {
+                var typeName = actions.GetArrayElementAtIndex(i).type;
+                var startIndex = typeName.IndexOf("<", StringComparison.Ordinal) + 1;
+                var lenght = typeName.IndexOf(">", StringComparison.Ordinal) - startIndex;
                 typeName = typeName.Substring(startIndex, lenght);
                 EditorGUILayout.PropertyField(actions.GetArrayElementAtIndex(i), new GUIContent(typeName), true);
             }

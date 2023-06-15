@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Character;
 using Character.BodyStuff;
@@ -12,11 +11,9 @@ using Character.Race.Races;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace AvatarStuff
-{
+namespace AvatarStuff {
     [RequireComponent(typeof(FootSteps))]
-    public partial class CharacterAvatar : MonoBehaviour
-    {
+    public partial class CharacterAvatar : MonoBehaviour {
         const float OrganMulti = 0.7f;
         [SerializeField] Gender[] supportedGenders;
         [SerializeField] BasicRace[] supportedRaces;
@@ -53,21 +50,20 @@ namespace AvatarStuff
 
         [SerializeField] bool hasDickController;
         [SerializeField] bool hasHideDaz;
-        
-        float ballSize;
-        bool firstUse = true;
-        float lastTick;
-        SkinnedMeshRenderer[] shapes;
         [field: SerializeField] public Animator Animator { get; private set; }
 
         [field: SerializeField] public AvatarKeyAreas KeyAreas { get; private set; }
 
+        float ballSize;
+        bool firstUse = true;
+
         bool hasShapes;
-        public SkinnedMeshRenderer[] AllShapes
-        {
-            get
-            {
-                if (hasShapes) 
+        float lastTick;
+        SkinnedMeshRenderer[] shapes;
+
+        public SkinnedMeshRenderer[] AllShapes {
+            get {
+                if (hasShapes)
                     return shapes;
                 var temp = bodyMeshRenderers.Concat(hairMeshRenderers);
                 temp = temp.Concat(detailsMeshRenderers);
@@ -84,8 +80,7 @@ namespace AvatarStuff
 
         public Material[] HairMats => hairMats;
 
-        void Update()
-        {
+        void Update() {
             if (firstUse || Time.time < lastTick + 1f)
                 return;
             lastTick = Time.time;
@@ -93,21 +88,19 @@ namespace AvatarStuff
         }
 
 #if UNITY_EDITOR
-        void OnValidate()
-        {
+        void OnValidate() {
             hasDickController = dickController != null;
             hasBallsController = ballsController != null;
             hasHideDaz = hideDazDickAndBalls != null;
             dictatorBoner.OnValidate();
             if (Application.isPlaying) return;
             if (bodyMeshRenderers is not { Count: > 0, }) return;
-            foreach (var skinnedMeshRenderer in bodyMeshRenderers)
-            {
+            foreach (var skinnedMeshRenderer in bodyMeshRenderers) {
                 bodyMuscle.ChangeShape(skinnedMeshRenderer, 0f);
                 bodyFat.ChangeShape(skinnedMeshRenderer, 0f);
             }
 
-            if (Animator == null && TryGetComponent(out Animator animator)) 
+            if (Animator == null && TryGetComponent(out Animator animator))
                 Animator = animator;
 
             if (KeyAreas == null)
@@ -119,14 +112,12 @@ namespace AvatarStuff
         }
 #endif
 
-        void FirstSetup()
-        {
+        void FirstSetup() {
             firstUse = false;
             vore.Setup(AllShapes, hasBallsController);
         }
 
-        public virtual void Setup(BaseCharacter character)
-        {
+        public virtual void Setup(BaseCharacter character) {
             var forceSkinUpdate = false;
             if (firstUse)
                 FirstSetup();
@@ -146,10 +137,8 @@ namespace AvatarStuff
             SetSkinTone(character.Body.SkinTone, forceSkinUpdate);
         }
 
-     
 
-        bool HandleDickAndBalls(SexualOrgans sexualOrgans)
-        {
+        bool HandleDickAndBalls(SexualOrgans sexualOrgans) {
             var hasDick = sexualOrgans.Dicks.HaveAny();
             var hasBalls = sexualOrgans.Balls.HaveAny();
             var forceSkinUpdate = hasHideDaz
@@ -164,8 +153,7 @@ namespace AvatarStuff
         // Fit 17
         // Normal 21
         // obese 28
-        void SetShapes(BaseCharacter character, bool hasVagina, SkinnedMeshRenderer shape)
-        {
+        void SetShapes(BaseCharacter character, bool hasVagina, SkinnedMeshRenderer shape) {
             var fatRatio = character.Body.GetFatRatio() - 1f;
             bodyFat.ChangeShape(shape, Mathf.Clamp(fatRatio * fatMultiplier, 0f, 120f));
             var muscleRatio = character.Body.GetMuscleRatio();
@@ -176,25 +164,21 @@ namespace AvatarStuff
             thickness.ChangeShape(shape, character.Body.Thickset);
         }
 
-        static float PregnancyValue(BaseCharacter character, bool hasVagina)
-        {
+        static float PregnancyValue(BaseCharacter character, bool hasVagina) {
             if (!hasVagina || !character.SexualOrgans.Vaginas.BaseList.Any(v => v.Womb.HasFetus)) return 0f;
             var oldestFetus = character.SexualOrgans.Vaginas.BaseList.Aggregate(0,
                 (current, baseOrgan) => baseOrgan.Womb.FetusList.Select(fetus => fetus.DaysOld).Prepend(current).Max());
             return Mathf.Clamp((float)oldestFetus / PregnancyExtensions.IncubationDays * 100f, 0f, 100f);
         }
 
-        public void SetArousal(int arousal)
-        {
+        public void SetArousal(int arousal) {
             dictatorBoner.ChangeShape(AllShapes, arousal);
             if (hasDickController)
                 dickController.SetBoner(arousal);
         }
 
-        void HandleBalls(BaseOrgansContainer balls, bool hasBalls)
-        {
-            if (hasBallsController)
-            {
+        void HandleBalls(BaseOrgansContainer balls, bool hasBalls) {
+            if (hasBallsController) {
                 ballsController.ShowOrHide(hasBalls);
                 if (!hasBalls)
                     return;
@@ -203,9 +187,7 @@ namespace AvatarStuff
                 balls.Fluid.CurrentValueChange += UpdateBallsStretch;
                 ballSize = SetOrganSize(balls.Biggest);
                 if (!balls.BaseList.Any(b => b.Vore.PreysIds.Any())) ballsController.ReSize(ballSize);
-            }
-            else if (dictatorBoner.hasDictatorBalls)
-            {
+            } else if (dictatorBoner.hasDictatorBalls) {
                 if (!hasBalls)
                     return;
                 dictatorBoner.SetupFluidStretch(balls);
@@ -219,21 +201,16 @@ namespace AvatarStuff
         void UpdateBallsStretch(float obj) => ballsController.SetFluidStretch(obj);
         void UpdateDictatorBallsStretch(float obj) => dictatorBoner.SetFluidStretch(obj);
 
-        void HandleDick(BaseOrgansContainer sexualBaseOrgans, bool hasDick)
-        {
-            if (hasDickController)
-            {
+        void HandleDick(BaseOrgansContainer sexualBaseOrgans, bool hasDick) {
+            if (hasDickController) {
                 DazDick(sexualBaseOrgans, hasDick);
-            }
-            else if (dictatorBoner.hasDictatorDick)
-            {
+            } else if (dictatorBoner.hasDictatorDick) {
                 dictatorBoner.HideOrShowDick(hasDick);
                 dictatorBoner.SetDickSize(SetOrganSize(sexualBaseOrgans.Biggest));
             }
         }
 
-        void DazDick(BaseOrgansContainer sexualBaseOrgans, bool hasDick)
-        {
+        void DazDick(BaseOrgansContainer sexualBaseOrgans, bool hasDick) {
             dickController.HideOrShow(hasDick);
             if (hasDick)
                 dickController.SetDickSize(SetOrganSize(sexualBaseOrgans.Biggest));
@@ -242,13 +219,11 @@ namespace AvatarStuff
         static float SetOrganSize(float currentSize) => 0.2f + Mathf.Log(currentSize) * OrganMulti;
 
 
-        public void SetSkinTone(float tone, bool forceSkinUpdate)
-        {
+        public void SetSkinTone(float tone, bool forceSkinUpdate) {
             skinTone.SetSkinTone(tone, bodyMeshRenderers, forceSkinUpdate);
         }
 
-        public void Save()
-        {
+        public void Save() {
             if (AvatarDetails.AvatarDetailsSavesDict.ContainsKey(prefab.AssetGUID))
                 AvatarDetails.AvatarDetailsSavesDict[prefab.AssetGUID] =
                     new AvatarDetails.SavedValues(prefab.AssetGUID);
@@ -259,21 +234,17 @@ namespace AvatarStuff
                 AvatarDetails.AvatarDetailsSavesDict[prefab.AssetGUID].MatToSave(hairMat);
         }
 
-        void LoadDetails()
-        {
+        void LoadDetails() {
             if (!AvatarDetails.AvatarDetailsSavesDict.TryGetValue(prefab.AssetGUID, out var saved))
                 return;
-            foreach (var colorSave in saved.ColorSaves)
-            {
+            foreach (var colorSave in saved.ColorSaves) {
                 if (!TryFindMaterial(colorSave, out var firstOrDefault)) continue;
                 if (ColorUtility.TryParseHtmlString($"#{colorSave.ColorName}", out var savedColor))
                     firstOrDefault.color = savedColor;
             }
 
-            bool TryFindMaterial(AvatarDetails.ColorSave colorSave, out Material firstOrDefault)
-            {
-                foreach (var m in hairMats)
-                {
+            bool TryFindMaterial(AvatarDetails.ColorSave colorSave, out Material firstOrDefault) {
+                foreach (var m in hairMats) {
                     if (m.name != colorSave.MatName)
                         continue;
                     firstOrDefault = m;
@@ -286,13 +257,11 @@ namespace AvatarStuff
         }
 
         [Serializable]
-        public struct BlendShape
-        {
+        public struct BlendShape {
             [SerializeField] bool hasShape;
             [SerializeField] int[] ids;
             [SerializeField, Range(-50, 50),] float offSet;
-            public void ChangeShape(SkinnedMeshRenderer shape, float value)
-            {
+            public void ChangeShape(SkinnedMeshRenderer shape, float value) {
                 if (!hasShape || ids.Length == 0)
                     return;
                 foreach (var id in ids)
@@ -300,8 +269,7 @@ namespace AvatarStuff
                         shape.SetBlendShapeWeight(id, value + offSet);
             }
 #if UNITY_EDITOR
-            public void EditorQuickAdd(int id)
-            {
+            public void EditorQuickAdd(int id) {
                 if (ids.Contains(id)) return;
                 ids = new List<int>(ids) { id, }.ToArray();
                 hasShape = true;
@@ -310,71 +278,44 @@ namespace AvatarStuff
         }
 #if UNITY_EDITOR
         [ContextMenu("Get hair renders")]
-        void GetSkinnedMeshRenderers()
-        {
+        void GetSkinnedMeshRenderers() {
             bodyMeshRenderers ??= new List<SkinnedMeshRenderer>();
             hairMeshRenderers ??= new List<SkinnedMeshRenderer>();
             foreach (var meshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
-                if (meshRenderer.name.ToLower().Contains("hair"))
-                {
+                if (meshRenderer.name.ToLower().Contains("hair")) {
                     if (hairMeshRenderers.Contains(meshRenderer) == false)
                         hairMeshRenderers.Add(meshRenderer);
-                }
-                else if (bodyMeshRenderers.Contains(meshRenderer) == false)
-                {
+                } else if (bodyMeshRenderers.Contains(meshRenderer) == false) {
                     bodyMeshRenderers.Add(meshRenderer);
                 }
         }
 
         [ContextMenu("Get ids")]
-        void GetMorphIds()
-        {
+        void GetMorphIds() {
             if (AllShapes == null || !AllShapes.Any())
                 return;
             var meshRenderer = AllShapes.First();
             var counts = meshRenderer.sharedMesh.blendShapeCount;
-            for (var i = 0; i < counts; i++)
-            {
+            for (var i = 0; i < counts; i++) {
                 var shapeName = meshRenderer.sharedMesh.GetBlendShapeName(i).ToLower();
-                if (shapeName.Contains("hd details"))
-                {
+                if (shapeName.Contains("hd details")) {
                     print($"Skipped {shapeName} ({i})");
-                }
-                else if (vore.EditorQuickSetup(shapeName, i))
-                {
-                }
-                else if (shapeName.Contains("breasts"))
-                {
+                } else if (vore.EditorQuickSetup(shapeName, i)) { } else if (shapeName.Contains("breasts")) {
                     if (shapeName.Contains("gone"))
                         noBoobs.EditorQuickAdd(i);
                     else if (shapeName.Contains("size"))
                         biggerBoobs.EditorQuickAdd(i);
-                }
-                else if (shapeName.Contains("heavy"))
-                {
+                } else if (shapeName.Contains("heavy")) {
                     bodyFat.EditorQuickAdd(i);
-                }
-                else if (shapeName.Contains("fbmbody"))
-                {
+                } else if (shapeName.Contains("fbmbody")) {
                     bodyMuscle.EditorQuickAdd(i);
-                }
-                else if (shapeName.Contains("fbmthin"))
-                {
+                } else if (shapeName.Contains("fbmthin")) {
                     thickness.EditorQuickAddThin(i);
-                }
-                else if (shapeName.Contains("fbmvoluptuous") || shapeName.Contains("fbmstocky"))
-                {
+                } else if (shapeName.Contains("fbmvoluptuous") || shapeName.Contains("fbmstocky")) {
                     thickness.EditorQuickAddThick(i);
-                }
-                else if (shapeName.Contains("preg"))
-                {
+                } else if (shapeName.Contains("preg")) {
                     pregnant.EditorQuickAdd(i);
-                }
-                else if (bodyShapes.EditorQuickSetup(shapeName, i))
-                {
-                }
-                else
-                {
+                } else if (bodyShapes.EditorQuickSetup(shapeName, i)) { } else {
                     print($"Unassigned {shapeName} ({i})");
                 }
             }

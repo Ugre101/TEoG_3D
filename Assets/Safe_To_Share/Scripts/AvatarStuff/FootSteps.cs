@@ -3,11 +3,9 @@ using UnityEditor;
 using UnityEngine;
 using Random = System.Random;
 
-namespace AvatarStuff
-{
+namespace AvatarStuff {
     [RequireComponent(typeof(AudioSource))]
-    public sealed class FootSteps : MonoBehaviour
-    {
+    public sealed class FootSteps : MonoBehaviour {
         [SerializeField] AudioClip[] audioClips;
         [SerializeField] AudioClip[] giantAudioClips;
         [SerializeField] AudioSource source;
@@ -15,8 +13,7 @@ namespace AvatarStuff
         readonly Random rng = new();
         bool valid;
 
-        void Start()
-        {
+        void Start() {
             if (audioClips == null || audioClips.Length == 0)
                 return;
             if (source == null)
@@ -24,8 +21,7 @@ namespace AvatarStuff
             valid = true;
         }
 
-        void Step()
-        {
+        void Step() {
             if (!valid) return;
             source.clip = transform.lossyScale.y > 3f
                 ? giantAudioClips[rng.Next(giantAudioClips.Length)]
@@ -34,15 +30,12 @@ namespace AvatarStuff
         }
 #if UNITY_EDITOR
         [Header("Editor stuff"), SerializeField,]
-        
         bool validated;
 
-        void OnValidate()
-        {
+        void OnValidate() {
             if (validated) return;
             validated = true;
-            if (TryGetComponent(out AudioSource gotSource))
-            {
+            if (TryGetComponent(out AudioSource gotSource)) {
                 source = gotSource;
                 source.playOnAwake = false;
             }
@@ -50,10 +43,9 @@ namespace AvatarStuff
             var assets = AssetDatabase.FindAssets("t:AudioClip", new[] { "Assets/Imported/Foot_Steps", });
             List<AudioClip> clips = new();
             List<AudioClip> giantClips = new();
-            foreach (string asset in assets)
-            {
+            foreach (var asset in assets) {
                 print(asset);
-                string assetPathToGuid = AssetDatabase.GUIDToAssetPath(asset);
+                var assetPathToGuid = AssetDatabase.GUIDToAssetPath(asset);
                 print(assetPathToGuid);
                 if (AssetDatabase.LoadAssetAtPath(assetPathToGuid, typeof(AudioClip)) is not AudioClip clip) continue;
                 if (clip.name.ToLower().Contains("giant"))

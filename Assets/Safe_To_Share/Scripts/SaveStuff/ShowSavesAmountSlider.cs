@@ -4,10 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SaveStuff
-{
-    public sealed class ShowSavesAmountSlider : MonoBehaviour
-    {
+namespace SaveStuff {
+    public sealed class ShowSavesAmountSlider : MonoBehaviour {
         const string ShowAmountSave = "SaveThisAmountOfSaves";
         public static int ShowAmount = 10;
         [SerializeField] Slider amountToShow;
@@ -15,8 +13,7 @@ namespace SaveStuff
         readonly WaitForSecondsRealtime afterSmallDelay = new(0.1f);
         bool firstSlide = true;
 
-        public void SetupSlider(int saves)
-        {
+        public void SetupSlider(int saves) {
             amountToShow.maxValue = saves;
             amountToShow.value = PlayerPrefs.GetInt(ShowAmountSave, ShowAmount);
             showAmountText.text = $"Show {ShowAmount} saves";
@@ -25,8 +22,7 @@ namespace SaveStuff
 
         public void NewMaxAmount(int amount) => amountToShow.maxValue = amount;
 
-        void ChangeAmount(float arg0)
-        {
+        void ChangeAmount(float arg0) {
             ShowAmount = Mathf.RoundToInt(arg0);
             PlayerPrefs.SetInt(ShowAmountSave, ShowAmount);
             showAmountText.text = $"Show {ShowAmount} saves";
@@ -36,8 +32,7 @@ namespace SaveStuff
 
         public event Action NewShowAmount;
 
-        IEnumerator AfterSmallDelay()
-        {
+        IEnumerator AfterSmallDelay() {
             firstSlide = false;
             yield return afterSmallDelay;
             NewShowAmount?.Invoke();

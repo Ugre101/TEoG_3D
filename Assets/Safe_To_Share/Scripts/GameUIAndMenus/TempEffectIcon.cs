@@ -9,19 +9,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class TempEffectIcon : EffectIcon
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class TempEffectIcon : EffectIcon {
         [SerializeField] TextMeshProUGUI timeLeft;
         Item item;
         List<TempIntMod> mod;
         public IObjectPool<TempEffectIcon> pool;
 
-        protected override string HoverText
-        {
-            get
-            {
+        protected override string HoverText {
+            get {
                 StringBuilder sb = new();
                 sb.AppendLine(item.Title);
                 sb.Append(item.TempEffectDesc);
@@ -33,8 +29,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 
         void OnDestroy() => DateSystem.NewHour -= UpdateTimeLeft;
 
-        public void Setup(Item gotItem, List<TempIntMod> tempIntMod)
-        {
+        public void Setup(Item gotItem, List<TempIntMod> tempIntMod) {
             icon.sprite = gotItem.Icon;
             item = gotItem;
             mod = tempIntMod;
@@ -42,20 +37,17 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             UpdateTimeLeft(101);
         }
 
-        public void Clear()
-        {
+        public void Clear() {
             icon.sprite = null;
             item = null;
             mod = null;
             DateSystem.NewHour -= UpdateTimeLeft;
         }
 
-        void UpdateTimeLeft(int obj)
-        {
-            int max = mod.Max(m => m.HoursLeft);
+        void UpdateTimeLeft(int obj) {
+            var max = mod.Max(m => m.HoursLeft);
             timeLeft.text = $"{max}h";
-            if (max <= 0)
-            {
+            if (max <= 0) {
                 Clear();
                 gameObject.SetActive(false);
             }

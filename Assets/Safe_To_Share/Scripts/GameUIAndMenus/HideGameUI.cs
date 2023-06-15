@@ -1,15 +1,12 @@
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class HideGameUI : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class HideGameUI : MonoBehaviour {
         static bool hidden;
         [SerializeField] GameObject[] expect;
 
-        void Start()
-        {
+        void Start() {
             if (hidden)
                 transform.SleepChildren();
             else
@@ -19,8 +16,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
         public void ForceHide() => transform.SleepChildren();
         public void StopForceHide() => Start();
 
-        public void ToggleHide()
-        {
+        public void ToggleHide() {
             hidden = !hidden;
             Start();
         }

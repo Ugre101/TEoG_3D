@@ -2,10 +2,8 @@
 using Character.PlayerStuff;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
-{
-    public sealed class TriggerSellEssence : MonoBehaviour, IInteractable
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave {
+    public sealed class TriggerSellEssence : MonoBehaviour, IInteractable {
         [SerializeField] SellEssenceMenu menu;
 
         public void DoInteraction(Player player) => menu.Setup(player);

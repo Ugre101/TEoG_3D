@@ -1,13 +1,9 @@
 ﻿using System;
 using CustomClasses;
 
-namespace Character.StatsStuff
-{
+namespace Character.StatsStuff {
     [Serializable]
-    public class CharStat : BaseIntStat
-    {
-        public CharStat(int baseValue) : base(baseValue)
-        {
-        }
+    public class CharStat : BaseIntStat {
+        public CharStat(int baseValue) : base(baseValue) { }
     }
 }

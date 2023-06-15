@@ -4,15 +4,12 @@ using System.Linq;
 using Character.Organs;
 using Character.PlayerStuff;
 using Character.VoreStuff;
-using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes;
 using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
-{
-    public sealed class VoreOrganSettings : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore {
+    public sealed class VoreOrganSettings : MonoBehaviour {
         [SerializeField] GameObject noSelected, selected;
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TMP_Dropdown dropdown;
@@ -20,41 +17,36 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
         [SerializeField] PreyShowCase preyPrefab;
         Player player;
 
-        void Start()
-        {
+        void Start() {
             SexualVoreOrganContainerInfo.ShowOrganSettingForMe += ShowSexualOrganSettings;
             StomachVoreOrganContainerInfo.ShowStomachSettings += ShowOralSettings;
         }
 
-        void OnEnable()
-        {
+        void OnEnable() {
             noSelected.gameObject.SetActive(true);
             selected.gameObject.SetActive(false);
         }
 
-        void OnDisable()
-        {
+        void OnDisable() {
             dropdown.onValueChanged.RemoveAllListeners();
             dropdown.ClearOptions();
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             SexualVoreOrganContainerInfo.ShowOrganSettingForMe -= ShowSexualOrganSettings;
             StomachVoreOrganContainerInfo.ShowStomachSettings -= ShowOralSettings;
         }
 
         public void Setup(Player player) => this.player = player;
 
-        void ShowOralSettings()
-        {
+        void ShowOralSettings() {
             noSelected.gameObject.SetActive(false);
             selected.gameObject.SetActive(true);
             title.text = "Stomach";
 
             dropdown.ClearOptions();
-            List<TMP_Dropdown.OptionData> options = player.Vore.StomachDigestionMode.GetPossibleDigestionTypes(player)
-                .Select(digestionType => new TMP_Dropdown.OptionData(digestionType)).ToList();
+            var options = player.Vore.StomachDigestionMode.GetPossibleDigestionTypes(player)
+                                .Select(digestionType => new TMP_Dropdown.OptionData(digestionType)).ToList();
             dropdown.AddOptions(options);
             dropdown.onValueChanged.RemoveAllListeners();
             dropdown.value = player.Vore.StomachDigestionMode.CurrentModeID;
@@ -62,26 +54,24 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
             ShowPreys(VoredCharacters.GetPreys(player.Vore.Stomach.PreysIds), VoreType.Oral,
                 player.Vore.StomachDigestionMode.CurrentModeTitle);
 
-            void NewMode(int arg0)
-            {
-                StomachDigestionMode mode = player.Vore.StomachDigestionMode;
-                int newMode = Array.IndexOf(mode.AllDigestionTypes,
+            void NewMode(int arg0) {
+                var mode = player.Vore.StomachDigestionMode;
+                var newMode = Array.IndexOf(mode.AllDigestionTypes,
                     mode.GetPossibleDigestionTypes(player).ElementAt(arg0));
                 player.Vore.StomachDigestionMode.SetDigestionMode(newMode);
             }
         }
 
 
-        void ShowSexualOrganSettings(SexualOrganType type)
-        {
+        void ShowSexualOrganSettings(SexualOrganType type) {
             noSelected.gameObject.SetActive(false);
             selected.gameObject.SetActive(true);
             title.text = nameof(type);
             dropdown.ClearOptions();
             if (!player.Vore.VoreOrgans.TryGetValue(type, out var voreOrgan))
                 return;
-            List<TMP_Dropdown.OptionData> options = voreOrgan.GetPossibleDigestionTypes(player)
-                .Select(t => new TMP_Dropdown.OptionData(t)).ToList();
+            var options = voreOrgan.GetPossibleDigestionTypes(player)
+                                   .Select(t => new TMP_Dropdown.OptionData(t)).ToList();
             dropdown.AddOptions(options);
             dropdown.onValueChanged.RemoveAllListeners();
             dropdown.value = voreOrgan.CurrentModeID;
@@ -89,27 +79,23 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
             if (!player.SexualOrgans.Containers.TryGetValue(type, out var container))
                 return;
             List<Prey> allPreys = new();
-            foreach (var baseOrgan in container.BaseList)
-            {
+            foreach (var baseOrgan in container.BaseList) {
                 allPreys.AddRange(VoredCharacters.GetPreys(baseOrgan.Vore.PreysIds));
                 allPreys.AddRange(VoredCharacters.GetPreys(baseOrgan.Vore.SpecialPreysIds));
             }
 
             ShowPreys(allPreys, type.OrganToVoreType(), voreOrgan.CurrentModeTitle);
 
-            void NewMode(int arg0)
-            {
-                int newMode = Array.IndexOf(voreOrgan.AllDigestionTypes,
+            void NewMode(int arg0) {
+                var newMode = Array.IndexOf(voreOrgan.AllDigestionTypes,
                     voreOrgan.GetPossibleDigestionTypes(player).ElementAt(arg0));
                 voreOrgan.SetDigestionMode(newMode);
             }
         }
 
-        void ShowPreys(IEnumerable<Prey> preys, VoreType voreType, string altMode)
-        {
+        void ShowPreys(IEnumerable<Prey> preys, VoreType voreType, string altMode) {
             preyContent.KillChildren();
-            foreach (Prey prey in preys)
-            {
+            foreach (var prey in preys) {
                 var preyPre = Instantiate(preyPrefab, preyContent);
                 preyPre.Setup(prey, voreType, altMode);
                 preyPre.RegurgitateMe += Reg;

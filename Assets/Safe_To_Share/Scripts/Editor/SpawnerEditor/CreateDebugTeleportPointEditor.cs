@@ -2,38 +2,33 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Spawner.Editor
-{
+namespace Spawner.Editor {
     [CustomEditor(typeof(CreateDebugTeleportPoint))]
-    public sealed class CreateDebugTeleportPointEditor : UnityEditor.Editor
-    {
+    public sealed class CreateDebugTeleportPointEditor : UnityEditor.Editor {
         CreateDebugTeleportPoint myTarget;
 
 
         void OnEnable() => myTarget = (CreateDebugTeleportPoint)target;
 
-        void OnSceneGUI()
-        {
+        void OnSceneGUI() {
             if (!Application.isEditor) return;
 
-            Event e = Event.current;
+            var e = Event.current;
 
 
-            if (e.control && e.type == EventType.MouseDown)
-            {
-                int controlID = GUIUtility.GetControlID(FocusType.Passive);
+            if (e.control && e.type == EventType.MouseDown) {
+                var controlID = GUIUtility.GetControlID(FocusType.Passive);
                 GUIUtility.hotControl = controlID;
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
+                var ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
 
-                if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, myTarget.validRaycastTargets))
+                if (Physics.Raycast(ray, out var hit, float.MaxValue, myTarget.validRaycastTargets))
                     myTarget.AddNewPoint(hit.point);
 
                 e.Use();
             }
         }
 
-        public override void OnInspectorGUI()
-        {
+        public override void OnInspectorGUI() {
             EditorGUILayout.LabelField("hold control and left click mouse to add point");
             base.OnInspectorGUI();
         }

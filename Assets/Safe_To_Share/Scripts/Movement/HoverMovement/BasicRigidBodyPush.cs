@@ -1,20 +1,16 @@
 ﻿using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Movement.HoverMovement
-{
-    public sealed class BasicRigidBodyPush : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Movement.HoverMovement {
+    public sealed class BasicRigidBodyPush : MonoBehaviour {
         public LayerMask pushLayers;
         public bool canPush;
         [Range(0.5f, 5f)] public float strength = 1.1f;
 
-        void OnControllerColliderHit(ControllerColliderHit hit)
-        {
+        void OnControllerColliderHit(ControllerColliderHit hit) {
             if (canPush) PushRigidBodies(hit);
         }
 
-        void PushRigidBodies(ControllerColliderHit hit)
-        {
+        void PushRigidBodies(ControllerColliderHit hit) {
             // https://docs.unity3d.com/ScriptReference/CharacterController.OnControllerColliderHit.html
 
             // make sure we hit a non kinematic rigidbody

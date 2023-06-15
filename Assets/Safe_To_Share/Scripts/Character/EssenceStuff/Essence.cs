@@ -1,18 +1,14 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Character.EssenceStuff
-{
+namespace Character.EssenceStuff {
     [Serializable]
-    public class Essence
-    {
+    public class Essence {
         [SerializeField] int amount;
 
-        public int Amount
-        {
+        public int Amount {
             get => amount;
-            private set
-            {
+            private set {
                 amount = Mathf.Max(0, value);
                 EssenceValueChange?.Invoke(amount);
             }
@@ -23,21 +19,18 @@ namespace Character.EssenceStuff
 
         public void InvokeEssenceChange() => EssenceTotalChange?.Invoke();
 
-        public int GainEssence(int toGain)
-        {
+        public int GainEssence(int toGain) {
             Amount += toGain;
             return Amount;
         }
 
-        public int LoseEssence(int toLose)
-        {
+        public int LoseEssence(int toLose) {
             var have = Mathf.Min(toLose, Amount);
             Amount -= toLose;
             return have;
         }
 
-        public void Clear()
-        {
+        public void Clear() {
             Amount = 0;
         }
     }

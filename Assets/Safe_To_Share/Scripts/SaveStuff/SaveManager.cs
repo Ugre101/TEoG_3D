@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using AvatarStuff.Holders;
 using Character;
 using Character.PlayerStuff;
 using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
-namespace SaveStuff
-{
-    public sealed class SaveManager : MonoBehaviour
-    {
+namespace SaveStuff {
+    public sealed class SaveManager : MonoBehaviour {
         public static bool SavesDirty = true;
         public static Save? LastSave;
 
         [SerializeField] PlayerHolder playerHolder;
         Player Player => playerHolder.Player;
 
-        public static string SavePath
-        {
-            get
-            {
-                string path = Path.Combine(Application.persistentDataPath, "Saves013");
+        public static string SavePath {
+            get {
+                var path = Path.Combine(Application.persistentDataPath, "Saves013");
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
                 return path;
@@ -43,16 +38,14 @@ namespace SaveStuff
         public void QuickSave() =>
             SaveGame($"QuickSave{Player.Identity.FullName}{DateTime.Now.ToString(CultureInfo.CurrentCulture)}");
 
-        void SaveGame(string saveName, string addedText = "QuickSave")
-        {
-            string cleanSaveName = CleanSave(saveName);
-            if (string.IsNullOrEmpty(cleanSaveName))
-            {
+        void SaveGame(string saveName, string addedText = "QuickSave") {
+            var cleanSaveName = CleanSave(saveName);
+            if (string.IsNullOrEmpty(cleanSaveName)) {
                 PromptErrorBadSaveName?.Invoke();
                 return;
             }
 
-            string fullSaveName = Path.Combine(SavePath, cleanSaveName);
+            var fullSaveName = Path.Combine(SavePath, cleanSaveName);
             SaveSummary summary = new(Player.Identity.FullName, Player.LevelSystem.Level, addedText);
             Save newSave = new(new PlayerSave(new ControlledCharacterSave(Player), playerHolder.transform.position,
                 Player.Inventory.Save()));
@@ -64,8 +57,7 @@ namespace SaveStuff
                 FinishSave(fullSaveName, fullSave);
         }
 
-        static void FinishSave(string fullSaveName, FullSave fullSave)
-        {
+        static void FinishSave(string fullSaveName, FullSave fullSave) {
             File.WriteAllText(fullSaveName, JsonUtility.ToJson(fullSave));
             SavesDirty = true;
             NewSave?.Invoke(fullSave, fullSaveName);
@@ -73,9 +65,8 @@ namespace SaveStuff
 
         public static event Action PromptErrorBadSaveName;
 
-        static string CleanSave(string saveName)
-        {
-            char[] cleaner = saveName.ToCharArray();
+        static string CleanSave(string saveName) {
+            var cleaner = saveName.ToCharArray();
             cleaner = Array.FindAll(cleaner, char.IsLetterOrDigit);
             string cleanString = new(cleaner);
             return cleanString;

@@ -5,10 +5,8 @@ using SaveStuff;
 using SceneStuff;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
-{
-    public sealed class ViewDormDormDungeon : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI {
+    public sealed class ViewDormDormDungeon : MonoBehaviour {
         [SerializeField] PlayerHolder playerHolder;
         [SerializeField] DormDungeonMateButton dormMateButton;
         [SerializeField] AreYouSure areYouSure;
@@ -17,28 +15,24 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
         void OnEnable() => Setup();
         void Fuck(DormMate obj) => SceneLoader.Instance.LoadAfterBattleFromLocation(playerHolder, obj);
 
-        void TryKick(DormMate obj)
-        {
+        void TryKick(DormMate obj) {
             Instantiate(areYouSure, transform).Setup(DeleteMate);
 
-            void DeleteMate()
-            {
+            void DeleteMate() {
                 DormManager.Instance.RemoveDormMate(obj);
                 Setup();
             }
         }
 
-        public void Setup()
-        {
+        public void Setup() {
             foreach (Transform child in container)
                 Destroy(child.gameObject);
-            foreach (DormMate mate in DormManager.Instance.DormMates.Where(mate =>
+            foreach (var mate in DormManager.Instance.DormMates.Where(mate =>
                          mate.SleepIn == DormMateSleepIn.Dungeon))
                 SetupDormMate(mate);
         }
 
-        void SetupDormMate(DormMate mate)
-        {
+        void SetupDormMate(DormMate mate) {
             var b = Instantiate(dormMateButton, container);
             b.Setup(mate);
             b.SelectedMe += ShowSelectedMate;

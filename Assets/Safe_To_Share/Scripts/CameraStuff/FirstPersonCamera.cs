@@ -4,45 +4,44 @@ using Safe_To_Share.Scripts.Movement.HoverMovement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Safe_To_Share.Scripts.CameraStuff
-{
-    public sealed class FirstPersonCamera : CinemachineInputProvider
-    {
+namespace Safe_To_Share.Scripts.CameraStuff {
+    public sealed class FirstPersonCamera : CinemachineInputProvider {
         [SerializeField] Movement.HoverMovement.Movement mover;
         [SerializeField] FreePlayCameraController thirdPerson;
         [SerializeField] CinemachineVirtualCamera brain;
-        [SerializeField,Range(1.5f,2.5f)] float crounchFactor;
+        [SerializeField, Range(1.5f, 2.5f),] float crounchFactor;
         [SerializeField, HideInInspector,] float orgZoom;
         [SerializeField, HideInInspector,] Vector3 orgCameraHeight;
 
         [SerializeField, Range(5f, 45f),] float zoomTo;
         [SerializeField, Range(10f, 25f),] float zoomRate;
-        [SerializeField,Header("Scale clipping")] AvatarScaler avatarScaler;
-        [SerializeField, Range(0.1f,0.5f),] float nearClipping = 0.5f;
+
+        [SerializeField, Header("Scale clipping"),]
+        AvatarScaler avatarScaler;
+
+        [SerializeField, Range(0.1f, 0.5f),] float nearClipping = 0.5f;
         bool zoomIn;
         bool zoomOut;
 
-        void Update()
-        {
+        void Update() {
             if (zoomIn)
                 ZoomIn();
             else if (zoomOut)
                 ZoomOut();
         }
 
-        void OnEnable()
-        {
-            if (FirstPersonCameraSettings.FirstPersonCameraEnabled.Enabled is false)
-            {
+        void OnEnable() {
+            if (FirstPersonCameraSettings.FirstPersonCameraEnabled.Enabled is false) {
                 ExitFirstPerson();
                 return;
             }
+
             //  print(transform.localEulerAngles);
             //  print(thirdPerson.transform.localEulerAngles);
             brain.ForceCameraPosition(transform.position, thirdPerson.transform.rotation);
             Cursor.lockState = CursorLockMode.Locked;
-           // mover.SetRotationMode(RotationMode.OrientToCameraViewDirection);
-           // mover.SetFirstPersonMode(true);
+            // mover.SetRotationMode(RotationMode.OrientToCameraViewDirection);
+            // mover.SetFirstPersonMode(true);
             mover.WalkingModule.StartedCrunching += Crouched;
             mover.WalkingModule.StoppedCrunching += UnCrouched;
             mover.ChangedMode += IfSwimming;
@@ -50,16 +49,8 @@ namespace Safe_To_Share.Scripts.CameraStuff
             AvatarScalerOnSizeChange(avatarScaler.Height);
         }
 
-        public void AvatarScalerOnSizeChange(float obj)
-        {
-            float clip = obj * nearClipping;
-            brain.m_Lens.NearClipPlane = clip;
-        }
 
-    
-
-        protected override void OnDisable()
-        {
+        protected override void OnDisable() {
             base.OnDisable();
 #if Calls_Code_I_Dont_Own
             mover.WalkingModule.StartedCrunching -= Crouched;
@@ -68,8 +59,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
 #endif
         }
 # if UNITY_EDITOR
-        void OnValidate()
-        {
+        void OnValidate() {
             if (brain == null && TryGetComponent(out CinemachineVirtualCamera cam))
                 brain = cam;
             orgZoom = brain.m_Lens.FieldOfView;
@@ -77,23 +67,25 @@ namespace Safe_To_Share.Scripts.CameraStuff
         }
 #endif
 
-        void IfSwimming(MoveCharacter.MoveModes moveModes)
-        {
+        public void AvatarScalerOnSizeChange(float obj) {
+            var clip = obj * nearClipping;
+            brain.m_Lens.NearClipPlane = clip;
+        }
+
+        void IfSwimming(MoveCharacter.MoveModes moveModes) {
 #if Calls_Code_I_Dont_Own
             if (mover.Swimming)
                 ExitFirstPerson();
 #endif
         }
 
-        public override float GetAxisValue(int axis)
-        {
+        public override float GetAxisValue(int axis) {
             var action = ResolveForPlayer(axis, axis == 2 ? ZAxis : XYAxis);
             if (action == null) return 0;
-            return axis switch
-            {
+            return axis switch {
                 0 => action.ReadValue<Vector2>().x * FirstPersonCameraSettings.Sensitivity,
-                1 => FirstPersonCameraSettings.HorizontalInverted.Enabled ?
-                    -(action.ReadValue<Vector2>().y * FirstPersonCameraSettings.Sensitivity)
+                1 => FirstPersonCameraSettings.HorizontalInverted.Enabled
+                    ? -(action.ReadValue<Vector2>().y * FirstPersonCameraSettings.Sensitivity)
                     : action.ReadValue<Vector2>().y * FirstPersonCameraSettings.Sensitivity,
                 2 => action.ReadValue<float>() * FirstPersonCameraSettings.Sensitivity,
                 _ => 0,
@@ -104,8 +96,7 @@ namespace Safe_To_Share.Scripts.CameraStuff
 
         void Crouched() => brain.Follow.localPosition /= crounchFactor;
 
-        public void OnScrollOut(InputAction.CallbackContext ctx)
-        {
+        public void OnScrollOut(InputAction.CallbackContext ctx) {
             if (!ctx.performed)
                 return;
             var value = ctx.ReadValue<float>();
@@ -113,18 +104,15 @@ namespace Safe_To_Share.Scripts.CameraStuff
                 ExitFirstPerson();
         }
 
-        void ExitFirstPerson()
-        {
+        void ExitFirstPerson() {
             gameObject.SetActive(false);
             thirdPerson.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
         }
 
 
-        void ZoomIn()
-        {
-            if (brain.m_Lens.FieldOfView > zoomTo)
-            {
+        void ZoomIn() {
+            if (brain.m_Lens.FieldOfView > zoomTo) {
                 brain.m_Lens.FieldOfView -= zoomRate * Time.deltaTime;
                 return;
             }
@@ -133,10 +121,8 @@ namespace Safe_To_Share.Scripts.CameraStuff
             zoomIn = false;
         }
 
-        void ZoomOut()
-        {
-            if (brain.m_Lens.FieldOfView < orgZoom)
-            {
+        void ZoomOut() {
+            if (brain.m_Lens.FieldOfView < orgZoom) {
                 brain.m_Lens.FieldOfView += zoomRate * 3f * Time.deltaTime;
                 return;
             }
@@ -145,15 +131,11 @@ namespace Safe_To_Share.Scripts.CameraStuff
             zoomOut = false;
         }
 
-        public void Binoculars(InputAction.CallbackContext ctx)
-        {
-            if (ctx.performed)
-            {
+        public void Binoculars(InputAction.CallbackContext ctx) {
+            if (ctx.performed) {
                 zoomIn = true;
                 zoomOut = false;
-            }
-            else if (ctx.canceled)
-            {
+            } else if (ctx.canceled) {
                 zoomIn = false;
                 zoomOut = true;
             }

@@ -6,10 +6,8 @@ using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Holders
-{
-    public sealed class ChangeAvatarDetails : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Holders {
+    public sealed class ChangeAvatarDetails : MonoBehaviour {
         [SerializeField] GetColor colorPicker;
         [SerializeField] MatsOptionBtn btnPrefab;
         [SerializeField] Transform matsBtnsContainer;
@@ -23,20 +21,17 @@ namespace Safe_To_Share.Scripts.Holders
         CharacterAvatar currentAvatar;
         PlayerHolder holder;
 
-        void Start()
-        {
+        void Start() {
             chooseAllBtn.onClick.AddListener(ChooseAll);
             toggleBaldBtn.onClick.AddListener(ToggleBald);
         }
 
-        void OnDisable()
-        {
+        void OnDisable() {
             colorPicker.NewColor -= UpdateColor;
             currentAvatar.Save();
         }
 
-        public void Enter(PlayerHolder playerHolder)
-        {
+        public void Enter(PlayerHolder playerHolder) {
             holder = playerHolder;
             gameObject.SetActive(true);
             GetAvatarMats();
@@ -47,28 +42,24 @@ namespace Safe_To_Share.Scripts.Holders
 
         public static event Action<bool> ToggleAll;
 
-        void ToggleBald()
-        {
+        void ToggleBald() {
             holder.Player.Hair.Bald = !holder.Player.Hair.Bald;
             holder.ModifyCurrentAvatar();
         }
 
-        void ChooseAll()
-        {
-            bool allToggled = changeColorOff.Count == canChangeColorOff.Length;
+        void ChooseAll() {
+            var allToggled = changeColorOff.Count == canChangeColorOff.Length;
             changeColorOff = allToggled ? new List<Material>() : new List<Material>(canChangeColorOff);
             ToggleAll?.Invoke(!allToggled);
         }
 
-        void SetupChooseMats()
-        {
+        void SetupChooseMats() {
             matsBtnsContainer.KillChildren();
             foreach (var mat in canChangeColorOff)
                 SetupMatBtn(mat);
         }
 
-        void SetupMatBtn(Material mat)
-        {
+        void SetupMatBtn(Material mat) {
             var btn = Instantiate(btnPrefab, matsBtnsContainer);
             btn.Setup(mat);
             btn.AddMe += AddMat;
@@ -77,22 +68,19 @@ namespace Safe_To_Share.Scripts.Holders
 
         void RemoveMat(Material obj) => changeColorOff.Remove(obj);
 
-        void AddMat(Material obj)
-        {
+        void AddMat(Material obj) {
             if (changeColorOff.Contains(obj))
                 return;
             changeColorOff.Add(obj);
         }
 
-        void UpdateColor(Color obj)
-        {
-            foreach (Material material in changeColorOff)
+        void UpdateColor(Color obj) {
+            foreach (var material in changeColorOff)
                 material.color = obj;
         }
 
         [ContextMenu("Get mats")]
-        public void GetAvatarMats()
-        {
+        public void GetAvatarMats() {
             currentAvatar = holder.Changer.CurrentAvatar;
             canChangeColorOff = currentAvatar.HairMats;
             changeColorOff = new List<Material>(canChangeColorOff);

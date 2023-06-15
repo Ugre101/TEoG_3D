@@ -4,11 +4,9 @@ using Character.Race.Races;
 using Items;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Character.Items.Item_Effects
-{
+namespace Safe_To_Share.Scripts.Character.Items.Item_Effects {
     [Serializable]
-    public class RaceEssenceItemEffects : ItemEffect
-    {
+    public class RaceEssenceItemEffects : ItemEffect {
         [SerializeField] BasicRace race;
         [SerializeField, Range(1, 250),] int toGain;
 

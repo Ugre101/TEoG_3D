@@ -2,19 +2,15 @@
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
-{
-    public sealed class VoreStartMenu : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore {
+    public sealed class VoreStartMenu : GameMenu {
         [SerializeField] GameObject drainChooseContainer;
         [SerializeField] TMP_Dropdown drainChoose;
 
         void OnEnable() => SetupDrain();
 
-        void SetupDrain()
-        {
-            if (Player.Vore.orgasmDrain.Value <= 0)
-            {
+        void SetupDrain() {
+            if (Player.Vore.orgasmDrain.Value <= 0) {
                 drainChooseContainer.gameObject.SetActive(false);
                 return;
             }

@@ -5,15 +5,10 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
-{
-    public sealed class SetFullName : MonoBehaviour
-    {
-        public enum LastNameOptions
-        {
-            Yours,
-            Partners,
-            Custom,
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu {
+    public sealed class SetFullName : MonoBehaviour {
+        public enum LastNameOptions {
+            Yours, Partners, Custom,
         }
 
         [SerializeField] TMP_InputField firstName, lastName;
@@ -26,23 +21,19 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu
         public void SetLast(string arg0) => identity.ChangeLastName(arg0);
 
 
-        public void Setup(BaseCharacter father, BaseCharacter mother, Identity toChange, bool birtEvent)
-        {
+        public void Setup(BaseCharacter father, BaseCharacter mother, Identity toChange, bool birtEvent) {
             identity = toChange;
-            if (birtEvent)
-            {
+            if (birtEvent) {
                 lastNameOption.gameObject.SetActive(true);
                 lastNameOption.SetupTmpDropDown(LastNameOptions.Yours, ChangeDefault);
-            }
-            else
+            } else {
                 lastNameOption.gameObject.SetActive(false);
+            }
         }
 
-        void ChangeDefault(int arg0)
-        {
+        void ChangeDefault(int arg0) {
             var res = UgreTools.IntToEnum(arg0, LastNameOptions.Yours);
-            switch (res)
-            {
+            switch (res) {
                 case LastNameOptions.Yours:
                     break;
                 case LastNameOptions.Partners:

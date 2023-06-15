@@ -1,16 +1,13 @@
 ﻿using Character.Organs.OrgansContainers;
 using UnityEngine;
 
-namespace AvatarStuff
-{
-    public sealed class DictatorBallsTester : MonoBehaviour
-    {
+namespace AvatarStuff {
+    public sealed class DictatorBallsTester : MonoBehaviour {
         [SerializeField, Range(0, 10f),] float size;
         [SerializeField] BallsContainer fluidsCon = new();
         [SerializeField] bool hidden;
 
-        void OnValidate()
-        {
+        void OnValidate() {
             if (!TryGetComponent(out DictatorBalls ballsController))
                 return;
             ballsController.ReSize(size);

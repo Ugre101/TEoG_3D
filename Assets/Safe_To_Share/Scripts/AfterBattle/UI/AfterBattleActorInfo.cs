@@ -1,5 +1,4 @@
-﻿using System;
-using Character;
+﻿using Character;
 using Character.EssenceStuff.UI;
 using Character.GenderStuff;
 using Character.Organs.Fluids.UI;
@@ -8,10 +7,8 @@ using Character.SexStatsStuff.UI;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.AfterBattle.UI
-{
-    public sealed class AfterBattleActorInfo : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.UI {
+    public sealed class AfterBattleActorInfo : MonoBehaviour {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI race;
         [SerializeField] ArousalSlider arousal;
@@ -24,9 +21,12 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
         [SerializeField] AfterBattleEssenceSliders afterBattleEssenceSliders;
         BaseCharacter actor;
 
+        void OnDestroy() {
+            actor.SexStats.OrgasmChange -= ChangeOrgasmText;
+        }
 
-        public void Setup(BaseCharacter character)
-        {
+
+        public void Setup(BaseCharacter character) {
             actor = character;
             title.text = character.Identity.FullName;
             if (character.RaceSystem.Race != null)
@@ -39,11 +39,6 @@ namespace Safe_To_Share.Scripts.AfterBattle.UI
             pregnant.text = character.IsPregnant() ? "P" : string.Empty;
             fluidInfos.Setup(character);
             afterBattleEssenceSliders.Setup(character);
-        }
-
-        void OnDestroy()
-        {
-            actor.SexStats.OrgasmChange -= ChangeOrgasmText;
         }
 
         void ChangeOrgasmText(int obj) => orgasmCounter.text = $"Orgasms: {obj}";

@@ -4,30 +4,25 @@ using CustomClasses;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class CheatMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class CheatMenu : MonoBehaviour, ICancelMeBeforeOpenPauseMenu {
         [SerializeField] Button expBtn, goldBtn, mascBtn, femiBtn;
         Player player;
 
-        void Start()
-        {
+        void Start() {
             expBtn.onClick.AddListener(ExpCheat);
             goldBtn.onClick.AddListener(GoldCheat);
             mascBtn.onClick.AddListener(MascCheat);
             femiBtn.onClick.AddListener(FemiCheat);
         }
-        public bool BlockIfActive()
-        {
+
+        public bool BlockIfActive() {
             if (!gameObject.activeInHierarchy) return false;
             gameObject.SetActive(false);
             return true;
-
         }
 
-        public void Enter(Player parPlayer)
-        {
+        public void Enter(Player parPlayer) {
             gameObject.SetActive(true);
             player = parPlayer;
         }

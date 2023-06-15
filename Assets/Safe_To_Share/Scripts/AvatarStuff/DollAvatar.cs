@@ -1,6 +1,3 @@
-﻿namespace AvatarStuff
-{
-    public sealed class DollAvatar : CharacterAvatar
-    {
-    }
+﻿namespace AvatarStuff {
+    public sealed class DollAvatar : CharacterAvatar { }
 }

@@ -1,10 +1,8 @@
 ﻿using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Character.DefeatScenarios.Nodes
-{
-    public class LoseScenarioNode : BaseEditorCanvasNode
-    {
+namespace Character.DefeatScenarios.Nodes {
+    public class LoseScenarioNode : BaseEditorCanvasNode {
         [SerializeField] string introText;
         [SerializeField] string resistText;
         [SerializeField] string giveInText;
@@ -20,8 +18,6 @@ namespace Character.DefeatScenarios.Nodes
 
         public virtual bool CanDo(BaseCharacter caster, BaseCharacter target) => true;
 
-        public virtual void HandleEffects(BaseCharacter caster, BaseCharacter target)
-        {
-        }
+        public virtual void HandleEffects(BaseCharacter caster, BaseCharacter target) { }
     }
 }

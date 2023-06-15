@@ -6,10 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DormAndHome
-{
-    public sealed class HomeCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
-    {
+namespace DormAndHome {
+    public sealed class HomeCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu {
         [SerializeField] GameObject panel;
         [SerializeField] Button sleepBtn;
         [SerializeField] TextMeshProUGUI sleepCooldown;
@@ -17,10 +15,8 @@ namespace DormAndHome
 
         void Start() => sleepBtn.onClick.AddListener(SleepAtHome);
 
-        public bool BlockIfActive()
-        {
-            if (panel.activeSelf)
-            {
+        public bool BlockIfActive() {
+            if (panel.activeSelf) {
                 Leave();
                 return true;
             }
@@ -28,25 +24,21 @@ namespace DormAndHome
             return false;
         }
 
-        void SleepAtHome()
-        {
+        void SleepAtHome() {
             // TODO Upgradable bedroom
             player.Sleep(100);
             CanSleep();
         }
 
-        public void Enter(Player component)
-        {
+        public void Enter(Player component) {
             player = component;
             GameManager.Pause();
             panel.SetActive(true);
             CanSleep();
         }
 
-        void CanSleep()
-        {
-            if (!player.PlayerCanSleep())
-            {
+        void CanSleep() {
+            if (!player.PlayerCanSleep()) {
                 sleepBtn.interactable = false;
                 sleepCooldown.text =
                     $"{SleepExtensions.HoursBeforeCanSleep(player)}h before you can sleep again.";
@@ -57,8 +49,7 @@ namespace DormAndHome
             sleepCooldown.text = string.Empty;
         }
 
-        public void Leave()
-        {
+        public void Leave() {
             GameManager.Resume(false);
             panel.SetActive(false);
         }

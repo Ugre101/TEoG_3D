@@ -3,18 +3,15 @@ using Items;
 using SaveStuff;
 using UnityEngine;
 
-namespace Character
-{
+namespace Character {
     [Serializable]
-    public struct PlayerSave
-    {
+    public struct PlayerSave {
         [SerializeField] ControlledCharacterSave controlledCharacterSave;
         [SerializeField] Vector3 posistion;
         [SerializeField] InventorySave inventorySave;
 
         public PlayerSave(ControlledCharacterSave controlledCharacterSave, Vector3 posistion,
-            InventorySave inventorySave)
-        {
+                          InventorySave inventorySave) {
             this.controlledCharacterSave = controlledCharacterSave;
             this.posistion = posistion;
             this.inventorySave = inventorySave;

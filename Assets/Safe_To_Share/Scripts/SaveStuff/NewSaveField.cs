@@ -4,17 +4,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace SaveStuff
-{
-    public sealed class NewSaveField : MonoBehaviour
-    {
+namespace SaveStuff {
+    public sealed class NewSaveField : MonoBehaviour {
         [SerializeField] TMP_InputField saveName;
         [SerializeField] Button saveBtn;
         [SerializeField] InputActionAsset actionMap;
         [SerializeField] InputAction saveHotKey = new();
 
-        void Start()
-        {
+        void Start() {
             saveBtn.onClick.AddListener(SaveGame);
             if (actionMap == null)
                 return;
@@ -30,14 +27,12 @@ namespace SaveStuff
 
         public static event Action<string> NewSave;
 
-        void EnableMap(string arg0)
-        {
+        void EnableMap(string arg0) {
             saveHotKey.Disable();
             actionMap.Enable();
         }
 
-        void DisableMap(string arg0)
-        {
+        void DisableMap(string arg0) {
             saveHotKey.Enable();
             actionMap.Disable();
         }

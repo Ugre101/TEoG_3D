@@ -2,10 +2,8 @@
 using TMPro;
 using UnityEngine;
 
-namespace SceneStuff
-{
-    public sealed class LoaderScreen : MonoBehaviour
-    {
+namespace SceneStuff {
+    public sealed class LoaderScreen : MonoBehaviour {
         const float Interval = 0.192f;
         [SerializeField] TextMeshProUGUI progressText;
         [SerializeField] CanvasGroup group;
@@ -17,37 +15,31 @@ namespace SceneStuff
         public void UnLoadProgress(float value) => progressText.text = $"Unloading... {value}";
 
         [ContextMenu("Fade In")]
-        public void StopFade()
-        {
+        public void StopFade() {
             if (running != null)
                 StopCoroutine(running);
             running = StartCoroutine(FadeIn());
         }
 
         [ContextMenu("Fade out")]
-        public void StartFade()
-        {
+        public void StartFade() {
             if (running != null)
                 StopCoroutine(running);
             running = StartCoroutine(FadeOut());
         }
 
-        IEnumerator FadeOut()
-        {
-            float startTime = Time.realtimeSinceStartup;
+        IEnumerator FadeOut() {
+            var startTime = Time.realtimeSinceStartup;
             group.blocksRaycasts = true;
-            while (group.alpha < 1f)
-            {
+            while (group.alpha < 1f) {
                 group.alpha = Mathf.SmoothStep(0, 1, TimeStep(startTime));
                 yield return null;
             }
         }
 
-        IEnumerator FadeIn()
-        {
-            float startTime = Time.realtimeSinceStartup;
-            while (group.alpha > aplhaCutOff)
-            {
+        IEnumerator FadeIn() {
+            var startTime = Time.realtimeSinceStartup;
+            while (group.alpha > aplhaCutOff) {
                 group.alpha = Mathf.SmoothStep(1, aplhaCutOff, TimeStep(startTime));
                 // group.alpha = Mathf.Max(group.alpha - intrevall * Time.deltaTime, 0f);
                 yield return null;

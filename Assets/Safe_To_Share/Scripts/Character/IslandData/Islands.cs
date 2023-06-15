@@ -1,7 +1,5 @@
-﻿namespace Character.IslandData
-{
-    public enum Islands
-    {
+﻿namespace Character.IslandData {
+    public enum Islands {
         Village,
     }
 }

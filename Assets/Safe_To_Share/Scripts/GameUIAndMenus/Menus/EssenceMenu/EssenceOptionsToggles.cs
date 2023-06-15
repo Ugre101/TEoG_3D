@@ -7,18 +7,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
-{
-    public sealed class EssenceOptionsToggles : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu {
+    public sealed class EssenceOptionsToggles : MonoBehaviour {
         [SerializeField] Toggle selfDrain;
         [SerializeField] Toggle giveHeight;
         [SerializeField] TMP_Dropdown transmuteOption;
         [SerializeField] TMP_Dropdown genderMorhpOption;
         Player player;
 
-        void Start()
-        {
+        void Start() {
             selfDrain.onValueChanged.AddListener(ToggleSelfDrain);
             giveHeight.onValueChanged.AddListener(ToggleGiveHeight);
         }
@@ -28,8 +25,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
         void ToggleGiveHeight(bool arg0) => player.Essence.EssenceOptions.GiveHeight = arg0;
 
 
-        public void Setup(Player parPlayer)
-        {
+        public void Setup(Player parPlayer) {
             player = parPlayer;
             SetupToggle(player.Essence.GiveAmount.Value > 0, selfDrain, player.Essence.EssenceOptions.SelfDrain);
             SetupToggle(player.Essence.EssencePerks.OfType<HeightEssencePerk>().Any(), giveHeight,
@@ -39,37 +35,34 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
             SetupGenderMorph();
         }
 
-        void SetupGenderMorph()
-        {
-            bool hasGenderMorphPerk = player.Essence.EssencePerks.OfType<GenderMorph>().Any();
-            if (hasGenderMorphPerk)
-            {
+        void SetupGenderMorph() {
+            var hasGenderMorphPerk = player.Essence.EssencePerks.OfType<GenderMorph>().Any();
+            if (hasGenderMorphPerk) {
                 genderMorhpOption.SetupTmpDropDown(player.Essence.EssenceOptions.MorphPartnerToGender, SetMode);
 
-                void SetMode(int arg) => player.Essence.EssenceOptions.MorphPartnerToGender =
-                    UgreTools.IntToEnum(arg, GenderMorph.MorphToGender.Disabled);
+                void SetMode(int arg) =>
+                    player.Essence.EssenceOptions.MorphPartnerToGender =
+                        UgreTools.IntToEnum(arg, GenderMorph.MorphToGender.Disabled);
             }
 
             genderMorhpOption.gameObject.SetActive(hasGenderMorphPerk);
         }
 
-        void SetupTransmute()
-        {
-            bool hasTransMutePerk = player.Essence.EssencePerks.OfType<AutoTransMuteEssencePerk>().Any();
-            if (hasTransMutePerk)
-            {
+        void SetupTransmute() {
+            var hasTransMutePerk = player.Essence.EssencePerks.OfType<AutoTransMuteEssencePerk>().Any();
+            if (hasTransMutePerk) {
                 transmuteOption.SetupTmpDropDown(player.Essence.EssenceOptions.TransmuteTo, SetMode,
                     DrainEssenceType.Both);
 
-                void SetMode(int arg) => player.Essence.EssenceOptions.TransmuteTo =
-                    UgreTools.IntToEnum(arg, DrainEssenceType.None, DrainEssenceType.Both);
+                void SetMode(int arg) =>
+                    player.Essence.EssenceOptions.TransmuteTo =
+                        UgreTools.IntToEnum(arg, DrainEssenceType.None, DrainEssenceType.Both);
             }
 
             transmuteOption.gameObject.SetActive(hasTransMutePerk);
         }
 
-        void SetupToggle(bool showToggle, Toggle toggle, bool isOn)
-        {
+        void SetupToggle(bool showToggle, Toggle toggle, bool isOn) {
             toggle.gameObject.SetActive(showToggle);
             if (!showToggle)
                 return;

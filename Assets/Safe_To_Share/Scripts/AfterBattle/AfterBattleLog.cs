@@ -5,10 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle
-{
-    public sealed class AfterBattleLog : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle {
+    public sealed class AfterBattleLog : MonoBehaviour {
         [SerializeField] Button clearBtn;
         [SerializeField] TextMeshProUGUI textLog;
 
@@ -17,14 +15,12 @@ namespace Safe_To_Share.Scripts.AfterBattle
         readonly WaitForSeconds waitForSecondsShort = new(6f);
 
 
-        void Start()
-        {
+        void Start() {
             clearBtn.onClick.AddListener(Clear);
             clearBtn.gameObject.SetActive(false);
         }
 
-        public void AddNewText(string text)
-        {
+        public void AddNewText(string text) {
             if (text.Length <= 0)
                 return;
             log.Add(text);
@@ -33,24 +29,21 @@ namespace Safe_To_Share.Scripts.AfterBattle
             clearBtn.gameObject.SetActive(true);
         }
 
-        void PrintLog()
-        {
-            if (log.Count <= 0)
-            {
+        void PrintLog() {
+            if (log.Count <= 0) {
                 clearBtn.gameObject.SetActive(false);
                 Clear();
                 return;
             }
 
             StringBuilder sb = new();
-            foreach (string s in log)
+            foreach (var s in log)
                 sb.AppendLine(s);
 
             textLog.text = sb.ToString();
         }
 
-        IEnumerator DelayedErasure(string length)
-        {
+        IEnumerator DelayedErasure(string length) {
             yield return length.Length < 30 ? waitForSecondsShort : waitForSeconds;
             log.RemoveAt(log.Count - 1);
             PrintLog();

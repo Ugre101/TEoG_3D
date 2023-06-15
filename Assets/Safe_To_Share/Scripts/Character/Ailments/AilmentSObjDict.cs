@@ -2,41 +2,33 @@
 using Character.BodyStuff;
 using UnityEngine;
 
-namespace Character.Ailments
-{
+namespace Character.Ailments {
     [CreateAssetMenu(menuName = "Create AilmentSObjDict", fileName = "AilmentSObjDict", order = 0)]
-    public sealed class AilmentSObjDict : ScriptableObject
-    {
-        [SerializeField] List<AilmentSObj> hunger = new List<AilmentSObj>();
-        [SerializeField] List<AilmentSObj> piss = new List<AilmentSObj>();
+    public sealed class AilmentSObjDict : ScriptableObject {
+        [SerializeField] List<AilmentSObj> hunger = new();
+        [SerializeField] List<AilmentSObj> piss = new();
 
-        void OnValidate()
-        {
+        void OnValidate() {
             hunger.Sort();
             piss.Sort();
         }
 
 
-        public void CheckAilments(BaseCharacter character)
-        {
-            var hungerValue = 1f -  character.Body.GetFatRatio();
+        public void CheckAilments(BaseCharacter character) {
+            var hungerValue = 1f - character.Body.GetFatRatio();
             GainAndCure(character, hungerValue, hunger);
-            GainAndCure(character,character.BodyFunctions.Bladder.Pressure(),piss);
+            GainAndCure(character, character.BodyFunctions.Bladder.Pressure(), piss);
         }
 
-        void GainAndCure(BaseCharacter character, float value , List<AilmentSObj> list)
-        {
-            bool match = false;
+        void GainAndCure(BaseCharacter character, float value, List<AilmentSObj> list) {
+            var match = false;
             foreach (var obj in list)
-            {
-                if (match is false && obj.ThreesHold < value)
-                {
+                if (match is false && obj.ThreesHold < value) {
                     obj.Gain(character);
                     match = true;
-                }
-                else
+                } else {
                     obj.Cure(character);
-            }
+                }
         }
     }
 }

@@ -2,21 +2,17 @@
 using SceneStuff;
 using UnityEngine;
 
-namespace Map
-{
-    public sealed class UnLockableTriggerBoatMenu : TriggerBoatMenu
-    {
+namespace Map {
+    public sealed class UnLockableTriggerBoatMenu : TriggerBoatMenu {
         [SerializeField] LocationSceneSo altLocationSceneSo;
         [SerializeField] UnLockAble lockAble;
         bool UnLocked { get; set; }
 
-        protected override void Start()
-        {
+        protected override void Start() {
             base.Start();
 #if UNITY_EDITOR
             StartCoroutine(DelayedStart());
-            IEnumerator DelayedStart()
-            {
+            IEnumerator DelayedStart() {
                 yield return new WaitForSeconds(2f);
                 CheckBoat();
             }
@@ -25,10 +21,8 @@ namespace Map
 #endif
         }
 
-        void CheckBoat()
-        {
-            if (!KnowLocationsManager.Dict.TryGetValue(SceneLoader.CurrentLocationSceneGuid, out var curLoc))
-            {
+        void CheckBoat() {
+            if (!KnowLocationsManager.Dict.TryGetValue(SceneLoader.CurrentLocationSceneGuid, out var curLoc)) {
                 if (altLocationSceneSo == null)
                     gameObject.SetActive(false);
                 return;
@@ -39,15 +33,13 @@ namespace Map
             UnLocked = true;
         }
 
-        protected override void OnPlayerEnter()
-        {
+        protected override void OnPlayerEnter() {
             if (!UnLocked)
                 UnLock();
             base.OnPlayerEnter();
         }
 
-        void UnLock()
-        {
+        void UnLock() {
             lockAble.UnLock();
             UnLocked = true;
             if (altLocationSceneSo != null)

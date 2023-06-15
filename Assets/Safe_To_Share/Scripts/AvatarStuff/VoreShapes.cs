@@ -8,11 +8,9 @@ using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace AvatarStuff
-{
+namespace AvatarStuff {
     [Serializable]
-    public class VoreShapes
-    {
+    public class VoreShapes {
         [SerializeField] CharacterAvatar.BlendShape voreBelly;
         [SerializeField] CharacterAvatar.BlendShape unBirth;
         [SerializeField] CharacterAvatar.BlendShape breastVore;
@@ -21,42 +19,36 @@ namespace AvatarStuff
         bool ballsVore;
 
         VoreStruggle breastVoreStruggle;
+        VoreStruggle cockVoreStruggle;
 
         bool hasBallsController;
         VoreStruggle oralVoreStruggle;
         SkinnedMeshRenderer[] shapes;
         VoreStruggle unbirthStruggle;
-        VoreStruggle cockVoreStruggle;
 #if UNITY_EDITOR
-        public bool EditorQuickSetup(string shapeName, int id)
-        {
-            if (shapeName.Contains("unbirth"))
-            {
+        public bool EditorQuickSetup(string shapeName, int id) {
+            if (shapeName.Contains("unbirth")) {
                 unBirth.EditorQuickAdd(id);
                 return true;
             }
 
             if (!shapeName.Contains("vore")) return false;
-            if (shapeName.Contains("breast"))
-            {
+            if (shapeName.Contains("breast")) {
                 breastVore.EditorQuickAdd(id);
                 return true;
             }
 
-            if (shapeName.Contains("cock"))
-            {
+            if (shapeName.Contains("cock")) {
                 cockVore.EditorQuickAdd(id);
                 return true;
             }
 
             voreBelly.EditorQuickAdd(id);
             return true;
-
         }
 #endif
 
-        public void Setup(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool haveBallsController)
-        {
+        public void Setup(IEnumerable<SkinnedMeshRenderer> skinnedMeshRenderers, bool haveBallsController) {
             shapes = skinnedMeshRenderers.ToArray();
             hasBallsController = haveBallsController;
             breastVoreStruggle = new VoreStruggle(breastVore);
@@ -65,20 +57,19 @@ namespace AvatarStuff
             cockVoreStruggle = new VoreStruggle(cockVore);
         }
 
-        public void Update(BaseCharacter character)
-        {
+        public void Update(BaseCharacter character) {
             HandleOralVore(character);
-            unbirthStruggle.HandleOrgan(shapes,character,character.SexualOrgans.Vaginas,4f);
-            breastVoreStruggle.HandleOrgan(shapes,character,character.SexualOrgans.Boobs,4f);
-            cockVoreStruggle.HandleOrgan(shapes,character,character.SexualOrgans.Balls,4f);
-            
+            unbirthStruggle.HandleOrgan(shapes, character, character.SexualOrgans.Vaginas, 4f);
+            breastVoreStruggle.HandleOrgan(shapes, character, character.SexualOrgans.Boobs, 4f);
+            cockVoreStruggle.HandleOrgan(shapes, character, character.SexualOrgans.Balls, 4f);
+
             var ballsList = character.SexualOrgans.Balls.BaseList.ToArray();
             ballsVore = ballsList.Any(l => l.Vore.PreysIds.Count > 0);
             ballsStretch = ballsVore ? ballsList.Max(b => b.Vore.Stretch) : 0f;
         }
-       
-        static float GetSexualOrganStretch(BaseCharacter character, BaseOrgansContainer baseOrgansContainer, float divValue)
-        {
+
+        static float GetSexualOrganStretch(BaseCharacter character, BaseOrgansContainer baseOrgansContainer,
+                                           float divValue) {
             var avatarStretch = 0f;
             if (!baseOrgansContainer.HaveAny()) return avatarStretch;
             List<int> preyIds = new();
@@ -89,65 +80,59 @@ namespace AvatarStuff
             return avatarStretch;
         }
 
-        void HandleOralVore(BaseCharacter character)
-        {
-            bool stomachVore = character.Vore.Stomach.PreysIds.Any();
-            float avatarStretch = AvatarStretch(character.Body.Height.Value / 3f, character.Vore.Stomach.PreysIds);
+        void HandleOralVore(BaseCharacter character) {
+            var stomachVore = character.Vore.Stomach.PreysIds.Any();
+            var avatarStretch = AvatarStretch(character.Body.Height.Value / 3f, character.Vore.Stomach.PreysIds);
             oralVoreStruggle.Setup(shapes, stomachVore, avatarStretch);
         }
 
-        static float AvatarStretch(float containerSize, IEnumerable<int> preyIds)
-        {
-            float stomachWeight = VoredCharacters.CurrentPreyTotalWeight(preyIds);
+        static float AvatarStretch(float containerSize, IEnumerable<int> preyIds) {
+            var stomachWeight = VoredCharacters.CurrentPreyTotalWeight(preyIds);
             return Mathf.Clamp(stomachWeight / containerSize, 0f, 200f);
         }
 
-        public void TickVoreStruggle(DazBallsController ballsController)
-        {
+        public void TickVoreStruggle(DazBallsController ballsController) {
             if (!OptionalContent.Vore.Enabled)
                 return;
-            foreach (var shape in shapes)
-            {
+            foreach (var shape in shapes) {
                 var struggleValue = 0.5f;
-                oralVoreStruggle.Tick(shape,struggleValue);
-                unbirthStruggle.Tick(shape,struggleValue);
-                breastVoreStruggle.Tick(shape,struggleValue);
-                cockVoreStruggle.Tick(shape,struggleValue);
+                oralVoreStruggle.Tick(shape, struggleValue);
+                unbirthStruggle.Tick(shape, struggleValue);
+                breastVoreStruggle.Tick(shape, struggleValue);
+                cockVoreStruggle.Tick(shape, struggleValue);
                 if (!hasBallsController || !ballsVore) continue;
-                float newSize = ballsController.currentSize + ballsController.currentSize / 2 *
+                var newSize = ballsController.currentSize + ballsController.currentSize / 2 *
                     Mathf.Max(0, ballsStretch + Random.Range(-0.05f, 0.05f));
                 ballsController.ReSize(newSize);
             }
         }
 
-        class VoreStruggle
-        {
+        class VoreStruggle {
             bool active;
             float stretch;
             CharacterAvatar.BlendShape voreShape;
 
             public VoreStruggle(CharacterAvatar.BlendShape voreShape) => this.voreShape = voreShape;
 
-            float GetValue(float struggleValue) => Mathf.Clamp(stretch * (1f + Random.Range(-struggleValue, struggleValue)), 0f, 200f);
+            float GetValue(float struggleValue) =>
+                Mathf.Clamp(stretch * (1f + Random.Range(-struggleValue, struggleValue)), 0f, 200f);
+
             void SetStretch(float value) => stretch = value * 100f;
 
-            public void Tick(SkinnedMeshRenderer shape,float struggleValue)
-            {
+            public void Tick(SkinnedMeshRenderer shape, float struggleValue) {
                 if (active)
                     voreShape.ChangeShape(shape, GetValue(struggleValue));
             }
 
-            public void HandleOrgan(SkinnedMeshRenderer[] shapes, BaseCharacter character, BaseOrgansContainer container,float divValue)
-            {
-                float avatarStretch = GetSexualOrganStretch(character, container, divValue);
+            public void HandleOrgan(SkinnedMeshRenderer[] shapes, BaseCharacter character,
+                                    BaseOrgansContainer container, float divValue) {
+                var avatarStretch = GetSexualOrganStretch(character, container, divValue);
                 Setup(shapes, container.HasPrey(), avatarStretch);
             }
 
-            public void Setup(SkinnedMeshRenderer[] shapes, bool isActive, float voreStrecht)
-            {
+            public void Setup(SkinnedMeshRenderer[] shapes, bool isActive, float voreStrecht) {
                 active = isActive;
-                if (active)
-                {
+                if (active) {
                     SetStretch(voreStrecht);
                     return;
                 }

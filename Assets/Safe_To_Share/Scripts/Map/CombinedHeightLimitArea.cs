@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Map
-{
+namespace Safe_To_Share.Scripts.Map {
     [RequireComponent(typeof(BoxCollider))]
-    public sealed class CombinedHeightLimitArea : MonoBehaviour
-    {
+    public sealed class CombinedHeightLimitArea : MonoBehaviour {
         static readonly Dictionary<int, HashSet<CombinedHeightLimitArea>> InsideArea = new();
         [SerializeField] int sharedId;
         [SerializeField] float heightLimit = 1f;
@@ -16,19 +14,16 @@ namespace Safe_To_Share.Scripts.Map
         WaitForSecondsRealtime waitForSecondsRealtime;
 
 
-        void Start()
-        {
+        void Start() {
             waitForSecondsRealtime = new WaitForSecondsRealtime(delay);
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             InsideArea.Remove(sharedId);
             StopAllCoroutines();
         }
 
-        void OnTriggerEnter(Collider other)
-        {
+        void OnTriggerEnter(Collider other) {
             if (!other.TryGetComponent(out Holder holder))
                 return;
             if (InsideArea.TryGetValue(sharedId, out var list))
@@ -40,8 +35,7 @@ namespace Safe_To_Share.Scripts.Map
             routine = null;
         }
 
-        void OnTriggerExit(Collider other)
-        {
+        void OnTriggerExit(Collider other) {
             if (!other.TryGetComponent(out Holder holder))
                 return;
             if (!InsideArea.TryGetValue(sharedId, out var hashSet)) return;
@@ -52,8 +46,7 @@ namespace Safe_To_Share.Scripts.Map
             routine ??= StartCoroutine(DelayExit(holder));
         }
 
-        IEnumerator DelayExit(Holder holder)
-        {
+        IEnumerator DelayExit(Holder holder) {
             yield return waitForSecondsRealtime;
             holder.Scaler.ExitHeightLimitArea();
             routine = null;

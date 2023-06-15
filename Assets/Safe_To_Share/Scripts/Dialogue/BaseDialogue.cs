@@ -6,12 +6,9 @@ using Safe_to_Share.Scripts.CustomClasses;
 using UnityEditor;
 using UnityEngine;
 
-namespace Dialogue
-{
+namespace Dialogue {
     [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue/new Dialogue", order = 0)]
-    public sealed class BaseDialogue : BaseEditorCanvasObject<DialogueBaseNode>
-    {
-
+    public sealed class BaseDialogue : BaseEditorCanvasObject<DialogueBaseNode> {
         public static event Action<BaseDialogue> StartDialogue;
         public static event Action<BaseDialogue, Player, Prey, VoreOrgan> StartVoreEvent;
         public void StartTalking() => StartDialogue?.Invoke(this);
@@ -22,15 +19,13 @@ namespace Dialogue
 
 #if UNITY_EDITOR
 
-        public override TNode CreateChildNode<TNode>(BaseEditorCanvasNode parentNode)
-        {
+        public override TNode CreateChildNode<TNode>(BaseEditorCanvasNode parentNode) {
             var newNode = base.CreateChildNode<TNode>(parentNode);
             IfPreBattleNodeAddThis(newNode);
             return newNode;
         }
 
-        void IfPreBattleNodeAddThis(DialogueBaseNode newNode)
-        {
+        void IfPreBattleNodeAddThis(DialogueBaseNode newNode) {
             if (newNode is not PreBattleDialogue preBattleDialogue)
                 return;
             var startBattleDialogue = MakeNode<StartBattleDialogue>();

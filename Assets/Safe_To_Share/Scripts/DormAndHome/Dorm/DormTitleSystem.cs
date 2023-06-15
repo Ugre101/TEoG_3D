@@ -1,42 +1,34 @@
-﻿using AvatarStuff.Holders;
-using Safe_To_Share.Scripts.Holders;
+﻿using Safe_To_Share.Scripts.Holders;
 
-namespace DormAndHome.Dorm
-{
-    public static class DormTitleSystem
-    {
+namespace DormAndHome.Dorm {
+    public static class DormTitleSystem {
         public static string GeneralTitleAllFollowers = "Follower";
 
-        static readonly ValueAndString[] NegativeOptions =
-        {
+        static readonly ValueAndString[] NegativeOptions = {
             new("stranger", -10),
             new("adversary", -25),
             new("enemy", -50),
         };
 
-        static readonly ValueAndString[] PositiveOptions =
-        {
+        static readonly ValueAndString[] PositiveOptions = {
             new("companion", 50),
             new("friend", 25),
             new("acquaintance", 10),
         };
 
-        public static void ChangeGeneralFollowerTitle(string newTitle)
-        {
+        public static void ChangeGeneralFollowerTitle(string newTitle) {
             if (string.IsNullOrWhiteSpace(newTitle))
                 return;
             GeneralTitleAllFollowers = newTitle;
         }
 
-        public static string TitleConversion(this DormMate mate)
-        {
-            float aff = mate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID).Affection;
-            float sub = mate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID).Submission;
+        public static string TitleConversion(this DormMate mate) {
+            var aff = mate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID).Affection;
+            var sub = mate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID).Submission;
             return aff >= 0 ? PositiveTree(aff, sub) : NegativeTree(aff, sub);
         }
 
-        static string NegativeTree(float aff, float sub)
-        {
+        static string NegativeTree(float aff, float sub) {
             if (sub > 10)
                 return NegSubTree(aff, sub);
             if (sub < -10)
@@ -49,8 +41,7 @@ namespace DormAndHome.Dorm
 
         static string NegDomTree(float aff, float sub) => string.Empty;
 
-        static string NegSubTree(float aff, float sub)
-        {
+        static string NegSubTree(float aff, float sub) {
             if (sub < 10)
                 return "";
             if (sub < 25)
@@ -60,8 +51,7 @@ namespace DormAndHome.Dorm
             return "jeff";
         }
 
-        static string PositiveTree(float aff, float sub)
-        {
+        static string PositiveTree(float aff, float sub) {
             if (sub > 10)
                 return PosSubTree(aff, sub);
             if (sub < -10)
@@ -76,10 +66,8 @@ namespace DormAndHome.Dorm
 
         static string PosSubTree(float aff, float sub) => string.Empty;
 
-        readonly struct ValueAndString
-        {
-            public ValueAndString(string title, float value)
-            {
+        readonly struct ValueAndString {
+            public ValueAndString(string title, float value) {
                 Title = title;
                 Value = value;
             }

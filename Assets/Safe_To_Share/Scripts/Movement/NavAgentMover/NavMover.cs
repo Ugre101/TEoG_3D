@@ -1,40 +1,47 @@
-using System;
 using Safe_To_Share.Scripts.Movement.HoverMovement;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Safe_To_Share.Scripts.Movement.NavAgentMover
-{
-    public sealed class NavMover : MoveCharacter
-    {
+namespace Safe_To_Share.Scripts.Movement.NavAgentMover {
+    public sealed class NavMover : MoveCharacter {
         [SerializeField] NavMeshAgent agent;
 
 
         [SerializeField] LayerMask groundLayer;
 
+        NavMeshPath path;
+
+        bool sprinting;
+
 
         void Start() => path = new NavMeshPath();
 
-        public bool SampleAndSetPositionNear(Vector3 dest) => NavMesh.SamplePosition(dest, out var meshHit, 2f, groundLayer) && SetDestination(meshHit.position);
+#if UNITY_EDITOR
 
-        NavMeshPath path;
-        bool SetDestination(Vector3 dest)
-        {
-            if (!agent.CalculatePath(dest,path)) 
+        protected override void OnValidate() {
+            base.OnValidate();
+            if (agent == null && TryGetComponent(out agent) is false)
+                throw new MissingComponentException("Missing nav agent");
+        }
+#endif
+
+        public bool SampleAndSetPositionNear(Vector3 dest) =>
+            NavMesh.SamplePosition(dest, out var meshHit, 2f, groundLayer) && SetDestination(meshHit.position);
+
+        bool SetDestination(Vector3 dest) {
+            if (!agent.CalculatePath(dest, path))
                 return false;
-            if (path.status != NavMeshPathStatus.PathComplete) 
+            if (path.status != NavMeshPathStatus.PathComplete)
                 return false;
             agent.SetPath(path);
             return true;
         }
 
-        public void SetSprint(bool sprint)
-        {
+        public void SetSprint(bool sprint) {
             if (sprinting == sprint)
                 return;
-        
-            if (sprint)
-            {
+
+            if (sprint) {
                 sprinting = true;
                 agent.speed = Stats.WalkSpeed * Stats.SprintMultiplier;
                 return;
@@ -44,28 +51,14 @@ namespace Safe_To_Share.Scripts.Movement.NavAgentMover
             agent.speed = Stats.WalkSpeed;
         }
 
-#if UNITY_EDITOR
-        
-        protected override void OnValidate()
-        {
-            base.OnValidate();
-            if (agent == null && TryGetComponent(out agent) is false)
-                throw new MissingComponentException("Missing nav agent");
 
-        }
-#endif
-        
-
-        public void SyncVariables()
-        {
+        public void SyncVariables() {
             agent.speed = Stats.WalkSpeed;
 
             agent.height = capsule.Height;
             agent.radius = capsule.Radius;
         }
 
-        bool sprinting;
-    
         public override bool IsCrouching() => false;
 
         public override bool IsGrounded() => true;
@@ -78,8 +71,7 @@ namespace Safe_To_Share.Scripts.Movement.NavAgentMover
 
         public override float GetCurrentSpeed() => base.GetCurrentSpeed();
 
-        public override Vector3 GetLocalMoveDirection()
-        {
+        public override Vector3 GetLocalMoveDirection() {
             var test = agent.desiredVelocity;
             test = Vector3.ProjectOnPlane(test, GetUpVector());
             return agent.transform.InverseTransformDirection(test);

@@ -2,38 +2,29 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Spawner.Editor
-{
+namespace Spawner.Editor {
     [CustomEditor(typeof(SpawnZone))]
-    public sealed class SpawnZoneEditor : UnityEditor.Editor
-    {
+    public sealed class SpawnZoneEditor : UnityEditor.Editor {
+        bool addingEnemy;
         SpawnZone myTarget;
 
 
         void OnEnable() => myTarget = (SpawnZone)target;
 
-        bool addingEnemy;
-        void OnSceneGUI()
-        {
+        void OnSceneGUI() {
             if (!Application.isEditor) return;
 
-            Event e = Event.current;
+            var e = Event.current;
 
 
-            if (e.shift && e.type == EventType.MouseDown)
-            {
-                int controlID = GUIUtility.GetControlID(FocusType.Passive);
+            if (e.shift && e.type == EventType.MouseDown) {
+                var controlID = GUIUtility.GetControlID(FocusType.Passive);
                 GUIUtility.hotControl = controlID;
-                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
-                if (myTarget.AddSpawnPosition(ray))
-                {
-                }
+                var ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
+                if (myTarget.AddSpawnPosition(ray)) { }
 
                 e.Use();
             }
         }
-
-     
-        
     }
 }

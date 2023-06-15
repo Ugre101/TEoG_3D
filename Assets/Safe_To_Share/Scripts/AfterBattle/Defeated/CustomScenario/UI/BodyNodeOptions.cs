@@ -5,10 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
-{
-    public sealed class BodyNodeOptions : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI {
+    public sealed class BodyNodeOptions : MonoBehaviour {
         [SerializeField] TMP_Dropdown bodyType;
         [SerializeField] Slider permChange;
         [SerializeField] TextMeshProUGUI permChangeText;
@@ -20,8 +18,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
 
         void Start() => addTempMod.onClick.AddListener(AddTempMod);
 
-        void AddTempMod()
-        {
+        void AddTempMod() {
             if (bodyNode == null)
                 return;
             MakeTempMod mod = new();
@@ -29,8 +26,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
             Instantiate(tempModButton, container).Setup(bodyNode, mod);
         }
 
-        public void Setup(CustomBodyNode bodyNode)
-        {
+        public void Setup(CustomBodyNode bodyNode) {
             this.bodyNode = bodyNode;
             container.KillChildren();
             bodyType.SetupTmpDropDown(bodyNode.bodyType, ChangeBodyType);
@@ -45,12 +41,9 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
             stealPermChange.onValueChanged.AddListener(ChangeStealPerm);
         }
 
-        void ChangeStealPerm(bool arg0)
-        {
-        }
+        void ChangeStealPerm(bool arg0) { }
 
-        void PerkChange(float arg0)
-        {
+        void PerkChange(float arg0) {
             bodyNode.permChange = Mathf.RoundToInt(arg0);
             permChangeText.text = bodyNode.permChange.ToString();
         }

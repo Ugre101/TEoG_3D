@@ -3,17 +3,14 @@ using Character.BodyStuff;
 using Character.EssenceStuff;
 using UnityEngine;
 
-namespace Character.IslandData
-{
+namespace Character.IslandData {
     [Serializable]
-    public class IslandData
-    {
+    public class IslandData {
         public BodyStatData bodyData = new();
         public EssenceData essenceData = new();
 
         [Serializable]
-        public class EssenceData
-        {
+        public class EssenceData {
             public const int IncreaseAmount = 10;
             public int mascValue;
             public int femiValue;
@@ -23,8 +20,7 @@ namespace Character.IslandData
 
             public MinMaxCurrent Femi => femi;
 
-            public void TempLoadFix()
-            {
+            public void TempLoadFix() {
                 if (masc.Max < mascValue)
                     masc.Max = mascValue;
                 if (femi.Max < femiValue)
@@ -32,11 +28,10 @@ namespace Character.IslandData
             }
 
             MinMaxCurrent GetMinMax(EssenceType type) =>
-                type switch
-                {
+                type switch {
                     EssenceType.Masc => masc,
                     EssenceType.Femi => femi,
-                    _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+                    _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
                 };
 
             public int GetValueOfType(EssenceType type) => GetMinMax(type).Current;
@@ -51,8 +46,7 @@ namespace Character.IslandData
         }
 
         [Serializable]
-        public class BodyStatData
-        {
+        public class BodyStatData {
             public int heightValue; // Old way of doing it remove later 
             public int fatValue;
             public int muscleValue;
@@ -76,37 +70,33 @@ namespace Character.IslandData
 
 
             MinMaxCurrent GetMinMaxOfType(BodyStatType type) =>
-                type switch
-                {
+                type switch {
                     BodyStatType.Muscle => muscle,
                     BodyStatType.Fat => fat,
                     BodyStatType.Height => height,
                     _ => throw new ArgumentOutOfRangeException(nameof(type), type, null),
                 };
+
             public void SetValueOfType(BodyStatType type, int value) => GetMinMaxOfType(type).Current = value;
             public int IncreaseMaxValueOfType(BodyStatType type) => ++GetMinMaxOfType(type).Max;
             public int DecreaseMinValueOfType(BodyStatType type) => --GetMinMaxOfType(type).Min;
         }
 
         [Serializable]
-        public class MinMaxCurrent
-        {
+        public class MinMaxCurrent {
             [SerializeField] int min, max, current;
 
-            public int Current
-            {
+            public int Current {
                 get => current;
                 set => current = value;
             }
 
-            public int Max
-            {
+            public int Max {
                 get => max;
                 set => max = value;
             }
 
-            public int Min
-            {
+            public int Min {
                 get => min;
                 set => min = value;
             }

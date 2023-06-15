@@ -4,40 +4,34 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
-{
-    public abstract class BasePerkButton : BaseLevelButton
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level {
+    public abstract class BasePerkButton : BaseLevelButton {
         [SerializeField, HideInInspector,] protected string guid;
         protected bool Have;
         protected BasicPerk loaded;
 
-        void LoadedPerk(AsyncOperationHandle<BasicPerk> obj)
-        {
+        void LoadedPerk(AsyncOperationHandle<BasicPerk> obj) {
             loaded = obj.Result;
             CanAfford(PlayerHolder.Player.LevelSystem.Points);
             HasPerk(obj.Result);
         }
 
-        public override void Setup(PlayerHolder player)
-        {
-            this.PlayerHolder = player;
+        public override void Setup(PlayerHolder player) {
+            PlayerHolder = player;
             Addressables.LoadAssetAsync<BasicPerk>(guid).Completed += LoadedPerk;
         }
 
 
         protected override void CanAfford(int obj) => Afford = loaded != null && loaded.Cost <= obj;
 
-        protected void HasPerk(BasicPerk result)
-        {
-            bool hasPerk = PlayerHolder.Player.LevelSystem.OwnedPerks.Contains(result);
+        protected void HasPerk(BasicPerk result) {
+            var hasPerk = PlayerHolder.Player.LevelSystem.OwnedPerks.Contains(result);
             HaveFade(hasPerk);
         }
 
-        protected void HaveFade(bool value)
-        {
+        protected void HaveFade(bool value) {
             Have = value;
-            Color color = rune.color;
+            var color = rune.color;
             color.a = GetAplha(value);
             rune.color = color;
         }
@@ -46,8 +40,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
 #if UNITY_EDITOR
         [SerializeField] BasicPerk basicPerk;
 
-        void OnValidate()
-        {
+        void OnValidate() {
             guid = basicPerk != null ? basicPerk.Guid : string.Empty;
             if (rune == null || basicPerk == null)
                 return;

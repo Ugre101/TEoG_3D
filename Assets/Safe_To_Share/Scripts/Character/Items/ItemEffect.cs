@@ -4,11 +4,9 @@ using Character;
 using Character.StatsStuff.Mods;
 using UnityEngine;
 
-namespace Items
-{
+namespace Items {
     [Serializable]
-    public abstract class ItemEffect
-    {
+    public abstract class ItemEffect {
         [SerializeField] bool active;
 
         public bool Active => active;
@@ -17,16 +15,15 @@ namespace Items
 
 
         [Serializable]
-        protected struct AssignTempMod
-        {
+        protected struct AssignTempMod {
             public List<TempIntMod> mod;
 
-            readonly TempIntMod AddTitle(TempIntMod tempIntMod, string itemGuid) => new(tempIntMod.HoursLeft,
-                tempIntMod.ModValue, itemGuid, tempIntMod.ModType);
+            readonly TempIntMod AddTitle(TempIntMod tempIntMod, string itemGuid) =>
+                new(tempIntMod.HoursLeft,
+                    tempIntMod.ModValue, itemGuid, tempIntMod.ModType);
 
-            public readonly void AddMods(ModsContainer container, string itemGuid)
-            {
-                foreach (TempIntMod tempIntMod in mod)
+            public readonly void AddMods(ModsContainer container, string itemGuid) {
+                foreach (var tempIntMod in mod)
                     container.AddTempStatMod(AddTitle(tempIntMod, itemGuid));
             }
         }

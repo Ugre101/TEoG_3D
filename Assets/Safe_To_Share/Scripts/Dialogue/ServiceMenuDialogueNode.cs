@@ -1,10 +1,8 @@
 ﻿using Character.Service;
 using UnityEngine;
 
-namespace Dialogue
-{
-    public sealed class ServiceMenuDialogueNode : DialogueBaseNode
-    {
+namespace Dialogue {
+    public sealed class ServiceMenuDialogueNode : DialogueBaseNode {
         [SerializeField] OfferServices offerServices;
         [SerializeField] string shopTitle;
 

@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
 
-namespace AvatarStuff
-{
-    public sealed class DictatorDickTester : MonoBehaviour
-    {
+namespace AvatarStuff {
+    public sealed class DictatorDickTester : MonoBehaviour {
         [SerializeField] DictatorDick dick;
         [SerializeField, Range(0, 10f),] float size;
         [SerializeField] bool hidden;
 
-        void OnValidate()
-        {
+        void OnValidate() {
             if (dick == null)
                 if (TryGetComponent(out DictatorDick foundDick))
                     dick = foundDick;

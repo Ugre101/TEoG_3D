@@ -5,23 +5,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
-{
-    public sealed class DrainNodeOptions : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI {
+    public sealed class DrainNodeOptions : MonoBehaviour {
         [SerializeField] TMP_Dropdown drain, give;
         [SerializeField] Slider drainAmount, giveAmount;
         [SerializeField] TextMeshProUGUI drainAmountText, giveAmountText;
         CustomDrainNode drainNode;
 
-        void ChangeDrainAmount(float arg0)
-        {
+        void ChangeDrainAmount(float arg0) {
             drainNode.DrainBonus = Mathf.RoundToInt(arg0);
             drainAmountText.text = drainNode.DrainBonus.ToString();
         }
 
-        void ChangeGiveAmount(float arg0)
-        {
+        void ChangeGiveAmount(float arg0) {
             drainNode.GiveBonus = Mathf.RoundToInt(arg0);
             giveAmountText.text = drainNode.GiveBonus.ToString();
         }
@@ -30,8 +26,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
         void ChangeGiveType(int arg0) => drainNode.giveEssenceType = UgreTools.IntToEnum(arg0, DrainEssenceType.None);
         void ChangeDrainType(int arg0) => drainNode.drainEssenceType = UgreTools.IntToEnum(arg0, DrainEssenceType.None);
 
-        public void Setup(CustomDrainNode drainNode)
-        {
+        public void Setup(CustomDrainNode drainNode) {
             this.drainNode = drainNode;
             drain.SetupTmpDropDown(drainNode.drainEssenceType, ChangeDrainType);
             drainAmountText.text = drainNode.DrainBonus.ToString();

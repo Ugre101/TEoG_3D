@@ -4,11 +4,9 @@ using Character;
 using Character.StatsStuff.Mods;
 using UnityEngine;
 
-namespace Safe_to_Share.Scripts.CustomClasses
-{
+namespace Safe_to_Share.Scripts.CustomClasses {
     [Serializable]
-    public class BaseFloatStat : ITickHour
-    {
+    public class BaseFloatStat : ITickHour {
         public delegate void StatChange();
 
         [SerializeField] float baseValue;
@@ -17,11 +15,9 @@ namespace Safe_to_Share.Scripts.CustomClasses
         float lastValue;
         public BaseFloatStat(float baseValue) => this.baseValue = baseValue;
 
-        public virtual float BaseValue
-        {
+        public virtual float BaseValue {
             get => baseValue;
-            set
-            {
+            set {
                 baseValue = value;
                 Dirty = true;
             }
@@ -29,11 +25,9 @@ namespace Safe_to_Share.Scripts.CustomClasses
 
         public virtual float Value => Dirty ? lastValue = CalcValue() : lastValue;
 
-        protected virtual bool Dirty
-        {
+        protected virtual bool Dirty {
             get => dirty || Mods.Dirty;
-            set
-            {
+            set {
                 dirty = value;
                 if (value)
                     StatDirtyEvent?.Invoke();
@@ -45,11 +39,10 @@ namespace Safe_to_Share.Scripts.CustomClasses
         public bool TickHour(int ticks = 1) => Mods.TickHour(ticks);
         public event StatChange StatDirtyEvent;
 
-        protected virtual float CalcValue()
-        {
+        protected virtual float CalcValue() {
             Dirty = false;
             Mods.Dirty = false;
-            float percent = (100f + GetValue(ModType.Percent)) / 100f;
+            var percent = (100f + GetValue(ModType.Percent)) / 100f;
 
             return (BaseValue + GetValue(ModType.Flat)) * percent;
 

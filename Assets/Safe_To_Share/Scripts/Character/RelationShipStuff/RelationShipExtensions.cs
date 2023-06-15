@@ -1,13 +1,10 @@
-﻿namespace Character.RelationShipStuff
-{
-    public static class RelationShipExtensions
-    {
+﻿namespace Character.RelationShipStuff {
+    public static class RelationShipExtensions {
         public const float FirstThreesHold = 10;
         public const float SecondThreesHold = 25;
 
-        public static string DominanceTitle(this RelationShip relationsShip)
-        {
-            float sub = relationsShip.Submission;
+        public static string DominanceTitle(this RelationShip relationsShip) {
+            var sub = relationsShip.Submission;
             if (sub > FirstThreesHold)
                 return SubmissionTree(sub);
 
@@ -17,23 +14,20 @@
             return "neutral";
         }
 
-        static string DomisionTree(float sub)
-        {
+        static string DomisionTree(float sub) {
             if (sub < -SecondThreesHold)
                 return "dominant";
             return "arrogant";
         }
 
-        static string SubmissionTree(float sub)
-        {
+        static string SubmissionTree(float sub) {
             if (sub > SecondThreesHold)
                 return "submissive";
             return "meek";
         }
 
-        public static string AffectionTitle(this RelationShip relationShip)
-        {
-            float affection = relationShip.Affection;
+        public static string AffectionTitle(this RelationShip relationShip) {
+            var affection = relationShip.Affection;
             if (affection > FirstThreesHold)
                 return LikeTree(affection);
 
@@ -42,15 +36,13 @@
             return "neutral";
         }
 
-        static string LikeTree(float affection)
-        {
+        static string LikeTree(float affection) {
             if (affection > SecondThreesHold)
                 return "friendly";
             return "acquaintance";
         }
 
-        static string DislikeTree(float affection)
-        {
+        static string DislikeTree(float affection) {
             if (affection < -SecondThreesHold)
                 return "dislike";
             return "indifferent";

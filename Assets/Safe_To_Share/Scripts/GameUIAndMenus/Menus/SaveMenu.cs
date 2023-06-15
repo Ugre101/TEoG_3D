@@ -5,10 +5,8 @@ using System.Linq;
 using SaveStuff;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus
-{
-    public sealed class SaveMenu : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus {
+    public sealed class SaveMenu : GameMenu {
         static string[] saves;
         [SerializeField] Transform content;
         [SerializeField] SaveButton saveBtn;
@@ -22,16 +20,14 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus
         int failed;
         bool firstStart = true;
 
-        void Start()
-        {
+        void Start() {
             firstStart = false;
             ButtonPool = new Queue<SaveButton>(preInstanced);
             RefreshSaves();
             showSavesAmount.SetupSlider(saves.Count());
         }
 
-        void OnEnable()
-        {
+        void OnEnable() {
             areYouSure.gameObject.SetActive(false);
             if (!firstStart && SaveManager.SavesDirty)
                 RefreshSaves();
@@ -40,15 +36,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus
             showSavesAmount.NewShowAmount += AddAllSaves;
         }
 
-        void OnDisable()
-        {
+        void OnDisable() {
             SaveButton.WantToDeleteSave -= ToggleAreYouSure;
             SaveManager.NewSave -= AddNewSave;
             showSavesAmount.NewShowAmount -= AddAllSaves;
         }
 #if UNITY_EDITOR
-        void OnValidate()
-        {
+        void OnValidate() {
             if (Application.isPlaying) return;
 
             var saveButtons = content.GetComponentsInChildren<SaveButton>(true);
@@ -57,16 +51,14 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus
             preInstanced = saveButtons;
         }
 #endif
-        SaveButton GetButton()
-        {
+        SaveButton GetButton() {
             if (ButtonPool.Count <= 0) return Instantiate(saveBtn, content);
             var btn = ButtonPool.Dequeue();
             btn.gameObject.SetActive(true);
             return btn;
         }
 
-        void AddNewSave(FullSave obj, string path)
-        {
+        void AddNewSave(FullSave obj, string path) {
             var move = Instantiate(saveBtn, content);
             move.transform.SetAsFirstSibling();
             move.Setup(obj, path);
@@ -75,8 +67,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus
 
         void ToggleAreYouSure(Action action) => areYouSure.Setup(action);
 
-        void RefreshSaves()
-        {
+        void RefreshSaves() {
             // saves = Directory.GetFiles(SaveManager.SavePath).OrderByDescending(Directory.GetLastWriteTime);
             saves = new DirectoryInfo(SaveManager.SavePath).GetFiles()
                                                            .OrderByDescending(f => f.LastWriteTime)
@@ -85,10 +76,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus
             SaveManager.SavesDirty = false;
         }
 
-        void AddAllSaves()
-        {
-            foreach (var activeButton in activeButtons)
-            {
+        void AddAllSaves() {
+            foreach (var activeButton in activeButtons) {
                 activeButton.Clear();
                 activeButton.gameObject.SetActive(false);
                 ButtonPool.Enqueue(activeButton);
@@ -101,20 +90,16 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus
 
         int GetShowAmount() => ShowSavesAmountSlider.ShowAmount + failed;
 
-        void TryAddSave(int i)
-        {
+        void TryAddSave(int i) {
             if (!File.Exists(saves[i]))
                 return;
-            try
-            {
+            try {
                 var fullSave = JsonUtility.FromJson<FullSave>(File.ReadAllText(saves[i]));
                 var button = GetButton();
                 button.transform.SetSiblingIndex(i);
                 button.Setup(fullSave, saves[i]);
                 activeButtons.Add(button);
-            }
-            catch
-            {
+            } catch {
                 Debug.LogWarning("Bad save file");
                 failed++;
             }

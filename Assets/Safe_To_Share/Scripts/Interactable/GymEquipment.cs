@@ -7,10 +7,8 @@ using Items;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Interactable
-{
-    public sealed class GymEquipment : MonoBehaviour, IInteractable
-    {
+namespace Safe_To_Share.Scripts.Interactable {
+    public sealed class GymEquipment : MonoBehaviour, IInteractable {
         [SerializeField] Item[] needItem;
         [SerializeField] string title;
         [SerializeField] string needText;
@@ -18,36 +16,31 @@ namespace Safe_To_Share.Scripts.Interactable
         [SerializeField, Range(3f, 20f),] float intensityFat = 2f;
         [SerializeField, Range(1f, 3f),] float intensityMuscle = 1f;
 
-        void Start()
-        {
+        void Start() {
             if (needItem != null) return;
             gameObject.SetActive(false);
             Debug.LogError("Gym equipment is missing it's needed item");
         }
 
+        void OnDestroy() {
+            RemoveIInteractableHit?.Invoke();
+        }
+
         public string HoverText(Player player) =>
             needItem.Any(item => player.Inventory.HasItemOfGuid(item.Guid)) ? title : needText;
 
-        public void DoInteraction(Player player)
-        {
-            foreach (Item item in needItem)
-                if (player.Inventory.HasItemOfGuid(item.Guid))
-                {
+        public void DoInteraction(Player player) {
+            foreach (var item in needItem)
+                if (player.Inventory.HasItemOfGuid(item.Guid)) {
                     UseItemAndDoAction(player, item.Guid);
                     break;
                 }
         }
 
-        void OnDestroy()
-        {
-            RemoveIInteractableHit?.Invoke();
-        }
-
         public event Action<IInteractable> UpdateHoverText;
         public event Action RemoveIInteractableHit;
 
-        void UseItemAndDoAction(Player player, string guid)
-        {
+        void UseItemAndDoAction(Player player, string guid) {
             player.Inventory.UseItemItemID(guid);
             StringBuilder returnText = new("You spent an hour working out and ");
             if (trainMuscle)

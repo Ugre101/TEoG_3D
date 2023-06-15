@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Character.Organs.Fluids
-{
+namespace Character.Organs.Fluids {
     [Serializable]
-    public class ForeignFluids
-    {
+    public class ForeignFluids {
         [SerializeField] List<ForeignFluid> fluids = new();
 
         public List<ForeignFluid> GetFluids => fluids;
 
-        public void AddFluid(string fluidType, float amount)
-        {
+        public void AddFluid(string fluidType, float amount) {
             if (fluids.Exists(f => f.FluidType == fluidType))
                 fluids.Find(f => f.FluidType == fluidType).Amount += amount;
             else
@@ -21,26 +18,22 @@ namespace Character.Organs.Fluids
 
         public void ClearFluids() => fluids.Clear();
 
-        public void ClearFluidsByPercent(float percent)
-        {
-            foreach (ForeignFluid foreignFluid in fluids)
+        public void ClearFluidsByPercent(float percent) {
+            foreach (var foreignFluid in fluids)
                 foreignFluid.Amount *= (100f - percent) / 100f;
         }
 
         [Serializable]
-        public class ForeignFluid
-        {
+        public class ForeignFluid {
             [SerializeField] float amount;
             [SerializeField] string fluidType;
 
-            public ForeignFluid(string fluidType, float amount)
-            {
+            public ForeignFluid(string fluidType, float amount) {
                 this.amount = amount;
                 this.fluidType = fluidType;
             }
 
-            public float Amount
-            {
+            public float Amount {
                 get => amount;
                 set => amount = value;
             }

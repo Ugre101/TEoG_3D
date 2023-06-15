@@ -5,10 +5,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SaveStuff
-{
-    public sealed class StartSaveMenu : MonoBehaviour
-    {
+namespace SaveStuff {
+    public sealed class StartSaveMenu : MonoBehaviour {
         [SerializeField] Transform content;
         [SerializeField] SaveButton saveBtn;
         [SerializeField] AreYouSure areYouSure;
@@ -19,16 +17,14 @@ namespace SaveStuff
         int failed;
         IOrderedEnumerable<string> saves;
 
-        void Start()
-        {
+        void Start() {
             RefreshSaves();
             showSavesAmount.SetupSlider(saves.Count());
             clearAll.onClick.AddListener(ClearAllSaves);
             showSavesAmount.NewShowAmount += PrintSaves;
         }
 
-        void OnEnable()
-        {
+        void OnEnable() {
             areYouSure.gameObject.SetActive(false);
             SaveButton.WantToDeleteSave += ToggleAreYouSure;
         }
@@ -38,8 +34,7 @@ namespace SaveStuff
 #if UNITY_EDITOR
         void OnValidate() => btns = content.GetComponentsInChildren<SaveButton>(true);
 #endif
-        SaveButton GetButton()
-        {
+        SaveButton GetButton() {
             if (btnPool.Count <= 0)
                 return Instantiate(saveBtn, content);
             var btn = btnPool.Dequeue();
@@ -47,11 +42,9 @@ namespace SaveStuff
             return btn;
         }
 
-        void SetupBtnPool()
-        {
+        void SetupBtnPool() {
             btnPool = new Queue<SaveButton>();
-            foreach (var item in btns)
-            {
+            foreach (var item in btns) {
                 btnPool.Enqueue(item);
                 item.gameObject.SetActive(false);
             }
@@ -61,39 +54,32 @@ namespace SaveStuff
 
         void ToggleAreYouSure(Action action) => areYouSure.Setup(action);
 
-        void RefreshSaves()
-        {
+        void RefreshSaves() {
             saves = Directory.GetFiles(SaveManager.SavePath).OrderByDescending(Directory.GetLastWriteTime);
             PrintSaves();
         }
 
-        void PrintSaves()
-        {
+        void PrintSaves() {
             SetupBtnPool();
             var array = saves.ToArray();
-            for (int i = 0; i < array.Length && i < GetShowAmount(); i++)
+            for (var i = 0; i < array.Length && i < GetShowAmount(); i++)
                 SetupSave(array[i]);
         }
 
         int GetShowAmount() => ShowSavesAmountSlider.ShowAmount + failed;
 
-        void SetupSave(string path)
-        {
-            try
-            {
-                FullSave fullSave = JsonUtility.FromJson<FullSave>(File.ReadAllText(path));
+        void SetupSave(string path) {
+            try {
+                var fullSave = JsonUtility.FromJson<FullSave>(File.ReadAllText(path));
                 GetButton().Setup(fullSave, path);
-            }
-            catch
-            {
+            } catch {
                 Debug.LogWarning("Bad save file");
                 failed++;
             }
         }
 
-        void ClearAllExceptLastTen()
-        {
-            for (int i = saves.Count(); i-- > 10;)
+        void ClearAllExceptLastTen() {
+            for (var i = saves.Count(); i-- > 10;)
                 File.Delete(saves.ElementAt(i));
             RefreshSaves();
             showSavesAmount.NewMaxAmount(saves.Count());

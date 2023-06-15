@@ -8,10 +8,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
-{
-    public sealed class ShopMenu : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu {
+    public sealed class ShopMenu : GameMenu {
         [SerializeField] TextMeshProUGUI shopTitleText;
         [SerializeField] BuyItemBag buyItemBag;
         [SerializeField] Button toggleSell;
@@ -21,46 +19,38 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
         bool selling;
         List<Item> shopItems;
 
-        void Start()
-        {
+        void Start() {
             // toggleSell.onClick.AddListener(ToggleSelling);
         }
 
-        void OnEnable()
-        {
+        void OnEnable() {
             ItemForSale.WantToBuyItem += GetItem;
             SellMyItem.SellMe += HandleSoldItem;
             ItemShowCase.BuyItemInAmount += BuyItem;
         }
 
-        void OnDisable()
-        {
+        void OnDisable() {
             ItemForSale.WantToBuyItem -= GetItem;
             SellMyItem.SellMe -= HandleSoldItem;
             ItemShowCase.BuyItemInAmount -= BuyItem;
             PlayerGold.GoldBag.GoldAmountChanged -= GoldChanged;
         }
 
-        void BuyItem(Item arg1, int arg2)
-        {
+        void BuyItem(Item arg1, int arg2) {
             if (Player.TryBuyItem(arg1, arg2))
                 buyItemShowCase.Setup(arg1, PlayerGold.GoldBag);
         }
 
         public static event Action<int> CanAfford;
 
-        void HandleSoldItem(InventoryItem obj)
-        {
-        }
+        void HandleSoldItem(InventoryItem obj) { }
 
-        void GetItem(Item obj)
-        {
+        void GetItem(Item obj) {
             buyItemShowCase.gameObject.SetActive(true);
             buyItemShowCase.Setup(obj, PlayerGold.GoldBag, GoldBagExtension.DiscountMulti(Player));
         }
 
-        void ToggleSelling()
-        {
+        void ToggleSelling() {
             selling = !selling;
             if (selling)
                 SellItems();
@@ -68,8 +58,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
                 ShowWares();
         }
 
-        void ShowWares()
-        {
+        void ShowWares() {
             toggleSellText.text = "Sell";
             buyItemBag.Setup(shopItems);
             CanAfford?.Invoke(PlayerGold.GoldBag.Gold);
@@ -81,8 +70,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
         //     if (item.ItemGuid.CanSell)
         //     {
         //     }
-        public void Setup(string shopTitle, List<Item> items)
-        {
+        public void Setup(string shopTitle, List<Item> items) {
             buyItemShowCase.Reset();
             shopTitleText.text = shopTitle;
             shopItems = items;

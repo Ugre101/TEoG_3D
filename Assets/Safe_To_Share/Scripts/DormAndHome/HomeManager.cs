@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 
-namespace DormAndHome
-{
-    public sealed class HomeManager : MonoBehaviour
-    {
-    }
+namespace DormAndHome {
+    public sealed class HomeManager : MonoBehaviour { }
 }

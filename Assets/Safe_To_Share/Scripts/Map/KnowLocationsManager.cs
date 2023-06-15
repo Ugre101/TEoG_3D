@@ -4,10 +4,8 @@ using System.Linq;
 using SceneStuff;
 using UnityEngine;
 
-namespace Map
-{
-    public static class KnowLocationsManager
-    {
+namespace Map {
+    public static class KnowLocationsManager {
         static Dictionary<string, Location> dict;
         public static List<Location> KnownLocations { get; private set; } = new();
         public static Dictionary<string, Location> Dict => dict ??= KnownLocations.ToDictionary(l => l.LocationGuid);
@@ -16,8 +14,7 @@ namespace Map
         public static void LearnLocation(LocationSceneSo locationSceneSo, params string[] exit) =>
             LearnLocation(locationSceneSo.Guid, exit);
 
-        public static void LearnLocation(string locationSceneSoGuid, params string[] exit)
-        {
+        public static void LearnLocation(string locationSceneSoGuid, params string[] exit) {
             if (Dict.ContainsKey(locationSceneSoGuid))
                 return;
             KnownLocations.Add(new Location(locationSceneSoGuid, new List<string>(exit)));
@@ -26,20 +23,17 @@ namespace Map
 
         public static KnowLocationsSave Save() => new(KnownLocations);
 
-        public static void Load(KnowLocationsSave toLoad)
-        {
+        public static void Load(KnowLocationsSave toLoad) {
             KnownLocations = toLoad.LocationsList;
             dict = null;
         }
 
         [Serializable]
-        public struct Location
-        {
+        public struct Location {
             [SerializeField] string locationGuid;
             [SerializeField] List<string> exitsGuids;
 
-            public Location(string locationGuid, List<string> exitsGuids)
-            {
+            public Location(string locationGuid, List<string> exitsGuids) {
                 this.locationGuid = locationGuid;
                 this.exitsGuids = exitsGuids;
             }
@@ -47,8 +41,7 @@ namespace Map
             public string LocationGuid => locationGuid;
             public List<string> ExitsGuids => exitsGuids;
 
-            public void LearnExit(string exitGuid)
-            {
+            public void LearnExit(string exitGuid) {
                 if (exitsGuids.Contains(exitGuid))
                     return;
                 exitsGuids.Add(exitGuid);
@@ -57,8 +50,7 @@ namespace Map
     }
 
     [Serializable]
-    public struct KnowLocationsSave
-    {
+    public struct KnowLocationsSave {
         [SerializeField] List<KnowLocationsManager.Location> locationsList;
 
         public KnowLocationsSave(List<KnowLocationsManager.Location> locationsList) =>

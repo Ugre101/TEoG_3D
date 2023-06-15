@@ -1,23 +1,19 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.AfterBattle
-{
-    public sealed class SexAnimationManager
-    {
+namespace Safe_To_Share.Scripts.AfterBattle {
+    public sealed class SexAnimationManager {
         readonly HashSet<int> validHashes = new();
         int? lastHash;
-        public void TryPlayAnimation(Animator animator, int hash)
-        {
+
+        public void TryPlayAnimation(Animator animator, int hash) {
             if (animator == null) return;
-            if (validHashes.Contains(hash))
-            {
+            if (validHashes.Contains(hash)) {
                 SetAnimatorBool(animator, hash);
                 return;
             }
 
-            foreach (var parameter in animator.parameters)
-            {
+            foreach (var parameter in animator.parameters) {
                 if (parameter.nameHash != hash) continue; // Check controller have parameter
                 validHashes.Add(hash);
                 SetAnimatorBool(animator, hash);
@@ -30,10 +26,8 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         public void Clear() => validHashes.Clear();
 
-        void SetAnimatorBool(Animator animator, int hash)
-        {
-            if (lastHash.HasValue)
-            {
+        void SetAnimatorBool(Animator animator, int hash) {
+            if (lastHash.HasValue) {
                 if (lastHash.Value == hash)
                     return;
                 animator.SetBool(lastHash.Value, false);

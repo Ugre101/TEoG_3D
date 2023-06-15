@@ -2,45 +2,36 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
-{
-    public sealed class PissPrefab : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss {
+    public sealed class PissPrefab : MonoBehaviour {
         const float MaxFlyTime = 10f;
         [SerializeField] Rigidbody rigid;
         [SerializeField] PissPuddle puddle;
         [SerializeField] Vector3 orgSize;
-            
+
         float beenActiveTime;
         IObjectPool<PissPrefab> pool;
 
-        void Update()
-        {
+        void Update() {
             beenActiveTime += Time.deltaTime;
             if (MaxFlyTime < beenActiveTime)
                 pool.Release(this);
         }
 
-        void OnCollisionEnter(Collision collision)
-        {
+        void OnCollisionEnter(Collision collision) {
             if (NotValidTarget(collision)) return;
             CheckPuddle(rigid.position, collision.transform.rotation);
             pool.Release(this);
         }
 
-        public void Launch(Vector3 dir, IObjectPool<PissPrefab> spawnPool)
-        {
+        public void Launch(Vector3 dir, IObjectPool<PissPrefab> spawnPool) {
             pool = spawnPool;
             rigid.AddRelativeForce(dir);
         }
 
-        bool NotValidTarget(Collision collision)
-        {
-            return false;
-        }
+        bool NotValidTarget(Collision collision) => false;
 
-        public void ResetPosAndRot(Vector3 transformPosition, Vector3 direction,float scaleFactor)
-        {
+        public void ResetPosAndRot(Vector3 transformPosition, Vector3 direction, float scaleFactor) {
             rigid.velocity = Vector3.zero;
             rigid.angularVelocity = Vector3.zero;
             transform.SetLocalPositionAndRotation(transformPosition, Quaternion.Euler(direction));
@@ -49,14 +40,14 @@ namespace Safe_To_Share.Scripts.AvatarStuff.ScatAndPiss
         }
 
 
-        public void CheckPuddle(Vector3 cords, Quaternion transformRotation)
-        {
-            foreach (var existingPuddle in PissPuddle.ExistingPuddles.Where(existingPuddle => Vector3.Distance(cords, existingPuddle.transform.position) < 5f))
-            {
+        public void CheckPuddle(Vector3 cords, Quaternion transformRotation) {
+            foreach (var existingPuddle in PissPuddle.ExistingPuddles.Where(existingPuddle =>
+                         Vector3.Distance(cords, existingPuddle.transform.position) < 5f)) {
                 existingPuddle.Grow();
                 return;
             }
-            var newPuddle = Instantiate(puddle, cords , transformRotation);
+
+            var newPuddle = Instantiate(puddle, cords, transformRotation);
             PissPuddle.ExistingPuddles.Add(newPuddle);
         }
     }

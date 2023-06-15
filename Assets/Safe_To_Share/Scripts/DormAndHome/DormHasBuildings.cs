@@ -2,18 +2,15 @@
 using DormAndHome.Dorm.Buildings;
 using UnityEngine;
 
-namespace DormAndHome
-{
-    public sealed class DormHasBuildings : MonoBehaviour
-    {
+namespace DormAndHome {
+    public sealed class DormHasBuildings : MonoBehaviour {
         [SerializeField] GameObject[] dormLodges;
         [SerializeField] GameObject[] kitchen;
         [SerializeField] GameObject[] gym;
         [SerializeField] GameObject[] essenceStone;
         DormBuildings dormBuildings;
 
-        void Start()
-        {
+        void Start() {
             dormBuildings = DormManager.Instance.Buildings;
             ShowOwnedBuildings();
             DormManager.Loaded += ShowOwnedBuildings;
@@ -23,8 +20,7 @@ namespace DormAndHome
             DormManager.Instance.Buildings.DormLodge.EssenceStone.Upgraded += CheckEssStone;
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             DormManager.Loaded -= ShowOwnedBuildings;
             DormManager.Instance.Buildings.Gym.Upgraded -= CheckGym;
             DormManager.Instance.Buildings.Kitchen.Upgraded -= CheckKitchen;
@@ -32,19 +28,17 @@ namespace DormAndHome
             DormManager.Instance.Buildings.DormLodge.EssenceStone.Upgraded -= CheckEssStone;
         }
 
-        static void SetActiveBuildingTier(GameObject[] array, int tier)
-        {
+        static void SetActiveBuildingTier(GameObject[] array, int tier) {
             if (array.Length <= 0)
                 return;
-            foreach (GameObject o in array)
+            foreach (var o in array)
                 o.SetActive(false);
-            int index = tier - 1;
+            var index = tier - 1;
             if (index >= 0)
                 array[Mathf.Min(index, array.Length - 1)].SetActive(true);
         }
 
-        void ShowOwnedBuildings()
-        {
+        void ShowOwnedBuildings() {
             CheckLodge();
             CheckKitchen();
             CheckGym();

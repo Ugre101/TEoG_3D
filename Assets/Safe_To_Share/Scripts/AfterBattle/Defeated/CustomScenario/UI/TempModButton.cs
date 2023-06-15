@@ -4,10 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
-{
-    public sealed class TempModButton : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI {
+    public sealed class TempModButton : MonoBehaviour {
         [SerializeField] Button percentOrFlat;
         [SerializeField] TextMeshProUGUI buttonText;
         [SerializeField] Button removeMod;
@@ -19,8 +17,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
         CustomBodyNode bodyNode;
         MakeTempMod tempMod;
 
-        public void Setup(CustomBodyNode bodyNode, MakeTempMod tempMod)
-        {
+        public void Setup(CustomBodyNode bodyNode, MakeTempMod tempMod) {
             this.bodyNode = bodyNode;
             this.tempMod = tempMod;
 
@@ -42,27 +39,23 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
             durationSlider.onValueChanged.AddListener(ChangeDuration);
         }
 
-        void ChangeDuration(float arg0)
-        {
+        void ChangeDuration(float arg0) {
             tempMod.Duration = Mathf.RoundToInt(arg0);
             durationText.text = Mathf.RoundToInt(arg0).ToString();
         }
 
-        void ChangeValue(float arg0)
-        {
+        void ChangeValue(float arg0) {
             tempMod.Value = Mathf.RoundToInt(arg0);
             amountText.text = Mathf.RoundToInt(arg0).ToString();
         }
 
-        void RemoveMe()
-        {
+        void RemoveMe() {
             bodyNode.tempMods.Remove(tempMod);
             Destroy(gameObject);
         }
 
-        void ToggleFlatOrPercent()
-        {
-            ModType toggled = tempMod.ModType == ModType.Flat ? ModType.Percent : ModType.Flat;
+        void ToggleFlatOrPercent() {
+            var toggled = tempMod.ModType == ModType.Flat ? ModType.Percent : ModType.Flat;
             tempMod.ModType = toggled;
             buttonText.text = toggled.ToString();
         }

@@ -6,21 +6,17 @@ using Character.DefeatScenarios.Custom;
 using Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.CustomContent
-{
-    public sealed class LoadCustomContent : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.CustomContent {
+    public sealed class LoadCustomContent : MonoBehaviour {
         [SerializeField] List<EnemyPreset> enemyPresets = new();
 
-        void Start()
-        {
+        void Start() {
             DontDestroyOnLoad(gameObject);
             LoadCustomLoseScenarios();
         }
 
-        void LoadCustomLoseScenarios()
-        {
-            string savePath = CustomLoseBuilderMenu.CustomScenarioFolder;
+        void LoadCustomLoseScenarios() {
+            var savePath = CustomLoseBuilderMenu.CustomScenarioFolder;
             if (!Directory.Exists(savePath))
                 Directory.CreateDirectory(savePath);
             var files = Directory.GetFiles(savePath);
@@ -29,22 +25,20 @@ namespace Safe_To_Share.Scripts.CustomContent
                     LoadScenario(file);
         }
 
-        void LoadScenario(string file)
-        {
+        void LoadScenario(string file) {
             var scenarioText = File.ReadAllText(file);
             var scenario = JsonUtility.FromJson<CustomLoseScenario>(scenarioText);
             if (scenario?.Enemies == null)
                 return;
-            foreach (EnemyPreset enemy in from enemy in enemyPresets
-                     from savedEnemy in
-                         scenario.Enemies.Where(savedEnemy =>
-                             savedEnemy == enemy.name && !enemy.customLoseScenarios.Contains(scenario))
-                     select enemy)
+            foreach (var enemy in from enemy in enemyPresets
+                                  from savedEnemy in
+                                      scenario.Enemies.Where(savedEnemy =>
+                                          savedEnemy == enemy.name && !enemy.customLoseScenarios.Contains(scenario))
+                                  select enemy)
                 FoundEnemy(scenario, enemy);
         }
 
-        static void FoundEnemy(CustomLoseScenario scenario, EnemyPreset enemy)
-        {
+        static void FoundEnemy(CustomLoseScenario scenario, EnemyPreset enemy) {
             if (!enemy.customLoseScenarios.Contains(scenario))
                 enemy.customLoseScenarios.Add(scenario);
         }

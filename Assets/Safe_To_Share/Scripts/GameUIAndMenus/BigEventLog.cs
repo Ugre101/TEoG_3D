@@ -3,32 +3,26 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class BigEventLog : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class BigEventLog : GameMenu {
         [SerializeField] TextMeshProUGUI eventLog;
 
 
-        void OnEnable()
-        {
+        void OnEnable() {
             PrintEventLog();
             EventLog.NewEvent += AddedText;
         }
 
         void OnDisable() => EventLog.NewEvent -= AddedText;
 
-        void PrintEventLog()
-        {
-            if (EventLog.Events.Count == 0)
-            {
+        void PrintEventLog() {
+            if (EventLog.Events.Count == 0) {
                 eventLog.text = string.Empty;
                 return;
             }
 
             StringBuilder sb = new();
-            for (int i = EventLog.Events.Count; i-- > 1;)
-            {
+            for (var i = EventLog.Events.Count; i-- > 1;) {
                 sb.AppendLine(EventLog.Events[i]);
                 sb.AppendLine();
             }
@@ -38,9 +32,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             eventLog.text = sb.ToString();
         }
 
-        void AddedText(string text)
-        {
-            string insertText = text;
+        void AddedText(string text) {
+            var insertText = text;
             if (eventLog.text.Length > 0)
                 insertText += "\n\n";
             eventLog.text = eventLog.text.Insert(0, $"{insertText}");

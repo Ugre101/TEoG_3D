@@ -5,18 +5,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts
-{
-    public sealed class SkipTime : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
-    {
+namespace Safe_To_Share.Scripts {
+    public sealed class SkipTime : MonoBehaviour, ICancelMeBeforeOpenPauseMenu {
         static int waitTime = 1;
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI waitText;
         [SerializeField] InputActionMap binds = new();
         [SerializeField] Button waitBtn, closeBtn;
 
-        void Start()
-        {
+        void Start() {
             slider.value = waitTime;
             slider.onValueChanged.AddListener(ChangeWait);
             closeBtn.onClick.AddListener(Close);
@@ -33,36 +30,31 @@ namespace Safe_To_Share.Scripts
 
         void OnDestroy() => binds.Dispose();
 
-        public bool BlockIfActive()
-        {
+        public bool BlockIfActive() {
             if (!gameObject.activeInHierarchy) return false;
             gameObject.SetActive(false);
             return true;
-
         }
 
         void IncreaseTime(InputAction.CallbackContext obj) => slider.value++;
         void DecreaseTime(InputAction.CallbackContext obj) => slider.value--;
         void CallWait(InputAction.CallbackContext obj) => Wait();
 
-        public void ToggleSetActive(InputAction.CallbackContext ctx)
-        {
+        public void ToggleSetActive(InputAction.CallbackContext ctx) {
             if (ctx.performed)
                 gameObject.SetActive(!gameObject.activeSelf);
         }
 
         void UpdateWaitText() => waitText.text = $"{waitTime}h";
 
-        void Wait()
-        {
+        void Wait() {
             DateSystem.PassHour(Mathf.Max(1, waitTime));
             Close();
         }
 
         void Close() => gameObject.SetActive(false);
 
-        void ChangeWait(float arg0)
-        {
+        void ChangeWait(float arg0) {
             waitTime = Mathf.RoundToInt(arg0);
             UpdateWaitText();
         }

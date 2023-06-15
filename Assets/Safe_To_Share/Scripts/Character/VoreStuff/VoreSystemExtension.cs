@@ -6,85 +6,78 @@ using Character.Organs.OrgansContainers;
 using Character.StatsStuff.Mods;
 using Character.VoreStuff.VorePerks;
 using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes;
-using UnityEngine;
 
-namespace Character.VoreStuff
-{
-    public static class VoreSystemExtension
-    {
-        public static bool HasPrey(this IEnumerable<BaseOrgan> list)
-        {
+namespace Character.VoreStuff {
+    public static class VoreSystemExtension {
+        public static bool HasPrey(this IEnumerable<BaseOrgan> list) {
             return list.Any(baseOrgan => baseOrgan.Vore.PreysIds.Any());
-        }public static bool HasPrey(this BaseOrgansContainer list)
-        {
+        }
+
+        public static bool HasPrey(this BaseOrgansContainer list) {
             return list.BaseList.Any(baseOrgan => baseOrgan.Vore.PreysIds.Any());
         }
-        public static float OrganVoreCapacity(BaseCharacter pred, BaseOrgan organ,SexualOrganType organType)
-        {
+
+        public static float OrganVoreCapacity(BaseCharacter pred, BaseOrgan organ, SexualOrganType organType) {
             if (organType == SexualOrganType.Anal)
                 return AnalVoreCapacity(pred, organ);
-            float flatBonus = pred.Vore.capacityBoost.GetValueOfType(ModType.Flat);
-            float percentBonus = 1f + organ.Vore.VoreExpMod +
-                                 pred.Vore.capacityBoost.GetValueOfType(ModType.Percent) / 100f;
+            var flatBonus = pred.Vore.capacityBoost.GetValueOfType(ModType.Flat);
+            var percentBonus = 1f + organ.Vore.VoreExpMod +
+                               pred.Vore.capacityBoost.GetValueOfType(ModType.Percent) / 100f;
             return organ.ScaledWithHeight(pred.Body.Height.Value) * percentBonus + flatBonus;
         }
 
-        public static float OralVoreCapacity(BaseCharacter pred)
-        {
-            float flatBonus = pred.Vore.capacityBoost.GetValueOfType(ModType.Flat);
-            float percentBonus = 1f + pred.Vore.Stomach.VoreExpMod +
-                                 pred.Vore.capacityBoost.GetValueOfType(ModType.Percent) / 100f;
+        public static float OralVoreCapacity(BaseCharacter pred) {
+            var flatBonus = pred.Vore.capacityBoost.GetValueOfType(ModType.Flat);
+            var percentBonus = 1f + pred.Vore.Stomach.VoreExpMod +
+                               pred.Vore.capacityBoost.GetValueOfType(ModType.Percent) / 100f;
             return pred.Body.Height.Value / 2f * percentBonus + flatBonus;
         }
 
-        static float AnalVoreCapacity(BaseCharacter pred,BaseOrgan organ)
-        {
-            float flatBonus = pred.Vore.capacityBoost.GetValueOfType(ModType.Flat);
-            float percentBonus = 1f + organ.Vore.VoreExpMod +
-                                 pred.Vore.capacityBoost.GetValueOfType(ModType.Percent) / 100f;
+        static float AnalVoreCapacity(BaseCharacter pred, BaseOrgan organ) {
+            var flatBonus = pred.Vore.capacityBoost.GetValueOfType(ModType.Flat);
+            var percentBonus = 1f + organ.Vore.VoreExpMod +
+                               pred.Vore.capacityBoost.GetValueOfType(ModType.Percent) / 100f;
             return pred.Body.Height.Value / 3f * percentBonus + flatBonus;
         }
-        public static bool CanOralVore(BaseCharacter pred, BaseCharacter prey)
-        {
-            float preyWeight = VoredCharacters.CurrentPreyTotalWeight(pred.Vore.Stomach.PreysIds);
-            float capacity = OralVoreCapacity(pred) - preyWeight;
+
+        public static bool CanOralVore(BaseCharacter pred, BaseCharacter prey) {
+            var preyWeight = VoredCharacters.CurrentPreyTotalWeight(pred.Vore.Stomach.PreysIds);
+            var capacity = OralVoreCapacity(pred) - preyWeight;
             return capacity >= prey.Body.Weight;
         }
 
 
-        public static bool CanOrganVore(BaseCharacter pred, BaseOrgan organ, BaseCharacter prey, SexualOrganType organType)
-        {
+        public static bool CanOrganVore(BaseCharacter pred, BaseOrgan organ, BaseCharacter prey,
+                                        SexualOrganType organType) {
             if (organType == SexualOrganType.Anal)
                 CanAnalVore(pred, organ, prey);
-            float preyWeight = VoredCharacters.CurrentPreyTotalWeight(organ.Vore.PreysIds);
-            float capacity = OrganVoreCapacity(pred, organ, organType) - preyWeight;
+            var preyWeight = VoredCharacters.CurrentPreyTotalWeight(organ.Vore.PreysIds);
+            var capacity = OrganVoreCapacity(pred, organ, organType) - preyWeight;
             return capacity >= prey.Body.Weight;
         }
 
-        static bool CanAnalVore(BaseCharacter pred, BaseOrgan organ, BaseCharacter prey)
-        {
-            float preyWeight = VoredCharacters.CurrentPreyTotalWeight(organ.Vore.PreysIds);
-            float capacity = AnalVoreCapacity(pred, organ) - preyWeight;
+        static bool CanAnalVore(BaseCharacter pred, BaseOrgan organ, BaseCharacter prey) {
+            var preyWeight = VoredCharacters.CurrentPreyTotalWeight(organ.Vore.PreysIds);
+            var capacity = AnalVoreCapacity(pred, organ) - preyWeight;
             return capacity >= prey.Body.Weight;
         }
-        
-        public static bool OralVore(this BaseCharacter pred, BaseCharacter prey)
-        {
+
+        public static bool OralVore(this BaseCharacter pred, BaseCharacter prey) {
             if (!CanOralVore(pred, prey))
                 return false;
             pred.Vore.Stomach.Vore(prey);
             pred.Vore.Stomach.SetStretch(OralVoreCapacity(pred));
             return true;
         }
-        public static bool OrganVore(this BaseCharacter pred, BaseCharacter prey, SexualOrganType organType)
-        {
-            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer container) ||
+
+        public static bool OrganVore(this BaseCharacter pred, BaseCharacter prey, SexualOrganType organType) {
+            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out var container) ||
                 !container.HaveAny())
                 return false;
             if (organType == SexualOrganType.Anal)
                 return AnalVore(pred, prey);
-            foreach (BaseOrgan baseOrgan in container.BaseList.Where(baseOrgan => CanOrganVore(pred, baseOrgan, prey, organType)))
-            {
+            foreach (var baseOrgan in container.BaseList.Where(baseOrgan =>
+                         CanOrganVore(pred, baseOrgan, prey, organType))) {
                 baseOrgan.Vore.Vore(prey);
                 baseOrgan.Vore.SetStretch(OrganVoreCapacity(pred, baseOrgan, organType));
                 return true;
@@ -93,13 +86,11 @@ namespace Character.VoreStuff
             return false;
         }
 
-        static bool AnalVore(this BaseCharacter pred, BaseCharacter prey)
-        {
-            if (!pred.SexualOrgans.Containers.TryGetValue(SexualOrganType.Anal, out BaseOrgansContainer container) ||
+        static bool AnalVore(this BaseCharacter pred, BaseCharacter prey) {
+            if (!pred.SexualOrgans.Containers.TryGetValue(SexualOrganType.Anal, out var container) ||
                 !container.HaveAny())
                 return false;
-            foreach (BaseOrgan baseOrgan in container.BaseList.Where(baseOrgan => CanAnalVore(pred, baseOrgan, prey)))
-            {
+            foreach (var baseOrgan in container.BaseList.Where(baseOrgan => CanAnalVore(pred, baseOrgan, prey))) {
                 baseOrgan.Vore.Vore(prey);
                 baseOrgan.Vore.SetStretch(AnalVoreCapacity(pred, baseOrgan));
                 return true;
@@ -109,13 +100,11 @@ namespace Character.VoreStuff
         }
 
         public static bool SpecialOrganVore(this BaseCharacter pred, BaseCharacter prey, SexualOrganType organType,
-            SpecialVoreOptions specialVoreOptions, bool onePreyOnly)
-        {
-            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out BaseOrgansContainer container) ||
+                                            SpecialVoreOptions specialVoreOptions, bool onePreyOnly) {
+            if (!pred.SexualOrgans.Containers.TryGetValue(organType, out var container) ||
                 !container.HaveAny())
                 return false;
-            foreach (BaseOrgan baseOrgan in container.BaseList)
-            {
+            foreach (var baseOrgan in container.BaseList) {
                 if (onePreyOnly && baseOrgan.Vore.SpecialPreysIds.Count > 0)
                     continue;
                 Prey myPrey = new(prey);
@@ -125,12 +114,12 @@ namespace Character.VoreStuff
                 VoredCharacters.AddPrey(myPrey);
                 myPrey.SetSpecialDigestionMode(GetMode());
 
-                string GetMode() => specialVoreOptions switch
-                {
-                    SpecialVoreOptions.Ctf => VoreOrganDigestionMode.Absorption,
-                    SpecialVoreOptions.BoobsTf => VoreOrganDigestionMode.Absorption,
-                    _ => string.Empty,
-                };
+                string GetMode() =>
+                    specialVoreOptions switch {
+                        SpecialVoreOptions.Ctf => VoreOrganDigestionMode.Absorption,
+                        SpecialVoreOptions.BoobsTf => VoreOrganDigestionMode.Absorption,
+                        _ => string.Empty,
+                    };
 
                 return true;
             }
@@ -139,20 +128,16 @@ namespace Character.VoreStuff
         }
 
         static bool HandleInsta(BaseCharacter pred, Prey prey, SexualOrganType organType,
-            SpecialVoreOptions specialVoreOptions, BaseOrgan baseOrgan)
-        {
-            if (specialVoreOptions != SpecialVoreOptions.Ctf && specialVoreOptions != SpecialVoreOptions.BoobsTf ||
+                                SpecialVoreOptions specialVoreOptions, BaseOrgan baseOrgan) {
+            if ((specialVoreOptions != SpecialVoreOptions.Ctf && specialVoreOptions != SpecialVoreOptions.BoobsTf) ||
                 !SexualOrganAbsorption.CanInstaMorph(prey, baseOrgan)) return false;
             SexualOrganAbsorption.AddToOrgan(pred, baseOrgan, prey, organType);
             // Insta morph and skip the rest
             return true;
-
         }
 
-        public static bool VoreOfType(this BaseCharacter pred, BaseCharacter prey, VoreType voreType)
-        {
-            switch (voreType)
-            {
+        public static bool VoreOfType(this BaseCharacter pred, BaseCharacter prey, VoreType voreType) {
+            switch (voreType) {
                 case VoreType.Oral:
                     if (OralVore(pred, prey))
                         return true;
@@ -183,39 +168,39 @@ namespace Character.VoreStuff
         }
 
         public static bool CanDoOfType(BaseCharacter pred, BaseCharacter prey, VoreType voreType) =>
-            voreType switch
-            {
+            voreType switch {
                 VoreType.Oral => CanOralVore(pred, prey),
-                VoreType.Balls => pred.SexualOrgans.Balls.BaseList.Any(baseOrgan => CanOrganVore(pred, baseOrgan, prey, SexualOrganType.Balls)),
+                VoreType.Balls => pred.SexualOrgans.Balls.BaseList.Any(baseOrgan =>
+                    CanOrganVore(pred, baseOrgan, prey, SexualOrganType.Balls)),
                 VoreType.UnBirth =>
-                    pred.SexualOrgans.Vaginas.BaseList.Any(baseOrgan => CanOrganVore(pred, baseOrgan, prey, SexualOrganType.Vagina)),
-                VoreType.Anal => pred.SexualOrgans.Anals.BaseList.Any(baseOrgan => CanAnalVore(pred,baseOrgan,prey)),
-                VoreType.Breast => pred.SexualOrgans.Boobs.BaseList.Any(baseOrgan => CanOrganVore(pred, baseOrgan, prey, SexualOrganType.Boobs)),
+                    pred.SexualOrgans.Vaginas.BaseList.Any(baseOrgan =>
+                        CanOrganVore(pred, baseOrgan, prey, SexualOrganType.Vagina)),
+                VoreType.Anal => pred.SexualOrgans.Anals.BaseList.Any(baseOrgan => CanAnalVore(pred, baseOrgan, prey)),
+                VoreType.Breast => pred.SexualOrgans.Boobs.BaseList.Any(baseOrgan =>
+                    CanOrganVore(pred, baseOrgan, prey, SexualOrganType.Boobs)),
                 _ => false,
             };
 
-        public static void RegurgitatePrey(BaseCharacter pred, VoreType from, int id)
-        {
-            switch (from)
-            {
+        public static void RegurgitatePrey(BaseCharacter pred, VoreType from, int id) {
+            switch (from) {
                 case VoreType.Oral:
                     pred.Vore.Stomach.ReleasePrey(id);
                     break;
                 case VoreType.Cock:
                 case VoreType.Balls:
-                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Balls.BaseList)
+                    foreach (var baseOrgan in pred.SexualOrgans.Balls.BaseList)
                         baseOrgan.Vore.ReleasePrey(id);
                     break;
                 case VoreType.UnBirth:
-                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Vaginas.BaseList)
+                    foreach (var baseOrgan in pred.SexualOrgans.Vaginas.BaseList)
                         baseOrgan.Vore.ReleasePrey(id);
                     break;
                 case VoreType.Anal:
-                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Anals.BaseList)
+                    foreach (var baseOrgan in pred.SexualOrgans.Anals.BaseList)
                         baseOrgan.Vore.ReleasePrey(id);
                     break;
                 case VoreType.Breast:
-                    foreach (BaseOrgan baseOrgan in pred.SexualOrgans.Boobs.BaseList)
+                    foreach (var baseOrgan in pred.SexualOrgans.Boobs.BaseList)
                         baseOrgan.Vore.ReleasePrey(id);
                     break;
                 default:

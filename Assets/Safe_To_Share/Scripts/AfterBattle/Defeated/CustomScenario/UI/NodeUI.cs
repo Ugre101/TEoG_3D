@@ -8,10 +8,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
-{
-    public class NodeUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI {
+    public class NodeUI : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler {
         static bool binding;
         [SerializeField] TextMeshProUGUI nodeTitle;
         [SerializeField] Slider slider;
@@ -29,46 +27,40 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
         CustomLoseScenarioNode node;
         CustomLoseScenario scenario;
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             CancelBinding -= ResetBindingText;
             StartLinking -= ChangeLinkingText;
             FinishLinking -= DoneLinking;
             NodeMoved -= DidMyChildMove;
         }
 
-        public void OnBeginDrag(PointerEventData eventData)
-        {
-        }
+        public void OnBeginDrag(PointerEventData eventData) { }
 
         public void OnDrag(PointerEventData eventData) => transform.position = eventData.position;
 
-        public void OnEndDrag(PointerEventData eventData)
-        {
+        public void OnEndDrag(PointerEventData eventData) {
             node.canvasPos = transform.localPosition;
             ShowLinks();
             NodeMoved?.Invoke(node.id);
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-        {
+        public void OnPointerClick(PointerEventData eventData) {
             if (node != null)
                 ShowMe?.Invoke(node);
         }
 
-        void CreateChild()
-        {
+        void CreateChild() {
             node.childNodesIds.Add(scenario.CreateNewNode(createChildOfType, node.canvasPos + new Vector2(250, 0)));
             ShowLinks();
         }
 
-        void ChangeChildType(int arg0) => createChildOfType =
-            UgreTools.IntToEnum(arg0, CustomNodeTypes.EssenceDrain, CustomNodeTypes.Intro);
+        void ChangeChildType(int arg0) =>
+            createChildOfType =
+                UgreTools.IntToEnum(arg0, CustomNodeTypes.EssenceDrain, CustomNodeTypes.Intro);
 
         protected virtual void ResistChange(float arg0) => resistCost.text = Mathf.RoundToInt(arg0).ToString();
 
-        public void SetupNode(CustomLoseScenario scenario, CustomLoseScenarioNode node)
-        {
+        public void SetupNode(CustomLoseScenario scenario, CustomLoseScenarioNode node) {
             this.scenario = scenario;
             this.node = node;
 
@@ -88,38 +80,34 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
             CancelBinding += ResetBindingText;
             NodeMoved += DidMyChildMove;
 
-            string GetTitle() => node switch
-            {
-                CustomIntroNode introNode => nodeTitle.text = "Intro",
-                CustomBodyNode bodyNode => nodeTitle.text = "Body",
-                CustomDrainNode drainNode => nodeTitle.text = "Essence",
-                CustomVoreNode voreNode => nodeTitle.text = "Vore",
-                _ => string.Empty,
-            };
+            string GetTitle() =>
+                node switch {
+                    CustomIntroNode introNode => nodeTitle.text = "Intro",
+                    CustomBodyNode bodyNode => nodeTitle.text = "Body",
+                    CustomDrainNode drainNode => nodeTitle.text = "Essence",
+                    CustomVoreNode voreNode => nodeTitle.text = "Vore",
+                    _ => string.Empty,
+                };
         }
 
-        void DidMyChildMove(string obj)
-        {
+        void DidMyChildMove(string obj) {
             if (node.childNodesIds.Contains(obj))
                 ShowLinks();
         }
 
-        public void ShowLinks()
-        {
+        public void ShowLinks() {
             linkContainer.KillChildren();
             if (node.childNodesIds.Count == 0) return;
             foreach (var childId in node.childNodesIds) PrintLink(childId);
         }
 
-        void PrintLink(string childId)
-        {
+        void PrintLink(string childId) {
             if (!scenario.ChildNodesDict.TryGetValue(childId, out var targetNode))
                 return;
-            GameObject obj = Instantiate(childLink, linkContainer);
+            var obj = Instantiate(childLink, linkContainer);
             Vector3 dir = targetNode.canvasPos - node.canvasPos;
-            float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-            foreach (PosAndRot linkPos in linkPoses.Where(linkPos => angle >= linkPos.min && angle < linkPos.max))
-            {
+            var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+            foreach (var linkPos in linkPoses.Where(linkPos => angle >= linkPos.min && angle < linkPos.max)) {
                 obj.transform.localPosition = linkPos.pos;
                 obj.transform.eulerAngles = new Vector3(0, 0, linkPos.zAngle);
                 break;
@@ -128,8 +116,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
 
         void ResetBindingText() => linkingBtnText.text = "Start Linking";
 
-        void DoneLinking(string obj)
-        {
+        void DoneLinking(string obj) {
             ResetBindingText();
             if (!bindingMe)
                 return;
@@ -138,8 +125,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
                 node.childNodesIds.Add(obj);
         }
 
-        void ChangeLinkingText()
-        {
+        void ChangeLinkingText() {
             if (bindingMe)
                 linkingBtnText.text = "Cancel";
             else
@@ -151,38 +137,29 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
         static event Action<string> FinishLinking;
         static event Action CancelBinding;
 
-        void ClickLinkingNodesAction()
-        {
-            if (binding)
-            {
+        void ClickLinkingNodesAction() {
+            if (binding) {
                 binding = false;
                 CompleteBinding();
-            }
-            else
-            {
+            } else {
                 binding = true;
                 bindingMe = true;
                 StartLinking?.Invoke();
             }
         }
 
-        void CompleteBinding()
-        {
-            if (bindingMe)
-            {
+        void CompleteBinding() {
+            if (bindingMe) {
                 bindingMe = false;
                 ResetBindingText();
                 CancelBinding?.Invoke();
-            }
-            else
-            {
+            } else {
                 ResetBindingText();
                 FinishLinking?.Invoke(node.id);
             }
         }
 
-        void DeleteThisNode()
-        {
+        void DeleteThisNode() {
             OnDestroy();
             scenario.RemoveNode(node);
             Destroy(gameObject);
@@ -191,8 +168,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.CustomScenario.UI
         public event Action<CustomLoseScenarioNode> ShowMe;
 
         [Serializable]
-        struct PosAndRot
-        {
+        struct PosAndRot {
             public float min, max;
             public Vector2 pos;
             public float zAngle;

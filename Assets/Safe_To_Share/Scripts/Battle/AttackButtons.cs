@@ -5,10 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Battle
-{
-    public sealed class AttackButtons : MonoBehaviour
-    {
+namespace Battle {
+    public sealed class AttackButtons : MonoBehaviour {
         const int MaxRow = 1, MinRow = 0;
         [SerializeField] AttackBtn[] buttons;
         [SerializeField] Button up, down;
@@ -17,8 +15,7 @@ namespace Battle
         AbilityBook currentBook;
         int currentRow;
 
-        int CurrentRow
-        {
+        int CurrentRow {
             get => currentRow;
             set => currentRow = Mathf.Clamp(value, MinRow, MaxRow);
         }
@@ -27,8 +24,7 @@ namespace Battle
         void OnValidate() => buttons = GetComponentsInChildren<AttackBtn>();
 #endif
 
-        public void FirstSetup()
-        {
+        public void FirstSetup() {
             foreach (var t in buttons)
                 t.FirstSetup();
 
@@ -37,16 +33,13 @@ namespace Battle
             UpdateRowButtonsAndText();
         }
 
-        public void Setup(ControlledCharacter playerControlled)
-        {
+        public void Setup(ControlledCharacter playerControlled) {
             currentBook = playerControlled.AndSpellBook;
             BindAbilities();
         }
 
-        void BindAbilities()
-        {
-            for (var i = 0; i < buttons.Length; i++)
-            {
+        void BindAbilities() {
+            for (var i = 0; i < buttons.Length; i++) {
                 var btn = buttons[i];
                 var bindIndex = CurrentRow > 0 ? buttons.Length * CurrentRow - 1 + i : i;
                 btn.SetId(bindIndex);
@@ -59,22 +52,19 @@ namespace Battle
             }
         }
 
-        void ScrollUp()
-        {
+        void ScrollUp() {
             CurrentRow++;
             UpdateRowButtonsAndText();
             BindAbilities();
         }
 
-        void UpdateRowButtonsAndText()
-        {
+        void UpdateRowButtonsAndText() {
             up.gameObject.SetActive(CurrentRow != MaxRow);
             down.gameObject.SetActive(CurrentRow != MinRow);
             currentRowText.text = CurrentRow.ToString();
         }
 
-        void ScrollDown()
-        {
+        void ScrollDown() {
             CurrentRow--;
             UpdateRowButtonsAndText();
             BindAbilities();

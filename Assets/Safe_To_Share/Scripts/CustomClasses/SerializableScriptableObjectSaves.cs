@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CustomClasses
-{
+namespace CustomClasses {
     [Serializable]
-    public struct SerializableScriptableObjectSaves
-    {
+    public struct SerializableScriptableObjectSaves {
         [SerializeField] List<string> savedGuids;
 
-        public SerializableScriptableObjectSaves(IEnumerable<SerializableScriptableObject> objects)
-        {
+        public SerializableScriptableObjectSaves(IEnumerable<SerializableScriptableObject> objects) {
             savedGuids = new List<string>();
             foreach (var guid in objects)
                 savedGuids.Add(guid.Guid);

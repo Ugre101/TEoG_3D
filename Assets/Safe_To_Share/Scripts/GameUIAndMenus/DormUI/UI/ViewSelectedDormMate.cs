@@ -2,18 +2,14 @@
 using Character;
 using Character.BodyStuff;
 using Character.GenderStuff;
-using Character.Race;
-using Character.RelationShipStuff;
 using DormAndHome.Dorm;
 using Safe_To_Share.Scripts.Holders;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
-{
-    public class ViewSelectedDormMate : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI {
+    public class ViewSelectedDormMate : MonoBehaviour {
         [SerializeField] protected TextMeshProUGUI fullName, bodyDesc, raceDesc, titleDesc;
         [SerializeField] protected Button rename;
         [SerializeField] protected RenameDormMate renameDormMate;
@@ -23,8 +19,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
         protected DormMateButton SelectedButton;
         protected DormMate SelectedMate;
 
-        protected virtual void Start()
-        {
+        protected virtual void Start() {
             rename.onClick.AddListener(RenameMate);
             changeSleepingArea.onClick.AddListener(ChangeSleepArea);
         }
@@ -33,15 +28,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 
         protected void OnDisable() => Clear();
 
-        void RenameMate()
-        {
+        void RenameMate() {
             if (DormMateIsNull)
                 return;
             renameDormMate.Setup(SelectedMate);
         }
 
-        public void Clear()
-        {
+        public void Clear() {
             SelectedMate = null;
             DormMateIsNull = true;
             titleDesc.text = string.Empty;
@@ -51,8 +44,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
             changeSleepingArea.gameObject.SetActive(false);
         }
 
-        public virtual void Setup(DormMateButton dormMateButton, DormMate dormMate)
-        {
+        public virtual void Setup(DormMateButton dormMateButton, DormMate dormMate) {
             SelectedButton = dormMateButton;
             SelectedMate = dormMate;
             DormMateIsNull = false;
@@ -66,21 +58,19 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
         protected virtual void CanChangeArea() =>
             changeSleepingArea.gameObject.SetActive(DormManager.Instance.Buildings.Dungeon.Level > 0);
 
-        void PrintTitleDesc()
-        {
+        void PrintTitleDesc() {
             if (DormMateIsNull)
                 return;
             StringBuilder sb = new();
             sb.AppendLine($"You treat {SelectedMate.Gender.HimHer()} as a {SelectedMate.TitleConversion()}.");
-            RelationShip relaWithPlayer = SelectedMate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID);
+            var relaWithPlayer = SelectedMate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID);
             sb.Append($"Affection {relaWithPlayer.Affection}");
             sb.Append("\t");
             sb.Append($"Submission {relaWithPlayer.Submission}");
             titleDesc.text = sb.ToString();
         }
 
-        void PrintRaceInfo(BaseCharacter dormMate)
-        {
+        void PrintRaceInfo(BaseCharacter dormMate) {
             if (DormMateIsNull)
                 return;
             StringBuilder sb = new();
@@ -89,14 +79,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
             sb.AppendLine(SelectedMate.RaceSystem.Race.Title);
             sb.AppendLine();
             sb.Append("(");
-            foreach (RaceEssence raceEssence in SelectedMate.RaceSystem.AllRaceEssence)
+            foreach (var raceEssence in SelectedMate.RaceSystem.AllRaceEssence)
                 sb.Append($"{raceEssence.Race.Title} {{{raceEssence.Amount}}}, ");
             sb.Append(")");
             raceDesc.text = sb.ToString();
         }
 
-        protected virtual void ChangeSleepArea()
-        {
+        protected virtual void ChangeSleepArea() {
             if (DormMateIsNull)
                 return;
             SelectedMate.SleepIn = DormMateSleepIn.Dungeon;
@@ -104,15 +93,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
             Clear();
         }
 
-        public void PrintName()
-        {
+        public void PrintName() {
             if (DormMateIsNull)
                 return;
             fullName.text = SelectedMate.Identity.FullName;
         }
 
-        public void RefreshSelectedButtonNames()
-        {
+        public void RefreshSelectedButtonNames() {
             if (DormMateIsNull)
                 return;
             SelectedButton.RefreshNames();

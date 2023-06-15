@@ -1,7 +1,5 @@
-﻿namespace Character.StatsStuff
-{
-    public enum CharStatType
-    {
+﻿namespace Character.StatsStuff {
+    public enum CharStatType {
         Strength,
         Intelligence,
         Constitution,

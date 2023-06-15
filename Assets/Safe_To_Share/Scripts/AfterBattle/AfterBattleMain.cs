@@ -12,22 +12,18 @@ using SceneStuff;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Safe_To_Share.Scripts.AfterBattle
-{
-    public sealed class AfterBattleMain : AfterBattleShared
-    {
+namespace Safe_To_Share.Scripts.AfterBattle {
+    public sealed class AfterBattleMain : AfterBattleShared {
         static AfterBattleMainUI AfterBattleMainUI => AfterBattleMainUI.Instance;
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             SexActionButton.PlayerAction -= HandlePlayerAction;
             DrainActionButton.PlayerAction -= HandleDrainAction;
             VoreActionButton.PlayerAction -= HandleVoreAction;
             TakeToDormButton.TakeToDorm -= HandleTakeToDorm;
         }
 
-        void HandleTakeToDorm()
-        {
+        void HandleTakeToDorm() {
             if (activeEnemyActor.Actor is not Enemy enemy || !enemy.CanTakeHome() || !DormManager.Instance.DormHasSpace)
                 return;
             DormManager.Instance.AddToDorm(enemy);
@@ -37,8 +33,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
 
-        IEnumerator BasePlayerActionReaction(AfterBattleBaseAction obj)
-        {
+        IEnumerator BasePlayerActionReaction(AfterBattleBaseAction obj) {
             var data = obj.Use(activePlayerActor, activeEnemyActor);
             AfterBattleMainUI.LogText(data);
             if (HasAct && LastAct == obj)
@@ -57,24 +52,20 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
 
-        void HandlePlayerAction(AfterBattleBaseAction obj)
-        {
+        void HandlePlayerAction(AfterBattleBaseAction obj) {
             StartCoroutine(PlayerActionReaction());
 
-            IEnumerator PlayerActionReaction()
-            {
+            IEnumerator PlayerActionReaction() {
                 yield return BasePlayerActionReaction(obj);
                 AfterBattleMainUI.RefreshButtons(activePlayerActor.Actor, activeEnemyActor.Actor);
             }
         }
 
 
-        void HandleDrainAction(AfterBattleBaseAction action)
-        {
+        void HandleDrainAction(AfterBattleBaseAction action) {
             StartCoroutine(DrainActionReaction());
 
-            IEnumerator DrainActionReaction()
-            {
+            IEnumerator DrainActionReaction() {
                 yield return BasePlayerActionReaction(action);
                 activePlayerActor.ModifyAvatar();
                 activeEnemyActor.ModifyAvatar();
@@ -83,12 +74,10 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
 
-        void HandleVoreAction(AfterBattleBaseAction obj)
-        {
+        void HandleVoreAction(AfterBattleBaseAction obj) {
             StartCoroutine(HandleVoreReaction());
 
-            IEnumerator HandleVoreReaction()
-            {
+            IEnumerator HandleVoreReaction() {
                 AfterBattleMainUI.NoPartnerRefresh(activePlayerActor.Actor);
                 yield return BasePlayerActionReaction(obj);
                 activePlayerActor.ModifyAvatar();
@@ -101,20 +90,18 @@ namespace Safe_To_Share.Scripts.AfterBattle
             }
         }
 
-        public override void Setup(Player player, BaseCharacter[] enemies, params BaseCharacter[] allies)
-        {
+        public override void Setup(Player player, BaseCharacter[] enemies, params BaseCharacter[] allies) {
             SexActionButton.PlayerAction += HandlePlayerAction;
             DrainActionButton.PlayerAction += HandleDrainAction;
             VoreActionButton.PlayerAction += HandleVoreAction;
             TakeToDormButton.TakeToDorm += HandleTakeToDorm;
             player.SexStats.NewSession();
             transform.AwakeChildren();
-            activePlayerActor.AvatarScaler.SetHeight(player.Body.Height.Value,true);
-            activeEnemyActor.AvatarScaler.SetHeight(enemies[0].Body.Height.Value,false);
-            
+            activePlayerActor.AvatarScaler.SetHeight(player.Body.Height.Value, true);
+            activeEnemyActor.AvatarScaler.SetHeight(enemies[0].Body.Height.Value, false);
+
             SetPlayerActor(player);
-            if (allies != null)
-            {
+            if (allies != null) {
                 // TODO
             }
 
@@ -124,23 +111,20 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
 
-        void SetPlayerActor(BaseCharacter character)
-        {
+        void SetPlayerActor(BaseCharacter character) {
             activePlayerActor.Setup(character, animatorController);
             LoadEssencePerks(character.LevelSystem.OwnedPerks.OfType<EssencePerk>());
             AfterBattleMainUI.SetupPlayer(character);
         }
 
-        static void LoadEssencePerks(IEnumerable<EssencePerk> enumerable)
-        {
+        static void LoadEssencePerks(IEnumerable<EssencePerk> enumerable) {
             if (enumerable == null)
                 return;
             foreach (var perk in enumerable)
                 Addressables.LoadAssetAsync<EssencePerk>(perk.Guid);
         }
 
-        void SetEnemyActor(BaseCharacter character)
-        {
+        void SetEnemyActor(BaseCharacter character) {
             activeEnemyActor.Setup(character, animatorController);
             LoadEssencePerks(character.LevelSystem.OwnedPerks.OfType<EssencePerk>());
             AfterBattleMainUI.SetupPartner(character);

@@ -1,13 +1,10 @@
-using System;
 using System.Collections;
 using Character.StatsStuff.HealthStuff;
 using TMPro;
 using UnityEngine;
 
-namespace Battle
-{
-    public sealed class HealthChangePopupNumbers : MonoBehaviour
-    {
+namespace Battle {
+    public sealed class HealthChangePopupNumbers : MonoBehaviour {
         [SerializeField] Color lightDmg = Color.yellow, mediumDmg = new(255, 165, 0), highDmg = Color.red;
 
         [Range(0.5f, 2f), SerializeField,] float minFontSize = 0.5f;
@@ -22,8 +19,7 @@ namespace Battle
         void OnDestroy() => UnSub();
 
 
-        public void Setup(Health health, Health willPower)
-        {
+        public void Setup(Health health, Health willPower) {
             delayedSetActiveFalse = new WaitForSeconds(delay);
 
             hp = health;
@@ -35,25 +31,22 @@ namespace Battle
             wp.ValueIncrease += HealWp;
         }
 
-        void HealWp(int obj)
-        {
-            float changePercent = (float)obj / wp.Value;
+        void HealWp(int obj) {
+            var changePercent = (float)obj / wp.Value;
             text.color = Color.green;
             text.fontSize = CalcFontSize(changePercent);
             BaseChange(obj, "wp");
         }
 
-        void HealHp(int obj)
-        {
-            float changePercent = (float)obj / hp.Value;
+        void HealHp(int obj) {
+            var changePercent = (float)obj / hp.Value;
             text.color = Color.blue;
             text.fontSize = CalcFontSize(changePercent);
             BaseChange(obj, "hp");
         }
 
-        void TakeWillDamage(int obj)
-        {
-            float changePercent = (float)obj / wp.Value;
+        void TakeWillDamage(int obj) {
+            var changePercent = (float)obj / wp.Value;
             text.color = DamageColor(changePercent);
             text.fontSize = CalcFontSize(changePercent);
             BaseChange(obj, "wp");
@@ -63,24 +56,20 @@ namespace Battle
             changePercent > 0.5f ? highDmg :
             changePercent > 0.3f ? mediumDmg : lightDmg;
 
-        void TakeHpDamage(int obj)
-        {
-            float changePercent = (float)obj / hp.Value;
+        void TakeHpDamage(int obj) {
+            var changePercent = (float)obj / hp.Value;
             text.color = DamageColor(changePercent);
             text.fontSize = CalcFontSize(changePercent);
             BaseChange(obj, "hp");
         }
 
-        public void UnSub()
-        {
-            if (hp != null)
-            {
+        public void UnSub() {
+            if (hp != null) {
                 hp.ValueDecrease -= TakeHpDamage;
                 hp.ValueIncrease -= HealHp;
             }
 
-            if (wp != null)
-            {
+            if (wp != null) {
                 wp.ValueDecrease -= TakeWillDamage;
                 wp.ValueIncrease -= HealWp;
             }
@@ -88,16 +77,14 @@ namespace Battle
 
         float CalcFontSize(float changePercent) => minFontSize + (maxFontSize - minFontSize) * changePercent;
 
-        void BaseChange(float change, string healthType)
-        {
+        void BaseChange(float change, string healthType) {
             text.text = $"{change} {healthType}";
             gameObject.SetActive(true);
             StartCoroutine(DelayedSetActiveFalse());
         }
 
 
-        IEnumerator DelayedSetActiveFalse()
-        {
+        IEnumerator DelayedSetActiveFalse() {
             yield return delayedSetActiveFalse;
             gameObject.SetActive(false);
         }

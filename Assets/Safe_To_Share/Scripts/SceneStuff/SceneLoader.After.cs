@@ -6,25 +6,21 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.SceneManagement;
 
-namespace SceneStuff
-{
-    public sealed partial class SceneLoader
-    {
+namespace SceneStuff {
+    public sealed partial class SceneLoader {
         public void PreLoadAfterBattle() =>
             scenePreload = afterBattleScene.SceneReference.LoadSceneAsync(LoadSceneMode.Additive);
 
         public void FinishPreloadAfterBattle(Player player, BaseCharacter[] partners, BaseCharacter[] allies = null) =>
             StartCoroutine(FinishPreloadAfter(true, player, partners, allies));
 
-        public void LoadAfterBattleFromLocation(PlayerHolder player, params BaseCharacter[] partners)
-        {
+        public void LoadAfterBattleFromLocation(PlayerHolder player, params BaseCharacter[] partners) {
             lastPos = player.transform.position;
             StartCoroutine(LoadAfterBattleDirectly(player.Player, partners));
         }
 
         IEnumerator LoadAfterBattleDirectly(Player player, BaseCharacter[] enemyTeam,
-            BaseCharacter[] allies = null)
-        {
+                                            BaseCharacter[] allies = null) {
             var op = afterBattleScene.SceneReference.LoadSceneAsync();
             StartLoadStuff();
             yield return UpdateProgressWhileSceneNotDone(op);
@@ -38,8 +34,7 @@ namespace SceneStuff
         }
 
         IEnumerator FinishPreloadAfter(bool win, Player player, BaseCharacter[] enemyTeam,
-            BaseCharacter[] allies = null)
-        {
+                                       BaseCharacter[] allies = null) {
             StartLoadStuff();
             yield return UpdateProgressWhileSceneNotDone(scenePreload);
             if (scenePreload.Status != AsyncOperationStatus.Succeeded) yield break;
@@ -60,21 +55,18 @@ namespace SceneStuff
         }
 
 
-        public void LeaveDefeat(Player player)
-        {
-            if (InSubRealm)
-            {
+        public void LeaveDefeat(Player player) {
+            if (InSubRealm) {
                 if (subRealmExitOnDefeat)
                     LoadNewLocation(lastLocation, player, currentSubRealm.Exit);
                 else
                     StartCoroutine(LoadSceneOp(currentSubRealm, player, lastPos));
-            }
-            else
+            } else {
                 LoadLastLocation(player);
+            }
         }
 
-        public void LeaveAfterBattle(Player player)
-        {
+        public void LeaveAfterBattle(Player player) {
             if (InSubRealm)
                 StartCoroutine(LoadSceneOp(currentSubRealm, player, lastPos));
             else

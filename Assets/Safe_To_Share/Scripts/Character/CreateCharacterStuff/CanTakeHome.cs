@@ -1,11 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Character.CreateCharacterStuff
-{
+namespace Character.CreateCharacterStuff {
     [Serializable]
-    public struct CanTakeEnemyHome
-    {
+    public struct CanTakeEnemyHome {
         [SerializeField] bool canTake;
         [SerializeField] int orgasmsNeeded;
 

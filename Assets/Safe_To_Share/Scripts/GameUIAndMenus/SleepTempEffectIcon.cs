@@ -8,10 +8,8 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class SleepTempEffectIcon : EffectIcon
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class SleepTempEffectIcon : EffectIcon {
         [SerializeField] TextMeshProUGUI timeLeft;
 
         List<TempIntMod> mods;
@@ -22,8 +20,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 
         void OnDisable() => DateSystem.NewHour -= UpdateTimeLeft;
 
-        public void Setup(List<TempIntMod> tempIntMod, float tier)
-        {
+        public void Setup(List<TempIntMod> tempIntMod, float tier) {
             mods = tempIntMod;
             sleepTier = tier;
             DateSystem.NewHour += UpdateTimeLeft;
@@ -33,9 +30,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             sleepDesc = sb.ToString();
         }
 
-        void UpdateTimeLeft(int obj)
-        {
-            int max = mods.Max(m => m.HoursLeft);
+        void UpdateTimeLeft(int obj) {
+            var max = mods.Max(m => m.HoursLeft);
             timeLeft.text = $"{max}h";
             if (max <= 0)
                 gameObject.SetActive(false);

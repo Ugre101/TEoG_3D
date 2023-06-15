@@ -18,10 +18,8 @@ using SaveStuff;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class GameCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class GameCanvas : MonoBehaviour, ICancelMeBeforeOpenPauseMenu {
         [SerializeField] GameObject gameUI, gameMenus, boatMenu;
         [SerializeField] ShopMenu.ShopMenu shopMenu;
         [SerializeField] DialogueMenu dialogueMenu;
@@ -34,8 +32,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
         [SerializeField] SleepCanvas sleepCanvas;
         IEnumerable<BlockGameUI> cancelThese;
 
-        void Start()
-        {
+        void Start() {
             closeMenuBtn.onClick.AddListener(CloseMenus);
             TriggerBoatMenu.OpenBoatMenu += OpenBoatMenu;
             TradeAbleCharacter.OpenShopMenu += OpenShopMenu;
@@ -49,27 +46,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             SwitchPanels(gameUI);
         }
 
-        void GameUIManagerOnSleepEffect()
-        {
-            SwitchPanels(sleepCanvas.gameObject);
-            sleepCanvas.Sleep();
-        }
 
-        void PlayerBirthEventOnTriggerBirthMenu(BaseCharacter arg1, IEnumerable<Fetus> arg2)
-        {
-            SwitchPanels(birthEventMenu.gameObject);
-            birthEventMenu.PlayerMotherBirthEvent(arg1,arg2);
-        }
-
-        void OpenSecInv(Inventory obj)
-        {
-            TriggerMenu(inventoryMenu.gameObject);
-            inventoryMenu.SetupSecondaryInventory(obj);
-        }
-
-
-        void OnDestroy()
-        {
+        void OnDestroy() {
             TriggerBoatMenu.OpenBoatMenu -= OpenBoatMenu;
             TradeAbleCharacter.OpenShopMenu -= OpenShopMenu;
             LoadManager.LoadedSave -= CloseMenus;
@@ -81,56 +59,63 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             CharacterEvents.PlayerEvents.PlayerBirthEvent.TriggerBirthMenu -= PlayerBirthEventOnTriggerBirthMenu;
         }
 
-        void ForceHide(bool obj)
-        {
+        public bool BlockIfActive() {
+            if (!gameMenus.activeInHierarchy && !boatMenu.activeInHierarchy) return false;
+            CloseMenus();
+            return true;
+        }
+
+        void GameUIManagerOnSleepEffect() {
+            SwitchPanels(sleepCanvas.gameObject);
+            sleepCanvas.Sleep();
+        }
+
+        void PlayerBirthEventOnTriggerBirthMenu(BaseCharacter arg1, IEnumerable<Fetus> arg2) {
+            SwitchPanels(birthEventMenu.gameObject);
+            birthEventMenu.PlayerMotherBirthEvent(arg1, arg2);
+        }
+
+        void OpenSecInv(Inventory obj) {
+            TriggerMenu(inventoryMenu.gameObject);
+            inventoryMenu.SetupSecondaryInventory(obj);
+        }
+
+        void ForceHide(bool obj) {
             if (obj)
                 hideGameUI.ForceHide();
             else
                 hideGameUI.StopForceHide();
         }
-        public bool BlockIfActive()
-        {
-            if (!gameMenus.activeInHierarchy && !boatMenu.activeInHierarchy) return false;
-            CloseMenus();
-            return true;
-
-        }
 
 
-        public void OpenShopMenu(string arg1, List<Item> arg2)
-        {
+        public void OpenShopMenu(string arg1, List<Item> arg2) {
             GameManager.Pause();
             SwitchPanels(shopMenu.gameObject);
             shopMenu.Setup(arg1, arg2);
         }
 
-        public void OpenServiceMenu(string title, OfferServices offers)
-        {
+        public void OpenServiceMenu(string title, OfferServices offers) {
             GameManager.Pause();
             SwitchPanels(serviceMenu.gameObject);
             serviceMenu.Setup(title, offers.OfferedServices);
         }
 
-        void OpenBoatMenu()
-        {
+        void OpenBoatMenu() {
             GameManager.Pause();
             SwitchPanels(boatMenu);
         }
 
-        public void CloseMenus()
-        {
+        public void CloseMenus() {
             GameManager.Resume(false);
             SwitchPanels(gameUI);
         }
 
-        public void TriggerMenu(GameObject menu)
-        {
+        public void TriggerMenu(GameObject menu) {
             if (GameUIManager.BlockList.Any() || menu == null)
                 return;
-            if (gameMenus.activeSelf && menu.activeSelf)
+            if (gameMenus.activeSelf && menu.activeSelf) {
                 CloseMenus();
-            else
-            {
+            } else {
                 GameManager.Pause();
                 SwitchPanels(gameMenus);
                 gameMenus.transform.SleepChildren(menu);
@@ -140,21 +125,18 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 
         void SwitchPanels(GameObject panel) => transform.SleepChildren(panel);
 
-        public void HideUI()
-        {
+        public void HideUI() {
             if (gameUI.activeSelf)
                 hideGameUI.ToggleHide();
         }
 
-        public void OpenDialogueMenu(BaseDialogue dialogue)
-        {
+        public void OpenDialogueMenu(BaseDialogue dialogue) {
             GameManager.Pause();
             SwitchPanels(dialogueMenu.gameObject);
             dialogueMenu.Setup(dialogue);
         }
 
-        void OpenVoreEvent(BaseDialogue arg1, Player arg2, Prey arg3, VoreOrgan arg4)
-        {
+        void OpenVoreEvent(BaseDialogue arg1, Player arg2, Prey arg3, VoreOrgan arg4) {
             if (voreEventMenu.isActiveAndEnabled) return; // TODO event que system
             GameManager.Pause();
             SwitchPanels(voreEventMenu.gameObject);

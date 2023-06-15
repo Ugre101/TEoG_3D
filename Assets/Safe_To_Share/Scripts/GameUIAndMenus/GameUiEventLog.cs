@@ -4,10 +4,8 @@ using Safe_To_Share.Scripts.Static;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class GameUiEventLog : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class GameUiEventLog : MonoBehaviour {
         const float CheckInterval = 0.5f;
         [SerializeField] TextMeshProUGUI eventLog;
         [SerializeField] float displayEventTime = 10f;
@@ -16,8 +14,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 
         void Start() => PrintEventLog();
 
-        void Update()
-        {
+        void Update() {
             if (!EnoughTimeAsPassed())
                 return;
             if (eventLogs.RemoveAll(l => l.AddedTime + displayEventTime <= Time.time) > 0)
@@ -31,17 +28,14 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
 
         bool EnoughTimeAsPassed() => lastCheck + CheckInterval <= Time.time;
 
-        void AddText(string text)
-        {
+        void AddText(string text) {
             eventLogs.Add(new TimedEventLog(text, Time.time));
-            string insertText = $"{text}\n\n";
+            var insertText = $"{text}\n\n";
             eventLog.text += insertText;
         }
 
-        void PrintEventLog()
-        {
-            switch (eventLogs.Count)
-            {
+        void PrintEventLog() {
+            switch (eventLogs.Count) {
                 case 0:
                     eventLog.text = string.Empty;
                     return;
@@ -51,8 +45,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             }
 
             StringBuilder sb = new();
-            foreach (TimedEventLog log in eventLogs)
-            {
+            foreach (var log in eventLogs) {
                 sb.AppendLine(log.Text);
                 sb.AppendLine();
             }
@@ -60,13 +53,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
             eventLog.text = sb.ToString();
         }
 
-        readonly struct TimedEventLog
-        {
+        readonly struct TimedEventLog {
             public readonly string Text;
             public readonly float AddedTime;
 
-            public TimedEventLog(string text, float addedTime)
-            {
+            public TimedEventLog(string text, float addedTime) {
                 Text = text;
                 AddedTime = addedTime;
             }

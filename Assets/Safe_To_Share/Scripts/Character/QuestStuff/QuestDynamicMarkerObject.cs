@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-namespace QuestStuff
-{
-    public sealed class QuestDynamicMarkerObject : MonoBehaviour
-    {
+namespace QuestStuff {
+    public sealed class QuestDynamicMarkerObject : MonoBehaviour {
         [SerializeField] QuestInfo questInfo;
 
         public Sprite Icon => questInfo.Icon;

@@ -2,12 +2,9 @@
 using DormAndHome.Dorm;
 using Safe_To_Share.Scripts.Holders;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
-{
-    public sealed class ViewSelectedDungeonDormMate : ViewSelectedDormMate
-    {
-        protected override void ChangeSleepArea()
-        {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI {
+    public sealed class ViewSelectedDungeonDormMate : ViewSelectedDormMate {
+        protected override void ChangeSleepArea() {
             if (DormMateIsNull || !CanSendUp(SelectedMate))
                 return;
             SelectedMate.SleepIn = DormMateSleepIn.Lodge;
@@ -17,8 +14,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
 
         protected override void CanChangeArea() => changeSleepingArea.gameObject.SetActive(CanSendUp(SelectedMate));
 
-        static bool CanSendUp(DormMate dormMate)
-        {
+        static bool CanSendUp(DormMate dormMate) {
             var relWithPlayer = dormMate.RelationsShips.GetRelationShipWith(PlayerHolder.PlayerID);
             var aff = relWithPlayer.Affection;
             var sub = relWithPlayer.Submission;

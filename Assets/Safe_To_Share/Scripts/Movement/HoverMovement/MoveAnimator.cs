@@ -2,10 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Movement.HoverMovement
-{
-    public sealed class MoveAnimator : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Movement.HoverMovement {
+    public sealed class MoveAnimator : MonoBehaviour {
         static readonly int Forward = Animator.StringToHash("Forward");
         static readonly int Turn = Animator.StringToHash("Turn");
         static readonly int Ground = Animator.StringToHash("OnGround");
@@ -28,25 +26,21 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
 
         float LocalScaleX => transform.localScale.x;
 
-        void Awake()
-        {
+        void Awake() {
             isCharacterNull = character == null;
             isAnimatorNull = animator == null;
         }
 
-        void Update()
-        {
+        void Update() {
             if (isCharacterNull || isAnimatorNull)
                 return;
 
             var move = character.GetLocalMoveDirection();
             animator.SetBool(Crouch, character.IsCrouching());
             animator.SetBool(Ground, CheckGrounded());
-            switch (character.CurrentMode)
-            {
+            switch (character.CurrentMode) {
                 case MoveCharacter.MoveModes.Walking:
-                    if (character.IsGrounded())
-                    {
+                    if (character.IsGrounded()) {
                         Walking(move);
                         break;
                     }
@@ -65,8 +59,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
 
 #if UNITY_EDITOR
 
-        void OnValidate()
-        {
+        void OnValidate() {
             if (Application.isPlaying)
                 return;
             //   if (animator == null && !TryGetComponent(out animator))
@@ -76,8 +69,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         }
 #endif
 
-        bool CheckGrounded()
-        {
+        bool CheckGrounded() {
             if (character.IsGrounded())
                 return true;
             if (character.WasGrounded())
@@ -85,14 +77,12 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             return character.Swimming;
         }
 
-        public void SetAnimator(Animator obj)
-        {
+        public void SetAnimator(Animator obj) {
             animator = obj;
             isAnimatorNull = false;
         }
 
-        void HandleSwimming(Vector3 move)
-        {
+        void HandleSwimming(Vector3 move) {
             var forward = move.z;
             forward *= character.GetCurrentSpeed() / character.GetMaxSpeed(); //Mathf.Max(HeightSpeed(), float.Epsilon);
             StartSwimming();
@@ -100,21 +90,18 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             animator.SetFloat(Turn, move.x, 0.1f, Time.deltaTime);
         }
 
-        void StartSwimming()
-        {
+        void StartSwimming() {
             if (animator.GetBool(Swimming) is false)
                 animator.SetBool(Swimming, true);
             isSwimming = true;
         }
 
-        void Walking(Vector3 move)
-        {
+        void Walking(Vector3 move) {
             var forward = move.z;
             forward *= character.GetCurrentSpeed() / Mathf.Max(HeightSpeed(), float.Epsilon);
             animator.SetFloat(Forward, forward, 0.1f, Time.deltaTime);
             animator.SetFloat(Turn, move.x, 0.1f, Time.deltaTime);
-            if (isSwimming)
-            {
+            if (isSwimming) {
                 isSwimming = false;
                 animator.SetBool(Swimming, false);
                 //StartCoroutine(StopSwimmingSoon());
@@ -129,11 +116,9 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
 
         float GetHeightFactor() => LocalScaleX * 0.4f + 0.6f;
 
-        IEnumerator StopSwimmingSoon()
-        {
+        IEnumerator StopSwimmingSoon() {
             float timePassed = 0;
-            while (timePassed < stopSwimmingDelay)
-            {
+            while (timePassed < stopSwimmingDelay) {
                 if (isSwimming)
                     yield break;
                 timePassed += Time.deltaTime;

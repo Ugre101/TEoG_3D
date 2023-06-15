@@ -4,11 +4,9 @@ using Character.BodyStuff.BodyBuild;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace Character.BodyStuff
-{
+namespace Character.BodyStuff {
     [Serializable]
-    public class Body : ITickHour
-    {
+    public class Body : ITickHour {
         // Muscle & fat: 20 != 20kg, 50 "muscle value" is always average muscle independent of height & fat. Likewise with fat.
         [SerializeField] BodyStat muscle, fat, height;
         [SerializeField] Thickset thickset;
@@ -18,17 +16,14 @@ namespace Character.BodyStuff
 
         Dictionary<BodyStatType, BodyStat> bodyStats;
 
-        public Body(int muscle, int fat, int height, float thickset = 0f)
-        {
+        public Body(int muscle, int fat, int height, float thickset = 0f) {
             this.muscle = new BodyStat(muscle);
             this.fat = new BodyStat(fat);
             this.height = new BodyStat(height);
             this.thickset = new Thickset(thickset);
         }
 
-        public Body() : this(20, 20, 160)
-        {
-        }
+        public Body() : this(20, 20, 160) { }
 
         public float FatWeight => Height.Value * (Fat.Value / 200f);
 
@@ -44,8 +39,7 @@ namespace Character.BodyStuff
         public BodyStat Height => height;
 
         public Dictionary<BodyStatType, BodyStat> BodyStats =>
-            bodyStats ??= new Dictionary<BodyStatType, BodyStat>
-            {
+            bodyStats ??= new Dictionary<BodyStatType, BodyStat> {
                 { BodyStatType.Fat, Fat },
                 { BodyStatType.Height, Height },
                 { BodyStatType.Muscle, Muscle },
@@ -57,17 +51,15 @@ namespace Character.BodyStuff
 
         public Thickset Thickset => thickset;
 
-        public float SkinTone
-        {
+        public float SkinTone {
             get => skinTone;
             set => skinTone = Mathf.Clamp(value, 0f, 1f);
         }
 
 
-        public bool TickHour(int ticks = 1)
-        {
-            bool change = false;
-            foreach (BodyStat bodyStatsValue in BodyStats.Values)
+        public bool TickHour(int ticks = 1) {
+            var change = false;
+            foreach (var bodyStatsValue in BodyStats.Values)
                 if (bodyStatsValue.TickHour(ticks))
                     change = true;
             FatBurnRate.TickHour(ticks);
@@ -76,9 +68,8 @@ namespace Character.BodyStuff
             return change;
         }
 
-        public void Loaded(params AssignBodyMod[] mods)
-        {
-            foreach (AssignBodyMod mod in mods)
+        public void Loaded(params AssignBodyMod[] mods) {
+            foreach (var mod in mods)
                 BodyStats[mod.Type].Mods.AddStatMod(mod.Mod);
             Morphs.Loaded();
         }

@@ -2,15 +2,11 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Safe_To_Share.Scripts.Movement.HoverMovement
-{
-    [RequireComponent(typeof(Rigidbody),typeof(CharacterCapsule))]
-    public abstract class MoveCharacter : MonoBehaviour
-    {
-        public enum MoveModes
-        {
-            Walking,
-            Swimming,
+namespace Safe_To_Share.Scripts.Movement.HoverMovement {
+    [RequireComponent(typeof(Rigidbody), typeof(CharacterCapsule))]
+    public abstract class MoveCharacter : MonoBehaviour {
+        public enum MoveModes {
+            Walking, Swimming,
         }
 
         [SerializeField] MoveModes currentMode;
@@ -23,11 +19,9 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         protected float Speed => Stats.WalkSpeed;
         public float MaxSwimSpeed => Speed;
 
-        public MoveModes CurrentMode
-        {
+        public MoveModes CurrentMode {
             get => currentMode;
-            protected set
-            {
+            protected set {
                 currentMode = value;
                 ChangedMode?.Invoke(value);
             }
@@ -37,10 +31,8 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
         public bool Swimming => CurrentMode is MoveModes.Swimming;
 
 #if UNITY_EDITOR
-        protected virtual void OnValidate()
-        {
-            if (Rigid == null)
-            {
+        protected virtual void OnValidate() {
+            if (Rigid == null) {
                 if (TryGetComponent(out Rigidbody rb))
                     Rigid = rb;
                 else
@@ -50,8 +42,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement
             if (capsule == null && TryGetComponent(out capsule) is false)
                 throw new MissingComponentException("Missing char capsule");
 
-            if (Stats == null)
-            {
+            if (Stats == null) {
                 if (TryGetComponent(out MoveStats stats))
                     Stats = stats;
                 else

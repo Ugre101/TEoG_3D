@@ -4,14 +4,10 @@ using Safe_To_Share.Scripts.Static;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace Dialogue.Editor
-{
-    public sealed class DialogueBuilderWindow : BaseNodeBuilderWindows<BaseDialogue,DialogueBaseNode>
-    {
-        [NonSerialized] readonly string[] options =
-        {
+namespace Dialogue.Editor {
+    public sealed class DialogueBuilderWindow : BaseNodeBuilderWindows<BaseDialogue, DialogueBaseNode> {
+        [NonSerialized] readonly string[] options = {
             NodeTypes.Basic.ToString(),
             NodeTypes.Close.ToString(),
             NodeTypes.Quest.ToString(),
@@ -22,39 +18,33 @@ namespace Dialogue.Editor
 
         [NonSerialized] NodeTypes nodeType;
 
-        void OnGUI()
-        {
-            if (Selected == null)
+        void OnGUI() {
+            if (Selected == null) {
                 EditorGUILayout.LabelField("No selected");
-            else
-            {
+            } else {
                 ProcessEvents();
                 ScrollPos = EditorGUILayout.BeginScrollView(ScrollPos, true, true);
                 EditorGUILayout.LabelField(Selected.name);
 
-                Rect canvas = GUILayoutUtility.GetRect(CanvasSize, CanvasSize);
-                foreach (DialogueBaseNode node in Selected.GetAllNodes())
-                {
+                var canvas = GUILayoutUtility.GetRect(CanvasSize, CanvasSize);
+                foreach (var node in Selected.GetAllNodes()) {
                     DrawNode(node);
                     DrawNodeConnection(Selected, node);
                 }
 
                 EditorGUILayout.EndScrollView();
 
-                if (deletingNode != null)
-                {
+                if (deletingNode != null) {
                     Selected.DeleteChildNode(deletingNode);
                     deletingNode = null;
-                }
-                else if (creatingNode != null)
+                } else if (creatingNode != null) {
                     AddNewNode();
+                }
             }
         }
 
-        void AddNewNode()
-        {
-            switch (nodeType)
-            {
+        void AddNewNode() {
+            switch (nodeType) {
                 case NodeTypes.Basic:
                     Selected.CreateChildNode<DialogueBaseNode>(creatingNode);
                     break;
@@ -81,15 +71,13 @@ namespace Dialogue.Editor
         }
 
         [MenuItem("Dialogue/Builder")]
-        static void ShowWindow()
-        {
+        static void ShowWindow() {
             var window = GetWindow<DialogueBuilderWindow>();
             window.titleContent = new GUIContent("Dialogue Builder");
             window.Show();
         }
 
-        void DrawNode(DialogueBaseNode node)
-        {
+        void DrawNode(DialogueBaseNode node) {
             GUILayout.BeginArea(node.rect, NodeStyle);
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.LabelField(node.GetType().Name, EditorStyles.whiteLabel);
@@ -102,11 +90,9 @@ namespace Dialogue.Editor
         }
 
         [OnOpenAsset(1)]
-        public static bool OnOpenAsset(int instanceID, int line)
-        {
-            Object obj = EditorUtility.InstanceIDToObject(instanceID);
-            if (obj is BaseDialogue dialogue)
-            {
+        public static bool OnOpenAsset(int instanceID, int line) {
+            var obj = EditorUtility.InstanceIDToObject(instanceID);
+            if (obj is BaseDialogue dialogue) {
                 ShowWindow();
                 return true;
             }
@@ -114,8 +100,7 @@ namespace Dialogue.Editor
             return false;
         }
 
-        enum NodeTypes
-        {
+        enum NodeTypes {
             Basic,
             Close,
             Quest,

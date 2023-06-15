@@ -2,13 +2,10 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Editorasd
-{
+namespace Editorasd {
     [CustomPropertyDrawer(typeof(DropSerializableObject<>))]
-    public class DropSerializedScriptableObjectPropertyDrawer : PropertyDrawer
-    {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
+    public class DropSerializedScriptableObjectPropertyDrawer : PropertyDrawer {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             EditorGUI.BeginProperty(position, label, property);
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
             var amountRect = new Rect(position.x, position.y, position.width, position.height * (2f / 3f));
@@ -24,13 +21,11 @@ namespace Editorasd
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) =>
             base.GetPropertyHeight(property, label) * 3f;
 
-        public void DropAreaGUI(Rect rect, SerializedProperty property)
-        {
-            Event evt = Event.current;
+        public void DropAreaGUI(Rect rect, SerializedProperty property) {
+            var evt = Event.current;
             GUI.Box(rect, "Drop scripableObject with guid");
 
-            switch (evt.type)
-            {
+            switch (evt.type) {
                 case EventType.DragUpdated:
                 case EventType.DragPerform:
                     if (!rect.Contains(evt.mousePosition))
@@ -38,11 +33,10 @@ namespace Editorasd
 
                     DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
 
-                    if (evt.type == EventType.DragPerform)
-                    {
+                    if (evt.type == EventType.DragPerform) {
                         DragAndDrop.AcceptDrag();
-                        
-                        foreach (Object dragged_object in DragAndDrop.objectReferences)
+
+                        foreach (var dragged_object in DragAndDrop.objectReferences)
                             if (dragged_object is SerializableScriptableObject serilized)
                                 property.FindPropertyRelative("guid").stringValue = serilized.Guid;
                     }

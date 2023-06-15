@@ -4,11 +4,9 @@ using CustomClasses;
 using Safe_To_Share.Scripts.Character.VoreStuff.VoreDigestionModes;
 using UnityEngine;
 
-namespace Character.VoreStuff.VorePerks
-{
+namespace Character.VoreStuff.VorePerks {
     [CreateAssetMenu(fileName = "SexualOrganAbsorption", menuName = "Character/Vore/SexualOrganAbsorption", order = 0)]
-    public sealed class SexualOrganAbsorption : VorePerkNewPredationMode
-    {
+    public sealed class SexualOrganAbsorption : VorePerkNewPredationMode {
         const float AbsorbSpeedMod = 1f;
 
         public override string DigestionMode => VoreOrganDigestionMode.Absorption;
@@ -18,14 +16,13 @@ namespace Character.VoreStuff.VorePerks
 
 
         public override void SpecialOrganDigestion(BaseCharacter pred, BaseOrgan organ, SexualOrganType type, int prey,
-            bool predIsPlayer) => AbsorbPrey(pred, organ, prey, type);
+                                                   bool predIsPlayer) =>
+            AbsorbPrey(pred, organ, prey, type);
 
-        static void AbsorbPrey(BaseCharacter pred, BaseOrgan baseOrgan, int preyId, SexualOrganType type)
-        {
-            if (!VoredCharacters.PreyDict.TryGetValue(preyId, out Prey prey))
+        static void AbsorbPrey(BaseCharacter pred, BaseOrgan baseOrgan, int preyId, SexualOrganType type) {
+            if (!VoredCharacters.PreyDict.TryGetValue(preyId, out var prey))
                 return;
-            if (prey.AltProgress >= 100f)
-            {
+            if (prey.AltProgress >= 100f) {
                 FullyAbsorbed(pred, baseOrgan, prey, preyId, type);
                 return;
             }
@@ -33,9 +30,8 @@ namespace Character.VoreStuff.VorePerks
             MorphToOrgan(prey, baseOrgan);
         }
 
-        static void MorphToOrgan(Prey prey, BaseIntStat baseOrgan)
-        {
-            float diff = MorphTickAmount(prey, baseOrgan);
+        static void MorphToOrgan(Prey prey, BaseIntStat baseOrgan) {
+            var diff = MorphTickAmount(prey, baseOrgan);
             prey.AltDigest(diff);
         }
 
@@ -45,19 +41,17 @@ namespace Character.VoreStuff.VorePerks
         public static bool CanInstaMorph(BaseCharacter prey, BaseIntStat baseOrgan) =>
             MorphTickAmount(prey, baseOrgan) >= 100f;
 
-        static void FullyAbsorbed(BaseCharacter pred, BaseOrgan organ, Prey prey, int preyId, SexualOrganType type)
-        {
+        static void FullyAbsorbed(BaseCharacter pred, BaseOrgan organ, Prey prey, int preyId, SexualOrganType type) {
             organ.Vore.RemovePrey(preyId);
             VoredCharacters.RemovePrey(prey);
             AddToOrgan(pred, organ, prey, type);
             // EventLog.AddEvent($"{pred.Identity.FirstName} has fully absorbed {prey.Identity.FullName}");
         }
 
-        public static void AddToOrgan(BaseCharacter pred, BaseOrgan organ, Prey prey, SexualOrganType type)
-        {
+        public static void AddToOrgan(BaseCharacter pred, BaseOrgan organ, Prey prey, SexualOrganType type) {
             pred.OnOrganDigestion(type, prey, VoreOrganDigestionMode.Absorption);
-            float diff = prey.Body.Weight / organ.BaseValue;
-            int growBy = Mathf.RoundToInt(Mathf.Sqrt(diff)); // need to expand futher
+            var diff = prey.Body.Weight / organ.BaseValue;
+            var growBy = Mathf.RoundToInt(Mathf.Sqrt(diff)); // need to expand futher
             if (growBy > 0)
                 organ.BaseValue += growBy;
         }

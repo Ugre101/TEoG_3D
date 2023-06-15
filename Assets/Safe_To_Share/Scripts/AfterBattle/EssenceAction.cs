@@ -2,10 +2,8 @@
 using Character.EssenceStuff;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.AfterBattle
-{
-    public abstract class EssenceAction : AfterBattleBaseAction
-    {
+namespace Safe_To_Share.Scripts.AfterBattle {
+    public abstract class EssenceAction : AfterBattleBaseAction {
         [SerializeField] string desc;
         [SerializeField] bool drainerOrgasmNeeded, victimOrgasmNeeded;
         [SerializeField] int orgasmsNeeded = 1;
@@ -14,8 +12,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         public int OrgasmsNeeded => orgasmsNeeded;
 
-        public override bool CanUse(BaseCharacter drainer, BaseCharacter victim)
-        {
+        public override bool CanUse(BaseCharacter drainer, BaseCharacter victim) {
             if (drainerOrgasmNeeded && !drainer.SexStats.HasEnoughOrgasms(orgasmsNeeded))
                 return false;
             if (victimOrgasmNeeded && !victim.SexStats.HasEnoughOrgasms(orgasmsNeeded))
@@ -23,16 +20,14 @@ namespace Safe_To_Share.Scripts.AfterBattle
             return true;
         }
 
-        protected void ShowEffect(Transform here)
-        {
+        protected void ShowEffect(Transform here) {
             if (effectPrefab == null) return;
             var effect = Instantiate(effectPrefab, here);
             Destroy(effect, 3f);
         }
 
-        protected SexActData SexActData(ChangeLog drainLog)
-        {
-            SexActData actData = returnData;
+        protected SexActData SexActData(ChangeLog drainLog) {
+            var actData = returnData;
             //  actData.AfterText.AddRange(drainLog.DrainLogs);
             //  actData.AfterText.AddRange(drainLog.GainLogs);
             return actData;

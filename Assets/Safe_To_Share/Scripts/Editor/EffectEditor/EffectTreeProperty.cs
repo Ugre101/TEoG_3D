@@ -2,17 +2,14 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace EffectStuff.Editor
-{
+namespace EffectStuff.Editor {
     [CustomPropertyDrawer(typeof(EffectsTree))]
-    public class EffectTreeProperty : PropertyDrawer
-    {
+    public class EffectTreeProperty : PropertyDrawer {
         bool folded;
         SerializedProperty showEffect;
 
         public override void OnGUI(Rect position, SerializedProperty property,
-            GUIContent label)
-        {
+                                   GUIContent label) {
             folded = EditorGUILayout.Foldout(folded, "Folded");
             if (!folded)
                 return;
@@ -20,8 +17,7 @@ namespace EffectStuff.Editor
             EditorGUILayout.BeginHorizontal();
 
             string[] effects = { "dealDamage", "dealWillDamage", "healDamage", };
-            foreach (string effect in effects)
-            {
+            foreach (var effect in effects) {
                 var tempShowEffect = property.FindPropertyRelative(effect);
                 var active = tempShowEffect.FindPropertyRelative("active");
                 // GUIStyle btnSkin = new GUIStyle(GUI.skin.button);

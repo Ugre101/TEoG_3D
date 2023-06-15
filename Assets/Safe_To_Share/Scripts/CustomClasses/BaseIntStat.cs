@@ -3,11 +3,9 @@ using System.Linq;
 using Character.StatsStuff.Mods;
 using UnityEngine;
 
-namespace CustomClasses
-{
+namespace CustomClasses {
     [Serializable]
-    public class BaseIntStat
-    {
+    public class BaseIntStat {
         public delegate void StatChange();
 
         [SerializeField] int baseValue;
@@ -16,11 +14,9 @@ namespace CustomClasses
         int lastValue;
         public BaseIntStat(int baseValue) => this.baseValue = baseValue;
 
-        public virtual int BaseValue
-        {
+        public virtual int BaseValue {
             get => baseValue;
-            set
-            {
+            set {
                 baseValue = value;
                 Dirty = true;
             }
@@ -28,11 +24,9 @@ namespace CustomClasses
 
         public virtual int Value => Dirty ? lastValue = CalcValue() : lastValue;
 
-        public virtual bool Dirty
-        {
+        public virtual bool Dirty {
             get => dirty || Mods.Dirty;
-            protected set
-            {
+            protected set {
                 dirty = value;
                 if (value)
                     StatDirtyEvent?.Invoke();
@@ -42,11 +36,10 @@ namespace CustomClasses
         public ModsContainer Mods => mods;
         public event StatChange StatDirtyEvent;
 
-        protected virtual int CalcValue()
-        {
+        protected virtual int CalcValue() {
             Dirty = false;
             Mods.Dirty = false;
-            float percent = (100 + GetValue(ModType.Percent)) / 100;
+            var percent = (100 + GetValue(ModType.Percent)) / 100;
 
             return Mathf.RoundToInt((BaseValue + GetValue(ModType.Flat)) * percent);
 

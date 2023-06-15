@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 
-namespace QuestStuff
-{
+namespace QuestStuff {
     [CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
-    public sealed class CompletedQuest : ScriptableObject
-    {
-    }
+    public sealed class CompletedQuest : ScriptableObject { }
 }

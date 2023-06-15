@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using Character.IdentityStuff;
 using UnityEngine;
 
-namespace Character.Family
-{
+namespace Character.Family {
     [Serializable]
-    public class FamilyTree
-    {
+    public class FamilyTree {
         [SerializeField] Identity father;
         [SerializeField] Identity mother;
         [SerializeField] List<int> childrenIds;
 
-        public FamilyTree()
-        {
+        public FamilyTree() {
             father = new Identity();
             mother = new Identity();
             childrenIds = new List<int>();
         }
 
-        public FamilyTree(Identity father, Identity mother)
-        {
+        public FamilyTree(Identity father, Identity mother) {
             this.father = father;
             this.mother = mother;
             childrenIds = new List<int>();

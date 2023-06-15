@@ -1,15 +1,12 @@
 using UnityEngine;
 
-namespace AvatarStuff
-{
-    public sealed class DazDickControllerTester : MonoBehaviour
-    {
+namespace AvatarStuff {
+    public sealed class DazDickControllerTester : MonoBehaviour {
         [SerializeField, Range(0f, 100f),] float boner;
         [SerializeField, Range(0.1f, 20f),] float size = 1f;
         [SerializeField] bool hidden;
 
-        void OnValidate()
-        {
+        void OnValidate() {
             if (Application.isPlaying) return;
             if (!TryGetComponent(out DazDickController component)) return;
             component.SetBoner(boner);

@@ -2,10 +2,8 @@
 using Safe_To_Share.Scripts.Holders.Npc;
 using UnityEngine;
 
-namespace Dialogue
-{
-    public sealed class NpcWithDialogue : NpcHolder
-    {
+namespace Dialogue {
+    public sealed class NpcWithDialogue : NpcHolder {
         [SerializeField] BaseDialogue dialogue;
         public override string HoverText(Player player) => "Talk";
 

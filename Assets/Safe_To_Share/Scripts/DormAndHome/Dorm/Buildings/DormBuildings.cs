@@ -1,11 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace DormAndHome.Dorm.Buildings
-{
+namespace DormAndHome.Dorm.Buildings {
     [Serializable]
-    public class DormBuildings
-    {
+    public class DormBuildings {
         [SerializeField] DormLodge dormLodge = new();
         [SerializeField] DormGym gym = new();
         [SerializeField] DormKitchen kitchen = new();

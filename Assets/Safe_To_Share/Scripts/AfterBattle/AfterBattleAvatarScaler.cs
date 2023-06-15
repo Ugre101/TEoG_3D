@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Safe_To_Share.Scripts.AfterBattle
-{
-    public sealed class AfterBattleAvatarScaler : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle {
+    public sealed class AfterBattleAvatarScaler : MonoBehaviour {
         static float playerHeight, enemyHeight;
         [SerializeField] float minSize = 0.5f, maxSize = 2f;
 
@@ -13,8 +11,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
 
         public void NewHeight(float avatarHeight) => originalHeight = avatarHeight;
 
-        public void ChangeScale(float newHeight, bool playerAvatar)
-        {
+        public void ChangeScale(float newHeight, bool playerAvatar) {
             if (playerAvatar)
                 playerHeight = newHeight;
             else
@@ -26,8 +23,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
             // TODO make it so two Tall/Short avatars still show height difference
         }
 
-        public void SetHeight(float bodyHeight, bool playerAvatar)
-        {
+        public void SetHeight(float bodyHeight, bool playerAvatar) {
             if (playerAvatar)
                 playerHeight = bodyHeight;
             else

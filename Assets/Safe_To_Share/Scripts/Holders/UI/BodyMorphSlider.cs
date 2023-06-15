@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Holders.UI
-{
-    public sealed class BodyMorphSlider : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Holders.UI {
+    public sealed class BodyMorphSlider : MonoBehaviour {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] TextMeshProUGUI value;
@@ -18,15 +16,13 @@ namespace Safe_To_Share.Scripts.Holders.UI
         BodyMorphs.AvatarBodyMorphs.BodyMorph myMorph;
         IObjectPool<BodyMorphSlider> pool;
 
-        void OnDisable()
-        {
+        void OnDisable() {
             if (hasPool)
                 pool.Release(this);
         }
 
         public void Setup(BodyMorphs.AvatarBodyMorphs.BodyMorph morph, CharacterAvatar avatar,
-            IObjectPool<BodyMorphSlider> spawnPool)
-        {
+                          IObjectPool<BodyMorphSlider> spawnPool) {
             myMorph = morph;
             currentAvatar = avatar;
             pool = spawnPool;
@@ -38,15 +34,13 @@ namespace Safe_To_Share.Scripts.Holders.UI
             slider.onValueChanged.AddListener(ChangeValue);
         }
 
-        void ChangeValue(float arg0)
-        {
+        void ChangeValue(float arg0) {
             myMorph.value = arg0;
             value.text = Mathf.RoundToInt(arg0).ToString();
             currentAvatar.UpdateABodyTypeMorphs(myMorph);
         }
 
-        public void Clear()
-        {
+        public void Clear() {
             myMorph = null;
             currentAvatar = null;
             title.text = string.Empty;

@@ -6,18 +6,16 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace AvatarStuff
-{
+namespace AvatarStuff {
     [CreateAssetMenu(fileName = "New avatar Info", menuName = "Character/Avatar/Avatar Info", order = 0)]
-    public sealed class AvatarInfo : ScriptableObject
-    {
+    public sealed class AvatarInfo : ScriptableObject {
         [SerializeField] AssetReference prefab;
         [SerializeField] AssetReference playerPrefab;
         [SerializeField] Gender[] supportedGenders;
         [SerializeField] BasicRace[] supportedRaces;
+        AsyncOperationHandle<GameObject> avatarOp;
 
         AsyncOperationHandle<GameObject> playerOp;
-        AsyncOperationHandle<GameObject> avatarOp;
 
         public Gender[] SupportedGenders => supportedGenders;
         public BasicRace[] SupportedRaces => supportedRaces;
@@ -26,18 +24,14 @@ namespace AvatarStuff
 
         public AssetReference PlayerPrefab => playerPrefab;
 
-        public async Task<GameObject> GetLoadedPrefab(bool player)
-        {
+        public async Task<GameObject> GetLoadedPrefab(bool player) {
             if (player)
                 return await PlayerLoaded();
 
-            if (avatarOp.IsValid() && avatarOp is { IsDone: true, Result: { } loadedPrefab })
-            {
+            if (avatarOp.IsValid() && avatarOp is { IsDone: true, Result: { } loadedPrefab, })
                 return loadedPrefab;
-            }
-            if (avatarOp.IsValid())
-            {
-                while (!avatarOp.IsDone) 
+            if (avatarOp.IsValid()) {
+                while (!avatarOp.IsDone)
                     await Task.Delay(100);
                 if (avatarOp.Result is { } result)
                     return result;
@@ -48,15 +42,13 @@ namespace AvatarStuff
             return avatarOp.Result;
         }
 
-        async Task<GameObject> PlayerLoaded()
-        {
-            if (playerOp.IsValid() && playerOp is {IsDone: true, Result: {} playerLoaded})
+        async Task<GameObject> PlayerLoaded() {
+            if (playerOp.IsValid() && playerOp is { IsDone: true, Result: { } playerLoaded, })
                 return playerLoaded;
-            if (playerOp.IsValid())
-            {
-                while (!playerOp.IsDone) 
+            if (playerOp.IsValid()) {
+                while (!playerOp.IsDone)
                     await Task.Delay(100);
-                if (avatarOp.Result is {} doneLoading)
+                if (avatarOp.Result is { } doneLoading)
                     return doneLoading;
             }
 
@@ -67,8 +59,7 @@ namespace AvatarStuff
             return playerOp.Result;
         }
 
-        public void UnLoadPlayer()
-        {
+        public void UnLoadPlayer() {
             if (!playerOp.IsValid()) return;
             Addressables.Release(playerOp);
         }

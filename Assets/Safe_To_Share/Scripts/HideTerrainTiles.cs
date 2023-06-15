@@ -1,9 +1,7 @@
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts
-{
-    public sealed class HideTerrainTiles : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts {
+    public sealed class HideTerrainTiles : MonoBehaviour {
         [SerializeField, Range(1, 5),] int cullingRange = 1;
 
         Vector3 lastPos;
@@ -11,8 +9,7 @@ namespace Safe_To_Share.Scripts
         Vector3 offset;
         GameObject[] terrainTiles;
 
-        void Start()
-        {
+        void Start() {
             terrainTiles = GameObject.FindGameObjectsWithTag("Terrain Tile");
             if (!terrainTiles[0].TryGetComponent(out Terrain terrain)) return;
             var terrainData = terrain.terrainData;
@@ -20,17 +17,15 @@ namespace Safe_To_Share.Scripts
         }
 
         // Update is called once per frame
-        void Update()
-        {
+        void Update() {
             if (lastPos == transform.position)
                 return;
             lastPos = transform.position;
-            foreach (GameObject terrainTile in terrainTiles)
-            {
-                Vector3 tilePosition = terrainTile.transform.position + offset;
+            foreach (var terrainTile in terrainTiles) {
+                var tilePosition = terrainTile.transform.position + offset;
 
-                float xDistance = Mathf.Abs(tilePosition.x - lastPos.x);
-                float zDistance = Mathf.Abs(tilePosition.z - lastPos.z);
+                var xDistance = Mathf.Abs(tilePosition.x - lastPos.x);
+                var zDistance = Mathf.Abs(tilePosition.z - lastPos.z);
                 terrainTile.SetActive(!(xDistance + zDistance > offset.x * cullingRange));
             }
         }

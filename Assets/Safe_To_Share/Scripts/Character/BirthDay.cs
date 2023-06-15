@@ -2,21 +2,17 @@
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Character
-{
+namespace Character {
     [Serializable]
-    public struct BirthDay
-    {
+    public struct BirthDay {
         [SerializeField] int year, day;
 
-        public BirthDay(int year, int day)
-        {
+        public BirthDay(int year, int day) {
             this.year = year;
             this.day = day;
         }
 
-        public BirthDay(DateSave date)
-        {
+        public BirthDay(DateSave date) {
             year = date.Year;
             day = date.Day;
         }

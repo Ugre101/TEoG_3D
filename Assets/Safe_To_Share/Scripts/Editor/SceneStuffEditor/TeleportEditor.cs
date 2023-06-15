@@ -2,28 +2,23 @@
 using UnityEditor;
 using UnityEngine.SceneManagement;
 
-namespace SceneStuff.Editor
-{
+namespace SceneStuff.Editor {
     [CustomEditor(typeof(SceneChangeTeleport))]
-    public sealed class TeleportEditor : UnityEditor.Editor
-    {
+    public sealed class TeleportEditor : UnityEditor.Editor {
         int index;
 
         SceneChangeTeleport myTarget;
         SerializedProperty sceneTarget;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             myTarget = (SceneChangeTeleport)target;
             sceneTarget = serializedObject.FindProperty("sceneToLoad");
         }
 
-        public override void OnInspectorGUI()
-        {
+        public override void OnInspectorGUI() {
             EditorGUI.BeginChangeCheck();
             index = EditorGUILayout.Popup(index, ScenesToList());
-            if (EditorGUI.EndChangeCheck())
-            {
+            if (EditorGUI.EndChangeCheck()) {
                 Undo.RecordObject(myTarget, "Changed target map");
                 serializedObject.Update();
                 sceneTarget.stringValue = ScenesToList()[index];
@@ -33,10 +28,9 @@ namespace SceneStuff.Editor
             base.OnInspectorGUI();
         }
 
-        static string[] ScenesToList()
-        {
-            string[] toReturn = new string[SceneManager.sceneCountInBuildSettings];
-            for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        static string[] ScenesToList() {
+            var toReturn = new string[SceneManager.sceneCountInBuildSettings];
+            for (var i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
                 toReturn[i] = Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             return toReturn;
         }

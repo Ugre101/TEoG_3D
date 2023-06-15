@@ -2,33 +2,27 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI
-{
-    public sealed class CraftingResult : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory.Crafting_UI {
+    public sealed class CraftingResult : MonoBehaviour {
         [SerializeField] Sprite questionMark;
         [SerializeField] Image image;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             image.sprite = questionMark;
         }
 
-        public void AddResult(Item opResult)
-        {
+        public void AddResult(Item opResult) {
             image.sprite = opResult.Icon;
             // If already has old result first add that to inventory?    
         }
 
-        public bool StillHasItem(out Item o, out int i)
-        {
+        public bool StillHasItem(out Item o, out int i) {
             o = null;
             i = 1;
             return false;
         }
 
-        public void ShowQuestionMark()
-        {
+        public void ShowQuestionMark() {
             image.sprite = questionMark;
         }
     }

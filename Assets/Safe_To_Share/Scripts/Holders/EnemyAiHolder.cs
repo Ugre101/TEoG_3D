@@ -3,15 +3,14 @@ using AvatarStuff;
 using Character.EnemyStuff;
 using Safe_To_Share.Scripts.Holders.AI.StateMachineStuff;
 using UnityEngine;
-using UnityEngine.AI;
 
-namespace Safe_To_Share.Scripts.Holders
-{
-    public sealed class EnemyAiHolder : AiHolder
-    {
+namespace Safe_To_Share.Scripts.Holders {
+    public sealed class EnemyAiHolder : AiHolder {
         [SerializeField] Enemy enemy;
         [SerializeField] float aggroRange = 10f;
         [Range(0f, 5f), SerializeField,] float initCombatRange = 1.5f;
+
+        StateHandler stateHandler;
 
         bool waitingToReturn;
         public float AggroRange => aggroRange;
@@ -21,9 +20,7 @@ namespace Safe_To_Share.Scripts.Holders
 
         public bool InterActedWith { get; private set; }
 
-        StateHandler stateHandler;
-        protected override void Start()
-        {
+        protected override void Start() {
             base.Start();
             SpawnLocation = transform.position;
             Changer.NewAvatar += ModifyAvatar;
@@ -32,26 +29,36 @@ namespace Safe_To_Share.Scripts.Holders
             // Player.RaceSystem.RaceChangedEvent += RaceChange;
         }
 
-        void FixedUpdate()
-        {
+        void FixedUpdate() {
             if (Stopped) return;
             if (OutOfRange || Time.frameCount % 3 != 0)
                 return;
-            if (DistanceToPlayer < initCombatRange) 
+            if (DistanceToPlayer < initCombatRange)
                 StartCombat();
             stateHandler.CurrentState.OnUpdate();
-           
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             Enemy.Unsub();
             Changer.NewAvatar -= ModifyAvatar;
             Changer.NewAvatar -= NewAvatar;
         }
 
-        public void ModifyAvatar(CharacterAvatar obj)
-        {
+        void OnTriggerEnter(Collider other) {
+            DidIHitPlayer(other);
+        }
+
+        void OnTriggerExit(Collider other) {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+                print("Stop swim");
+        }
+
+        void OnTriggerStay(Collider other) {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
+                print("Start swim");
+        }
+
+        public void ModifyAvatar(CharacterAvatar obj) {
             if (waitingToReturn)
                 ReturnMe?.Invoke(this);
             else
@@ -64,53 +71,28 @@ namespace Safe_To_Share.Scripts.Holders
         //Player.TriggerCombat(enemy);
         public void ChangeState(StateHandler.States newState) => stateHandler.ChangeState(newState);
 
-        public void AddEnemy(Enemy newEnemy)
-        {
+        public void AddEnemy(Enemy newEnemy) {
             waitingToReturn = false;
             enemy = newEnemy;
             UpdateAvatar(Enemy);
             HeightsChange(Enemy.Body.Height.Value);
         }
 
-        protected override void NewAvatar(CharacterAvatar obj)
-        {
+        protected override void NewAvatar(CharacterAvatar obj) {
             if (!enemy.WantBodyMorph) return;
             obj.GetRandomBodyMorphs(enemy);
             ModifyAvatar(obj);
             enemy.WantBodyMorph = false;
         }
 
-        protected override void OutOfRangeFunction()
-        {
+        protected override void OutOfRangeFunction() {
             if (Changer.AvatarLoaded)
                 ReturnMe?.Invoke(this);
             else
                 waitingToReturn = true;
         }
-        void OnTriggerEnter(Collider other)
-        {
-            DidIHitPlayer(other);
-            
-        }
 
-        void OnTriggerStay(Collider other)
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
-            {
-                print("Start swim");
-            }
-        }
-
-        void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Water"))
-            {
-                print("Stop swim");
-            }
-        }
-
-        void DidIHitPlayer(Collider other)
-        {
+        void DidIHitPlayer(Collider other) {
             if (Enemy.Defeated) return;
             if (!other.gameObject.CompareTag("Player")) return;
             if (!other.TryGetComponent(out PlayerHolder playerHolder)) return;

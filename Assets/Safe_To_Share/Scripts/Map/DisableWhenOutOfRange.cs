@@ -1,17 +1,14 @@
 ﻿using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Map
-{
-    public sealed class DisableWhenOutOfRange : MonoBehaviour
-    {
+namespace Map {
+    public sealed class DisableWhenOutOfRange : MonoBehaviour {
         [SerializeField, Range(100f, 500f),] float cullingRange;
 
         bool active = true;
         Transform playerTrans;
 
-        void Start()
-        {
+        void Start() {
             var player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)
                 playerTrans = player.transform;
@@ -19,13 +16,11 @@ namespace Map
                 Debug.LogError("Can't find player");
         }
 
-        void Update()
-        {
+        void Update() {
             if (Time.frameCount % 12 != 0)
                 return;
-            bool inRange = Vector3.Distance(transform.position, playerTrans.position) <= cullingRange;
-            switch (inRange)
-            {
+            var inRange = Vector3.Distance(transform.position, playerTrans.position) <= cullingRange;
+            switch (inRange) {
                 case true when !active:
                     transform.AwakeChildren();
                     active = true;

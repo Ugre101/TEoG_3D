@@ -3,11 +3,9 @@ using System.Collections;
 using Safe_To_Share.Scripts.Battle.CombatantStuff;
 using UnityEngine;
 
-namespace Battle
-{
+namespace Battle {
     [Serializable]
-    public class BattleAct
-    {
+    public class BattleAct {
         [SerializeField] BattlePrefabEffect onCasterEffect;
         [SerializeField] bool instancePrefabOnCasterFirst;
         [SerializeField] BattlePrefabEffect onTargetEffect;
@@ -17,10 +15,9 @@ namespace Battle
 
         bool firstUse = true;
         WaitForSeconds waitFor;
-        WaitForSeconds WaitFor
-        {
-            get
-            {
+
+        WaitForSeconds WaitFor {
+            get {
 #if UNITY_EDITOR
                 firstUse = true; // Hack so editing time doesn't require restart
 #endif
@@ -29,16 +26,13 @@ namespace Battle
                 return waitFor;
             }
         }
-        public IEnumerator InstanceEffects(Combatant caster, Combatant target)
-        {
-            if (instancePrefabOnCasterFirst)
-            {
+
+        public IEnumerator InstanceEffects(Combatant caster, Combatant target) {
+            if (instancePrefabOnCasterFirst) {
                 CastIfNotNull(caster, onCasterEffect);
                 yield return WaitFor;
                 CastIfNotNull(target, onTargetEffect);
-            }
-            else if (instancePrefabOnTargetFirst)
-            {
+            } else if (instancePrefabOnTargetFirst) {
                 CastIfNotNull(target, onTargetEffect);
                 yield return WaitFor;
                 CastIfNotNull(caster, onCasterEffect);
@@ -46,12 +40,12 @@ namespace Battle
 
             CastIfNotNull(target, onTargetEffect);
             CastIfNotNull(caster, onCasterEffect);
-            float longestWait = onCasterEffect.StayTime < onTargetEffect.StayTime
-                ? onTargetEffect.StayTime : onCasterEffect.StayTime;
+            var longestWait = onCasterEffect.StayTime < onTargetEffect.StayTime
+                ? onTargetEffect.StayTime
+                : onCasterEffect.StayTime;
             yield return new WaitForSeconds(longestWait);
 
-            static void CastIfNotNull(Combatant castOn, BattlePrefabEffect prefab)
-            {
+            static void CastIfNotNull(Combatant castOn, BattlePrefabEffect prefab) {
                 if (prefab.Prefab)
                     castOn.CastPrefabOn(prefab);
                 if (prefab.TriggerAnimation != TriggerBattleAnimations.None)
@@ -61,8 +55,7 @@ namespace Battle
     }
 
     [Serializable]
-    public struct BattlePrefabEffect
-    {
+    public struct BattlePrefabEffect {
         [SerializeField] GameObject prefab;
         [SerializeField] TriggerBattleAnimations triggerBattleAnimations;
         [SerializeField] FloatBattleAnimations floatBattleAnimations;

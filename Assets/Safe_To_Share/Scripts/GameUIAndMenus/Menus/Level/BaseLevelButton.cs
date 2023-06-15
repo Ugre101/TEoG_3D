@@ -6,10 +6,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level
-{
-    public abstract class BaseLevelButton : MonoBehaviour, IPointerExitHandler
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Level {
+    public abstract class BaseLevelButton : MonoBehaviour, IPointerExitHandler {
         [SerializeField] protected Image rune;
         [SerializeField] protected TextMeshProUGUI btnText;
         [SerializeField] Button btn;

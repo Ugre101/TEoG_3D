@@ -1,10 +1,8 @@
 ﻿using Unity.Mathematics;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.DebugTools
-{
-    public sealed class CreateDebugTeleportPoint : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.DebugTools {
+    public sealed class CreateDebugTeleportPoint : MonoBehaviour {
         [SerializeField] DebugTeleportPoint prefab;
         public LayerMask validRaycastTargets;
 

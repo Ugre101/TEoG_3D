@@ -8,30 +8,25 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
-{
-    public sealed class VorePerkButton : BasePerkButton, IPointerEnterHandler
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore {
+    public sealed class VorePerkButton : BasePerkButton, IPointerEnterHandler {
         public void OnPointerEnter(PointerEventData eventData) => ShowPerkInfo?.Invoke(transform.position, loaded);
 
         //  new VorePerk loaded;
-        public override void Setup(PlayerHolder player)
-        {
-            this.PlayerHolder = player;
+        public override void Setup(PlayerHolder player) {
+            PlayerHolder = player;
             Addressables.LoadAssetAsync<VorePerk>(guid).Completed += Loaded;
         }
 
         public static event Action<Vector3, BasicPerk> ShowPerkInfo;
 
-        void HasPerk(VorePerk obj)
-        {
-            bool havePerk = Player.Vore.Level.OwnedPerks.Contains(loaded as VorePerk);
+        void HasPerk(VorePerk obj) {
+            var havePerk = Player.Vore.Level.OwnedPerks.Contains(loaded as VorePerk);
             HaveFade(havePerk);
             CanAfford(loaded.Cost);
         }
 
-        void Loaded(AsyncOperationHandle<VorePerk> obj)
-        {
+        void Loaded(AsyncOperationHandle<VorePerk> obj) {
             loaded = obj.Result;
             CanAfford(Player.Vore.Level.Points);
             HasPerk(obj.Result);
@@ -39,8 +34,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 
         protected override void CanAfford(int obj) => Afford = loaded.Cost <= obj;
 
-        protected override void OnClick()
-        {
+        protected override void OnClick() {
             if (Have || !loaded.MeetsRequirements(Player) || !Player.Vore.Level.TryUsePoints(loaded.Cost))
                 return;
             if (loaded is not VorePerk perk)
@@ -51,8 +45,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Vore
 
 #if UNITY_EDITOR
         [SerializeField] VorePerk vorePerk;
-        void OnValidate()
-        {
+        void OnValidate() {
             guid = vorePerk != null ? vorePerk.Guid : string.Empty;
             if (rune == null || vorePerk == null)
                 return;

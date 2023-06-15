@@ -3,10 +3,8 @@ using Items;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
-{
-    public sealed class ItemForSale : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu {
+    public sealed class ItemForSale : MonoBehaviour {
         [SerializeField] Image icon;
         [SerializeField] Color afford, cantAfford;
         [SerializeField] Button btn;
@@ -18,8 +16,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.ShopMenu
         public static event Action<Item> WantToBuyItem;
 
 
-        public void Setup(Item newItem)
-        {
+        public void Setup(Item newItem) {
             item = newItem;
             icon.sprite = newItem.Icon;
             //icon.color = gold.CanAfford(newItem.Value) ? afford : cantAfford;

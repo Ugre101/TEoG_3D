@@ -1,8 +1,5 @@
-﻿namespace Character.EssenceStuff
-{
-    public enum EssenceType
-    {
-        Masc,
-        Femi,
+﻿namespace Character.EssenceStuff {
+    public enum EssenceType {
+        Masc, Femi,
     }
 }

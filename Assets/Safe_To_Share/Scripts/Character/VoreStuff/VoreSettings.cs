@@ -1,6 +1,3 @@
-﻿namespace Character.VoreStuff
-{
-    public static class VoreSettings
-    {
-    }
+﻿namespace Character.VoreStuff {
+    public static class VoreSettings { }
 }

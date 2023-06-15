@@ -1,11 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Map
-{
+namespace Map {
     [Serializable]
-    public abstract class MiniMapBaseObject : MonoBehaviour
-    {
+    public abstract class MiniMapBaseObject : MonoBehaviour {
         [SerializeField] protected Sprite icon;
         [SerializeField] protected bool addIconToBigMap;
         [SerializeField] protected string addedIconText;

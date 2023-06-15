@@ -4,10 +4,8 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace SaveStuff
-{
-    public sealed class SaveButton : MonoBehaviour
-    {
+namespace SaveStuff {
+    public sealed class SaveButton : MonoBehaviour {
         [SerializeField] TextMeshProUGUI title;
 
         [SerializeField] TextMeshProUGUI text;
@@ -23,10 +21,9 @@ namespace SaveStuff
         void OnDestroy() => LoadManager.LoadedSave -= SetLoadingFalse;
         public static event Action<Action> WantToDeleteSave;
 
-        public void Setup(FullSave fullSave, string path)
-        {
+        public void Setup(FullSave fullSave, string path) {
             this.path = path;
-            SaveSummary summary = fullSave.Summary;
+            var summary = fullSave.Summary;
             title.text = summary.PlayerAddedText;
             text.text = SummaryText(summary);
             save = fullSave.Save;
@@ -38,8 +35,7 @@ namespace SaveStuff
 
         void SetLoadingFalse() => loading = false;
 
-        static string SummaryText(SaveSummary summary)
-        {
+        static string SummaryText(SaveSummary summary) {
             StringBuilder sb = new();
             sb.AppendLine($"Player Name: {summary.PlayerName}");
             sb.AppendLine($"Player level: {summary.Level}");
@@ -48,8 +44,7 @@ namespace SaveStuff
             return sb.ToString();
         }
 
-        void ClearSaveAndDeleteBtn()
-        {
+        void ClearSaveAndDeleteBtn() {
             File.Delete(path);
             Clear();
             gameObject.SetActive(false);
@@ -57,12 +52,10 @@ namespace SaveStuff
 
         public void DeleteSave() => WantToDeleteSave?.Invoke(ClearSaveAndDeleteBtn);
 
-        public void LoadSave()
-        {
+        public void LoadSave() {
             if (loading)
                 return;
-            if (needsDoubleClick && firstClick)
-            {
+            if (needsDoubleClick && firstClick) {
                 firstClick = false;
                 return;
             }

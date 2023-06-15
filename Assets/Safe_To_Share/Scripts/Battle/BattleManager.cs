@@ -13,10 +13,8 @@ using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
 
-namespace Battle
-{
-    public sealed class BattleManager : MonoBehaviour
-    {
+namespace Battle {
+    public sealed class BattleManager : MonoBehaviour {
         public static CombatCharacter CurrentPlayerControlled;
         [SerializeField] CombatantTeam playerTeam, enemyTeam;
 
@@ -30,50 +28,43 @@ namespace Battle
         List<CombatCharacter> whoseTurn;
         public static BattleManager Instance { get; private set; }
 
-        void Awake()
-        {
+        void Awake() {
             if (Instance == null)
                 Instance = this;
             else
                 Destroy(gameObject);
         }
 
-        void Start()
-        {
+        void Start() {
             AttackBtn.PlayerAction += HandlePlayerAction;
             AttackBtn.BoundAbility += BindToActivePlayer;
             SceneLoader.ActionSceneLoaded += Setup;
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
             AttackBtn.PlayerAction -= HandlePlayerAction;
             AttackBtn.BoundAbility -= BindToActivePlayer;
             SceneLoader.ActionSceneLoaded -= Setup;
             battleAI.CleanUp();
         }
 
-        void HandlePlayerAction(Ability ability)
-        {
+        void HandlePlayerAction(Ability ability) {
             if (!waitingForPlayerInput)
                 return;
             StartCoroutine(PlayerAction(ability));
             waitingForPlayerInput = false;
         }
 
-        static void BindToActivePlayer(int arg1, Ability arg2)
-        {
+        static void BindToActivePlayer(int arg1, Ability arg2) {
             if (CurrentPlayerControlled.Character is ControlledCharacter controlledCharacter)
                 controlledCharacter.AndSpellBook.BoundAbilities[arg1] = arg2.Guid;
         }
 
 
-        public async void Setup(Player parPlayer, BaseCharacter[] enemies, BaseCharacter[] allies, bool boss)
-        {
+        public async void Setup(Player parPlayer, BaseCharacter[] enemies, BaseCharacter[] allies, bool boss) {
             player = parPlayer;
             playerTeamChars = new ControlledCharacter[] { player, };
-            if (allies != null)
-            {
+            if (allies != null) {
                 // TODO
             }
 
@@ -85,11 +76,9 @@ namespace Battle
             BuildSpeed(); // Favour player team
             await SetupTeam(enemyTeam, enemyTeamChars, false);
 
-            async Task SetupTeam(CombatantTeam team, IEnumerable<BaseCharacter> charArray, bool ally)
-            {
+            async Task SetupTeam(CombatantTeam team, IEnumerable<BaseCharacter> charArray, bool ally) {
                 team.FirstSetup();
-                foreach (var character in charArray)
-                {
+                foreach (var character in charArray) {
                     var setupTeam = await team.SetupTeam(character);
                     whoseTurn.Add(new CombatCharacter(setupTeam, character, ally));
                 }
@@ -101,15 +90,13 @@ namespace Battle
         }
 
 
-        IEnumerator PlayerAction(Ability obj)
-        {
+        IEnumerator PlayerAction(Ability obj) {
             yield return obj.UseEffect(CurrentPlayerControlled, battleTarget.EnemyTargeted);
             battleTarget.EnemyTargeted.Combatant.StopTargeting();
             NextTurn();
         }
 
-        void NextTurn()
-        {
+        void NextTurn() {
             var someOneDefeated = whoseTurn.RemoveAll(c => c.Character.Stats.Dead) > 0;
             if (someOneDefeated && HaveATeamWon())
                 return;
@@ -117,8 +104,7 @@ namespace Battle
 
             whoseTurn.Sort((cc1, cc2) => cc2.SpeedAccumulated.CompareTo(cc1.SpeedAccumulated));
             var next = whoseTurn[0];
-            if (next == null)
-            {
+            if (next == null) {
                 BattleSceneManager.Leave(player);
                 // TODO Show error message or Draw
                 return;
@@ -132,8 +118,7 @@ namespace Battle
         }
 
 
-        bool HaveATeamWon()
-        {
+        bool HaveATeamWon() {
             var alliesLeft = whoseTurn.Any(a => a.Ally);
             var enemiesLeft = whoseTurn.Any(e => !e.Ally);
             if (alliesLeft && enemiesLeft)
@@ -147,40 +132,34 @@ namespace Battle
             return true;
         }
 
-        void Victory()
-        {
+        void Victory() {
             BattleSceneManager.Victory();
             foreach (var teamChar in enemyTeamChars)
                 if (teamChar is Enemy enemy)
                     HandleDefeatedEnemy(player, enemy);
         }
 
-        static void HandleDefeatedEnemy(Player player, Enemy enemy)
-        {
+        static void HandleDefeatedEnemy(Player player, Enemy enemy) {
             player.LevelSystem.GainExp(enemy.Reward.ExpReward);
             PlayerGold.GoldBag.GainGold(enemy.Reward.GoldReward);
             enemy.Stats.FullRecovery(80);
             enemy.SetDefeated(true);
         }
 
-        public void Leave()
-        {
+        public void Leave() {
             BattleSceneManager.Leave(player);
         }
 
-        public void Resurrected(CombatCharacter character)
-        {
+        public void Resurrected(CombatCharacter character) {
             whoseTurn.Add(character);
         }
 
-        void BuildSpeed()
-        {
+        void BuildSpeed() {
             foreach (var nextTurn in whoseTurn)
                 nextTurn.NewTurn();
         }
 
-        void HandleTurnAlly(CombatCharacter myTurn)
-        {
+        void HandleTurnAlly(CombatCharacter myTurn) {
             CurrentPlayerControlled = myTurn;
             // Linq to get array of most threatening enemies
 
@@ -200,17 +179,15 @@ namespace Battle
         }
 
 
-        IEnumerator HandleTurnEnemy(CombatCharacter myTurn)
-        {
+        IEnumerator HandleTurnEnemy(CombatCharacter myTurn) {
             BattleUIManager.Instance.EnemyTurn();
             // Attack player tea
             var tempList = whoseTurn.FindAll(cc => cc.Ally);
-            if (tempList.Count == 0)
-            {
+            if (tempList.Count == 0) {
                 HaveATeamWon();
                 yield break;
             }
-            
+
             tempList.Sort((cc1, cc2) => cc2.Threat.CompareTo(cc1.Threat));
             var target = tempList[0];
 
@@ -224,8 +201,7 @@ namespace Battle
 
         public void GoToAfterBattle() => BattleSceneManager.GoToAfterBattle(player, enemyTeamChars);
 
-        public async Task Hide()
-        {
+        public async Task Hide() {
             SceneLoader.ActionSceneLoaded -= Setup;
             gameObject.SetActive(false);
             await Task.Yield();

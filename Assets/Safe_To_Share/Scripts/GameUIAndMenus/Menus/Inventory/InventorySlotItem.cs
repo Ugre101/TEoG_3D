@@ -8,11 +8,9 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
-{
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory {
     public class InventorySlotItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler,
-        IPointerEnterHandler, IPointerExitHandler
-    {
+                                     IPointerEnterHandler, IPointerExitHandler {
         [SerializeField] TextMeshProUGUI amount;
         [SerializeField] RectTransform rect;
         [SerializeField] Image iconSprite;
@@ -27,25 +25,23 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         Item loadedItem;
         Coroutine loadItemOp;
         Transform orgParent;
+        protected InventorySlot slot;
 
-        Sprite Sprite
-        {
+        Sprite Sprite {
             set => iconSprite.sprite = value;
         }
 
-        void OnDisable()
-        {
+        void OnDisable() {
             StopCoroutine(loadItemOp);
             if (invItem != null)
                 invItem.AmountChange -= SetAmount;
         }
 
-        public virtual void OnBeginDrag(PointerEventData eventData)
-        {
+        public virtual void OnBeginDrag(PointerEventData eventData) {
             blockHoverInfo = true;
             StopShowing?.Invoke();
             orgParent = transform.parent;
-            Vector2 orgSize = rect.rect.size;
+            var orgSize = rect.rect.size;
             SetAnchor(rect, 0.5f, 0.5f);
             rect.sizeDelta = orgSize;
             transform.SetParent(orgParent.parent.parent.parent, false);
@@ -54,34 +50,28 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 
         public void OnDrag(PointerEventData eventData) => transform.position = eventData.position;
 
-        public virtual void OnEndDrag(PointerEventData eventData)
-        {
+        public virtual void OnEndDrag(PointerEventData eventData) {
             List<RaycastResult> results = new();
             EventSystem.current.RaycastAll(eventData, results);
-            foreach (RaycastResult o in results)
-            {
+            foreach (var o in results) {
                 if (!o.gameObject.TryGetComponent(out InventorySlot newSlot)) continue;
                 ResetPosition();
-                newSlot.MoveTo(invItem,slot);
+                newSlot.MoveTo(invItem, slot);
                 return;
-                
-                
             }
 
             ResetPosition();
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
+        public void OnPointerEnter(PointerEventData eventData) {
             if (!blockHoverInfo)
                 ShowItem?.Invoke(loadedItem, transform.position);
         }
 
         public void OnPointerExit(PointerEventData eventData) => StopShowing?.Invoke();
-        public event Action<Item, InventoryItem,InventorySlot> Use;
+        public event Action<Item, InventoryItem, InventorySlot> Use;
 
-        protected void ResetPosition()
-        {
+        protected void ResetPosition() {
             transform.SetParent(orgParent);
             transform.position = orgParent.position;
             SetAnchor(rect, 0f, 1f);
@@ -91,26 +81,23 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             lastClick = 0;
         }
 
-        static void SetAnchor(RectTransform rect, float minAnchor, float maxAnchor)
-        {
+        static void SetAnchor(RectTransform rect, float minAnchor, float maxAnchor) {
             rect.anchorMin = new Vector2(minAnchor, minAnchor);
             rect.anchorMax = new Vector2(maxAnchor, maxAnchor);
         }
 
         void SetAmount(int value) => amount.text = value.ToString();
-        protected InventorySlot slot;
-        public void Setup(InventoryItem parInvItem, InventorySlot inventorySlot)
-        {
+
+        public void Setup(InventoryItem parInvItem, InventorySlot inventorySlot) {
             slot = inventorySlot;
             gameObject.SetActive(true);
-            this.invItem = parInvItem;
+            invItem = parInvItem;
             SetAmount(parInvItem.Amount);
             loadItemOp = StartCoroutine(LoadItem());
             invItem.AmountChange += SetAmount;
         }
 
-        IEnumerator LoadItem()
-        {
+        IEnumerator LoadItem() {
             var op = Addressables.LoadAssetAsync<Item>(invItem.ItemGuid);
             yield return op;
             loaded = true;
@@ -118,13 +105,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             Sprite = op.Result.Icon;
         }
 
-        public void DoubleClick()
-        {
+        public void DoubleClick() {
             if (!loaded) return;
-            float newClick = Time.unscaledTime;
-            if (newClick - lastClick < doubleClickResetTime)
-            {
-                Use?.Invoke(loadedItem, invItem,slot);
+            var newClick = Time.unscaledTime;
+            if (newClick - lastClick < doubleClickResetTime) {
+                Use?.Invoke(loadedItem, invItem, slot);
                 SetAmount(invItem.Amount);
             }
 
@@ -134,13 +119,11 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         public static event Action<Item, Vector2> ShowItem;
         public static event Action StopShowing;
 
-        public void Clear()
-        {
+        public void Clear() {
             if (invItem != null)
                 invItem.AmountChange -= SetAmount;
             loaded = false;
             gameObject.SetActive(false);
         }
-
     }
 }

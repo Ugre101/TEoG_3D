@@ -7,10 +7,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
-{
-    public sealed class DefeatMainUI : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI {
+    public sealed class DefeatMainUI : MonoBehaviour {
         [SerializeField] AfterBattleActorInfo playerInfo;
         [SerializeField] AfterBattleActorInfo enemyInfo;
         [SerializeField] Button resist, giveIn;
@@ -23,12 +21,10 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
         bool preloading;
         public static DefeatMainUI Instance { get; private set; }
 
-        void Awake()
-        {
-            if (Instance == null)
+        void Awake() {
+            if (Instance == null) {
                 Instance = this;
-            else
-            {
+            } else {
                 Debug.LogError("Duplicate defeat main UI");
                 Destroy(gameObject);
             }
@@ -38,8 +34,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
         public static event Action GiveIn;
         public static event Action Continue;
 
-        public void Setup(Player parPlayer)
-        {
+        public void Setup(Player parPlayer) {
             player = parPlayer;
             // buttons.FirstSetup(buttonOwner, partner);
             resist.onClick.AddListener(InvokeResist);
@@ -57,8 +52,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
 
         public void SetupPartner(BaseCharacter character) => enemyInfo.Setup(character);
 
-        public void Leave()
-        {
+        public void Leave() {
             if (alreadyLeaving)
                 return;
             alreadyLeaving = true;
@@ -66,8 +60,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
         }
 
 
-        public void SetupNode(string node)
-        {
+        public void SetupNode(string node) {
             giveIn.gameObject.SetActive(true);
             resist.gameObject.SetActive(true);
             leaveBtn.gameObject.SetActive(false);
@@ -75,8 +68,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
             textLog.text = node;
         }
 
-        public void PrintNodeEffect(string node)
-        {
+        public void PrintNodeEffect(string node) {
             giveIn.gameObject.SetActive(false);
             resist.gameObject.SetActive(false);
             leaveBtn.gameObject.SetActive(false);
@@ -84,27 +76,20 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
             textLog.text = node;
         }
 
-        public void ShowLeaveBtn(bool only)
-        {
+        public void ShowLeaveBtn(bool only) {
             leaveBtn.gameObject.SetActive(true);
-            if (only)
-            {
+            if (only) {
                 giveIn.gameObject.SetActive(false);
                 resist.gameObject.SetActive(false);
                 continueBtn.gameObject.SetActive(false);
             }
         }
 
-        public void Resisted()
-        {
-        }
+        public void Resisted() { }
 
-        public void FailedResist()
-        {
-        }
+        public void FailedResist() { }
 
-        public void StartNode(string startNode)
-        {
+        public void StartNode(string startNode) {
             giveIn.gameObject.SetActive(false);
             resist.gameObject.SetActive(false);
             leaveBtn.gameObject.SetActive(false);

@@ -5,15 +5,12 @@ using SaveStuff;
 using SceneStuff;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts
-{
-    public sealed class SyncSceneLoaderWithLocation : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts {
+    public sealed class SyncSceneLoaderWithLocation : MonoBehaviour {
         [SerializeField] GameSceneSo locationSceneSo;
         readonly WaitForSeconds coldStartAfterDelay = new(1f);
 
-        IEnumerator Start()
-        {
+        IEnumerator Start() {
             if (!GameTester.GetFirstCall())
                 yield break;
             if (locationSceneSo == null)

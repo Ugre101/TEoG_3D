@@ -1,23 +1,19 @@
-﻿using Character.EssenceStuff;
-using Character.EssenceStuff.UI;
+﻿using Character.EssenceStuff.UI;
 using Character.Organs.UI;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
-{
-    public sealed class EssenceMenu : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu {
+    public sealed class EssenceMenu : GameMenu {
         [SerializeField] EssenceBars essenceBars;
         [SerializeField] TextMeshProUGUI stableAmount, giveAmount, drainAmount;
         [SerializeField] ManualOrganGrowth dick, balls, vagina, boobs;
         [SerializeField] EssenceOptionsToggles essenceOptions;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             ManualOrganGrowth.Change = false;
             GrowOrganButton.Change = false;
-            EssenceSystem essence = Player.Essence;
+            var essence = Player.Essence;
             essenceBars.Setup(essence);
             stableAmount.text = $"Stable amount\n{essence.StableEssence.Value}";
             giveAmount.text = $"Give amount:\n{essence.GiveAmount.Value}";
@@ -30,8 +26,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.EssenceMenu
         }
 
 
-        void OnDisable()
-        {
+        void OnDisable() {
             if (ManualOrganGrowth.Change || GrowOrganButton.Change)
                 holder.UpdateAvatar();
         }

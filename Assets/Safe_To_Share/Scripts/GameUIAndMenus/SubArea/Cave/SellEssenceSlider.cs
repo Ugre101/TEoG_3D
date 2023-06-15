@@ -4,10 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
-{
-    public sealed class SellEssenceSlider : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave {
+    public sealed class SellEssenceSlider : MonoBehaviour {
         const float SellEssenceFor = 0.361436f; // Need to test around for best value 
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI sellFor, essenceAmount;
@@ -18,14 +16,12 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
         Essence myEss;
         GoldBag myGold;
 
-        void OnDisable()
-        {
+        void OnDisable() {
             slider.onValueChanged.RemoveAllListeners();
             sellBtn.onClick.RemoveAllListeners();
         }
 
-        public void Setup(Essence essence, GoldBag goldBag)
-        {
+        public void Setup(Essence essence, GoldBag goldBag) {
             myEss = essence;
             myGold = goldBag;
 
@@ -40,16 +36,14 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.SubArea.Cave
             sellBtn.onClick.AddListener(SellMyEssence);
         }
 
-        void ChangeAmount(float arg0)
-        {
+        void ChangeAmount(float arg0) {
             amount = Mathf.RoundToInt(arg0);
             essenceAmount.text = amount.ToString();
             sellFor.text = $"{SellValue()}g";
         }
 
-        void SellMyEssence()
-        {
-            myEss.LoseEssence( amount);
+        void SellMyEssence() {
+            myEss.LoseEssence(amount);
             myGold.GainGold(SellValue());
 
             amount = Mathf.Min(myEss.Amount, amount);

@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class TriggerMenus : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class TriggerMenus : MonoBehaviour {
         [SerializeField] GameCanvas gameCanvas;
         [SerializeField] GameObject looksMenu;
         [SerializeField] GameObject saveMenu;
@@ -17,8 +15,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus
         [SerializeField] GameObject questMenu;
         [SerializeField] GameObject essenceMenu;
 
-        void OpenMenu(InputAction.CallbackContext ctx, GameObject menu)
-        {
+        void OpenMenu(InputAction.CallbackContext ctx, GameObject menu) {
             if (ctx.performed)
                 gameCanvas.TriggerMenu(menu);
         }

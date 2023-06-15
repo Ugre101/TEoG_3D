@@ -2,15 +2,12 @@ using System.Text;
 using TMPro;
 using UnityEngine;
 
-namespace Character.Race.UI
-{
-    public sealed class RaceInfo : MonoBehaviour
-    {
+namespace Character.Race.UI {
+    public sealed class RaceInfo : MonoBehaviour {
         [SerializeField] TextMeshProUGUI raceText;
         [SerializeField] TextMeshProUGUI moreInfo;
 
-        public void PrintRaceInfo(BaseCharacter character)
-        {
+        public void PrintRaceInfo(BaseCharacter character) {
             StringBuilder sb = new("Race\n");
             if (character.RaceSystem.Race != null)
                 sb.AppendLine(character.RaceSystem.Race.Title);
@@ -20,10 +17,9 @@ namespace Character.Race.UI
             PrintMoreInfo(character);
         }
 
-        void PrintMoreInfo(BaseCharacter character)
-        {
+        void PrintMoreInfo(BaseCharacter character) {
             StringBuilder sb = new();
-            foreach (RaceEssence raceEssence in character.RaceSystem.AllRaceEssence)
+            foreach (var raceEssence in character.RaceSystem.AllRaceEssence)
                 sb.AppendLine($"{raceEssence.Race.Title} {{{raceEssence.Amount}}}");
             moreInfo.text = sb.ToString();
         }

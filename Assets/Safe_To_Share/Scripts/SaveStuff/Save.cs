@@ -11,17 +11,15 @@ using DormAndHome.Dorm.Buildings;
 using Map;
 using QuestStuff;
 using Safe_To_Share.Scripts.Building;
+using Safe_To_Share.Scripts.Character.Items;
 using Safe_To_Share.Scripts.Farming;
 using Safe_To_Share.Scripts.Static;
 using SceneStuff;
 using UnityEngine;
-using Safe_To_Share.Scripts.Character.Items;
 
-namespace SaveStuff
-{
+namespace SaveStuff {
     [Serializable]
-    public struct Save
-    {
+    public struct Save {
         [SerializeField] int lastId;
         [SerializeField] string sceneGuid;
         [SerializeField] List<string> subSceneGuid;
@@ -37,8 +35,8 @@ namespace SaveStuff
         [SerializeField] string playerGold;
         [SerializeField] string farmsSave;
         [SerializeField] string worldInventories;
-        public Save(PlayerSave character)
-        {
+
+        public Save(PlayerSave character) {
             lastId = IDGiver.Save();
             sceneGuid = SceneLoader.CurrentLocation.Guid;
             subSceneGuid = new List<string>(SceneLoader.CurrentLocation.SaveActiveSubLocations());
@@ -67,16 +65,11 @@ namespace SaveStuff
         public KnowLocationsSave Locations => JsonUtility.FromJson<KnowLocationsSave>(locations);
         public QuestsSave PlayerQuests => JsonUtility.FromJson<QuestsSave>(playerQuests);
 
-        public VoredCharactersSave VoreSave
-        {
-            get
-            {
-                try
-                {
+        public VoredCharactersSave VoreSave {
+            get {
+                try {
                     return JsonUtility.FromJson<VoredCharactersSave>(voredCharacters);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     LoadError?.Invoke("Vored characters Failed load");
                     Console.WriteLine(e);
                     return new VoredCharactersSave(new Prey[] { });
@@ -84,16 +77,11 @@ namespace SaveStuff
             }
         }
 
-        public DormSave DormSave
-        {
-            get
-            {
-                try
-                {
+        public DormSave DormSave {
+            get {
+                try {
                     return JsonUtility.FromJson<DormSave>(dorm);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     LoadError?.Invoke("Dorm Failed to load");
                     Console.WriteLine(e);
                     return new DormSave(new List<DormMate>(), new DormBuildings());
@@ -101,16 +89,11 @@ namespace SaveStuff
             }
         }
 
-        public DayCareSave DayCareSave
-        {
-            get
-            {
-                try
-                {
+        public DayCareSave DayCareSave {
+            get {
+                try {
                     return JsonUtility.FromJson<DayCareSave>(dayCare);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     LoadError?.Invoke("Day care failed to load");
                     Console.WriteLine(e);
                     return new DayCareSave(new List<Child>());
@@ -124,54 +107,41 @@ namespace SaveStuff
 
         public string IslandStones => islandStones;
 
-        public int Gold
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(playerGold))
-                {
-                    GoldSave gold = JsonUtility.FromJson<GoldSave>(playerGold);
+        public int Gold {
+            get {
+                if (!string.IsNullOrEmpty(playerGold)) {
+                    var gold = JsonUtility.FromJson<GoldSave>(playerGold);
                     return gold.Gold;
                 }
 
                 if (!player.Contains("gold\":")) return 100;
-                int start = player.LastIndexOf("gold\":", StringComparison.Ordinal);
-                int errTest = player.LastIndexOf("goldgf\"aas:", StringComparison.Ordinal);
-                int end = player.IndexOf("}", start, StringComparison.Ordinal);
+                var start = player.LastIndexOf("gold\":", StringComparison.Ordinal);
+                var errTest = player.LastIndexOf("goldgf\"aas:", StringComparison.Ordinal);
+                var end = player.IndexOf("}", start, StringComparison.Ordinal);
                 if (start == -1 || end == -1) return 200;
-                string substring = player.Substring(start, end - start);
-                return int.TryParse(substring, out int res) ? res : 200;
+                var substring = player.Substring(start, end - start);
+                return int.TryParse(substring, out var res) ? res : 200;
                 // if (int.TryParse(JObject))
                 // "gold\\\":99999}}\"
             }
         }
 
-        public FarmAreas.FarmSave FarmsSave
-        {
-            get
-            {
-                try
-                {
+        public FarmAreas.FarmSave FarmsSave {
+            get {
+                try {
                     return JsonUtility.FromJson<FarmAreas.FarmSave>(farmsSave);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     Console.WriteLine(e);
                     return new FarmAreas.FarmSave();
                 }
             }
         }
 
-        public WorldInventoriesSave WorldInventoriesSave
-        {
-            get
-            {
-                try
-                {
+        public WorldInventoriesSave WorldInventoriesSave {
+            get {
+                try {
                     return JsonUtility.FromJson<WorldInventoriesSave>(worldInventories);
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     Console.WriteLine(e);
                     return new WorldInventoriesSave();
                 }

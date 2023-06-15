@@ -3,11 +3,9 @@ using Character.LevelStuff;
 using Character.StatsStuff.Mods;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Holders
-{
+namespace Safe_To_Share.Scripts.Holders {
     [CreateAssetMenu(menuName = "Character/Movement/Perk", fileName = "MovementPerk", order = 0)]
-    public sealed class MovementPerk : BasicPerk
-    {
+    public sealed class MovementPerk : BasicPerk {
         [SerializeField] int extraJumps;
         [SerializeField] float extraJumpStrength;
         [SerializeField] List<TempIntMod> tempJumpStrength = new();

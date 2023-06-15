@@ -3,15 +3,11 @@ using Safe_To_Share.Scripts.Static;
 using UnityEditor;
 using UnityEngine;
 
-namespace EditorVore
-{
-    public sealed class VoredCharactersWindow : EditorWindow
-    {
-        void OnGUI()
-        {
+namespace EditorVore {
+    public sealed class VoredCharactersWindow : EditorWindow {
+        void OnGUI() {
             GUILayout.Label("Preys", EditorStyles.boldLabel);
-            foreach (Prey prey in VoredCharacters.PreyDict.Values)
-            {
+            foreach (var prey in VoredCharacters.PreyDict.Values) {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.TextField("Prey ID", prey.Identity.ID.ToString());
                 EditorGUILayout.TextField("Prey Name", prey.Identity.FullName);
@@ -24,8 +20,7 @@ namespace EditorVore
         }
 
         [MenuItem("MENUITEM/Vored Windows")]
-        static void ShowWindow()
-        {
+        static void ShowWindow() {
             var window = GetWindow<VoredCharactersWindow>();
             window.titleContent = new GUIContent("Vored");
             window.Show();

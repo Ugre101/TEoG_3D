@@ -8,16 +8,14 @@ using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Safe_To_Share.Scripts.Farming
-{
-    public sealed class ShowPlantPlacement : MonoBehaviour, ICancelMeBeforeOpenPauseMenu
-    {
+namespace Safe_To_Share.Scripts.Farming {
+    public sealed class ShowPlantPlacement : MonoBehaviour, ICancelMeBeforeOpenPauseMenu {
         [SerializeField] Camera cam;
         [SerializeField] LayerMask searchLayers;
         [SerializeField] float distFromPlayer = 12f;
-        [SerializeField] [Range(0.1f, 0.4f)] float timeInterval = 0.2f;
+        [SerializeField, Range(0.1f, 0.4f),]  float timeInterval = 0.2f;
 
-        [SerializeField] [Range(float.Epsilon, 0.5f)]
+        [SerializeField, Range(float.Epsilon, 0.5f),] 
         float tolerance = 0.2f;
 
         NativeArray<RaycastCommand> commands;
@@ -44,22 +42,14 @@ namespace Safe_To_Share.Scripts.Farming
 
         bool validPlacement;
 
-        void Start()
-        {
+        void Start() {
             results = new NativeArray<RaycastHit>(1, Allocator.Persistent);
             commands = new NativeArray<RaycastCommand>(1, Allocator.Persistent);
             PlantOptionButton.ShowPlacement += ShowHowever;
             // optionButton.onClick.AddListener(DoInteraction);
         }
 
-        void OnDisable()
-        {
-            if (hovering)
-                CancelHovering();
-        }
-
-        void Update()
-        {
+        void Update() {
             if (hovering is false) return;
 
             if (Time.time < lastTick + timeInterval)
@@ -73,15 +63,18 @@ namespace Safe_To_Share.Scripts.Farming
             lastValue = newValue;
         }
 
-        void OnDestroy()
-        {
+        void OnDisable() {
+            if (hovering)
+                CancelHovering();
+        }
+
+        void OnDestroy() {
             PlantOptionButton.ShowPlacement -= ShowHowever;
             results.Dispose();
             commands.Dispose();
         }
 
-        public bool BlockIfActive()
-        {
+        public bool BlockIfActive() {
             if (!hovering) return false;
             CancelHovering();
             return true;
@@ -89,8 +82,7 @@ namespace Safe_To_Share.Scripts.Farming
 
         public static event Action UpdateSeedsOptions;
 
-        void ShowHowever(Plant obj, Inventory inventory, string guid, PlantOptionButton button)
-        {
+        void ShowHowever(Plant obj, Inventory inventory, string guid, PlantOptionButton button) {
             plant = obj;
             this.inventory = inventory;
             //    item = inventoryItem;
@@ -99,27 +91,23 @@ namespace Safe_To_Share.Scripts.Farming
             StartHover(obj.Prefab);
         }
 
-        public void StartHover(PlantedPlant prefab)
-        {
+        public void StartHover(PlantedPlant prefab) {
             lastPrefab = prefab;
             hoverPrefab = Instantiate(prefab); // just dump it
             hovering = true;
             validPlacement = false;
         }
 
-        public void CancelHovering()
-        {
+        public void CancelHovering() {
             Destroy(hoverPrefab.gameObject);
             hoverPrefab = null;
             hovering = false;
             validPlacement = false;
         }
 
-        void CheckResults()
-        {
+        void CheckResults() {
             handle.Complete();
-            foreach (var raycastHit in results)
-            {
+            foreach (var raycastHit in results) {
                 if (raycastHit.collider is not TerrainCollider) continue;
                 var position = raycastHit.point;
                 if (!(Vector3.Distance(PlayerPosition.Pos, position) < distFromPlayer)) continue;
@@ -128,8 +116,7 @@ namespace Safe_To_Share.Scripts.Farming
             }
         }
 
-        public async void ConfirmPlacement(InputAction.CallbackContext callbackContext)
-        {
+        public async void ConfirmPlacement(InputAction.CallbackContext callbackContext) {
             if (planting) return;
             if (callbackContext.performed is false) return;
             if (!validPlacement) return;
@@ -138,15 +125,12 @@ namespace Safe_To_Share.Scripts.Farming
             var position = hoverPrefab.transform.position;
             planted.Plant(new PlantStats(plant, position));
             var stillHave = await inventory.LowerItemAmountAndReturnIfStillHave(itemGuid);
-            if (stillHave is false)
-            {
+            if (stillHave is false) {
                 // Stop
                 CancelHovering();
                 Destroy(plantButton.gameObject);
                 UpdateSeedsOptions?.Invoke();
-            }
-            else
-            {
+            } else {
                 hovering = true;
             }
 
@@ -155,8 +139,7 @@ namespace Safe_To_Share.Scripts.Farming
         }
 
 
-        void ScheduleRayCast()
-        {
+        void ScheduleRayCast() {
             var camRay = cam.ScreenPointToRay(lastValue);
             commands[0] = new RaycastCommand(camRay.origin, camRay.direction, Mathf.Infinity, searchLayers);
             handle = RaycastCommand.ScheduleBatch(commands, results, 1);

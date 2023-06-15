@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using Character.DefeatScenarios.Custom;
 
-namespace Character.CreateCharacterStuff
-{
-    public readonly struct CreateEnemy
-    {
+namespace Character.CreateCharacterStuff {
+    public readonly struct CreateEnemy {
         public CreateEnemy(CreateCharacter character, BattleReward battleReward, CanTakeEnemyHome canTake,
                            string loseScenarios, bool giveRandomBodyMorphs, List<CustomLoseScenario> customScenarios,
-                           string enemyGuid)
-        {
+                           string enemyGuid) {
             Character = character;
             BattleReward = battleReward;
             CanTake = canTake;

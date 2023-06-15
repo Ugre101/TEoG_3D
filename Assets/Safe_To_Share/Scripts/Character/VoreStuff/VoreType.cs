@@ -1,7 +1,5 @@
-﻿namespace Character.VoreStuff
-{
-    public enum VoreType
-    {
+﻿namespace Character.VoreStuff {
+    public enum VoreType {
         Oral,
         Balls,
         UnBirth,

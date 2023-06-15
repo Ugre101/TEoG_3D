@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Character.IdentityStuff
-{
+namespace Character.IdentityStuff {
     [CreateAssetMenu(fileName = "Gender name list", menuName = "Character/Name list", order = 0)]
-    public sealed class GenderedNameList : ScriptableObject
-    {
+    public sealed class GenderedNameList : ScriptableObject {
         [SerializeField] string[] neutralNames;
         [SerializeField] string[] femaleNames;
         [SerializeField] string[] malesNames;
@@ -26,14 +24,12 @@ namespace Character.IdentityStuff
 
 #if UNITY_EDITOR
         [Header("Editor Only"), SerializeField,]
-        
         TextAsset nuetralNamesFile;
 
         [SerializeField] TextAsset femaleNamesFile;
         [SerializeField] TextAsset maleNamesFile;
         [SerializeField] TextAsset lastNamesFile;
-        void OnValidate()
-        {
+        void OnValidate() {
             neutralNames = nuetralNamesFile
                 ? nuetralNamesFile.text.Split(new[] { Environment.NewLine, }, StringSplitOptions.RemoveEmptyEntries)
                 : null;

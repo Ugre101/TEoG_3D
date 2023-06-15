@@ -2,10 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace AvatarStuff
-{
-    public sealed class AvatarScaler : MonoBehaviour
-    {
+namespace AvatarStuff {
+    public sealed class AvatarScaler : MonoBehaviour {
         // [SerializeField] CharacterMovement characterMovement; 
         [SerializeField] float minSize = 0.1f, maxSize = 3f;
         public UnityEvent<float> SizeChange;
@@ -18,8 +16,7 @@ namespace AvatarStuff
         float originalHeight = 160f;
         public float Height { get; private set; }
 
-        public void AreaHasHeightLimit(float limit)
-        {
+        public void AreaHasHeightLimit(float limit) {
             areaHasHeightLimit = true;
             heightLimit = limit;
             if (transform.localScale.x <= limit)
@@ -30,13 +27,11 @@ namespace AvatarStuff
             heightChangeRoutine = StartCoroutine(ShrinkTo(tempHeight));
         }
 
-        IEnumerator ShrinkTo(float endHeight)
-        {
+        IEnumerator ShrinkTo(float endHeight) {
             var startSize = transform.localScale.x;
             const float duration = 0.8f;
             var startTime = Time.time;
-            while (endHeight < transform.localScale.x)
-            {
+            while (endHeight < transform.localScale.x) {
                 var stepSize = Mathf.SmoothStep(startSize, endHeight, TimeStep());
                 SetScale(stepSize);
                 yield return null;
@@ -46,14 +41,12 @@ namespace AvatarStuff
             float TimeStep() => (Time.time - startTime) / duration;
         }
 
-        void SetScale(float stepSize)
-        {
+        void SetScale(float stepSize) {
             SizeChange?.Invoke(stepSize);
             transform.localScale = new Vector3(stepSize, stepSize, stepSize);
         }
 
-        public void ExitHeightLimitArea()
-        {
+        public void ExitHeightLimitArea() {
             areaHasHeightLimit = false;
             if (heightChangeRoutine != null)
                 StopCoroutine(heightChangeRoutine);
@@ -61,13 +54,11 @@ namespace AvatarStuff
             //  SetStoredHeight();
         }
 
-        IEnumerator GrowTo()
-        {
+        IEnumerator GrowTo() {
             var startSize = transform.localScale.x;
             const float duration = 1.2f;
             var startTime = Time.time;
-            while (transform.localScale.x < Height)
-            {
+            while (transform.localScale.x < Height) {
                 var stepSize = Mathf.SmoothStep(startSize, Height, TimeStep());
                 SetScale(stepSize);
                 yield return null;
@@ -79,8 +70,7 @@ namespace AvatarStuff
 
         public void NewHeight(float avatarHeight) => originalHeight = avatarHeight;
 
-        public void ChangeScale(float newHeight)
-        {
+        public void ChangeScale(float newHeight) {
             var limited = areaHasHeightLimit && heightLimit < newHeight;
             Height = Mathf.Clamp(newHeight / originalHeight, minSize, maxSize);
             if (limited)
@@ -89,8 +79,7 @@ namespace AvatarStuff
             //            characterMovement.groundProbingDistance = orgProbHeight * f;
         }
 
-        void SetStoredHeight()
-        {
+        void SetStoredHeight() {
             SetScale(Height);
         }
     }

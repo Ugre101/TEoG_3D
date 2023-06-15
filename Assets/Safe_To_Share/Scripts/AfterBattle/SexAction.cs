@@ -4,21 +4,17 @@ using System.Linq;
 using System.Text;
 using Character;
 using Character.BodyStuff;
-using Character.EssenceStuff;
 using Character.Organs;
 using Character.Organs.Fluids;
-using Character.Organs.OrgansContainers;
 using Character.PregnancyStuff;
 using Character.SexStatsStuff;
 using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Safe_To_Share.Scripts.AfterBattle
-{
+namespace Safe_To_Share.Scripts.AfterBattle {
     [CreateAssetMenu(fileName = "Sex Act", menuName = "AfterBattle/Sex Act")]
-    public sealed class SexAction : AfterBattleBaseAction
-    {
+    public sealed class SexAction : AfterBattleBaseAction {
         [SerializeField] ArousalGain arousalGain;
         [SerializeField] List<NeededOrgans> casterNeedsSexualOrgan = new();
         [SerializeField] List<NeededOrgans> partnerNeedsSexualOrgan = new();
@@ -45,34 +41,31 @@ namespace Safe_To_Share.Scripts.AfterBattle
             MeetsOrganReq(receiver, partnerNeedsSexualOrgan) &&
             heightCompression.PassHeightReq(giver, receiver);
 
-        static bool MeetsOrganReq(BaseCharacter character, IReadOnlyCollection<NeededOrgans> needOrgans)
-            => needOrgans.Count <= 0 || needOrgans.Any(c => c.MeetReq(character));
+        static bool MeetsOrganReq(BaseCharacter character, IReadOnlyCollection<NeededOrgans> needOrgans) =>
+            needOrgans.Count <= 0 || needOrgans.Any(c => c.MeetReq(character));
 
-        static bool MeetsBodyReq(BaseCharacter character, IReadOnlyCollection<NeededBody> bodyNeeds)
-            => bodyNeeds.Count <= 0 || bodyNeeds.Any(c => c.MeetReq(character));
+        static bool MeetsBodyReq(BaseCharacter character, IReadOnlyCollection<NeededBody> bodyNeeds) =>
+            bodyNeeds.Count <= 0 || bodyNeeds.Any(c => c.MeetReq(character));
 
-        public override SexActData Use(AfterBattleActor caster, AfterBattleActor target)
-        {
+        public override SexActData Use(AfterBattleActor caster, AfterBattleActor target) {
             data.AfterText.Clear();
             var gain = arousalGain.Gain(caster.Actor, target.Actor);
-            for (int i = 0; i < gain.TimesCasterOrgasmed; i++)
+            for (var i = 0; i < gain.TimesCasterOrgasmed; i++)
                 OnCasterOrgasm(caster, target);
-            for (int i = 0; i < gain.TimesPartnerOrgasmed; i++)
+            for (var i = 0; i < gain.TimesPartnerOrgasmed; i++)
                 OnTargetOrgasm(caster, target);
             return data;
         }
 
-        void OnCasterOrgasm(AfterBattleActor caster, AfterBattleActor target)
-        {
+        void OnCasterOrgasm(AfterBattleActor caster, AfterBattleActor target) {
             if (canImpregnate && CanGetImpregnated(caster.Actor, target.Actor))
                 data.AfterText.Add($"You impregnated {target.Actor.Identity.FirstName}'s {ImpregnateOrganTitle}");
-            foreach (EssencePerk perk in caster.Actor.Essence.EssencePerks)
+            foreach (var perk in caster.Actor.Essence.EssencePerks)
                 perk.OnCasterOrgasmPerkEffect(caster.Actor, target.Actor);
             HandleFluids(caster, target);
         }
 
-        void HandleFluids(AfterBattleActor caster, AfterBattleActor target)
-        {
+        void HandleFluids(AfterBattleActor caster, AfterBattleActor target) {
             foreach (var fluidsInto in cumFluidsFromInto)
                 if (fluidsInto.FromPartner)
                     Test(target.Actor, caster.Actor, fluidsInto);
@@ -80,11 +73,9 @@ namespace Safe_To_Share.Scripts.AfterBattle
                     Test(caster.Actor, target.Actor, fluidsInto);
         }
 
-        static void Test(BaseCharacter from, BaseCharacter into, CumFluidsFromInto fluidsInto)
-        {
+        static void Test(BaseCharacter from, BaseCharacter into, CumFluidsFromInto fluidsInto) {
             var foreignFluidsList = new List<ForeignFluids>();
-            switch (fluidsInto.Into)
-            {
+            switch (fluidsInto.Into) {
                 case CumFluidsFromInto.IntoForeignFluids.Vagina:
                     foreignFluidsList.AddRange(into.SexualOrgans.Vaginas.BaseList.Select(v => v.Womb.ForeignFluids));
                     break;
@@ -107,16 +98,14 @@ namespace Safe_To_Share.Scripts.AfterBattle
             SexExtensions.Orgasm(from, fluidsInto.Form, foreignFluidsList);
         }
 
-        void OnTargetOrgasm(AfterBattleActor caster, AfterBattleActor target)
-        {
+        void OnTargetOrgasm(AfterBattleActor caster, AfterBattleActor target) {
             if (canGetImpregnated && CanGetImpregnated(target.Actor, caster.Actor))
                 data.AfterText.Add($"Your {ImpregnateOrganTitle} got impregnated by {target.Actor.Identity.FirstName}");
-            foreach (EssencePerk essencePerk in caster.Actor.Essence.EssencePerks)
+            foreach (var essencePerk in caster.Actor.Essence.EssencePerks)
                 essencePerk.OnPartnerOrgasmPerkEffect(caster.Actor, target.Actor);
         }
 
-        bool CanGetImpregnated(BaseCharacter father, BaseCharacter mother)
-        {
+        bool CanGetImpregnated(BaseCharacter father, BaseCharacter mother) {
             if (!mother.SexualOrgans.Containers.TryGetValue(organToBeImpregnated, out var motherCon) ||
                 !motherCon.HaveAny())
                 return false;
@@ -126,27 +115,23 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
         [Serializable]
-        struct NeededBody
-        {
+        struct NeededBody {
             [SerializeField] BodyStatType bodyType;
             [SerializeField] NeedToMet minSize, maxSize;
 
-            public bool MeetReq(BaseCharacter character)
-            {
-                float value = character.Body.BodyStats[bodyType].Value;
+            public bool MeetReq(BaseCharacter character) {
+                var value = character.Body.BodyStats[bodyType].Value;
                 return (!minSize.Need || !(value < minSize.Size)) &&
                        (!maxSize.Need || !(maxSize.Size < value));
             }
         }
 
         [Serializable]
-        struct HeightCompression
-        {
+        struct HeightCompression {
             [SerializeField] bool active;
             [SerializeField] float playerIsXTimesTaller;
 
-            public bool PassHeightReq(BaseCharacter caster, BaseCharacter partner)
-            {
+            public bool PassHeightReq(BaseCharacter caster, BaseCharacter partner) {
                 if (!active)
                     return true;
                 return caster.Body.Height.Value >= partner.Body.Height.Value * playerIsXTimesTaller;
@@ -154,29 +139,26 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
         [Serializable]
-        struct NeededOrgans
-        {
+        struct NeededOrgans {
             [SerializeField] SexualOrganType organType;
             [SerializeField] NeedToMet minSize, maxSize, amount;
 
             public SexualOrganType OrganType => organType;
 
-            public bool MeetReq(BaseCharacter character)
-            {
-                BaseOrgansContainer baseOrgansContainer = character.SexualOrgans.Containers[OrganType];
+            public bool MeetReq(BaseCharacter character) {
+                var baseOrgansContainer = character.SexualOrgans.Containers[OrganType];
                 if (baseOrgansContainer.BaseList.Any() is false)
                     return false;
                 if (minSize.Need && baseOrgansContainer.Biggest < minSize.Size)
                     return false;
-                if (maxSize.Need && maxSize.Size < baseOrgansContainer.BaseList.Min(o => o.Value)) 
+                if (maxSize.Need && maxSize.Size < baseOrgansContainer.BaseList.Min(o => o.Value))
                     return false;
                 return !amount.Need || !(baseOrgansContainer.BaseList.Count() < amount.Size);
             }
         }
 
         [Serializable]
-        class NeedToMet
-        {
+        class NeedToMet {
             [SerializeField] bool need;
             [SerializeField] float size;
             public bool Need => need;
@@ -184,8 +166,7 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
         [Serializable]
-        class ArousalGain
-        {
+        class ArousalGain {
             [SerializeField] int casterBaseAmount;
             [SerializeField] int targetBaseAmount;
 
@@ -193,25 +174,24 @@ namespace Safe_To_Share.Scripts.AfterBattle
             //     [SerializeField]  List<AffectedBySexualOrgan> giverAffectedBySexualOrganFromReceiver;
             //     [SerializeField]  List<AffectedBySexualOrgan> receiverAffectedBySexualOrganFromGiver;
 
-            public GainInfo Gain(BaseCharacter caster, BaseCharacter receiver)
-            {
-                int casterArousal = GainArousal(caster, receiver, casterBaseAmount, out int casterOrgasmed);
-                int partnerArousal = GainArousal(receiver, caster, targetBaseAmount, out int partnerOrgasmed);
-                var returnText = new StringBuilder($"{caster.Identity.FirstName} gained {casterArousal} arousal and {receiver.Identity.FirstName} gained {partnerArousal} arousal.");
+            public GainInfo Gain(BaseCharacter caster, BaseCharacter receiver) {
+                var casterArousal = GainArousal(caster, receiver, casterBaseAmount, out var casterOrgasmed);
+                var partnerArousal = GainArousal(receiver, caster, targetBaseAmount, out var partnerOrgasmed);
+                var returnText =
+                    new StringBuilder(
+                        $"{caster.Identity.FirstName} gained {casterArousal} arousal and {receiver.Identity.FirstName} gained {partnerArousal} arousal.");
                 returnText = ReturnTextOrgasms(caster, casterOrgasmed, returnText);
                 returnText = ReturnTextOrgasms(receiver, partnerOrgasmed, returnText);
                 return new GainInfo(returnText.ToString(), casterOrgasmed, partnerOrgasmed);
 
-                int GainArousal(BaseCharacter gainer, BaseCharacter giver, float gain, out int orgasms)
-                {
-                    float gGain = gain * rng.GetRandomValue;
-                    int i = Mathf.RoundToInt(gGain * giver.SexStats.GiveArousalFactor.Value);
+                int GainArousal(BaseCharacter gainer, BaseCharacter giver, float gain, out int orgasms) {
+                    var gGain = gain * rng.GetRandomValue;
+                    var i = Mathf.RoundToInt(gGain * giver.SexStats.GiveArousalFactor.Value);
                     orgasms = gainer.SexStats.GainArousal(i);
                     return i;
                 }
 
-                static StringBuilder ReturnTextOrgasms(BaseCharacter giver, int gOrgasm,StringBuilder builder)
-                {
+                static StringBuilder ReturnTextOrgasms(BaseCharacter giver, int gOrgasm, StringBuilder builder) {
                     if (gOrgasm <= 0) return builder;
                     builder.Append($"\n{giver.Identity.FirstName} orgasmed");
                     if (gOrgasm <= 1) return builder;
@@ -220,14 +200,12 @@ namespace Safe_To_Share.Scripts.AfterBattle
                 }
             }
 
-            public struct GainInfo
-            {
+            public struct GainInfo {
                 public string Summary { get; }
                 public int TimesCasterOrgasmed { get; }
                 public int TimesPartnerOrgasmed { get; }
 
-                public GainInfo(string summary, int timesCasterOrgasmed, int timesPartnerOrgasmed)
-                {
+                public GainInfo(string summary, int timesCasterOrgasmed, int timesPartnerOrgasmed) {
                     Summary = summary;
                     TimesCasterOrgasmed = timesCasterOrgasmed;
                     TimesPartnerOrgasmed = timesPartnerOrgasmed;
@@ -236,10 +214,8 @@ namespace Safe_To_Share.Scripts.AfterBattle
         }
 
         [Serializable]
-        struct CumFluidsFromInto
-        {
-            public enum IntoForeignFluids
-            {
+        struct CumFluidsFromInto {
+            public enum IntoForeignFluids {
                 Vagina,
                 Stomach,
                 Body,

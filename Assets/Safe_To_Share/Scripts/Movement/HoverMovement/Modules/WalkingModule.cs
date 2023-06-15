@@ -1,11 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
-{
+namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules {
     [Serializable]
-    public sealed class WalkingModule : BaseMoveModule
-    {
+    public sealed class WalkingModule : BaseMoveModule {
         [SerializeField, Range(0.01f, 0.25f),] float hoverHeight = 2f;
 
 
@@ -40,23 +38,19 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
 
         public override float MaxSpeed => stats.WalkSpeed;
 
-        public override void OnEnter(Collider collider)
-        {
+        public override void OnEnter(Collider collider) {
             base.OnEnter(collider);
             startCenter = offsetTransform.localPosition;
         }
 
 
-        public override void OnGravity()
-        {
-            if (StandingInSlope())
-            {
+        public override void OnGravity() {
+            if (StandingInSlope()) {
                 rigid.AddForce(checker.SlopeDir(Physics.gravity));
                 return;
             }
 
-            if (IsGrounded() is false || IsJumping())
-            {
+            if (IsGrounded() is false || IsJumping()) {
                 rigid.AddForce(Physics.gravity);
 
                 return;
@@ -82,15 +76,13 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
                 hitBody.AddForceAtPosition(rayDir * -springForce, checker.LastHit.point);
         }
 
-        bool HitOther(Vector3 rayDir, out Rigidbody hitBody, out float otherDirVel)
-        {
+        bool HitOther(Vector3 rayDir, out Rigidbody hitBody, out float otherDirVel) {
             var hitOther = DidIHitOtherRigidBody(out hitBody);
             var otherVel = hitOther ? hitBody.velocity : Vector3.zero;
             otherDirVel = Vector3.Dot(rayDir, otherVel);
             return hitOther;
 
-            bool DidIHitOtherRigidBody(out Rigidbody hitBody)
-            {
+            bool DidIHitOtherRigidBody(out Rigidbody hitBody) {
                 if (checker.LastHit.collider != null)
                     return checker.LastHit.collider.TryGetComponent(out hitBody);
                 hitBody = default;
@@ -106,8 +98,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         public override bool IsJumping() => jumps > 0;
 
 
-        public override void OnMove(Vector3 force)
-        {
+        public override void OnMove(Vector3 force) {
             var walkSpeed = force * (stats.WalkSpeed * rigid.mass);
             if (IsGrounded() && inputs.Sprinting)
                 walkSpeed *= stats.SprintMultiplier;
@@ -123,13 +114,11 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             HandleCrunching();
         }
 
-        void HandleCrunching()
-        {
+        void HandleCrunching() {
             var shouldCrunch = inputs.Crunching && WasGrounded();
             if (IsJumping())
                 shouldCrunch = false;
-            switch (shouldCrunch)
-            {
+            switch (shouldCrunch) {
                 case true when IsCrouching is false:
                     StartCrunching();
                     break;
@@ -139,33 +128,28 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             }
         }
 
-        public override void OnUpdateAvatarOffset()
-        {
+        public override void OnUpdateAvatarOffset() {
             if (ShouldNotUpdateAvatarOffset()) return;
             var newPos = offsetTransform.position;
             newPos.y = checker.LastHit.point.y;
             offsetTransform.position = newPos;
             lastY = newPos.y;
         }
-        bool ShouldNotUpdateAvatarOffset()
-        {
+
+        bool ShouldNotUpdateAvatarOffset() {
             if (checker.DidHitGround is false)
                 return true;
-            if (IsJumping() || IsGrounded() is false)
-                return true;
-            return false; 
+            return IsJumping() || IsGrounded() is false;
         }
 
 
-        void StopCrunching()
-        {
+        void StopCrunching() {
             IsCrouching = false;
             capsule.RestoreHeight();
             StoppedCrunching?.Invoke();
         }
 
-        public override void OnExit()
-        {
+        public override void OnExit() {
             base.OnExit();
             offsetTransform.localPosition = startCenter;
             if (IsCrouching)
@@ -174,8 +158,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
 
         bool StandingInSlope() => IsGrounded() && checker.SlopeAngle() > maxSlopeAngle;
 
-        void HandleJumping()
-        {
+        void HandleJumping() {
             UpdateJumpVariables();
             if (!inputs.Jumping || !CanJump())
                 return;
@@ -185,15 +168,13 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
         }
 
 
-        void StartCrunching()
-        {
+        void StartCrunching() {
             IsCrouching = true;
             capsule.HalfHeight();
             StartedCrunching?.Invoke();
         }
 
-        bool CanStopCrunching()
-        {
+        bool CanStopCrunching() {
             var capPos = capsule.Center;
             var offset = capsule.Height / 10;
             capPos.y -= offset;
@@ -201,8 +182,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules
             return !Physics.SphereCast(ray, capsule.Radius, capsule.Height);
         }
 
-        void UpdateJumpVariables()
-        {
+        void UpdateJumpVariables() {
             if (jumps > 0 && IsGrounded() && timeSinceLastJump > jumpCoolDown / 2f && !StandingInSlope())
                 jumps = 0;
             timeSinceLastJump += Time.deltaTime;

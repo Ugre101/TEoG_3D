@@ -1,11 +1,9 @@
 ﻿using Safe_to_Share.Scripts.CustomClasses;
 using UnityEngine;
 
-namespace QuestStuff
-{
+namespace QuestStuff {
     [CreateAssetMenu(fileName = "Quest info", menuName = "ScriptableObject/Quest")]
-    public sealed class QuestInfo : SObjSavableTitleDescIcon
-    {
+    public sealed class QuestInfo : SObjSavableTitleDescIcon {
         [SerializeField] string world;
         [SerializeField] int progressGoal;
         [SerializeField] bool questChain;
@@ -30,17 +28,13 @@ namespace QuestStuff
         QuestReturnInfo returnTo;
 
         [SerializeField] QuestInfo altNextQuest;
-        public override void OnValidate()
-        {
+        public override void OnValidate() {
             base.OnValidate();
             returnGuid = returnTo != null ? returnTo.Guid : string.Empty;
-            if (altNextQuest != null)
-            {
+            if (altNextQuest != null) {
                 nextGuid = altNextQuest.Guid;
                 questChain = true;
-            }
-            else
-            {
+            } else {
                 nextGuid = string.Empty;
                 questChain = false;
             }

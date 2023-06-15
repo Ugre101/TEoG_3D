@@ -6,15 +6,12 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
-namespace SceneStuff
-{
+namespace SceneStuff {
     [Serializable]
-    public class FreePlayUILoader
-    {
+    public class FreePlayUILoader {
         [SerializeField] SceneUISo gameUI;
 
-        public IEnumerator LoadGameUI()
-        {
+        public IEnumerator LoadGameUI() {
             yield return null;
             yield return gameUI.SceneReference.LoadSceneAsync(LoadSceneMode.Additive);
         }

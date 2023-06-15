@@ -5,10 +5,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Battle.UI
-{
-    public sealed class AssignAbilityIcon : MonoBehaviour, IPointerEnterHandler
-    {
+namespace Safe_To_Share.Scripts.Battle.UI {
+    public sealed class AssignAbilityIcon : MonoBehaviour, IPointerEnterHandler {
         [SerializeField] Image icon;
         [SerializeField] Button btn;
         Ability ability;
@@ -16,8 +14,7 @@ namespace Safe_To_Share.Scripts.Battle.UI
 
         void Start() => btn.onClick.AddListener(BindAbility);
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
+        public void OnPointerEnter(PointerEventData eventData) {
             if (ability == null) return;
             AbilityLastHovered?.Invoke(ability);
             // Display ability info
@@ -26,16 +23,14 @@ namespace Safe_To_Share.Scripts.Battle.UI
         public static event Action<Ability> AbilityLastHovered;
         public static event Action AbilityBound;
 
-        public void Setup(Ability parAbility, AttackBtn parBindTo)
-        {
+        public void Setup(Ability parAbility, AttackBtn parBindTo) {
             gameObject.SetActive(true);
             ability = parAbility;
             bindTo = parBindTo;
             icon.sprite = parAbility.Icon;
         }
 
-        void BindAbility()
-        {
+        void BindAbility() {
             if (ability == null)
                 return;
             bindTo.BindNewAbility(ability);

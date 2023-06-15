@@ -2,23 +2,19 @@ using SaveStuff;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus
-{
-    public sealed class HasPerkPoint : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus {
+    public sealed class HasPerkPoint : GameMenu {
         [SerializeField] Color no, yes;
         [SerializeField] Image image;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             Refresh();
             LoadManager.LoadedSave += Refresh;
             Player.LevelSystem.PerkPointsChanged += CheckGained;
         }
 
 
-        void OnDisable()
-        {
+        void OnDisable() {
             LoadManager.LoadedSave -= Refresh;
             Player.LevelSystem.PerkPointsChanged -= CheckGained;
         }

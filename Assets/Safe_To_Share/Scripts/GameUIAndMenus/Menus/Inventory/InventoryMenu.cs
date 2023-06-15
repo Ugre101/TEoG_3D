@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using Character.PlayerStuff.Currency;
-using Character.StatsStuff;
 using Currency.UI;
 using Items;
 using TMPro;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
-{
-    public sealed class InventoryMenu : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory {
+    public sealed class InventoryMenu : GameMenu {
         [SerializeField] Transform content;
         [SerializeField] HaveGold haveGold;
         [SerializeField] InventorySlot[] preInstancedSlots;
@@ -22,10 +19,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         Queue<InventorySlot> slotsPool;
 
 
-        void OnEnable()
-        {
-            if (firstUse)
-            {
+        void OnEnable() {
+            if (firstUse) {
                 firstUse = false;
                 SetupSlotPool();
                 Setup();
@@ -34,14 +29,13 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             AddItems();
             ShowStats();
             haveGold.GoldChanged(PlayerGold.GoldBag.Gold);
-            foreach (CharStat charStat in Player.Stats.GetCharStats.Values)
+            foreach (var charStat in Player.Stats.GetCharStats.Values)
                 charStat.StatDirtyEvent += ReDraw;
             //InventorySlotItem.Use += UseItem;
         }
 
-        void OnDisable()
-        {
-            foreach (CharStat charStat in Player.Stats.GetCharStats.Values)
+        void OnDisable() {
+            foreach (var charStat in Player.Stats.GetCharStats.Values)
                 charStat.StatDirtyEvent -= ReDraw;
             //InventorySlotItem.Use -= UseItem;
         }
@@ -50,10 +44,8 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
         void OnValidate() => preInstancedSlots = content.GetComponentsInChildren<InventorySlot>(true);
 #endif
 
-        InventorySlot GetSlot()
-        {
-            if (slotsPool.Count > 0)
-            {
+        InventorySlot GetSlot() {
+            if (slotsPool.Count > 0) {
                 var getSlot = slotsPool.Dequeue();
                 getSlot.gameObject.SetActive(true);
                 return getSlot;
@@ -64,56 +56,49 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 
         void ReDraw() => ShowStats();
 
-        void ShowStats()
-        {
+        void ShowStats() {
             StringBuilder sb = new();
-            foreach ((CharStatType key, CharStat value) in Player.Stats.GetCharStats)
+            foreach ((var key, var value) in Player.Stats.GetCharStats)
                 sb.AppendLine($"{key} {value.Value}");
             stats.text = sb.ToString();
         }
 
-        public void Setup()
-        {
+        public void Setup() {
             // Reset
             Slots = new Dictionary<Vector2, InventorySlot>();
             // Add slots
-            for (int x = 0; x < Player.Inventory.InventorySize.x; x++)
-            for (int y = 0; y < Player.Inventory.InventorySize.y; y++)
+            for (var x = 0; x < Player.Inventory.InventorySize.x; x++)
+            for (var y = 0; y < Player.Inventory.InventorySize.y; y++)
                 AddInventorySlot(x, y);
         }
 
-        void AddInventorySlot(int x, int y)
-        {
-            InventorySlot newSlot = GetSlot();
-            newSlot.Setup(Player.Inventory,new Vector2(x, y));
+        void AddInventorySlot(int x, int y) {
+            var newSlot = GetSlot();
+            newSlot.Setup(Player.Inventory, new Vector2(x, y));
             newSlot.MovedItem += MoveItem;
             Slots.Add(newSlot.Position, newSlot);
         }
 
-        void MoveItem(InventoryItem item, Vector2 newPos, InventorySlot oldSlot, InventorySlot newSlot)
-        {
+        void MoveItem(InventoryItem item, Vector2 newPos, InventorySlot oldSlot, InventorySlot newSlot) {
             oldSlot.ClearItem();
-            if (Player.Inventory.MoveItemInsideInventory(item, newPos, out var oldItem))
-            {
+            if (Player.Inventory.MoveItemInsideInventory(item, newPos, out var oldItem)) {
                 AddInventoryItem(oldItem);
                 newSlot.ClearItem();
             }
+
             AddInventoryItem(item);
         }
 
-        void AddItems()
-        {
+        void AddItems() {
             foreach (var pair in Slots)
                 pair.Value.ClearItem();
-            foreach (InventoryItem invItem in Player.Inventory.Items)
+            foreach (var invItem in Player.Inventory.Items)
                 AddInventoryItem(invItem);
         }
 
-        void SetupSlotPool()
-        {
+        void SetupSlotPool() {
             slotsPool = new Queue<InventorySlot>();
-            foreach (var inventorySlot in preInstancedSlots)
-            {
+            foreach (var inventorySlot in preInstancedSlots) {
                 inventorySlot.ClearItem();
                 inventorySlot.gameObject.SetActive(false);
                 slotsPool.Enqueue(inventorySlot);
@@ -125,11 +110,9 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
 
         public static event Action StopHoverInfo;
 
-        void UseItem(Item loaded, InventoryItem item, InventorySlot arg3)
-        {
+        void UseItem(Item loaded, InventoryItem item, InventorySlot arg3) {
             loaded.Use(Player);
-            if (Player.Inventory.UseLoadedItem(loaded, item.Position))
-            {
+            if (Player.Inventory.UseLoadedItem(loaded, item.Position)) {
                 arg3.ClearItem();
                 StopHoverInfo?.Invoke();
             }
@@ -137,7 +120,7 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Inventory
             if (loaded.UpdateInventoryAfterUse)
                 AddItems();
             holder.UpdateAvatar();
-           // holder.HeightsChange(Player.Body.Height.Value);
+            // holder.HeightsChange(Player.Body.Height.Value);
         }
     }
 }

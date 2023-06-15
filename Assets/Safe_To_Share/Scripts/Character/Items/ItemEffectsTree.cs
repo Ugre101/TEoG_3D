@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using Safe_To_Share.Scripts.Character.Items.Item_Effects;
 using UnityEngine;
 
-namespace Items
-{
+namespace Items {
     [Serializable]
-    public class ItemEffectsTree
-    {
+    public class ItemEffectsTree {
 #if UNITY_EDITOR
-        public static string[] PropertyNames =
-        {
+        public static string[] PropertyNames = {
             "healingItemEffects",
             "pregnancyItemEffect",
             "bodyStatItemEffect",
@@ -39,26 +36,24 @@ namespace Items
         List<ItemEffect> activeEffects;
         ItemEffect[] allEffects;
 
-        ItemEffect[] AllEffects => allEffects ??= new ItemEffect[]
-        {
-            healingItemEffects,
-            pregnancyItemEffect,
-            bodyStatItemEffect,
-            voreItemEffect,
-            learnAbilityItemEffect,
-            sexStatsItemEffects,
-            raceEssenceItemEffects,
-            charStatItemEffects,
-            healthStatItemEffects,
-            sexualFluidItemEffects,
-            miscItemEffects,
-            sexualOrganItemEffect,
-        };
+        ItemEffect[] AllEffects =>
+            allEffects ??= new ItemEffect[] {
+                healingItemEffects,
+                pregnancyItemEffect,
+                bodyStatItemEffect,
+                voreItemEffect,
+                learnAbilityItemEffect,
+                sexStatsItemEffects,
+                raceEssenceItemEffects,
+                charStatItemEffects,
+                healthStatItemEffects,
+                sexualFluidItemEffects,
+                miscItemEffects,
+                sexualOrganItemEffect,
+            };
 
-        public List<ItemEffect> ActiveEffects
-        {
-            get
-            {
+        public List<ItemEffect> ActiveEffects {
+            get {
                 if (activeEffects != null) return activeEffects;
                 activeEffects = new List<ItemEffect>();
                 foreach (var effect in AllEffects)

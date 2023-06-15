@@ -1,29 +1,24 @@
-﻿using System.Collections.Generic;
-using Character.Family;
+﻿using Character.Family;
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Family
-{
-    public sealed class FamilyTreePanel : GameMenu
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.Menus.Family {
+    public sealed class FamilyTreePanel : GameMenu {
         [SerializeField] ChildTreePrefab prefab;
         [SerializeField] Transform birthed, fathered;
 
-        void OnEnable()
-        {
+        void OnEnable() {
             birthed.KillChildren();
             fathered.KillChildren();
-            List<int> children = Player.FamilyTree.Children;
+            var children = Player.FamilyTree.Children;
             if (children == null)
                 return;
-            foreach (int id in children)
+            foreach (var id in children)
                 PrintChild(id);
         }
 
-        void PrintChild(int id)
-        {
-            if (!DayCare.ChildDict.TryGetValue(id, out Child myChild))
+        void PrintChild(int id) {
+            if (!DayCare.ChildDict.TryGetValue(id, out var myChild))
                 return;
             if (myChild.FamilyTree.Mother.ID == Player.Identity.ID)
                 AddBirthed(myChild);

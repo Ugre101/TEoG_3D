@@ -2,10 +2,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
-{
-    public sealed class ResistanceSlider : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI {
+    public sealed class ResistanceSlider : MonoBehaviour {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI text;
 
@@ -13,8 +11,7 @@ namespace Safe_To_Share.Scripts.AfterBattle.Defeated.UI
 
         void OnDestroy() => DefeatShared.ResistanceChange -= Change;
 
-        void Change(int obj)
-        {
+        void Change(int obj) {
             slider.value = obj;
             text.text = obj.ToString();
         }

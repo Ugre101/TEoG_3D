@@ -1,9 +1,5 @@
-﻿namespace Character.BodyStuff
-{
-    public enum BodyStatType
-    {
-        Muscle,
-        Fat,
-        Height,
+﻿namespace Character.BodyStuff {
+    public enum BodyStatType {
+        Muscle, Fat, Height,
     }
 }

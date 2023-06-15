@@ -6,20 +6,16 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Safe_To_Share.Scripts.Init_Game
-{
-    public sealed class InitScene : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Init_Game {
+    public sealed class InitScene : MonoBehaviour {
         static bool init;
 
         [SerializeField] GameObject[] dontDestroyObjects;
         [SerializeField] List<AssetReference> assetRefs = new();
 
         // Start is called before the first frame update
-        IEnumerator Start()
-        {
-            if (init)
-            {
+        IEnumerator Start() {
+            if (init) {
                 Destroy(gameObject);
                 yield break;
             }
@@ -27,13 +23,12 @@ namespace Safe_To_Share.Scripts.Init_Game
             init = true;
 
             FarmAreas.Initialize();
-            foreach (GameObject toAdd in dontDestroyObjects)
+            foreach (var toAdd in dontDestroyObjects)
                 DontDestroyOnLoad(Instantiate(toAdd));
             yield return InstanceAssets();
         }
 
-        IEnumerator InstanceAssets()
-        {
+        IEnumerator InstanceAssets() {
             var ops = assetRefs.Select(asset => asset.InstantiateAsync()).ToArray();
             while (StillLoadingOperations(ops))
                 yield return null;
@@ -41,7 +36,7 @@ namespace Safe_To_Share.Scripts.Init_Game
                 DontDestroyOnLoad(operation.Result);
         }
 
-        static bool StillLoadingOperations(IEnumerable<AsyncOperationHandle<GameObject>> ops)
-            => ops.Any(operation => operation.Status != AsyncOperationStatus.Succeeded);
+        static bool StillLoadingOperations(IEnumerable<AsyncOperationHandle<GameObject>> ops) =>
+            ops.Any(operation => operation.Status != AsyncOperationStatus.Succeeded);
     }
 }

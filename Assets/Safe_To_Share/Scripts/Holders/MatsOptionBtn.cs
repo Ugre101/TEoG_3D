@@ -3,18 +3,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Holders
-{
-    public sealed class MatsOptionBtn : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Holders {
+    public sealed class MatsOptionBtn : MonoBehaviour {
         [SerializeField] Button btn;
         [SerializeField] Image btnBackground;
         [SerializeField] TextMeshProUGUI btnTitle;
         bool chosen = true;
         Material material;
 
-        void Start()
-        {
+        void Start() {
             btn.onClick.AddListener(Click);
             ChangeAvatarDetails.ToggleAll += ToggledAll;
         }
@@ -24,21 +21,18 @@ namespace Safe_To_Share.Scripts.Holders
         public event Action<Material> AddMe;
         public event Action<Material> RemoveMe;
 
-        public void Setup(Material mat)
-        {
+        public void Setup(Material mat) {
             material = mat;
             btnTitle.text = mat.name;
             UpdateChosenColor();
         }
 
-        void ToggledAll(bool obj)
-        {
+        void ToggledAll(bool obj) {
             chosen = obj;
             UpdateChosenColor();
         }
 
-        void Click()
-        {
+        void Click() {
             chosen = !chosen;
             if (chosen)
                 AddMe?.Invoke(material);

@@ -3,33 +3,28 @@ using Map;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.MinimapUI
-{
-    public sealed class MiniMap : MapShared
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.MinimapUI {
+    public sealed class MiniMap : MapShared {
         [SerializeField] RunTimeReSizeRectTransform sizeChanger;
 
         // Start is called before the first frame update
 
         // Update is called once per frame
-        void Update()
-        {
+        void Update() {
             if (FrameLimit())
                 return;
-            foreach (PairedObject pairedObject in PairedObjects)
+            foreach (var pairedObject in PairedObjects)
                 MoveDynamic(pairedObject);
         }
 
-        protected override void OnEnable()
-        {
+        protected override void OnEnable() {
             sizeChanger.ChangedSize += SetPosAll;
             sizeChanger.ChangedSize += ReSizeAll;
             base.OnEnable();
         }
 
 
-        protected override void OnDisable()
-        {
+        protected override void OnDisable() {
             sizeChanger.ChangedSize -= SetPosAll;
             sizeChanger.ChangedSize -= ReSizeAll;
             base.OnDisable();
@@ -40,31 +35,28 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.MinimapUI
 
         static bool FrameLimit() => Time.frameCount % 6 != 0;
 
-        void ReSizeAll()
-        {
+        void ReSizeAll() {
             ReSize(PairedObjects);
             ReSize(PairedEnemyZones);
             ReSize(PairedStaticObjects);
             ReSize(PairedStaticQuestObject);
 
-            void ReSize(IEnumerable<PairedObject> objects)
-            {
-                foreach (PairedObject pairedObject in objects)
+            void ReSize(IEnumerable<PairedObject> objects) {
+                foreach (var pairedObject in objects)
                     if (pairedObject.GlobalTrans.TryGetComponent(out Graphic graphic))
                         SetMiniMapObjectSize(graphic);
             }
         }
 
 
-        void SetPosAll()
-        {
-            foreach (PairedObject staticObject in PairedStaticObjects)
+        void SetPosAll() {
+            foreach (var staticObject in PairedStaticObjects)
                 MoveStaticPos(staticObject);
-            foreach (PairedObject pairedObject in PairedObjects)
+            foreach (var pairedObject in PairedObjects)
                 MoveDynamic(pairedObject);
-            foreach (PairedObject staticQuestObject in PairedStaticQuestObject)
+            foreach (var staticQuestObject in PairedStaticQuestObject)
                 MoveStaticPos(staticQuestObject);
-            foreach (PairedObject zone in PairedEnemyZones)
+            foreach (var zone in PairedEnemyZones)
                 MoveStaticPos(zone);
         }
     }

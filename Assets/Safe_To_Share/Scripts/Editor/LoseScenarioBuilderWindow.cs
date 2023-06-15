@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Linq;
 using Character.DefeatScenarios.Nodes;
 using CustomClasses.Editor;
 using Safe_To_Share.Scripts.Static;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-namespace Defeated.Editor
-{
-    public sealed class LoseScenarioBuilderWindow : BaseNodeBuilderWindows<LoseScenario,LoseScenarioNode>
-    {
-        [NonSerialized] readonly string[] options =
-        {
+namespace Defeated.Editor {
+    public sealed class LoseScenarioBuilderWindow : BaseNodeBuilderWindows<LoseScenario, LoseScenarioNode> {
+        [NonSerialized] readonly string[] options = {
             NodeTypes.Basic.ToString(),
             NodeTypes.Drain.ToString(),
             NodeTypes.Body.ToString(),
@@ -22,34 +17,27 @@ namespace Defeated.Editor
 
         NodeTypes createOfType = NodeTypes.Body;
 
-        void OnGUI()
-        {
-            if (Selected == null)
+        void OnGUI() {
+            if (Selected == null) {
                 EditorGUILayout.LabelField("No selected");
-            else
-            {
+            } else {
                 ProcessEvents();
                 ScrollPos = EditorGUILayout.BeginScrollView(ScrollPos, true, true);
                 EditorGUILayout.LabelField(Selected.name);
 
-                Rect canvas = GUILayoutUtility.GetRect(CanvasSize, CanvasSize);
-                foreach (LoseScenarioNode node in Selected.GetAllNodes())
-                {
+                var canvas = GUILayoutUtility.GetRect(CanvasSize, CanvasSize);
+                foreach (var node in Selected.GetAllNodes()) {
                     DrawNode(node);
                     DrawNodeConnection(Selected, node);
                 }
 
                 EditorGUILayout.EndScrollView();
 
-                if (deletingNode != null)
-                {
+                if (deletingNode != null) {
                     Selected.DeleteChildNode(deletingNode);
                     deletingNode = null;
-                }
-                else if (creatingNode != null)
-                {
-                    switch (createOfType)
-                    {
+                } else if (creatingNode != null) {
+                    switch (createOfType) {
                         case NodeTypes.Basic:
                             Selected.CreateChildNode<LoseScenarioNode>(creatingNode);
                             break;
@@ -73,15 +61,13 @@ namespace Defeated.Editor
 
 
         [MenuItem("Defeat/Lose Scenario Builder")]
-        static void ShowWindow()
-        {
+        static void ShowWindow() {
             var window = GetWindow<LoseScenarioBuilderWindow>();
             window.titleContent = new GUIContent("Lose Scenario");
             window.Show();
         }
 
-        void DrawNode(LoseScenarioNode node)
-        {
+        void DrawNode(LoseScenarioNode node) {
             GUILayout.BeginArea(node.rect, NodeStyle);
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.LabelField(node.GetType().Name.Remove(0, 12), EditorStyles.whiteLabel);
@@ -95,11 +81,9 @@ namespace Defeated.Editor
         }
 
         [OnOpenAsset(1)]
-        public static bool OnOpenAsset(int instanceID, int line)
-        {
-            Object obj = EditorUtility.InstanceIDToObject(instanceID);
-            if (obj is LoseScenario loseScenario)
-            {
+        public static bool OnOpenAsset(int instanceID, int line) {
+            var obj = EditorUtility.InstanceIDToObject(instanceID);
+            if (obj is LoseScenario loseScenario) {
                 ShowWindow();
                 return true;
             }
@@ -107,8 +91,7 @@ namespace Defeated.Editor
             return false;
         }
 
-        enum NodeTypes
-        {
+        enum NodeTypes {
             Basic,
             Drain,
             Body,

@@ -5,21 +5,17 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace AvatarStuff
-{
-    public sealed class AvatarChanger : AvatarChangerBase
-    {
+namespace AvatarStuff {
+    public sealed class AvatarChanger : AvatarChangerBase {
+        // Probably dumb to use both but I don't want to mess with it.
+        public UnityEvent<CharacterAvatar> NewAvatarEvent;
         bool hasAvatar;
         public bool AvatarLoaded { get; private set; }
         public CharacterAvatar CurrentAvatar { get; private set; }
         public event Action<CharacterAvatar> NewAvatar;
-        // Probably dumb to use both but I don't want to mess with it.
-        public UnityEvent<CharacterAvatar> NewAvatarEvent;
 
-        public void UpdateAvatar(AssetReference avatar)
-        {
-            if (hasAvatar && CurrentAvatar.Prefab.AssetGUID == avatar.AssetGUID)
-            {
+        public void UpdateAvatar(AssetReference avatar) {
+            if (hasAvatar && CurrentAvatar.Prefab.AssetGUID == avatar.AssetGUID) {
                 NewAvatar?.Invoke(CurrentAvatar);
                 return;
             }
@@ -29,8 +25,7 @@ namespace AvatarStuff
             //    avatar.LoadAssetAsync<GameObject>().Completed += Done;
         }
 
-        void Done(AsyncOperationHandle<GameObject> obj)
-        {
+        void Done(AsyncOperationHandle<GameObject> obj) {
             if (hasAvatar)
                 Destroy(CurrentAvatar.gameObject);
             if (obj.Result == null)
@@ -44,11 +39,9 @@ namespace AvatarStuff
             NewAvatar?.Invoke(avatar);
         }
 
-        public void UpdateAvatar(GameObject value)
-        {
+        public void UpdateAvatar(GameObject value) {
             if (!value.TryGetComponent(out CharacterAvatar avatar)) return;
-            if (hasAvatar && CurrentAvatar.Prefab.AssetGUID == avatar.Prefab.AssetGUID)
-            {
+            if (hasAvatar && CurrentAvatar.Prefab.AssetGUID == avatar.Prefab.AssetGUID) {
                 NewAvatar?.Invoke(CurrentAvatar);
                 NewAvatarEvent?.Invoke(CurrentAvatar);
                 return;

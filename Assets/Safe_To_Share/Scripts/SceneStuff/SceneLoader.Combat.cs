@@ -9,37 +9,31 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
-namespace SceneStuff
-{
-    public sealed partial class SceneLoader
-    {
+namespace SceneStuff {
+    public sealed partial class SceneLoader {
         AsyncOperationHandle<SceneInstance> battleSceneOperationHandle;
 
         AsyncOperationHandle<SceneInstance> battleUIOperationHandle;
-
-        bool subRealmExitOnDefeat;
         bool startedCombat;
 
-        public void LoadCombatUIIfNotAlready()
-        {
+        bool subRealmExitOnDefeat;
+
+        public void LoadCombatUIIfNotAlready() {
             if (currentScene == battleScene)
                 return;
             if (!battleUIOperationHandle.IsValid())
                 battleUIOperationHandle = battleUIScene.SceneReference.LoadSceneAsync(LoadSceneMode.Additive);
         }
 
-        public void LoadCombatIfNotAlready()
-        {
+        public void LoadCombatIfNotAlready() {
             if (currentScene == battleScene)
                 return;
             if (!battleSceneOperationHandle.IsValid())
                 battleSceneOperationHandle = battleScene.SceneReference.LoadSceneAsync(LoadSceneMode.Additive);
         }
 
-        void PreloadCombat(GameManager.EnemyClose obj)
-        {
-            switch (obj)
-            {
+        void PreloadCombat(GameManager.EnemyClose obj) {
+            switch (obj) {
                 case GameManager.EnemyClose.OutOfRange:
                     break;
                 case GameManager.EnemyClose.InView:
@@ -53,14 +47,12 @@ namespace SceneStuff
             }
         }
 
-        void LoadCombat(Player player, params BaseCharacter[] enemy)
-        {
+        void LoadCombat(Player player, params BaseCharacter[] enemy) {
             if (startedCombat) return;
             StartCoroutine(FinishLoadCombatScene(player, enemy));
         }
-        
-        void LoadSubRealmCombat(Player player,bool exitOnDefeat, params BaseCharacter[] enemy)
-        {
+
+        void LoadSubRealmCombat(Player player, bool exitOnDefeat, params BaseCharacter[] enemy) {
             if (startedCombat) return;
             LoadCombatIfNotAlready();
             LoadCombatUIIfNotAlready();
@@ -68,10 +60,8 @@ namespace SceneStuff
             subRealmExitOnDefeat = exitOnDefeat;
         }
 
-        IEnumerator FinishLoadCombatScene(Player player, BaseCharacter[] enemyTeam, BaseCharacter[] allies = null)
-        {
-            if (battleScene == CurrentScene)
-            {
+        IEnumerator FinishLoadCombatScene(Player player, BaseCharacter[] enemyTeam, BaseCharacter[] allies = null) {
+            if (battleScene == CurrentScene) {
                 Debug.LogError("Trying to load current scene");
                 yield break;
             }
@@ -84,9 +74,10 @@ namespace SceneStuff
             if (battleUIOperationHandle.Status != AsyncOperationStatus.Succeeded)
                 yield return battleUIOperationHandle;
             var unloadUI = gameUI.UnLoadUI();
-            var unLoadScene = InSubRealm ? currentSubRealm.SceneReference.UnLoadScene() : CurrentLocation.SceneReference.UnLoadScene();
-            while (!unLoadScene.IsDone || !unloadUI.IsDone)
-            {
+            var unLoadScene = InSubRealm
+                ? currentSubRealm.SceneReference.UnLoadScene()
+                : CurrentLocation.SceneReference.UnLoadScene();
+            while (!unLoadScene.IsDone || !unloadUI.IsDone) {
                 LoaderScreen.UnLoadProgress(unLoadScene.PercentComplete);
                 yield return null;
             }
@@ -102,16 +93,11 @@ namespace SceneStuff
             yield return AllDone(true);
         }
 
-        public void LeaveBattle(Player player, bool preloading)
-        {
+        public void LeaveBattle(Player player, bool preloading) {
             if (InSubRealm)
-            {
                 StartCoroutine(LoadSceneOp(currentSubRealm, player, lastPos));
-            }
             else
-            {
                 ReturnToLastLocation(player);
-            }
         }
     }
 }

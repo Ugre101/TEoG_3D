@@ -2,10 +2,8 @@ using Battle;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Battle.UI
-{
-    public sealed class DefeatScreen : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.Battle.UI {
+    public sealed class DefeatScreen : MonoBehaviour {
         [SerializeField] Button leaveBtn;
 
         // Start is called before the first frame update

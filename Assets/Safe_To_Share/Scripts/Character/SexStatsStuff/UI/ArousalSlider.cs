@@ -2,15 +2,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Character.SexStatsStuff.UI
-{
-    public sealed class ArousalSlider : MonoBehaviour
-    {
+namespace Character.SexStatsStuff.UI {
+    public sealed class ArousalSlider : MonoBehaviour {
         [SerializeField] Slider slider;
         [SerializeField] TextMeshProUGUI arousalText;
 
-        public void Setup(SexStats sexStats)
-        {
+        public void Setup(SexStats sexStats) {
             ChangeArousalSlider((float)sexStats.Arousal / sexStats.MaxArousal);
             ChangeArousalText(sexStats.Arousal);
             sexStats.ArousalChange += ChangeArousalText;

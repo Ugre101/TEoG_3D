@@ -3,10 +3,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.Holders.UI
-{
-    public sealed class GetColor : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
-    {
+namespace Safe_To_Share.Scripts.Holders.UI {
+    public sealed class GetColor : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
         [SerializeField] GameObject pointer;
         [SerializeField] Texture2D texture2D;
         [SerializeField] RectTransform rectTransform;
@@ -15,17 +13,16 @@ namespace Safe_To_Share.Scripts.Holders.UI
 
         public void OnBeginDrag(PointerEventData eventData) => startPos = pointer.transform.position;
 
-        public void OnDrag(PointerEventData eventData)
-        {
+        public void OnDrag(PointerEventData eventData) {
             if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, null,
-                    out Vector2 point)) return;
+                    out var point)) return;
             pointer.transform.position = eventData.position;
             var rect = rectTransform.rect;
-            float width = rect.width;
-            float height = rect.height;
+            var width = rect.width;
+            var height = rect.height;
             point += new Vector2(width / 2, height / 2);
 
-            Color chosen = texture2D.GetPixel((int)point.x, (int)point.y);
+            var chosen = texture2D.GetPixel((int)point.x, (int)point.y);
             choosenColor.color = chosen;
             NewColor?.Invoke(chosen);
         }

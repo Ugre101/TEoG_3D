@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AvatarStuff
-{
-    public sealed class DazDickController : MonoBehaviour
-    {
+namespace AvatarStuff {
+    public sealed class DazDickController : MonoBehaviour {
         [SerializeField] Transform[] genitals;
         [SerializeField, Range(0.1f, 0.5f),] float downBend = 0.1f;
         [SerializeField, Min(0.01f),] float dickMin, dickMax = 3f;
@@ -24,8 +22,7 @@ namespace AvatarStuff
         /// <summary>0 No boner => 1 Max boner</summary>
         float Boner { get; set; }
 
-        void HideDick()
-        {
+        void HideDick() {
             if (hidden)
                 return;
             transform.localPosition += hideOffset;
@@ -33,47 +30,42 @@ namespace AvatarStuff
             hidden = true;
         }
 
-        public void HideOrShow(bool show)
-        {
+        public void HideOrShow(bool show) {
             if (show)
                 ShowDick();
             else
                 HideDick();
         }
 
-        void ShowDick()
-        {
+        void ShowDick() {
             if (!hidden)
                 return;
             transform.localPosition -= hideOffset;
             hidden = false;
         }
 
-        public void SetDickSize(float value)
-        {
+        public void SetDickSize(float value) {
             DickSize = Mathf.Clamp(value, dickMin, dickMax);
             ScaleDick();
         }
 
-        void ScaleDick()
-        {
+        void ScaleDick() {
             if (!hasGenitals) return;
-            float bonerMod = Mathf.Clamp(0.6f + Boner * 0.5f, 0.7f, 1.1f);
-            float dickSize = DickSize * bonerMod;
+            var bonerMod = Mathf.Clamp(0.6f + Boner * 0.5f, 0.7f, 1.1f);
+            var dickSize = DickSize * bonerMod;
             genitals[0].localScale = new Vector3(dickSize, dickSize, dickSize);
         }
 
-        public void SetBoner(float value)
-        {
+        public void SetBoner(float value) {
             Boner = Mathf.Clamp(value / 70f, 0f, 1f);
             if (!hasGenitals)
                 return;
             ScaleDick();
             if (hasShapes)
-                foreach (SkinnedMeshRenderer meshRenderer in bodyShapes)
+                foreach (var meshRenderer in bodyShapes)
                     meshRenderer.SetBlendShapeWeight(bonerId, Mathf.Clamp(100f - value * 1.5f, 0f, 100f));
             else
-                for (int i = 0; i < genitals.Length; i++)
+                for (var i = 0; i < genitals.Length; i++)
                     genitals[i].localEulerAngles = GenBend(i);
         }
 
@@ -82,8 +74,7 @@ namespace AvatarStuff
         [ContextMenu("Quick setup")]
         public void QuickSetup() => genitals = GetComponentsInChildren<Transform>();
 
-        void OnValidate()
-        {
+        void OnValidate() {
             genitals = GetComponentsInChildren<Transform>();
             hasGenitals = genitals is { Length: > 0, };
             hasShapes = bodyShapes is { Count: > 0, };

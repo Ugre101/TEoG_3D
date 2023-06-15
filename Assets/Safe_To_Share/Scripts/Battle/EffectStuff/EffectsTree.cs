@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using Safe_To_Share.Scripts.Battle.EffectStuff.Effects;
 using UnityEngine;
 
-namespace Safe_To_Share.Scripts.Battle.EffectStuff
-{
+namespace Safe_To_Share.Scripts.Battle.EffectStuff {
     [Serializable]
-    public class EffectsTree
-    {
+    public class EffectsTree {
         [SerializeField] DealDamage dealDamage = new();
         [SerializeField] DealWillDamage dealWillDamage = new();
         [SerializeField] HealDamage healDamage = new();
@@ -18,20 +16,18 @@ namespace Safe_To_Share.Scripts.Battle.EffectStuff
         List<Effect> activeEffects;
         Effect[] effects;
 
-        Effect[] Effects => effects ??= new Effect[]
-        {
-            dealDamage,
-            dealWillDamage,
-            healDamage,
-            healWillPower,
-            shrinkBody,
-            growBody,
-        };
-        
-        public List<Effect> ActiveEffects
-        {
-            get
-            {
+        Effect[] Effects =>
+            effects ??= new Effect[] {
+                dealDamage,
+                dealWillDamage,
+                healDamage,
+                healWillPower,
+                shrinkBody,
+                growBody,
+            };
+
+        public List<Effect> ActiveEffects {
+            get {
                 if (activeEffects != null) return activeEffects;
                 activeEffects = new List<Effect>();
                 foreach (var effect in Effects)

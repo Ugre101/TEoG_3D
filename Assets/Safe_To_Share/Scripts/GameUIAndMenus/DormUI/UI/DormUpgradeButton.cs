@@ -5,10 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
-{
-    public sealed class DormUpgradeButton : MonoBehaviour
-    {
+namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI {
+    public sealed class DormUpgradeButton : MonoBehaviour {
         [SerializeField] TextMeshProUGUI title, desc, cost;
         [SerializeField] Button btn;
         [SerializeField] TextMeshProUGUI btnText;
@@ -17,15 +15,14 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
         Player player;
         public static event Action UpdateDormBuildings;
 
-        public void SubSetup(Player buyer, DormAndHome.Dorm.Buildings.Building toUpgrade, string titleText, string descText)
-        {
+        public void SubSetup(Player buyer, DormAndHome.Dorm.Buildings.Building toUpgrade, string titleText,
+                             string descText) {
             title.text = titleText;
             desc.text = descText;
             Setup(buyer, toUpgrade);
         }
 
-        public void Setup(Player buyer, DormAndHome.Dorm.Buildings.Building toUpgrade)
-        {
+        public void Setup(Player buyer, DormAndHome.Dorm.Buildings.Building toUpgrade) {
             player = buyer;
             building = toUpgrade;
             btn.onClick.RemoveAllListeners();
@@ -34,26 +31,22 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DormUI.UI
             UpdateCost();
         }
 
-        void UpdateCost()
-        {
+        void UpdateCost() {
             cost.text = building.CanUpgrade ? $"{building.UpgradeCost}g" : string.Empty;
-            if (building.CanUpgrade)
-            {
+            if (building.CanUpgrade) {
                 btnText.text = building.Level <= 0 ? "Build" : "Upgrade";
                 cost.color = PlayerGold.GoldBag.CanAfford(building.UpgradeCost)
                     ? new Color(0.93f, 0.82f, 0.13f)
                     : new Color(0.59f, 0f, 0f);
-            }
-            else
+            } else {
                 btnText.text = "Max";
+            }
         }
 
-        void Upgrade()
-        {
-            if (!building.CanUpgrade)
+        void Upgrade() {
+            if (!building.CanUpgrade) {
                 btn.onClick.RemoveAllListeners();
-            else if (PlayerGold.GoldBag.TryToBuy(building.UpgradeCost))
-            {
+            } else if (PlayerGold.GoldBag.TryToBuy(building.UpgradeCost)) {
                 building.Upgrade();
                 UpdateCost();
                 UpdateDormBuildings?.Invoke();

@@ -17,10 +17,8 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
 
-namespace SceneStuff
-{
-    public sealed partial class SceneLoader : MonoBehaviour
-    {
+namespace SceneStuff {
+    public sealed partial class SceneLoader : MonoBehaviour {
         static GameSceneSo currentScene;
         static LocationSceneSo lastLocation;
         static SubRealmSceneSo currentSubRealm;
@@ -39,11 +37,9 @@ namespace SceneStuff
 
         AsyncOperationHandle<SceneInstance> scenePreload;
 
-        public static LocationSceneSo CurrentLocation
-        {
+        public static LocationSceneSo CurrentLocation {
             get => lastLocation;
-            private set
-            {
+            private set {
                 lastLocation = value;
                 CurrentLocationSceneGuid = value.Guid;
             }
@@ -52,11 +48,9 @@ namespace SceneStuff
         public static string CurrentLocationSceneGuid { get; private set; }
         public static SceneLoader Instance { get; private set; }
 
-        public static GameSceneSo CurrentScene
-        {
+        public static GameSceneSo CurrentScene {
             get => currentScene;
-            private set
-            {
+            private set {
                 currentScene = value;
                 NewScene?.Invoke();
             }
@@ -64,19 +58,18 @@ namespace SceneStuff
 
         public LoaderScreen LoaderScreen => loaderScreen;
 
-        void Awake()
-        {
-            if (Instance == null)
+        public bool InSubRealm { get; set; }
+
+        void Awake() {
+            if (Instance == null) {
                 Instance = this;
-            else
-            {
+            } else {
                 Destroy(this);
                 Debug.LogWarning("Spawned duplicates of SceneLoader", this);
             }
         }
 
-        void Start()
-        {
+        void Start() {
             GameManager.EnemyGrowsCloser += PreloadCombat;
             PlayerHolder.LoadCombat += LoadCombat;
             PlayerHolder.LoadDormSex += LoadDormSex;
@@ -97,48 +90,41 @@ namespace SceneStuff
                 ? LoadSceneOp(CurrentLocation, player, lastPos)
                 : LoadGoHomeSObj(player));
 
-        IEnumerator UpdateProgressWhileSceneNotDone(AsyncOperationHandle<SceneInstance> handle)
-        {
-            while (!handle.IsDone)
-            {
+        IEnumerator UpdateProgressWhileSceneNotDone(AsyncOperationHandle<SceneInstance> handle) {
+            while (!handle.IsDone) {
                 LoaderScreen.LoadProgress(handle.PercentComplete);
                 yield return null;
             }
         }
 
-        void StartLoadStuff()
-        {
+        void StartLoadStuff() {
             LoaderScreen.StartFade();
             GameManager.Pause();
         }
 
-        static void SetNewSceneStuff(GameSceneSo newScene, AsyncOperationHandle<SceneInstance> asyncLoad)
-        {
+        static void SetNewSceneStuff(GameSceneSo newScene, AsyncOperationHandle<SceneInstance> asyncLoad) {
             SceneManager.SetActiveScene(asyncLoad.Result.Scene);
             CurrentScene = newScene;
         }
 
-        IEnumerator AllDone(bool forceFreeCursor)
-        {
+        IEnumerator AllDone(bool forceFreeCursor) {
             yield return fadeDelay;
             LoaderScreen.StopFade();
             GameManager.Resume(forceFreeCursor);
         }
 
-        public void LoadNewLocation(LocationSceneSo newScene, Player player, SceneTeleportExit teleportExit)
-        {
+        public void LoadNewLocation(LocationSceneSo newScene, Player player, SceneTeleportExit teleportExit) {
             SavedEnemies.ClearEnemies();
             StartCoroutine(LoadSceneOp(newScene, player, teleportExit));
         }
-        
-        public void LoadSubRealm(SubRealmSceneSo newScene, Player player, SceneTeleportExit teleportExit) => 
+
+        public void LoadSubRealm(SubRealmSceneSo newScene, Player player, SceneTeleportExit teleportExit) =>
             StartCoroutine(LoadSceneOp(newScene, player, teleportExit));
 
         public void TeleportToExit(PlayerHolder holder, SceneTeleportExit teleportExit) =>
             StartCoroutine(HideLoadSubScenes(holder, teleportExit));
 
-        IEnumerator HideLoadSubScenes(PlayerHolder holder, SceneTeleportExit exit)
-        {
+        IEnumerator HideLoadSubScenes(PlayerHolder holder, SceneTeleportExit exit) {
             StartLoadStuff();
             holder.gameObject.SetActive(true);
             holder.transform.position = exit.ExitPos;
@@ -147,23 +133,19 @@ namespace SceneStuff
             LoaderScreen.StopFade();
         }
 
-        IEnumerator LoadSceneOp(GameSceneSo newScene, Player player, SceneTeleportExit teleportExit)
-        {
+        IEnumerator LoadSceneOp(GameSceneSo newScene, Player player, SceneTeleportExit teleportExit) {
             yield return BaseLoadGameSceneSoOp(newScene);
             yield return GetPlayerHolderAndReplacePlayer(player, teleportExit.ExitPos);
             yield return AllDone(false);
         }
 
-        IEnumerator BaseLoadGameSceneSoOp(GameSceneSo newScene)
-        {
-            if (CurrentScene != null && newScene.Guid == CurrentScene.Guid)
-            {
+        IEnumerator BaseLoadGameSceneSoOp(GameSceneSo newScene) {
+            if (CurrentScene != null && newScene.Guid == CurrentScene.Guid) {
                 Debug.LogError("Trying to load current scene");
                 yield break;
             }
 
-            switch (newScene)
-            {
+            switch (newScene) {
                 case SubRealmSceneSo subRealmSceneSo:
                     currentSubRealm = subRealmSceneSo;
                     InSubRealm = true;
@@ -173,6 +155,7 @@ namespace SceneStuff
                     CurrentLocation = locationSceneSo;
                     break;
             }
+
             StartLoadStuff();
             yield return fadeDelay;
             var asyncLoad = newScene.SceneReference.LoadSceneAsync();
@@ -182,22 +165,18 @@ namespace SceneStuff
                 SetNewSceneStuff(newScene, asyncLoad);
         }
 
-        public bool InSubRealm { get; set; }
-
-        static IEnumerator GetPlayerHolderAndReplacePlayer(Player player, Vector3 exitPos)
-        {
-            PlayerHolder holder = PlayerHolder.Instance;
+        static IEnumerator GetPlayerHolderAndReplacePlayer(Player player, Vector3 exitPos) {
+            var holder = PlayerHolder.Instance;
             if (holder == null)
                 yield break;
-            Task wait = holder.ReplacePlayer(player);
+            var wait = holder.ReplacePlayer(player);
             while (!wait.IsCompleted) yield return null;
             if (wait.IsFaulted)
                 throw wait.Exception;
             holder.transform.position = exitPos;
         }
 
-        IEnumerator LoadSceneOp(GameSceneSo newScene, Player player, Vector3 playerPosition)
-        {
+        IEnumerator LoadSceneOp(GameSceneSo newScene, Player player, Vector3 playerPosition) {
             yield return BaseLoadGameSceneSoOp(newScene);
             yield return GetPlayerHolderAndReplacePlayer(player, playerPosition);
             yield return AllDone(false);
@@ -205,22 +184,19 @@ namespace SceneStuff
 
         public void StartGame(Player tempPlayer) => GoHome(tempPlayer);
 
-        public IEnumerator LoadSceneAndSubScenes(LocationSceneSo sceneSo, List<string> toLoad)
-        {
+        public IEnumerator LoadSceneAndSubScenes(LocationSceneSo sceneSo, List<string> toLoad) {
             yield return BaseLoadGameSceneSoOp(sceneSo);
             yield return waitAFrame; // Let scene start
             yield return LoadSubScenes(toLoad);
         }
 
-        public static IEnumerator LoadSubScenes(List<string> toLoad)
-        {
+        public static IEnumerator LoadSubScenes(List<string> toLoad) {
             if (!toLoad.Any())
                 yield break;
             var subOps = toLoad.Select(Addressables
-                            .LoadAssetAsync<SubLocationSceneSo>).ToList();
+               .LoadAssetAsync<SubLocationSceneSo>).ToList();
             List<AsyncOperationHandle<SceneInstance>> loadSubOps = new();
-            foreach (var subOp in subOps)
-            {
+            foreach (var subOp in subOps) {
                 yield return subOp;
                 if (subOp.Result.SceneActive)
                     continue;
@@ -233,16 +209,14 @@ namespace SceneStuff
                 yield return loadSubOp;
         }
 
-        public void GoHome(Player player)
-        {
+        public void GoHome(Player player) {
             if (CurrentLocation != null && CurrentLocation.Guid == defaultScene.guid)
                 StartCoroutine(GetPlayerHolderAndReplacePlayer(player, defaultExit.ExitPos));
             else
                 StartCoroutine(LoadGoHomeSObj(player));
         }
 
-        IEnumerator LoadGoHomeSObj(Player player)
-        {
+        IEnumerator LoadGoHomeSObj(Player player) {
             var asset = Addressables.LoadAssetAsync<LocationSceneSo>(defaultScene.guid);
             yield return asset;
             if (asset.Status != AsyncOperationStatus.Succeeded) yield break;
@@ -250,24 +224,21 @@ namespace SceneStuff
         }
 
 
-        public void FinishPreloadAfterBattleDefeat(Player player, BaseCharacter[] enemyTeamChars)
-            => StartCoroutine(FinishPreloadAfter(false, player, enemyTeamChars));
+        public void FinishPreloadAfterBattleDefeat(Player player, BaseCharacter[] enemyTeamChars) =>
+            StartCoroutine(FinishPreloadAfter(false, player, enemyTeamChars));
 
 
         #region ReturnToLastLocation
 
-        public void PreLoadDepLast()
-        {
+        public void PreLoadDepLast() {
             if (InSubRealm && currentSubRealm != null)
                 Addressables.DownloadDependenciesAsync(currentSubRealm.Guid, true);
             else if (lastLocation != null)
                 Addressables.DownloadDependenciesAsync(lastLocation.SceneReference.AssetGUID, true);
         }
 
-        public void LoadLastLocation(Player player)
-        {
-            if (lastLocation == null)
-            {
+        public void LoadLastLocation(Player player) {
+            if (lastLocation == null) {
                 Addressables.LoadAssetAsync<LocationSceneSo>(defaultScene.guid).Completed +=
                     obj => PreloadDefault(obj, player);
                 return;
@@ -277,16 +248,14 @@ namespace SceneStuff
             StartCoroutine(FinishLoadLastLocation(player));
         }
 
-        void PreloadDefault(AsyncOperationHandle<LocationSceneSo> obj, Player player)
-        {
+        void PreloadDefault(AsyncOperationHandle<LocationSceneSo> obj, Player player) {
             scenePreload = obj.Result.SceneReference.LoadSceneAsync();
             lastLocation = obj.Result;
             lastPos = new Vector3(0, 50);
             StartCoroutine(FinishLoadLastLocation(player));
         }
 
-        IEnumerator FinishLoadLastLocation(Player player)
-        {
+        IEnumerator FinishLoadLastLocation(Player player) {
             StartLoadStuff();
             //yield return new WaitForSecondsRealtime(0.5f);
             yield return UpdateProgressWhileSceneNotDone(scenePreload);
@@ -308,11 +277,9 @@ namespace SceneStuff
         #endregion
 
 #if UNITY_EDITOR
-        public async void EditorColdStart(GameSceneSo gameSceneSo)
-        {
+        public async void EditorColdStart(GameSceneSo gameSceneSo) {
             currentScene = gameSceneSo;
-            switch (gameSceneSo)
-            {
+            switch (gameSceneSo) {
                 case LocationSceneSo locationSceneSo:
                     CurrentLocationSceneGuid = locationSceneSo.Guid;
                     CurrentLocation = locationSceneSo;
@@ -322,11 +289,11 @@ namespace SceneStuff
                     currentSubRealm = subRealmSceneSo;
                     break;
             }
+
             await EditorSceneLoadOp(gameSceneSo);
         }
 
-        async Task EditorSceneLoadOp(GameSceneSo locationSceneSo)
-        {
+        async Task EditorSceneLoadOp(GameSceneSo locationSceneSo) {
             await locationSceneSo.SceneReference.LoadSceneAsync().Task;
             await PlayerHolder.Instance.EditorSetup();
             await gameUI.LoadGameUIAsync();

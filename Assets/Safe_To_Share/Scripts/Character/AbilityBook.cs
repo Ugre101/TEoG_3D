@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-namespace Character.SkillsAndSpells
-{
+namespace Character.SkillsAndSpells {
     [Serializable]
-    public class AbilityBook
-    {
+    public class AbilityBook {
         [SerializeField] string[] boundAbilities = new string[18];
 
-        public string[] BoundAbilities
-        {
+        public string[] BoundAbilities {
             get => boundAbilities;
             set => boundAbilities = value;
         }
 
         public HashSet<string> Abilities { get; private set; } = new();
 
-        public void Load(List<string> guids)
-        {
+        public void Load(List<string> guids) {
             Abilities = new HashSet<string>();
-            foreach (string loadSavedGuid in guids)
+            foreach (var loadSavedGuid in guids)
                 if (!string.IsNullOrEmpty(loadSavedGuid))
                     Abilities.Add(loadSavedGuid);
         }
