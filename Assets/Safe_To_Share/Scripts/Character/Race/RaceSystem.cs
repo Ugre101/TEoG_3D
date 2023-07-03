@@ -11,8 +11,12 @@ namespace Character.Race {
 
         Dictionary<BasicRace, RaceEssence> dict;
 
-        public RaceSystem() => SortRaces();
+        public RaceSystem() => SortRaces(true)
+        ;
 
+        /// <summary>
+        /// A sorted list of all a characters race essences
+        /// </summary>
         public List<RaceEssence> AllRaceEssence { get; private set; } = new();
         Dictionary<BasicRace, RaceEssence> RaceDict => dict ??= AllRaceEssence.ToDictionary(r => r.Race);
 
@@ -32,16 +36,16 @@ namespace Character.Race {
                 dict = null;
             }
 
-            SortRaces();
+            SortRaces(false);
         }
 
         public void RemoveRace(BasicRace race, int raceEssAmountToRemove) {
             if (RaceDict.TryGetValue(race, out var essence))
                 essence.DecreaseAmount(raceEssAmountToRemove);
-            SortRaces();
+            SortRaces(false);
         }
 
-        void SortRaces() {
+        void SortRaces(bool skipEvent) {
             if (AllRaceEssence.RemoveAll(r => r.Amount <= 0) != 0)
                 dict = null;
             AllRaceEssence.Sort((r1, r2) => r2.Amount.CompareTo(r1.Amount));
@@ -49,9 +53,11 @@ namespace Character.Race {
                       oldSecRace = SecRace;
             Race = AllRaceEssence.Count > 0 ? AllRaceEssence[0].Race : null;
             SecRace = AllRaceEssence.Count > 1 ? AllRaceEssence[1].Race : Race;
-            if (oldRace != null && oldRace != Race)
+            if (skipEvent)
+                return;
+            if ((Race != null && oldRace == null) || (oldRace != null && oldRace != Race))
                 RaceChangedEvent?.Invoke(oldRace, Race);
-            if (oldSecRace != null && oldSecRace != SecRace)
+            if ((SecRace != null && oldSecRace == null) || (oldSecRace != null && oldSecRace != SecRace))
                 SecRaceChangedEvent?.Invoke(oldSecRace, SecRace);
         }
 
@@ -67,7 +73,7 @@ namespace Character.Race {
                     AllRaceEssence.Add(new RaceEssence(op.Result, save.amount));
             }
 
-            SortRaces();
+            SortRaces(true);
         }
     }
 }
