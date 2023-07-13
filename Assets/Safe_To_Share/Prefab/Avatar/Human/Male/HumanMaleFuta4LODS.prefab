@@ -6160,14 +6160,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7404075305291151207}
     - target: {fileID: -1013246253426896495, guid: 0cff51f39044efc4babdaa3541d73a8f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c3a1af03f4c15614c80462ff38fbe441, type: 2}
-    - target: {fileID: -1013246253426896495, guid: 0cff51f39044efc4babdaa3541d73a8f, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: fe7b602f4ebfbcd44b4228a7a186ec00, type: 2}
-    - target: {fileID: -1013246253426896495, guid: 0cff51f39044efc4babdaa3541d73a8f, type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
       value: 33
       objectReference: {fileID: 0}

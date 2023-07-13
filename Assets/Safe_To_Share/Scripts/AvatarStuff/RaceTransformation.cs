@@ -3,7 +3,7 @@ using Character.Race.Races;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.AvatarStuff {
-    public class RaceTransformation : MonoBehaviour {
+    public sealed class RaceTransformation : MonoBehaviour {
         [SerializeField] BasicRace orc;
         [SerializeField] BasicRace bovine;
         const string OrcProp = "_Turn_Orc";
@@ -11,7 +11,7 @@ namespace Safe_To_Share.Scripts.AvatarStuff {
         static readonly int TurnOrc = Shader.PropertyToID(OrcProp);
         static readonly int TurnBovine = Shader.PropertyToID(BovineProp);
 
-        public void Check(Renderer renderer, BaseCharacter character) {
+        public void Check(Renderer avatarRenderer, BaseCharacter character) {
             float essTot = 0;
             float orcEss = 0, bovineEss = 0;
             foreach (var raceEssence in character.RaceSystem.AllRaceEssence) {
@@ -29,7 +29,7 @@ namespace Safe_To_Share.Scripts.AvatarStuff {
             print($"orc {orcPer}");
             print($"Bovine {bovinePer}");
 
-            foreach (var skin in renderer.materials) {
+            foreach (var skin in avatarRenderer.materials) {
                 if (skin.HasProperty("_Turn_Orc")) {
                     skin.SetFloat(TurnOrc,orcPer);
                 }
