@@ -9,4 +9,5 @@ namespace Safe_To_Share.Scripts.Battle.EffectStuff.Effects {
             health.IncreaseCurrentValue(FinalIntValue(user, health.Value));
         }
     }
+    
 }

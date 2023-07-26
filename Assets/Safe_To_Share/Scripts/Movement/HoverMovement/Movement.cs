@@ -1,3 +1,4 @@
+using System;
 using Safe_To_Share.Scripts.Movement.HoverMovement.Modules;
 using UnityEngine;
 
@@ -76,9 +77,19 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement {
                 moveDir = Vector3.zero;
             if (currentModule == WalkingModule)
                 moveDir = IsGrounded() ? groundChecker.SlopeDir(moveDir) : moveDir.normalized;
+            moveDir = RemoveJitter(moveDir);
+            var boost = DirectionChangeBoost(moveDir);
 
-            var force = DirectionChangeBoost(moveDir);
-            currentModule.OnMove(force);
+            currentModule.OnMove(moveDir * boost);
+        }
+
+        void OnDrawGizmos() {
+            Gizmos.DrawRay(transform.position,moveDir);
+        }
+
+        Vector3 RemoveJitter(Vector3 vector3) {
+            var dot = Vector3.Dot(transform.forward, vector3.normalized);
+            return vector3;
         }
 
         void SpeedLimit() {
@@ -142,12 +153,11 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement {
             currentModule.OnEnter(other);
         }
 
-        Vector3 DirectionChangeBoost(Vector3 force) {
+        float DirectionChangeBoost(Vector3 force) {
             var dot = Vector3.Dot(force.normalized.FlatVel(),
                 Rigid.velocity.normalized.FlatVel());
             var boost = 1f - dot;
-            force *= 1f + boost * directionChangeBoostMultiplier;
-            return force;
+            return 1f + boost * directionChangeBoostMultiplier;
         }
 
         public void OnUpdateAvatarScale(float newHeight) {

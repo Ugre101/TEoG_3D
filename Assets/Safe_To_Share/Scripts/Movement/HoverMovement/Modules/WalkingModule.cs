@@ -25,6 +25,8 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules {
         float updateAvatarOffsetFactor = float.Epsilon;
 
 
+        [SerializeField, Range(float.Epsilon, 0.5f)]
+        float smallAvatarExtraGroundPadding = 0.1f;
         int jumps;
 
         float lastY;
@@ -52,12 +54,10 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules {
 
             if (IsGrounded() is false || IsJumping()) {
                 rigid.AddForce(Physics.gravity);
-
                 return;
             }
 
             var rayDir = rigid.transform.TransformDirection(Vector3.down);
-
             var hitOther = HitOther(rayDir, out var hitBody, out var otherDirVel);
 
             var rayDirVel = Vector3.Dot(rayDir, rigid.velocity);
@@ -65,7 +65,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules {
 
             var x = OffFromTargetBy();
             if (x < 0)
-                x *= 2f;
+                x *= 3f;
 
             var springForce = x * rideSpringStrength - relVel * RideSpringDamper;
 
@@ -92,7 +92,7 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules {
 
         float OffFromTargetBy() => checker.DistanceToGround - TargetHeight;
 
-        public override bool IsGrounded() => checker.DistanceToGround < TargetHeight * groundedPadding;
+        public override bool IsGrounded() => checker.DistanceToGround - smallAvatarExtraGroundPadding < TargetHeight * groundedPadding;
 
 
         public override bool IsJumping() => jumps > 0;
@@ -105,15 +105,17 @@ namespace Safe_To_Share.Scripts.Movement.HoverMovement.Modules {
             else if (!IsGrounded())
                 walkSpeed *= airMultiplier;
 
-            if (StandingInSlope())
+            if (StandingInSlope()) {
                 walkSpeed = checker.SlopeDir(Physics.gravity);
-            else if (!IsGrounded() && checker.IsColliding)
+            }
+            else if (!IsGrounded() && checker.IsColliding) {
                 walkSpeed = checker.HandleHittingWall(walkSpeed);
+                Debug.Log("Hit Wall");
+            }
             rigid.AddForce(walkSpeed, ForceMode.Force);
             HandleJumping();
             HandleCrunching();
         }
-
         void HandleCrunching() {
             var shouldCrunch = inputs.Crunching && WasGrounded();
             if (IsJumping())

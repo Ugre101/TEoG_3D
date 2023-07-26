@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Character.Race.Races;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -28,6 +29,23 @@ namespace Character.Race {
 
         public event RaceChanged SecRaceChangedEvent;
 
+         int TransferEssence(BasicRace target, int amount) {
+            if (!dict.TryGetValue(target, out var ess))
+                return 0;
+            int have = ess.Amount;
+            ess.DecreaseAmount(amount);
+            SortRaces(false);
+            return Mathf.Min(amount, have);
+        }
+
+        public void DrainRaceEssence(RaceSystem from, BasicRace target, int amount) {
+            var transferEssence = from.TransferEssence(target,amount);
+            if (transferEssence <= 0)
+                return;
+            AddRace(target,transferEssence); 
+            SortRaces(false);
+
+        }
         public void AddRace(BasicRace race, int raceEssAmount = 100) {
             if (RaceDict.TryGetValue(race, out var essence)) {
                 essence.IncreaseAmount(raceEssAmount);
