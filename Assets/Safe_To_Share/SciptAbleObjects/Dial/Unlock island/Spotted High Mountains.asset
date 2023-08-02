@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3647076768380088196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b89bdac9304ea6abce1ea60f773c12, type: 3}
+  m_Name: 0ff3ba33-cb9a-45db-b9f5-7e309f5323d6
+  m_EditorClassIdentifier: 
+  childNodeIds: []
+  rect:
+    serializedVersion: 2
+    x: 98
+    y: 135
+    width: 200
+    height: 150
+  playerText: 
+  title: You spotted a new island
+  text: []
+  canEscapeOut: 1
+  image: {fileID: 21300000, guid: f62b9b074df5cc943ad0dfe152166962, type: 3}
+  actions:
+  - rid: 3146227922113134595
+  references:
+    version: 2
+    RefIds:
+    - rid: 3146227922113134595
+      type: {class: SpotIsland, ns: Safe_To_Share.Scripts.Dialogue.Events, asm: MyDialogueScripts}
+      data:
+        sceneSo: {fileID: 11400000, guid: 82334dafa7dcb5b4ea6ac5830e46666a, type: 2}
+        exit: {fileID: 11400000, guid: deb0c6b34f6fb7c4eae9e3ee15fe46f3, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c780b751cbb47188a39f5378e087136, type: 3}
+  m_Name: Spotted High Mountains
+  m_EditorClassIdentifier: 
+  guid: 301fe333ece53a942ab8888fadff7697
+  nodes:
+  - {fileID: -3647076768380088196}

@@ -4,7 +4,7 @@ using Character.PlayerStuff.Currency;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class HiddenLoot : MonoBehaviour, IInteractable {
         const float GoldRngRange = 0.15f;
         static readonly int OpenLid = Animator.StringToHash("openLid");

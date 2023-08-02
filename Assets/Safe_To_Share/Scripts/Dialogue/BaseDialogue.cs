@@ -16,6 +16,20 @@ namespace Dialogue {
         public void TriggerVoreEvent(Player player, Prey prey, VoreOrgan voreOrgan) =>
             StartVoreEvent?.Invoke(this, player, prey, voreOrgan);
 
+        public override void OnBeforeSerialize() {
+#if UNITY_EDITOR
+
+            base.OnBeforeSerialize();
+            // foreach (var dialogueBaseNode in nodes) {
+            //     Debug.Log(dialogueBaseNode.Actions.Count);
+            //     foreach (var dialogueBaseAction in dialogueBaseNode.Actions) {
+            //         if (AssetDatabase.GetAssetPath(dialogueBaseAction) == string.Empty) {
+            //             AssetDatabase.AddObjectToAsset(dialogueBaseAction,this);
+            //         }
+            //     }
+            // }
+#endif
+        }
 
 #if UNITY_EDITOR
 
@@ -24,6 +38,7 @@ namespace Dialogue {
             IfPreBattleNodeAddThis(newNode);
             return newNode;
         }
+
 
         void IfPreBattleNodeAddThis(DialogueBaseNode newNode) {
             if (newNode is not PreBattleDialogue preBattleDialogue)

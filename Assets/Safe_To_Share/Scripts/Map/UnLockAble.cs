@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     [Serializable]
     public class UnLockAble {
         [SerializeField] Material locked, unLocked;

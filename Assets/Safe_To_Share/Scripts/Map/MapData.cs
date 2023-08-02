@@ -1,5 +1,4 @@
 ﻿using System;
-using Map;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Map {

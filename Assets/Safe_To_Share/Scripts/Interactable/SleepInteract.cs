@@ -4,7 +4,7 @@ using Character.EnemyStuff;
 using Character.PlayerStuff;
 using Character.PlayerStuff.Currency;
 using Currency;
-using Map.Spawner;
+using Safe_To_Share.Scripts.Map.Spawner;
 using UnityEngine;
 
 namespace Safe_To_Share.Scripts.Interactable {

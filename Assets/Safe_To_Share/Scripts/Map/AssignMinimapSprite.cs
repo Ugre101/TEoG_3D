@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class AssignMinimapSprite : MonoBehaviour {
         [SerializeField] Sprite miniMapSprite;
         [SerializeField] Image miniMapImage, bigMapImage;

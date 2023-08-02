@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class BigMapNamedIcon : MonoBehaviour {
         [SerializeField] TextMeshProUGUI title;
         [SerializeField] Image image;

@@ -22,7 +22,10 @@ namespace Safe_To_Share.Scripts {
         Tired tired = new();
 
         [ContextMenu("Test")]
-        void Test() => StartCoroutine(AddEvents());
+        void Test() {
+            print(nameof(TestStuff));
+            //StartCoroutine(AddEvents());
+        }
 
         [ContextMenu("Sleep")]
         void Sleep() {

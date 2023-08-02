@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class ScreenShootMiniMapBackGround : MonoBehaviour {
         [ContextMenu("Take Picture")]
         void TakePicture() {

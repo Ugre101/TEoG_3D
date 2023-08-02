@@ -3,6 +3,7 @@ using System.Linq;
 using Dialogue.DialogueActions;
 using Dialogue.DialogueActions.Vore;
 using Safe_to_Share.Scripts.CustomClasses;
+using Safe_To_Share.Scripts.Dialogue.Events;
 using UnityEngine;
 #if UNITY_EDITOR
 #endif
@@ -13,7 +14,7 @@ namespace Dialogue {
         [SerializeField] string title;
         [SerializeField, TextArea,] string[] text;
         [SerializeField] bool canEscapeOut;
-
+        [SerializeField] Sprite image;
         public string Title => title;
         public string[] Text => text;
         public string PlayerText => playerText;
@@ -21,9 +22,12 @@ namespace Dialogue {
 
         public bool CanEscapeOut => canEscapeOut;
 
+        public Sprite Image => image;
+
         [field: SerializeReference] public List<DialogueVoreAction> VoreActions { get; } = new();
 
-        [field: SerializeReference] public List<DialogueBaseAction> Actions { get; } = new();
+        [SerializeReference] List<DialogueBaseAction> actions = new();
+        public List<DialogueBaseAction> Actions => actions;
 
         public bool MeetsActionsConditions() => Actions.All(dialogueBaseAction => dialogueBaseAction.MeetsCondition());
 #if UNITY_EDITOR
@@ -38,8 +42,17 @@ namespace Dialogue {
                 case 2:
                     VoreActions.Add(new AddVoreTempMod());
                     break;
+                case 3: 
+                    Actions.Add(new SpotIsland());
+                    break;
             }
         }
+
+        // T CreateAction<T>() where T : DialogueBaseAction{
+        //     var act = CreateInstance<T>();
+        //     act.name = $"{name}{nameof(T)}";
+        //     return act;
+        // }
 #endif
     }
 }

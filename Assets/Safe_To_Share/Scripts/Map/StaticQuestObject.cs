@@ -1,10 +1,10 @@
 ﻿using System;
-using Map;
+using QuestStuff;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace QuestStuff {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class StaticQuestObject : MiniMapBaseObject {
         [SerializeField] bool triggerComplete, triggerProgress;
         [SerializeField, HideInInspector,] string guid;

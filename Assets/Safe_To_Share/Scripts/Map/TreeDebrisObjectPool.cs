@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class TreeDebrisObjectPool : MonoBehaviour {
         [SerializeField] List<DebrisMatch> debrisMatches = new();
 

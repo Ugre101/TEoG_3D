@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class TerrainBorder : MonoBehaviour {
 #if UNITY_EDITOR
         [SerializeField] float borderHeight = 50f;

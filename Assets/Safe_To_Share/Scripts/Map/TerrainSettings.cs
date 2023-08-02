@@ -2,7 +2,7 @@
 using CustomClasses;
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class TerrainSettings : MonoBehaviour {
         const string TerrainDetailSave = "TerrainDetailDensity";
         public static readonly SavedFloatSetting TerrainDetail = new(TerrainDetailSave, 0.5f);

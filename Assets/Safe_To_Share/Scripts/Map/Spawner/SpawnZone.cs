@@ -11,7 +11,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Map.Spawner {
+namespace Safe_To_Share.Scripts.Map.Spawner {
     public sealed class SpawnZone : MonoBehaviour {
         const float DontSpawnWithinRangeOfPlayer = 25f;
         static bool alreadyPreloading;

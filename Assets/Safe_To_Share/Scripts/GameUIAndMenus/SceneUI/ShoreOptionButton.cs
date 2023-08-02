@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using Map;
+using Safe_To_Share.Scripts.Map;
 using SceneStuff;
 using TMPro;
 using UnityEngine;

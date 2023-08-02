@@ -1,4 +1,4 @@
-﻿using Map.Spawner;
+﻿using Safe_To_Share.Scripts.Map.Spawner;
 using UnityEditor;
 using UnityEngine;
 

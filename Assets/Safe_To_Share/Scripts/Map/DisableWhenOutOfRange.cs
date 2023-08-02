@@ -1,7 +1,7 @@
 ﻿using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class DisableWhenOutOfRange : MonoBehaviour {
         [SerializeField, Range(100f, 500f),] float cullingRange;
 

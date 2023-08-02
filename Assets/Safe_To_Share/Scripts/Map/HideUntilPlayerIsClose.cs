@@ -2,7 +2,7 @@
 using Safe_To_Share.Scripts.Static;
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class HideUntilPlayerIsClose : MonoBehaviour {
         [SerializeField] float showDist = 100f;
         bool showing;

@@ -4,7 +4,7 @@ using System.Linq;
 using SceneStuff;
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public static class KnowLocationsManager {
         static Dictionary<string, Location> dict;
         public static List<Location> KnownLocations { get; private set; } = new();

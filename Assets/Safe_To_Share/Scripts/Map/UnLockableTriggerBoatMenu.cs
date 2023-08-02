@@ -2,7 +2,7 @@
 using SceneStuff;
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class UnLockableTriggerBoatMenu : TriggerBoatMenu {
         [SerializeField] LocationSceneSo altLocationSceneSo;
         [SerializeField] UnLockAble lockAble;

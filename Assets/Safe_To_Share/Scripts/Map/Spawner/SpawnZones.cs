@@ -2,7 +2,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Map.Spawner {
+namespace Safe_To_Share.Scripts.Map.Spawner {
     public sealed class SpawnZones : MonoBehaviour {
         [SerializeField] SpawnZone zone;
         [SerializeField] SpawnZone[] zones = { };

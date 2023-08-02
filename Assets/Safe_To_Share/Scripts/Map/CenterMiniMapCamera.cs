@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class CenterMiniMapCamera : MonoBehaviour {
         [SerializeField] float yOffset;
 

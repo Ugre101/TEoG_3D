@@ -5,7 +5,7 @@ using Safe_To_Share.Scripts.Holders;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Map.Spawner {
+namespace Safe_To_Share.Scripts.Map.Spawner {
     public sealed class SubRealmEnemySpawner : MonoBehaviour {
         [SerializeField] EnemyPreset[] enemyPresets;
         [SerializeField] AssetReference enemyPrefab;

@@ -3,7 +3,7 @@ using System.Linq;
 using SceneStuff;
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class EditorPlayerKnowsLocations : MonoBehaviour {
         [SerializeField] List<LocationSceneSo> knowLocations = new();
         [SerializeField] List<SceneTeleportExit> exits = new();

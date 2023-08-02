@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Editors.Dialogue {
     [CustomEditor(typeof(DialogueBaseNode))]
     public sealed class DialogueBaseNodeEditor : Editor {
-        public string[] actionsTypes = { "Add To Dorm", "Release Prey", "Add vore temp mods", };
+        public string[] actionsTypes = { "Add To Dorm", "Release Prey", "Add vore temp mods", "Spot new island", };
         SerializedProperty actions;
         DialogueBaseNode myTarget;
 
@@ -26,7 +26,7 @@ namespace Editors.Dialogue {
                 PrintActions();
 
             selected = EditorGUILayout.Popup("Action type", selected, actionsTypes);
-            if (GUILayout.Button("Add takeHome")) myTarget.AddAction(selected);
+            if (GUILayout.Button("Add Event")) myTarget.AddAction(selected);
         }
 
         void PrintActions() {

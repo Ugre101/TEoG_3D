@@ -90,6 +90,9 @@ namespace Safe_To_Share.Scripts.GameUIAndMenus.DialogueAndEventMenu {
         protected void AddOptionButtons(DialogueBaseNode obj) {
             content.KillChildren();
             var dialogueBaseNodes = CurrentDialogue.GetChildNodes(obj).ToArray();
+            if (dialogueBaseNodes.Length == 0) {
+                Instantiate(prefab,content).Setup(ScriptableObject.CreateInstance<CloseDialogue>(),0);                
+            }
             for (var i = 0; i < dialogueBaseNodes.Length; i++) {
                 var childNode = dialogueBaseNodes[i];
                 if (childNode.ShowNode)

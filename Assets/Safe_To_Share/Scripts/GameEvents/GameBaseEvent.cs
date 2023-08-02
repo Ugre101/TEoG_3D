@@ -9,16 +9,18 @@ namespace Safe_To_Share.Scripts.GameEvents {
         [SerializeField] string title;
         [SerializeField, TextArea,] string desc;
         [SerializeField] bool canReturnToStart;
-        [SerializeField] List<QuestOption> subQuestOption = new();
         [SerializeField] List<EventOption> subOption = new();
+
+        public void Invoke() {
+            
+        }
     }
 
 
     [Serializable]
-    public abstract class EventOption {
+    public abstract class EventOption : ScriptableObject {
         [SerializeField] string title;
         [SerializeField] string desc;
-        [SerializeField] List<EventOption> subOptions = new();
 
         public string Title => title;
 

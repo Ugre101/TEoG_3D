@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public sealed class RunTimeReSizeRectTransform : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
         static Vector2 newSize;
         [SerializeField] float minSize = 100f, maxSize = 600f;

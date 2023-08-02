@@ -2,7 +2,7 @@ using System;
 using SceneStuff;
 using UnityEngine;
 
-namespace Map {
+namespace Safe_To_Share.Scripts.Map {
     public class TriggerBoatMenu : MonoBehaviour {
         [SerializeField] protected SceneTeleportExit exit;
         [SerializeField] Transform exitLocation;
