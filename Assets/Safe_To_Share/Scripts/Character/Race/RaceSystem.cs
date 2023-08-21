@@ -57,7 +57,12 @@ namespace Character.Race {
             SortRaces(false);
         }
 
-        public void RemoveRace(BasicRace race, int raceEssAmountToRemove) {
+        public void RemoveRace(BasicRace race) {
+            if (RaceDict.TryGetValue(race, out var essence))
+                essence.DecreaseAmount(essence.Amount + 1);
+            SortRaces(false);
+        } 
+        public void RemoveAmountFromRace(BasicRace race, int raceEssAmountToRemove) {
             if (RaceDict.TryGetValue(race, out var essence))
                 essence.DecreaseAmount(raceEssAmountToRemove);
             SortRaces(false);
