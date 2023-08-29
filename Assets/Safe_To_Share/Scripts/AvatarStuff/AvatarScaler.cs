@@ -42,6 +42,7 @@ namespace AvatarStuff {
         }
 
         void SetScale(float stepSize) {
+            stepSize = Mathf.Clamp(stepSize, minSize, maxSize);
             SizeChange?.Invoke(stepSize);
             transform.localScale = new Vector3(stepSize, stepSize, stepSize);
         }

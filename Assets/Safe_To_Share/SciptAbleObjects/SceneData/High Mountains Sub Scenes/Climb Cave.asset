@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f5f9edf476f49c5b362024b81123266, type: 3}
+  m_Name: Climb Cave
+  m_EditorClassIdentifier: 
+  guid: 9843f0df14aa53845bd54df72477d673
+  description: 
+  sceneType: 4
+  sceneReference:
+    m_AssetGUID: 6c349956fab42ec4683a2223a4e1d839
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <Exit>k__BackingField: {fileID: 11400000, guid: 51d9a7189d837c84bb244b872354941a, type: 2}
