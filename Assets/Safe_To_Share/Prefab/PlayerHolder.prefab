@@ -694,7 +694,7 @@ MonoBehaviour:
   groundChecker: {fileID: 1623128089208261143}
   inputs: {fileID: 1008936549818365483}
   ori: {fileID: 4449375253713366490}
-  maxFallSpeed: 20
+  maxFallSpeed: 30
   cameraTarget: {fileID: 3156939597315827700}
   mainCamera: {fileID: 0}
   avatarOffsetTransform: {fileID: 8759715639741286662}

@@ -90,6 +90,7 @@ PlayerSettings:
   hideHomeButton: 0
   submitAnalytics: 1
   usePlayerLog: 1
+  dedicatedServerOptimizations: 0
   bakeCollisionMeshes: 1
   forceSingleInstance: 0
   useFlipModelSwapchain: 1
@@ -129,6 +130,7 @@ PlayerSettings:
   switchNVNMaxPublicTextureIDCount: 0
   switchNVNMaxPublicSamplerIDCount: 0
   switchNVNGraphicsFirmwareMemory: 32
+  switchMaxWorkerMultiple: 8
   stadiaPresentMode: 0
   stadiaTargetFramerate: 0
   vulkanNumSwapchainBuffers: 3
@@ -137,7 +139,7 @@ PlayerSettings:
   vulkanEnableLateAcquireNextImage: 0
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
-  bundleVersion: 0.251
+  bundleVersion: 0.270
   preloadedAssets:
   - {fileID: 0}
   - {fileID: 0}
@@ -207,7 +209,7 @@ PlayerSettings:
     iPhone: com.Akerboden.TEoG3D
   buildNumber:
     Bratwurst: 0
-    Standalone: 0.261
+    Standalone: 0.270
     VisionOS: 0
     iPhone: 0
     tvOS: 0
@@ -881,7 +883,7 @@ PlayerSettings:
     PS5: UNITY_POST_PROCESSING_STACK_V2
     QNX: UNITY_POST_PROCESSING_STACK_V2
     Stadia: UNITY_POST_PROCESSING_STACK_V2
-    Standalone: AutoSetupForUnity;USING_URP;GENA_PRO;GAIA_2_PRESENT;GAIA_PRO_PRESENT;CROSS_PLATFORM_INPUT;__MICROSPLAT__;__MICROSPLAT_ALPHAHOLE__;FLORA_PRESENT;UPPipeline;UNITY_POST_PROCESSING_STACK_V2;MCSCaves;GeNa_URP;PW_ADDRESSABLES;GAIA_MESH_PRESENT;Calls_Code_I_Dont_Own;STARTER_ASSETS_PACKAGES_CHECKED;__MICROSPLAT_MESHTERRAIN__
+    Standalone: AutoSetupForUnity;USING_URP;GENA_PRO;GAIA_2_PRESENT;GAIA_PRO_PRESENT;CROSS_PLATFORM_INPUT;FLORA_PRESENT;UPPipeline;UNITY_POST_PROCESSING_STACK_V2;MCSCaves;GeNa_URP;PW_ADDRESSABLES;GAIA_MESH_PRESENT;Calls_Code_I_Dont_Own;STARTER_ASSETS_PACKAGES_CHECKED;__MICROSPLAT__;__MICROSPLAT_MESHTERRAIN__
     VisionOS: UNITY_POST_PROCESSING_STACK_V2
     WebGL: UNITY_POST_PROCESSING_STACK_V2;__MICROSPLAT__;__MICROSPLAT_MESHTERRAIN__;FLORA_PRESENT;MCSCaves;GeNa_URP;GENA_PRO;GAIA_2_PRESENT;GAIA_PRO_PRESENT;GAIA_MESH_PRESENT;PW_ADDRESSABLES;STARTER_ASSETS_PACKAGES_CHECKED
     Windows Store Apps: MOBILE_INPUT;UNITY_POST_PROCESSING_STACK_V2
